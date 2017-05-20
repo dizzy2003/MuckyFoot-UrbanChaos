@@ -1,0 +1,216 @@
+French
+Appuyez sur |16 pour continuer.
+- F I N   D E   L A   P A R T I E -
+Véhicule fermé
+Munitions
+Pistolet
+Santé +50
+Explosion dans 5 sec.
+Appuyez sur |4 pour monter dans la voiture.
+Appuyez sur |4 pour monter sur la moto.
+Appuyez sur |4 pour ramasser l'objet.
+Appuyez sur |1 pour saisir le câble.
+Recherche...
+Terminée.
+Appuyez sur |7 pour revenir au menu principal.
+Appuyez sur |4 pour reprendre votre dernière sauvegarde automatique.
+Niveau termine
+Commencer
+Charger partie
+Sauvegarder partie
+Options
+Graphismes
+Son
+Musique
+Qualité
+Volume
+Stéréo
+Mono
+Stéréo inversée
+Pilotes
+Résolution
+Reflets
+Portée d'affichage
+Ombres réalistes
+Details
+Elevés
+Moyens
+Faibles
+Quitter
+OK
+Annuler
+Commandes
+Pavé numérique
+Clavier
+Joystick
+Manette
+Espace
+Entrée
+Saut
+Pied
+Poing
+Action
+Gauche
+Droite
+Avant
+Arriere
+Selection
+Observer
+Courir
+Camera
+Badge
+Ramassé
+Terminé
+Raté
+Score
+Primaires
+Secondaires
+Objectifs
+Carte
+Armes
+Fusil à pompe
+M-16
+Grenade
+Explosifs
+Couteau
+Batte de base-ball
+Bombe
+Carte magnétique
+Fichier
+Disquette
+Pied de biche
+Masque à gaz
+Clé
+Vidéo
+Gants
+Désherbant
+Clés de la voiture rouge
+Clés de la voiture bleue
+Clés de la voiture verte
+Clés de la voiture noire
+Clés de la voiture blanche
+Cisailles
+Etes-vous sur ?
+Taux de criminalité
+Arrêté
+Société
+Copie des fichiers d'installation...
+Copie des fichiers d'installation...
+Copie des fichiers du programme...
+Ce programme nécessite une version 32 bits de Windows
+Composant :
+Fichier :
+Groupe de fichiers :
+Une erreur est apparue lors de la copie des données :
+Ce programme s'utilise avec DirectX 6, qui n'est pas compatible avec votre système d'exploitation.
+Le programme de désinstallation n'a pu être initialisé.  Vous ne pourrez peut-être pas désinstaller ce logiciel.
+Ce programme nécessite au minimum une résolution graphique VGA.
+Installation d'Urban Chaos
+(Editeur)
+Environnement
+Etoiles
+Lune
+Gens
+Flaques
+Boue
+Brume
+Pluie
+Dist. a l'horizon
+Constitution
+Force
+Résistance
+Réflexes
+(Charger UCM)
+Scanner
+Piste
+Personnage
+Gamma
+Configuration par défaut
+For.
+Con.
+Dex.
+Res.
+Aucun plot de heurté !
+Nombre de plots heurtés
+Reprendre niveau
+Recommencer niveau
+Abandonner la partie
+Placage de textures
+Perspective 
+Bilineaire
+Pénalité !
+Niveau perdu
+Pause
+Couche toi
+Je ne peux pas descendre un flic.
+Hé ! Pourquoi tu me tapes dessus D'arci ?
+Je ne peux pas tiré sur une personne désarmé.
+Taux de criminalité réduit de
+Partie sauvegardée
+Relief
+Couleurs
+T'es un bon flic, D'arci, mais tu donnes du fil à r'tordre. Tu blesses trop de civils pendant tes missions.
+Félicitations pour la réussite de cette mission, D'arci. Cependant tu es responsable d'un nombre important de pertes civiles. Considère cela comme ton premier avertissement.
+Ma patience a des limites, D'arci. Notre job est de protéger les habitants d'Union City. C'est ton dernier avertissement. Encore une mission avec des pertes humaines et tu m'rends ta plaque.
+On ne peut pas s'permettre de te perdre, D'arci. Pourtant, mon devoir est basé sur la protection des citoyens d'Union City. Au cours de tes missions, ton comportement à couter la vie à plus de civils que je n'suis prêt à accepter. J'te r'tire ton badge pour de bon.
+Criminels éliminés
+Criminels arrêtés
+Criminels toujours en cavale
+Bonus acquis
+Bonus ratés
+Temps utilisé
+Meilleur Temps
+Temps de Mucky
+Oui
+Non
+(Vide)
+Séléction carte 3D
+Utiliser carte 3D primaire
+Utiliser carte 3D secondaire
+Utiliser rendu Software
+Nombre de couleurs
+Couleurs 16-bit
+Couleurs vraies 24-bit
+Ne plus afficher cette boite de dialogue
+Setup Miles Sound System 
+Veuillez séléctionner un pilote son 3D dans la liste ci-dessous
+Bouton
+Credits
+Mission bonus acquise
+Saut
+Mode
+Personnalisé
+Marcher
+Changer de manette
+Tourner
+Bouger
+Position inventaire
+Langue
+English
+Francais
+Choisissez la VMU
+(Aucune VMU présente)
+(VMU pleine)
+Manette %c port %c
+Echec du chargement !
+Partie chargée
+Echec du chargement de la partie !
+Général
+Ecraser sauvegarde précédente ?
+Pas de manette
+Appuyez sur Start
+Vibrations
+Vibrations du moteur
+Chargement...
+Sauvegarde...
+(2 blocs requis)
+Urban Chaos
+
+
+
+
+
+
+
+
+

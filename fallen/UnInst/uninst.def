@@ -1,0 +1,11 @@
+; UNINST.def : Declares the module parameters for the DLL.
+
+LIBRARY      "UNINST"
+DESCRIPTION  'UNINST Windows Dynamic Link Library'
+
+EXPORTS
+    ; Explicit exports can go here
+
+	UninstInitialize 
+    UninstUnInitialize 
+	

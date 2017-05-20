@@ -1,0 +1,59 @@
+WATCOM Make Version 10.5
+Copyright by WATCOM International Corp. 1988, 1995. All rights reserved.
+WATCOM is a trademark of WATCOM International Corp.
+
+	wmake /h /f WIN1.WMK DEBUG=0
+
+SET	INCLUDE	=	C:\WATCOM10\H;C:\WATCOM10\H\NT;C:\WATCOM10\H\WIN;C:\DXSDK\SDK\INC;C:\MFLIB1\HEADERS;\HEADERS;
+SET	LIB	=	C:\WATCOM10\LIB;C:\WATCOM10\LIB386;C:\WATCOM10\LIB386\DOS;C:\DXSDK\SDK\LIB;C:\MFLIB1\LIBS
+
+wpp386 @W_WIN1_R.occ  c:\mflib1\source\c\common\textdef.CPP
+
+Building W_WIN1_R.lib
+Done.
+
+All done.
+
+
+
+	wmake /h /f WIN1.WMK DEBUG=1
+
+SET	INCLUDE	=	C:\WATCOM10\H;C:\WATCOM10\H\NT;C:\WATCOM10\H\WIN;C:\DXSDK\SDK\INC;C:\MFLIB1\HEADERS;\HEADERS;
+SET	LIB	=	C:\WATCOM10\LIB;C:\WATCOM10\LIB386;C:\WATCOM10\LIB386\DOS;C:\DXSDK\SDK\LIB;C:\MFLIB1\LIBS
+
+wpp386 @W_WIN1_D.occ  c:\mflib1\source\c\common\textdef.CPP
+
+Building W_WIN1_D.lib
+Done.
+
+All done.
+
+
+
+	wmake /h /f DOS1.WMK DEBUG=0
+
+SET	INCLUDE	=	C:\WATCOM10\H;C:\WATCOM10\H\NT;C:\WATCOM10\H\WIN;C:\DXSDK\SDK\INC;C:\MFLIB1\HEADERS;\HEADERS;
+SET	LIB	=	C:\WATCOM10\LIB;C:\WATCOM10\LIB386;C:\WATCOM10\LIB386\DOS;C:\DXSDK\SDK\LIB;C:\MFLIB1\LIBS
+
+wpp386 @W_DOS1_R.occ  c:\mflib1\source\c\common\textdef.CPP
+
+Building W_DOS1_R.lib
+Done.
+
+All done.
+
+
+
+	wmake /h /f DOS1.WMK DEBUG=1
+
+SET	INCLUDE	=	C:\WATCOM10\H;C:\WATCOM10\H\NT;C:\WATCOM10\H\WIN;C:\DXSDK\SDK\INC;C:\MFLIB1\HEADERS;\HEADERS;
+SET	LIB	=	C:\WATCOM10\LIB;C:\WATCOM10\LIB386;C:\WATCOM10\LIB386\DOS;C:\DXSDK\SDK\LIB;C:\MFLIB1\LIBS
+
+wpp386 @W_DOS1_D.occ  c:\mflib1\source\c\common\textdef.CPP
+
+Building W_DOS1_D.lib
+Done.
+
+All done.
+
+

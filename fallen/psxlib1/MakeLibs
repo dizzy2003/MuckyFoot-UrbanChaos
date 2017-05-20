@@ -1,0 +1,11 @@
+
+Build	:	.SYMBOLIC
+	@echo.
+	wmake /h /f WIN1.WMK DEBUG=0
+	@echo.
+	wmake /h /f WIN1.WMK DEBUG=1
+	@echo.
+	wmake /h /f DOS1.WMK DEBUG=0
+	@echo.
+	wmake /h /f DOS1.WMK DEBUG=1
+

@@ -1,0 +1,160 @@
+
+//---------------------------------------------------------------
+
+ControlDef	com_tab_def[]	=
+{
+	{	BUTTON,			0,	"New Command List",	LISTS_X,		10,			0,				0				},
+	{	V_SLIDER,		0,	"",			LISTS_X+LISTS_WIDTH,		LISTS_Y,	0,				LISTS_HEIGHT	},
+	{	EDIT_TEXT,		0,	"",			COM_NAME_X,					COM_NAME_Y,	COM_NAME_WIDTH,	0				},
+	{	V_SLIDER,		0,	"",			COM_LIST_X+COM_LIST_WIDTH,	COM_LIST_Y,	0,				COM_LIST_HEIGHT	},
+	{	BUTTON,			0,	"New Command",	COM_NAME_X+COM_NAME_WIDTH+2,		COM_NAME_Y,			0,				0				},
+
+	{	0															   							}
+};
+
+//---------------------------------------------------------------
+
+static ControlDef		comlist_popup_def	=	{	POPUP_MENU,	0,	""};
+MenuDef2	comlist_popup[]	=
+{
+	{	"Delete Command List"	},
+	{	"!"						}
+};
+
+//---------------------------------------------------------------
+
+static ControlDef		command_popup_def	=	{	POPUP_MENU,	0,	""};
+MenuDef2	command_popup[]	=
+{
+	{	"Delete Command"		},
+	{	"^"						},
+	{	"Group Commands"		},
+	{	"Ungroup Commands"		},
+	{	"^"						},
+	{	"NONE"					},
+	{	"ATTACK_PLAYER"			},
+	{	"ATTACK_THING"			},
+	{	"ATTACK_GROUP"			},
+	{	"ATTACK_CLASS"			},
+	{	"DEFEND_PLAYER"			},
+	{	"DEFEND_THING"			},
+	{	"DEFEND_GROUP"			},
+	{	"DEFEND_CLASS"			},
+	{	"PATROL_WAYPOINT"		},
+	{	"START_TIMER"			},
+	{	"WAIT_FOR_TRIGGER"		},
+	{	"WAIT_FOR_CLIST"		},
+	{	"FOLLOW_PLAYER"			},
+	{	"!"						}
+};
+
+//---------------------------------------------------------------
+
+MenuDef2	select_thing_popup2[]	=
+{
+	{	"Delete Command"		},
+	{	"^"						},
+	{	"Group Commands"		},
+	{	"Ungroup Commands"		},
+	{	"^"						},
+	{	"Select Thing",			},
+	{	"!"						}
+};
+
+//---------------------------------------------------------------
+
+MenuDef2	select_waypoint_popup[]	=
+{
+	{	"Delete Command"		},
+	{	"^"						},
+	{	"Group Commands"		},
+	{	"Ungroup Commands"		},
+	{	"^"						},
+	{	"Select Waypoint",		},
+	{	"!"						}
+};
+
+//---------------------------------------------------------------
+
+MenuDef2	select_switch_popup2[]	=
+{
+	{	"Delete Command"		},
+	{	"^"						},
+	{	"Group Commands"		},
+	{	"Ungroup Commands"		},
+	{	"^"						},
+	{	"Select Switch",		},
+	{	"!"						}
+};
+
+//---------------------------------------------------------------
+
+MenuDef2	select_clist_popup[]	=
+{
+	{	"Delete Command"		},
+	{	"^"						},
+	{	"Group Commands"		},
+	{	"Ungroup Commands"		},
+	{	"^"						},
+	{	"Select Condition List"	},
+	{	"!"						}
+};
+
+//---------------------------------------------------------------
+
+MenuDef2	select_secondary_popup[]	=
+{
+	{	"Delete Command"		},
+	{	"^"						},
+	{	"Group Commands"		},
+	{	"Ungroup Commands"		},
+	{	"^"						},
+	{	"ALWAYS"				},
+	{	"UNTIL_TRIGGER"			},
+	{	"UNTIL_CLIST"			},
+	{	"WHILE_TRIGGER"			},
+	{	"WHILE_CLIST"			},
+	{	"!"						}
+};
+
+//---------------------------------------------------------------
+
+MenuDef2	generic_popup2[]	=
+{
+	{	"Delete Command"		},
+	{	"^"						},
+	{	"Group Commands"		},
+	{	"Ungroup Commands"		},
+	{	"!"						}
+};
+
+
+//---------------------------------------------------------------
+
+MenuDef2	*command_defs[][MAX_FIELDS]	=
+{
+	{	command_popup,		NULL,					NULL,								NULL	},	//	COM_NONE
+	{	command_popup,		NULL,					select_secondary_popup,				NULL	},	//	COM_ATTACK_PLAYER
+	{	command_popup,		select_thing_popup2,	select_secondary_popup,				NULL	},	//	COM_ATTACK_THING
+	{	command_popup,		NULL,					select_secondary_popup,				NULL	},	//	COM_ATTACK_GROUP
+	{	command_popup,		NULL,					select_secondary_popup,				NULL	},	//	COM_ATTACK_CLASS
+	{	command_popup,		NULL,					select_secondary_popup,				NULL	},	//	COM_DEFEND_PLAYER
+	{	command_popup,		select_thing_popup2,	select_secondary_popup,				NULL	},	//	COM_DEFEND_THING
+	{	command_popup,		NULL,					select_secondary_popup,				NULL	},	//	COM_DEFEND_GROUP
+	{	command_popup,		NULL,					select_secondary_popup,				NULL	},	//	COM_DEFEND_CLASS
+	{	command_popup,		select_waypoint_popup,	select_secondary_popup,				NULL	},	//	COM_PATROL_WAYPOINT
+	{	command_popup,		NULL,					select_secondary_popup,				NULL	},	//	COM_START_TIMER
+	{	command_popup,		select_switch_popup2,	select_secondary_popup,				NULL	},	//	COM_WAIT_FOR_TRIGGER
+	{	command_popup,		select_clist_popup,		select_secondary_popup,				NULL	},	//	COM_WAIT_FOR_CLIST
+	{	command_popup,		NULL,					select_secondary_popup,				NULL	}	//	COM_FOLLOW_PLAYER
+};
+
+//---------------------------------------------------------------
+
+ControlDef	select_clist_def[]	=
+{
+	{	V_SLIDER,		0,	"",			LISTS_X+LISTS_WIDTH,		LISTS_Y-30,	0,				LISTS_HEIGHT	},
+	{	0															}
+};
+
+//---------------------------------------------------------------

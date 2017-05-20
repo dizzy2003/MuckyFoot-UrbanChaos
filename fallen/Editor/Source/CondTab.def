@@ -1,0 +1,154 @@
+
+//---------------------------------------------------------------
+
+ControlDef	cond_tab_def[]	=
+{
+	{	BUTTON,			0,	"New Condition List",	LISTS_X,		10,			0,				0				},
+	{	V_SLIDER,		0,	"",			LISTS_X+LISTS_WIDTH,		LISTS_Y,	0,				LISTS_HEIGHT	},
+	{	EDIT_TEXT,		0,	"",			CON_NAME_X,					CON_NAME_Y,	CON_NAME_WIDTH,	0				},
+	{	V_SLIDER,		0,	"",			CON_LIST_X+CON_LIST_WIDTH,	CON_LIST_Y,	0,				CON_LIST_HEIGHT	},
+	{	BUTTON,			0,	"New Condition",	CON_NAME_X+CON_NAME_WIDTH+2,		CON_NAME_Y,			0,				0				},
+
+	{	0															   							}
+};
+
+//---------------------------------------------------------------
+
+static ControlDef		clist_popup_def	=	{	POPUP_MENU,	0,	""};
+MenuDef2	clist_popup[]	=
+{
+	{	"Delete Condition List"	},
+	{	"!"						}
+};
+
+//---------------------------------------------------------------
+
+static ControlDef		condition_popup_def	=	{	POPUP_MENU,	0,	""};
+MenuDef2	condition_popup[]	=
+{
+	{	"Delete Condition"		},
+	{	"^"						},
+	{	"Group Conditions"		},
+	{	"Ungroup Conditions"	},
+	{	"^"						},
+	{	"NONE"					},
+	{	"THING_DEAD"			},
+	{	"ALL_GROUP_DEAD"		},
+	{	"PERCENT_GROUP_DEAD"	},
+	{	"THING_NEAR_PLAYER"		},
+	{	"GROUP_NEAR_PLAYER"		},
+	{	"CLASS_NEAR_PLAYER"		},
+	{	"THING_NEAR_THING"		},
+	{	"GROUP_NEAR_THING"		},
+	{	"CLASS_NEAR_THING"		},
+	{	"CLASS_COUNT"			},
+	{	"GROUP_COUNT"			},
+	{	"SWITCH_TRIGGERED"		},
+	{	"TIME"					},
+	{	"CLIST_FULFILLED"		},
+	{	"!"						}
+};
+
+//---------------------------------------------------------------
+
+MenuDef2	select_thing_popup[]	=
+{
+	{	"Delete Condition"		},
+	{	"^"						},
+	{	"Group Conditions"		},
+	{	"Ungroup Conditions"	},
+	{	"^"						},
+	{	"Select Thing",			},
+	{	"!"						}
+};
+
+//---------------------------------------------------------------
+
+MenuDef2	select_switch_popup[]	=
+{
+	{	"Delete Condition"		},
+	{	"^"						},
+	{	"Group Conditions"		},
+	{	"Ungroup Conditions"	},
+	{	"^"						},
+	{	"Select Switch",		},
+	{	"!"						}
+};
+
+//---------------------------------------------------------------
+
+MenuDef2	select_group_popup[]	=
+{
+	{	"Delete Condition"		},
+	{	"^"						},
+	{	"Group Conditions"		},
+	{	"Ungroup Conditions"	},
+	{	"^"						},
+	{	"Group 0"				},
+	{	"Group 1"				},
+	{	"Group 2"				},
+	{	"Group 3"				},
+	{	"Group 4"				},
+	{	"Group 5"				},
+	{	"Group 6"				},
+	{	"Group 7"				},
+	{	"!"						}
+};
+
+//---------------------------------------------------------------
+
+MenuDef2	select_class_popup[]	=
+{
+	{	"Delete Condition"		},
+	{	"^"						},
+	{	"Group Conditions"		},
+	{	"Ungroup Conditions"	},
+	{	"^"						},
+	{	"PLAYER"				},
+	{	"CAMERA"				},
+	{	"PROJECTILE"			},
+	{	"BUILDING"				},
+	{	"PERSON"				},
+	{	"ANIMAL"				},
+	{	"FURNITURE"				},
+	{	"SWITCH"				},
+	{	"VEHICLE"				},
+	{	"!"						}
+};
+
+//---------------------------------------------------------------
+
+MenuDef2	generic_popup[]	=
+{
+	{	"Delete Condition"		},
+	{	"^"						},
+	{	"Group Conditions"		},
+	{	"Ungroup Conditions"	},
+	{	"!"						}
+};
+
+//---------------------------------------------------------------
+extern	MenuDef2	select_clist_popup[];
+
+MenuDef2	*condition_defs[][MAX_FIELDS]	=
+{
+	{	condition_popup,	generic_popup,			generic_popup,			NULL	},	// CON_NONE
+	{	condition_popup,	select_thing_popup,		generic_popup,			NULL	},	// CON_THING_DEAD
+	{	condition_popup,	select_group_popup,		generic_popup,			NULL	},	// CON_ALL_GROUP_DEAD
+	{	condition_popup,	select_group_popup,		generic_popup,			NULL	},	// CON_PERCENT_GROUP_DEAD
+	{	condition_popup,	select_thing_popup,		generic_popup,			NULL	},	// CON_THING_NEAR_PLAYER
+	{	condition_popup,	select_group_popup,		generic_popup,			NULL	},	// CON_GROUP_NEAR_PLAYER
+	{	condition_popup,	select_class_popup,		generic_popup,			NULL	},	// CON_CLASS_NEAR_PLAYER
+	{	condition_popup,	select_thing_popup,		select_thing_popup,		NULL	},	// CON_THING_NEAR_THING
+	{	condition_popup,	select_group_popup,		select_thing_popup,		NULL	},	// CON_GROUP_NEAR_THING
+	{	condition_popup,	select_class_popup,		select_thing_popup,		NULL	},	// CON_CLASS_NEAR_THING
+	{	condition_popup,	select_class_popup,		generic_popup,			NULL	},	// CON_CLASS_COUNT
+	{	condition_popup,	select_group_popup,		generic_popup,			NULL	},	// CON_GROUP_COUNT
+	{	condition_popup,	select_switch_popup,	NULL,					NULL	},	// CON_SWITCH_TRIGGERED
+	{	condition_popup,	generic_popup,			generic_popup,			NULL	},	// CON_TIME
+	{	condition_popup,	select_clist_popup,		generic_popup,			NULL	}	// CON_CLIST_FULFILLED
+};
+
+//---------------------------------------------------------------
+
+extern	ControlDef	select_clist_def[];

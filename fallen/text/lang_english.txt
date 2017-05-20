@@ -1,0 +1,212 @@
+English
+Press |16 to continue.
+- G A M E   O V E R -
+The car is locked.
+Ammo
+Gun
+Health +50
+Five second fuse set...
+Press |4 to enter vehicle.
+Press |4 to use motorbike.
+Press |4 to pick up item.
+Press |1 to grab cable.
+Searching...
+Complete.
+Press |7 to return to main menu.
+Press |4 to restart from your last autosave.
+Level Complete
+Start
+Load Game
+Save Game
+Options
+Graphics
+Sound
+Music
+Quality
+Volume
+Stereo
+Mono
+Reverse Stereo
+Drivers
+Resolution
+Reflections
+Draw Distance
+Real Shadows
+Detail
+High
+Medium
+Low
+Exit
+Okay
+Cancel
+Controls	
+Keypad
+Keyboard
+Joystick
+Controller
+Space
+Enter
+Jump
+Kick
+Punch
+Action
+Left
+Right
+Forwards
+Backwards
+Select
+Look
+Run
+Camera
+Badge
+Collected
+Completed
+Failed
+Score
+Primary
+Secondary
+Objectives
+Map
+Weapons
+Shotgun
+M16
+Grenade
+Explosives
+Knife
+Baseball Bat
+Bomb
+Keycard
+File
+Floppy Disk
+Crowbar
+Gas Mask
+Wrench
+Video
+Gloves
+Weed-Away
+Red Car Keys
+Blue Car Keys
+Green Car Keys
+Black Car Keys
+White Car Keys
+Wirecutters
+Are you sure?
+Crime Rate
+Arrested
+Company
+Copying global media files ...
+Copying local media files ...
+Copying Program files ...
+This program requires 32-bit Windows
+Component:
+File:
+File Group:
+An error occurred during the move data process:
+This program requires DirectX 6, which is not compatible with your operating system
+unInstaller setup failed to initialize.  You may not be able to uninstall this product.
+This program requires VGA or better resolution.
+Urban Chaos Setup
+(Editor)
+Ambient
+Stars
+Moon
+People
+Puddles
+Dirt
+Mist
+Rain
+Skyline
+Constitution
+Strength
+Stamina
+Reflexes
+(Load UCM)
+Scanner
+Track
+Character
+Gamma
+Reset to default
+Str
+Con
+Dex
+Sta
+No cones hit!
+Number of cones hit
+Resume Level
+Restart Level
+Abandon Game
+Texture Mapping
+Perspective 
+Bilinear
+Time penalty!
+Level Lost
+Game Paused
+Get Down
+I can't shoot a Cop.
+Hey! Why are you hitting me, Darci?
+I can't shoot an Unarmed Person.
+Crime rate reduced by
+Game Saved
+Crinkles
+Colour Depth
+You're a good cop, Darci, but you play rough.  You are injuring too many civilians in the course of your duty.
+Congratulations on a successful mission, Darci, however you are responsible for an unacceptable number of civilian casualties.  Consider this your first warning.
+I'm at the end of my patience, Darci.  Our job is to protect the residents of Union City.  Consider this your final warning.  One more mission with too many civilian casualties and I'll have your badge.
+We can hardly afford to lose you, Darci.  However, my first duty is the protection of the citizens of Union City.  In the course of your duty, your behaviour has resulted in more civilian casualties than I am prepared to accept.  I'm taking your badge for good.
+Criminals Killed
+Criminals Arrested
+Criminals Still at Large
+Bonuses Found
+Bonuses Missed
+Time Taken
+Best Time
+Mucky Time
+Yes
+No
+(Empty)
+3D Card Selection
+Use primary 3D card
+Use secondary 3D card
+Use software rendering
+Number of Colours
+16-bit "high" colour
+24-bit "true" colour
+Do not show this dialog box again
+Miles Sound System setup
+Please select a 3D sound driver from the list below
+Button
+Credits
+Bonus Mission Unlocked!
+Jump
+Mode
+Custom
+Dont Run
+Change Controller
+Turn
+Move
+Panel position
+Change Language
+English
+Francais
+Select VMU
+(no VMU present)
+(VMU full)
+Controller %c port %c
+Game save failed!
+Game loaded
+Game load failed!
+General
+Write over existing save?
+No Controller
+Press Start Button
+Vibration
+Engine Vibration
+Loading...
+Saving...
+(2 blocks needed)
+Urban Chaos
+
+
+
+
+

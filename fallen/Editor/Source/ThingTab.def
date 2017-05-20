@@ -1,0 +1,263 @@
+
+
+//---------------------------------------------------------------
+
+MenuDef2		class_menu[]	=
+{
+	{"@CLASS_NONE"},		{"CLASS_PLAYER"},		{"CLASS_CAMERA"},
+	{"@CLASS_PROJECTILE"},	{"@CLASS_BUILDING"},	{"CLASS_PERSON"},
+	{"CLASS_ANIMAL"},		{"CLASS_FURNITURE"},	{"CLASS_TRIGGER"},
+	{"CLASS_VEHICLE"},		{"CLASS_SPECIAL"},
+	{"!"}
+};
+
+ControlDef	thing_tab_def[]	=	
+{
+	{	PULLDOWN_MENU,	0,	"Class",		2,	10,		0,	0,	class_menu		},
+	{	STATIC_TEXT,	0,	"Current Class : ",	14,	24,		0,	10				},
+
+	{	CHECK_BOX,		0,	"",				-100,-100,	0,	0					},		// CLASS_NONE		-	Hide it.
+	{	CHECK_BOX,		0,	"Players",		2,	150,	0,	0					},
+	{	CHECK_BOX,		0,	"Cameras",		2,	160,	0,	0					},
+	{	CHECK_BOX,		0,	"",				-100,-100,	0,	0					},		// CLASS_PROJECTILE	-	Hide it.
+	{	CHECK_BOX,		0,	"Buildings",	2,	170,	0,	0					},
+	{	CHECK_BOX,		0,	"People",		2,	180,	0,	0					},
+	{	CHECK_BOX,		0,	"Animals",		2,	190,	0,	0					},
+	{	CHECK_BOX,		0,	"Furniture",	2,	200,	0,	0					},
+	{	CHECK_BOX,		0,	"Trigger",		2,	210,	0,	0					},
+	{	CHECK_BOX,		0,	"Vehicle",		2,	220,	0,	0					},
+	{	CHECK_BOX,		0,	"Special",		2,	230,	0,	0					},
+
+	{	0															   			}
+};
+
+//---------------------------------------------------------------
+
+ControlDef	null_def[]	=
+{
+	{	STATIC_TEXT,	0,	"NULL",			4,	4,		0,	10					},
+
+	{	0															   			}	
+};
+
+//---------------------------------------------------------------
+
+MenuDef2		player_menu[]	=
+{
+	{"Darci"},	{"Roper"},
+	{"!"}
+};
+
+ControlDef	player_def[]	=
+{
+	{	PULLDOWN_MENU,	0,	"PlayerType",	4,	4,		0,	0,	player_menu		},
+	{	STATIC_TEXT,	0,	"Current PlayerType : ",	14,	24,		0,	10		},
+
+	{	0															   			}	
+};
+
+//---------------------------------------------------------------
+
+MenuDef2		camera_menu[]	=
+{
+	{"Tracker"},{"Fixed"},
+	{"!"}
+};
+
+ControlDef	camera_def[]	=
+{
+	{	PULLDOWN_MENU,	0,	"CameraType",	4,	4,		0,	0,	camera_menu		},
+	{	STATIC_TEXT,	0,	"Current CameraType : ",	14,	24,		0,	10		},
+
+	{	0															   			}	
+};
+
+//---------------------------------------------------------------
+
+MenuDef2		building_menu[]	=
+{
+	{"Hello World"},
+	{"!"}
+};
+
+ControlDef	building_def[]	=
+{
+	{	STATIC_TEXT,	0,	"Building : ",			4,	4,		0,	10		},
+
+	{	CHECK_BOX,		0,	"Building Locked",		4,	30,	0,	0			},
+	{	BUTTON,			0,	"Select Lock Trigger",	4,	50,		0,	10		},
+	{	STATIC_TEXT,	0,	"Unlock On Trigger : ",	14,	64,		0,	10		},
+
+	{	0															   			}	
+};
+
+//---------------------------------------------------------------
+
+MenuDef2		person_menu[]	=
+{
+	{"Cop"},{"Thug"},{"Victim"},{"Mafiosa"},
+	{"!"}
+};
+
+ControlDef	person_def[]	=
+{
+	{	PULLDOWN_MENU,	0,	"PersonType",	4,	4,		0,	0,	person_menu		},
+	{	STATIC_TEXT,	0,	"Current PersonType : ",	14,	24,		0,	10		},
+
+	{	BUTTON,			0,	"Select Command List",	14,	40,		0,	10		},
+	{	STATIC_TEXT,	0,	"Using List : "		,	14,	54,		0,	10		},
+
+	{	0															   			}	
+};
+
+//---------------------------------------------------------------
+
+MenuDef2		animal_menu[]	=
+{
+	{"Hello"},
+	{"!"}
+};
+
+ControlDef	animal_def[]	=
+{
+	{	PULLDOWN_MENU,	0,	"AnimalType",	4,	4,		0,	0,	animal_menu		},
+	{	STATIC_TEXT,	0,	"Current AnimalType : ",	14,	24,		0,	10		},
+
+	{	0															   			}	
+};
+
+//---------------------------------------------------------------
+
+MenuDef2		furniture_menu[]	=
+{
+	{"Hello"},
+	{"!"}
+};
+
+ControlDef	furniture_def[]	=
+{
+	{	PULLDOWN_MENU,	0,	"FurnitureType",	4,	4,		0,	0,	furniture_menu	},
+	{	STATIC_TEXT,	0,	"Current FurnitureType : ",	14,	24,		0,	10		},
+
+	{	0															   			}	
+};
+
+//---------------------------------------------------------------
+
+MenuDef2		trigger_menu[]	=
+{
+	{"Player Trigger"},{"Thing Trigger"},{"Group Trigger"},{"Class Trigger"},
+	{"!"}
+};
+
+ControlDef	player_switch_def[]	=
+{
+	{	PULLDOWN_MENU,	0,	"TriggerType",	4,	4,		0,	0,	trigger_menu	},
+	{	STATIC_TEXT,	0,	"Current TriggerType : ",	14,	24,		0,	10		},
+
+	{	0															   			}	
+};
+
+ControlDef	thing_switch_def[]	=
+{
+	{	PULLDOWN_MENU,	0,	"TriggerType",	4,	4,		0,	0,	trigger_menu	},
+	{	STATIC_TEXT,	0,	"Current TriggerType : ",	14,	24,		0,	10		},
+
+
+	{	BUTTON,			0,	"Select Thing",	14,	40,		0,	10		},
+	{	STATIC_TEXT,	0,	"Will Activate On Thing : "		,	14,	54,		0,	10		},
+
+	{	0															   			}	
+};
+
+ControlDef	group_switch_def[]	=
+{
+	{	PULLDOWN_MENU,	0,	"TriggerType",	4,	4,		0,	0,	trigger_menu	},
+	{	STATIC_TEXT,	0,	"Current TriggerType : ",	14,	24,		0,	10		},
+
+	{	0															   			}	
+};
+
+ControlDef	class_switch_def[]	=
+{
+	{	PULLDOWN_MENU,	0,	"TriggerType",	4,	4,		0,	0,	trigger_menu	},
+	{	STATIC_TEXT,	0,	"Current TriggerType : ",	14,	24,		0,	10		},
+
+	{	0															   			}	
+};
+
+ControlDef	*switch_defs[]	=
+{
+	player_switch_def,
+	player_switch_def,
+	thing_switch_def,
+	group_switch_def,
+	class_switch_def,
+	null_def
+};
+
+//---------------------------------------------------------------
+
+MenuDef2		vehicle_menu[]	=
+{
+	{"Van"},
+	{"Car"},
+	{"!"}
+};
+
+ControlDef	vehicle_def[]	=
+{
+	{	PULLDOWN_MENU,	0,	"VehicleType",	4,	4,		0,	0,	vehicle_menu	},
+	{	STATIC_TEXT,	0,	"Current Vehicle : ",	14,	24,		0,	10			},
+
+
+	{	BUTTON,			0,	"Select Command List",	14,	40,		0,	10		},
+	{	STATIC_TEXT,	0,	"Using List : "		,	14,	54,		0,	10		},
+
+	{	0															   			}	
+};
+
+//---------------------------------------------------------------
+
+MenuDef2		special_menu[]	=
+{
+	{"Key"},
+	{"!"}
+};
+
+ControlDef	special_def[]	=
+{
+	{	PULLDOWN_MENU,	0,	"SpecialType",	4,	4,		0,	0,	special_menu	},
+	{	STATIC_TEXT,	0,	"Current Special : ",	14,	24,		0,	10			},
+
+	{	0															   			}	
+};
+
+//---------------------------------------------------------------
+
+ControlDef	*class_defs[]	=
+{
+	null_def,
+	player_def,
+	camera_def,
+	null_def,
+	building_def,
+	person_def,
+	animal_def,
+	furniture_def,
+	player_switch_def,
+	vehicle_def,
+	special_def,
+	null_def
+};
+
+//---------------------------------------------------------------
+
+ControlDef	select_command_def[]	=
+{
+	{	V_SLIDER,		0,	"",			LISTS_X+LISTS_WIDTH,		LISTS_Y,	0,				LISTS_HEIGHT	},
+	{	0															}
+};
+
+//---------------------------------------------------------------
+

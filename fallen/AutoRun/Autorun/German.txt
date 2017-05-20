@@ -1,0 +1,45 @@
+"Urban Chaos CD-ROM"
+"URBAN CHAOS"
+"FALLEN.EXE"
+3
+
+PREINSTALL
+"BACKGROUND.BMP"
+"ARIAL",18,700
+0,255,0
+255,255,0
+22,103,31
+"Zu Urban Chaos","OPEN","README.HTM","",0
+"Urban Chaos installieren","@OPEN","SETUP.EXE","",0
+"DirectX 6.1 installieren","OPEN","DXINSTALL.EXE","",0
+"Systemanforderungen prüfen","","","",0
+"Websites...","MENU","WEBLINKS","",0
+"Diese CD untersuchen","EXPLORE","$SRC$","",1
+"Beenden","@","","",-1
+
+POSTINSTALL
+"BACKGROUND.BMP"
+"ARIAL",18,700
+0,255,0
+255,255,0
+22,103,31
+"Zu Urban Chaos","OPEN","README.HTM","",0
+"Urban Chaos spielen","OPEN","$DST$\FALLEN.EXE","$DST$",0
+"Urban Chaos neu installieren","OPEN","SETUP.EXE","",0
+"Urban Chaos deinstallieren","UNINSTALL","","",0
+"DirectX 6.1 installieren","OPEN","DXINSTALL.EXE","",0
+"Websites...","MENU","WEBLINKS","",0
+"Diese CD untersuchen","EXPLORE","$SRC$","",1
+"Beenden","@","","",-1
+
+WEBLINKS
+"BACKGROUND.BMP"
+"ARIAL",18,700
+0,255,0
+255,255,0
+22,103,31
+"Mucky Foot Productions Ltd","OPEN","http://www.muckyfoot.com","",0
+"Eidos Interactive","OPEN","http://www.eidos.com","",0
+"Technischer Support","OPEN","http://www.eidos.co.uk/support.html","",0
+"Hinweise zur Gewährleistung","OPEN","http://www.eidos.co.uk/warranty.html","",1
+"Zurück","back","","",-1

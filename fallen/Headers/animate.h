@@ -1,0 +1,781 @@
+#ifndef	ANIMATE
+#define ANIMATE
+
+//
+// Defines
+//
+
+
+/*
+#define	REMAP_ANIM_WALK					1
+#define	REMAP_ANIM_YOMP_START			
+#define	REMAP_ANIM_YOMP					
+#define	REMAP_ANIM_YOMP_STOP			
+#define	REMAP_ANIM_YOMP_START_AK			
+#define	REMAP_ANIM_YOMP_AK				
+#define	REMAP_ANIM_YOMP_STOP_AK			
+*/
+
+#define	CIV_M_START				100
+#define	CIV_M_ANIM_WALK				(CIV_M_START+2)
+#define	CIV_M_ANIM_RUN				(CIV_M_START+3)
+#define	CIV_M_ANIM_STAND			(CIV_M_START+6)
+#define	CIV_M_ANIM_IDLE_START		(CIV_M_START+5)
+#define	CIV_M_ANIM_IDLE_LOOP		(CIV_M_START+6)
+#define	CIV_M_ANIM_IDLE_WATCH		(CIV_M_START+7)
+#define	CIV_M_ANIM_IDLE_END			(CIV_M_START+8)
+#define	CIV_M_ANIM_SIT_START		(CIV_M_START+9)
+#define	CIV_M_ANIM_SIT_LOOP			(CIV_M_START+10)
+#define	CIV_M_ANIM_SIT_WAIT			(CIV_M_START+11)
+#define	CIV_M_ANIM_SIT_END			(CIV_M_START+12)
+#define	CIV_M_ANIM_SIT_TALK1		(CIV_M_START+13)
+#define	CIV_M_ANIM_SIT_TALK2		(CIV_M_START+14)
+#define	CIV_M_ANIM_SIT_TALK3		(CIV_M_START+15)
+#define	CIV_M_ANIM_HANDS_UP			(CIV_M_START+16)
+#define	CIV_M_ANIM_HANDS_UP_LOOP	(CIV_M_START+17)
+#define	CIV_M_ANIM_HANDS_UP_LIE		(CIV_M_START+18)
+#define	CIV_M_ANIM_TALK1			(CIV_M_START+19)
+#define	CIV_M_ANIM_TALK2			(CIV_M_START+20)
+#define	CIV_M_ANIM_TALK3			(CIV_M_START+21)
+
+#define	CIV_F_START				122
+#define	CIV_F_ANIM_WALK				(CIV_F_START+2)
+#define	CIV_F_ANIM_IDLE_BREATHE		(CIV_F_START+3)
+#define	CIV_F_ANIM_IDLE_START		(CIV_F_START+4)
+#define	CIV_F_ANIM_IDLE_LOOP		(CIV_F_START+5)
+#define	CIV_F_ANIM_IDLE_LOOP2		(CIV_F_START+6)
+#define	CIV_F_ANIM_IDLE_STOP		(CIV_F_START+7)
+#define	CIV_F_ANIM_SIT_IDLE1		(CIV_F_START+8)
+#define	CIV_F_ANIM_SIT_IDLE2		(CIV_F_START+9)
+#define	CIV_F_ANIM_RUN				(CIV_F_START+10)
+
+
+#define	COP_START	200
+#define	COP_ROPER_ANIM_WALK			(COP_START+1)
+#define	COP_ROPER_ANIM_RUN			(COP_START+13)
+#define	COP_ROPER_ANIM_READY		(COP_START+2)
+#define	COP_ROPER_ANIM_IDLE1		(COP_START+4)
+#define	COP_ROPER_ANIM_IDLE2		(COP_START+11)
+#define	COP_ROPER_ANIM_IDLE3		(COP_START+14)
+#define	COP_ROPER_ANIM_IDLE4		(COP_START+15)
+
+#define	COP_ROPER_ANIM_LADDER_START	(COP_START+19)
+#define	COP_ROPER_ANIM_LADDER_LOOP	(COP_START+20)
+#define	COP_ROPER_ANIM_LADDER_END_L	(COP_START+21)
+#define	COP_ROPER_ANIM_LADDER_END_R	(COP_START+22)
+#define	COP_ROPER_ANIM_REST			(COP_START+24)
+#define	COP_ROPER_ANIM_FIGHT		(COP_START+31)
+#define	COP_ROPER_ANIM_LADDER_OFF_BOT	(COP_START+32)
+
+#define	FOOT_HEIGHT	9
+#define	HAND_HEIGHT	4
+/*
+#define	ROPER_WALK					(1)
+#define	ROPER_PUNCH_CLOSE			(2)
+#define	ROPER_ELBOW_CLOSE			(3)
+#define	ROPER_DRAW_GUN				(4)
+#define	ROPER_SHOOT					(5)
+#define	ROPER_RUN					(6)
+#define	ROPER_CLIMB_OVER_FENCE		(8)
+#define	ROPER_CLIMB_UP_FENCE		(9)
+#define	ROPER_JUMP_UP_GRAB			(10)
+#define	ROPER_PULL_UP				(11)
+#define	ROPER_WALK_MEAN				(12)
+#define	ROPER_SWING					(13)
+#define	ROPER_ENTER_VAN				(14)
+#define	ROPER_EXIT_VAN				(15)
+#define	ROPER_AIM_GUN				(16)
+#define	ROPER_STAND					(17)
+#define	ROPER_DANGLE				(18)
+#define	ROPER_ANIM_JUMP				(25)
+#define	ROPER_ANIM_LAND				(26)
+#define	ROPER_ANIM_MID_AIR			(27)
+#define	ROPER_ANIM_MID_AIR_TWEEN_LEFT	(28)
+#define	ROPER_ANIM_MID_AIR_TWEEN_RIGHT	(28)
+*/
+#define	ROPER_WALK					(1)
+#define	ROPER_PUNCH_CLOSE1			(31)
+#define	ROPER_PUNCH_CLOSE2			(30)
+#define	ROPER_PUNCH_CLOSE3			(32)
+#define	ROPER_ELBOW_CLOSE			(3)
+#define	ROPER_DRAW_GUN				(2)
+#define	ROPER_SHOOT					(3)
+#define	ROPER_RUN					(4)
+#define	ROPER_LAND_ON_FENCE			(5)
+#define	ROPER_CLIMB_OVER_FENCE		(6)
+#define	ROPER_CLIMB_UP_FENCE		(7)
+#define	ROPER_STANDING_JUMP			(47)
+#define	ROPER_PULL_UP				(9)
+#define	ROPER_WALK_MEAN				(10)
+#define	ROPER_SWING					(11)
+#define	ROPER_ENTER_VAN				(12)
+#define	ROPER_EXIT_VAN				(13)
+#define	ROPER_AIM_GUN				(68)
+#define	ROPER_STAND					(15)
+#define	ROPER_DANGLE				(16)
+#define	ROPER_ANIM_JUMP				(22)
+#define	ROPER_ANIM_LAND				(23)
+#define	ROPER_ANIM_MID_AIR			(24)
+#define	ROPER_ANIM_MID_AIR_TWEEN_LEFT	(23)
+#define	ROPER_ANIM_MID_AIR_TWEEN_RIGHT	(23)
+#define	ROPER_JUMP_UP_GRAB			(47)
+#define	ROPER_FLY_GRABBING_LEDGE	(51)
+#define	ROPER_LAND_VERT   			(52)
+#define ROPER_DEATH_SLIDE			(59)
+#define ROPER_CRAWL					(26)
+#define ROPER_FALLING				(48)
+#define ROPER_FIGHT_IDLE			(49)
+#define ROPER_FIGHT_RECOIL			(50)
+#define ROPER_KICK_DOOR 			(46)
+#define ROPER_IDLE_CROUCH			(54)
+#define ROPER_CROUCH_DOWN			(53)
+#define ROPER_PICKUP				(38)
+#define ROPER_THROW_1H				(42)
+#define ROPER_FOLDARMS   			(62)
+#define ROPER_ARMSFOLDED			(64)
+#define ROPER_TO_FIGHT				(72)
+#define	ROPER_MOUNT_LADDER			(56)
+#define	ROPER_ON_LADDER				(57)
+#define	ROPER_OFF_LADDER_TOP		(58)
+//#define	ROPER_OFF_LADDER_BOT			(56)
+
+#define	ROPER_TRAVERSE_LEFT			(60)
+#define	ROPER_TRAVERSE_RIGHT		(61)
+#define	ROPER_ROTATE_LEFT			(65)
+#define	ROPER_ROTATE_RIGHT			(66)
+
+#define ROPER_FIGHT_LEFT			(75)
+#define ROPER_FIGHT_RIGHT			(76)
+#define ROPER_FIGHT_FORWARD			(73)
+#define ROPER_FIGHT_BACK			(74)
+
+#define ROPER_BIKE_MOUNT			(33)
+#define ROPER_BIKE_RIDE				(69)
+#define ROPER_BIKE_LEAN_LEFT		(70)
+#define ROPER_BIKE_LEAN_RIGHT		(71)
+/*
+#define	CIVVY_WALK					(1)
+#define	CIVVY_RUN_TAXI				(2)
+#define	CIVVY_RUN_FLEE				(3)
+#define	CIVVY_HAIL_TAXI				(4)
+#define	CIVVY_ENTER_TAXI			(5)
+#define	CIVVY_SIT					(6)
+#define	CIVVY_READ_PAPER1			(7)
+#define	CIVVY_READ_PAPER2			(8)
+#define	CIVVY_IDLE_BREATHE			(9)
+#define	CIVVY_IDLE_PHONE_ANSWER		(10)
+#define	CIVVY_IDLE_PHONE_TALK		(11)
+*/
+#define	THUG_ANIM_WALK				(2)
+#define	THUG_ANIM_RUN				(5)
+#define	THUG_ANIM_IDLE1				(8)
+#define	THUG_ANIM_IDLE2				(9)
+#define	THUG_ANIM_FIGHT_IDLE		(41)
+
+
+#define	CIV_ANIM_WALK					(2)
+#define CIV_ANIM_WANKER					(13)
+//unused #define	CIV_ANIM_RUN_TAXI				(8)
+//unused#define	CIV_ANIM_RUN_FLEE				(7)
+//#define	CIV_ANIM_HAIL_TAXI				(26)
+#define	CIV_ANIM_ENTER_TAXI				(27)
+#define	CIV_ANIM_SIT					(28)
+#define	CIV_ANIM_READ_PAPER1			(29)
+#define	CIV_ANIM_READ_PAPER2			(30)
+#define	CIV_ANIM_IDLE_BREATHE			(30)
+#define	CIV_ANIM_IDLE_PHONE_ANSWER		(31)
+#define	CIV_ANIM_IDLE_PHONE_TALK		(32)
+#define	CIV_FIGHT_IDLE					(46)
+#define	CIV_BLOCK						(45)
+#define CIV_ANIM_DANCE_BOOGIE			(52)
+#define CIV_ANIM_DANCE_WOOGIE			(58)
+#define CIV_ANIM_DANCE_HEADBANG			(55)
+#define CIV_ANIM_WARM_HANDS				(53)
+#define CIV_ANIM_HANDS_UP				(56)
+#define CIV_ANIM_HANDS_UP_LOOP			(57)
+
+#define	ANIM_HEAD_HIT_SMALL			(26)
+#define	ANIM_HEAD_HIT_BIG			(22)
+#define	ANIM_HEAD_HIT_BEHIND		(28)
+#define	ANIM_GUT_HIT_BIG			(24)
+#define	ANIM_GUT_HIT_SMALL			(27)
+#define	ANIM_GUT_HIT_BIG_BEHIND		(40)
+
+#define	ANIM_KO_BEHIND_BIG			(109)
+#define	ANIM_KO_BEHIND_BIG_GU		(110)
+#define	ANIM_KO_BACK				(33)		
+#define	ANIM_KO_BACK_GU				(34)		
+
+#define	ANIM_RUN					(119) //was 1
+#define	ANIM_WALK					(20)
+#define	ANIM_STAND_HIP				(2)
+#define	ANIM_STAND_READY			(3)
+#define	ANIM_KICK_ROUND1			(8)
+#define	ANIM_PUNCH1					(19)
+#define	ANIM_PULL_UP				(48)
+#define	ANIM_UP_LADDER				(14)
+#define	ANIM_VAULT					(16)
+#define	ANIM_SIDLE					(18)
+//#define	ANIM_JUMP2					(54)
+//#define	ANIM_LAND2					(53)
+#define	ANIM_FALLING				(51)
+#define	ANIM_FALLING_QUEUED			(206)
+#define	ANIM_FALLING_AK				(390)
+
+#define	ANIM_FALLING_QUEUED_AK		(382)
+#define	ANIM_STANDING_JUMP			(203)
+#define	ANIM_STANDING_JUMP_AK		(380)
+#define	ANIM_LAND_VERT_AK			(381)
+#define	ANIM_FALL_VERT_AK			(382)
+//(7)
+#define	ANIM_FLY_GRABBING_LEDGE		(52)
+#define	ANIM_JUMP_UP_GRAB			(12)
+#define	ANIM_LAND_VERT				(204)
+//(50)
+#define	ANIM_MOUNT_LADDER			(13)
+#define	ANIM_ON_LADDER				(14)
+#define	ANIM_OFF_LADDER_TOP			(55)
+#define	ANIM_OFF_LADDER_BOT			(56)
+#define	ANIM_FIGHT_READY			(25)
+#define	ANIM_PUNCH2					(35)
+#define	ANIM_KICK2					(36)
+#define	ANIM_PUNCH3					(39)
+#define	ANIM_LAND_ON_FENCE			(57)  //62
+#define	ANIM_CLIMB_UP_FENCE			(45)
+#define ANIM_CLIMB_RIGHT_FENCE		(43)
+#define ANIM_CLIMB_LEFT_FENCE		(42)
+#define	ANIM_CLIMB_OVER_FENCE		(58)
+#define	ANIM_HAND_OVER_HAND			(37)
+#define ANIM_DEATH_SLIDE			(68)
+#define	ANIM_FALL_LONG				(47)
+#define	ANIM_STEP_LEFT				(59)
+#define	ANIM_STEP_RIGHT				(60)
+//#define	ANIM_DRAW_GUN				(9)		
+//#define	ANIM_GUN_AIM				(11)	
+//#define	ANIM_SHOOT					(10)
+#define ANIM_LANDED_ON_FENCE		(62)						
+#define ANIM_FLIP_LEFT				(91)
+#define ANIM_FLIP_RIGHT				(92)
+#define ANIM_FLIP_RIGHT_CONT		(93)
+#define ANIM_FLIP_LEFT_CONT			(94)
+#define	ANIM_IDLE_SCRATCH1			(77)
+#define	ANIM_IDLE_SCRATCH2			(78)
+#define ANIM_NECK_SNAP				(88)
+#define ANIM_ENTER_CAR				(89) //will be 369
+#define ANIM_EXIT_CAR				(90)
+#define ANIM_SNEAK					(86)
+#define	ANIM_BSTEP					(69) //was 69
+//#define	ANIM_LAND_RUN				(95)
+#define	ANIM_LAND_STAND				(96)
+#define	ANIM_RUN_JUMP_LEFT_AK		(269)   //(6)
+#define	ANIM_RUN_JUMP_LEFT			(54)   //(6)
+#define	ANIM_RUN_JUMP_RIGHT			(46)
+//#define	ANIM_MID_AIR_LAND			(98)
+#define	ANIM_SIT					(100)
+#define	ANIM_DESPAIR				(101)
+#define	ANIM_STAND_UP				(103)
+#define	ANIM_SNAP_KNECK				(88)
+#define	ANIM_SNEAK					(86)
+//#define	ANIM_LAND_LEFT				(120)
+#define	ANIM_LAND_RIGHT				(53)
+#define	ANIM_LAND_RIGHT_AK			(270)
+#define	ANIM_MID_AIR_TWEEN_LEFT_AK	(268)
+#define	ANIM_MID_AIR_TWEEN_LEFT		(122)
+#define	ANIM_MID_AIR_TWEEN_RIGHT	(122) //was 123
+#define ANIM_LOB2					(87)
+
+
+#define ANIM_HOSTAGE_STAND			(99)
+#define ANIM_HOSTAGE_SIT			(100)
+#define ANIM_HOSTAGE_DESPAIR		(101)
+#define ANIM_HOSTAGE_READY			(102)
+#define ANIM_HOSTAGE_RELEASE		(103)
+
+
+#define ANIM_SHOTGUN_DRAW			(81)
+#define ANIM_SHOTGUN_IDLE_OLD			(82)
+#define ANIM_SHOTGUN_SHOOT			(83)
+#define ANIN_SHOTGUN_WHIP			(84)
+#define ANIM_SHOTGUN_WALK			(85)
+
+#define	ANIM_BACK_FLIP				(105)
+
+//#define	ANIM_BACK_FLIP_CLIMB		(106)
+#define	ANIM_FORWARD_JUMP			(112)
+
+//#define	ANIM_STOP_RUN				(115)
+//#define	ANIM_STOP_RUN_L				(115)
+//#define	ANIM_STOP_RUN_R				(116)
+#define	ANIM_WALL_KICK				(117)
+#define	ANIM_RUN_JUMP_MLEFT			(118)
+
+#define	ANIM_BACK_HOP				(121)
+#define	ANIM_BREATHE				(124)
+#define	ANIM_KICK3					(104)
+
+#define	ANIM_GRAPPLING_HOOK_PICKUP	(140)
+#define	ANIM_GRAPPLING_HOOK_WINDUP	(137)
+#define ANIM_GRAPPLING_HOOK_RELEASE	(138)
+
+#define ANIM_CAN_PICKUP				(64)
+#define ANIM_CAN_RELEASE			(65)
+#define	ANIM_FATAL_FALL				(80)
+
+
+//#define	ANIM_SKID					(125)
+//#define	ANIM_SKID_TURN				(126)
+//#define	ANIM_SKID_STOP				(127)
+#ifndef PSX
+#define	ANIM_PLUNGE_BACKWARDS		(128)
+#else
+#warning This has been changed for the time being
+#define ANIM_PLUNGE_BACKWARDS		(129)
+#endif
+#define	ANIM_PLUNGE_FORWARDS		(129)
+#define	ANIM_TRAVERSE_LEFT			(130)
+#define	ANIM_TRAVERSE_RIGHT			(131)
+#define	ANIM_TURN90_LEFT			(132)
+#define	ANIM_TURN90_RIGHT			(133)
+#define	ANIM_BUTTON					(134)
+#define	ANIM_LEVER					(135)
+#define	ANIM_BATMAN					(139)
+#define	ANIM_PLUNGE_BACK_SLAM		(140)
+#define	ANIM_PLUNGE_FRONT_SLAM		(141)
+#define	ANIM_GET_DOWN				(142)
+#define	ANIM_CROUCH					(143)
+#define	ANIM_CRAWL					(144)
+#define	ANIM_PUNCH_COMBO1			(146)
+#define	ANIM_PUNCH_COMBO2			(147)
+#define	ANIM_PUNCH_COMBO3			(148)
+#define	ANIM_PUNCH_COMBO3B			(149)
+#define	ANIM_PUNCH_RETURN1			(150)
+#define	ANIM_PUNCH_RETURN2			(151)
+#define	ANIM_KICK_COMBO1			(154)
+#define	ANIM_KICK_COMBO2			(155)
+#define	ANIM_KICK_COMBO3			(156)
+#define	ANIM_KICK_RETURN1			(157)
+#define	ANIM_KICK_RETURN2			(158)
+#define	ANIM_FIGHT					(159)
+#define	ANIM_KICK_NS				(161)
+#define	ANIM_KICK_LEFT				(162)
+#define	ANIM_KICK_RIGHT				(262)
+#define	ANIM_KICK_NEAR				(263)
+#define	ANIM_PUNCH_BEHIND			(163)
+#define	ANIM_KICK_BEHIND			(164)
+#define	ANIM_BLOCK_HIGH				(165)
+#define	ANIM_HIT_FRONT_HI			(166)
+#define	ANIM_HIT_FRONT_MID			(167)
+#define	ANIM_HIT_BACK_HI			(168)
+#define	ANIM_HIT_BACK_MID			(169)
+#define	ANIM_KD_FRONT_MID			(170)
+#define	ANIM_KD_FRONT_HI			(171)
+#define	ANIM_KD_BACK_MID			(172)
+#define	ANIM_KD_BACK_HI				(173)
+#define	ANIM_KD_BACK_LOW			(174)
+#define	ANIM_KD_FRONT_LOW			(175)
+#define	ANIM_KD_FRONT_LAND			(176)
+#define	ANIM_KD_BACK_LAND			(177)
+#define	ANIM_FIGHT_STEP_N			(178)
+#define	ANIM_FIGHT_STEP_S			(179)
+#define	ANIM_FIGHT_STEP_E			(180)
+#define	ANIM_FIGHT_STEP_W			(181)
+#define	ANIM_PUNCH_COMBO2b			(185)
+#define	ANIM_PUNCH_COMBO3b			(186)
+#define	ANIM_KICK_COMBO3b			(187)
+
+#define	ANIM_FIGHT_STOMP			(184)
+#define	ANIM_FIGHT_STOMPED_BACK		(188)
+#define	ANIM_FIGHT_STOMPED_FRONT	(189)
+
+
+#define	ANIM_IDLE_CROUTCH			(222)
+//(165)
+#define	ANIM_CROUTCH_DOWN			(143)
+//(183)
+//(184)
+
+#define	ANIM_ROTATE_L				(193)
+#define	ANIM_ROTATE_R				(194)
+
+#define	ANIM_YOMP					(198)
+
+#define ANIM_BAT_HIT1				(199)
+#define ANIM_BAT_HIT1_RET			(240)
+#define ANIM_BAT_HIT2				(200)
+#define ANIM_BAT_IDLE				(201)
+#define ANIM_BAT_BLOCK				(202)
+#define ANIM_BAT_DRAW				(245)
+
+#define	ANIM_SHOTGUN_WHIP1			(208)
+#define	ANIM_SHOTGUN_WHIP2			(209)
+#define	ANIM_SHOTGUN_FIRE			(210)
+#define	ANIM_SHOTGUN_WHIP3			(211)
+#define	ANIM_SHOTGUN_STAND			(212)
+#define	ANIM_SHOTGUN_BLOCK			(213)
+#define	ANIM_SHOTGUN_AIM			(293)
+//(214)
+#define	ANIM_SLIDER_START			(216)
+#define	ANIM_SLIDER_END				(217)
+#define	ANIM_SLIDER_HOLD			(218)
+#define	ANIM_LEG_SWEEP				(219)
+#define	ANIM_FIGHT_SHUFFLE			(221)
+#define	ANIM_DANGLE					(223)
+
+#define	ANIM_GRAB_ARM				(226)
+#define	ANIM_GRAB_ARMV				(227)
+
+#define	ANIM_GRAB_ARM_THROW			(228)
+#define	ANIM_GRAB_ARM_THROWV		(229)
+
+#define	ANIM_GRAB_ARM_KNEE1			(230)
+#define	ANIM_GRAB_ARM_KNEE1V		(231)
+
+#define	ANIM_GRAB_ARM_KNEE2			(232)
+#define	ANIM_GRAB_ARM_KNEE2V		(233)
+
+#define	ANIM_GRAB_ARM_ESCAPE		(234)
+#define	ANIM_GRAB_ARM_ESCAPEV		(235)
+
+#define	ANIM_BIG_LAND				(225)
+#define	ANIM_YOMP_START				(238)
+
+#define ANIM_BIKE_LEAN_LEFT_FOOT	(287)
+#define ANIM_BIKE_LEAN_RIGHT_FOOT	(288)
+#define ANIM_BIKE_LEAN_LEFT			(252)
+#define ANIM_BIKE_LEAN_RIGHT        (250)
+#define ANIM_BIKE_LEAN				(248)
+
+#define ANIM_BIKE_MOUNT				(236)
+#define ANIM_BIKE_RIDE              (237)
+
+#define	ANIM_LEG_SWEEP_LOW			(242) // from croutch pos
+
+//#define	ANIM_					()
+
+#define	ANIM_WIRE_SLIDE_PULLUP		(246)
+#define	ANIM_WIRE_SLIDE_HANG		(247)
+
+#define	ANIM_BLOCK_LOW				(112) //jump
+#define	ANIM_AK_AIM					(253)
+#define	ANIM_AK_FIRE				(254)
+#define	ANIM_AK_JOG					(266)
+#define	ANIM_PISTOL_JOG				(267)
+//#define ANIM_AK_DRAW				(265) // darci doesn't have these, roper does...
+//#define	ANIM_AK_AIM_L				(268) // 
+//#define	ANIM_AK_AIM_R				(41)  // 
+
+#define	ANIM_SNIPE_AIM				(255)
+#define	ANIM_SNIPE_FIRE				(256)
+#define	ANIM_SNIPE_NORM				(257)
+#define	ANIM_TALK_ASK				(258)
+#define	ANIM_TALK_TELL				(259)
+#define	ANIM_TALK_LISTEN			(260)
+#define	ANIM_DIE_KNECK				(261)
+#define	ANIM_KICK_RIGHT				(262)
+#define	ANIM_QUICK_GET_UP			(264)
+
+#define	ANIM_PLUNGE_FORWARD			(129)
+#define	ANIM_PLUNGE_BACKWARD		(128)
+#define	ANIM_PLUNGE_SLAM_FORWARD	(141)
+#define	ANIM_PLUNGE_SLAM_BACKWARD	(140)
+
+#define	ANIM_KNIFE_DRAW				(286)
+#define	ANIM_KNIFE_FIGHT_READY		(276)
+#define	ANIM_KNIFE_ATTACK1			(271)
+#define	ANIM_KNIFE_ATTACK2			(272)
+#define	ANIM_KNIFE_ATTACK3			(273)
+#define	ANIM_KNIFE_ATTACK1_RET		(274)
+#define	ANIM_KNIFE_ATTACK2_RET		(275)
+
+#define	ANIM_PLUNGE_START			(277)
+
+#define	ANIM_CROUTCH_GETUP			(278)
+#define	ANIM_FLYKICK_START			(279)
+#define	ANIM_FLYKICK_FALL			(280)
+#define	ANIM_FLYKICK_LAND			(281)
+
+#define	ANIM_ARREST_CROUTCH			(282)
+#define	ANIM_ARREST_BE_CUFFED		(283)
+#define	ANIM_ARREST_STRUGGLE		(284)
+#define	ANIM_ARREST_ROLL			(285)
+
+#define ANIM_POINT_GUN_LEFT			(290)
+//#define ANIM_POINT_GUN_AHEAD		(291)
+#define ANIM_POINT_GUN_RIGHT		(292)
+
+#define ANIM_POINT_SHOTGUN_LEFT		(294)
+#define ANIM_POINT_SHOTGUN_AHEAD	(293)
+#define ANIM_POINT_SHOTGUN_RIGHT	(295)
+
+#define ANIM_PISTOL_DRAW			(296)
+#define ANIM_PISTOL_SHOOT			(297)
+#define ANIM_PISTOL_AIM_AHEAD		(298)
+
+#define	ANIM_SHOT_DEAD_HEAD			(304)
+#define	ANIM_SHOT_DEAD_CHEST		(305)
+#define	ANIM_SHOT_DEAD_GUT			(306)
+#define	ANIM_SHOT_DEAD_BACK			(307)
+#define	ANIM_SHOT_DEAD_UZI			(308)
+
+#define	ANIM_PISTOL_DUCK			(309)
+#define	ANIM_PISTOL_DUCK_HOLD		(310)
+#define	ANIM_PISTOL_STANDUP			(311)
+
+#define	ANIM_SHOTGUN_DUCK			(312)
+#define	ANIM_SHOTGUN_DUCK_HOLD		(313)
+#define	ANIM_SHOTGUN_STANDUP		(314)
+
+#define	ANIM_SNIPER_CRAWL			(315)
+#define	ANIM_HIT_WALL				(316)
+#define	ANIM_DIVE_LEFT				(317)
+#define	ANIM_DIVE_RIGHT				(318)
+#define	ANIM_YOMP_START_AK			(321)
+#define	ANIM_PRESS_WALL_TURN		(322)
+#define	ANIM_PRESS_WALL_STAND		(323)
+#define	ANIM_PRESS_WALL_SIDLE_L		(324)
+#define	ANIM_PRESS_WALL_SIDLE_R		(325)
+#define	ANIM_PRESS_WALL_TURN_AK		(326)
+#define	ANIM_PRESS_WALL_STAND_AK	(327)
+#define	ANIM_PRESS_WALL_SIDLE_L_AK	(328)
+#define	ANIM_PRESS_WALL_SIDLE_R_AK	(329)
+
+#define	ANIM_GET_UP_HALF_BLOCK		(330)
+#define	ANIM_PULL_UP_NEW			(332)
+#define	ANIM_SURF					(333)
+#define	ANIM_SURF_AK				(335)
+#define	ANIM_BACK_WALK				(334)
+#define	ANIM_BACK_WALK_AK			(336)
+#define	ANIM_SIT_DOWN				(337)
+#define	ANIM_SIT_IDLE				(338)
+#define	ANIM_SIT_TO_STAND			(339)
+#define	ANIM_STOP_RUN				(340)
+
+#define	ANIM_PRESS_WALL_TURN_PISTOL	(341)
+#define	ANIM_PRESS_WALL_STAND_PISTOL	(342)
+#define	ANIM_PRESS_WALL_SIDLE_L_PISTOL	(343)
+#define	ANIM_PRESS_WALL_SIDLE_R_PISTOL	(344)
+
+#define	ANIM_PRESS_WALL_LOOK_L_PISTOL	(345)
+#define	ANIM_PRESS_WALL_LOOK_R_PISTOL	(346)
+#define	ANIM_PRESS_WALL_LOOK_L_AK	(347)
+#define	ANIM_PRESS_WALL_LOOK_R_AK	(348)
+#define	ANIM_PRESS_WALL_LOOK_L		(349)
+#define	ANIM_PRESS_WALL_LOOK_R		(350)
+
+#define	ANIM_PRESS_WALL_FREEZE_L_PISTOL	(351)
+#define	ANIM_PRESS_WALL_FREEZE_R_PISTOL	(352)
+#define	ANIM_PRESS_WALL_FREEZE_L_AK	(353)
+#define	ANIM_PRESS_WALL_FREEZE_R_AK	(354)
+#define	ANIM_PRESS_WALL_FREEZE_L	(355)
+#define	ANIM_PRESS_WALL_FREEZE_R	(356)
+
+#define	ANIM_UNFIGHT				(358)
+
+
+
+#define ANIM_BIKE_DISMOUNT			(360)
+#define ANIM_BIKE_FALL_OVER_BARS	(361)
+
+#define	ANIM_FIGHT_STEP_N_BAT		(375)
+#define	ANIM_FIGHT_STEP_S_BAT		(376)
+#define	ANIM_FIGHT_STEP_E_BAT		(377)
+#define	ANIM_FIGHT_STEP_W_BAT		(378)
+
+#define	ANIM_FIGHT_SHUFFLE_BAT		(379)
+
+#define	ANIM_YOMP_START_PISTOL		(368)
+#define	ANIM_YOMP_START_BAT			(371)
+#define	ANIM_YOMP_BAT				(370)
+
+#define	ANIM_SHOTGUN_IDLE			(383)
+#define	ANIM_THUG_WALK_SHOTGUN		(384)
+#define	ANIM_THUG_WALK				(389)
+#define	ANIM_INJURED_LOOP			(386)
+#define	ANIM_INJURED_LOOP_STRUGGLE	(387)  
+
+#define	ANIM_BIGLAND_DIE			(388)  
+#define	ANIM_UNCROUTCH_PISTOL		(311)	
+#define	ANIM_UNCROUTCH_AK			(314)	
+
+
+#define	ANIM_PISTOL_WHIP			(391)
+#define	ANIM_PISTOL_WHIP_TAKE		(392)
+#define	ANIM_KICK_NAD				(394)
+#define	ANIM_KICK_NAD_TAKE			(395)
+#define	ANIM_KICK_NAD_STUNNED		(396)
+#define	ANIM_KICK_NAD_RECOVER		(397)
+
+
+#define ANIM_VALVE_LOOP				(398)
+#define ANIM_VALVE_END			(399)
+#define	ANIM_END					(400)
+
+//
+// these are anims darci doesnt has but steals from other characters
+//
+#define	ANIM_EXIT_VAN				(ANIM_END+1)
+#define	ANIM_ENTER_VAN				(ANIM_END+2)
+#define ANIM_WANKER					(ANIM_END+3)
+#define	ANIM_RUN_TAXI				(ANIM_END+4)
+#define	ANIM_RUN_FLEE				(ANIM_END+5)
+#define	ANIM_HAIL_TAXI				(ANIM_END+6)
+#define	ANIM_ENTER_TAXI				(ANIM_END+7)
+//#define	ANIM_SIT_BENCH				(ANIM_END+8)
+//#define	ANIM_READ_PAPER1			(ANIM_END+9)
+//#define	ANIM_READ_PAPER2			(ANIM_END+10)
+#define	ANIM_PUTDOWN_CARRY_V			(ANIM_END+8)
+
+#define	ANIM_STAND_CARRY				(ANIM_END+9)
+#define	ANIM_STAND_CARRY_V				(ANIM_END+10)
+
+#define	ANIM_IDLE_BREATH			(ANIM_END+11)
+#define	ANIM_IDLE_PHONE_ANSWER		(ANIM_END+12)
+#define	ANIM_IDLE_PHONE_TALK		(ANIM_END+13)
+#define	ANIM_FIGHT_STANCE_WIMP		(ANIM_END+14)
+#define	ANIM_FIGHT_STANCE_HARD		(ANIM_END+15)
+#define ANIM_DANCE_BOOGIE			(ANIM_END+16)
+#define ANIM_DANCE_WOOGIE			(ANIM_END+17)
+#define ANIM_DANCE_HEADBANG			(ANIM_END+18)
+#define ANIM_WARM_HANDS				(ANIM_END+19)
+#define ANIM_HANDS_UP				(ANIM_END+20)
+#define	ANIM_STRANGLE				(ANIM_END+21)
+#define	ANIM_STRANGLE_VICTIM		(ANIM_END+22)
+#define	ANIM_HEADBUTT				(ANIM_END+23)
+#define	ANIM_HEADBUTT_VICTIM		(ANIM_END+24)
+#define	ANIM_HANDS_UP_LOOP			(ANIM_END+26)
+
+#define	ANIM_PICKUP_CARRY				(ANIM_END+27)
+#define	ANIM_START_WALK_CARRY			(ANIM_END+28)
+#define	ANIM_WALK_CARRY					(ANIM_END+29)
+#define	ANIM_WALK_STOP_CARRY			(ANIM_END+30)
+#define	ANIM_PUTDOWN_CARRY				(ANIM_END+31)
+
+#define	ANIM_PICKUP_CARRY_V				(ANIM_END+32)
+#define	ANIM_START_WALK_CARRY_V			(ANIM_END+33)
+#define	ANIM_WALK_CARRY_V				(ANIM_END+34)
+#define	ANIM_WALK_STOP_CARRY_V			(ANIM_END+35)
+#define ANIM_HANDS_UP_LIE				(ANIM_END+36)
+
+
+/* old
+#define	ANIM_RUN					(1)
+#define	ANIM_WALK					(20)
+#define	ANIM_STAND_HIP				(2)
+#define	ANIM_STAND_READY			(3)
+#define	ANIM_KICK_ROUND1			(8)
+#define	ANIM_PUNCH1					(19)
+#define	ANIM_DRAW_GUN				(10)
+#define	ANIM_PULL_UP				(36)
+#define	ANIM_UP_LADDER				(14)
+#define	ANIM_VAULT					(16)
+#define	ANIM_SIDLE					(18)
+#define	ANIM_JUMP2					(32)
+#define	ANIM_LAND2					(33)
+#define	ANIM_FALLING				(34)
+#define	ANIM_HIT1					(26)//may be 27
+#define	ANIM_STANDING_JUMP			(7)
+#define	ANIM_FLY_GRABBING_LEDGE		(37)
+#define	ANIM_JUMP_UP_GRAB			(12)
+#define	ANIM_LAND_VERT				(38)
+#define	ANIM_MOUNT_LADDER			(15)
+#define	ANIM_ON_LADDER				(14)
+#define	ANIM_OFF_LADDER_TOP			(13)
+#define	ANIM_OFF_LADDER_BOT			(39)
+#define	ANIM_FIGHT_READY			(25)
+#define	ANIM_PUNCH2					(40)
+#define	ANIM_KICK2					(41)
+*/
+#define	ACTION_IDLE					(0)
+#define	ACTION_WALK					(1)
+#define	ACTION_RUN					(2)
+#define	ACTION_STANDING_JUMP		(3)
+#define	ACTION_STANDING_JUMP_GRAB	(4)
+#define	ACTION_RUNNING_JUMP			(5)
+#define	ACTION_DANGLING				(6)
+#define	ACTION_PULL_UP				(7)
+#define	ACTION_STAND_RELAX			(8)
+#define	ACTION_GRABBING_LEDGE		(9)
+
+#define	ACTION_NONE					(10)
+#define	ACTION_DROP_DOWN			(10)
+#define	ACTION_FALLING				(11)
+#define	ACTION_LANDING				(12)
+#define	ACTION_CLIMBING				(13)
+#define	ACTION_FIGHT_PUNCH			(14)
+#define	ACTION_FIGHT_KICK			(15)
+#define	ACTION_FIGHT_IDLE			(16)
+#define	ACTION_DANGLING_CABLE		(17)
+#define ACTION_HOP_BACK				(18)
+#define	ACTION_SIDE_STEP			(19)
+#define	ACTION_DYING				(20)
+#define	ACTION_DRAW_SPECIAL			(21)
+#define	ACTION_AIM_GUN				(22)
+#define	ACTION_SHOOT				(23)
+#define	ACTION_GUN_AWAY				(24)
+#define	ACTION_RESPAWN				(25)
+#define	ACTION_DEAD					(26)
+#define	ACTION_FLIP_LEFT			(27)
+#define	ACTION_FLIP_RIGHT			(28)
+#define	ACTION_STOPPING				(30)
+#define	ACTION_RUN_JUMP				(31)
+#define	ACTION_KICK_FLAG			(32)
+#define	ACTION_JUMP_FLAG			(33)
+#define	ACTION_WALK_BACK			(34)
+#define	ACTION_DEATH_SLIDE			(35)
+#define	ACTION_TRAVERSE_LEFT		(36)
+#define	ACTION_TRAVERSE_RIGHT		(37)
+#define	ACTION_PUNCH_FLAG			(38)
+#define	ACTION_BLOCK_FLAG			(39)
+#define	ACTION_CROUTCH				(40)
+#define	ACTION_CRAWLING				(41)
+#define	ACTION_SKID					(42)
+#define	ACTION_GRAPPLE				(43)
+#define	ACTION_GRAPPLEE				(44)
+#define ACTION_ENTER_VEHICLE		(45)
+#define ACTION_INSIDE_VEHICLE		(46)
+#define ACTION_SIT_BENCH			(47)
+#define ACTION_HUG_WALL				(48)
+#define ACTION_HUG_LEFT				(49)
+#define ACTION_HUG_RIGHT			(50)
+#define ACTION_UNSIT				(51)
+
+
+#define SUB_OBJECT_PELVIS			(0)
+#define SUB_OBJECT_LEFT_FEMUR		(1)
+#define SUB_OBJECT_LEFT_TIBIA		(2)
+#define	SUB_OBJECT_LEFT_FOOT		(3)
+#define SUB_OBJECT_TORSO			(4)
+#define SUB_OBJECT_LEFT_HUMORUS		(5)
+#define SUB_OBJECT_LEFT_RADIUS	    (6)
+#define SUB_OBJECT_LEFT_HAND        (7)
+#define SUB_OBJECT_RIGHT_HUMORUS    (8)
+#define SUB_OBJECT_RIGHT_RADIUS     (9)
+#define SUB_OBJECT_RIGHT_HAND       (10)
+#define SUB_OBJECT_HEAD             (11)
+#define SUB_OBJECT_RIGHT_FEMUR		(12)
+#define SUB_OBJECT_RIGHT_TIBIA		(13)
+#define SUB_OBJECT_RIGHT_FOOT       (14)
+
+
+
+
+// <copperfield> it's maaaagic </copperfield> 
+#define SUB_OBJECT_PREFERRED_HAND	(65535)
+
+//
+// Structs
+//
+
+
+//
+// Data
+//
+
+//extern KeyFrame			*anim_array[100];
+
+//
+// Functions
+//
+
+
+#endif

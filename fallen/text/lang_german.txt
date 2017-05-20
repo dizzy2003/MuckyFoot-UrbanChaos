@@ -1,0 +1,178 @@
+Deutsch
+Fortsetzen: Drücken Sie |16.
+S P I E L E N D E -
+Der Wagen ist abgeschlossen.
+Munition
+Waffe
+Gesundheit +50
+Auf 5 Sekunden gestellt...
+In Fahrzeug einsteigen: Drücken Sie |4.
+Motorrad benutzen: Drücken Sie |4.
+Gegenstand aufnehmen: Drücken Sie |4.
+Kabel ergreifen: Drücken Sie |1.
+Suche läuft...
+Abgeschlossen.
+Zurück zum Hauptmenü: Drücken Sie |7.
+Neustart vom letzten automatischen Speichervorgang: Drücken Sie |4.
+Level abgeschlossen
+Start
+Spiel laden
+Spiel speichern
+Optionen
+Grafik
+Sound
+Musik
+Qualität
+Lautstärke
+Stereo
+Mono
+Stereokanäle umkehren
+Treiber
+Auflösung
+Reflexionen
+Darstellungstiefe
+Schatten
+Details
+Hoch
+Mittel
+Niedrig
+Beenden
+Ok
+Abbrechen
+Steuerung
+Tastenfeld
+Tastatur
+Joystick
+Joypad
+Leertaste
+Eingabe
+Springen
+Treten
+Schlagen
+Aktion
+Links
+Rechts
+Vorwärts
+Rückwärts
+Wählen
+Umsehen
+Rennen
+Kamera
+Abzeichen
+Gesammelt
+Abgeschlossen
+Nicht geschafft
+Punktzahl
+Primär
+Sekundär
+Aufgaben
+Karte
+Waffen
+Schrotflinte
+AK-47
+Granate
+Sprengstoff
+Messer
+Baseball-Schläger
+Bombe
+Kartenschlüssel
+Daten
+Diskette
+Brecheisen
+Gasmaske
+Schraubenschlüssel
+Video
+Handschuhe
+Unkrautvernichter
+Schlüssel für den roten Wagen
+Schlüssel für den blauen Wagen
+Schlüssel für den grünen Wagen
+Schlüssel für den schwarzen Wagen
+Schlüssel für den weißen Wagen
+Drahtschere
+Sind Sie sicher?
+Verbrechensrate
+Verhaftet
+Gesellschaft
+Globale Mediendateien werden kopiert...
+Lokale Mediendateien werden kopiert...
+Programmdateien werden kopiert...
+Programmanforderungen: 32-bit-Windows
+Komponente:
+Datei:
+Dateigruppe:
+Beim Verschieben der Daten ist ein Fehler aufgetreten:
+Für dieses Programm ist DirectX 6 erforderlich, das mit Ihrem Betriebssystem nicht kompatibel ist.
+Das Deinstallationsprogramm ließ sich nicht initialisieren. Möglicherweise können Sie dieses Produkt nicht deinstallieren.
+Für dieses Programm ist VGA oder eine bessere Auflösung erforderlich.
+Urban Chaos Setup
+(Editor)
+Umgebung
+Sterne
+Mond
+Leute
+Pfützen
+Schmutz
+Nebel
+Regen
+Skyline
+Konstitution verbessert
+Stärke verbessert
+Ausdauer verbessert
+Reflexe verbessert
+(Load UCM)
+Scanner
+Strecke
+Person
+Gamma
+Auf Standard zurücksetzen
+Stärke
+Konstitution
+Geschicklichkeit
+Ausdauer
+Keine Kegel getroffen!
+Anzahl der getroffenen Kegel
+Level wiederaufnehmen
+Level neu starten
+Spiel verlassen
+Textur-Abbildung
+Perspektive
+Bilinear
+Strafpunkte: Zeit!
+Level verloren
+Spiel pausiert
+Runter
+Ich kann nicht auf einen Polizisten schießen.
+Hey! Warum schlagen Sie mich, Darci?
+Ich kann nicht auf unbewaffnete Personen schießen.
+Verbrechnsrate wurde reduziert um
+Spiel gespeichert
+Crinkles
+Farbentiefe
+Sie sind ein guter Bulle, Darci, nur sind Sie leider ein bißchen zu brutal.  Sie verletzen zu viele Zivilisten in der Ausübung ihrer Pflichten.
+Gratuliere zum Erfolg ihrer Mission, Darci. Unglücklicherweise sind Sie für zuviele Opfer verantwortlich. Dies ist Ihre erste Warnung.
+Meine Geduld ist am Ende, Darci.  Unser Job ist es die Bürger von Union City zu beschützen.  Dies ist Ihre letzte Warnung.  Wenn sie auch nur eine Mission mit zuvielen unschuldigen Opfern ausführen, verlange ich ihr Abzeichen.
+Eigentlich können wir es uns nicht erlauben Sie zu verlieren, Darci. Jedoch haben Sie, während der Ausführung ihrer Pflichten zuviele unschuldige Opfer gefordert. Ich werde Ihnen daher ihr Abzeichen entziehen.
+Kriminelle getötet
+Kriminelle verhaftet
+Kriminelle auf der Flucht
+Bonus gefunden
+Bonus nicht gefunden
+Zeit
+Beste Zeit
+Mucky Zeit
+Ja
+Nein
+(Leer)
+3D-Karte wählen
+Primärer Anzeigentreiber
+Sekundärer Anzeigentreiber
+Software Modus
+Anzahl der Farben
+Farbtiefe: 16-Bit
+Farbtiefe: 32-Bit
+Dieses Dialogfenster nicht wieder anzeigen
+Miles Sound System Setup
+Bitte wählen Sie ihren 3D Sound Treiber
+Button
+Bonus Mission Unlocked!

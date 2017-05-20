@@ -1,0 +1,12 @@
+WATCOM Make Version 10.5
+Copyright by WATCOM International Corp. 1988, 1995. All rights reserved.
+WATCOM is a trademark of WATCOM International Corp.
+
+	wmake /h /f WIN1.WMK DEBUG=0
+
+SET	INCLUDE	=	C:\WATCOM10\H;C:\WATCOM10\H\NT;C:\WATCOM10\H\WIN;C:\DXSDK\SDK\INC;C:\MFLIB1\HEADERS;\HEADERS;;C:\3Dfx\Glide\src\SST1\include
+SET	LIB	=	C:\WATCOM10\LIB;C:\WATCOM10\LIB386;C:\WATCOM10\LIB386\DOS;C:\DXSDK\SDK\LIB;C:\MFLIB1\LIBS;C:\3Dfx\Glide\lib\win32
+
+wpp386 @W_WIN1_R.occ  c:\mflib1\source\c\windows\d3d.CPP
+c:\mflib1\source\c\windows\d3d.CPP(7): Warning! W701: (col 28) pre-compiled header file cannot be used ('C:\MFLIB1\HEADERS\MFHeader.h' has been modified) 
+c:\mflib1\source\c\windows\d3d.CPP(7): Error! E105: (col 29) read error on work file: error code = 1 

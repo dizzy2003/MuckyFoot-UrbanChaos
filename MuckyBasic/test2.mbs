@@ -1,0 +1,32 @@
+	
+	LOCAL x
+
+
+	FUNCTION isprime(n)
+
+		LOCAL i,j
+	
+		FOR i = 2 TO SQRT(n)
+			IF n MOD i = 0 THEN RETURN FALSE
+		NEXT i
+
+		j = 55
+
+		RETURN TRUE
+
+	ENDFUNC
+
+
+	i = 100
+
+	PRINT "i = " + i
+	PRINT "j = " + j
+	
+
+	PRINT "127 is prime ? " + isprime(127)
+
+	PRINT "i = " + i
+	PRINT "j = " + j
+
+
+	PRINT "x = " + x

@@ -1,0 +1,23 @@
+//
+// TODO next is the get . working for MATRIXes and VECTORs 
+// There are already ML_TYPE_* for floats and vectors...
+//
+//
+//
+//
+//
+//
+
+	
+	right    = VECTOR(1,0,0)
+	up       = VECTOR(0,1,0)
+	forwards = VECTOR(0,0,1)
+
+	direction = MATRIX(right,up,forwards)
+
+
+	pos = right * 2
+
+	PRINT pos.x
+
+

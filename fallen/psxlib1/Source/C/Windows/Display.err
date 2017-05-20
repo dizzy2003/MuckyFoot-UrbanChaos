@@ -1,0 +1,189 @@
+WATCOM Make Version 10.5
+Copyright by WATCOM International Corp. 1988, 1995. All rights reserved.
+WATCOM is a trademark of WATCOM International Corp.
+
+	wmake /h /f WIN1.WMK DEBUG=0
+
+SET	INCLUDE	=	C:\WATCOM10\H;C:\WATCOM10\H\NT;C:\WATCOM10\H\WIN;C:\DXSDK\SDK\INC;C:\MFLIB1\HEADERS;\HEADERS;
+SET	LIB	=	C:\WATCOM10\LIB;C:\WATCOM10\LIB386;C:\WATCOM10\LIB386\DOS;C:\DXSDK\SDK\LIB;C:\MFLIB1\LIBS
+
+wpp386 @W_WIN1_R.occ  c:\mflib1\source\c\windows\d3d.CPP
+c:\mflib1\source\c\windows\d3d.CPP(7): Warning! W701: (col 28) pre-compiled header file cannot be used ('C:\MFLIB1\HEADERS\DrawPoly.h' has been modified) 
+wpp386 @W_WIN1_R.occ  c:\mflib1\source\c\windows\display.CPP
+c:\mflib1\source\c\windows\display.CPP(5): Warning! W703: (col 28) pre-compiled header file cannot be used (macro 'INITGUID' is not defined) 
+c:\mflib1\source\c\windows\display.CPP(181): Warning! W367: (col 44) conditional expression in if statement is always true 
+wpp386 @W_WIN1_R.occ  c:\mflib1\source\c\common\dmodes.CPP
+wpp386 @W_WIN1_R.occ  c:\mflib1\source\c\common\draw2d.CPP
+wpp386 @W_WIN1_R.occ  c:\mflib1\source\c\common\drawbox.CPP
+wpp386 @W_WIN1_R.occ  c:\mflib1\source\c\common\drawline.CPP
+wpp386 @W_WIN1_R.occ  c:\mflib1\source\c\common\drawpnt.CPP
+wpp386 @W_WIN1_R.occ  c:\mflib1\source\c\common\drawpxl.CPP
+wpp386 @W_WIN1_R.occ  c:\mflib1\source\c\common\drawrect.CPP
+wpp386 @W_WIN1_R.occ  c:\mflib1\source\c\windows\file.CPP
+wpp386 @W_WIN1_R.occ  c:\mflib1\source\c\windows\keyboard.CPP
+wpp386 @W_WIN1_R.occ  c:\mflib1\source\c\common\maths.CPP
+wpp386 @W_WIN1_R.occ  c:\mflib1\source\c\windows\mem.CPP
+c:\mflib1\source\c\windows\mem.CPP(63): Warning! W014: (col 1) no reference to symbol 'mem_ptr' 
+c:\mflib1\source\c\windows\mem.CPP(63): Note! N392: (col 1) 'void * mem_ptr' in 'void MemClear( void *, unsigned long )' defined in: c:\mflib1\source\c\windows\mem.CPP(55) (col 24) 
+c:\mflib1\source\c\windows\mem.CPP(63): Warning! W014: (col 1) no reference to symbol 'size' 
+c:\mflib1\source\c\windows\mem.CPP(63): Note! N392: (col 1) 'unsigned long size' in 'void MemClear( void *, unsigned long )' defined in: c:\mflib1\source\c\windows\mem.CPP(55) (col 38) 
+wpp386 @W_WIN1_R.occ  c:\mflib1\source\c\windows\mfhost.CPP
+wpp386 @W_WIN1_R.occ  c:\mflib1\source\c\windows\mouse.CPP
+wpp386 @W_WIN1_R.occ  c:\mflib1\source\c\windows\palette.CPP
+wpp386 @W_WIN1_R.occ  c:\mflib1\source\c\common\sprites.CPP
+wpp386 @W_WIN1_R.occ  c:\mflib1\source\c\common\quicktxt.CPP
+wpp386 @W_WIN1_R.occ  c:\mflib1\source\c\common\textdef.CPP
+wpp386 @W_WIN1_R.occ  c:\mflib1\source\c\common\trig.CPP
+
+Building W_WIN1_R.lib
+Done.
+
+All done.
+
+
+
+	wmake /h /f WIN1.WMK DEBUG=1
+
+SET	INCLUDE	=	C:\WATCOM10\H;C:\WATCOM10\H\NT;C:\WATCOM10\H\WIN;C:\DXSDK\SDK\INC;C:\MFLIB1\HEADERS;\HEADERS;
+SET	LIB	=	C:\WATCOM10\LIB;C:\WATCOM10\LIB386;C:\WATCOM10\LIB386\DOS;C:\DXSDK\SDK\LIB;C:\MFLIB1\LIBS
+
+wpp386 @W_WIN1_D.occ  c:\mflib1\source\c\windows\d3d.CPP
+c:\mflib1\source\c\windows\d3d.CPP(7): Warning! W701: (col 28) pre-compiled header file cannot be used ('C:\MFLIB1\HEADERS\DrawPoly.h' has been modified) 
+wpp386 @W_WIN1_D.occ  c:\mflib1\source\c\windows\display.CPP
+c:\mflib1\source\c\windows\display.CPP(5): Warning! W703: (col 28) pre-compiled header file cannot be used (macro 'INITGUID' is not defined) 
+c:\mflib1\source\c\windows\display.CPP(181): Warning! W367: (col 44) conditional expression in if statement is always true 
+wpp386 @W_WIN1_D.occ  c:\mflib1\source\c\common\dmodes.CPP
+wpp386 @W_WIN1_D.occ  c:\mflib1\source\c\common\draw2d.CPP
+wpp386 @W_WIN1_D.occ  c:\mflib1\source\c\common\drawbox.CPP
+wpp386 @W_WIN1_D.occ  c:\mflib1\source\c\common\drawline.CPP
+wpp386 @W_WIN1_D.occ  c:\mflib1\source\c\common\drawpnt.CPP
+wpp386 @W_WIN1_D.occ  c:\mflib1\source\c\common\drawpxl.CPP
+wpp386 @W_WIN1_D.occ  c:\mflib1\source\c\common\drawrect.CPP
+wpp386 @W_WIN1_D.occ  c:\mflib1\source\c\windows\file.CPP
+wpp386 @W_WIN1_D.occ  c:\mflib1\source\c\windows\keyboard.CPP
+wpp386 @W_WIN1_D.occ  c:\mflib1\source\c\common\maths.CPP
+wpp386 @W_WIN1_D.occ  c:\mflib1\source\c\windows\mem.CPP
+c:\mflib1\source\c\windows\mem.CPP(63): Warning! W014: (col 1) no reference to symbol 'mem_ptr' 
+c:\mflib1\source\c\windows\mem.CPP(63): Note! N392: (col 1) 'void * mem_ptr' in 'void MemClear( void *, unsigned long )' defined in: c:\mflib1\source\c\windows\mem.CPP(55) (col 24) 
+c:\mflib1\source\c\windows\mem.CPP(63): Warning! W014: (col 1) no reference to symbol 'size' 
+c:\mflib1\source\c\windows\mem.CPP(63): Note! N392: (col 1) 'unsigned long size' in 'void MemClear( void *, unsigned long )' defined in: c:\mflib1\source\c\windows\mem.CPP(55) (col 38) 
+wpp386 @W_WIN1_D.occ  c:\mflib1\source\c\windows\mfhost.CPP
+wpp386 @W_WIN1_D.occ  c:\mflib1\source\c\windows\mouse.CPP
+wpp386 @W_WIN1_D.occ  c:\mflib1\source\c\windows\palette.CPP
+wpp386 @W_WIN1_D.occ  c:\mflib1\source\c\common\sprites.CPP
+wpp386 @W_WIN1_D.occ  c:\mflib1\source\c\common\quicktxt.CPP
+wpp386 @W_WIN1_D.occ  c:\mflib1\source\c\common\textdef.CPP
+wpp386 @W_WIN1_D.occ  c:\mflib1\source\c\common\trig.CPP
+
+Building W_WIN1_D.lib
+Done.
+
+All done.
+
+
+
+	wmake /h /f DOS1.WMK DEBUG=0
+
+SET	INCLUDE	=	C:\WATCOM10\H;C:\WATCOM10\H\NT;C:\WATCOM10\H\WIN;C:\DXSDK\SDK\INC;C:\MFLIB1\HEADERS;\HEADERS;
+SET	LIB	=	C:\WATCOM10\LIB;C:\WATCOM10\LIB386;C:\WATCOM10\LIB386\DOS;C:\DXSDK\SDK\LIB;C:\MFLIB1\LIBS
+
+wpp386 @W_DOS1_R.occ  c:\mflib1\source\c\dos\dfile.CPP
+c:\mflib1\source\c\dos\dfile.CPP(4): Warning! W701: (col 28) pre-compiled header file cannot be used ('C:\MFLIB1\HEADERS\DrawPoly.h' has been modified) 
+wpp386 @W_DOS1_R.occ  c:\mflib1\source\c\dos\dmem.CPP
+wpp386 @W_DOS1_R.occ  c:\mflib1\source\c\dos\ddisplay.CPP
+c:\mflib1\source\c\dos\ddisplay.CPP(187): Warning! W389: (col 25) integral value may be truncated during assignment or initialization 
+c:\mflib1\source\c\dos\ddisplay.CPP(188): Warning! W389: (col 25) integral value may be truncated during assignment or initialization 
+c:\mflib1\source\c\dos\ddisplay.CPP(329): Warning! W014: (col 1) no reference to symbol 'depth' 
+c:\mflib1\source\c\dos\ddisplay.CPP(329): Note! N392: (col 1) 'unsigned long depth' in 'long SetDisplay( unsigned long, unsigned long, unsigned long )' defined in: c:\mflib1\source\c\dos\ddisplay.CPP(284) (col 51) 
+c:\mflib1\source\c\dos\ddisplay.CPP(368): Warning! W014: (col 1) no reference to symbol 'flags' 
+c:\mflib1\source\c\dos\ddisplay.CPP(368): Note! N392: (col 1) 'unsigned long flags' in 'void ShowWorkScreen( unsigned long )' defined in: c:\mflib1\source\c\dos\ddisplay.CPP(331) (col 30) 
+c:\mflib1\source\c\dos\ddisplay.CPP(389): Warning! W014: (col 1) no reference to symbol 'colour' 
+c:\mflib1\source\c\dos\ddisplay.CPP(389): Note! N392: (col 1) 'unsigned char colour' in 'void ClearWorkScreen( unsigned char )' defined in: c:\mflib1\source\c\dos\ddisplay.CPP(386) (col 31) 
+c:\mflib1\source\c\dos\ddisplay.CPP(394): Warning! W014: (col 1) no reference to symbol 'mode' 
+c:\mflib1\source\c\dos\ddisplay.CPP(394): Note! N392: (col 1) 'unsigned char mode' in 'void FadeDisplay( unsigned char )' defined in: c:\mflib1\source\c\dos\ddisplay.CPP(391) (col 27) 
+c:\mflib1\source\c\dos\ddisplay.CPP(422): Warning! W389: (col 28) integral value may be truncated during assignment or initialization 
+c:\mflib1\source\c\dos\ddisplay.CPP(454): Warning! W014: (col 1) no reference to symbol 'page' 
+c:\mflib1\source\c\dos\ddisplay.CPP(454): Note! N392: (col 1) 'unsigned char page' in 'void ShowWorkWindow( unsigned long )' defined in: c:\mflib1\source\c\dos\ddisplay.CPP(415) (col 30) 
+c:\mflib1\source\c\dos\ddisplay.CPP(454): Warning! W014: (col 1) no reference to symbol 'left_page' 
+c:\mflib1\source\c\dos\ddisplay.CPP(454): Note! N392: (col 1) 'unsigned char left_page' in 'void ShowWorkWindow( unsigned long )' defined in: c:\mflib1\source\c\dos\ddisplay.CPP(415) (col 35) 
+c:\mflib1\source\c\dos\ddisplay.CPP(454): Warning! W014: (col 1) no reference to symbol 'right_page' 
+c:\mflib1\source\c\dos\ddisplay.CPP(454): Note! N392: (col 1) 'unsigned char right_page' in 'void ShowWorkWindow( unsigned long )' defined in: c:\mflib1\source\c\dos\ddisplay.CPP(415) (col 45) 
+c:\mflib1\source\c\dos\ddisplay.CPP(454): Warning! W014: (col 1) no reference to symbol 'flags' 
+c:\mflib1\source\c\dos\ddisplay.CPP(454): Note! N392: (col 1) 'unsigned long flags' in 'void ShowWorkWindow( unsigned long )' defined in: c:\mflib1\source\c\dos\ddisplay.CPP(411) (col 30) 
+wpp386 @W_DOS1_R.occ  c:\mflib1\source\c\dos\dkeybrd.CPP
+wpp386 @W_DOS1_R.occ  c:\mflib1\source\c\dos\dmouse.CPP
+c:\mflib1\source\c\dos\dmouse.CPP(212): Warning! W014: (col 1) no reference to symbol 'vesa_page' 
+c:\mflib1\source\c\dos\dmouse.CPP(212): Note! N392: (col 1) 'unsigned short __far vesa_page' in 'void __loadds __interrupt __pragma("MouseInterrupt") (__far MouseInterrupt)( int, int, int )' defined in: c:\mflib1\source\c\dos\dmouse.CPP(81) (col 33) 
+c:\mflib1\source\c\dos\dmouse.CPP(276): Warning! W014: (col 0) no reference to symbol 'mbuffer' 
+c:\mflib1\source\c\dos\dmouse.CPP(276): Note! N392: (col 0) 'mouse_buffer mbuffer' defined in: c:\mflib1\source\c\dos\dmouse.CPP(47) (col 33) 
+wpp386 @W_DOS1_R.occ  c:\mflib1\source\c\dos\dmfhost.CPP
+wpp386 @W_DOS1_R.occ  c:\mflib1\source\c\common\draw2d.CPP
+wpp386 @W_DOS1_R.occ  c:\mflib1\source\c\common\drawbox.CPP
+wpp386 @W_DOS1_R.occ  c:\mflib1\source\c\common\drawline.CPP
+wpp386 @W_DOS1_R.occ  c:\mflib1\source\c\common\drawpnt.CPP
+wpp386 @W_DOS1_R.occ  c:\mflib1\source\c\common\drawpxl.CPP
+wpp386 @W_DOS1_R.occ  c:\mflib1\source\c\common\drawrect.CPP
+wpp386 @W_DOS1_R.occ  c:\mflib1\source\c\common\sprites.CPP
+wpp386 @W_DOS1_R.occ  c:\mflib1\source\c\common\quicktxt.CPP
+wpp386 @W_DOS1_R.occ  c:\mflib1\source\c\common\textdef.CPP
+wpp386 @W_DOS1_R.occ  c:\mflib1\source\c\common\trig.CPP
+
+Building W_DOS1_R.lib
+Done.
+
+All done.
+
+
+
+	wmake /h /f DOS1.WMK DEBUG=1
+
+SET	INCLUDE	=	C:\WATCOM10\H;C:\WATCOM10\H\NT;C:\WATCOM10\H\WIN;C:\DXSDK\SDK\INC;C:\MFLIB1\HEADERS;\HEADERS;
+SET	LIB	=	C:\WATCOM10\LIB;C:\WATCOM10\LIB386;C:\WATCOM10\LIB386\DOS;C:\DXSDK\SDK\LIB;C:\MFLIB1\LIBS
+
+wpp386 @W_DOS1_D.occ  c:\mflib1\source\c\dos\dfile.CPP
+c:\mflib1\source\c\dos\dfile.CPP(4): Warning! W701: (col 28) pre-compiled header file cannot be used ('C:\MFLIB1\HEADERS\DrawPoly.h' has been modified) 
+wpp386 @W_DOS1_D.occ  c:\mflib1\source\c\dos\dmem.CPP
+wpp386 @W_DOS1_D.occ  c:\mflib1\source\c\dos\ddisplay.CPP
+c:\mflib1\source\c\dos\ddisplay.CPP(187): Warning! W389: (col 25) integral value may be truncated during assignment or initialization 
+c:\mflib1\source\c\dos\ddisplay.CPP(188): Warning! W389: (col 25) integral value may be truncated during assignment or initialization 
+c:\mflib1\source\c\dos\ddisplay.CPP(329): Warning! W014: (col 1) no reference to symbol 'depth' 
+c:\mflib1\source\c\dos\ddisplay.CPP(329): Note! N392: (col 1) 'unsigned long depth' in 'long SetDisplay( unsigned long, unsigned long, unsigned long )' defined in: c:\mflib1\source\c\dos\ddisplay.CPP(284) (col 51) 
+c:\mflib1\source\c\dos\ddisplay.CPP(368): Warning! W014: (col 1) no reference to symbol 'flags' 
+c:\mflib1\source\c\dos\ddisplay.CPP(368): Note! N392: (col 1) 'unsigned long flags' in 'void ShowWorkScreen( unsigned long )' defined in: c:\mflib1\source\c\dos\ddisplay.CPP(331) (col 30) 
+c:\mflib1\source\c\dos\ddisplay.CPP(389): Warning! W014: (col 1) no reference to symbol 'colour' 
+c:\mflib1\source\c\dos\ddisplay.CPP(389): Note! N392: (col 1) 'unsigned char colour' in 'void ClearWorkScreen( unsigned char )' defined in: c:\mflib1\source\c\dos\ddisplay.CPP(386) (col 31) 
+c:\mflib1\source\c\dos\ddisplay.CPP(394): Warning! W014: (col 1) no reference to symbol 'mode' 
+c:\mflib1\source\c\dos\ddisplay.CPP(394): Note! N392: (col 1) 'unsigned char mode' in 'void FadeDisplay( unsigned char )' defined in: c:\mflib1\source\c\dos\ddisplay.CPP(391) (col 27) 
+c:\mflib1\source\c\dos\ddisplay.CPP(422): Warning! W389: (col 28) integral value may be truncated during assignment or initialization 
+c:\mflib1\source\c\dos\ddisplay.CPP(454): Warning! W014: (col 1) no reference to symbol 'page' 
+c:\mflib1\source\c\dos\ddisplay.CPP(454): Note! N392: (col 1) 'unsigned char page' in 'void ShowWorkWindow( unsigned long )' defined in: c:\mflib1\source\c\dos\ddisplay.CPP(415) (col 30) 
+c:\mflib1\source\c\dos\ddisplay.CPP(454): Warning! W014: (col 1) no reference to symbol 'left_page' 
+c:\mflib1\source\c\dos\ddisplay.CPP(454): Note! N392: (col 1) 'unsigned char left_page' in 'void ShowWorkWindow( unsigned long )' defined in: c:\mflib1\source\c\dos\ddisplay.CPP(415) (col 35) 
+c:\mflib1\source\c\dos\ddisplay.CPP(454): Warning! W014: (col 1) no reference to symbol 'right_page' 
+c:\mflib1\source\c\dos\ddisplay.CPP(454): Note! N392: (col 1) 'unsigned char right_page' in 'void ShowWorkWindow( unsigned long )' defined in: c:\mflib1\source\c\dos\ddisplay.CPP(415) (col 45) 
+c:\mflib1\source\c\dos\ddisplay.CPP(454): Warning! W014: (col 1) no reference to symbol 'flags' 
+c:\mflib1\source\c\dos\ddisplay.CPP(454): Note! N392: (col 1) 'unsigned long flags' in 'void ShowWorkWindow( unsigned long )' defined in: c:\mflib1\source\c\dos\ddisplay.CPP(411) (col 30) 
+wpp386 @W_DOS1_D.occ  c:\mflib1\source\c\dos\dkeybrd.CPP
+wpp386 @W_DOS1_D.occ  c:\mflib1\source\c\dos\dmouse.CPP
+c:\mflib1\source\c\dos\dmouse.CPP(212): Warning! W014: (col 1) no reference to symbol 'vesa_page' 
+c:\mflib1\source\c\dos\dmouse.CPP(212): Note! N392: (col 1) 'unsigned short __far vesa_page' in 'void __loadds __interrupt __pragma("MouseInterrupt") (__far MouseInterrupt)( int, int, int )' defined in: c:\mflib1\source\c\dos\dmouse.CPP(81) (col 33) 
+c:\mflib1\source\c\dos\dmouse.CPP(276): Warning! W014: (col 0) no reference to symbol 'mbuffer' 
+c:\mflib1\source\c\dos\dmouse.CPP(276): Note! N392: (col 0) 'mouse_buffer mbuffer' defined in: c:\mflib1\source\c\dos\dmouse.CPP(47) (col 33) 
+wpp386 @W_DOS1_D.occ  c:\mflib1\source\c\dos\dmfhost.CPP
+wpp386 @W_DOS1_D.occ  c:\mflib1\source\c\common\draw2d.CPP
+wpp386 @W_DOS1_D.occ  c:\mflib1\source\c\common\drawbox.CPP
+wpp386 @W_DOS1_D.occ  c:\mflib1\source\c\common\drawline.CPP
+wpp386 @W_DOS1_D.occ  c:\mflib1\source\c\common\drawpnt.CPP
+wpp386 @W_DOS1_D.occ  c:\mflib1\source\c\common\drawpxl.CPP
+wpp386 @W_DOS1_D.occ  c:\mflib1\source\c\common\drawrect.CPP
+wpp386 @W_DOS1_D.occ  c:\mflib1\source\c\common\sprites.CPP
+wpp386 @W_DOS1_D.occ  c:\mflib1\source\c\common\quicktxt.CPP
+wpp386 @W_DOS1_D.occ  c:\mflib1\source\c\common\textdef.CPP
+wpp386 @W_DOS1_D.occ  c:\mflib1\source\c\common\trig.CPP
+
+Building W_DOS1_D.lib
+Done.
+
+All done.
+
+
