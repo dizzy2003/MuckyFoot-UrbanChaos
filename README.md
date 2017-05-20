@@ -25,21 +25,35 @@ occasionally still ask me about data formats so they can dig them out themsleves
 
 *BrainDump*
 I tried compiling the code, but theres a lot of errors..
+
 We used DirectX before it did hardware vertex transforms, at some point VertexBuffers came along and I seem to recall Eddie Edwards implementing their use.
+
 a prim is simply a mesh (lampost etc)
+
 There is no soft skinning characters are seperate meshes
+
 The floor is a heightmap with a vertical offset possible for the kerbs see pap.h
+
 The building meshes were created on the fly from wall data that could generate N stories high of side wall building.cpp
+
 Fence meshes and fire escape meshes were similarily created on the fly
+
 The editor allowed placement of waypoints and control code for ai. as well as map creation
+
 The data set was limited to run on a 1 Meg Playstation1 (PSX)
+
 Theres code for features that never shipped like a motorbike and a grappling hook with rope physics, also once 
 mav is the sequel to nav, it handles mavigation :)
+
 I also had a tendency to increment the letter of a file type with new versions so map.h eventually became pap.h (much of the code was written with a 8.3 filename restriction)
+
 yes we had pee physics
+
 Thing could be considered a cpp base class
+
 MapWho is a bullfrog thing, essentially a 2d spatial array that objects in the world attach themselves to as a linked list for fast spatial lookups
-upon a time the building all had procedural internals, also sewer systems..
+
+once upon a time the building all had procedural internals, also sewer systems..
 
 
 
