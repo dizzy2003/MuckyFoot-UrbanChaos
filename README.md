@@ -24,6 +24,7 @@ occasionally still ask me about data formats so they can dig them out themsleves
 
 
 *BrainDump*
+
 I tried compiling the code, but theres a lot of errors..
 
 We used DirectX before it did hardware vertex transforms, at some point VertexBuffers came along and I seem to recall Eddie Edwards implementing their use.
