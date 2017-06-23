@@ -6,7 +6,7 @@
 #define _QENG_
 
 
-#include "c:\fallen\headers\qmap.h"
+#include "fallen/headers/qmap.h"
 
 
 //
@@ -53,7 +53,7 @@ extern float QENG_mouse_pos_y;
 extern float QENG_mouse_pos_z;
 
 void QENG_world_line(
-		SLONG x1, SLONG y1, SLONG z1, SLONG width1, ULONG colour1, 
+		SLONG x1, SLONG y1, SLONG z1, SLONG width1, ULONG colour1,
 		SLONG x2, SLONG y2, SLONG z2, SLONG width2, ULONG colour2,
 		bool sort_to_front);
 

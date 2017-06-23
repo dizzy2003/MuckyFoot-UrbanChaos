@@ -7,16 +7,16 @@
 #include	"Engine.h"
 #include	"crinkle.h"
 
-#include	"c:\fallen\editor\headers\primativ.hpp"
-//#include	"c:\fallen\editor\headers\building.hpp"
-#include	"c:\fallen\editor\headers\Edit.h"
-//#include	"c:\fallen\editor\headers\Engine.h"
-#include	"c:\fallen\editor\headers\Map.h"
-#include	"c:\fallen\editor\headers\prim_draw.h"
-#include	"c:\fallen\editor\headers\Thing.h"
-#include	"c:\fallen\headers\interact.h"
-#include	"c:\fallen\headers\FMatrix.h"
-//#include	"c:\fallen\editor\headers\collide.hpp"
+#include	"fallen/editor/headers/primativ.hpp"
+//#include	"fallen/editor/headers/building.hpp"
+#include	"fallen/editor/headers/Edit.h"
+//#include	"fallen/editor/headers/Engine.h"
+#include	"fallen/editor/headers/Map.h"
+#include	"fallen/editor/headers/prim_draw.h"
+#include	"fallen/editor/headers/Thing.h"
+#include	"fallen/headers/interact.h"
+#include	"fallen/headers/FMatrix.h"
+//#include	"fallen/editor/headers/collide.hpp"
 
 #define	POLY_FLAG_TEXTURED		(1<<1)
 #define	POLY_FLAG_MASKED		(1<<2)
@@ -40,18 +40,18 @@ extern SVECTOR_F			dx_prim_points[MAX_PRIM_POINTS];
 //---------------------------------------------------------------
 void matrix_mult33(struct Matrix33* result,struct Matrix33* mat1,struct  Matrix33* mat2)
 {
-	result->M[0][0] = ((mat1->M[0][0]*mat2->M[0][0])+(mat1->M[0][1]*mat2->M[1][0])+(mat1->M[0][2]*mat2->M[2][0]))>>15; 
-	result->M[0][1] = ((mat1->M[0][0]*mat2->M[0][1])+(mat1->M[0][1]*mat2->M[1][1])+(mat1->M[0][2]*mat2->M[2][1]))>>15; 
-	result->M[0][2] = ((mat1->M[0][0]*mat2->M[0][2])+(mat1->M[0][1]*mat2->M[1][2])+(mat1->M[0][2]*mat2->M[2][2]))>>15; 
-	result->M[1][0] = ((mat1->M[1][0]*mat2->M[0][0])+(mat1->M[1][1]*mat2->M[1][0])+(mat1->M[1][2]*mat2->M[2][0]))>>15; 
-	result->M[1][1] = ((mat1->M[1][0]*mat2->M[0][1])+(mat1->M[1][1]*mat2->M[1][1])+(mat1->M[1][2]*mat2->M[2][1]))>>15; 
-	result->M[1][2] = ((mat1->M[1][0]*mat2->M[0][2])+(mat1->M[1][1]*mat2->M[1][2])+(mat1->M[1][2]*mat2->M[2][2]))>>15; 
-	result->M[2][0] = ((mat1->M[2][0]*mat2->M[0][0])+(mat1->M[2][1]*mat2->M[1][0])+(mat1->M[2][2]*mat2->M[2][0]))>>15; 
-	result->M[2][1] = ((mat1->M[2][0]*mat2->M[0][1])+(mat1->M[2][1]*mat2->M[1][1])+(mat1->M[2][2]*mat2->M[2][1]))>>15; 
+	result->M[0][0] = ((mat1->M[0][0]*mat2->M[0][0])+(mat1->M[0][1]*mat2->M[1][0])+(mat1->M[0][2]*mat2->M[2][0]))>>15;
+	result->M[0][1] = ((mat1->M[0][0]*mat2->M[0][1])+(mat1->M[0][1]*mat2->M[1][1])+(mat1->M[0][2]*mat2->M[2][1]))>>15;
+	result->M[0][2] = ((mat1->M[0][0]*mat2->M[0][2])+(mat1->M[0][1]*mat2->M[1][2])+(mat1->M[0][2]*mat2->M[2][2]))>>15;
+	result->M[1][0] = ((mat1->M[1][0]*mat2->M[0][0])+(mat1->M[1][1]*mat2->M[1][0])+(mat1->M[1][2]*mat2->M[2][0]))>>15;
+	result->M[1][1] = ((mat1->M[1][0]*mat2->M[0][1])+(mat1->M[1][1]*mat2->M[1][1])+(mat1->M[1][2]*mat2->M[2][1]))>>15;
+	result->M[1][2] = ((mat1->M[1][0]*mat2->M[0][2])+(mat1->M[1][1]*mat2->M[1][2])+(mat1->M[1][2]*mat2->M[2][2]))>>15;
+	result->M[2][0] = ((mat1->M[2][0]*mat2->M[0][0])+(mat1->M[2][1]*mat2->M[1][0])+(mat1->M[2][2]*mat2->M[2][0]))>>15;
+	result->M[2][1] = ((mat1->M[2][0]*mat2->M[0][1])+(mat1->M[2][1]*mat2->M[1][1])+(mat1->M[2][2]*mat2->M[2][1]))>>15;
 	result->M[2][2] = ((mat1->M[2][0]*mat2->M[0][2])+(mat1->M[2][1]*mat2->M[1][2])+(mat1->M[2][2]*mat2->M[2][2]))>>15;
 }
 
-void rotate_obj(SWORD xangle,SWORD yangle,SWORD zangle, Matrix33 *r3) 
+void rotate_obj(SWORD xangle,SWORD yangle,SWORD zangle, Matrix33 *r3)
 {
 	SLONG	sinx, cosx, siny, cosy, sinz, cosz;
  	SLONG	cxcz,sysz,sxsycz,sxsysz,sysx,cxczsy,sxsz,cxsysz,czsx,cxsy,sycz,cxsz;
@@ -133,7 +133,7 @@ void	build_radius_info(void)
 			{
 				for(radius_offset=-4;radius_offset<4;radius_offset++)
 				{
-					
+
 					dx=(SIN(angle)*(radius+radius_offset))>>(16+2);
 					dz=(COS(angle)*(radius+radius_offset))>>(16+2);
 					actual_radius=Root(SDIST2(dx,dz));
@@ -216,7 +216,7 @@ void	load_anim(MFFileHandle file_handle,Anim *the_anim,KeyFrameChunk *the_chunk)
 	SWORD			fixed=0;
 	CBYTE			version=0;
 
-	
+
 	FileRead(file_handle,&version,1);
 
 	if(version==0||version>20)
@@ -227,7 +227,7 @@ void	load_anim(MFFileHandle file_handle,Anim *the_anim,KeyFrameChunk *the_chunk)
 	}
 	else
 		FileRead(file_handle,anim_name,ANIM_NAME_SIZE);
-	
+
 
 	FileRead(file_handle,&anim_flags,sizeof(anim_flags));
 	FileRead(file_handle,&frame_count,sizeof(frame_count));
@@ -499,12 +499,12 @@ SLONG	e_draw_a_facet_at(UWORD building_object, UWORD f_building, UWORD facet, SL
 	facet_flags =  p_facet->FacetFlags;
 
 	UBYTE point_order[4] = {0, 1, 3, 2};
-	
+
 	/*
 
 	//
 	// Draw the normals of all the points.
-	// 
+	//
 
 	{
 		SLONG i;
@@ -522,13 +522,13 @@ SLONG	e_draw_a_facet_at(UWORD building_object, UWORD f_building, UWORD facet, SL
 			z2 = z1 + (prim_normal[i].Z >> 3);
 
 			e_draw_3d_line_col_sorted(
-				x1, y1, z1, 
+				x1, y1, z1,
 				x2, y2, z2,
 				128, 130, 150);
 		}
 	}
 
-	
+
 
 	for(c0=p_facet->StartFace4;c0<p_facet->EndFace4;c0++)
 	{
@@ -673,7 +673,7 @@ SLONG	e_draw_a_facet_at(UWORD building_object, UWORD f_building, UWORD facet, SL
 		if( (p_f4->DrawFlags&POLY_FLAG_DOUBLESIDED) || points_clockwise(p0,p1,p2))
 		{
 
-		
+
 			flag_and	=	global_flags[p0]&global_flags[p1]&global_flags[p2]&global_flags[p3];
 			flag_or		=	global_flags[p0]|global_flags[p1]|global_flags[p2]|global_flags[p3];
 
@@ -840,8 +840,8 @@ SLONG	e_draw_a_facet_at(UWORD building_object, UWORD f_building, UWORD facet, SL
 		p1	=	p_f3->Points[1]-sp;
 		p2	=	p_f3->Points[2]-sp;
 
-		flag_and = global_flags[p0]&global_flags[p1]&global_flags[p2];	
-		flag_or  = global_flags[p0]|global_flags[p1]|global_flags[p2];	
+		flag_and = global_flags[p0]&global_flags[p1]&global_flags[p2];
+		flag_or  = global_flags[p0]|global_flags[p1]|global_flags[p2];
 
 		if((flag_or&EF_BEHIND_YOU)==0)
 		if(!(flag_and & EF_CLIPFLAGS))
@@ -1006,11 +1006,11 @@ void	e_draw_a_prim_at(UWORD	prim,SLONG x,SLONG y,SLONG z,UBYTE shade)
 
 	sp		=	p_obj->StartPoint;
 	ep		=	p_obj->EndPoint;
-	
+
 	f_x	=	(float)x;
 	f_y	=	(float)y;
 	f_z	=	(float)z;
-		
+
 	for(c0=sp;c0<ep;c0++)
 	{
 		//transform all points for this Object
@@ -1035,13 +1035,13 @@ void	e_draw_a_prim_at(UWORD	prim,SLONG x,SLONG y,SLONG z,UBYTE shade)
 		p1	=	p_f4->Points[1]-sp;
 		p2	=	p_f4->Points[2]-sp;
 		p3	=	p_f4->Points[3]-sp;
-	
+
 		if( (p_f4->DrawFlags&POLY_FLAG_DOUBLESIDED) || points_clockwise(p0,p1,p2))
 		{
 
 
-			flag_and = global_flags[p0]&global_flags[p1]&global_flags[p2]&global_flags[p3];	
-			flag_or = global_flags[p0]|global_flags[p1]|global_flags[p2]|global_flags[p3];	
+			flag_and = global_flags[p0]&global_flags[p1]&global_flags[p2]&global_flags[p3];
+			flag_or = global_flags[p0]|global_flags[p1]|global_flags[p2]|global_flags[p3];
 
 			if( (!(flag_and & EF_CLIPFLAGS))&&((flag_or&EF_BEHIND_YOU)==0))
 			{
@@ -1158,8 +1158,8 @@ void	e_draw_a_prim_at(UWORD	prim,SLONG x,SLONG y,SLONG z,UBYTE shade)
 
 		if( (p_f3->DrawFlags&POLY_FLAG_DOUBLESIDED) || points_clockwise(p0,p1,p2))
 		{
-		flag_and = global_flags[p0]&global_flags[p1]&global_flags[p2];	
-		flag_or  = global_flags[p0]|global_flags[p1]|global_flags[p2];	
+		flag_and = global_flags[p0]&global_flags[p1]&global_flags[p2];
+		flag_or  = global_flags[p0]|global_flags[p1]|global_flags[p2];
 
 		if((flag_or&EF_BEHIND_YOU)==0)
 		if(!(flag_and & EF_CLIPFLAGS))
@@ -1272,7 +1272,7 @@ void	animate_bloke(void);
 		animate_bloke();
 extern MapThing	man_thing;
 	p_mthing=&man_thing;
-	
+
 	p_mthing->X	=	x;
 	p_mthing->Y	=	y;
 	p_mthing->Z	=	z;
@@ -1354,9 +1354,9 @@ void	e_draw_figure(Thing *p_thing,DrawTween *draw_info,SLONG x,SLONG y,SLONG z)
 		next_anim_elements	=	draw_info->NextFrame->FirstElement;
 	else
 		next_anim_elements	=	anim_elements;
-	
 
-	
+
+
 	rotate_obj	(
 					draw_info->Tilt,
 					draw_info->Angle,
@@ -1386,7 +1386,7 @@ void	e_draw_figure(Thing *p_thing,DrawTween *draw_info,SLONG x,SLONG y,SLONG z)
 								&next_anim_elements[c1],
 								&r_matrix,
 								draw_info->Flags&FLAGS_DRAW_SHADOW,
-								dx,dy,dz             // funny bodge 
+								dx,dy,dz             // funny bodge
 							);
 //			test_draw(start_object+object_offset,AnimOffsetX,AnimOffsetY,100,AnimTween,the_element,the_next_element,&r_matrix);
 
@@ -1457,7 +1457,7 @@ void	e_draw_prim_tween(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct Gam
 	p_obj    =	&prim_objects[prim];
 	p_f4     =	&prim_faces4[p_obj->StartFace4];
 	p_f3     =	&prim_faces3[p_obj->StartFace3];
-	
+
 //	mat			=	&anim_info->Matrix;
 //	mat_next	=	&anim_info_next->Matrix;
 
@@ -1472,7 +1472,7 @@ void matrix_transformZMY(Matrix31* result, Matrix33* trans, Matrix31* mat2);
 	matrix_transformZMY((struct Matrix31*)&temp,rot_mat, &offset);
 	x			+=	temp.X;
 	y			+=	temp.Y;
-	z			+=	temp.Z;	
+	z			+=	temp.Z;
 
 
 	sp=p_obj->StartPoint;
@@ -1555,8 +1555,8 @@ SLONG	calc_shadow_co_ord(struct SVECTOR *input,struct SVECTOR *output,SLONG l_x,
 
 		if(shadow)
 		{
-			flag_and = flags_shadow[p0]&flags_shadow[p1]&flags_shadow[p2]&flags_shadow[p3];	
-			flag_or = flags_shadow[p0]|flags_shadow[p1]|flags_shadow[p2]|flags_shadow[p3];	
+			flag_and = flags_shadow[p0]&flags_shadow[p1]&flags_shadow[p2]&flags_shadow[p3];
+			flag_or = flags_shadow[p0]|flags_shadow[p1]|flags_shadow[p2]|flags_shadow[p3];
 
 			if((flag_or&EF_BEHIND_YOU)==0)
 			if(!(flag_and & EF_CLIPFLAGS))
@@ -1613,8 +1613,8 @@ SLONG	calc_shadow_co_ord(struct SVECTOR *input,struct SVECTOR *output,SLONG l_x,
 
 		if( (p_f4->DrawFlags&POLY_FLAG_DOUBLESIDED) || points_clockwise(p0,p1,p2))
 		{
-			flag_and = flags[p0]&flags[p1]&flags[p2]&flags[p3];	
-			flag_or = flags[p0]|flags[p1]|flags[p2]|flags[p3];	
+			flag_and = flags[p0]&flags[p1]&flags[p2]&flags[p3];
+			flag_or = flags[p0]|flags[p1]|flags[p2]|flags[p3];
 
 			if( (!(flag_and & EF_CLIPFLAGS))&&((flag_or&EF_BEHIND_YOU)==0))
 			{
@@ -1894,8 +1894,8 @@ SLONG	calc_shadow_co_ord(struct SVECTOR *input,struct SVECTOR *output,SLONG l_x,
 
 		if( (p_f3->DrawFlags&POLY_FLAG_DOUBLESIDED) || points_clockwise(p0,p1,p2))
 		{
-			flag_and = flags[p0]&flags[p1]&flags[p2];	
-			flag_or  = flags[p0]|flags[p1]|flags[p2];	
+			flag_and = flags[p0]&flags[p1]&flags[p2];
+			flag_or  = flags[p0]|flags[p1]|flags[p2];
 
 			if((flag_or&EF_BEHIND_YOU)==0)
 			if(!(flag_and & EF_CLIPFLAGS))
@@ -1933,7 +1933,7 @@ SLONG	calc_shadow_co_ord(struct SVECTOR *input,struct SVECTOR *output,SLONG l_x,
 					vertex_pool[current_vertex+2].tu	=	p_f3->UV[2][0]*TEXTURE_MUL;
 					vertex_pool[current_vertex+2].tv	=	p_f3->UV[2][1]*TEXTURE_MUL;
 
-					
+
 					vertex_pool[current_vertex+0].color = d3d_colour[p0];
 					vertex_pool[current_vertex+1].color = d3d_colour[p1];
 					vertex_pool[current_vertex+2].color = d3d_colour[p2];
@@ -1952,7 +1952,7 @@ SLONG	calc_shadow_co_ord(struct SVECTOR *input,struct SVECTOR *output,SLONG l_x,
 
 //					LogText(" draw fig col %d  rgb %d %d %d \n",p_f3->Col,r,g,b);
 
-					
+
 					//
 					// The colour of each point.
 					//
@@ -2036,7 +2036,7 @@ SLONG	calc_shadow_co_ord(struct SVECTOR *input,struct SVECTOR *output,SLONG l_x,
 					blue  >>= 8;
 
 					vertex_pool[current_vertex+2].color = (red << 16) | (green << 8) | (blue << 0);
-					
+
 					//
 					// Don't take face colour into account with the specular...
 					//
@@ -2045,7 +2045,7 @@ SLONG	calc_shadow_co_ord(struct SVECTOR *input,struct SVECTOR *output,SLONG l_x,
 					vertex_pool[current_vertex+1].specular = d3d_specular[p1];
 					vertex_pool[current_vertex+2].specular = d3d_specular[p2];
 	*/
-					
+
 					/*
 
 					r		=	dx_materials[p_f3->Col].R;
@@ -2075,7 +2075,7 @@ SLONG	calc_shadow_co_ord(struct SVECTOR *input,struct SVECTOR *output,SLONG l_x,
 			}
 		}
 		p_f3++;
-	}	
+	}
 exit:;
 }
 
@@ -2113,11 +2113,11 @@ void	e_draw_3d_line(SLONG x1,SLONG y1,SLONG z1,SLONG x2,SLONG y2,SLONG z2)
 
 	if ((flag_or  & EF_BEHIND_YOU) || (flag_and & EF_CLIPFLAGS))
 	{
-		
+
 //		LogText(" not drawn f1 %x f2 %x or %x and %x \n",f1,f2,flag_or,flag_and);
 		//
 		// Don't draw the line.
-		// 
+		//
 	}
 	else
 	{
@@ -2230,7 +2230,7 @@ void	e_draw_3d_line_col_sorted(SLONG x1,SLONG y1,SLONG z1,SLONG x2,SLONG y2,SLON
 	{
 		//
 		// Don't draw the line.
-		// 
+		//
 	}
 	else
 	{
@@ -2294,7 +2294,7 @@ void	e_draw_3d_line_col(SLONG x1,SLONG y1,SLONG z1,SLONG x2,SLONG y2,SLONG z2,SL
 		{
 			//
 			// Don't draw the line.
-			// 
+			//
 		}
 		else
 		{

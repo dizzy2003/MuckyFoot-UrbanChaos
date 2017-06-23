@@ -8,9 +8,9 @@
 #include "tracks.h"
 #include "structs.h"
 #ifndef PSX
-#include "C:\fallen\DDEngine\Headers\poly.h"
+#include "fallen/DDEngine/Headers/poly.h"
 #else
-#include "c:\fallen\psxeng\headers\poly.h"
+#include "fallen/psxeng/headers/poly.h"
 #endif
 #include "person.h"
 #include "puddle.h"
@@ -31,16 +31,16 @@
 Track	*tracks;//[TRACK_BUFFER_LENGTH];
 UWORD	track_head,track_tail,track_eob; //stopped them being pointers by MikeD
 
-void TRACKS_InitOnce(SWORD size) 
+void TRACKS_InitOnce(SWORD size)
 {
 	track_eob=size; //&tracks[TRACK_BUFFER_LENGTH]; // yes, intentionally one past the end of the buffer
 	track_head=track_tail=0;//tracks;
 	memset((UBYTE*)tracks,0,sizeof(Track)*size);
 }
 
-void TRACKS_Reset(SWORD size) 
+void TRACKS_Reset(SWORD size)
 {
-	while (track_tail!=track_head) 
+	while (track_tail!=track_head)
 	{
 	  remove_thing_from_map(TO_THING(TO_TRACK(track_tail)->thing));
 	  free_thing(TO_THING(TO_TRACK(track_tail)->thing));
@@ -93,7 +93,7 @@ void TRACKS_CalcDiffs(Track &track, UBYTE width) {
 	x=(track.dz); z=-(track.dx);
   f=Root((x*x)+(z*z));
   if (!f) f=1;
-  x*=width; z*=width; x/=f; z/=f; 
+  x*=width; z*=width; x/=f; z/=f;
   track.sx=x; track.sz=z;
 
 //  TRACE("result: x: %d   z: %d\n",x,z);
@@ -120,7 +120,7 @@ void TRACKS_AddQuad(SLONG x, SLONG y, SLONG z, SLONG dx, SLONG dy, SLONG dz, SLO
 		thing->Flags=0;
 		add_thing_to_map(thing);
 		track.dx=dx; track.dy=dy; track.dz=dz;
-		track.page=page; track.colour=colour; track.flip=flip; //track.width=width; 
+		track.page=page; track.colour=colour; track.flip=flip; //track.width=width;
 		track.flags=flags; track.splut=0; track.splutmax=1+(width>>1);
 		TRACKS_CalcDiffs(track,width);
 		TRACKS_AddTrack(track);
@@ -128,7 +128,7 @@ void TRACKS_AddQuad(SLONG x, SLONG y, SLONG z, SLONG dx, SLONG dy, SLONG dz, SLO
 }
 
 // Add a track unit supplying a completed track entry
-void TRACKS_AddTrack(Track &track) 
+void TRACKS_AddTrack(Track &track)
 {
   *(TO_TRACK(track_head))=track;
 
@@ -142,7 +142,7 @@ void TRACKS_AddTrack(Track &track)
 
   track_head++;
   if (track_head==track_eob) track_head=0; //tracks;
-  if (track_head==track_tail) 
+  if (track_head==track_tail)
   {
 //	  TRACE("stomp\n");
       // stomping one, so free it's thing first (woof)
@@ -159,7 +159,7 @@ UWORD TRACKS_Add(SLONG x, SLONG y, SLONG z, SLONG dx, SLONG dy, SLONG dz, UBYTE 
 	UBYTE lastkind=last&0xff;
 	SLONG code,kind,page,colour;
 	CBYTE msg[20];
-	
+
 	switch (type) {
 	case TRACK_TYPE_TYRE_SKID:
 //		TRACKS_AddQuad(x, y, z, dx, dy, dz, POLY_PAGE_TYRESKID, 0x00ffffff, 10, 0, TRACK_FLAGS_INVALPHA);
@@ -266,7 +266,7 @@ UWORD TRACKS_Add(SLONG x, SLONG y, SLONG z, SLONG dx, SLONG dy, SLONG dz, UBYTE 
 
 
 	last=(age<<8)+lastkind;
-	return last; 
+	return last;
 }
 
 
@@ -274,7 +274,7 @@ UWORD TRACKS_Add(SLONG x, SLONG y, SLONG z, SLONG dx, SLONG dy, SLONG dz, UBYTE 
 SLONG TRACKS_GroundAtXZ(SLONG X, SLONG Z) {
 	//
 	// Standing in a puddle?
-	// 
+	//
 #ifndef PSX
 #ifndef TARGET_DC
 	if (PUDDLE_in(X >> 8,Z >> 8))  return PERSON_ON_WATER;
@@ -315,10 +315,10 @@ SLONG TRACKS_GroundAtXZ(SLONG X, SLONG Z) {
 
 
 void TRACKS_Bleed(Thing *bleeder) {
-	
+
 //#ifdef VERSION_GERMAN
 	if(!VIOLENCE)
-		return; 
+		return;
 //#endif
 
 	UBYTE sz=1+(rand()&0x1f);
@@ -349,7 +349,7 @@ void TRACKS_Bloodpool(Thing *bleeder) {
 
 //#ifdef VERSION_GERMAN
 	if(!VIOLENCE)
-	 return; 
+	 return;
 //#endif
 
 	UBYTE sz=80+(rand()&0x1f);

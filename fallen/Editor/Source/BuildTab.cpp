@@ -2,10 +2,10 @@
 
 #include	"BuildTab.hpp"
 #include	"engine.h"
-#include	"c:\fallen\headers\enter.h"
-#include	"c:\fallen\headers\id.h"
+#include	"fallen/headers/enter.h"
+#include	"fallen/headers/id.h"
 #include	"extra.h"
-#include	"c:\fallen\headers\supermap.h"
+#include	"fallen/headers/supermap.h"
 #include	"outline.h"
 
 
@@ -22,7 +22,7 @@ void	cross_work_window(void)
 {
 	DrawLineC(0,0,WorkWindowWidth-1,WorkWindowHeight-1,255);
 	DrawLineC(0,WorkWindowHeight-1,WorkWindowWidth-1,0,255);
-	
+
 }
 */
 //---------------------------------------------------------------
@@ -112,13 +112,13 @@ CBYTE	*storey_name[]=
 };
 
 
-ControlDef	build_tab_def[]	=	
+ControlDef	build_tab_def[]	=
 {
 	{	CHECK_BOX,	0,	"Textures",					180,	200-50,	0,	10		},
 	{	CHECK_BOX,	0,	"Y Free",					120,	213-10,	0,	10		},
 	{	CHECK_BOX,	0,	"Z Free",					120,	226-10,	0,	10		},
 	{	BUTTON,		0,	"New Building",				10,		 40,	0,	0		},
-	{	BUTTON,		0,	"Next Storey",				10,		 80,	0,	0		},		 
+	{	BUTTON,		0,	"Next Storey",				10,		 80,	0,	0		},
 	{	BUTTON,		0,	"Duplicate Storey",			10,		100,	0,	0		},
 	{	BUTTON,		0,	"Toggle Tiled Roof",		10,		120,	0,	0		},
 	{	BUTTON,		0,	"Add Flat Roof Quad",		10,		140,	0,	0		},
@@ -270,7 +270,7 @@ void	BuildingBlock::Allocate(SLONG building)
 		storey=storey_list[storey].Next;
 		nstorey++;
 	}
-	
+
 
 	WallCount=nwall;
 	StoreyCount=nstorey;
@@ -756,7 +756,7 @@ void	BuildTab::ResetBuildTab(void)
 			}
 		}
 	}
-	
+
 }
 
 
@@ -797,7 +797,7 @@ void	BuildTab::DrawTabContent(void)
 
 	EdRect		content_rect;
 
-	content_rect	=	ContentRect;	
+	content_rect	=	ContentRect;
 	content_rect.ShrinkRect(1,1);
 	content_rect.FillRect(CONTENT_COL);
 
@@ -821,7 +821,7 @@ void	BuildTab::AddHeightOffset(SLONG *x,SLONG *y)
 
 	*x-=((-CurrentY)*(ViewSize+3))/(BLOCK_SIZE<<3);
 	*y-=-((-CurrentY)*(ViewSize+3))/(BLOCK_SIZE<<3);
-	
+
 }
 
 
@@ -837,7 +837,7 @@ SLONG	BuildTab::GetHeightColour(SLONG	storey)
 		return(0);
 	else
 		return(GREY_COL);
-	
+
 }
 
 void	BuildTab::HighlightVertexes(SLONG x,SLONG y,SLONG w,SLONG h)
@@ -873,8 +873,8 @@ void	BuildTab::HighlightVertexes(SLONG x,SLONG y,SLONG w,SLONG h)
 				QuickText(20,ploty,str,0);
 				ploty+=20;
 	*/
-																				  
-				
+
+
 				x1=storey_list[storey_index].DX;
 				y1=storey_list[storey_index].DY;
 				z1=storey_list[storey_index].DZ;
@@ -893,7 +893,7 @@ void	BuildTab::HighlightVertexes(SLONG x,SLONG y,SLONG w,SLONG h)
 
 							if(x1>0&&x1<WorkWindowRect.Width&&z1>0&&z1<WorkWindowRect.Height)
 							{
-								
+
 								sprintf(str,"%d",storey_list[storey_index].Height);
 								rect.SetRect(10,z1+2,12,12);
 								rect.OutlineRect(GetHeightColour(storey_index));
@@ -935,7 +935,7 @@ void	BuildTab::HighlightVertexes(SLONG x,SLONG y,SLONG w,SLONG h)
 
 							if(x1>0&&x1<WorkWindowRect.Width&&z1>0&&z1<WorkWindowRect.Height)
 							{
-								
+
 								sprintf(str,"%d",storey_list[storey_index].Height);
 								rect.SetRect(x1-ViewSize*2,z1+2,12,12);
 								rect.OutlineRect(RED_COL);
@@ -950,7 +950,7 @@ void	BuildTab::HighlightVertexes(SLONG x,SLONG y,SLONG w,SLONG h)
 
 							if(x1>0&&x1<WorkWindowRect.Width&&z1>0&&z1<WorkWindowRect.Height)
 							{
-								
+
 								sprintf(str,"%d",storey_list[storey_index].Info1);
 								rect.SetRect(10,z1+2,12,12);
 								rect.OutlineRect(GetHeightColour(storey_index));
@@ -964,7 +964,7 @@ void	BuildTab::HighlightVertexes(SLONG x,SLONG y,SLONG w,SLONG h)
 
 							if(x1>0 && x1<WorkWindowRect.Width && z1>0 && z1<WorkWindowRect.Height)
 							{
-								
+
 								sprintf(str,"%d",y1>>6);
 								rect.SetRect(x1-ViewSize*2,z1+2,12,12);
 								rect.OutlineRect(0); //GetHeightColour(storey_index));
@@ -995,7 +995,7 @@ void	BuildTab::HighlightVertexes(SLONG x,SLONG y,SLONG w,SLONG h)
 
 								if(x1>0 && x1<WorkWindowRect.Width && z1>0 && z1<WorkWindowRect.Height)
 								{
-									
+
 									sprintf(str,"%d",y1>>6);
 									rect.SetRect(x1-ViewSize*2,z1+2,12,12);
 									rect.OutlineRect(0); //GetHeightColour(storey_index));
@@ -1029,7 +1029,7 @@ void	BuildTab::HighlightVertexes(SLONG x,SLONG y,SLONG w,SLONG h)
 
 
 
-					
+
 				}
 
 				x1=storey_list[storey_index].DX;
@@ -1042,7 +1042,7 @@ void	BuildTab::HighlightVertexes(SLONG x,SLONG y,SLONG w,SLONG h)
 					else
 					{
 
-						if(storey_list[storey_index].StoreyFlags&(FLAG_STOREY_TILED_ROOF|FLAG_STOREY_FLAT_TILED_ROOF))						
+						if(storey_list[storey_index].StoreyFlags&(FLAG_STOREY_TILED_ROOF|FLAG_STOREY_FLAT_TILED_ROOF))
 						{
 							SLONG	tx,tz;
 
@@ -1097,7 +1097,7 @@ void	BuildTab::HighlightVertexes(SLONG x,SLONG y,SLONG w,SLONG h)
 						rect.SetRect(x1-rect_size,z1-rect_size,rect_size<<1,rect_size<<1);
 						rect.OutlineRect(GetHeightColour(storey_index));
 
-						index=wall_list[index].Next;	
+						index=wall_list[index].Next;
 					}
 				}
 //				if(roof_flag)
@@ -1133,7 +1133,7 @@ SLONG	BuildTab::ClickInVertexStoreyList(SLONG building,SLONG storey_index,SLONG 
 	rect_size=ViewSize>>2;
 	while(storey_index>0)
 	{
-		
+
 		x1=storey_list[storey_index].DX;
 		z1=storey_list[storey_index].DZ;
 
@@ -1147,7 +1147,7 @@ SLONG	BuildTab::ClickInVertexStoreyList(SLONG building,SLONG storey_index,SLONG 
 					z1=((((z1)-(ViewZ))*ViewSize)/ELE_SIZE)+(h>>1);
 					if(x1>0&&x1<w&&z1>0&&z1<h)
 					{
-						
+
 						rect.SetRect(10,z1+2,12,12);
 						if(rect.PointInRect(mouse_point))
 						{
@@ -1177,7 +1177,7 @@ SLONG	BuildTab::ClickInVertexStoreyList(SLONG building,SLONG storey_index,SLONG 
 					z1=((((z1)-(ViewZ))*ViewSize)/ELE_SIZE)+(h>>1);
 					if(x1>0&&x1<w&&z1>0&&z1<h)
 					{
-						
+
 						rect.SetRect(x1-ViewSize*2,z1+2,12,12);
 						if(rect.PointInRect(mouse_point))
 						{
@@ -1206,7 +1206,7 @@ SLONG	BuildTab::ClickInVertexStoreyList(SLONG building,SLONG storey_index,SLONG 
 
 					if(x1>0&&x1<WorkWindowRect.Width&&z1>0&&z1<WorkWindowRect.Height)
 					{
-						
+
 						rect.SetRect(10,z1+2,12,12);
 						if(rect.PointInRect(mouse_point))
 						{
@@ -1233,7 +1233,7 @@ SLONG	BuildTab::ClickInVertexStoreyList(SLONG building,SLONG storey_index,SLONG 
 
 					if(x1>0&&x1<WorkWindowRect.Width&&z1>0&&z1<WorkWindowRect.Height)
 					{
-						
+
 						rect.SetRect(x1-ViewSize*2,z1+2,12,12);
 						if(rect.PointInRect(mouse_point))
 						{
@@ -1263,7 +1263,7 @@ SLONG	BuildTab::ClickInVertexStoreyList(SLONG building,SLONG storey_index,SLONG 
 						z1=((((z1)-(ViewZ))*ViewSize)/ELE_SIZE)+(WorkWindowRect.Height>>1);
 						if(x1>0&&x1<WorkWindowRect.Width&&z1>0&&z1<WorkWindowRect.Height)
 						{
-							
+
 							rect.SetRect(x1-ViewSize*2,z1+2,12,12);
 							if(rect.PointInRect(mouse_point))
 							{
@@ -1307,7 +1307,7 @@ SLONG	BuildTab::ClickInVertexStoreyList(SLONG building,SLONG storey_index,SLONG 
 
 					break;
 
-			
+
 		}
 
 		x1=storey_list[storey_index].DX;
@@ -1329,7 +1329,7 @@ SLONG	BuildTab::ClickInVertexStoreyList(SLONG building,SLONG storey_index,SLONG 
 			{
 				if(storey_index==EditStorey)
 				{
-					
+
 					EditBuilding=building;
 					EditStorey=storey_index;
 					EditY=0;//storey_list[EditStorey].DY;
@@ -1375,7 +1375,7 @@ SLONG	BuildTab::ClickInVertexStoreyList(SLONG building,SLONG storey_index,SLONG 
 					}
 				}
 
-				index=wall_list[index].Next;	
+				index=wall_list[index].Next;
 			}
 		}
 		if(roof_flag)
@@ -1393,7 +1393,7 @@ SLONG	BuildTab::ClickInVertexStoreyList(SLONG building,SLONG storey_index,SLONG 
 			{
 				storey_index=temp_index;
 				roof_flag=1;
-				
+
 			}
 			else
 */
@@ -1415,10 +1415,10 @@ SLONG	BuildTab::ClickInVertexStoreyList(SLONG building,SLONG storey_index,SLONG 
 		DrawTabContent();
 
 		return(1);
-		
+
 	}
 	return(0);
-	
+
 }
 
 SLONG	BuildTab::ClickInVertex(SLONG x,SLONG y,SLONG w,SLONG h,MFPoint	*mouse_point,SLONG flags)
@@ -1488,7 +1488,7 @@ SLONG 	BuildTab::DrawWall(SLONG px,SLONG pz,SLONG x1,SLONG z1,SLONG index,SLONG 
 	{
 		wcount=dist/(BLOCK_SIZE*3);
 		wwidth=dist/(wcount*2+1);
-		
+
 	}
 	else
 	{
@@ -1561,11 +1561,11 @@ void	BuildTab::DrawContentLine(SLONG x1,SLONG y1,SLONG x2,SLONG y2,SLONG col)
 	y2=((y2>>ELE_SHIFT)-(ViewZ>>ELE_SHIFT))*ViewSize+(WorkWindowRect.Height>>1);
 */
 
-		
+
 
 	x1=((((x1)-(ViewX))*ViewSize)/ELE_SIZE)+(WorkWindowRect.Width>>1);
 	y1=((((y1)-(ViewZ))*ViewSize)/ELE_SIZE)+(WorkWindowRect.Height>>1);
-	   
+
 	x2=((((x2)-(ViewX))*ViewSize)/ELE_SIZE)+(WorkWindowRect.Width>>1);
 	y2=((((y2)-(ViewZ))*ViewSize)/ELE_SIZE)+(WorkWindowRect.Height>>1);
 
@@ -1590,7 +1590,7 @@ void	BuildTab::DrawContentLineY(SLONG x1,SLONG y1,SLONG z1,SLONG x2,SLONG y2,SLO
 	temp=CurrentY;
 	x1=((((x1)-(ViewX))*ViewSize)/ELE_SIZE)+(WorkWindowRect.Width>>1);
 	z1=((((z1)-(ViewZ))*ViewSize)/ELE_SIZE)+(WorkWindowRect.Height>>1);
-	   
+
 	x2=((((x2)-(ViewX))*ViewSize)/ELE_SIZE)+(WorkWindowRect.Width>>1);
 	z2=((((z2)-(ViewZ))*ViewSize)/ELE_SIZE)+(WorkWindowRect.Height>>1);
 
@@ -1973,7 +1973,7 @@ void	BuildTab::DrawModuleContent(SLONG x,SLONG y,SLONG w,SLONG h)
 		else
 		{
 			inside_valid = FALSE;
-			
+
 			/*
 
 			//
@@ -1988,7 +1988,7 @@ void	BuildTab::DrawModuleContent(SLONG x,SLONG y,SLONG w,SLONG h)
 				//
 
 				create_super_dbuilding(inside_building);
-				
+
 				//
 				// Calculate the height of this storey.
 				//
@@ -2100,7 +2100,7 @@ void	BuildTab::DrawModuleContent(SLONG x,SLONG y,SLONG w,SLONG h)
 	//
 	// Draw all the extra things.
 	//
-	
+
 	if(0)
 	{
 		SLONG i;
@@ -2159,7 +2159,7 @@ void	BuildTab::DrawModuleContent(SLONG x,SLONG y,SLONG w,SLONG h)
 					}
 
 					break;
-				
+
 				case EXTRA_TYPE_MIST:
 
 					x1 = et->x - et->radius;
@@ -2246,7 +2246,7 @@ void	BuildTab::DrawModuleContent(SLONG x,SLONG y,SLONG w,SLONG h)
 
 		storey_index=building_list[building].StoreyHead;
 
-		
+
 		while(storey_index)
 		{
 			UBYTE	drawn_normal=0;
@@ -2275,12 +2275,12 @@ void	BuildTab::DrawModuleContent(SLONG x,SLONG y,SLONG w,SLONG h)
 					case	STOREY_TYPE_NORMAL:
 						drawn_normal=1;
 						break;
-					
+
 				}
 
 				if(Mode==BUILD_MODE_CONT_STOREY)
 				{
-					
+
 					CurrentY=storey_list[EditStorey].DY;
 					mouse_point.X+= ((-CurrentY)*(ViewSize+3))/(BLOCK_SIZE<<3);
 					mouse_point.Y+=-((-CurrentY)*(ViewSize+3))/(BLOCK_SIZE<<3);
@@ -2314,7 +2314,7 @@ void	BuildTab::DrawModuleContent(SLONG x,SLONG y,SLONG w,SLONG h)
 
 				if(index==0)
 				{
-					
+
 					if(Mode==BUILD_MODE_CONT_STOREY&&storey_index==EditStorey)
 						DrawContentLine(x1,z1,fx,fz,GetHeightColour(storey_index));
 				}
@@ -2327,7 +2327,7 @@ void	BuildTab::DrawModuleContent(SLONG x,SLONG y,SLONG w,SLONG h)
 						{
 							CurrentY+=BLOCK_SIZE;
 						}
-						
+
 					}
 	*/
 
@@ -2361,7 +2361,7 @@ void	BuildTab::DrawModuleContent(SLONG x,SLONG y,SLONG w,SLONG h)
 										y1=pz;
 										x1=((((x1)-(ViewX))*ViewSize)/ELE_SIZE)+(WorkWindowRect.Width>>1);
 										y1=((((y1)-(ViewZ))*ViewSize)/ELE_SIZE)+(WorkWindowRect.Height>>1);
-										   
+
 										x2=x1;
 										y2=y1;
 
@@ -2389,7 +2389,7 @@ void	BuildTab::DrawModuleContent(SLONG x,SLONG y,SLONG w,SLONG h)
 						px=x1;
 						py=y1;
 						pz=z1;
-						index=wall_list[index].Next;	
+						index=wall_list[index].Next;
 					}
 					if(Mode==BUILD_MODE_CONT_STOREY&&storey_index==EditStorey)
 						DrawContentLine(px,pz,fx,fz,GetHeightColour(storey_index));
@@ -2435,7 +2435,7 @@ void	BuildTab::DrawModuleContent(SLONG x,SLONG y,SLONG w,SLONG h)
 								x1, z1,
 								x2, z2,
 								RED_COL);
-							
+
 							//
 							// Draw the doors.
 							//
@@ -2520,7 +2520,7 @@ void	BuildTab::DrawModuleContent(SLONG x,SLONG y,SLONG w,SLONG h)
 				{
 					storey_index=temp_index;
 					roof_flag=1;
-					
+
 				}
 				else
 				*/
@@ -2538,7 +2538,7 @@ void	BuildTab::DrawModuleContent(SLONG x,SLONG y,SLONG w,SLONG h)
 
 	//
 	// Draw the edge of the map...
-	// 
+	//
 
 	CurrentY = 0;
 
@@ -2561,7 +2561,7 @@ void	BuildTab::DrawModuleContent(SLONG x,SLONG y,SLONG w,SLONG h)
 				px=storey_list[index].DX;
 				pz=storey_list[index].DZ;
 				CurrentY=0;
-				index=storey_list[index].WallHead;	
+				index=storey_list[index].WallHead;
 
 				while(index)
 				{
@@ -2571,16 +2571,16 @@ void	BuildTab::DrawModuleContent(SLONG x,SLONG y,SLONG w,SLONG h)
 					DrawContentLine(px,pz,x1,z1,GetHeightColour());
 					px=x1;
 					pz=z1;
-					index=wall_list[index].Next;	
+					index=wall_list[index].Next;
 				}
 				if(Mode==BUILD_MODE_CONT_STOREY)
 					DrawContentLine(px,pz,fx,fz,GetHeightColour());
-				
+
 			}
 */
 
 
-	
+
 	if (!Keys[KB_T])
 	{
 		HighlightVertexes(x,y,w,h);
@@ -2600,7 +2600,7 @@ void	BuildTab::DrawModuleContent(SLONG x,SLONG y,SLONG w,SLONG h)
 
 		CBYTE	str[100];
 		sprintf(str," build %d storey %d wall %d edity %d",EditBuilding,EditStorey,EditWall,EditY);
-  		QuickTextC(20,20,str,0);  
+  		QuickTextC(20,20,str,0);
 	}
 	switch(Mode)
 	{
@@ -2631,7 +2631,7 @@ void	BuildTab::DrawModuleContent(SLONG x,SLONG y,SLONG w,SLONG h)
 void	BuildTab::HandleTab(MFPoint *current_point)
 {
 	SLONG		   update	=	0;
-	
+
 
 	ModeTab::HandleTab(current_point);
 	KeyboardInterface();
@@ -2787,7 +2787,7 @@ SLONG	BuildTab::DragEngine(UBYTE flags,MFPoint *clicked_point)
 				engine.Z = (old_z+(-nz+start_z));
 
 //				engine.Z=nz<<8;
-				
+
 				DrawModuleContent(Parent->ContentLeft()+1,Parent->ContentTop()+1,Parent->ContentWidth(),Parent->ContentHeight());
 				SetWorkWindowBounds(Parent->ContentLeft()+1,Parent->ContentTop()+1,Parent->ContentWidth(),Parent->ContentHeight());
 				ShowWorkWindow(0);
@@ -2796,7 +2796,7 @@ SLONG	BuildTab::DragEngine(UBYTE flags,MFPoint *clicked_point)
 				engine.X=old_x;
 				engine.Y=old_y;
 				engine.Z=old_z;
-				
+
 			}
 		}
 		if(flag)
@@ -2857,12 +2857,12 @@ SLONG	BuildTab::CalcMapCoord(SLONG	*mapx,SLONG	*mapy,SLONG	*mapz,SLONG	x,SLONG	y
 	else
 		dz=((dz+(ViewSize>>1))<<GridFlag)/ViewSize+(mz<<GridFlag);
 
-	
+
 
 	*mapx=dx<<(ELE_SHIFT-GridFlag);
 	*mapy=0;
 	*mapz=dz<<(ELE_SHIFT-GridFlag);
-	
+
 	return(1);
 }
 
@@ -2899,10 +2899,10 @@ SLONG	BuildTab::MouseInContent(void)
 
 		SetWorkWindowBounds(wwx,wwy,www,wwh); //RESTORE CLIP RECT
 
-		
+
 	}
 	return(0);
-	
+
 }
 
 SLONG	BuildTab::DragPaint(UBYTE flags)
@@ -3057,7 +3057,7 @@ void	move_storey(SLONG storey,SLONG dx,SLONG dy,SLONG dz)
 			wall_list[wall].DY+=dy;
 			wall_list[wall].DZ+=dz;
 			wall=wall_list[wall].Next;
-			
+
 		}
 //		if(storey_list[storey].Roof)
 //			move_storey(storey_list[storey].Roof,dx,dy,dz);
@@ -3230,7 +3230,7 @@ SLONG	BuildTab::DragBuilding(UBYTE flags,UBYTE type)
 			dz=mz-storey_list[EditStorey].DZ;
 		}
 		move_building(EditBuilding,dx,0,dz);
-		
+
 
 		DrawModuleContent(Parent->ContentLeft()+1,Parent->ContentTop()+1,Parent->ContentWidth(),Parent->ContentHeight());
 		SetWorkWindowBounds(Parent->ContentLeft()+1,Parent->ContentTop()+1,Parent->ContentWidth(),Parent->ContentHeight());
@@ -3344,7 +3344,7 @@ SLONG	BuildTab::DragVertex(UBYTE flags)
 				dz=mz-storey_list[EditStorey].DZ;
 			}
 			move_building(EditBuilding,dx,0,dz);
-			
+
 
 		}
 		else
@@ -3428,7 +3428,7 @@ void	BuildTab::DeleteVertex(void)
 		}
 	}
 	else
-	{			   
+	{
 		SLONG	next;
 		next=storey_list[EditStorey].WallHead;
 		if(next)
@@ -3468,7 +3468,7 @@ SLONG	BuildTab::ClickNearWall(SLONG x,SLONG y,SLONG w,SLONG h,MFPoint	*mouse_poi
 
 			while(storey_index)
 			{
-				
+
 				x1=storey_list[storey_index].DX;
 				z1=storey_list[storey_index].DZ;
 				CurrentY=storey_list[storey_index].DY;
@@ -3505,9 +3505,9 @@ SLONG	BuildTab::ClickNearWall(SLONG x,SLONG y,SLONG w,SLONG h,MFPoint	*mouse_poi
 							best_storey=storey_index;
 							best_wall=index;
 							best_dist=dist;
-							
+
 						}
-						index=wall_list[index].Next;	
+						index=wall_list[index].Next;
 						px=x1;
 						pz=z1;
 					}
@@ -3527,7 +3527,7 @@ SLONG	BuildTab::ClickNearWall(SLONG x,SLONG y,SLONG w,SLONG h,MFPoint	*mouse_poi
 					{
 						storey_index=temp_index;
 						roof_flag=1;
-						
+
 					}
 					else
 					*/
@@ -3816,7 +3816,7 @@ SLONG	BuildTab::FenceOptions(void)
 	{
 		//
 		// Might be a door because all doors are unclimbable.
-		// 
+		//
 
 		if (storey_list[EditStorey].StoreyType == STOREY_TYPE_OUTSIDE_DOOR)
 		{
@@ -3908,7 +3908,7 @@ SLONG	BuildTab::FenceOptions(void)
 	flags			=	0;
 
 //	storey_list[EditStorey].StoreyFlags&=~0x1f;
-	
+
 	for(c0=0;c0<12;c0++)
 	{
 
@@ -4018,7 +4018,7 @@ SLONG	count_wall_size(UWORD storey)
 //		LogText(" size count %d index %d \n",count,index);
 	}
 	return(count);
-	
+
 }
 
 SLONG	find_n_from_end(SLONG n,UWORD storey)
@@ -4044,7 +4044,7 @@ SLONG	find_n_from_end(SLONG n,UWORD storey)
 	}
 	return(index);
 
-	
+
 }
 
 void	show_storey(UWORD index)
@@ -4058,8 +4058,8 @@ void	show_storey(UWORD index)
 		index=wall_list[index].Next;
 	}
 	LogText("\n");
-	
-}	
+
+}
 
 
 void	flip_storey(UWORD storey)
@@ -4083,11 +4083,11 @@ void	flip_storey(UWORD storey)
 	storey_list[new_storey].DZ=wall_list[index].DZ;
 
 	size=count_wall_size(storey);
-//	LogText(" count wall size = %d \n",size); 
+//	LogText(" count wall size = %d \n",size);
 
 	for(c0=0;c0<size-1;c0++)
 	{
-//		LogText(" flip part %d \n",c0); 
+//		LogText(" flip part %d \n",c0);
 		index=get_new_wall();
 		wall_list[index].WallFlags|=1; //|FLAG_WALL_AUTO_WINDOWS;
 		if(prev)
@@ -4100,7 +4100,7 @@ void	flip_storey(UWORD storey)
 //			end_index_next=storey_list[storey].WallHead;
 //		else
 		end_index_next=wall_list[end_index].Next;
-//		LogText(" end_index %d ei next %d\n",end_index,end_index_next); 
+//		LogText(" end_index %d ei next %d\n",end_index,end_index_next);
 
 		wall_list[index]=wall_list[end_index_next];
 		wall_list[index].DX=wall_list[end_index].DX;
@@ -4136,7 +4136,7 @@ void	BuildTab::CheckStoreyIntegrity(UWORD storey)
 
 	if(storey_list[storey].WallHead&&wall_list[storey_list[storey].WallHead].Next)
 	{
-		
+
 		x1=storey_list[storey].DX;
 		z1=storey_list[storey].DZ;
 
@@ -4154,11 +4154,11 @@ void	BuildTab::CheckStoreyIntegrity(UWORD storey)
 		if(!is_it_clockwise_xy(x1,z1,x2,z2,x3,z3))
 		{
 			flip_storey(storey);
-			
+
 		}
 */
 	}
-	
+
 }
 
 
@@ -4185,7 +4185,7 @@ SLONG	BuildTab::HandleModuleContentClick(MFPoint	*clicked_point,UBYTE flags,SLON
 										{
 											if(EditWall<0)
 											{
-												
+
 												EditWall=0;
 												storey_list[EditStorey].Height++;
 												return(1);
@@ -4198,7 +4198,7 @@ SLONG	BuildTab::HandleModuleContentClick(MFPoint	*clicked_point,UBYTE flags,SLON
 												SLONG	size=4;
 												if(ShiftFlag)
 													size=1;
-												
+
 												EditWall=0;
 												storey_list[EditStorey].Height+=size;
 												return(1);
@@ -4228,7 +4228,7 @@ SLONG	BuildTab::HandleModuleContentClick(MFPoint	*clicked_point,UBYTE flags,SLON
 
 											}
 										break;
-									
+
 								}
 
 								LogText(" dragging editwall %d\n",EditWall);
@@ -4267,7 +4267,7 @@ SLONG	BuildTab::HandleModuleContentClick(MFPoint	*clicked_point,UBYTE flags,SLON
 										{
 											if(EditWall<0)
 											{
-												
+
 												EditWall=0;
 												storey_list[EditStorey].Height--;
 												return(1);
@@ -4280,7 +4280,7 @@ SLONG	BuildTab::HandleModuleContentClick(MFPoint	*clicked_point,UBYTE flags,SLON
 												SLONG	size=4;
 												if(ShiftFlag)
 													size=1;
-												
+
 												EditWall=0;
 												storey_list[EditStorey].Height-=size;
 												return(1);
@@ -4310,7 +4310,7 @@ SLONG	BuildTab::HandleModuleContentClick(MFPoint	*clicked_point,UBYTE flags,SLON
 
 											}
 										break;
-									
+
 								}
 								if(EditWall>0)
 								{
@@ -4319,7 +4319,7 @@ SLONG	BuildTab::HandleModuleContentClick(MFPoint	*clicked_point,UBYTE flags,SLON
 									index=get_new_wall();
 									wall_list[index].StoreyHead=EditStorey;
 									wall_list[index].WallFlags=1; //|FLAG_WALL_AUTO_WINDOWS;
-										
+
 									wall_list[EditWall].Next=index;
 
 									wall_list[index].DX=wall_list[EditWall].DX;
@@ -4336,7 +4336,7 @@ SLONG	BuildTab::HandleModuleContentClick(MFPoint	*clicked_point,UBYTE flags,SLON
 								else
 								{
 									//trying to drag one of the root
-									
+
 								}
 							}
 							else
@@ -4369,7 +4369,7 @@ SLONG	BuildTab::HandleModuleContentClick(MFPoint	*clicked_point,UBYTE flags,SLON
 										break;
 								}
 								return(1);
-								
+
 							}
 						}
 						//delete vertex
@@ -4387,7 +4387,7 @@ SLONG	BuildTab::HandleModuleContentClick(MFPoint	*clicked_point,UBYTE flags,SLON
 						CurrentY=storey_list[EditStorey].DY;
 						clicked_point->X+= ((-CurrentY)*(ViewSize+3))/(BLOCK_SIZE<<3);
 						clicked_point->Y+=-((-CurrentY)*(ViewSize+3))/(BLOCK_SIZE<<3);
-					
+
 						CalcMapCoord(&mx,&my,&mz,x,y,w,h,clicked_point);
 						storey_list[EditStorey].DX=mx;
 		//				storey_list[EditStorey].DY=my;
@@ -4418,7 +4418,7 @@ SLONG	BuildTab::HandleModuleContentClick(MFPoint	*clicked_point,UBYTE flags,SLON
 //						wall_list[index].WindowCount=0;
 						if(EditWall)
 						{
-							
+
 							wall_list[EditWall].Next=index;
 						}
 						else
@@ -4460,7 +4460,7 @@ SLONG	BuildTab::HandleModuleContentClick(MFPoint	*clicked_point,UBYTE flags,SLON
 				break;
 	}
 	return(0);
-	
+
 }
 
 UWORD	BuildTab::HandleTabClick(UBYTE flags,MFPoint *clicked_point)
@@ -4536,7 +4536,7 @@ SLONG  BuildTab::DoZoom(void)
 		update=2;
 	}
 	return(update);
-	
+
 }
 
 SLONG  BuildTab::DoKeys(void)
@@ -4564,7 +4564,7 @@ SLONG  BuildTab::DoKeys(void)
 	}
 	if(!ShiftFlag)
 	{
-		
+
 		if(Keys[KB_UP])
 		{
 			ViewZ-=scroll_step;
@@ -4585,7 +4585,7 @@ SLONG  BuildTab::DoKeys(void)
 				Keys[KB_UP]=0;
 				EditStorey=storey_list[EditStorey].Next;
 				EditY=0;//storey_list[EditStorey].DY;
-				
+
 			}
 			update=2;
 		}
@@ -4640,7 +4640,7 @@ SLONG	BuildTab::SetWorldMouse(ULONG flag)
 	}
 	else
 	{
-		
+
 		engine.ClipFlag=temp;
 		return(0);
 	}
@@ -4790,7 +4790,7 @@ SLONG	do_storeys_overlap(SLONG s1,SLONG s2)
 	if(ool==NULL)
 		return(0);
 
-	
+
 	if (OUTLINE_overlap(oos, ool))
 	{
 		return(1);
@@ -4805,7 +4805,7 @@ SLONG	set_storey_height(SLONG building,SLONG storey ,SLONG height)
 {
 	SLONG link;
 	SLONG y,offset_dy;
-	
+
 	OUTLINE_Outline *oos;
 	OUTLINE_Outline *ool;
 
@@ -4863,7 +4863,7 @@ SLONG	set_storey_height(SLONG building,SLONG storey ,SLONG height)
 
 						//
 						// Does this storey overlap the storey whose fence has changed.
-						// 
+						//
 
 						{
 							SLONG x1;
@@ -5190,7 +5190,7 @@ void	BuildTab::HandleControl(UWORD control_id)
 					}
 					else
 					{
-						
+
 
 						UWORD	storey;
 						storey=get_new_storey();
@@ -5244,7 +5244,7 @@ void	BuildTab::HandleControl(UWORD control_id)
 				break;
 		case	CTRL_LOAD_TEXTURES:
 			{
-				
+
 				FileRequester	*fr;
 				CBYTE	fname[100];
 				fr=new FileRequester("data\\","*.map","Load A MAP","temp.map");
@@ -5301,7 +5301,7 @@ void	BuildTab::HandleControl(UWORD control_id)
 					res=quit_alert->HandleAlert("Delete ALL BUILDINGS you crazy fucker? ",NULL);
 					delete	quit_alert;
 
-					
+
 					if(res==1)
 						delete_all();
 				}
@@ -5403,7 +5403,7 @@ void	BuildTab::HandleControl(UWORD control_id)
 								wall_list[prev].Next=wall;
 							else
 							{
-								
+
 								storey_list[storey].WallHead=wall;
 								LogText(" set storey %d wallhead to %d \n",storey,wall);
 							}
@@ -5456,7 +5456,7 @@ void	BuildTab::HandleControl(UWORD control_id)
 						RequestUpdate();
 					}
 				}
-				
+
 			}
 			break;
 		case	CTRL_ADD_FIRE_ESCAPE:
@@ -5501,7 +5501,7 @@ void	BuildTab::HandleControl(UWORD control_id)
 				{
 					storey_list[EditStorey].StoreyFlags|=FLAG_STOREY_LEDGE;
 				}
-				
+
 				break;
 		case	CTRL_ADD_LADDER:
 
@@ -5559,7 +5559,7 @@ void	BuildTab::HandleControl(UWORD control_id)
 				if(EditBuilding)
 				{
 
-						
+
 					SLONG	storey;
 					storey=get_new_storey();
 					if(storey)
@@ -5597,7 +5597,7 @@ void	BuildTab::HandleControl(UWORD control_id)
 				if(EditBuilding)
 				{
 
-						
+
 					UWORD	storey;
 					storey=get_new_storey();
 					if(storey)
@@ -5645,7 +5645,7 @@ void	BuildTab::HandleControl(UWORD control_id)
 					}
 					else
 					{
-						
+
 
 						UWORD	storey;
 						storey=get_new_storey();
@@ -5759,7 +5759,7 @@ void	BuildTab::HandleControl(UWORD control_id)
 
 				RequestUpdate();
 			}
-			
+
 			break;
 
 		case	CTRL_ANOTHER_STAIRCASE_SEED:
@@ -5798,7 +5798,7 @@ void	BuildTab::HandleControl(UWORD control_id)
 
 
 		case	CTRL_NEXT_STOREY:
-		
+
 			if (WITHIN(EditBuilding, 1, MAX_BUILDINGS - 1) &&
 				WITHIN(EditStorey, 1, MAX_STOREYS - 1))
 			{
@@ -5818,7 +5818,7 @@ void	BuildTab::HandleControl(UWORD control_id)
 
 
 		case	CTRL_PREV_STOREY:
-		
+
 			if (WITHIN(EditBuilding, 1, MAX_BUILDINGS - 1) &&
 				WITHIN(EditStorey, 1, MAX_STOREYS - 1))
 			{
@@ -5899,7 +5899,7 @@ void	BuildTab::HandleControl(UWORD control_id)
 
 
 		case	CTRL_SET_STOREY_TYPE_NORMAL:
-			
+
 			//
 			// Make the current storey a fence.
 			//
@@ -5917,7 +5917,7 @@ void	BuildTab::HandleControl(UWORD control_id)
 
 
 		case	CTRL_SET_STOREY_TYPE_FENCE:
-			
+
 			//
 			// Make the current storey a fence.
 			//

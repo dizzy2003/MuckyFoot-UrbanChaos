@@ -5,7 +5,7 @@
 #define	THE_EDITOR_HPP
 
 #ifdef	__WINDOWS_386__
-#pragma	warning	389	9 
+#pragma	warning	389	9
 #endif
 
 #include	"EditorLib.h"
@@ -30,8 +30,8 @@
 #include	"LevelEd.hpp"
 #include	"math.h"
 #include	"macros.h"
-#include	"c:\fallen\headers\inline.h"
-#include	"c:\fallen\headers\building.h"
+#include	"fallen/headers/inline.h"
+#include	"fallen/headers/building.h"
 #include	"ModeTab.hpp"
 #include	"PaintTab.hpp"
 #include	"poly.h"
@@ -44,7 +44,7 @@
 #include	"ThingTab.h"
 #include	"Window.hpp"
 #include	"undo.hpp"
-#include	"c:\fallen\headers\game.h"
+#include	"fallen/headers/game.h"
 //#include	"collide.hpp"
 
 

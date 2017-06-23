@@ -4,12 +4,12 @@
 #include	"game.h"
 //#include	"trig.h"
 #include	"prim_draw.h"
-#include	"c:\fallen\headers\animate.h"
-#include	"c:\fallen\headers\io.h"
+#include	"fallen/headers/animate.h"
+#include	"fallen/headers/io.h"
 #include	"primtex.h"
 #include	"perstex.h"
-#include	"c:\fallen\headers\memory.h"
-#include	"c:\fallen\headers\noserver.h"
+#include	"fallen/headers/memory.h"
+#include	"fallen/headers/noserver.h"
 
 CBYTE	*body_part_names[]=
 {
@@ -64,11 +64,11 @@ void	calc_prims_screen_box(UWORD	prim,SLONG x,SLONG y,SLONG z,EdRect *rect)
 
 	sp=p_obj->StartPoint;
 	ep=p_obj->EndPoint;
-	
+
 	engine.X-=x<<8;
 	engine.Y-=y<<8;
 	engine.Z-=z<<8;
-		
+
 	for(c0=sp;c0<ep;c0++)
 	{
 		struct	SVector	pp;
@@ -92,7 +92,7 @@ void	calc_prims_screen_box(UWORD	prim,SLONG x,SLONG y,SLONG z,EdRect *rect)
 			if(global_res[c0-sp].Y>max_y)
 				max_y=global_res[c0-sp].Y;
 		}
-		
+
 	}
 
 	engine.X+=x<<8;
@@ -117,8 +117,8 @@ void	calc_prims_world_box(UWORD	prim,SLONG x,SLONG y,SLONG z,EdRect *rect)
 
 	sp=p_obj->StartPoint;
 	ep=p_obj->EndPoint;
-	
-		
+
+
 	for(c0=sp;c0<ep;c0++)
 	{
 		global_res[c0-sp].X=prim_points[c0].X+x;
@@ -137,7 +137,7 @@ void	calc_prims_world_box(UWORD	prim,SLONG x,SLONG y,SLONG z,EdRect *rect)
 			if(global_res[c0-sp].Y>max_y)
 				max_y=global_res[c0-sp].Y;
 		}
-		
+
 	}
 
 	if(min_x<0)
@@ -155,7 +155,7 @@ void	re_texture_face_using_screen_co_ords(SWORD	face,SWORD p0,SWORD p1,SWORD p2,
 //	SLONG	uv[4][1];
 	if(face<0)
 	{
-		
+
 	}
 	else
 	{
@@ -166,7 +166,7 @@ void	re_texture_face_using_screen_co_ords(SWORD	face,SWORD p0,SWORD p1,SWORD p2,
 //		ty&=~31;
 
 		{
-/*			
+/*
 			x=prim_points[prim_faces4[face].Points[point]].X;
 			y=prim_points[prim_faces4[face].Points[point]].Y;
 
@@ -231,7 +231,7 @@ void	re_texture_face_using_screen_co_ords2(SWORD	face,SLONG p0,SLONG p1,SLONG p2
 				prim_faces3[-face].UV[2][1]=((global_res[p2].Y>>1)&255);//+255;
 
 			}
-			
+
 		}
 		else
 		{
@@ -269,7 +269,7 @@ void	re_texture_face_using_screen_co_ords2(SWORD	face,SLONG p0,SLONG p1,SLONG p2
 				prim_faces3[-face].UV[2][1]=(global_res[p2].Y>>1)&255;
 
 			}
-			
+
 		}
 		else
 		{
@@ -334,9 +334,9 @@ void	do_quad_clip_list(SWORD face,SLONG p0,SLONG p1,SLONG p2,SLONG p3)
 				   global_res[p3].X<edit_info.SelectRect.GetRight()&&
 				   global_res[p3].Y>edit_info.SelectRect.GetTop()&&
 				   global_res[p3].Y<edit_info.SelectRect.GetBottom())
-				
+
 				{
-					//What A Bloody Great If statement 
+					//What A Bloody Great If statement
 					if(SelectFlag==1)
 					{
 //						LogText(" quad select flag1  face %d nsf %d\n",face,next_face_selected);
@@ -401,7 +401,7 @@ void	do_tri_clip_list(SWORD face,SLONG p0,SLONG p1,SLONG p2)
 			   global_res[p2].Y>edit_info.SelectRect.GetTop()&&
 			   global_res[p2].Y<edit_info.SelectRect.GetBottom())
 				{
-					//What A Bloody Great If statement 
+					//What A Bloody Great If statement
 					if(SelectFlag==1)
 					{
 						if(!face_is_in_list(face))
@@ -514,7 +514,7 @@ UWORD	find_pair(UWORD start_face,UWORD end_face,UWORD half_face,UWORD tolerance)
 	}
 
 //	printf(" len1 %d len2 %d len3 %d  longest %d \n",len1,len2,len3,longest);
-	
+
 	for(which_longest=0;which_longest<tolerance+1;which_longest++)
 	{
 		for(current_face=start_face;current_face<=end_face;current_face++)
@@ -664,7 +664,7 @@ UWORD	find_pair(UWORD start_face,UWORD end_face,UWORD half_face,UWORD tolerance)
 				}
 			}
 		}
-	}	
+	}
 	return(0);
 }	/* end find_pair */
 
@@ -681,7 +681,7 @@ UWORD	find_pair(UWORD start_face,UWORD end_face,UWORD half_face,UWORD tolerance)
 // delete primitive face
 // subtract 1 from face count
 // shuffle down all later faces
-// 
+//
 void	delete_prim_face3(UWORD object,UWORD	face)
 {
 	struct	PrimFace3 *this_face;
@@ -738,7 +738,7 @@ void make_object_quad(UWORD prim)
 	PrimFace3  *f3_a;
 	PrimFace3  *f3_b;
 	PrimFace4  *f4;
-	
+
 	SLONG combine;
 	SLONG combine_edge;
 	SLONG combine_p1;
@@ -796,7 +796,7 @@ void make_object_quad(UWORD prim)
 
 				//
 				// Check each edge.
-				// 
+				//
 
 				for (k = 0; k < 3; k++)
 				{
@@ -926,7 +926,7 @@ void	make_object_quad_old(UWORD prim_object)
 	next_normal=temp_normal;
 */
 
-	for(match_tolerance=0;match_tolerance<2;match_tolerance++)	
+	for(match_tolerance=0;match_tolerance<2;match_tolerance++)
 	for(c0=start_face;c0<end_face;c0++)
 	{
 		cur_face=&prim_object_faces[c0];
@@ -1002,7 +1002,7 @@ void	make_object_quad_old(UWORD prim_object)
 
 			if(!failed_match)
 			{
-				
+
 //				printf(" passed texture temp unique %d \n",temp_unique);
 			}
 			else
@@ -1023,7 +1023,7 @@ void	make_object_quad_old(UWORD prim_object)
 				if(corners[0]==2||corners[1]==2||corners[2]==2)
 					cur_unique=1;
 
-			
+
 			this_face4=&prim_object_faces4[prim_next_object_face4];
 
 			for(c1=0;c1<3;c1++)
@@ -1063,7 +1063,7 @@ void	make_object_quad_old(UWORD prim_object)
 			this_face4->Bright[1]	=	0; //128;
 			this_face4->Bright[2]	=	0; //128;
 			this_face4->Bright[3]	=	0; //128;
-			
+
 			point_object->EndFace4++;
 			prim_next_object_face4++;
 			if(c0>temp_match)
@@ -1078,7 +1078,7 @@ void	make_object_quad_old(UWORD prim_object)
 				delete_prim_face3(prim_object,c0);
 				c0--;
 			}
-			
+
 			end_face-=2;
 		}
 	}
@@ -1140,7 +1140,7 @@ SBYTE	read_multi_vue(SLONG m_object)
 	if(handle = fopen(fname,"r"))
 	{
 		do
-		{						  
+		{
 			retval = fscanf(handle,"%s",ts);
 			if(!strcmp(ts,"frame"))
 			{
@@ -1227,7 +1227,7 @@ sy  0    cy      cxsy -sx  cxcy
 rot Z            rotXYZ
 cz  sz   0       czcy         cysz          -sy
 -sz cz   0       sxsycz-cxsz  sxsysz+cxcz   sxcy
-0   0    1       cxsycz+sxsz  cxsysz-sxcz   cxcy  
+0   0    1       cxsycz+sxsz  cxsysz-sxcz   cxcy
 
 
 [A B C]
@@ -1300,7 +1300,7 @@ extern	SLONG	x_centre,y_centre,z_centre;
 
 //
 // A buffer for texture coordinates.
-// 
+//
 
 #define MAX_SEX_UVS 4096
 
@@ -1505,7 +1505,7 @@ SLONG read_sex(CBYTE *fname, SLONG scale /* Ignored */, SLONG offset)
 
 			base_f = next_prim_face3;
 			base_v = next_prim_point;
-			
+
 			num_f  = 0;
 			num_v  = 0;
 			num_tv = 0;
@@ -1516,7 +1516,7 @@ SLONG read_sex(CBYTE *fname, SLONG scale /* Ignored */, SLONG offset)
 
 		//
 		// Version number?
-		// 
+		//
 
 		match = sscanf(line, "Version: %f", &v);
 
@@ -1528,7 +1528,7 @@ SLONG read_sex(CBYTE *fname, SLONG scale /* Ignored */, SLONG offset)
 		//
 		// Is this a material definition line?
 		//
-	   
+
 		match = sscanf(line, "Material: DiffuseRGB (%f,%f,%f), %s sided, %s alpha, filename %s", &r, &g, &b, sided, alpha, tname);
 
 		if (match != 6)
@@ -1591,7 +1591,7 @@ SLONG read_sex(CBYTE *fname, SLONG scale /* Ignored */, SLONG offset)
 			//
 			// Convert from 3ds orientation to our one.
 			//
-			
+
 			SWAP_FL(y,z);
 
 			pivot_x = (x * GAME_SCALE) / GAME_SCALE_DIV;
@@ -1610,7 +1610,7 @@ SLONG read_sex(CBYTE *fname, SLONG scale /* Ignored */, SLONG offset)
 		match = sscanf(line, "Vertex: (%f,%f,%f)", &x, &y, &z);
 
 		if (match == 3)
-		{	
+		{
 			ASSERT(WITHIN(next_prim_point, 1, MAX_PRIM_POINTS - 1));
 
 			//
@@ -1690,7 +1690,7 @@ SLONG read_sex(CBYTE *fname, SLONG scale /* Ignored */, SLONG offset)
 		}
 
 		if (match == 10)
-		{	
+		{
 			ASSERT(WITHIN(m,  0, num_m  - 1));
 
 			ASSERT(WITHIN(p1, 0, num_v  - 1));
@@ -1704,7 +1704,7 @@ SLONG read_sex(CBYTE *fname, SLONG scale /* Ignored */, SLONG offset)
 			ASSERT(WITHIN(next_prim_face3, 1, MAX_PRIM_FACES3 - 1));
 
 			//
-			// Has the texture been loaded? 
+			// Has the texture been loaded?
 			//
 
 			if (mat[m].page == 255)
@@ -1921,7 +1921,7 @@ void	invert_matrix(float *mat,float *out)
 	//
 	// now finish it off?
 	//
-	
+
 
 
 }
@@ -2053,7 +2053,7 @@ SLONG read_multi_sex(CBYTE *fname,float shrink)
 
 		return FALSE;
 	}
-	
+
 	//
 	// Our new multi-prim.
 	//
@@ -2097,7 +2097,7 @@ SLONG read_multi_sex(CBYTE *fname,float shrink)
 
 		//
 		// Version number?
-		// 
+		//
 
 		match = sscanf(line, "Version: %f", &v);
 
@@ -2134,7 +2134,7 @@ SLONG read_multi_sex(CBYTE *fname,float shrink)
 
 			//
 			// Create a new prim object.
-			// 
+			//
 
 			ASSERT(WITHIN(next_prim_object, 1, MAX_PRIM_OBJECTS - 1));
 
@@ -2145,7 +2145,7 @@ SLONG read_multi_sex(CBYTE *fname,float shrink)
 			}
 
 			object_index=calc_object_index(object_name,&extra);
-									   
+
 			DebugText(" object name %s INDEX %d extra %d\n",object_name,object_index,extra);
 //			if(object_index<0)
 //				return(0);      //body part name unknown
@@ -2203,7 +2203,7 @@ SLONG read_multi_sex(CBYTE *fname,float shrink)
 
 			base_f = next_prim_face3;
 			base_v = next_prim_point;
-			
+
 			num_f  = 0;
 			num_v  = 0;
 			num_tv = 0;
@@ -2217,7 +2217,7 @@ SLONG read_multi_sex(CBYTE *fname,float shrink)
 		//
 		// Is this a material definition line?
 		//
-	   
+
 		match = sscanf(line, "Material: DiffuseRGB (%f,%f,%f), %s sided, %s alpha, filename", &r, &g, &b, sided, alpha);
 
 		if (match != 5)
@@ -2259,7 +2259,7 @@ SLONG read_multi_sex(CBYTE *fname,float shrink)
 
 			//
 			// Get rid of control characters at the end of the string.
-			// 
+			//
 
 			{
 				CBYTE *ch;
@@ -2314,7 +2314,7 @@ SLONG read_multi_sex(CBYTE *fname,float shrink)
 		match = sscanf(line, "Vertex: (%f,%f,%f)", &x, &y, &z);
 
 		if (match == 3)
-		{	
+		{
 //			DebugText(" num_v %d num_p %d next_prim_point %d\n",num_v,num_points,next_prim_point);
 			ASSERT(WITHIN(next_prim_point, 1, MAX_PRIM_POINTS - 1));
 
@@ -2379,7 +2379,7 @@ SLONG read_multi_sex(CBYTE *fname,float shrink)
 		}
 
 		if (match == 10)
-		{	
+		{
 			ASSERT(WITHIN(m,  0, num_m  - 1));
 
 			ASSERT(WITHIN(p1, 0, num_v  - 1));
@@ -2393,7 +2393,7 @@ SLONG read_multi_sex(CBYTE *fname,float shrink)
 			ASSERT(WITHIN(next_prim_face3, 1, MAX_PRIM_FACES3 - 1));
 
 			//
-			// Has the texture been loaded? 
+			// Has the texture been loaded?
 			//
 
 			if (mat[m].page == 255)
@@ -2525,7 +2525,7 @@ SLONG read_multi_sex(CBYTE *fname,float shrink)
 		//
 		// Finish off the last prim-object.
 		//
-		
+
 		po->EndPoint = next_prim_point;
 		po->EndFace3 = next_prim_face3;
 		po->EndFace4 = 0; //next_prim_face4;
@@ -2640,7 +2640,7 @@ SLONG read_multi_sex(CBYTE *fname,float shrink)
 	{
 		x_centre = 15;//-30;
 		y_centre = 30;
-		z_centre = 0;//-51; 
+		z_centre = 0;//-51;
 	}
 
 
@@ -2652,7 +2652,7 @@ SLONG read_multi_sex(CBYTE *fname,float shrink)
 		// Create face4s out of the face3s.
 		//
 
-//mark I've commented this back in, in this wrong?		
+//mark I've commented this back in, in this wrong?
 
 		if (old_version)
 		{
@@ -2663,7 +2663,7 @@ SLONG read_multi_sex(CBYTE *fname,float shrink)
 			make_object_quad(c0);
 		}
 
-		
+
 
 		//apply_ambient_light_to_object(c0,-12,-128,-40,256);
 		//smooth_a_prim(c0);
@@ -2893,7 +2893,7 @@ SBYTE read_asc(CBYTE *fname,SLONG scale,ULONG offset)
 						if(prim_points[next_prim_point].Y<min_y)
 							min_y=prim_points[next_prim_point].Y;
 					}
-					
+
 					average_x+=prim_points[next_prim_point].X;
 					average_y+=prim_points[next_prim_point].Y;
 					average_z+=prim_points[next_prim_point].Z;
@@ -2951,7 +2951,7 @@ SBYTE read_asc(CBYTE *fname,SLONG scale,ULONG offset)
 						prim_faces3[next_prim_face3].DrawFlags=POLY_G;
 
 					}
-					
+
 					next_prim_face3++;
 					cno_faces--;
 				}
@@ -2959,7 +2959,7 @@ SBYTE read_asc(CBYTE *fname,SLONG scale,ULONG offset)
 			else if(!strcmp(ts,"Material:"))
 			{
 				SLONG	mat;
-				fscanf(handle,"%d",&mat); 
+				fscanf(handle,"%d",&mat);
 				prim_faces3[next_prim_face3-1].Col2=materials[mat].Index;
 				prim_faces3[next_prim_face3-1].DrawFlags=POLY_G;
 
@@ -2972,15 +2972,15 @@ SBYTE read_asc(CBYTE *fname,SLONG scale,ULONG offset)
 		fclose(handle);
 
 /*
-	average_x=0;		
-	average_y=0;		
-	average_z=0;		
+	average_x=0;
+	average_y=0;
+	average_z=0;
 	for(current_point=start_point;current_point<=end_point;current_point++)
 	{
 		average_x+=prim_points[current_point].X;
 		average_y+=prim_points[current_point].Y;
 		average_z+=prim_points[current_point].Z;
-		
+
 	}
 	num_points=end_point-start_point;
 	num_points++;
@@ -3029,7 +3029,7 @@ SBYTE read_asc(CBYTE *fname,SLONG scale,ULONG offset)
 	make_object_quad(next_prim_object-1);
 //	apply_ambient_light_to_object(next_prim_object-1,-128,128,-40,256);
 //	load_textures_for_prim("",next_prim_object-1);
-	return(1);		
+	return(1);
 }
 
 
@@ -3133,7 +3133,7 @@ SLONG read_multi_asc(CBYTE *asc_name,UBYTE flag,float shrink)
 		do
 		{
 			retval = fscanf(handle,"%s",ts);
-			
+
 			if(!strcmp(ts,"Named"))
 			{
 				if(got_torso)
@@ -3395,7 +3395,7 @@ SLONG read_multi_asc(CBYTE *asc_name,UBYTE flag,float shrink)
 
 					if(prim_points[next_prim_point].Z<min_y)
 						min_y=prim_points[next_prim_point].Z;
-					
+
 					average_x	+=	prim_points[next_prim_point].X;
 					average_y	+=	prim_points[next_prim_point].Y;
 					average_z	+=	prim_points[next_prim_point].Z;
@@ -3438,10 +3438,10 @@ SLONG read_multi_asc(CBYTE *asc_name,UBYTE flag,float shrink)
 						prim_faces3[next_prim_face3].TexturePage=0;
 
 					}
-					
+
 					// Guy
 //					prim_faces3[next_prim_face3].Col2	=	material_index;
-					
+
 					next_prim_face3++;
 					cno_faces--;
 				}
@@ -3467,15 +3467,15 @@ SLONG read_multi_asc(CBYTE *asc_name,UBYTE flag,float shrink)
 		fclose(handle);
 
 	/*
-		average_x=0;		
-		average_y=0;		
-		average_z=0;		
+		average_x=0;
+		average_y=0;
+		average_z=0;
 		for(current_point=start_point;current_point<=end_point;current_point++)
 		{
 			average_x+=prim_points[current_point].X;
 			average_y+=prim_points[current_point].Y;
 			average_z+=prim_points[current_point].Z;
-			
+
 		}
 		num_points=end_point-start_point;
 		num_points++;
@@ -3501,7 +3501,7 @@ SLONG read_multi_asc(CBYTE *asc_name,UBYTE flag,float shrink)
 		apply_ambient_light_to_object(c0,-12,-128,-40,256);
 		smooth_a_prim(c0);
 	}
-	return(object_count);		
+	return(object_count);
 }
 
 
@@ -3709,7 +3709,7 @@ SLONG	save_a_multi_prim(CBYTE	*name,SLONG multi)
 	handle	=	FileCreate(ext_name,1);
 	if(handle!=FILE_OPEN_ERROR)
 	{
-		
+
 		FileWrite(handle,(UBYTE*)&save_type,sizeof(save_type));
 
 		so=prim_multi_objects[multi].StartObject;
@@ -3725,7 +3725,7 @@ SLONG	save_a_multi_prim(CBYTE	*name,SLONG multi)
 		return(1);
 	}
 	return(0);
-	
+
 }
 
 
@@ -3734,7 +3734,7 @@ void	dump_face_info_for_prim(MFFileHandle handle,UWORD prim)
 {
 	SLONG			c0,sf,ef,point;
 	SLONG			count;
-	
+
 	sf=prim_objects[prim].StartFace4;
 	ef=prim_objects[prim].EndFace4;
 	count=ef-sf;
@@ -3786,7 +3786,7 @@ UWORD	change_fname_extension(CBYTE *name,CBYTE *ext)
 		}
 	}
 	return(0);
-	
+
 }
 
 void	export_tex(CBYTE *fname)
@@ -3819,7 +3819,7 @@ void	export_tex(CBYTE *fname)
 	}
 	FileClose(handle);
 
-	
+
 }
 
 #define	CLOSE(x,y)	(abs((x)-(y))<5)
@@ -3832,7 +3832,7 @@ SLONG	find_and_apply_to_quad(struct PrimPoint *pp,struct PrimFace4 *face4,SLONG 
 	SLONG			c0,sf,ef,point;
 	SLONG			count;
 	UWORD	prim;
-	
+
 	index=background_prim;
 	while(index)
 	{
@@ -3877,7 +3877,7 @@ SLONG	find_and_apply_to_tri(struct PrimPoint *pp,struct PrimFace3 *face3,SLONG g
 	SLONG			c0,sf,ef,point;
 	SLONG			count;
 	UWORD	prim;
-	
+
 	index=background_prim;
 	while(index)
 	{
@@ -3925,7 +3925,7 @@ SLONG	is_this_unique(SLONG *dx,SLONG *dy,SLONG *dz,SLONG dx2,SLONG dy2,SLONG dz2
 	SLONG	mx,my,mz,mx2,my2,mz2;
 	UWORD	prim;
 	SLONG rx,ry,rz;
-	
+
 	index=background_prim;
 	while(index)
 	{
@@ -3966,7 +3966,7 @@ SLONG	is_this_unique(SLONG *dx,SLONG *dy,SLONG *dz,SLONG dx2,SLONG dy2,SLONG dz2
 	return(unique);
 
 
-	
+
 }
 UWORD	find_unique_face_to_offset(CBYTE *fname,SLONG *x,SLONG *y,SLONG *z)
 {
@@ -3989,7 +3989,7 @@ UWORD	find_unique_face_to_offset(CBYTE *fname,SLONG *x,SLONG *y,SLONG *z)
 //		LogText(" fing unique save type=%d \n",save_type);
 		while(1)
 		{
-			
+
 			FileRead(handle,(UBYTE*)&count,sizeof(count));
 			if(count==-1)
 				break;
@@ -4055,7 +4055,7 @@ SLONG	sum_shared_brightness_flag(SWORD shared_point)
 
 	SLONG			sf,ef;
 	UWORD	prim;
-	
+
 	index=background_prim;
 	while(index)
 	{
@@ -4098,7 +4098,7 @@ SLONG	sum_shared_brightness_flag(SWORD shared_point)
 						count++;
 					}
 				}
-				
+
 			}
 		}
 		index=p_thing->IndexNext;
@@ -4160,7 +4160,7 @@ void	set_shared_brightness_flag(SWORD shared_point,SWORD bright)
 						prim_faces4[face].Bright[point]=bright;
 					}
 				}
-				
+
 			}
 		}
 		index=p_thing->IndexNext;
@@ -4213,7 +4213,7 @@ void	smooth_faces(void)
 					bright=sum_shared_brightness_flag(prim_faces4[face].Points[point]);
 					set_shared_brightness_flag(prim_faces4[face].Points[point],bright);
 				}
-				
+
 			}
 		}
 		index=p_thing->IndexNext;
@@ -4247,10 +4247,10 @@ void	import_tex(CBYTE *fname)
 	SLONG	save_type;
 	SLONG	gx=0,gy=0,gz=0;
 	SLONG	remap_quad=0,remap_tri=0;
-	
+
 	if(ShiftFlag)
 	{
-		
+
 		if(!find_unique_face_to_offset(fname,&gx,&gy,&gz))
 		{
 //			LogText(" could not find a unique face to offset\n");
@@ -4269,7 +4269,7 @@ void	import_tex(CBYTE *fname)
 //		LogText(" IMPORT TEX save type=%d \n",save_type);
 		while(1)
 		{
-			
+
 			FileRead(handle,(UBYTE*)&count,sizeof(count));
 			if(count==-1)
 				break;
@@ -4361,7 +4361,7 @@ void	import_tex(CBYTE *fname)
 
 void save_asc(UWORD building,UWORD version)
 {
-	
+
 //	struct	SingleTexture	*texture;
 //	struct	SingleFloorTexture	*texture4;
 
@@ -4443,7 +4443,7 @@ void save_asc(UWORD building,UWORD version)
 
 void save_prim_asc(UWORD prim,UWORD version)
 {
-	
+
 //	struct	SingleTexture	*texture;
 //	struct	SingleFloorTexture	*texture4;
 
@@ -4557,11 +4557,11 @@ SLONG save_prim_object(SLONG prim)
 	{
 		//
 		// Oh dear!
-		// 
+		//
 
 		return FALSE;
 	}
-	
+
 	//
 	// Does this prim have any walkable faces?
 	//

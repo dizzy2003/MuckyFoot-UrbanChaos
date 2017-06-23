@@ -92,7 +92,7 @@ void	new_engine(Camera *the_view);
 // After you have loaded all the prims, call this function. It
 // fixes the texture coordinates of the prims if the engine has
 // fiddled with the texture pages.
-// 
+//
 
 void engine_fiddle_prim_textures(void);
 
@@ -137,7 +137,7 @@ void  ENGINE_flip(void);
 SLONG ENGINE_lock(void);		// Locks the screen.. returns TRUE on success.
 void  ENGINE_unlock(void);
 
-#include "c:\fallen\ddengine\headers\font.h"
+#include "fallen/ddengine/headers/font.h"
 
 
 

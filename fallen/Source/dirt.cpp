@@ -17,7 +17,7 @@
 #include "pcom.h"
 #include "animate.h"
 #include "fmatrix.h"
-#include "c:\fallen\headers\night.h"
+#include "fallen/headers/night.h"
 #include "pyro.h"
 #include "poly.h"
 #include "psystem.h"
@@ -27,8 +27,8 @@
 #include "mav.h"
 
 #ifndef PSX
-#include    "C:\fallen\DDLibrary\headers\D3DTexture.h"
-#include    "C:\fallen\DDLibrary\headers\GDisplay.h"
+#include    "fallen/DDLibrary/headers/D3DTexture.h"
+#include    "fallen/DDLibrary/headers/GDisplay.h"
 #endif
 
 #define TICK_SHIFT_LOWRES	(TICK_SHIFT-2)
@@ -41,7 +41,7 @@ SLONG calc_angle(SLONG dx, SLONG dz);
 
 //
 // Where all the trees are.
-// 
+//
 
 typedef struct
 {
@@ -132,7 +132,7 @@ SLONG DIRT_focus_first;
 //
 // Uses the probabilites and the pigeon rectangle to decide
 // the type of the new bit of dirt at (x,z).
-// 
+//
 
 SLONG DIRT_get_new_type(SLONG x, SLONG z)
 {
@@ -227,7 +227,7 @@ void DIRT_init(
 
 	//
 	// Store the pigeon bounding box.
-	// 
+	//
 
 	DIRT_pigeon_map_x1 = pigeon_map_x1;
 	DIRT_pigeon_map_z1 = pigeon_map_z1;
@@ -239,7 +239,7 @@ void DIRT_init(
 	//
 
 	DIRT_tree_upto = 0;
-	
+
 	{
 		SLONG mx;
 		SLONG mz;
@@ -356,7 +356,7 @@ void DIRT_set_focus(
 		SBYTE dx;
 		SBYTE dz;
 
-	} order[8] = 
+	} order[8] =
 	{
 		{-1,-1},
 		{ 0,-1},
@@ -871,7 +871,7 @@ void DIRT_pigeon_init_hop(DIRT_Dirt *dd, UBYTE upordown)
 	dd->UU.Pidgeon.morph1   = MORPH_PIGEON_WALK1;	// Standing morph?
 	dd->UU.Pidgeon.morph2   = MORPH_PIGEON_WALK1;
 	dd->UU.Pidgeon.tween    = 10;
-	
+
 	switch(upordown)
 	{
 		case DIRT_PIGEON_HOPUP:	  dd->dy = 20 << TICK_SHIFT; break;
@@ -1033,7 +1033,7 @@ void DIRT_pigeon_process_walkrun(DIRT_Dirt *dd)
 		if ((PAP_2HI(mx1,mz1).Flags ^ PAP_2HI(mx2,mz2).Flags) & PAP_FLAG_SINK_SQUARE)
 		{
 			//
-			// About to go up or down the curb. 
+			// About to go up or down the curb.
 			//
 
 			DIRT_pigeon_init_hop(dd, (PAP_2HI(mx1,mz1).Flags & PAP_FLAG_SINK_SQUARE) ? DIRT_PIGEON_HOPUP : DIRT_PIGEON_HOPDOWN);
@@ -1078,7 +1078,7 @@ void DIRT_pigeon_process_hop(DIRT_Dirt *dd)
 		dd->UU.Pidgeon.morph2 = MORPH_PIGEON_WALK2;
 		dd->UU.Pidgeon.tween  = 0;
 	}
-} 
+}
 
 //
 // Chooses an initialises a new state for the given pigeon.
@@ -1281,13 +1281,13 @@ void DIRT_new_water(
 	}*/
 	dd->type=dirt_type;
 
-	dd->flag = 0;               
-	dd->x    = x;               
-	dd->y    = y;               
-	dd->z    = z;               
-	dd->dx   = dx;             
+	dd->flag = 0;
+	dd->x    = x;
+	dd->y    = y;
+	dd->z    = z;
+	dd->dx   = dx;
 	dd->dy   = dy << TICK_SHIFT_LOWRES;
-	dd->dz   = dz;             
+	dd->dz   = dz;
 	dd->dyaw = 0;
 
 	if (dd->type==DIRT_TYPE_SPARKS)
@@ -1336,7 +1336,7 @@ void DIRT_new_sparks(SLONG px, SLONG py, SLONG pz, UBYTE dir)
 			dy=(Random()&7)-3;
 			dz=(Random()&7)-3;
 			break;
-		case 2: // Y+ 
+		case 2: // Y+
 			dy=5+(Random()&3);
 			dx=(Random()&7)-3;
 			dz=(Random()&7)-3;
@@ -1438,7 +1438,7 @@ void DIRT_process(void)
 
 			if (dd->type==DIRT_TYPE_SNOW) // it fades over time
 			{
-				if (dd->UU.Leaf.fade>4) 
+				if (dd->UU.Leaf.fade>4)
 					dd->UU.Leaf.fade-=4;
 				else
 					dd->type=DIRT_TYPE_UNUSED;
@@ -1478,9 +1478,9 @@ void DIRT_process(void)
 						// The leaf has hit a wall... not touched the ground.
 						//
 
-						dd->x = oldx; 
+						dd->x = oldx;
 						dd->dx = -dd->dx;
-						dd->z = oldz; 
+						dd->z = oldz;
 						dd->dz = -dd->dz;
 					}
 					else
@@ -1613,7 +1613,7 @@ void DIRT_process(void)
 				if (dd->y<newy) {
 				  dd->y   = newy;
 				  if (dd->type != DIRT_TYPE_BRASS)
-					if (dd->dy<-8 << TICK_SHIFT) 
+					if (dd->dy<-8 << TICK_SHIFT)
 					{
 #ifdef	MIKE
 						ASSERT(0);
@@ -1711,7 +1711,7 @@ void DIRT_process(void)
 				{
 					//
 					// Stop the water going off the map.
-					// 
+					//
 
 					collided = TRUE;
 				}
@@ -1722,13 +1722,13 @@ void DIRT_process(void)
 					// The water has hit a wall... not touched the ground.
 					//
 
-					if ((oldx >> 8) != (dd->x >> 8)) 
+					if ((oldx >> 8) != (dd->x >> 8))
 					{
 						//
 						// Travel in the dx direction must be stopped
 						//
 
-						dd->x  =  oldx; 
+						dd->x  =  oldx;
 						dd->dx = -dd->dx >> 2;
 						//dd->dy =  SIN((i*97)&2047)>>(10-TICK_SHIFT_LOWRES);
 						dd->dz =  COS((i*97)&2047)>>10;
@@ -1740,7 +1740,7 @@ void DIRT_process(void)
 						// Travel in the dz direction must be stopped
 						//
 
-						dd->z  =  oldz; 
+						dd->z  =  oldz;
 						dd->dz = -dd->dz >> 2;
 						//dd->dy =  SIN((i*97)&2047)>>(10-TICK_SHIFT_LOWRES);
 						dd->dx =  COS((i*97)&2047)>>10;
@@ -1768,7 +1768,7 @@ void DIRT_process(void)
 					{
 						//
 						// Create a drip.
-						// 
+						//
 #ifndef PSX
 						if (dd->type!=DIRT_TYPE_BLOOD)
 						{
@@ -1798,7 +1798,7 @@ void DIRT_process(void)
 
 						//
 						// Create a drip.
-						// 
+						//
 #ifndef PSX
 						if (dd->type!=DIRT_TYPE_BLOOD)
 						{
@@ -1818,7 +1818,7 @@ void DIRT_process(void)
 
 			case DIRT_TYPE_HELDCAN:
 			case DIRT_TYPE_HELDHEAD:
-				
+
 				//
 				// Take values from the position of owner's right hand.
 				//
@@ -1887,7 +1887,7 @@ void DIRT_process(void)
 					if (dd->y < floor)
 					{
 						under = floor - dd->y;
-						
+
 						if (abs(dd->dy) > 8 << TICK_SHIFT)
 						{
 							//
@@ -1914,13 +1914,13 @@ void DIRT_process(void)
 							// Hit a building- but from which direction?
 							//
 
-							if ((oldx >> 8) != (dd->x >> 8)) 
+							if ((oldx >> 8) != (dd->x >> 8))
 							{
 								//
 								// Travel in the dx direction must be stopped
 								//
 
-								dd->x  =  oldx; 
+								dd->x  =  oldx;
 								dd->dx = -dd->dx >> 1;
 							}
 
@@ -1930,7 +1930,7 @@ void DIRT_process(void)
 								// Travel in the dz direction must be stopped
 								//
 
-								dd->z  =  oldz; 
+								dd->z  =  oldz;
 								dd->dz = -dd->dz >> 1;
 							}
 						}
@@ -2022,7 +2022,7 @@ void DIRT_gust(
 	SLONG dx;
 	SLONG dz;
 	SLONG dist;
-	
+
 	SLONG push;
 	SLONG pushx;
 	SLONG pushy;
@@ -2053,7 +2053,7 @@ void DIRT_gust(
 
 //	if (dist > (DIRT_focus_radius >> 1))
 	if (dist > (DIRT_focus_radius))
-	{	
+	{
 		return;
 	}
 
@@ -2068,7 +2068,7 @@ void DIRT_gust(
 	//
 	// Strength is radius around point1 in which dirt is effected.
 	//
-	
+
 	strength  = QDIST2(abs(dgx),abs(dgz));
 	strength += 1;
 	strength *= 8;
@@ -2145,7 +2145,7 @@ void DIRT_gust(
 						//
 						// Depending on the frame speed...
 						//
-						
+
 						pushx = pushx * TICK_INV_RATIO >> TICK_SHIFT;
 						pushy = pushy * TICK_INV_RATIO >> TICK_SHIFT;
 						pushz = pushz * TICK_INV_RATIO >> TICK_SHIFT;
@@ -2439,7 +2439,7 @@ SLONG DIRT_get_info(SLONG which,DIRT_Info *ans)
 			if (dd->type == DIRT_TYPE_URINE)
 			{
 				ans->type  = DIRT_INFO_TYPE_URINE;
-			} 
+			}
 
 			break;
 
@@ -2785,7 +2785,7 @@ SLONG DIRT_shoot(Thing *p_person)
 
 				dd->dy += (Random() & 0xf) << TICK_SHIFT;
 				dd->dy += 0xf << TICK_SHIFT;
-				
+
 				dd->dyaw  = Random() & 0x3f;
 				dd->dyaw += 0x7f;
 
@@ -2837,7 +2837,7 @@ void DIRT_behead_person(Thing *p_person, Thing *p_attacker)
 
 	SLONG best_dirt  = 0;
 	SLONG best_score = 0;
-	
+
 	DIRT_Dirt *dd;
 
 	//

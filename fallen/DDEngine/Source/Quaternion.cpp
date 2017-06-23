@@ -2,7 +2,7 @@
 
 #include	"game.h"
 #include	"Quaternion.h"
-#include	"c:\fallen\headers\fmatrix.h"
+#include	"fallen/headers/fmatrix.h"
 
 void	QUATERNION_BuildTweenInteger(struct Matrix33 *dest,struct CMatrix33 *cm1,struct CMatrix33 *cm2,SLONG tween);
 
@@ -26,7 +26,7 @@ void	QuatSlerp(CQuaternion *from, CQuaternion *to, float t, CQuaternion *res)
     if ( cosom <0.0 )
 	{
 		cosom = -cosom;
-		
+
 		to1[0] = - to->x;
 		to1[1] = - to->y;
 		to1[2] = - to->z;
@@ -52,8 +52,8 @@ void	QuatSlerp(CQuaternion *from, CQuaternion *to, float t, CQuaternion *res)
 
     }
 	else
-	{        
-	    // "from" and "to" quaternions are very close 
+	{
+	    // "from" and "to" quaternions are very close
 	    //  ... so we can do a linear interpolation
         scale0 = 1.0 - t;
         scale1 = t;
@@ -81,7 +81,7 @@ void	QuatMul(CQuaternion *q1, CQuaternion *q2, CQuaternion *res)
 	H = (q1->w - q1->y) * (q2->w + q2->z);
 
 	res->w =  B + (-E - F + G + H) / 2;
-	res->x =  A - ( E + F + G + H) / 2; 
+	res->x =  A - ( E + F + G + H) / 2;
 	res->y = -C + ( E - F + G - H) / 2;
 	res->z = -D + ( E - F - G + H) / 2;
 }
@@ -99,7 +99,7 @@ void	EulerToQuat(float roll, float pitch, float yaw, CQuaternion * quat)
 	sr = sin(roll/2);
 	sp = sin(pitch/2);
 	sy = sin(yaw/2);
-	
+
 	cpcy = cp * cy;
 	spsy = sp * sy;
 
@@ -115,20 +115,20 @@ void	QuatToMatrix(CQuaternion *quat, FloatMatrix *fm)
 	float wx, wy, wz, xx, yy, yz, xy, xz, zz, x2, y2, z2;
 
 	// calculate coefficients
-	x2 = quat->x + quat->x; y2 = quat->y + quat->y; 
+	x2 = quat->x + quat->x; y2 = quat->y + quat->y;
 	z2 = quat->z + quat->z;
 	xx = quat->x * x2;   xy = quat->x * y2;   xz = quat->x * z2;
 	yy = quat->y * y2;   yz = quat->y * z2;   zz = quat->z * z2;
 	wx = quat->w * x2;   wy = quat->w * y2;   wz = quat->w * z2;
 
 	fm->M[0][0] = 1.0 - (yy + zz); 		fm->M[1][0] = xy - wz;
-	fm->M[2][0] = xz + wy;				
+	fm->M[2][0] = xz + wy;
 
 	fm->M[0][1] = xy + wz;				fm->M[1][1] = 1.0 - (xx + zz);
-	fm->M[2][1] = yz - wx;				
+	fm->M[2][1] = yz - wx;
 
 	fm->M[0][2] = xz - wy;				fm->M[1][2] = yz + wx;
-	fm->M[2][2] = 1.0 - (xx + yy);		
+	fm->M[2][2] = 1.0 - (xx + yy);
 }
 
 //***************************************************************************************************
@@ -152,8 +152,8 @@ void	MatrixToQuat(FloatMatrix *fm, CQuaternion *quat)
 		quat->y = (fm->M[2][0] - fm->M[0][2]) * s;
 		quat->z = (fm->M[0][1] - fm->M[1][0]) * s;
 	}
-	else 
-	{		
+	else
+	{
 		// diagonal is negative
 		i = 0;
 		if (fm->M[1][1] > fm->M[0][0]) i = 1;
@@ -185,17 +185,17 @@ void	MatrixToQuat(FloatMatrix *fm, CQuaternion *quat)
 
 void	cmat_to_fmat(CMatrix33 *cm, FloatMatrix *fm)
 {
-	fm->M[0][0] = float(((cm->M[0] & CMAT0_MASK) >> 20)) / 512.f; 
-	fm->M[0][1] = float(((cm->M[0] & CMAT1_MASK) >> 10)) / 512.f; 
-	fm->M[0][2] = float(((cm->M[0] & CMAT2_MASK) >> 00)) / 512.f; 
+	fm->M[0][0] = float(((cm->M[0] & CMAT0_MASK) >> 20)) / 512.f;
+	fm->M[0][1] = float(((cm->M[0] & CMAT1_MASK) >> 10)) / 512.f;
+	fm->M[0][2] = float(((cm->M[0] & CMAT2_MASK) >> 00)) / 512.f;
 
-	fm->M[1][0] = float(((cm->M[1] & CMAT0_MASK) >> 20)) / 512.f; 
-	fm->M[1][1] = float(((cm->M[1] & CMAT1_MASK) >> 10)) / 512.f; 
-	fm->M[1][2] = float(((cm->M[1] & CMAT2_MASK) >> 00)) / 512.f; 
+	fm->M[1][0] = float(((cm->M[1] & CMAT0_MASK) >> 20)) / 512.f;
+	fm->M[1][1] = float(((cm->M[1] & CMAT1_MASK) >> 10)) / 512.f;
+	fm->M[1][2] = float(((cm->M[1] & CMAT2_MASK) >> 00)) / 512.f;
 
-	fm->M[2][0] = float(((cm->M[2] & CMAT0_MASK) >> 20)) / 512.f; 
-	fm->M[2][1] = float(((cm->M[2] & CMAT1_MASK) >> 10)) / 512.f; 
-	fm->M[2][2] = float(((cm->M[2] & CMAT2_MASK) >> 00)) / 512.f; 
+	fm->M[2][0] = float(((cm->M[2] & CMAT0_MASK) >> 20)) / 512.f;
+	fm->M[2][1] = float(((cm->M[2] & CMAT1_MASK) >> 10)) / 512.f;
+	fm->M[2][2] = float(((cm->M[2] & CMAT2_MASK) >> 00)) / 512.f;
 
 	// this is pretty damn shite.
 	if (fm->M[0][0] >= 1.f) fm->M[0][0] -= 2.f;
@@ -383,8 +383,8 @@ void	MatrixToQuatInteger(Matrix33 *m, QuatInt *quat)
 		quat->y = ((m->M[2][0] - m->M[0][2]) * s) >> 15;
 		quat->z = ((m->M[0][1] - m->M[1][0]) * s) >> 15;
 	}
-	else 
-	{		
+	else
+	{
 		// diagonal is negative
 		i = 0;
 		if (m->M[1][1] > m->M[0][0]) i = 1;
@@ -416,20 +416,20 @@ void	QuatToMatrixInteger(QuatInt *quat, Matrix33 *m)
 	SLONG wx, wy, wz, xx, yy, yz, xy, xz, zz, x2, y2, z2;
 
 	// calculate coefficients
-	x2 = quat->x + quat->x; y2 = quat->y + quat->y; 
+	x2 = quat->x + quat->x; y2 = quat->y + quat->y;
 	z2 = quat->z + quat->z;
 	xx = (quat->x * x2) >> 15;   xy = (quat->x * y2) >> 15;   xz = (quat->x * z2) >> 15;
 	yy = (quat->y * y2) >> 15;   yz = (quat->y * z2) >> 15;   zz = (quat->z * z2) >> 15;
 	wx = (quat->w * x2) >> 15;   wy = (quat->w * y2) >> 15;   wz = (quat->w * z2) >> 15;
 
 	m->M[0][0] = (1 << 15) - (yy + zz);		m->M[1][0] = xy - wz;
-	m->M[2][0] = xz + wy;				
+	m->M[2][0] = xz + wy;
 
 	m->M[0][1] = xy + wz;					m->M[1][1] = (1 << 15) - (xx + zz);
-	m->M[2][1] = yz - wx;				
+	m->M[2][1] = yz - wx;
 
 	m->M[0][2] = xz - wy;					m->M[1][2] = yz + wx;
-	m->M[2][2] = (1 << 15) - (xx + yy);		
+	m->M[2][2] = (1 << 15) - (xx + yy);
 }
 
 //***************************************************************************************************
@@ -471,7 +471,7 @@ void	QuatSlerpInteger(QuatInt *from, QuatInt *to, SLONG tween, QuatInt *res)
     if ( cosom < 0 )
 	{
 		cosom = -cosom;
-		
+
 		to1[0] = -to->x;
 		to1[1] = -to->y;
 		to1[2] = -to->z;
@@ -495,15 +495,15 @@ void	QuatSlerpInteger(QuatInt *from, QuatInt *to, SLONG tween, QuatInt *res)
 		ASSERT(cosom >= 0);
 		ASSERT(cosom <= 32768);
 		omega = acos_table[cosom / 32];
-		
+
 		sinom = SIN(omega);
 		scale0 = (SIN(((256 - tween) * omega) / 256) * 256) / sinom;
 		scale1 = (SIN(((tween      ) * omega) / 256) * 256) / sinom;
 
     }
 	else
-	{        
-	    // "from" and "to" quaternions are very close 
+	{
+	    // "from" and "to" quaternions are very close
 	    //  ... so we can do a linear interpolation
         scale0 = 256 - tween;
         scale1 = tween;

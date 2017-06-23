@@ -21,7 +21,7 @@
 
 #include	"cutscene.h"
 
-#include	"c:\fallen\editor\headers\anim.h"
+#include	"fallen/editor/headers/anim.h"
 #include	"poly.h"
 #include	"polypage.h"
 #include	"animate.h"
@@ -180,8 +180,8 @@ void CUTSCENE_chan_delete(CSData* cutscene, int chan) {
 	CUTSCENE_editchan_free(cutscene->editchannels[chan]);
 	// this only frees the resources allocated by the channel, not the channel itself :(
 	// yes, that sucks
-	CUTSCENE_chan_free(*buff); 
-	
+	CUTSCENE_chan_free(*buff);
+
 	// now free the channel itself (messy)
 	buff2 = buff = new CSChannel[ct];
 	if (chan>0) {
@@ -247,7 +247,7 @@ CSChannel* CUTSCENE_add_channel(CSData* data) {
 	data->channelcount++;
 	buff2->data=buff;
 	buff2->thing=0;
-	
+
 	return buff;
 }
 
@@ -409,14 +409,14 @@ void CUTSCENE_recreate(CSData* cutscene) {
 				strcpy(msg+1,PeopleStrings[chan->index-1]);
 			else
 				strcpy(msg+1,"Some Person");
-			if ((chan->index>0)&&(chan->index<=PERSON_NUM_TYPES)) 
+			if ((chan->index>0)&&(chan->index<=PERSON_NUM_TYPES))
 				who=chan->index-1;
 			else
 				who=-1;
 /*			switch(chan->index) {
 			  case 1: who=PERSON_DARCI; break;
 			  case 2: who=PERSON_ROPER; break;
-			  default: who=-1; 
+			  default: who=-1;
 			}*/
 			if (who>-1)
 				edit->thing=CUTSCENE_create_person(who,64<<8,0,64<<8);
@@ -440,7 +440,7 @@ void CUTSCENE_recreate(CSData* cutscene) {
 			strcpy(msg+1,"Loudspeaker");
 			timeline->Add(msg);
 			for(pktnum=0;pktnum<chan->packetcount;pkt++,pktnum++) {
-				timeline->MarkEntry(channum,pkt->start,1,4); 
+				timeline->MarkEntry(channum,pkt->start,1,4);
 			}
 			break;
 		case CT_TEXT:
@@ -448,11 +448,11 @@ void CUTSCENE_recreate(CSData* cutscene) {
 			strcpy(msg+1,"Subtitles");
 			timeline->Add(msg);
 			for(pktnum=0;pktnum<chan->packetcount;pkt++,pktnum++) {
-				timeline->MarkEntry(channum,pkt->start,pkt->length,4); 
+				timeline->MarkEntry(channum,pkt->start,pkt->length,4);
 			}
 			break;
 		case CT_FX:
-			msg[0]=(CBYTE)0xff;	
+			msg[0]=(CBYTE)0xff;
 			strcpy(msg+1,"FX");
 			timeline->Add(msg);
 			break;
@@ -465,10 +465,10 @@ void CUTSCENE_recreate(CSData* cutscene) {
 		chan++;
 		edit++;
 	}
-			
+
 	timeline->SetReadHead(0);
 	timeline->Repaint();
-  
+
 }
 
 void CUTSCENE_remove(CSData* cutscene) {
@@ -604,7 +604,7 @@ int ScanWavs(TreeBrowser *browser, CBYTE *path, BOOL subdirs, HTREEITEM parent, 
 			added=ScanWavs(browser,path2,true,0,indent+1,param,img,imgfld,combo);
 			// param+=added;
 			count+=added;
-		} 
+		}
 		res=FindNextFile(handle,&data);
 	}
 	FindClose(handle);
@@ -651,7 +651,7 @@ VOID CALLBACK tf(HWND hWnd, UINT message, UINT idEvent, DWORD dwTime) {
 //	PostMessage(hWnd, WM_USER, 0, 0);
 	// evil. eeee ville!
 	PostMessage(hWnd, WM_ENTERIDLE, 0, 0);
-} 
+}
 */
 
 //---------------------------------------------------------------
@@ -694,7 +694,7 @@ void	LoadAnim(MFFileHandle file_handle, TreeBrowser *browser, SLONG num)
 	SWORD			wdummy;
 	CBYTE			version=0;
 	SLONG			ldummy;
-	
+
 
 	FileRead(file_handle,&version,1);
 
@@ -763,7 +763,7 @@ SLONG	LoadAllAnimNames(CBYTE *fname, TreeBrowser *browser, SLONG base_ctr)
 			FileRead(file_handle,&anim_count,sizeof(anim_count));
 
 			SkipBodyPartInfo(file_handle);
-			
+
 		}
 
 		for(c0=0;c0<anim_count;c0++)
@@ -954,7 +954,7 @@ void LERPAnim(CSChannel *chan, Thing *person, int cell) {
 			smoothin=(mult-256)*2;
 			smoothin=256+(SIN(smoothin&2047)>>8);
 			smoothout=SIN(mult*2)>>8;
-		}		
+		}
 
 		// motion:
 		if (pktA->flags&PF_INTERPOLATE_MOVE) {
@@ -994,7 +994,7 @@ void LERPAnim(CSChannel *chan, Thing *person, int cell) {
 			y=pktA->pos.Y;
 			z=pktA->pos.Z;
 		}
-		
+
 		// er... later.
 
 		// rotation:
@@ -1061,7 +1061,7 @@ void LERPCamera(CSChannel *chan, int cell) {
 		smoothin=256+(SIN(smoothin&2047)>>8);
 		smoothout=SIN(mult*2)>>8;
 	}
-	
+
 	if (pktA->flags&PF_INTERPOLATE_MOVE) {
 		if ((pktA->flags&PF_SMOOTH_MOVE_BOTH)==PF_SMOOTH_MOVE_BOTH) {
 			x=pktA->pos.X+(((pktB->pos.X-pktA->pos.X)*smoothmult)/256);
@@ -1147,7 +1147,7 @@ void SnapAnimation() {
 	posA.X+=pktA->pos.X; posA.Y+=pktA->pos.Y; posA.Z+=pktA->pos.Z;
 
 	// posA now abs-world-coord pos of foot
-		
+
 	LERPAnim(chan, edit->thing, cell);
 
 	calc_sub_objects_position(
@@ -1161,7 +1161,7 @@ void SnapAnimation() {
 	current_packet->pos.Z=posA.Z-posB.Z;
 	move_thing_on_map(edit->thing,&current_packet->pos);
 
-	
+
 	/*
 		track_x<<=8;
 		track_y<<=8;
@@ -1176,7 +1176,7 @@ void SnapAnimation() {
 void DoEraseChan(int channum) {
 	CBYTE msg[255],buf[255];
 	timeline->GetText(channum,buf);
-	
+
 	sprintf(msg,"Are you sure you want to permanently delete this %s track?",buf);
 	if (MessageBox(CUTSCENE_edit_wnd,msg,"Confirm: Delete Track",MB_ICONEXCLAMATION|MB_OKCANCEL)==IDOK) {
 		CUTSCENE_chan_delete(cutscene,channum);
@@ -1225,7 +1225,7 @@ void DoErase(int do_row=-1, int do_cell=-1) {
 		timeline->SetReadHead(packx);
 	}
 */
-	
+
 }
 
 void DoHandleShit() {
@@ -1331,7 +1331,7 @@ BOOL browserCB(TreeBrowser *tb, int reason, int index, HTREEITEM item, char *str
 	CSChannel *chan;
 	CSEditChannel *echan;
 	SLONG x,y,z,who;
-	
+
 	switch (reason) {
 	case TBCB_DBLCLK:
 		char msg[800];
@@ -1346,8 +1346,8 @@ BOOL browserCB(TreeBrowser *tb, int reason, int index, HTREEITEM item, char *str
 /*			x=cam_focus_x; z=cam_focus_z;
 			y=PAP_calc_map_height_at(x,z);*/
 			switch(image) {
-			case IM_SCENE_PERSON:  
-				chan->type=CT_CHAR; 
+			case IM_SCENE_PERSON:
+				chan->type=CT_CHAR;
 				chan->index=index;
 				if ((index>0)&&(index<=PERSON_NUM_TYPES))
 					who=index-1;
@@ -1356,7 +1356,7 @@ BOOL browserCB(TreeBrowser *tb, int reason, int index, HTREEITEM item, char *str
 /*				switch(index) {
 				case 1: who=PERSON_DARCI; break;
 				case 2: who=PERSON_ROPER; break;
-				default: who=-1; 
+				default: who=-1;
 				}*/
 				if (who>-1) echan->thing=CUTSCENE_create_person(who,x,y,z);
 				break;
@@ -1461,10 +1461,10 @@ BOOL timelineCB(TimeLine *tb, int reason, int index, int subline, int cell) {
 	switch(reason) {
 /*	case TLCB_GETBARINFO:
 		chan=&cutscene->Channels[index];
-		
+
 		break;*/
 	case TLCB_SELECT:
-		for (channum=0;channum<cutscene->channelcount;channum++) 
+		for (channum=0;channum<cutscene->channelcount;channum++)
 			if (channum!=index) // we need to update the 3d display, but not the property window
 			{
 				chan=cutscene->channels+channum;
@@ -1640,7 +1640,7 @@ BOOL propeditCB(PropertyEditor *tb, int reason, int index, CBYTE *value) {
 				if (index==2) SnapAnimation();
 				break;
 			case PT_WAVE:
-				if (index==2) 
+				if (index==2)
 					//MFX_play_stereo(MUSIC_REF,current_packet->index-2048,0);
 					MFX_play_xyz(MUSIC_REF,current_packet->index-2048,0,cam_x<<8,cam_y<<8,cam_z<<8);
 				break;
@@ -1717,7 +1717,7 @@ LRESULT	CALLBACK	scene_map_view_proc	(
 						dragitem->Draw.Tweened->Angle=angle;
 
 					if (current_packet) current_packet->angle=angle;
-					
+
 					//dir>>=3;
 					break;
 				}
@@ -1751,7 +1751,7 @@ BOOL	CALLBACK	cuts_proc(HWND hWnd,UINT message,WPARAM wParam,LPARAM lParam)
 		case	WM_INITDIALOG:
 
 			CUTSCENE_edit_wnd=hWnd;
-			
+
 			the_ctrl = GetDlgItem(hWnd,IDC_LIST1);
 //			InitCols(the_ctrl);
 			pedit = new PropertyEditor(the_ctrl);
@@ -1767,7 +1767,7 @@ BOOL	CALLBACK	cuts_proc(HWND hWnd,UINT message,WPARAM wParam,LPARAM lParam)
 //			timer = SetTimer(hWnd,NULL,40,tf);
 
 			timeline = new TimeLine(
-				GetDlgItem(hWnd,IDC_LIST2), 
+				GetDlgItem(hWnd,IDC_LIST2),
 				ruler = new TimeLineRuler(GetDlgItem(hWnd,IDC_BUTTON1)),
 				scroll= new TimeLineScroll(GetDlgItem(hWnd,IDC_SCROLLBAR1))
 			);

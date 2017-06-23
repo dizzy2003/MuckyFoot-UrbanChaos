@@ -3,7 +3,7 @@
 
 
 #include	"Editor.hpp"
-#include	"c:\fallen\headers\memory.h"
+#include	"fallen/headers/memory.h"
 
 #define	CONTROLS_HEIGHT			400
 #define	CONTROLS_WIDTH			200
@@ -34,7 +34,7 @@ void	update_key_frames(void);
 
 KeyFrameEditor2::~KeyFrameEditor2()
 {
-	
+
 }
 
 //---------------------------------------------------------------
@@ -318,7 +318,7 @@ SLONG				c1,
 					sp,ep;
 struct PrimObject	*p_obj;
 
-					
+
 					for(c0=prim_multi_objects[test_chunk2.MultiObject].StartObject;c0<=prim_multi_objects[test_chunk2.MultiObject].EndObject;c0++)
 					{
 						p_obj   =	&prim_objects[c0];
@@ -332,7 +332,7 @@ struct PrimObject	*p_obj;
 							prim_points[c1].Z	-=	z_centre;
 						}
 					}
-				}				
+				}
 				load_multi_vue(&test_chunk2);
 				((CHSlider*)KeyFramesControls.GetControlPtr(CTRL_KF_FRAME_SLIDER))->SetValueRange(0,key_frame_count-(KEY_FRAME_COUNT-1));
 /*
@@ -456,7 +456,7 @@ void	KeyFrameEditor2::DrawKeyFrame(UWORD multi_object,EdRect *bounds_rect,struct
 
 	set_camera();
 //	set_camera_to_base();
-	
+
 
 //md	LogText(" width %d height %d \n",width,height);
 	test_draw_all_get_sizes(test_chunk2.MultiObject,the_frame,0,0,0,0,r_matrix,&width,&height,&mid_x,&mid_y);

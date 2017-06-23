@@ -8,7 +8,7 @@
 #ifndef _MFX_MILES_H_
 #define _MFX_MILES_H_
 
-#include "c:\fallen\miles\mss.h" // i tried changing the project settings but it didn't care
+#include "fallen/miles/mss.h" // i tried changing the project settings but it didn't care
 
 // MFX_Sample
 //

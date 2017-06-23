@@ -12,11 +12,11 @@
 #include "dirt.h"
 #include "thing.h"
 #include "pow.h"
-#include "c:\fallen\headers\music.h"
+#include "fallen/headers/music.h"
 #ifndef	PSX
 #include "font2d.h"
-#include "C:\fallen\DDEngine\Headers\console.h"
-#include "C:\fallen\DDEngine\Headers\map.h"
+#include "fallen/DDEngine/Headers/console.h"
+#include "fallen/DDEngine/Headers/map.h"
 #endif
 #include "chopper.h"
 #include "animal.h"
@@ -28,9 +28,9 @@
 #include "sound.h"
 #include "statedef.h"
 #include "wmove.h"
-#ifdef		PSX 
-#include "c:\fallen\psxeng\headers\psxeng.h"
-#include "c:\fallen\psxeng\headers\panel.h"
+#ifdef		PSX
+#include "fallen/psxeng/headers/psxeng.h"
+#include "fallen/psxeng/headers/panel.h"
 #else
 #include "aeng.h"
 #include "panel.h"
@@ -50,7 +50,7 @@
 #include "xlat_str.h"
 #include "mist.h"
 #include "gamemenu.h"
-#include	"c:\fallen\headers\env.h"
+#include	"fallen/headers/env.h"
 
 
 #ifdef TARGET_DC
@@ -110,7 +110,7 @@ static void ScribbleCheck ( void )
 //
 
 #ifdef	PSX
-//#define	ASSERT(x)	
+//#define	ASSERT(x)
 extern	char *PANEL_wide_cont;
 extern  char PANEL_wide_text[];
 
@@ -141,7 +141,7 @@ SLONG EWAY_mess_upto;
 
 //
 // The time.
-// 
+//
 
 SLONG EWAY_time_accurate;	 // 1600 ticks per second
 SLONG EWAY_time;			 // 100  ticks per second
@@ -151,7 +151,7 @@ UBYTE EWAY_count_up_visible; // Onscreen at the moment.
 
 //
 // The penalties incurred for the count-up timer.
-// 
+//
 
 UBYTE EWAY_count_up_add_penalties;
 SWORD EWAY_count_up_num_penalties;
@@ -200,7 +200,7 @@ UBYTE EWAY_darci_move;
 // If non-NULL then this is the person who say any message!
 //
 
-UWORD EWAY_used_thing;	
+UWORD EWAY_used_thing;
 
 //
 // The cut-scene camera.
@@ -267,7 +267,7 @@ void	get_level_word(CBYTE *str)
 	SLONG	c0=0,c1=0;
 
 
-	
+
 	while(ELEV_fname_level[c0]!='\\' && c0<101)
 	{
 		c0++;
@@ -286,13 +286,13 @@ void	get_level_word(CBYTE *str)
 SLONG	playing_combat_tutorial(void)
 {
 #ifdef VERSION_DEMO
-//	return 0;	
+//	return 0;
 #endif
 
  	SLONG	c0=0,c1=0;
 //	if(save_psx)
 //		return(0);
-	
+
 //	ASSERT(0);
 	while(ELEV_fname_level[c0]!='\\' && c0<101)
 	{
@@ -328,7 +328,7 @@ SLONG	playing_level(const CBYTE *name)
 {
  	SLONG	c0=0,c1=0;
 #ifdef VERSION_DEMO
-//	return 0;	
+//	return 0;
 #endif
 
 
@@ -340,7 +340,7 @@ SLONG	playing_level(const CBYTE *name)
 
 //	if(save_psx)
 //		return(0);
-	
+
 //	ASSERT(0);
 	while(ELEV_fname_level[c0]!='\\' && c0<101)
 	{
@@ -384,7 +384,7 @@ SLONG	playing_real_mission(void)
 
 
  	SLONG	c0=0,c1=0;
-	
+
 	while(ELEV_fname_level[c0]!='\\' && c0<101)
 	{
 		c0++;
@@ -570,7 +570,7 @@ ANNOYINGSCRIBBLECHECK;
 
 	//
 	// Clear all the waypoints.
-	// 
+	//
 	talk_thing=0;
 
 	memset((UBYTE*)EWAY_way, 0, sizeof(EWAY_Way)*EWAY_MAX_WAYS);
@@ -644,7 +644,7 @@ UWORD EWAY_create_player(
 
 	//
 	// Make sure we haven't got too many players.
-	// 
+	//
 
 	ASSERT(WITHIN(NO_PLAYERS, 0, 1));
 
@@ -675,7 +675,7 @@ UWORD EWAY_create_player(
 			break;
 
 		case PLAYER_ROPER:
-			
+
 			p_index = PCOM_create_player(
 						PLAYER_ROPER,
 						has,
@@ -700,8 +700,8 @@ UWORD EWAY_create_player(
 
 			break;
 
-		case PLAYER_COP: 
-			
+		case PLAYER_COP:
+
 			p_index = PCOM_create_player(
 						PLAYER_COP,
 						has,
@@ -716,7 +716,7 @@ UWORD EWAY_create_player(
 			break;
 
 		case PLAYER_THUG:
-			
+
 			p_index = PCOM_create_player(
 						PLAYER_THUG,
 						has,
@@ -743,7 +743,7 @@ UWORD EWAY_create_player(
 
 //
 // Creates an enemy.
-// 
+//
 
 UWORD EWAY_create_enemy(
 		UBYTE subtype,
@@ -773,9 +773,9 @@ ANNOYINGSCRIBBLECHECK;
 
 	if (zone & (1 << 4)) {f2 |= FLAG2_PERSON_INVULNERABLE;}
 	if (zone & (1 << 5)) {f2 |= FLAG2_PERSON_GUILTY;      }
-	if (zone & (1 << 6)) 
+	if (zone & (1 << 6))
 	{
-		f2 |= FLAG2_PERSON_FAKE_WANDER; 
+		f2 |= FLAG2_PERSON_FAKE_WANDER;
 	}
 
 //	group_count[group]++;
@@ -899,7 +899,7 @@ ANNOYINGSCRIBBLECHECK;
 		//
 		// Don't create specials under ground...
 		//
-		
+
 		SLONG ground = PAP_calc_map_height_at(world_x, world_z);
 
 		if (world_y < ground + 0x40 && world_y > ground - 0xc0)
@@ -1050,7 +1050,7 @@ ANNOYINGSCRIBBLECHECK;
 			break;
 
 		case EWAY_SUBTYPE_VEHICLE_POLICE:
-			
+
 			p_index = VEH_create(
 						world_x         << 8,
 						world_y + 0x100 << 8,	// Add a mapsquare to make it fall to the ground.
@@ -1066,7 +1066,7 @@ ANNOYINGSCRIBBLECHECK;
 			break;
 
 		case EWAY_SUBTYPE_VEHICLE_AMBULANCE:
-			
+
 			p_index = VEH_create(
 						world_x         << 8,
 						world_y + 0x100 << 8,	// Add a mapsquare to make it fall to the ground.
@@ -1082,7 +1082,7 @@ ANNOYINGSCRIBBLECHECK;
 			break;
 
 		case EWAY_SUBTYPE_VEHICLE_JEEP:
-			
+
 			p_index = VEH_create(
 						world_x         << 8,
 						world_y + 0x100 << 8,	// Add a mapsquare to make it fall to the ground.
@@ -1098,7 +1098,7 @@ ANNOYINGSCRIBBLECHECK;
 			break;
 
 		case EWAY_SUBTYPE_VEHICLE_MEATWAGON:
-			
+
 			p_index = VEH_create(
 						world_x         << 8,
 						world_y + 0x100 << 8,	// Add a mapsquare to make it fall to the ground.
@@ -1236,7 +1236,7 @@ EWAY_Cond EWAY_create_cond(
 
 					//
 					// The direction the prim is facing.
-					// 
+					//
 
 					FMATRIX_vector(
 						vector,
@@ -1253,7 +1253,7 @@ EWAY_Cond EWAY_create_cond(
 
 					//
 					// The end coordinate of the tripwire.
-					// 
+					//
 
 					x2 = x1 - MUL64(vector[0], 0x500);
 					y2 = y1;
@@ -1275,7 +1275,7 @@ EWAY_Cond EWAY_create_cond(
 
 					//
 					// Create the tripwire.
-					// 
+					//
 
 					ans.arg1 = TRIP_create(
 										y1,
@@ -1372,7 +1372,7 @@ EWAY_Cond EWAY_create_cond(
 			break;
 
 		case EWAY_COND_RADIUS_USED:
-			
+
 			//
 			// Is there a nearby switch or valve OB?
 			//
@@ -1392,7 +1392,7 @@ EWAY_Cond EWAY_create_cond(
 			{
 				//
 				// Convert to a EWAY_COND_PRIM_ACTIVATED...
-				// 
+				//
 
 				ans.type = EWAY_COND_PRIM_ACTIVATED;
 				ans.arg1 = ob_index;
@@ -1675,7 +1675,7 @@ SLONG EWAY_set_message(
 	//
 
 	if (message[len - 1] != '\000')
-	{	
+	{
 		message[len - 1] = '\000';
 #ifndef	FINAL
 #ifndef	PSX
@@ -1786,7 +1786,7 @@ void EWAY_fix_cond(EWAY_Cond *ec)
 				ASSERT(WITHIN(ew->index, 1, EWAY_edef_upto - 1));
 
 				ee = &EWAY_edef[ew->index];
-				
+
 				ec->arg1 = ee->drop;
 			}
 		}
@@ -1794,7 +1794,7 @@ void EWAY_fix_cond(EWAY_Cond *ec)
 	else
 	if (ec->type == EWAY_COND_A_SEE_B ||
 		ec->type == EWAY_COND_PERSON_IN_VEHICLE)
-	{	
+	{
 		//
 		// Two ids.
 		//
@@ -1939,7 +1939,7 @@ SLONG EWAY_load_message_file(CBYTE *fname, UWORD *index, UWORD *number)
 
 				//
 				// Get rid of white space at the end of the message.
-				// 
+				//
 
 				while(*ch) ch++;
 				for (; isspace(*--ch); *ch = '\000');
@@ -2207,7 +2207,7 @@ void EWAY_created_last_waypoint()
 
 		if (ed->type    == EWAY_DO_CAMERA_TARGET &&
 			ed->subtype == EWAY_SUBTYPE_CAMERA_TARGET_THING)
-		{	
+		{
 			//
 			// Look for the nearest CREATE_* waypoint and attach to it.
 			//
@@ -2268,7 +2268,7 @@ void EWAY_created_last_waypoint()
 		{
 			points = ew->ed.arg2;
 
-			switch (ew->ed.subtype) 
+			switch (ew->ed.subtype)
 			{
 				case EWAY_SUBTYPE_OBJECTIVE_MAIN:
 
@@ -2336,7 +2336,7 @@ void EWAY_created_last_waypoint()
 	//
 	// Reset the tutorial string.
 	//
-	
+
 	EWAY_tutorial_string = NULL;
 
 	//
@@ -2353,9 +2353,9 @@ void EWAY_created_last_waypoint()
 		// 4 percent per guilty person... but no more than 50% of the
 		// original CRIME_RATE is allocated to guilty people.
 		//
-		
-		SLONG for_guilty = num_guilty_people * 4;	
-		
+
+		SLONG for_guilty = num_guilty_people * 4;
+
 		SATURATE(for_guilty, 0, CRIME_RATE >> 1);
 
 		CRIME_RATE_SCORE_MUL = ((CRIME_RATE - for_guilty) << 8) / total_points;
@@ -2458,7 +2458,7 @@ ANNOYINGSCRIBBLECHECK;
 			ans = FALSE;
 			break;
 
-		case EWAY_COND_TRUE: 
+		case EWAY_COND_TRUE:
 			ans = TRUE;
 			break;
 
@@ -2534,7 +2534,7 @@ ANNOYINGSCRIBBLECHECK;
 			break;
 
 		case EWAY_COND_BOOL_AND:
-			
+
 			{
 				EWAY_Cond *ec1 = &EWAY_cond[ec->arg1];
 				EWAY_Cond *ec2 = &EWAY_cond[ec->arg2];
@@ -2599,7 +2599,7 @@ ANNOYINGSCRIBBLECHECK;
 							ec->arg2 -= EWAY_tick*2;
 							ans		= FALSE;
 						}
-	#endif			
+	#endif
 					}
 
 					if (ec->type == EWAY_COND_COUNTDOWN_SEE)
@@ -2611,7 +2611,7 @@ ANNOYINGSCRIBBLECHECK;
 							else // maybe we were below 30 seconds but time got added
 //								if (MUSIC_wave()==S_TUNE_TIMER1) MUSIC_stop(1);
 							{
-								if (music_mode_override) 
+								if (music_mode_override)
 								{
 									// this is a little awkward but override must be cleared before the call or it fails
 									music_mode_override = 0;
@@ -2702,12 +2702,12 @@ ANNOYINGSCRIBBLECHECK;
 							break;
 
 						case EWAY_DO_CREATE_BARREL:
-							
+
 							{
 								ans = FALSE;
 
 								if (ew_dead->flag & EWAY_FLAG_ACTIVE)
-								{	
+								{
 									if (ew_dead->ed.arg1 == NULL)
 									{
 										//
@@ -2741,7 +2741,7 @@ ANNOYINGSCRIBBLECHECK;
 			break;
 
 		case EWAY_COND_PERSON_NEAR:
-			
+
 			{
 				Thing *p_person;
 
@@ -2805,7 +2805,7 @@ ANNOYINGSCRIBBLECHECK;
 			break;
 
 		case EWAY_COND_PLAYER_CUBE:
-			
+
 			{
 				Thing *darci = NET_PERSON(0);
 
@@ -2881,7 +2881,7 @@ ANNOYINGSCRIBBLECHECK;
 //					global_write=i;
 
 					//
-					// On Simons, request. This only checks for people in the 
+					// On Simons, request. This only checks for people in the
 					// same colour. It ignores their group.
 					//
 
@@ -2898,7 +2898,7 @@ ANNOYINGSCRIBBLECHECK;
 								extern SLONG is_person_dead(Thing *p_person);
 
 								if (!is_person_dead(TO_THING(ew2->ed.arg1)))
-								{	
+								{
 									//
 									// Found someone alive.
 									//
@@ -3027,7 +3027,7 @@ ANNOYINGSCRIBBLECHECK;
 				}
 
 				//
-				// Always return FALSE, this waypoint will be set active in 
+				// Always return FALSE, this waypoint will be set active in
 				// do_an_action() in interfac.cpp.
 				//
 
@@ -3039,7 +3039,7 @@ ANNOYINGSCRIBBLECHECK;
 		case EWAY_COND_PRIM_DAMAGED:
 
 			ans = FALSE;
-			
+
 			if (ec->arg1)
 			{
 				ASSERT(WITHIN(ec->arg1, 1, OB_ob_upto - 1));
@@ -3055,7 +3055,7 @@ ANNOYINGSCRIBBLECHECK;
 		case EWAY_COND_CONVERSE_END:
 
 			ASSERT(WITHIN(ec->arg1, 1, EWAY_way_upto - 1));
-			
+
 			ans = FALSE;
 
 			if (EWAY_way[ec->arg1].flag & EWAY_FLAG_FINISHED)
@@ -3066,7 +3066,7 @@ ANNOYINGSCRIBBLECHECK;
 			break;
 
 		case EWAY_COND_COUNTER_GTEQ:
-			
+
 			ASSERT(WITHIN(ec->arg1, 0, EWAY_MAX_COUNTERS - 1));
 
 			ans = FALSE;
@@ -3136,7 +3136,7 @@ extern	UBYTE	is_semtex;
 
 				SLONG x2;
 				SLONG z2;
-				
+
 				SLONG dx = ec->arg1;
 				SLONG dz = ec->arg2;
 
@@ -3299,7 +3299,7 @@ extern	UBYTE	is_semtex;
 							}
 						}
 						else
-						{	
+						{
 							ans = TRUE;
 						}
 					}
@@ -3310,7 +3310,7 @@ extern	UBYTE	is_semtex;
 
 		case EWAY_COND_THING_RADIUS_DIR:
 		case EWAY_COND_MOVE_RADIUS_DIR:
-			
+
 			ans = FALSE;
 
 			{
@@ -3516,7 +3516,7 @@ extern	UBYTE	is_semtex;
 		case EWAY_COND_PUNCHED_AND_KICKED:
 
 			ans = FALSE;
-			
+
 			if (ec->arg1 == NULL)
 			{
 				#ifndef NDEBUG
@@ -3539,7 +3539,7 @@ extern	UBYTE	is_semtex;
 
 							EWAY_darci_move &= ~EWAY_DARCI_MOVE_PUNCH;
 						}
-						
+
 						if (EWAY_darci_move & EWAY_DARCI_MOVE_KICK)
 						{
 							ec->arg2 += 0x100;
@@ -3608,7 +3608,7 @@ ANNOYINGSCRIBBLECHECK;
 	{
 		//
 		// If there is a voice playing, then delay the message triggering.
-		// 
+		//
 
 		if (!WITHIN(ew->ed.arg1, 0, EWAY_MAX_MESSES - 1))
 		{
@@ -3809,7 +3809,7 @@ ANNOYINGSCRIBBLECHECK;
 
 	EWAY_Way *ew;
 	EWAY_Way *ew_target;
-	
+
 	ew = &EWAY_way[waypoint];
 
 	EWAY_cam_active         = TRUE;
@@ -3940,7 +3940,7 @@ ANNOYINGSCRIBBLECHECK;
 			{
 				if (p_thing->SubState == SUB_STATE_SIMPLE_ANIM ||
 					p_thing->SubState == SUB_STATE_SIMPLE_ANIM_OVER)
-					
+
 				{
 					target_stationary = TRUE;
 				}
@@ -4018,7 +4018,7 @@ ANNOYINGSCRIBBLECHECK;
 							{
 								if (p_thing->SubState == SUB_STATE_SIMPLE_ANIM ||
 									p_thing->SubState == SUB_STATE_SIMPLE_ANIM_OVER)
-									
+
 								{
 									target_stationary = TRUE;
 								}
@@ -4030,7 +4030,7 @@ ANNOYINGSCRIBBLECHECK;
 				break;
 
 			case EWAY_SUBTYPE_CAMERA_TARGET_NEAR:
-				
+
 				//
 				// Search around for the nearest living thing.
 				//
@@ -4063,7 +4063,7 @@ ANNOYINGSCRIBBLECHECK;
 							{
 								if (p_look->SubState == SUB_STATE_SIMPLE_ANIM ||
 									p_look->SubState == SUB_STATE_SIMPLE_ANIM_OVER)
-									
+
 								{
 									target_stationary = TRUE;
 								}
@@ -4115,7 +4115,7 @@ ANNOYINGSCRIBBLECHECK;
 		{
 			if (!EWAY_cam_cant_interrupt && EWAY_cam_skip <= 0)
 			{
-				if (!EWAY_conv_ambient)			 
+				if (!EWAY_conv_ambient)
 				if (NET_PLAYER(0)->Genus.Player->Pressed & (INPUT_MASK_JUMP | INPUT_MASK_KICK | INPUT_MASK_ACTION | INPUT_MASK_PUNCH))
 				{
 #ifndef PSX
@@ -4126,7 +4126,7 @@ ANNOYINGSCRIBBLECHECK;
 						strcpy(PANEL_wide_text,PANEL_wide_cont);
 						PANEL_wide_cont=0;
 						goto skip_camera;
-					} 
+					}
 					else
 					{
 						MFX_QUICK_stop();
@@ -4225,7 +4225,7 @@ skip_camera:;
 				{
 					//
 					// Just stay here...
-					//	
+					//
 				}
 				else
 				{
@@ -4273,7 +4273,7 @@ skip_camera:;
 
 						//
 						// Make the camera look at Darci properly.
-						// 
+						//
 	#ifdef OLD_CAM
 						CAM_look_at_thing(FALSE);
 	#endif
@@ -4363,7 +4363,7 @@ ANNOYINGSCRIBBLECHECK;
 	//
 	// Look at the right part of the thing.
 	//
-						
+
 	EWAY_cam_want_yaw    = -Arctan(dx,dz);
 	EWAY_cam_want_pitch  =  Arctan(dy,dxz);
 
@@ -4505,7 +4505,7 @@ ANNOYINGSCRIBBLECHECK;
 
 //
 // Finishes a conversation.
-// 
+//
 
 void EWAY_finish_conversation(void)
 {
@@ -4652,7 +4652,7 @@ ANNOYINGSCRIBBLECHECK;
 
 		    ch[0]          = '\000';
 		}
-		
+
 		EWAY_conv_skip = 50;
 
 #if 0
@@ -4763,7 +4763,7 @@ ANNOYINGSCRIBBLECHECK;
 		{
 			case EWAY_SUBTYPE_STEAM_FORWARD:
 				dx = -SIN(ew->yaw << 3) * range >> 8;
-				dy = 0;                         
+				dy = 0;
 				dz = -COS(ew->yaw << 3) * range >> 8;
 				break;
 
@@ -4787,7 +4787,7 @@ ANNOYINGSCRIBBLECHECK;
 		dx += (Random() & 0xff) - 0x7f;
 		dy += (Random() & 0xff) - 0x7f;
 		dz += (Random() & 0xff) - 0x7f;
-	
+
 		PARTICLE_Add(
 			ew->x + (Random() & 0x7) - 0x3 << 8,
 			ew->y + (Random() & 0x7) - 0x3 << 8,
@@ -4897,7 +4897,7 @@ ANNOYINGSCRIBBLECHECK;
 				(ew->ec.type==EWAY_COND_PERSON_DEAD)||
 				(ew->ec.type==EWAY_COND_HALF_DEAD)||
 				(ew->ec.type=EWAY_COND_PERSON_USED)
-				) 
+				)
 			   )
 			{
 				ASSERT(ew->ec.arg1);
@@ -4988,7 +4988,7 @@ ANNOYINGSCRIBBLECHECK;
 
 			//
 			// Bang!
-			// 
+			//
 /*
 			POW_create(
 				POW_CREATE_LARGE_SEMI,
@@ -5050,7 +5050,7 @@ ANNOYINGSCRIBBLECHECK;
 
 			//
 			// Add a message to the console.
-			// 
+			//
 
 			if (!WITHIN(ew->ed.arg1, 0, EWAY_MAX_MESSES - 1))
 			{
@@ -5093,7 +5093,7 @@ ANNOYINGSCRIBBLECHECK;
 							"(%d) %s",
 							(ew->yaw << 8) + ew->index,
 							EWAY_mess[ew->ed.arg1]);
-  
+
 						#else
 
 						PANEL_new_text(
@@ -5167,7 +5167,7 @@ ANNOYINGSCRIBBLECHECK;
 									(ew->yaw << 8) + ew->index,
 									EWAY_mess[ew->ed.arg1]);
 
-  
+
 								#else
 
 								PANEL_new_text(
@@ -5218,7 +5218,7 @@ ANNOYINGSCRIBBLECHECK;
 													}
 													else
 													{
-														CONSOLE_text ( "D'arci arrête de jouer !", 8000 );
+														CONSOLE_text ( "D'arci arrï¿½te de jouer !", 8000 );
 													}
 												}
 												break;
@@ -5236,7 +5236,7 @@ ANNOYINGSCRIBBLECHECK;
 													}
 													else
 													{
-														CONSOLE_text ( "La boîte de vitesse D'arci !", 8000 );
+														CONSOLE_text ( "La boï¿½te de vitesse D'arci !", 8000 );
 													}
 												}
 												TRACE ( "2: Car yaw: %i\n", yaw_car );
@@ -5261,7 +5261,7 @@ ANNOYINGSCRIBBLECHECK;
 													}
 													else
 													{
-														CONSOLE_text ( "Bien joué D'arci. La bagnole est bonne pour la casse maintenant !", 8000 );
+														CONSOLE_text ( "Bien jouï¿½ D'arci. La bagnole est bonne pour la casse maintenant !", 8000 );
 													}
 												}
 												break;
@@ -5310,7 +5310,7 @@ ANNOYINGSCRIBBLECHECK;
 
 			//
 			// Add a nav beacon to the map.
-			// 
+			//
 
 			{
 				CBYTE *str;
@@ -5442,7 +5442,7 @@ extern	void	set_stats(void);
 				else
 				{
 					Thing *p_change = TO_THING(change);
-					
+
 					PCOM_change_person_attributes(
 						p_change,
 						ew->colour,
@@ -5477,7 +5477,7 @@ extern	void	set_stats(void);
 				else
 				{
 					Thing *p_change = TO_THING(change);
-					
+
 					p_change->Genus.Person->pcom_bent   = ew->ed.arg2;
 					p_change->Genus.Person->pcom_zone	= ew->ed.arg2>>8;
 extern void PCOM_set_person_ai_normal(Thing *p_person);
@@ -5498,7 +5498,7 @@ extern void PCOM_set_person_ai_normal(Thing *p_person);
 							ew->z);
 			break;
 		case EWAY_DO_CREATE_BOMB:
-			
+
 			//
 			// The 'special' bomb monitors the waypoint that created it and
 			// explodes when the waypoint goes active.
@@ -5583,7 +5583,7 @@ extern void PCOM_set_person_ai_normal(Thing *p_person);
 
 						//
 						// As if this person has never been created.
-						// 
+						//
 
 						ewk->ed.arg1 = NULL;
 					}
@@ -5599,7 +5599,7 @@ extern void PCOM_set_person_ai_normal(Thing *p_person);
 						{
 							//
 							// Make the vehicle blow up!
-							// 
+							//
 
 							extern void VEH_reduce_health(Thing *p_car, Thing *p_person, SLONG damage);
 
@@ -5622,7 +5622,7 @@ extern	UBYTE	hit_player;
 
 							//
 							// As if this vehicle has never been created.
-							// 
+							//
 
 							ewk->ed.arg1 = NULL;
 
@@ -5817,7 +5817,7 @@ extern	UBYTE	hit_player;
 						{
 							//
 							// End the current converstaion.
-							// 
+							//
 
 							EWAY_finish_conversation();
 						}
@@ -5872,7 +5872,7 @@ extern	UBYTE	hit_player;
 			break;
 
 		case EWAY_DO_INCREASE_COUNTER:
-			
+
 			ASSERT(WITHIN(ew->ed.subtype, 0, EWAY_MAX_COUNTERS - 1));
 
 			EWAY_counter[ew->ed.subtype] += 1;
@@ -5909,7 +5909,7 @@ extern	UBYTE	hit_player;
 					// first, preserve roper/darci's stats in the_game for saving later
 					//
 /*
-					if (NET_PERSON(0)->Genus.Person->PersonType==PERSON_DARCI) 
+					if (NET_PERSON(0)->Genus.Person->PersonType==PERSON_DARCI)
 					{
 						the_game.DarciConstitution=NET_PLAYER(0)->Genus.Player->Constitution;
 						the_game.DarciStrength=NET_PLAYER(0)->Genus.Player->Strength;
@@ -5998,7 +5998,7 @@ extern	SLONG	SAVE_ingame(CBYTE *fname);
 			break;
 
 		case EWAY_DO_LOCK_VEHICLE:
-			
+
 			{
 				Thing *p_vehicle;
 
@@ -6056,7 +6056,7 @@ extern	SLONG	SAVE_ingame(CBYTE *fname);
 			break;
 
 		case EWAY_DO_GROUP_RESET:
-	
+
 			{
 				SLONG i;
 
@@ -6223,7 +6223,7 @@ extern	SLONG	SAVE_ingame(CBYTE *fname);
 						}
 
 						if (p_thing->Class == CLASS_PERSON)
-						{	
+						{
 							plant_feet(p_thing);
 							p_thing->Draw.Tweened->Angle   = ew->yaw << 3;
 							p_thing->Genus.Person->HomeX   = ew->x;
@@ -6304,7 +6304,7 @@ extern	SLONG	SAVE_ingame(CBYTE *fname);
 
 			//
 			// Start the countdown to going inactive.
-			// 
+			//
 
 			{
 				UBYTE i;
@@ -6329,7 +6329,7 @@ extern	SLONG	SAVE_ingame(CBYTE *fname);
 			break;
 
 		case EWAY_STAY_ALWAYS:
-		
+
 			//
 			// Never need to process this waypoint anymore.
 			//
@@ -6449,7 +6449,7 @@ void EWAY_process_penalties()
 
 	//
 	// Show the time achieved.
-	// 
+	//
 
 	PANEL_draw_timer(EWAY_count_up / 10, 320, 50);
 
@@ -6520,7 +6520,7 @@ void EWAY_process_penalties()
 extern	SWORD	people_types[50];
 
 void	count_people_types(void)
-{		 
+{
 	return;
 
 	EWAY_Way *ew;
@@ -6553,7 +6553,7 @@ ANNOYINGSCRIBBLECHECK;
 	SLONG	eway_max=EWAY_way_upto;
 
 
-#ifdef PSX	
+#ifdef PSX
 
 	if(GAME_TURN==0)
 	{
@@ -6737,7 +6737,7 @@ ANNOYINGSCRIBBLECHECK;
 							{
 								//
 								// The countdown to going inactive.
-								// 
+								//
 
 								ew->timer = ew->es.arg;
 								ew->flag |= EWAY_FLAG_COUNTDOWN;
@@ -6748,7 +6748,7 @@ ANNOYINGSCRIBBLECHECK;
 						//
 						// There is no case for EWAY_STAY_TIME because ew->timer
 						// should always be set in this case.
-						// 
+						//
 
 						default:
 							ASSERT(0);
@@ -6848,7 +6848,7 @@ UWORD EWAY_get_angle(SLONG waypoint)
 UWORD EWAY_get_person(SLONG waypoint)
 {
 	UWORD ans;
-	
+
 	if (waypoint == NULL)
 	{
 		return NULL;
@@ -7168,7 +7168,7 @@ SLONG EWAY_used_person(UWORD t_index)
 {
 	UWORD i;
 	SLONG ans = FALSE;
-	
+
 	EWAY_Way *ew;
 
 	//
@@ -7191,7 +7191,7 @@ SLONG EWAY_used_person(UWORD t_index)
 			//
 			// Is this waypoint looking at our person?
 			//
-			
+
 			ASSERT(WITHIN(ew->ec.arg1, 1, EWAY_way_upto - 1));
 
 			if (EWAY_way[ew->ec.arg1].ed.type == EWAY_DO_CREATE_ENEMY)
@@ -7213,7 +7213,7 @@ SLONG EWAY_used_person(UWORD t_index)
 					//
 					// Don't mark this person as useable any more.
 					//
-					
+
 					ASSERT(TO_THING(t_index)->Class == CLASS_PERSON);
 
 					TO_THING(t_index)->Genus.Person->Flags &= ~FLAG_PERSON_USEABLE;
@@ -7329,7 +7329,7 @@ void EWAY_cam_converse(Thing *p_thing, Thing *p_listener)
 
 	SLONG best_angle;
 	SLONG best_score;
-	
+
 	SLONG side1;
 	SLONG side2;
 
@@ -7379,7 +7379,7 @@ void EWAY_cam_converse(Thing *p_thing, Thing *p_listener)
 		dz = abs(p_listener->WorldPos.Z - z);
 
 		dist = QDIST3(dx,dy,dz) >> 8;
-	
+
 		if (WITHIN(dist, 0x200, 0x700))
 		{
 			x >>= 8;
@@ -7415,7 +7415,7 @@ void EWAY_cam_converse(Thing *p_thing, Thing *p_listener)
 	//
 	// How far the camera should be from the talking thing.
 	//
-	
+
 	dx = p_listener->WorldPos.X - p_thing->WorldPos.X >> 8;
 	dz = p_listener->WorldPos.Z - p_thing->WorldPos.Z >> 8;
 
@@ -7424,7 +7424,7 @@ void EWAY_cam_converse(Thing *p_thing, Thing *p_listener)
 	//
 	// Use the distance between the two people... but not too extreme.
 	//
-			 
+
 	SATURATE(cam_dist, 0x180, 0x300);
 
 	for (i = 0; i < EWAY_CONVERSE_ANGLES; i++)
@@ -7647,7 +7647,7 @@ void EWAY_cam_converse(Thing *p_thing, Thing *p_listener, UBYTE cam_flags) {
 		if ((p_thing!=p_last1)||(p_listener!=p_last2)||(cam_flags!=lastflags)) { // new scene
 
 
-			
+
 			if (!(lastflags&16)) lineside^=1;
 			p_last1=p_thing;
 			p_last2=p_listener;
@@ -7804,7 +7804,7 @@ void EWAY_cam_look_at(Thing *p_thing)
 			ASSERT(0);
 			break;
 	}
-	
+
 	dx = -SIN(thing_yaw);
 	dz = -COS(thing_yaw);
 
@@ -7832,7 +7832,7 @@ void EWAY_cam_look_at(Thing *p_thing)
 			cz = vz - (p_thing->WorldPos.Z >> 8);
 
 			dprod = dx*cx + dz*cz;
-			
+
 			if (dprod < 1000)
 			{
 				dprod = 1000;
@@ -7944,7 +7944,7 @@ SLONG EWAY_find_or_create_waypoint_that_created_person(Thing *p_person)
 	EWAY_Way *ew;
 
 	for (i = 1; i < EWAY_way_upto; i++)
-	{	
+	{
 //		global_write11=i;
 		ew = &EWAY_way[i];
 
@@ -8049,7 +8049,7 @@ void	flag_undeletable_people(void)
 
 		switch(ew->type)
 		{
-			
+
 		}
 	}
 
@@ -8198,7 +8198,7 @@ void	flag_undeletable_people(void)
 			}
 
 
-			
+
 		}
 	}
 }

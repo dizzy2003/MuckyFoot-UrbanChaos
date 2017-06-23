@@ -5,10 +5,10 @@
 
 
 #include	"Editor.hpp"
-#include	"c:\fallen\headers\game.h"
-#include	"c:\fallen\headers\animtmap.h"
-#include	"c:\fallen\ddlibrary\headers\tga.h"
-#include	"c:\fallen\headers\memory.h"
+#include	"fallen/headers/game.h"
+#include	"fallen/headers/animtmap.h"
+#include	"fallen/ddlibrary/headers/tga.h"
+#include	"fallen/headers/memory.h"
 #define	SET_TEXTURE_COORDS			texture_x=TextureX;if(texture_x>(256-(1<<TextureZoom)))texture_x=(256-(1<<TextureZoom));	\
 									texture_y=TextureY;if(texture_y>(256-(1<<TextureZoom)))texture_y=(256-(1<<TextureZoom));
 
@@ -99,7 +99,7 @@ UBYTE	texture_sizes[]={8,16,32,64,96,128,160,192};
 //#define	CTRL_PAINT_MENU		1
 //#define	CTRL_PAINT_TEXT		2
 /*
-ControlDef	paint_tab_def[]	=	
+ControlDef	paint_tab_def[]	=
 {
 
 	{	0															   				}
@@ -195,7 +195,7 @@ extern	void	sync_animtmaps(void);
 
 
 void	new_tile_size(void);
-PaintTab	*the_painttab;	
+PaintTab	*the_painttab;
 //---------------------------------------------------------------
 
 SLONG	max_textures=NUM_GAME_TEXTURES - 1;
@@ -217,7 +217,7 @@ PaintTab::PaintTab(EditorModule *parent)
 //	for fucks sake
 
 	for(c0=0;c0<14;c0++)
-	{		
+	{
 		if(!game_textures[c0].TextureName)
 			break;
 	}
@@ -258,9 +258,9 @@ PaintTab::PaintTab(EditorModule *parent)
 
 	TextureFlags=	FLAGS_QUADS|FLAGS_FIXED;
 
-	SetControlState(CTRL_TEX_HIDE_L,CTRL_DESELECTED); 
-	SetControlState(CTRL_TEX_HIDE_R,CTRL_DESELECTED); 
-	SetControlState(CTRL_TEX_HIDE_ROOF,CTRL_DESELECTED); 
+	SetControlState(CTRL_TEX_HIDE_L,CTRL_DESELECTED);
+	SetControlState(CTRL_TEX_HIDE_R,CTRL_DESELECTED);
+	SetControlState(CTRL_TEX_HIDE_ROOF,CTRL_DESELECTED);
 
 	SetControlState(CTRL_TEX_QUAD_BOX,CTRL_SELECTED); //ts
 	SetControlState(CTRL_TEX_FIXED_BOX,CTRL_SELECTED);
@@ -382,7 +382,7 @@ void	PaintTab::DrawTabContent(void)
 				content_rect;
 
 
-	content_rect	=	ContentRect;	
+	content_rect	=	ContentRect;
 	content_rect.ShrinkRect(1,1);
 	content_rect.FillRect(CONTENT_COL);
 	SetWorkWindowBounds(ContentLeft()+1,ContentTop()+1,ContentWidth()-1,ContentHeight()-1);
@@ -391,7 +391,7 @@ void	PaintTab::DrawTabContent(void)
 	extern	UWORD	diff_page_count1,diff_page_count2;
 	{
 		CBYTE	str[100];
-		sprintf(str,"diff tex(world %d) %d  shared %d",editor_texture_set,diff_page_count1,diff_page_count2); 
+		sprintf(str,"diff tex(world %d) %d  shared %d",editor_texture_set,diff_page_count1,diff_page_count2);
 		QuickText(0,0,str,0);
 		QuickText(1,0,str,WHITE_COL);
 	}
@@ -481,7 +481,7 @@ void	draw_selected_face_textures(SLONG tx,SLONG ty,SLONG zoom)
 			DrawLineC(x1,y1,x2,y2,WHITE_COL);
 			DrawLineC(x2,y2,x3,y3,WHITE_COL);
 			DrawLineC(x3,y3,x1,y1,WHITE_COL);
-		}															 
+		}
 	}
 }
 
@@ -618,7 +618,7 @@ void	PaintTab::DrawStyleTexture(void)
 	EdRect	tex_rect;
 
 	SLONG	tx=20,ty=20;
-	
+
 
 	for(c0=0;c0<10;c0++)
 	{
@@ -661,7 +661,7 @@ void	PaintTab::DrawTexture(void)
 				UBYTE		*buffer_ptr;
 				UBYTE		texture_buffer[256];
 
-				
+
 				SET_TEXTURE_COORDS
 
 				rect_ptr	=	WorkWindow+PaintRect.GetLeft()+1+((PaintRect.GetTop()+1)*WorkScreenWidth);
@@ -709,7 +709,7 @@ void	PaintTab::DrawTexture(void)
 					UWORD		*buffer_ptr;
 					UWORD		texture_buffer[256];
 
-					
+
 					SET_TEXTURE_COORDS
 
 					rect_ptr	=	((UWORD*)WorkWindow)+PaintRect.GetLeft()+1+((PaintRect.GetTop()+1)*WorkScreenPixelWidth);
@@ -838,7 +838,7 @@ extern	UWORD	page_count[];
 									sprintf(str,"%d(%d)",page_count[page],page);
 									QuickText(PaintRect.GetLeft()+zoom_x,PaintRect.GetTop()+zoom_y,str,0);
 									QuickText(PaintRect.GetLeft()+zoom_x+1,PaintRect.GetTop()+zoom_y+1,str,WHITE_COL);
-	
+
 									if(page_remap[page])
 									{
 										SLONG	u,v,flip=0;
@@ -856,7 +856,7 @@ extern	UWORD	page_count[];
 										draw_quad_now(PaintRect.GetLeft()+zoom_x+(16<<unzoom),PaintRect.GetTop()+zoom_y+(16<<unzoom),16<<unzoom,16<<unzoom,u,v,((rpage>>6)&7)+25,flip,POLY_T);
 
 									}
-	
+
 								}
 								page++;
 							}
@@ -1047,7 +1047,7 @@ void	PaintTab::UpdatePalette(void)
 
 void	PaintTab::UpdatePaletteInfo(void)
 {
-	
+
 }
 
 //---------------------------------------------------------------
@@ -1082,7 +1082,7 @@ void	PaintTab::do_undo_me_bloody_self_then(SLONG index)
 				{
 					if(selected_face.PEle==(struct EditMapElement*)-2)
 					{
-						
+
 					}
 					else
 					if(selected_face.PEle==(struct EditMapElement*)-1)
@@ -1325,7 +1325,7 @@ void	offset_selected_tex_page(SWORD offset);
 	if(!ControlFlag)
 	{
 		SLONG	offset=0;
-		
+
 		if(ShiftFlag)
 			offset=10;
 		if(Keys[KB_1])
@@ -1464,7 +1464,7 @@ void	offset_selected_tex_page(SWORD offset);
 				SetControlState(CTRL_TEX_FIXED_BOX,CTRL_DESELECTED);
 			if(LockWorkScreen())
 			{
-				
+
 				DrawControlSet();
 //				DrawTabContent();
 				UnlockWorkScreen();
@@ -1511,7 +1511,7 @@ void	PaintTab::SelectAnimTexture(MFPoint *clicked_point)
 	y=(y/19)+ShowAnimTmap;
 	if(PaintMode==ANIM_TMAP_PAINT)
 	{
-		
+
 	}
 	else
 	{
@@ -1530,7 +1530,7 @@ void	PaintTab::SetEditAnimTexture(MFPoint *clicked_point)
 	y=(y/19)+ShowAnimTmap;
 	if(PaintMode==ANIM_TMAP_PAINT)
 	{
-		
+
 	}
 	else
 	{
@@ -1740,11 +1740,11 @@ void	PaintTab::HandleControl(UWORD control_id)
 			if(edit_info.HideMap&1)
 			{
 				edit_info.HideMap&=~1;
-				SetControlState(CTRL_TEX_HIDE_L,CTRL_DESELECTED); 
+				SetControlState(CTRL_TEX_HIDE_L,CTRL_DESELECTED);
 			}
 			else
 			{
-				SetControlState(CTRL_TEX_HIDE_L,CTRL_SELECTED); 
+				SetControlState(CTRL_TEX_HIDE_L,CTRL_SELECTED);
 				edit_info.HideMap|=1;
 			}
 
@@ -1753,11 +1753,11 @@ void	PaintTab::HandleControl(UWORD control_id)
 			if(edit_info.HideMap&2)
 			{
 				edit_info.HideMap&=~2;
-				SetControlState(CTRL_TEX_HIDE_R,CTRL_DESELECTED); 
+				SetControlState(CTRL_TEX_HIDE_R,CTRL_DESELECTED);
 			}
 			else
 			{
-				SetControlState(CTRL_TEX_HIDE_R,CTRL_SELECTED); 
+				SetControlState(CTRL_TEX_HIDE_R,CTRL_SELECTED);
 				edit_info.HideMap|=2;
 			}
 			break;
@@ -1787,11 +1787,11 @@ extern	SLONG	build_psx;
 			if(edit_info.HideMap&4)
 			{
 				edit_info.HideMap&=~4;
-				SetControlState(CTRL_TEX_HIDE_ROOF,CTRL_DESELECTED); 
+				SetControlState(CTRL_TEX_HIDE_ROOF,CTRL_DESELECTED);
 			}
 			else
 			{
-				SetControlState(CTRL_TEX_HIDE_ROOF,CTRL_SELECTED); 
+				SetControlState(CTRL_TEX_HIDE_ROOF,CTRL_SELECTED);
 				edit_info.HideMap|=4;
 			}
 			break;
@@ -2007,7 +2007,7 @@ void	PaintTab::DoPlanarMapF(void)
 
 void	PaintTab::HandleTextureControl(UWORD control_id)
 {
-	
+
 	switch(control_id&0xff)
 	{
 		case	CTRL_TEX_PAGE_TEXT:
@@ -2180,7 +2180,7 @@ void	find_highest_selected_tmap(SLONG *tx,SLONG *ty)
 			}
 
 		}
-	}		 
+	}
 }
 
 void	offset_selected_tmaps(SLONG tx,SLONG ty,UBYTE	page,SLONG sx,SLONG sy,SLONG flag)
@@ -2272,7 +2272,7 @@ void	scale_selected_tmaps(SWORD scale)
 					temp=((temp*scale)/256);
 					temp+=mid_x;
 					p_f4->UV[c1][0]=temp;
-					
+
 					temp=p_f4->UV[c1][1];
 					temp-=mid_y;
 					temp=((temp*scale)/256);
@@ -2294,7 +2294,7 @@ void	scale_selected_tmaps(SWORD scale)
 					temp=((temp*scale)/256);
 					temp+=mid_x;
 					p_f3->UV[c1][0]=temp;
-					
+
 					temp=p_f3->UV[c1][1];
 					temp-=mid_y;
 					temp=((temp*scale)/256);
@@ -2468,7 +2468,7 @@ void	PaintTab::PlanarMapping(MFPoint *clicked_point)
 	local_point.X	=	(((local_point.X-(PaintRect.GetLeft()+2))));
 	local_point.Y	=	(((local_point.Y-(PaintRect.GetTop()+2))));
 	LogText(" Planar  local point %d,%d AFTER -paintrect\n",local_point.X,local_point.Y);
-	
+
 
 	SET_TEXTURE_COORDS
 //	local_point.X	=	(local_point.X+texture_x);
@@ -2674,7 +2674,7 @@ void	PaintTab::SelectTexture(MFPoint *clicked_point)
 							UpdateTexture();
 							local_point	=	current_point;
 						}
-					} //end of while loop 
+					} //end of while loop
 
 					TextureHeight=32; //(TextureHeight+7)&~15;
 					TextureWidth=32; //(TextureWidth+7)&~15;
@@ -2700,7 +2700,7 @@ void	PaintTab::SelectTexture(MFPoint *clicked_point)
 					CurrentTexture.V[3]=sy+TextureHeight;
 					UpdateTexture();
 					local_point	=	current_point;
-#ifndef	PAINT2	
+#ifndef	PAINT2
 					if(selected_face.PEle)
 					{
 						ApplyTexture(&selected_face);
@@ -2746,7 +2746,7 @@ void	PaintTab::SelectTexture(MFPoint *clicked_point)
 			TextureFlags		|=	FLAGS_SHOW_TEXTURE;
 			UpdateTexture();
 		}
-#ifndef	PAINT2	
+#ifndef	PAINT2
 		if(selected_face.PEle)
 		{
 			ApplyTexture(&selected_face);
@@ -2886,7 +2886,7 @@ void	PaintTab::SelectTexture(MFPoint *clicked_point)
 
 						UpdateTexture();
 						local_point	=	current_point;
-//#ifndef	PAINT2	
+//#ifndef	PAINT2
 //						if(selected_face.PEle)
 						{
 							ApplyTexture(&selected_face);
@@ -3017,7 +3017,7 @@ void	PaintTab::SelectTexture(MFPoint *clicked_point)
 						}
 
 						UpdateTexture();
-#ifndef	PAINT2	
+#ifndef	PAINT2
 						if(selected_face.PEle)
 						{
 							ApplyTexture(&selected_face);
@@ -3111,7 +3111,7 @@ UWORD	PaintTab::ConvertFreeToFixedEle(struct TextureBits *t,SLONG *x,SLONG *y,SL
 	*height=t->Height;
 	*page=t->Page;
 
-	return(1);	
+	return(1);
 }
 
 void	PaintTab::ConvertFixedToFree(struct TextureBits *t)
@@ -3170,13 +3170,13 @@ void	PaintTab::ConvertMiniTex(struct	MiniTextureBits	*tex)
 		CurrentTexture.V[3]	=	CurrentTexture.V[2];
 		CurrentTexture.U[2]	=	temp_u;
 		CurrentTexture.V[2]	=	temp_v;
-		
+
 	}
 
 	TextureWidth=w;
 	TextureHeight=w;
 
-	
+
 }
 UWORD	PaintTab::ConvertTexToMiniTex(void)
 {
@@ -3198,10 +3198,10 @@ BOOL	PaintTab::ApplyTexture(struct EditFace *edit_face)
 
 	if(edit_face->PEle==(struct EditMapElement*)-2)
 	{
-		
+
 		if(PaintMode==PALETTE_PAINT)
 		{
-			
+
 		}
 		else
 		{
@@ -3303,7 +3303,7 @@ extern	void	apply_texture_to_wall_face(SLONG face,SLONG texture);
 void	paint_texture_to_wall(SLONG wall,SLONG pos,SLONG texture)
 {
 	ASSERT(pos<200);
-		
+
 	if(wall_list[wall].Tcount<=pos)
 	{
 		SLONG	size;
@@ -3326,14 +3326,14 @@ void	paint_texture_to_wall(SLONG wall,SLONG pos,SLONG texture)
 			MemFree(old);
 		}
 		wall_list[wall].Tcount=size;
-	
+
 	}
 	wall_list[wall].Textures[pos]=texture;
 }
 void	paint_texture_to_wall2(SLONG wall,SLONG pos,SLONG texture)
 {
 	ASSERT(pos<200);
-		
+
 	if(wall_list[wall].Tcount2<=pos)
 	{
 		SLONG	size;
@@ -3356,7 +3356,7 @@ void	paint_texture_to_wall2(SLONG wall,SLONG pos,SLONG texture)
 			MemFree(old);
 		}
 		wall_list[wall].Tcount2=size;
-	
+
 	}
 	wall_list[wall].Textures2[pos]=texture;
 }
@@ -3395,7 +3395,7 @@ void	remove_style_textures(void)
 void	paint_texture_to_storey(SLONG storey,SLONG pos,SLONG texture)
 {
 	ASSERT(pos<100);
-/*		
+/*
 	if(storey_list[storey].Tcount<=pos)
 	{
 		SLONG	size;
@@ -3412,7 +3412,7 @@ void	paint_texture_to_storey(SLONG storey,SLONG pos,SLONG texture)
 			return;
 		}
 		storey_list[storey].Tcount=size;
-	
+
 	}
 	storey_list[storey].Textures[pos]=texture;
 */
@@ -3519,7 +3519,7 @@ void	apply_texture_to_wall_face(SLONG face,SLONG texture)
 	else
 	*/
 	{
-		
+
 		if(prim_faces4[face].FaceFlags&FACE_FLAG_TEX2)
 		{
 			// this wall is double sided and so uses different texture info

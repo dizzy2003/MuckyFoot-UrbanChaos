@@ -3,8 +3,8 @@
 #include	"aeng.h"
 #include	"poly.h"
 #include	"sprite.h"
-#include	"c:\fallen\headers\supermap.h"
-#include	"c:\fallen\headers\cam.h"
+#include	"fallen/headers/supermap.h"
+#include	"fallen/headers/cam.h"
 #include	"fc.h"
 #include	<math.h>
 #include	"panel.h"
@@ -13,7 +13,7 @@
 #include	"font2d.h"
 #include	"eway.h"
 #include	"DDLib.h"
-#include	"c:\fallen\ddengine\headers\map.h"
+#include	"fallen/ddengine/headers/map.h"
 #include	"memory.h"
 #include	"mfx.h"
 #include	"xlat_str.h"
@@ -454,7 +454,7 @@ typedef struct
 #define PANEL_MAX_STORES 8
 
 PANEL_Store PANEL_store[PANEL_MAX_STORES];
-SLONG       PANEL_store_upto; 
+SLONG       PANEL_store_upto;
 
 #endif
 
@@ -488,7 +488,7 @@ void PANEL_draw_timer_do(float time, float x, float y)
 		}
 	}
 
-	float x_start = x;	
+	float x_start = x;
 
 	for (ch = countdown; *ch; ch++)
 	{
@@ -581,7 +581,7 @@ void PANEL_draw_timer(SLONG time, SLONG x, SLONG y)
 	slPANEL_draw_timer_time = time;
 }
 
-#else 
+#else
 
 void PANEL_draw_timer(SLONG time, SLONG x, SLONG y)
 {
@@ -722,7 +722,7 @@ void PANEL_draw_local_health(SLONG mx,SLONG my,SLONG mz,SLONG percentage,SLONG r
 
 #endif
 
-	
+
 }
 
 void PANEL_draw_gun_sight(SLONG mx,SLONG my,SLONG mz,SLONG accuracy,SLONG scale)
@@ -746,7 +746,7 @@ void PANEL_draw_gun_sight(SLONG mx,SLONG my,SLONG mz,SLONG accuracy,SLONG scale)
 	sat_acc=accuracy;
 	SATURATE(sat_acc,0,255)
 
-	
+
 
 
 	col =  sat_acc<<8;
@@ -1034,7 +1034,7 @@ typedef struct
 	float u2;
 	float v2;
 	SLONG page;
-	
+
 } PANEL_Ic;
 
 #define PIC(uv) ((uv) / 256.0F)
@@ -1458,7 +1458,7 @@ void PANEL_do_heartbeat(SLONG which, float stamina, SLONG death)
 			{
 				amp = 0.00F;
 			}
-			
+
 			//
 			// How about phase?
 			//
@@ -1477,7 +1477,7 @@ void PANEL_do_heartbeat(SLONG which, float stamina, SLONG death)
 
 	//
 	// Set up the beat quad.
-	// 
+	//
 
 	pp[0].z        = 0.0F;
 	pp[0].Z        = 1.0F;
@@ -1570,15 +1570,15 @@ void PANEL_do_heartbeat(SLONG which, float stamina, SLONG death)
 			pp[0].Y        = PANEL_BEAT_SY(pb1->y) - 5.5F;
 			pp[0].colour   = c1;
 
-			pp[1].X        = PANEL_BEAT_SX(pb1->x);       
+			pp[1].X        = PANEL_BEAT_SX(pb1->x);
 			pp[1].Y        = PANEL_BEAT_SY(pb1->y) + 5.5F;
-			pp[1].colour   = c1;                 
+			pp[1].colour   = c1;
 
-			pp[2].X        = PANEL_BEAT_SX(pb2->x);       
+			pp[2].X        = PANEL_BEAT_SX(pb2->x);
 			pp[2].Y        = PANEL_BEAT_SY(pb2->y) - 5.5F;
-			pp[2].colour   = c2;                 
+			pp[2].colour   = c2;
 
-			pp[3].X        = PANEL_BEAT_SX(pb2->x);       
+			pp[3].X        = PANEL_BEAT_SX(pb2->x);
 			pp[3].Y        = PANEL_BEAT_SY(pb2->y) + 5.5F;
 			pp[3].colour   = c2;
 
@@ -1677,7 +1677,7 @@ ULONG      PANEL_toss_tick;
 
 //
 // A floating point number between 0 and 1.0F
-// 
+//
 
 static inline float frand(void)
 {
@@ -1743,7 +1743,7 @@ void PANEL_do_tosses(void)
 	while(PANEL_toss_tick < now)
 	{
 		PANEL_toss_tick += 1000 / 20;
-		
+
 		for (i = 0; i < PANEL_MAX_TOSSES; i++)
 		{
 			pt = &PANEL_toss[i];
@@ -1766,7 +1766,7 @@ void PANEL_do_tosses(void)
 
 	//
 	// Set up the toss quad.
-	// 
+	//
 
 	float fWDepthBodge = PANEL_GetNextDepthBodge();
 	float fZDepthBodge = 1.0f - fWDepthBodge;
@@ -1875,7 +1875,7 @@ void PANEL_new_face(
 	float v;
 	float width;
 	float uvwidth;
-	
+
 	#define PANEL_FACE_RADIO		0
 	#define PANEL_FACE_DARCI		1
 	#define PANEL_FACE_ROPER		2
@@ -1902,7 +1902,7 @@ void PANEL_new_face(
 
 	//
 	// The position of the faces on each page given in 32 pixel steps.
-	// 
+	//
 
 	typedef struct
 	{
@@ -1911,7 +1911,7 @@ void PANEL_new_face(
 		UBYTE v;
 
 	} PANEL_Face;
-	
+
 	PANEL_Face face_large[PANEL_FACE_NUMBER] =
 	{
 		{0,4,4},	// Radio
@@ -1997,7 +1997,7 @@ void PANEL_new_face(
 						switch(who->Draw.Tweened->PersonID - 6)
 						{
 							case 0:
-								
+
 								//
 								// Pinhead.
 								//
@@ -2035,7 +2035,7 @@ void PANEL_new_face(
 						break;
 
 					case 8:
-						
+
 						//
 						// Male fake wandering civ.
 						//
@@ -2045,7 +2045,7 @@ void PANEL_new_face(
 						break;
 
 					case 9:
-						
+
 						//
 						// Female fake wandering civ.
 						//
@@ -2239,9 +2239,9 @@ void PANEL_new_text(Thing *who, SLONG delay, CBYTE *fmt, ...)
 
 		return;
 	}
-	
+
 	/*
-		
+
 	//
 	// Convert to uppercase.
 	//
@@ -2252,7 +2252,7 @@ void PANEL_new_text(Thing *who, SLONG delay, CBYTE *fmt, ...)
 
 	//
 	// Do we already have this message?
-	// 
+	//
 
 	SLONG i;
 
@@ -2292,7 +2292,7 @@ void PANEL_new_text(Thing *who, SLONG delay, CBYTE *fmt, ...)
 	strcpy(pt->text, message);
 
 	//
-	// Process the message so we put in vertical '|'s 
+	// Process the message so we put in vertical '|'s
 	//
 
 	PANEL_text_tail += 1;
@@ -2403,7 +2403,7 @@ void PANEL_new_text_draw()
 			//
 			// The speech bubble.
 			//
-			
+
 			PANEL_funky_quad(
 				PANEL_IC_BUBBLE_START,
 				PANEL_IC_MESX + 36,
@@ -2430,7 +2430,7 @@ void PANEL_new_text_draw()
 				0xffffffff,
 			   -1.0F,
 				height);
-			
+
 			if (height < 34)
 			{
 				height = 34;
@@ -2445,7 +2445,7 @@ void PANEL_new_text_draw()
 
 //
 // The help message.
-// 
+//
 
 
 CBYTE PANEL_help_message[256];
@@ -2485,7 +2485,7 @@ void PANEL_help_message_do()
 		//
 
 		SLONG height;
-	
+
 		#define PANEL_IC_HELPX 10
 		#define PANEL_IC_HELPY 10
 
@@ -2495,7 +2495,7 @@ void PANEL_help_message_do()
 		//
 		// The speech bubble.
 		//
-		
+
 		PANEL_funky_quad(
 			PANEL_IC_BUBBLE_START,
 			PANEL_IC_HELPX,
@@ -2579,17 +2579,17 @@ void PANEL_new_widescreen()
 	{
 		//
 		// Sort in thing number order!
-		// 
+		//
 
 		if (PANEL_wide_top_person > PANEL_wide_bot_person)
-		{	
+		{
 			SWAP(PANEL_wide_top_person, PANEL_wide_bot_person);
 		}
 	}
 
 	//
 	// Steal new_text messages!
-	// 
+	//
 
 	SLONG i;
 
@@ -2605,7 +2605,7 @@ void PANEL_new_widescreen()
 			{
 				//
 				// This is a message that goes on the bottom.
-				// 
+				//
 
 				strcpy(PANEL_wide_text, pt->text);
 
@@ -2619,7 +2619,7 @@ void PANEL_new_widescreen()
 				{
 					//
 					// This is a message that goes on the top.
-					// 
+					//
 
 					strcpy(PANEL_wide_text, pt->text);
 
@@ -2631,7 +2631,7 @@ void PANEL_new_widescreen()
 				{
 					//
 					// This is a message that goes on the bottom.
-					// 
+					//
 
 					strcpy(PANEL_wide_text, pt->text);
 
@@ -2917,7 +2917,7 @@ void PANEL_draw_beacons(void)
 			PANEL_IC_BTY,
 			PANEL_beacon_colour[best_beacon % PANEL_MAX_BEACON_COLOURS],
 			192);
-			
+
 	}
 }
 
@@ -2982,7 +2982,7 @@ void PANEL_new_funky_do(SLONG which, SLONG where)
 		specialtype = NULL;
 		ammo        = 0;
 	}
-	
+
 	if (darci->Genus.Person->Flags & FLAG_PERSON_GUN_OUT)
 	{
 		specialtype = SPECIAL_GUN;
@@ -3001,7 +3001,7 @@ void PANEL_new_funky_do(SLONG which, SLONG where)
 
 	//
 	// The background and the character.
-	// 
+	//
 
 	PANEL_funky_quad(
 		PANEL_IC_BACKBOX,
@@ -3087,8 +3087,8 @@ void PANEL_new_funky_do(SLONG which, SLONG where)
 
 				ULONG colour;
 				SLONG secsleft;
-				
-				
+
+
 				secsleft = p_special->Genus.Special->timer / (16 * 20) + 1;
 
 				if (secsleft > 6)
@@ -3133,7 +3133,7 @@ void PANEL_new_funky_do(SLONG which, SLONG where)
 	switch(specialtype)
 	{
 		default:
-			
+
 			if (who == PANEL_WHO_DARCI)
 			{
 				which_gun = PANEL_IC_DARCI_HAND;
@@ -3385,7 +3385,7 @@ extern void FONT2D_DrawString_NoTrueType(CBYTE*str, SLONG x, SLONG y, ULONG rgb,
 
 	//
 	// The text.
-	// 
+	//
 
 	PANEL_new_text_process();
 	PANEL_new_text_draw();
@@ -3461,7 +3461,7 @@ void PANEL_new_funky()
 
 		PANEL_new_funky_do(0,1);
 //		PANEL_new_funky_do(1,0);
-	}	
+	}
 	else
 	{
 		//
@@ -3534,7 +3534,7 @@ void PANEL_fadeout_draw()
 
 		float ydu =  (float)sin(angle) * zoom;
 		float ydv =  (float)cos(angle) * zoom;
-	
+
 		SLONG colour;
 
 		colour = 0xffffffff;
@@ -3602,7 +3602,7 @@ void PANEL_fadeout_draw()
 
 			//
 			// Fadeout the colour.
-			// 
+			//
 
 			bright = GetTickCount() - (PANEL_fadeout_time + 768);
 
@@ -3708,7 +3708,7 @@ PANEL_Lsprite PANEL_lsprite[PANEL_LSPRITE_NUMBER] =
 	PLS(1,95, 75,111),
 
 	#else
-	
+
 	//
 	// Made all coordinates even.
 	//
@@ -3785,7 +3785,7 @@ PANEL_Lsprite PANEL_lsprite[PANEL_LSPRITE_NUMBER] =
 void PANEL_last_arrow(float x, float y, float angle, float size, ULONG colour, UBYTE is_dot=0)
 {
 	PANEL_Lsprite *pls;
-	if (is_dot) 
+	if (is_dot)
 		pls = &PANEL_lsprite[PANEL_LSPRITE_DOT];
 	else
 		pls = &PANEL_lsprite[PANEL_LSPRITE_ARROW];
@@ -3959,7 +3959,7 @@ void PANEL_new_info_message(CBYTE *fmt, ...)
 	va_start(ap, fmt);
 	vsprintf(PANEL_info_message, fmt, ap);
 	va_end  (ap);
-	
+
 	PANEL_info_time = GetTickCount();
 }
 
@@ -4220,7 +4220,7 @@ void PANEL_inventory(Thing *darci, Thing *player) {
 	{
 		p_special = TO_THING(darci->Genus.Person->SpecialList);
 
-		while(p_special) 
+		while(p_special)
 		{
 			ASSERT(p_special->Class == CLASS_SPECIAL);
 			if (SPECIAL_info[p_special->Genus.Special->SpecialType].group == SPECIAL_GROUP_ONEHANDED_WEAPON ||
@@ -4228,7 +4228,7 @@ void PANEL_inventory(Thing *darci, Thing *player) {
 				p_special->Genus.Special->SpecialType                     == SPECIAL_EXPLOSIVES ||
 				p_special->Genus.Special->SpecialType                     == SPECIAL_WIRE_CUTTER)
 			{
-				if (THING_NUMBER(p_special)==darci->Genus.Person->SpecialUse) 
+				if (THING_NUMBER(p_special)==darci->Genus.Person->SpecialUse)
 				{
 					current_item=draw_count;
 					sel=p_special->Genus.Special->SpecialType;
@@ -4242,9 +4242,9 @@ void PANEL_inventory(Thing *darci, Thing *player) {
 		}
 	}
 
-	if (darci->Flags & FLAGS_HAS_GUN) 
+	if (darci->Flags & FLAGS_HAS_GUN)
 	{
-		if (darci->Genus.Person->Flags & FLAG_PERSON_GUN_OUT) 
+		if (darci->Genus.Person->Flags & FLAG_PERSON_GUN_OUT)
 		{
 			current_item=draw_count;
 			sel=SPECIAL_GUN;
@@ -4327,7 +4327,7 @@ void PANEL_last()
 	if (EWAY_tutorial_string)
 	{
 		//
-		// Darken the whole screen... 
+		// Darken the whole screen...
 		//
 
 		PANEL_darken_screen(640);
@@ -4579,8 +4579,8 @@ void PANEL_last()
 					if (p_special->SubState == SPECIAL_SUBSTATE_ACTIVATED)
 					{
 						SLONG secsleft;
-						
-						
+
+
 						secsleft = p_special->Genus.Special->timer / (16 * 20) + 1;
 						SATURATE(secsleft,0,6);
 
@@ -4589,10 +4589,10 @@ void PANEL_last()
 						iGrenadeCountdown = secsleft;
 #else
 						ULONG colour, colours[]={0xff3300,0xff8800,0x88ff00,0x888888};
-						if (secsleft<1) 
+						if (secsleft<1)
 							colour=*colours;
 						else
-							if (secsleft>3) 
+							if (secsleft>3)
 								colour=colours[3];
 							else
 								colour=colours[secsleft];
@@ -4693,13 +4693,13 @@ void PANEL_last()
 	//
 	// Draw the ammo.
 	//
-	
+
 	if (text)
 	{
 		FONT2D_DrawStringRightJustify(
 			text,
 			m_iPanelXPos + 215, // 214,
-			m_iPanelYPos - 50,	// 427,	
+			m_iPanelYPos - 50,	// 427,
 			0xffffff,
 			256 + 64);
 
@@ -4708,7 +4708,7 @@ void PANEL_last()
 		FONT2D_DrawStringRightJustify(
 			text,
 			m_iPanelXPos + 217, // 214,
-			m_iPanelYPos - 51,	// 427,	
+			m_iPanelYPos - 51,	// 427,
 			0x000000,
 			384);
 
@@ -4719,7 +4719,7 @@ void PANEL_last()
 		FONT2D_DrawStringRightJustify(
 			text,
 			m_iPanelXPos + 214, // 214,
-			m_iPanelYPos - 53,	// 427,	
+			m_iPanelYPos - 53,	// 427,
 			0xffffff,
 			256);
 
@@ -4831,7 +4831,7 @@ extern	ULONG	strip_stats[];
 			timing,
 			"Frame time %d strip len %f",
 			AENG_draw_time >> 12,strip);
-		
+
 		FONT2D_DrawString(
 			timing,
 			50,
@@ -4858,7 +4858,7 @@ extern	ULONG	strip_stats[];
 			timing,
 			"Poly add quad %d",
 			AENG_poly_add_quad_time >> 12);
-		
+
 		FONT2D_DrawString(
 			timing,
 			50,
@@ -4892,7 +4892,7 @@ extern	ULONG	strip_stats[];
 		POLY_Point  pp  [4];
 		POLY_Point *quad[4];
 		POLY_Point *tri [3];
-	
+
 		quad[0] = &pp[0];
 		quad[1] = &pp[1];
 		quad[2] = &pp[2];
@@ -4914,8 +4914,8 @@ extern	ULONG	strip_stats[];
 		#define PLH_RADIUS (66.0F)
 
 		#define PLH_WIDTH  (10.0F)
-		#define PLH_ANGLE1 blah1 
-		#define PLH_ANGLE2 blah2 
+		#define PLH_ANGLE1 blah1
+		#define PLH_ANGLE2 blah2
 		#define PLH_SEGS   (8)
 
 		//#define PLH_MID_X  (74.0F)
@@ -4928,7 +4928,7 @@ extern	ULONG	strip_stats[];
 
 		float dangle;
 		float fraction;
-		
+
 		dangle = (PLH_ANGLE2 - PLH_ANGLE1) / PLH_SEGS;
 
 		//
@@ -5025,7 +5025,7 @@ extern	ULONG	strip_stats[];
 		SLONG x = m_iPanelXPos + 107;
 		SLONG y = m_iPanelYPos - 36;
 		SLONG rgb[] = { 0x00FF0000, 0x00C04000, 0x00808000, 0x0040C000, 0x0000ff00 };
-	
+
 		SATURATE(stamina,0,5);
 
 		for (i=0;i<stamina;i++)
@@ -5466,7 +5466,7 @@ extern	ULONG	strip_stats[];
 		// of text are added but none are removed from the tail, so when
 		// we come back the difference between head and tail can be over
 		// the maximum buffer length, which will then wrap around and display
-		// the same message multiple times, therefore if we have more than 
+		// the same message multiple times, therefore if we have more than
 		// PANEL_MAX_TEXTS messages we need to shift our head forwards.to
 		// remove those bogus messages.
 
@@ -5660,7 +5660,7 @@ extern	ULONG	strip_stats[];
 				//
 
 				float percent;
-				
+
 				percent = darci->Genus.Person->Timer1 * (1.0F / (100.0F * 256.0F));
 
 				SATURATE(percent, 0.0F, 1.0F);
@@ -6260,7 +6260,7 @@ void PANEL_draw_VMU_ammo_counts ( void )
 	Thing *p_special = NULL;
 
 	// The pistol is special.
-	if (darci->Flags & FLAGS_HAS_GUN) 
+	if (darci->Flags & FLAGS_HAS_GUN)
 	{
 		bHaveWeapon[WEAP_PISTOL] = TRUE;
 	}

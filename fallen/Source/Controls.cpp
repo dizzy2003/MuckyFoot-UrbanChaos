@@ -19,7 +19,7 @@
 #include	"drip.h"
 #include	"cam.h"
 #include	"sewer.h"
-#include	"bang.h"  
+#include	"bang.h"
 #include	"mav.h"
 #include	"animtmap.h"
 #include	"spark.h"
@@ -44,11 +44,11 @@
 #include	"combat.h"
 #include	"door.h"
 #ifndef	PSX
-#include    "C:\fallen\DDEngine\Headers\console.h"
+#include    "fallen/DDEngine/Headers/console.h"
 #endif
 #include	"psystem.h"
 #include	"ribbon.h"
-#include	"C:\fallen\DDEngine\Headers\poly.h"
+#include	"fallen/DDEngine/Headers/poly.h"
 #include	"wmove.h"
 #include	"balloon.h"
 #include	"wand.h"
@@ -78,8 +78,8 @@
 #ifndef TARGET_DC
 #include	"FFManager.h"
 #endif
-#include	"c:\fallen\ddlibrary\headers\ddlib.h"
-#include	"c:\fallen\ddengine\headers\texture.h"
+#include	"fallen/ddlibrary/headers/ddlib.h"
+#include	"fallen/ddengine/headers/texture.h"
 #else
 #include	"LIBETC.h"
 
@@ -149,7 +149,7 @@ UBYTE InkeyToAscii[]=
 
 UBYTE InkeyToAsciiShift[]=
 {
-	/*   0 - 9   */		0,		0,		'!',	'"',	'œ',	'$',	'%',	'^',	'&',	'*',
+	/*   0 - 9   */		0,		0,		'!',	'"',	'ï¿½',	'$',	'%',	'^',	'&',	'*',
 	/*  10 - 19  */		'(',	')',	'_',	'+',	'\b',	'\t',	'Q',	'W',	'E',	'R',
 	/*  20 - 29  */		'T',	'Y',	'U',	'I',	'O',	'P',	'{',	'}',	0,		0,
 	/*  30 - 39  */ 	'A', 	'S',	'D',	'F',	'G',	'H',	'J',	'K',	'L',	':',
@@ -290,7 +290,7 @@ void parse_console(CBYTE *str) {
 				} else CONSOLE_text("wpt not found");
 				break;
 			case 5: // break
-				ASSERT(0); 
+				ASSERT(0);
 				break;
 			case 6: // wpt? -- find nearest wpt
 				way=eway_find_near(NET_PERSON(0)->WorldPos);
@@ -350,8 +350,8 @@ void parse_console(CBYTE *str) {
 				allow_debug_keys^=1;
 				if (allow_debug_keys)
 					CONSOLE_text("debug mode on");
-				else 
-					CONSOLE_text("debug mode off");			
+				else
+					CONSOLE_text("debug mode off");
 
 				dkeys_have_been_used = TRUE;
 
@@ -463,13 +463,13 @@ extern int AENG_detail_crinkles;
 			case 25:
 				PYRO_create(darci->WorldPos, PYRO_GAMEOVER);
 				break;
-				
+
 		  }
 		  return;
 	  }
   }
   CONSOLE_text("huh?",3000);
-  
+
 }
 
 #endif
@@ -503,8 +503,8 @@ void	tga_dump(void)
 
 	//
 	// Find the first available file.
-	// 
-	
+	//
+
 	for (i = 0; i < 10000; i++)
 	{
 		sprintf(fname, "c:\\tmp\\shot%03d.tga", i);
@@ -668,7 +668,7 @@ void plan_view_shot()
 
 	//
 	// Shadow the floor.
-	// 
+	//
 
 	for (mx = 0; mx < 128; mx++)
 	for (mz = 0; mz < 128; mz++)
@@ -685,7 +685,7 @@ void plan_view_shot()
 			tga[px + dx][py + dy].green = tga[px + dx][py + dy].green * shad[shadow][(2 - dx) + (2 - dy) * 3] >> 2;
 			tga[px + dx][py + dy].blue  = tga[px + dx][py + dy].blue  * shad[shadow][(2 - dx) + (2 - dy) * 3] >> 2;
 		}
-		
+
 	}
 
 	//
@@ -769,10 +769,10 @@ void plan_view_shot()
 	//
 	// Waypoints.
 	//
-	
+
 	UBYTE dot_do;
 	UBYTE dot_size;
-	
+
 	EWAY_Way *ew;
 
 	for (i = 1; i < EWAY_way_upto; i++)
@@ -867,7 +867,7 @@ void plan_view_shot()
 						red    = 255;
 						green  = 55;
 						blue   = 55;
-						
+
 						break;
 				}
 
@@ -1001,7 +1001,7 @@ SLONG can_i_draw_this_special(Thing *p_special)
 }
 
 
-void	CONTROLS_set_inventory(Thing *darci, Thing *player,SLONG count) 
+void	CONTROLS_set_inventory(Thing *darci, Thing *player,SLONG count)
 {
 	Thing *p_special = NULL;
 //	SBYTE count;
@@ -1018,7 +1018,7 @@ void	CONTROLS_set_inventory(Thing *darci, Thing *player,SLONG count)
 //	if (player->Genus.Player->PopupFade<64) CONTROLS_rot_inventory(darci,player,1);   //not needed on PC anymore
 //	count=player->Genus.Player->ItemFocus;
 
-	if (!count) 
+	if (!count)
 	{
 		set_person_item_away(darci);
 		return; // using fists
@@ -1033,11 +1033,11 @@ void	CONTROLS_set_inventory(Thing *darci, Thing *player,SLONG count)
 
 	if (p_special && can_i_draw_this_special(p_special))
 		count--;
-	
+
 	while (count) {
 		if (!p_special) break; // no specials -- gun maybe?
 		ASSERT(p_special->Class == CLASS_SPECIAL);
-	
+
 		if (p_special->Genus.Special->NextSpecial)
 			p_special = TO_THING(p_special->Genus.Special->NextSpecial);
 		else
@@ -1072,7 +1072,7 @@ void	CONTROLS_set_inventory(Thing *darci, Thing *player,SLONG count)
 		}
 	}
 
-	
+
 }
 
 #ifndef PSX
@@ -1146,7 +1146,7 @@ SBYTE CONTROLS_get_selected_item(Thing *darci, Thing *player) {
 #define	BAT_SCORE		2
 #define	GRENADE_SCORE	1
 
-SBYTE CONTROLS_get_best_item(Thing *darci, Thing *player) 
+SBYTE CONTROLS_get_best_item(Thing *darci, Thing *player)
 {
 	SBYTE count=1; // 0 is fist
 	Thing *p_special = NULL;
@@ -1156,13 +1156,13 @@ SBYTE CONTROLS_get_best_item(Thing *darci, Thing *player)
 	{
 		p_special = TO_THING(darci->Genus.Person->SpecialList);
 
-		while(p_special) 
+		while(p_special)
 		{
 			ASSERT(p_special->Class == CLASS_SPECIAL);
 			if (can_i_draw_this_special(p_special))
 			{
 				switch(p_special->Genus.Special->SpecialType)
-				{	
+				{
 					case SPECIAL_SHOTGUN:
 						if(p_special->Genus.Special->ammo||darci->Genus.Person->ammo_packs_shotgun)
 						if(current_score<SHOTGUN_SCORE)
@@ -1213,7 +1213,7 @@ SBYTE CONTROLS_get_best_item(Thing *darci, Thing *player)
 		}
 	}
 
-	if (darci->Flags & FLAGS_HAS_GUN) 
+	if (darci->Flags & FLAGS_HAS_GUN)
 	{
 		if(darci->Genus.Person->ammo_packs_pistol || darci->Genus.Person->Ammo)
 		{
@@ -1236,20 +1236,20 @@ SBYTE CONTROLS_get_best_item(Thing *darci, Thing *player)
 //
 // does the panel fade in, and if no item is focus it finds if you have a current weapon and sets that as focus
 //
-SLONG	CONTROLS_new_inventory(Thing *darci, Thing *player) 
+SLONG	CONTROLS_new_inventory(Thing *darci, Thing *player)
 {
 	UWORD temp = player->Genus.Player->PopupFade;
-	if (!temp) 
+	if (!temp)
 		player->Genus.Player->ItemFocus=-1;
 
 	temp+=INVENTORY_FADE_SPEED;
 
-	if (temp<256) 
+	if (temp<256)
 		player->Genus.Player->PopupFade=temp;
 
 	if (player->Genus.Player->ItemFocus==-1)
 	{
-/*		
+/*
 		if(darci->Genus.Person->SpecialUse==0 &&  !(darci->Flags & FLAGS_HAS_GUN) )
 		{
 			//
@@ -1259,13 +1259,13 @@ SLONG	CONTROLS_new_inventory(Thing *darci, Thing *player)
 			player->Genus.Player->ItemFocus = CONTROLS_get_best_item(darci, player);
 			if(player->Genus.Player->ItemFocus)
 			{
-				CONTROLS_set_inventory(darci,player,player->Genus.Player->ItemFocus); 
+				CONTROLS_set_inventory(darci,player,player->Genus.Player->ItemFocus);
 				return(1);
 			}
 		}
 		else
 */
-		
+
 		{
 			player->Genus.Player->ItemFocus = CONTROLS_get_selected_item(darci, player);
 		}
@@ -1276,18 +1276,18 @@ SLONG	CONTROLS_new_inventory(Thing *darci, Thing *player)
 
 //void	CONTROLS_set_inventory(Thing *darci, Thing *player);
 
-void	CONTROLS_rot_inventory(Thing *darci, Thing *player, SBYTE dir,SLONG pull_it_out_ooooerrr) 
+void	CONTROLS_rot_inventory(Thing *darci, Thing *player, SBYTE dir,SLONG pull_it_out_ooooerrr)
 {
 	player->Genus.Player->ItemFocus+=dir;
-	if (player->Genus.Player->ItemFocus==-1) 
+	if (player->Genus.Player->ItemFocus==-1)
 		player->Genus.Player->ItemFocus=player->Genus.Player->ItemCount-1;
 
-	if (player->Genus.Player->ItemFocus>=player->Genus.Player->ItemCount) 
+	if (player->Genus.Player->ItemFocus>=player->Genus.Player->ItemCount)
 		player->Genus.Player->ItemFocus=0;
 
 	if(pull_it_out_ooooerrr)
-		CONTROLS_set_inventory(darci,player,player->Genus.Player->ItemFocus); 
-}											  
+		CONTROLS_set_inventory(darci,player,player->Genus.Player->ItemFocus);
+}
 
 /*
 void	CONTROLS_set_inventory(Thing *darci, Thing *player) {
@@ -1320,11 +1320,11 @@ void	CONTROLS_set_inventory(Thing *darci, Thing *player) {
 
 	if (p_special && can_i_draw_this_special(p_special))
 		count--;
-	
+
 	while (count) {
 		if (!p_special) break; // no specials -- gun maybe?
 		ASSERT(p_special->Class == CLASS_SPECIAL);
-	
+
 		if (p_special->Genus.Special->NextSpecial)
 			p_special = TO_THING(p_special->Genus.Special->NextSpecial);
 		else
@@ -1359,7 +1359,7 @@ void	CONTROLS_set_inventory(Thing *darci, Thing *player) {
 		}
 	}
 
-	
+
 }
 */
 
@@ -1377,18 +1377,18 @@ void	context_music(void)
 	static	SLONG danger=0;
 	static enum Waves danger_lookup[] = { S_NULL, S_TUNE_DANGER_RED, S_NULL, S_TUNE_DANGER_GREEN };
 	UBYTE	new_danger;
-	
+
 	if (!NET_PLAYER(PLAYER_ID))
 	{
 		MUSIC_mode(0);
 		return;
-	} 
-	else 
+	}
+	else
 		new_danger=NET_PLAYER(PLAYER_ID)->Genus.Player->Danger;
 
 	// the danger 'tunes' are more sfx than music, and can overlap other tunes without clashing.
 
-	if(new_danger!=danger) 
+	if(new_danger!=danger)
 	{
 		danger=danger_lookup[new_danger];
 		if (danger) MFX_play_ambient(MUSIC_REF+1,danger,MFX_OVERLAP);
@@ -1401,7 +1401,7 @@ void	context_music(void)
 
 	if(darci->Genus.Person->Flags&FLAG_PERSON_DRIVING)
 		mode = MUSIC_MODE_DRIVING;
-	 
+
 	if(darci->SubState==SUB_STATE_CRAWLING)
 		mode = MUSIC_MODE_CRAWLING;
 
@@ -1415,7 +1415,7 @@ void	context_music(void)
 	// hi ho, hi ho, a bodging we shall go
 	switch(MUSIC_bodge_code)
 	{
-	case 1: 
+	case 1:
 		mode=MUSIC_MODE_TRAIN_COMBAT;
 		break;
 	case 2:
@@ -1430,12 +1430,12 @@ void	context_music(void)
 	}
 #endif
 
-	if (WARE_ware[darci->Genus.Person->Ware].ambience==4) 
+	if (WARE_ware[darci->Genus.Person->Ware].ambience==4)
 		return;
 //		mode=0; // we're inside the nightclub, so don't play context music.
 
 // Just for dreamcast MikeD aug 2000
-//	if (WARE_ware[darci->Genus.Person->Ware].ambience) 
+//	if (WARE_ware[darci->Genus.Person->Ware].ambience)
 //		mode=13+WARE_ware[darci->Genus.Person->Ware].ambience;
 		//return; // we're inside the nightclub, so don't play context music.
 
@@ -1504,7 +1504,7 @@ void	context_music(void)
 		drive=0;*/
 	}
 
-	 
+
 	if(darci->SubState==SUB_STATE_CRAWLING)
 	{
 		/*
@@ -1541,7 +1541,7 @@ void	context_music(void)
 				MUSIC_play(S_TUNE_FIGHT+(GAME_TURN&1),MUSIC_FLAG_QUEUED|MUSIC_FLAG_FADE_OUT|MUSIC_FLAG_FADE_IN);
 			return;
 		}*/
-		
+
 		mode = MUSIC_MODE_FIGHTING;
 
 	}
@@ -1565,8 +1565,8 @@ void	context_music(void)
 
 	MUSIC_mode(mode);
 
-#if 0	
-//	switch (NET_PLAYER(PLAYER_ID)->Genus.Player->Danger) 
+#if 0
+//	switch (NET_PLAYER(PLAYER_ID)->Genus.Player->Danger)
 	if(new_danger_music)
 	{
 		//
@@ -1626,7 +1626,7 @@ void	context_music(void)
 */
 				break;
 		}
-	} 
+	}
 #endif
 
 /*
@@ -1763,7 +1763,7 @@ void	set_danger_level()
 					{
 						//
 						// These are safe people...
-						// 
+						//
 					}
 				}
 
@@ -1804,7 +1804,7 @@ void	process_controls(void)
 
 	*/
 
-	
+
 	/*
 	{
 		static werwer = FALSE;
@@ -1883,9 +1883,9 @@ void	process_controls(void)
 #endif //#ifndef TARGET_DC
 
 
-//	PANEL_new_text(NULL, 2000, "abcdefghijk lmnopqr stuvwxyz ABCDEFG HIJKLMNO PQRSTUVWXYZ 0123456789 !\"£$%^ &*(){} []<>\\/:;'@ #~?-=+.,");
+//	PANEL_new_text(NULL, 2000, "abcdefghijk lmnopqr stuvwxyz ABCDEFG HIJKLMNO PQRSTUVWXYZ 0123456789 !\"ï¿½$%^ &*(){} []<>\\/:;'@ #~?-=+.,");
 //	PANEL_new_text(NULL, 2000, "a-b-c-d-e-f-g  h-i-j-k-l-m-n");
-	
+
 	#if THIS_IS_A_LOS_TEST
 
 	{
@@ -2008,10 +2008,10 @@ void	process_controls(void)
 			"xyzABCDEFGHIJKLMNOPQRS "
 			"TUVWXYZ0123456789!\"#$ "
 			"%^&*(){}[]<>\\/:;'@#_?-=+., "
-			"ÄË ABC ÏÖØÜß Abc ïöøü "
-			"ÆÇôàâç abc èéê abc îïôøû "
-			"¡¿Ø abc áäéí abc ñóøú "
- 			"ÀÈ ABC ÌÒÙàì abc òù©®");
+			"ï¿½ï¿½ ABC ï¿½ï¿½ï¿½ï¿½ï¿½ Abc ï¿½ï¿½ï¿½ï¿½ "
+			"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ abc ï¿½ï¿½ï¿½ abc ï¿½ï¿½ï¿½ï¿½ï¿½ "
+			"ï¿½ï¿½ï¿½ abc ï¿½ï¿½ï¿½ï¿½ abc ï¿½ï¿½ï¿½ï¿½ "
+ 			"ï¿½ï¿½ ABC ï¿½ï¿½ï¿½ï¿½ï¿½ abc ï¿½ï¿½ï¿½ï¿½");
 	}
 #endif
 
@@ -2045,7 +2045,7 @@ void	process_controls(void)
 		Thing	*p_thing;
 
 
-		if (Keys[KB_RBRACE]) 
+		if (Keys[KB_RBRACE])
 		{
 			Keys[KB_RBRACE]=0;
 			while(1)
@@ -2062,9 +2062,9 @@ void	process_controls(void)
 
 				}
 			}
-			
+
 		}
-		if (Keys[KB_LBRACE]) 
+		if (Keys[KB_LBRACE])
 		{
 			Keys[KB_LBRACE]=0;
 			while(1)
@@ -2081,7 +2081,7 @@ void	process_controls(void)
 
 				}
 			}
-			
+
 		}
 
 		if(Keys[KB_P])
@@ -2130,7 +2130,7 @@ void	process_controls(void)
 	if (Keys[KB_7])
 	{
 		Keys[KB_7] = 0;
-	
+
 		PARTICLE_Add(
 			darci->WorldPos.X,
 			darci->WorldPos.Y + 0x5000,
@@ -2147,7 +2147,7 @@ void	process_controls(void)
 			1,
 			1,
 			1);
-	
+
 		/*
 
 		static pow_size = POW_CREATE_MEDIUM;
@@ -2193,7 +2193,7 @@ void	process_controls(void)
 	/*
 
 	if ((GAME_TURN & 0xffff) == 0)
-	{		
+	{
 		SLONG look = ROAD_get_mapsquare_type(darci->WorldPos.X >> 16, darci->WorldPos.Z >> 16);
 
 		CBYTE *look_names[] =
@@ -2293,8 +2293,8 @@ SLONG is_person_crouching(Thing *p_person);
 
 
 	// console processing
-	
-	
+
+
 	static BOOL  is_inputing=0;
 	extern UBYTE InkeyToAscii[];
 	extern UBYTE InkeyToAsciiShift[];
@@ -2328,7 +2328,7 @@ SLONG is_person_crouching(Thing *p_person);
 				}
 				LastKey=0;
 			}
-			
+
 			CONSOLE_status(input_text);
 			POLY_frame_draw(FALSE, FALSE);
 
@@ -2363,7 +2363,7 @@ SLONG is_person_crouching(Thing *p_person);
 			}
 */
 
-			if (NET_PLAYER(0)->Genus.Player->Pressed & INPUT_MASK_SELECT) 
+			if (NET_PLAYER(0)->Genus.Player->Pressed & INPUT_MASK_SELECT)
 			{
 				CONTROLS_new_inventory(darci, the_player);
 
@@ -2376,7 +2376,7 @@ SLONG is_person_crouching(Thing *p_person);
 					the_player->Genus.Player->ItemFocus = CONTROLS_get_best_item(darci, the_player);
 					if(the_player->Genus.Player->ItemFocus)
 					{
-						CONTROLS_set_inventory(darci,the_player,the_player->Genus.Player->ItemFocus); 
+						CONTROLS_set_inventory(darci,the_player,the_player->Genus.Player->ItemFocus);
 					}
 					else
 						CONTROLS_rot_inventory(darci,the_player, 1,1);
@@ -2408,13 +2408,13 @@ SLONG is_person_crouching(Thing *p_person);
 					//
 					CONTROLS_new_inventory(darci, the_player);
 /*
-					if ((NET_PLAYER(0)->Genus.Player->Pressed & INPUT_MASK_LEFT)||(NET_PLAYER(0)->Genus.Player->Pressed & INPUT_MASK_FORWARDS)) 
+					if ((NET_PLAYER(0)->Genus.Player->Pressed & INPUT_MASK_LEFT)||(NET_PLAYER(0)->Genus.Player->Pressed & INPUT_MASK_FORWARDS))
 					{
 //						NET_PLAYER(0)->Genus.Player->Pressed &= ~(INPUT_MASK_LEFT|INPUT_MASK_FORWARDS);
 						CONTROLS_rot_inventory(darci,the_player,-1,0);
 						CONTROLS_inventory_mode=500;
 					}
-					if ((NET_PLAYER(0)->Genus.Player->Pressed & INPUT_MASK_RIGHT)||(NET_PLAYER(0)->Genus.Player->Pressed & INPUT_MASK_BACKWARDS)) 
+					if ((NET_PLAYER(0)->Genus.Player->Pressed & INPUT_MASK_RIGHT)||(NET_PLAYER(0)->Genus.Player->Pressed & INPUT_MASK_BACKWARDS))
 					{
 //						NET_PLAYER(0)->Genus.Player->Pressed &= ~(INPUT_MASK_RIGHT|INPUT_MASK_BACKWARDS);
 						CONTROLS_rot_inventory(darci,the_player, 1,0);
@@ -2440,10 +2440,10 @@ SLONG is_person_crouching(Thing *p_person);
 
 //		if (the_player->Genus.Player->PopupFade&&!(NET_PLAYER(0)->Genus.Player->ThisInput & INPUT_MASK_SELECT)) {
 
-		if (the_player->Genus.Player->PopupFade&&!CONTROLS_inventory_mode) 
+		if (the_player->Genus.Player->PopupFade&&!CONTROLS_inventory_mode)
 		{
 			the_player->Genus.Player->PopupFade-=INVENTORY_FADE_SPEED;
-			if (the_player->Genus.Player->ItemFocus>-1) 
+			if (the_player->Genus.Player->ItemFocus>-1)
 			{
 //				CONTROLS_set_inventory(darci,the_player);
 				the_player->Genus.Player->ItemFocus = -1;
@@ -2619,7 +2619,7 @@ void	save_whole_game(CBYTE	*gamename);
 	if(Keys[KB_1])
 	{
 extern	UBYTE	anim_type[];
-										   
+
 		darci->Genus.Person->PersonType =  PERSON_DARCI;
 		darci->Genus.Person->AnimType =  ANIM_TYPE_DARCI;
 		darci->Draw.Tweened->TheChunk   = &game_chunk[ANIM_TYPE_DARCI];
@@ -2632,8 +2632,8 @@ extern	UBYTE	anim_type[];
 
 //darci->Genus.Person->Flags&=~FLAG_PERSON_OTHERHAND;
 void FC_look_at(SLONG cam, UWORD thing_index);
-		
-		
+
+
 		FC_look_at(0,THING_NUMBER(darci));
 
 //		yomp_speed=50;
@@ -2729,7 +2729,7 @@ void FC_look_at(SLONG cam, UWORD thing_index);
 	}
 	*/
 /*
-	switch (NET_PLAYER(0)->Genus.Player->Danger) 
+	switch (NET_PLAYER(0)->Genus.Player->Danger)
 	{
 		case 0: // no danger warning
 			break;
@@ -2751,7 +2751,7 @@ void FC_look_at(SLONG cam, UWORD thing_index);
 //	TRACE("danger numbers: %d\n",(NET_PLAYER(0)->Genus.Player->Danger));
 
 	if (!ShiftFlag)
-	{		
+	{
 		if (Keys[KB_J])
 		{
 			SLONG mx = darci->WorldPos.X >> 16;
@@ -2951,7 +2951,7 @@ void FC_look_at(SLONG cam, UWORD thing_index);
 		pz += 0x80;
 
 		if (ControlFlag)
-		{		
+		{
 			DIRT_new_water(px,py,pz, 1+(SIN(darci->Draw.Tweened->Angle+((GAME_TURN*7)&15))>>12),14,   (COS(darci->Draw.Tweened->Angle+((GAME_TURN*7)&15))>>12));
 			DIRT_new_water(px,py,pz, 1+(SIN(darci->Draw.Tweened->Angle+((GAME_TURN*7)&15))>>12),14,-1+(COS(darci->Draw.Tweened->Angle+((GAME_TURN*7)&15))>>12));
 			DIRT_new_water(px,py,pz, 1+(SIN(darci->Draw.Tweened->Angle+((GAME_TURN*7)&15))>>12),14, 1+(COS(darci->Draw.Tweened->Angle+((GAME_TURN*7)&15))>>12));
@@ -3035,7 +3035,7 @@ void FC_look_at(SLONG cam, UWORD thing_index);
 				x2, 12, z2, 8, 0x00866dd,
 				los_failure_x, 12, los_failure_z, 8, 0x00ff22ee,
 				TRUE);
-			
+
 		}
 	}
 
@@ -3219,7 +3219,7 @@ void FC_look_at(SLONG cam, UWORD thing_index);
 		//
 		// Wind...
 		//
-		
+
 		static SLONG wind_dx = 0;
 		static SLONG wind_dz = 0;
 
@@ -3278,7 +3278,7 @@ void FC_look_at(SLONG cam, UWORD thing_index);
 
 			SLONG wind_dx = (wind_speed >> 3) ;
 			SLONG wind_dz = (wind_speed >> 4) ;
-			
+
 			wind_counter=(Random()&0x3f);
 
 /*			DIRT_gale(
@@ -3486,7 +3486,7 @@ extern void PYRO_fn_init(Thing *thing);
 		}
 	}
 	}
-	
+
 
 /*
 	if (Keys[KB_P8])
@@ -3578,7 +3578,7 @@ extern void PYRO_fn_init(Thing *thing);
 
 		SPARK_Pinfo p1;
 		SPARK_Pinfo p2;
-	
+
 		p1.type   = SPARK_TYPE_LIMB;
 		p1.flag   = 0;
 		p1.person = THING_NUMBER(darci);
@@ -3732,7 +3732,7 @@ extern void PYRO_fn_init(Thing *thing);
 	}
 
 	/*
-	
+
 	static SWORD steamypos = 0;
 	if (Keys[KB_POINT]) {
 		Keys[KB_POINT]=0;
@@ -3791,11 +3791,11 @@ extern void PYRO_fn_init(Thing *thing);
 
 	static SLONG      ma_valid = 0;
 	static MAV_Action ma = {0,0,0,0};
-#ifndef	PSX	
+#ifndef	PSX
 #ifndef TARGET_DC
 	{
 		//e_draw_3d_mapwho_y(nav_x, MAV_height[nav_x][nav_z] << 6, nav_z);
- 
+
 		if (ma_valid)
 		{
 			SLONG x1 = darci->WorldPos.X >> 8;
@@ -3930,10 +3930,10 @@ extern	void PCOM_set_person_ai_kill_person(Thing *p_person, Thing *p_target, SLO
 		if (Keys[KB_X])
 		{
 			Keys[KB_X] = 0;
-			
+
 void	set_person_mav_to_xz(Thing *p_person,SLONG x,SLONG z);
 			set_person_mav_to_xz(darci,nav_x<<8,nav_z<<8);
-			
+
 			ma_valid = TRUE;
 
 		}
@@ -4103,7 +4103,7 @@ void	set_person_mav_to_xz(Thing *p_person,SLONG x,SLONG z);
 
 			GameCoord p1 = darci->WorldPos;
 			GameCoord p2;
-			
+
 			p1.X>>=8;
 			p1.Y>>=8;
 			p1.Z>>=8;
@@ -4398,7 +4398,7 @@ void	set_person_mav_to_xz(Thing *p_person,SLONG x,SLONG z);
 
 							pos.X += 0x8000;
 							pos.Z += 0x8000;
-							
+
 							move_thing_on_map(darci, &pos);
 
 							//
@@ -4627,26 +4627,26 @@ extern	SLONG	FC_cam_height;
 				dz=SIN(angle*(2047/7))>>8;
 				switch(angle)
 				{
-					case 0: 
-						alloc_special(SPECIAL_HEALTH     , SPECIAL_SUBSTATE_NONE, wx+dx, wy + 0x10, wz+dz, 0); 
+					case 0:
+						alloc_special(SPECIAL_HEALTH     , SPECIAL_SUBSTATE_NONE, wx+dx, wy + 0x10, wz+dz, 0);
 						break;
-					case 1: 
-						alloc_special(SPECIAL_BASEBALLBAT        , SPECIAL_SUBSTATE_NONE, wx+dx, wy,        wz+dz, 0); 
+					case 1:
+						alloc_special(SPECIAL_BASEBALLBAT        , SPECIAL_SUBSTATE_NONE, wx+dx, wy,        wz+dz, 0);
 						break;
-					case 2: 
-						alloc_special(SPECIAL_KNIFE        , SPECIAL_SUBSTATE_NONE, wx+dx, wy,        wz+dz, 0); 
+					case 2:
+						alloc_special(SPECIAL_KNIFE        , SPECIAL_SUBSTATE_NONE, wx+dx, wy,        wz+dz, 0);
 						break;
-					case 3: 
-						alloc_special(SPECIAL_SHOTGUN    , SPECIAL_SUBSTATE_NONE, wx+dx, wy,        wz+dz, 0); 
+					case 3:
+						alloc_special(SPECIAL_SHOTGUN    , SPECIAL_SUBSTATE_NONE, wx+dx, wy,        wz+dz, 0);
 						break;
-					case 4: 
-						alloc_special(SPECIAL_GRENADE    , SPECIAL_SUBSTATE_NONE, wx+dx, wy,        wz+dz, 0); 
+					case 4:
+						alloc_special(SPECIAL_GRENADE    , SPECIAL_SUBSTATE_NONE, wx+dx, wy,        wz+dz, 0);
 						break;
-					case 5: 
-						alloc_special(SPECIAL_AK47       , SPECIAL_SUBSTATE_NONE, wx+dx, wy,        wz+dz, 0); 
+					case 5:
+						alloc_special(SPECIAL_AK47       , SPECIAL_SUBSTATE_NONE, wx+dx, wy,        wz+dz, 0);
 						break;
-					case 6: 
-						alloc_special(SPECIAL_MINE       , SPECIAL_SUBSTATE_NONE, wx+dx, wy,        wz+dz, 0); 
+					case 6:
+						alloc_special(SPECIAL_MINE       , SPECIAL_SUBSTATE_NONE, wx+dx, wy,        wz+dz, 0);
 						break;
 
 					default:
@@ -4824,8 +4824,8 @@ extern	SLONG	FC_cam_height;
 #ifndef TARGET_DC
 #if !defined(PSX)
 		if (Keys[KB_R])
-		{	
-			Keys[KB_R] = 0;		 
+		{
+			Keys[KB_R] = 0;
 
 			SLONG world_x;
 			SLONG world_y;
@@ -4946,7 +4946,7 @@ SBYTE CONTROLS_get_selected_item(Thing *darci, Thing *player) {
 }
 
 
-void	CONTROLS_new_inventory(Thing *darci, Thing *player) 
+void	CONTROLS_new_inventory(Thing *darci, Thing *player)
 {
 	PSX_inv_open=1;
 	PSX_inv_focus = CONTROLS_get_selected_item(darci,player);
@@ -4965,13 +4965,13 @@ void	CONTROLS_new_inventory(Thing *darci, Thing *player)
 */
 }
 
-void	CONTROLS_rot_inventory(Thing *darci, Thing *player, SBYTE dir) 
+void	CONTROLS_rot_inventory(Thing *darci, Thing *player, SBYTE dir)
 {
 	PSX_inv_timer=3;
 	PSX_inv_focus+=dir;
-	if (PSX_inv_focus<0) 
+	if (PSX_inv_focus<0)
 		PSX_inv_focus=PSX_inv_count-1;
-	if (PSX_inv_focus>=PSX_inv_count) 
+	if (PSX_inv_focus>=PSX_inv_count)
 		PSX_inv_focus=0;
 }
 /*
@@ -4994,14 +4994,14 @@ void	CONTROLS_set_inventory(Thing *darci, Thing *player) {
 	}
 
 	// Make Darci use an item.
-	
+
 	if (darci->Genus.Person->SpecialList!=0)
 		p_special = TO_THING(darci->Genus.Person->SpecialList);
 	else
 		p_special = 0;
 
 	count--;
-	
+
 	while (count) {
 		if (!p_special) break; // no specials -- gun maybe?
 		ASSERT(p_special->Class == CLASS_SPECIAL);
@@ -5013,7 +5013,7 @@ void	CONTROLS_set_inventory(Thing *darci, Thing *player) {
 		{
 			count--;
 		}
-		
+
 		if (p_special->Genus.Special->NextSpecial)
 			p_special = TO_THING(p_special->Genus.Special->NextSpecial);
 		else
@@ -5043,7 +5043,7 @@ void	CONTROLS_set_inventory(Thing *darci, Thing *player) {
 		}
 	}
 
-	
+
 }
 */
 //
@@ -5129,12 +5129,12 @@ void	process_controls(void)
 				else
 				{
 					PSX_inv_open=0;
-					CONTROLS_set_inventory(darci,the_player,PSX_inv_focus); 
+					CONTROLS_set_inventory(darci,the_player,PSX_inv_focus);
 				}
-	
-			} 
+
+			}
 		}
-		if (PSX_inv_open) 
+		if (PSX_inv_open)
 		{
 			if(PSX_inv_timer)
 			{
@@ -5156,7 +5156,7 @@ void	process_controls(void)
 				if ((PACKET_DATA(0) & INPUT_MASK_RIGHT)||(PACKET_DATA(0) & INPUT_MASK_BACKWARDS))
 					CONTROLS_rot_inventory(darci,the_player, 1);
 			}
-				
+
 		}
 
 	}

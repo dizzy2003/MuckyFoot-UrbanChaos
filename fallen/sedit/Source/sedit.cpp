@@ -9,9 +9,9 @@
 #include "fmatrix.h"
 #include "es.h"
 #include "ns.h"
-#include "c:\fallen\editor\headers\prim.h"
-#include "c:\fallen\headers\building.h"
-#include	"c:\fallen\headers\memory.h"
+#include "fallen/editor/headers/prim.h"
+#include "fallen/headers/building.h"
+#include	"fallen/headers/memory.h"
 
 
 HINSTANCE SEDIT_hinstance;
@@ -51,7 +51,7 @@ UINT SEDIT_wm_mousewheel;
 
 //
 // The current map.
-// 
+//
 
 CBYTE SEDIT_map_name[_MAX_PATH];
 SLONG SEDIT_map_valid;		// TRUE => A map is loaded.
@@ -88,7 +88,7 @@ SLONG SEDIT_mouse_light;
 
 //
 // Our current engine view.
-// 
+//
 
 #define SEDIT_VIEW_TYPE_NONE   0
 #define SEDIT_VIEW_TYPE_SEWERS 1
@@ -97,7 +97,7 @@ SLONG SEDIT_mouse_light;
 
 //
 // View flags.
-// 
+//
 
 #define SEDIT_VIEW_FLAG_SHOW_BUILDINGS	(1 << 0)
 
@@ -131,13 +131,13 @@ SLONG SEDIT_city_water_place_state;
 
 //
 // What we are currently doing.
-// 
+//
 
 #define SEDIT_DOING_NOTHING			   0
 #define SEDIT_DOING_PAINT_SEWERS	   1
 #define SEDIT_DOING_PAINT_GROUND	   2
 #define SEDIT_DOING_PAINT_ROCK		   3
-#define SEDIT_DOING_PAINT_HOLE		   4  
+#define SEDIT_DOING_PAINT_HOLE		   4
 #define SEDIT_DOING_PAINT_WATER_ON	   5
 #define SEDIT_DOING_PAINT_WATER_OFF    6
 #define SEDIT_DOING_PAINT_ENTRANCE_ON  7
@@ -151,7 +151,7 @@ SLONG SEDIT_doing;
 
 //
 // For placing ladders.
-// 
+//
 
 SLONG SEDIT_ladder_mid_x;
 SLONG SEDIT_ladder_mid_z;
@@ -177,7 +177,7 @@ SLONG SEDIT_cam_left   [3]; // The movement vector left
 
 //
 // Changes the windows and menus to reflect the current state.
-// 
+//
 
 CBYTE SEDIT_engine_window_text[256];
 
@@ -291,7 +291,7 @@ void SEDIT_set_state_look()
 		EnableMenuItem(SEDIT_main_menu, ID_EDIT_PLACE_PRIM,     MF_ENABLED);
 		EnableMenuItem(SEDIT_main_menu, ID_EDIT_PLACE_LADDER,   MF_ENABLED);
 		EnableMenuItem(SEDIT_main_menu, ID_EDIT_EDIT_LIGHT,     MF_ENABLED);
-		                                                                     
+
 		EnableMenuItem(SEDIT_main_menu, ID_VIEW_SEWER_ENGINE,   MF_ENABLED);
 		EnableMenuItem(SEDIT_main_menu, ID_VIEW_SEWER_EDITOR,   MF_ENABLED);
 		EnableMenuItem(SEDIT_main_menu, ID_VIEW_CITY_ENGINE,    MF_ENABLED);
@@ -528,7 +528,7 @@ void SEDIT_load_map(CBYTE *name)
 
 	//
 	// The default sewer file name.
-	// 
+	//
 
 	{
 		CBYTE *ch;
@@ -542,7 +542,7 @@ void SEDIT_load_map(CBYTE *name)
 			{
 				break;
 			}
-			
+
 			if (*ch == '\\')
 			{
 				ch++;
@@ -629,7 +629,7 @@ void SEDIT_sewers_load(void)
 				break;
 		}
 	}
-	
+
  	if (!GetOpenFileName(&SEDIT_ofn_sewers))
 	{
 		return;
@@ -827,7 +827,7 @@ void SEDIT_process(void)
 
 	//
 	// The y of the focus is more tricky.
-	// 
+	//
 
 	SLONG want_focus_y;
 
@@ -863,7 +863,7 @@ void SEDIT_process(void)
 	}
 
 	SLONG dfocus_y;
-	
+
 	dfocus_y   = want_focus_y - SEDIT_cam_focus_y;
 	dfocus_y >>= 4;
 
@@ -1011,7 +1011,7 @@ LRESULT CALLBACK SEDIT_callback_frame(
 			if (SEDIT_view_type == SEDIT_VIEW_TYPE_ENGINE)
 			{
 				dheight = (dwheel < 0) ? -16 : +16;
-				
+
 				//
 				// Change the height of the city water.
 				//
@@ -1235,14 +1235,14 @@ LRESULT CALLBACK SEDIT_callback_frame(
 
 			//
 			// The message we send to ourselves when nothing else is happening.
-			// 
+			//
 
 			SEDIT_process();
 
 			return 0;
 
 		case WM_KILLFOCUS:
-			
+
 			//
 			// Stop the focus going elsewhere!
 			//
@@ -1265,7 +1265,7 @@ LRESULT CALLBACK SEDIT_callback_frame(
 
 //
 // The callback function for the choose-a-prim dialog box.
-// 
+//
 
 LRESULT CALLBACK SEDIT_callback_choose_prim(
 					HWND   dialog_handle,
@@ -1284,11 +1284,11 @@ LRESULT CALLBACK SEDIT_callback_choose_prim(
 	switch(message_type)
 	{
 		case WM_INITDIALOG:
-			
+
 			if (SEDIT_map_valid)
 			{
 				list_handle = GetDlgItem(dialog_handle, IDC_PRIM_LIST);
-				
+
 				for (i = 1; i < next_prim_object; i++)
 				{
 					SendMessage(
@@ -1321,7 +1321,7 @@ LRESULT CALLBACK SEDIT_callback_choose_prim(
 			switch(LOWORD(param_w))
 			{
 				case IDC_PRIM_LIST:
-					
+
 					if (HIWORD(param_w) == LBN_SELCHANGE)
 					{
 						list_handle = GetDlgItem (dialog_handle, IDC_PRIM_LIST);
@@ -1404,7 +1404,7 @@ LRESULT CALLBACK SEDIT_callback_engine(
 			return 0;
 
 		case WM_LBUTTONDOWN:
-			
+
 			if (SEDIT_mouse_valid)
 			{
 				if (SEDIT_view_type == SEDIT_VIEW_TYPE_ENGINE)
@@ -1421,7 +1421,7 @@ LRESULT CALLBACK SEDIT_callback_engine(
 					ASSERT(WITHIN(SEDIT_mouse_map_x, 0, PAP_SIZE_HI - 1));
 					ASSERT(WITHIN(SEDIT_mouse_map_z, 0, PAP_SIZE_HI - 1));
 
-					eh = &ES_hi[SEDIT_mouse_map_x][SEDIT_mouse_map_z];				
+					eh = &ES_hi[SEDIT_mouse_map_x][SEDIT_mouse_map_z];
 
 					switch(SEDIT_doing)
 					{
@@ -1481,7 +1481,7 @@ LRESULT CALLBACK SEDIT_callback_engine(
 				}
 
 				//
-				// Pretend that the mouse has moved- because the action we 
+				// Pretend that the mouse has moved- because the action we
 				// are doing only occurs when the mouse moves.
 				//
 
@@ -1515,7 +1515,7 @@ LRESULT CALLBACK SEDIT_callback_engine(
 					break;
 
 				case SEDIT_DOING_PLACE_LADDER:
-					
+
 					if (SEDIT_mouse_valid)
 					{
 						ES_ladder_create(
@@ -1568,7 +1568,7 @@ LRESULT CALLBACK SEDIT_callback_engine(
 					ASSERT(WITHIN(SEDIT_mouse_map_x, 0, PAP_SIZE_HI - 1));
 					ASSERT(WITHIN(SEDIT_mouse_map_z, 0, PAP_SIZE_HI - 1));
 
-					eh = &ES_hi[SEDIT_mouse_map_x][SEDIT_mouse_map_z];				
+					eh = &ES_hi[SEDIT_mouse_map_x][SEDIT_mouse_map_z];
 
 					switch(SEDIT_doing)
 					{
@@ -1618,7 +1618,7 @@ LRESULT CALLBACK SEDIT_callback_engine(
 			return 0;
 
 		case WM_RBUTTONDOWN:
-			
+
 			ret = DialogBox(
 					SEDIT_hinstance,
 					MAKEINTRESOURCE(IDD_CHOOSE_PRIM),
@@ -1629,7 +1629,7 @@ LRESULT CALLBACK SEDIT_callback_engine(
 			{
 				SEDIT_prim_object = ret;
 			}
-			
+
 			return 0;
 
 		case WM_COMMAND:
@@ -1676,7 +1676,7 @@ void SEDIT_do(void)
 
 	//
 	// Our frame window class.
-	// 
+	//
 
 	SEDIT_class_frame.hInstance		= SEDIT_hinstance;
 	SEDIT_class_frame.lpszClassName	= SEDIT_name_frame;
@@ -1690,19 +1690,19 @@ void SEDIT_do(void)
 	SEDIT_class_frame.hIconSm		= SEDIT_icon;
 	SEDIT_class_frame.hCursor		= LoadCursor(NULL, IDC_ARROW);
 	SEDIT_class_frame.hbrBackground	= (struct HBRUSH__ *)GetStockObject(WHITE_BRUSH);
-	
+
 	if (!RegisterClassEx(&SEDIT_class_frame))
 	{
 		//
 		// Could not register the class.
 		//
-		
+
 		return;
 	}
 	//
 	// Create the frame window.
 	//
-	
+
 	SEDIT_handle_frame = CreateWindow(
 							SEDIT_name_frame,
 							SEDIT_name_frame,
@@ -1719,7 +1719,7 @@ void SEDIT_do(void)
 	if (SEDIT_handle_frame == NULL)
 	{
 		//
-		// Could not create our main window. 
+		// Could not create our main window.
 		//
 
 		UnregisterClass(SEDIT_name_frame, SEDIT_hinstance);
@@ -1752,7 +1752,7 @@ void SEDIT_do(void)
 
 		return;
 	}
-	
+
 	rect.left   = 0;
 	rect.right  = 640;
 	rect.top    = 0;
@@ -1779,7 +1779,7 @@ void SEDIT_do(void)
 
 	//
 	// Our main menu.
-	// 
+	//
 
 	SEDIT_main_menu = LoadMenu(SEDIT_hinstance, MAKEINTRESOURCE(IDR_SEDIT_MENU));
 
@@ -1841,13 +1841,13 @@ void SEDIT_do(void)
 
 	//
 	// Our current directory.
-	// 
+	//
 
 	GetCurrentDirectory(_MAX_PATH, SEDIT_default_dir);
 
 	//
 	// The default directories of the map and lighting files.
-	// 
+	//
 
 	sprintf(SEDIT_ofn_default_dir_map,    "data");
 	sprintf(SEDIT_ofn_default_dir_sewers, "data\\sewers", SEDIT_default_dir);

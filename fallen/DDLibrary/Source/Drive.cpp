@@ -4,7 +4,7 @@
 
 #include "ddlib.h"
 #include "drive.h"
-#include "c:\fallen\headers\env.h"
+#include "fallen/headers/env.h"
 
 static char Path[MAX_PATH];			// CD-ROM path
 static bool	TexturesCD;				// textures on CD?
@@ -89,7 +89,7 @@ void LocateCDROM(void)
 				sprintf(filename, "%sclumps\\mib.txc", sptr); // fallen.ex_ doesnt exist on eidos funny fanny builds
 
 				FILE*	fd = MF_Fopen(filename, "rb");
-				
+
 				if (fd)
 				{
 					// found it!

@@ -10,12 +10,12 @@
 #include "fmatrix.h"
 #include "heap.h"
 #include "supermap.h"
-#include "c:\fallen\ledit\headers\ed.h"
+#include "fallen/ledit/headers/ed.h"
 #include "memory.h"
 #include "ware.h"
 #include "mav.h"
 
-									   
+
 
 #define	NIGHT_FLAG_INSIDE	(1<<0)
 
@@ -120,7 +120,7 @@ NIGHT_Colour NIGHT_ambient_at_point(
 
 	dprod =
 		norm_x * NIGHT_amb_norm_x +
-		norm_y * NIGHT_amb_norm_y + 
+		norm_y * NIGHT_amb_norm_y +
 		norm_z * NIGHT_amb_norm_z >> 10;
 
 
@@ -225,7 +225,7 @@ SLONG NIGHT_slight_create(
 			//
 			// Not enough room- try compressing the static lights.
 			//
-			
+
 			NIGHT_slight_compress();
 
 			if (NIGHT_slight_upto + ns->number + 1 > NIGHT_MAX_SLIGHTS)
@@ -367,7 +367,7 @@ void NIGHT_slight_delete(
 	//
 
 	ASSERT(0);
-	
+
 	return;
 }
 
@@ -464,7 +464,7 @@ void NIGHT_light_mapsquare(SLONG lo_map_x, SLONG lo_map_z, NIGHT_Colour *colour,
 	SLONG red;
 	SLONG green;
 	SLONG blue;
-	
+
 	SLONG dprod;
 	SLONG bright;
 
@@ -481,7 +481,7 @@ void NIGHT_light_mapsquare(SLONG lo_map_x, SLONG lo_map_z, NIGHT_Colour *colour,
 
 		inside = TRUE;
 	}
-	
+
 	//
 	// Allocate a 2d array on the scratchpad.
 	//
@@ -553,8 +553,8 @@ void NIGHT_light_mapsquare(SLONG lo_map_x, SLONG lo_map_z, NIGHT_Colour *colour,
 		//
 
 		dprod =
-			NIGHT_amb_norm_x * nx + 
-			NIGHT_amb_norm_y * ny + 
+			NIGHT_amb_norm_x * nx +
+			NIGHT_amb_norm_y * ny +
 			NIGHT_amb_norm_z * nz;
 
 		dprod = -dprod;
@@ -596,7 +596,7 @@ void NIGHT_light_mapsquare(SLONG lo_map_x, SLONG lo_map_z, NIGHT_Colour *colour,
 						if (col_upto->red   <= NIGHT_DARKEN_GROUND) {col_upto->red   = 0;} else {col_upto->red   -= NIGHT_DARKEN_GROUND;}
 						if (col_upto->green <= NIGHT_DARKEN_GROUND) {col_upto->green = 0;} else {col_upto->green -= NIGHT_DARKEN_GROUND;}
 						if (col_upto->blue  <= NIGHT_DARKEN_GROUND) {col_upto->blue  = 0;} else {col_upto->blue  -= NIGHT_DARKEN_GROUND;}
-						
+
 						goto darkened_this_point_once;
 					}
 				}
@@ -648,7 +648,7 @@ void NIGHT_light_mapsquare(SLONG lo_map_x, SLONG lo_map_z, NIGHT_Colour *colour,
 			// is outside.
 			//
 
-			if (inside==(nsl->blue&1))   
+			if (inside==(nsl->blue&1))
 			{
 
 				lx = (nsl->x << 2) + map_x;
@@ -1030,7 +1030,7 @@ typedef struct
 	SLONG nx;
 	SLONG ny;
 	SLONG nz;
-	
+
 } NIGHT_Point;
 
 #define NIGHT_MAX_POINTS (HEAP_PAD_SIZE / sizeof(NIGHT_Point))
@@ -1143,8 +1143,8 @@ void NIGHT_light_prim(
 	for (i = 0; i < num_points; i++)
 	{
 		dprod =
-			amb_x * prim_normal[p_obj->StartPoint + i].X + 
-			amb_y * prim_normal[p_obj->StartPoint + i].Y + 
+			amb_x * prim_normal[p_obj->StartPoint + i].X +
+			amb_y * prim_normal[p_obj->StartPoint + i].Y +
 			amb_z * prim_normal[p_obj->StartPoint + i].Z;
 
 		dprod >>= 9;
@@ -1174,7 +1174,7 @@ void NIGHT_light_prim(
 
 	if (xmin < 0) {xmin = 0;}
 	if (zmin < 0) {zmin = 0;}
-	
+
 	if (xmax > PAP_SIZE_LO - 1) {xmax = PAP_SIZE_LO - 1;}
 	if (zmax > PAP_SIZE_LO - 1) {zmax = PAP_SIZE_LO - 1;}
 
@@ -1245,8 +1245,8 @@ void NIGHT_light_prim(
 							dz = prim_points[point].Z - lz;
 
 							dprod =
-								dx * prim_normal[point].X + 
-								dy * prim_normal[point].Y + 
+								dx * prim_normal[point].X +
+								dy * prim_normal[point].Y +
 								dz * prim_normal[point].Z;
 
 							if (dprod <= 0)
@@ -1353,8 +1353,8 @@ void NIGHT_light_prim(
 				dz = prim_points[point].Z - lz;
 
 				dprod =
-					dx * prim_normal[point].X + 
-					dy * prim_normal[point].Y + 
+					dx * prim_normal[point].X +
+					dy * prim_normal[point].Y +
 					dz * prim_normal[point].Z;
 
 				if (dprod <= 0)
@@ -1401,7 +1401,7 @@ void NIGHT_light_prim(
 
 
 // ========================================================
-// 
+//
 // DYNAMIC LIGHTS
 //
 // ========================================================
@@ -1420,7 +1420,7 @@ void NIGHT_dlight_init()
 	{
 		NIGHT_dlight[i].next = i + 1;
 	}
-	
+
 	NIGHT_dlight[NIGHT_MAX_DLIGHTS - 1].next = NULL;
 	NIGHT_dlight_free                        = 1;
 	NIGHT_dlight_used                        = NULL;
@@ -1522,7 +1522,7 @@ void NIGHT_dlight_destroy(UBYTE dlight_index)
 			//
 
 		   *prev = ndl->next;
-			
+
 			break;
 		}
 
@@ -1697,7 +1697,7 @@ void NIGHT_dlight_squares_do(SLONG subtract)
 
 				if (x1 < 0) {x1 = 0;}
 				if (z1 < 0) {z1 = 0;}
-				
+
 				if (x2 > PAP_BLOCKS - 1) {x2 = PAP_BLOCKS - 1;}
 				if (z2 > PAP_BLOCKS - 1) {z2 = PAP_BLOCKS - 1;}
 
@@ -1809,7 +1809,7 @@ void NIGHT_dlight_squares_do(SLONG subtract)
 							{
 								//
 								// We have already lit this facet.
-								// 
+								//
 							}
 							else
 							{
@@ -2536,7 +2536,7 @@ UBYTE NIGHT_dfcache_create(UWORD dfacet_index)
 	   &dy,
 	   &dz,
 	   &flags);
-	
+
 	ASSERT(height >= 2);
 
 	num_points = length * height;
@@ -2588,7 +2588,7 @@ UBYTE NIGHT_dfcache_create(UWORD dfacet_index)
 
 	//
 	// The normal of the facet
-	// 
+	//
 
 	nx = -dz;
 	ny =  0;
@@ -2825,7 +2825,7 @@ void NIGHT_dfcache_destroy(UBYTE dfcache_index)
 		if (next == NULL)
 		{
 			//
-			// It wasn't in the used list! 
+			// It wasn't in the used list!
 			//
 
 			ASSERT(0);
@@ -2844,7 +2844,7 @@ void NIGHT_dfcache_destroy(UBYTE dfcache_index)
 			//
 
 		   *prev = nd->next;
-			
+
 			break;
 		}
 
@@ -3364,7 +3364,7 @@ void NIGHT_init()
 	//
 	// Initialises everything else.
 	//
-	
+
 	NIGHT_cache_init();
 	NIGHT_slight_init();
 	NIGHT_dlight_init();
@@ -3404,7 +3404,7 @@ SLONG NIGHT_check_index(SLONG walkable_prim_point_index)
 {
 	ASSERT(WITHIN(
 			walkable_prim_point_index,
-			first_walkable_prim_point, 
+			first_walkable_prim_point,
 			first_walkable_prim_point + number_of_walkable_prim_points - 1));
 
 	return TRUE;
@@ -3610,7 +3610,7 @@ void	NIGHT_generate_roof_walkable()
 	//
 
 	NIGHT_first_walkable_prim_point = first_walkable_prim_point;
-	
+
 	//
 	// The lighting for all the roof faces.
 	//
@@ -3621,7 +3621,7 @@ void	NIGHT_generate_roof_walkable()
 
 		//
 		// The ambient colour of the walkable prim points.
-		// 
+		//
 
 		if (db->Type != BUILDING_TYPE_CRATE_IN)
 		{
@@ -3822,10 +3822,10 @@ void NIGHT_generate_walkable_lighting()
 	//
 
 	NIGHT_first_walkable_prim_point = first_walkable_prim_point;
-	
+
 	//
 	// The ambient colour of the walkable prim points.
-	// 
+	//
 
 	return;
 
@@ -4055,7 +4055,7 @@ SLONG NIGHT_load_ed_file(CBYTE *name)
 		if (el.used)
 		{
 			count++;
-			
+
 			NIGHT_slight_create(
 				el.x,
 				el.y,
@@ -4069,8 +4069,8 @@ SLONG NIGHT_load_ed_file(CBYTE *name)
 
 	//
 	// We can ignore this.
-	// 
-	
+	//
+
 //	if (fread(&ed_light_free, sizeof(SLONG), 1, handle) != 1) goto file_error;
 	if (FileRead(handle, &ed_light_free, sizeof(SLONG)) <0) goto file_error;
 
@@ -4140,9 +4140,9 @@ SLONG NIGHT_load_ed_file(CBYTE *name)
 //	MF_Fclose(handle);
 			 TRACE("Oops it's a bit buggered.\n");
 	FileClose(handle);
-	
+
 //#endif
-	return FALSE;	
+	return FALSE;
 }
 
 

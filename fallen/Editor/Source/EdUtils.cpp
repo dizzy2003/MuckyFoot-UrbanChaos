@@ -2,8 +2,8 @@
 // Guy Simmons, 5th April 1997
 
 #include	"Editor.hpp"
-#include	"c:\fallen\headers\animtmap.h"
-#include	"c:\fallen\headers\memory.h"
+#include	"fallen/headers/animtmap.h"
+#include	"fallen/headers/memory.h"
 
 
 extern	SLONG			key_frame_count,current_element;
@@ -35,8 +35,8 @@ void	invert_mult(struct Matrix33 *mat,struct PrimPoint *pp)
 
 //	LogText(" len before %d \n",SDIST3(pp->X,pp->Y,pp->Z));
 
-	x = (pp->X * temp_mat.M[0][0])+(pp->Y * temp_mat.M[0][1])+(pp->Z * temp_mat.M[0][2])>>15; 
-	y = (pp->X * temp_mat.M[1][0])+(pp->Y * temp_mat.M[1][1])+(pp->Z * temp_mat.M[1][2])>>15; 
+	x = (pp->X * temp_mat.M[0][0])+(pp->Y * temp_mat.M[0][1])+(pp->Z * temp_mat.M[0][2])>>15;
+	y = (pp->X * temp_mat.M[1][0])+(pp->Y * temp_mat.M[1][1])+(pp->Z * temp_mat.M[1][2])>>15;
 	z = (pp->X * temp_mat.M[2][0])+(pp->Y * temp_mat.M[2][1])+(pp->Z * temp_mat.M[2][2])>>15;
 //	LogText(" len after %d \n",SDIST3(x,y,z));
 
@@ -122,7 +122,7 @@ void	draw_element(UWORD	prim,SLONG x,SLONG y,SLONG z,struct KeyFrameElement *ani
 
 //apply local rotation matrix
 	matrix_mult33(&mat_final,&local_matrix,mat);
-		
+
 	for(c0=sp;c0<ep;c0++)
 	{
 		matrix_transform_small((struct Matrix31*)&temp,&mat_final, (struct SMatrix31*)&prim_points[c0]);
@@ -133,7 +133,7 @@ void	draw_element(UWORD	prim,SLONG x,SLONG y,SLONG z,struct KeyFrameElement *ani
 	engine.X	+=	x<<8;
 	engine.Y	+=	y<<8;
 	engine.Z	+=	z<<8;
-		
+
 	for(c0=p_obj->StartFace4;c0<p_obj->EndFace4;c0++)
 	{
 		SLONG	p0,p1,p2,p3;
@@ -146,14 +146,14 @@ void	draw_element(UWORD	prim,SLONG x,SLONG y,SLONG z,struct KeyFrameElement *ani
 		p2=p_f4->Points[2]-sp;
 		p3=p_f4->Points[3]-sp;
 
-		flag_and	=	global_flags[p0]&global_flags[p1]&global_flags[p2]&global_flags[p3];	
-		flag_or		=	global_flags[p0]|global_flags[p1]|global_flags[p2]|global_flags[p3];	
+		flag_and	=	global_flags[p0]&global_flags[p1]&global_flags[p2]&global_flags[p3];
+		flag_or		=	global_flags[p0]|global_flags[p1]|global_flags[p2]|global_flags[p3];
 
 		{
-			
+
 			if((flag_or&EF_BEHIND_YOU)==0)
 			if(!(flag_and & EF_CLIPFLAGS))
-			{			
+			{
 				az	=	(global_res[p0].Z+global_res[p1].Z+global_res[p2].Z+global_res[p3].Z)>>2;
 
 				setPolyType4(
@@ -249,8 +249,8 @@ void	draw_element(UWORD	prim,SLONG x,SLONG y,SLONG z,struct KeyFrameElement *ani
 		p1=p_f3->Points[1]-sp;
 		p2=p_f3->Points[2]-sp;
 
-		flag_and = global_flags[p0]&global_flags[p1]&global_flags[p2];	
-		flag_or  = global_flags[p0]|global_flags[p1]|global_flags[p2];	
+		flag_and = global_flags[p0]&global_flags[p1]&global_flags[p2];
+		flag_or  = global_flags[p0]|global_flags[p1]|global_flags[p2];
 
 		if((flag_or&EF_BEHIND_YOU)==0)
 		if(!(flag_and & EF_CLIPFLAGS))
@@ -308,7 +308,7 @@ void	draw_element(UWORD	prim,SLONG x,SLONG y,SLONG z,struct KeyFrameElement *ani
 			current_bucket_pool	+=	sizeof(struct BucketQuad);
 		}
 		p_f3++;
-	}					
+	}
 exit:;
 }
 
@@ -377,7 +377,7 @@ void	load_chunk_texture_info_old(KeyFrameChunk *the_chunk)
 			p_f4		=	&prim_faces4[p_obj->StartFace4];
 			p_f3		=	&prim_faces3[p_obj->StartFace3];
 
-			
+
 //			LogText(" obj %d has f4 %d f3 %d \n",c0,-p_obj->StartFace4+p_obj->EndFace4,-p_obj->StartFace3+p_obj->EndFace3);
 
 			for(c1=p_obj->StartFace4;c1<p_obj->EndFace4;c1++,p_f4++)
@@ -459,7 +459,7 @@ void	load_chunk_texture_info(KeyFrameChunk *the_chunk)
 					p_obj		=	&prim_objects[c0];
 					p_f4		=	&prim_faces4[p_obj->StartFace4];
 					p_f3		=	&prim_faces3[p_obj->StartFace3];
-					
+
 					LogText("LCTI obj %d has f4 %d f3 %d \n",c0,-p_obj->StartFace4+p_obj->EndFace4,-p_obj->StartFace3+p_obj->EndFace3);
 
 					FileRead(file_handle,&count,sizeof(count));
@@ -488,7 +488,7 @@ void	load_chunk_texture_info(KeyFrameChunk *the_chunk)
 
 					//
 					// The size of each face's data.
-					// 
+					//
 
 					sizeof_face_data  = sizeof(p_f4->DrawFlags);
 					sizeof_face_data += sizeof(p_f4->Col2);
@@ -532,7 +532,7 @@ void	load_chunk_texture_info(KeyFrameChunk *the_chunk)
 
 					//
 					// The size of each face's data.
-					// 
+					//
 
 					sizeof_face_data  = sizeof(p_f3->DrawFlags);
 					sizeof_face_data += sizeof(p_f3->Col2);
@@ -706,7 +706,7 @@ SLONG	write_pcx(CBYTE *fname,UBYTE *src,UBYTE *pal)
 			palette[(c0*3)+3] = *(pal++);
 		}
 		FileWrite(f_handle,&palette[0],769);
-		FileClose(f_handle);	
+		FileClose(f_handle);
 		return 0;
 	}
 	else
@@ -862,7 +862,7 @@ void	test_draw(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct KeyFrameEle
 	p_obj    =	&prim_objects[prim];
 	p_f4     =	&prim_faces4[p_obj->StartFace4];
 	p_f3     =	&prim_faces3[p_obj->StartFace3];
-	
+
 
 	mat      =	&anim_info->Matrix;
 	mat_next =	&anim_info_next->Matrix;
@@ -900,11 +900,11 @@ void	test_draw(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct KeyFrameEle
 	//apply local rotation matrix
 	matrix_mult33(&mat_final,rot_mat,&mat2);
 
-		
+
 	for(c0=sp;c0<ep;c0++)
 	{
 		matrix_transform((struct Matrix31*)&temp,&mat_final, (struct Matrix31*)&prim_points[c0]);
-		
+
 		flags[c0-sp]	=	rotate_point_gte((struct SVector*)&temp,&res[c0-sp]);
 	}
 
@@ -921,11 +921,11 @@ void	test_draw(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct KeyFrameEle
 		p2=p_f4->Points[2]-sp;
 		p3=p_f4->Points[3]-sp;
 
-		flag_and	=	flags[p0]&flags[p1]&flags[p2]&flags[p3];	
-		flag_or		=	flags[p0]|flags[p1]|flags[p2]|flags[p3];	
+		flag_and	=	flags[p0]&flags[p1]&flags[p2]&flags[p3];
+		flag_or		=	flags[p0]|flags[p1]|flags[p2]|flags[p3];
 		if(!(flag_and & EF_CLIPFLAGS))
 		{
-			
+
 			az=(res[p0].Z+res[p1].Z+res[p2].Z+res[p3].Z)>>2;
 
 			setPolyType4(
@@ -956,7 +956,7 @@ void	test_draw(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct KeyFrameEle
 					);
 
 			setZ4((struct BucketQuad*)current_bucket_pool,-res[p0].Z,-res[p1].Z,-res[p2].Z,-res[p3].Z);
-			
+
 			setShade4	(
 							(struct BucketQuad*)current_bucket_pool,
 							(p_f4->Bright[0]),
@@ -981,8 +981,8 @@ void	test_draw(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct KeyFrameEle
 		p1=p_f3->Points[1]-sp;
 		p2=p_f3->Points[2]-sp;
 
-		flag_and = flags[p0]&flags[p1]&flags[p2];	
-		flag_or  = flags[p0]|flags[p1]|flags[p2];	
+		flag_and = flags[p0]&flags[p1]&flags[p2];
+		flag_or  = flags[p0]|flags[p1]|flags[p2];
 
 		if((flag_or&EF_BEHIND_YOU)==0)
 		if(!(flag_and & EF_CLIPFLAGS))
@@ -1078,7 +1078,7 @@ void	test_draw_all_get_sizes(SWORD multi_prim,struct KeyFrame *the_frame,SLONG x
 		p_obj    =&prim_objects[prim];
 		p_f4     =&prim_faces4[p_obj->StartFace4];
 		p_f3     =&prim_faces3[p_obj->StartFace3];
-		
+
 
 		mat      = &the_element->Matrix;
 		mat_next = &the_element->Matrix;
@@ -1091,7 +1091,7 @@ void	test_draw_all_get_sizes(SWORD multi_prim,struct KeyFrame *the_frame,SLONG x
 		x	= temp.X;
 		y	= temp.Y;
 		z	= temp.Z;
-		
+
 
 		sp=p_obj->StartPoint;
 		ep=p_obj->EndPoint;
@@ -1112,7 +1112,7 @@ void	test_draw_all_get_sizes(SWORD multi_prim,struct KeyFrame *the_frame,SLONG x
 	//apply local rotation matrix
 		matrix_mult33(&mat_final,rot_mat,&mat2);
 
-			
+
 		for(c0=sp;c0<ep;c0++)
 		{
 

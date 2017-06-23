@@ -8,8 +8,8 @@
 
 #include	"Stealth.h"
 #include	"poly.h"
-#include	"c:\fallen\headers\io.h"
-#include	"c:\fallen\headers\noserver.h"
+#include	"fallen/headers/io.h"
+#include	"fallen/headers/noserver.h"
 
 
 extern void	game(void);
@@ -37,12 +37,12 @@ SLONG	load_rect_into_page(UWORD *ptr,SLONG xpos,SLONG ypos,SLONG w,SLONG h,CBYTE
 		return(0);
 
 	//	ret=TGA_load(name,256,256,(TGA_Pixel*)tga);
-	ret=TGA_load(name,256,256,(TGA_Pixel*)tga,-1); 
+	ret=TGA_load(name,256,256,(TGA_Pixel*)tga,-1);
 
 
 	if(!ret.valid)
 		return(0);
-	
+
 	for(y=0;y<h;y++)
 	for(x=0;x<w;x++)
 	{
@@ -76,7 +76,7 @@ void	load_splitup_texture_page(UWORD *ptr,CBYTE *path,UWORD page)
 		}
 		index++;
 	}
-	
+
 }
 
 extern	TGA_Info TGA_load_remap(const CBYTE *file,const CBYTE *pname,SLONG max_width,SLONG max_height,TGA_Pixel *data);
@@ -94,7 +94,7 @@ SLONG	load_rect_into_page_remap(UWORD *ptr,SLONG xpos,SLONG ypos,SLONG w,SLONG h
 	ret=TGA_load_remap(name,pname,256,256,(TGA_Pixel*)tga);
 	if(!ret.valid)
 		return(0);
-	
+
 	for(y=0;y<h;y++)
 	for(x=0;x<w;x++)
 	{
@@ -136,7 +136,7 @@ void	load_splitup_texture_page_remap(UWORD *ptr,CBYTE *path,UWORD page)
 
 		index++;
 	}
-	
+
 }
 
 extern	void	load_game_textures_psx(UBYTE flags);
@@ -371,7 +371,7 @@ void	load_game_textures_psx(UBYTE flags)
 		load_splitup_texture_page_remap(the_texture->TexturePtr,dir,page);
 		the_texture->PalPtr	=	(UBYTE*)MemAlloc(256*3);
 		tmaps[i+25]	=	the_texture->TexturePtr;
-		
+
 
 		if(the_texture->PalPtr)
 		{

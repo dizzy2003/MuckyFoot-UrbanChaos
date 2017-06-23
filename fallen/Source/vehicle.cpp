@@ -18,12 +18,12 @@
 
 #include "game.h"
 #ifndef	PSX
-#include "c:\fallen\ddengine\headers\matrix.h"
-#include "c:\fallen\ddengine\headers\poly.h"
-#include "c:\fallen\ddengine\headers\oval.h"
-#include "c:\fallen\ddlibrary\headers\ddlib.h"
+#include "fallen/ddengine/headers/matrix.h"
+#include "fallen/ddengine/headers/poly.h"
+#include "fallen/ddengine/headers/oval.h"
+#include "fallen/ddlibrary/headers/ddlib.h"
 #else
-#include "c:\fallen\psxeng\headers\poly.h"
+#include "fallen/psxeng/headers/poly.h"
 #endif
 #include "pap.h"
 #include "fmatrix.h"
@@ -31,10 +31,10 @@
 #include "pcom.h"
 
 #ifndef	PSX
-#include "c:\fallen\ddengine\headers\aeng.h"
-#include "c:\fallen\ddengine\headers\mesh.h"
+#include "fallen/ddengine/headers/aeng.h"
+#include "fallen/ddengine/headers/mesh.h"
 #else
-#include "c:\fallen\psxeng\headers\mesh.h"
+#include "fallen/psxeng/headers/mesh.h"
 #endif
 
 #include "pow.h"
@@ -42,14 +42,14 @@
 #include "interfac.h"
 #include "dirt.h"
 #include "mist.h"
-#include "c:\fallen\editor\headers\prim.h"
+#include "fallen/editor/headers/prim.h"
 #include "animate.h"
 #include "sound.h"
 #include "barrel.h"
 #include "interact.h"
 #include "ob.h"
 #include "night.h"
-#include "c:\fallen\ddengine\headers\drawxtra.h"
+#include "fallen/ddengine/headers/drawxtra.h"
 #include "psystem.h"
 
 #include "mfx.h"
@@ -127,7 +127,7 @@ UBYTE	vehicle_random[] =
 {
 	VEH_TYPE_VAN,	VEH_TYPE_CAR,	VEH_TYPE_TAXI,	VEH_TYPE_JEEP,
 	VEH_TYPE_SEDAN,	VEH_TYPE_VAN,	VEH_TYPE_CAR,	VEH_TYPE_TAXI,
-	VEH_TYPE_JEEP,	VEH_TYPE_SEDAN,	VEH_TYPE_VAN,	VEH_TYPE_CAR, 
+	VEH_TYPE_JEEP,	VEH_TYPE_SEDAN,	VEH_TYPE_VAN,	VEH_TYPE_CAR,
 	VEH_TYPE_TAXI,	VEH_TYPE_VAN,	VEH_TYPE_CAR,	VEH_TYPE_TAXI
 };
 
@@ -639,7 +639,7 @@ void VEH_add_damage(Vehicle* vp, UBYTE area, UBYTE hp)
 	// reduce damage at opposite corner
 	if ((vp->damage[0] + vp->damage[1] > 6) && (area == 0))	vp->damage[1]--;
 	if ((vp->damage[0] + vp->damage[1] > 6) && (area == 1))	vp->damage[0]--;
-	
+
 	if ((vp->damage[4] + vp->damage[5] > 6) && (area == 4))	vp->damage[5]--;
 	if ((vp->damage[4] + vp->damage[5] > 6) && (area == 5))	vp->damage[4]--;
 
@@ -679,7 +679,7 @@ void VEH_bounce(Vehicle* vp, UBYTE area, SLONG amount)
 
 	case 5:
 		vp->DY[2] -= amount;
-		break;		
+		break;
 	}
 }
 
@@ -750,7 +750,7 @@ void VEH_init_vehinfo()
 		px[3] = inf->maxx;	pz[3] = (inf->minz + inf->maxz) / 2;
 		px[4] = inf->minx;	pz[4] = inf->maxz;
 		px[5] = inf->maxx;	pz[5] = inf->maxz;
-				
+
 		veh_info[ii].NumVertices = obj->EndPoint - obj->StartPoint;
 
 #ifdef TARGET_DC
@@ -779,7 +779,7 @@ void VEH_init_vehinfo()
 			for (int kk = 0; kk < 6; kk++)
 			{
 				SLONG	dist = (x - px[kk])*(x - px[kk]) + (z - pz[kk])*(z - pz[kk]);
-				
+
 				if (dist < maxdist)
 				{
 					maxdist = dist;
@@ -896,7 +896,7 @@ ANNOYINGSCRIBBLECHECK;
 
 	if (rd < 0)
 	{
-		SLONG	tmp = rn1; rn1 = rn2; rn2 = tmp;		
+		SLONG	tmp = rn1; rn1 = rn2; rn2 = tmp;
 	}
 
 	SLONG	x1,z1;
@@ -1050,7 +1050,7 @@ void reinit_vehicle(Thing* p_thing)
 	}
 
 	SLONG	height;
-	
+
 	for (ii = 0; ii < 4; ii++)
 	{
 		vp->DY[ii] = 0;
@@ -1174,7 +1174,7 @@ extern	FONT2D_DrawString_3d(CBYTE*str, ULONG world_x, ULONG world_y,ULONG world_
 	{
 		//
 		// Draw the car as a normal prim.
-		// 
+		//
 #ifndef PSX
 		// set crumples
 		MESH_set_crumple(info->VertexAssignments, p_car->Genus.Vehicle->damage);
@@ -1245,7 +1245,7 @@ extern	FONT2D_DrawString_3d(CBYTE*str, ULONG world_x, ULONG world_y,ULONG world_
 				dy = xyz[p_car->Genus.Vehicle->damage[1]][1];
 				dx = xyz[p_car->Genus.Vehicle->damage[1]][2];
 				FMATRIX_MUL(car_matrix,dx,dy,dz);
-				
+
 				vector[2] =  info->HLX;
 				vector[1] =  info->HLY;
 				vector[0] =  info->HLZ;
@@ -1296,7 +1296,7 @@ extern	FONT2D_DrawString_3d(CBYTE*str, ULONG world_x, ULONG world_y,ULONG world_
 
 		if (vp->damage[0] || vp->damage[1] || vp->damage[2] || vp->damage[3] || vp->damage[4] || vp->damage[5])
 		{
-			UBYTE total = vp->damage[0] + vp->damage[1] + vp->damage[2] + 
+			UBYTE total = vp->damage[0] + vp->damage[1] + vp->damage[2] +
 						  vp->damage[3] + vp->damage[4] + vp->damage[5];
 
 			total /= 6;
@@ -1327,7 +1327,7 @@ extern	FONT2D_DrawString_3d(CBYTE*str, ULONG world_x, ULONG world_y,ULONG world_
 				{
 					//
 					// Smoke from out the back of the vehicle aswell...
-					// 
+					//
 
 					PARTICLE_Add(
 						p_car->WorldPos.X-(vector[0]<<8) + (Random() & 0x7fff) - 0x3fff,
@@ -1411,7 +1411,7 @@ void AENG_set_bike_wheel_rotation(UWORD rot, UBYTE prim);
 
 #if !defined(PSX) && !defined(TARGET_DC)
 #ifndef NDEBUG
-	if (p_car != SelectedThing)	// don't draw wheels when selected	
+	if (p_car != SelectedThing)	// don't draw wheels when selected
 #endif
 #endif
 	for(c0=0;c0<4;c0++)
@@ -1499,7 +1499,7 @@ void AENG_set_bike_wheel_rotation(UWORD rot, UBYTE prim);
 #ifdef PSX
 				MFX_play_thing(THING_NUMBER(p_car),S_SKID_START,MFX_MOVING,p_car);
 #else
-				if (speed>300000) 
+				if (speed>300000)
 					MFX_play_thing(THING_NUMBER(p_car),S_SKID_START,MFX_MOVING,p_car);
 				else
 					if (speed>100000)
@@ -1546,7 +1546,7 @@ void AENG_set_bike_wheel_rotation(UWORD rot, UBYTE prim);
 
   F=Ma     F= carMass*Gravity/4     (this assumes the mass is equaly dispersed)
 
-  The spring will exert an upwards force on the car of 
+  The spring will exert an upwards force on the car of
 
   Force = k/Extension, (the force is inversely proportional to the extension of the spring)
 
@@ -1562,13 +1562,13 @@ void AENG_set_bike_wheel_rotation(UWORD rot, UBYTE prim);
 
 /*
 
-Suggested Readings: 
+Suggested Readings:
 
 1 "Fundamental of Vehicle Dynamics," Thomas D. Gillespie, 1992, Society of Automotive Engineers, Inc.
 
 2. "Theory of Ground Vehicles," J. Y. Wong, John Wiley & Sons, Inc, 1993.
 
-3. MOTOR VEHICLE DYNAMICS: MODELING AND SIMULATION by G Genta (Poli. Torino, Italy) 
+3. MOTOR VEHICLE DYNAMICS: MODELING AND SIMULATION by G Genta (Poli. Torino, Italy)
 
 */
 
@@ -1605,9 +1605,9 @@ void VEH_collide_find_things(SLONG x, SLONG y, SLONG z, SLONG radius, SLONG igno
 	PrimInfo     *pi;
 	AnimPrimBbox *apb;
 	OB_Info      *oi;
-	
+
 	//
-	// Do we include bikes or not? 
+	// Do we include bikes or not?
 	//
 
 	ULONG collide_types;
@@ -1703,7 +1703,7 @@ void VEH_collide_find_things(SLONG x, SLONG y, SLONG z, SLONG radius, SLONG igno
 					if (dist <= radius + pi->radius + 0x10)
 					{
 						vc = &VEH_col[VEH_col_upto++];
-					
+
 						vc->type     = VEH_COL_TYPE_BBOX;
 						vc->ob_index = NULL;
 						vc->veh		 = NULL;
@@ -1727,7 +1727,7 @@ void VEH_collide_find_things(SLONG x, SLONG y, SLONG z, SLONG radius, SLONG igno
 			case CLASS_BIKE:
 
 				vc = &VEH_col[VEH_col_upto++];
-			
+
 				vc->type     = VEH_COL_TYPE_CYLINDER;
 				vc->ob_index = NULL;
 				vc->veh		 = NULL;
@@ -1747,7 +1747,7 @@ void VEH_collide_find_things(SLONG x, SLONG y, SLONG z, SLONG radius, SLONG igno
 				if (p_found->Genus.Bat->type == BAT_TYPE_BALROG)
 				{
 					vc = &VEH_col[VEH_col_upto++];
-				
+
 					vc->type     = VEH_COL_TYPE_CYLINDER;
 					vc->ob_index = NULL;
 					vc->veh		 = p_found;
@@ -1810,7 +1810,7 @@ void VEH_collide_find_things(SLONG x, SLONG y, SLONG z, SLONG radius, SLONG igno
 							if (dist <= radius + pi->radius + 0x10)
 							{
 								vc = &VEH_col[VEH_col_upto++];
-							
+
 								vc->type     = VEH_COL_TYPE_BBOX;
 								vc->ob_index = oi->index;
 								vc->veh		 = NULL;
@@ -1845,7 +1845,7 @@ void VEH_collide_find_things(SLONG x, SLONG y, SLONG z, SLONG radius, SLONG igno
 							if (dist <= radius + 0x40)
 							{
 								vc = &VEH_col[VEH_col_upto++];
-							
+
 								vc->type     = VEH_COL_TYPE_CYLINDER;
 								vc->ob_index = oi->index;
 								vc->veh		 = NULL;
@@ -1968,7 +1968,7 @@ static UBYTE	find_closest_car_point(SLONG x, SLONG y, SLONG z, Thing* car)
 	zz[3]=(inf->minz + inf->maxz)/2;
 	zz[4]=inf->maxz;
 	zz[5]=inf->maxz;
-	
+
 	SLONG	best_manhattan_distance = 0x7FFFFFFF;
 	SLONG	nearest = -1;
 
@@ -2023,7 +2023,7 @@ void VEH_co_damage(Thing* v1, Thing* v2)
 
 	vv2->VelX = -vv2->VelX/8 + vv1->VelX/4;
 	vv2->VelZ = -vv2->VelZ/8 + vv1->VelZ/4;
-	
+
 	SLONG torque = abs(vv1->VelX) + abs(vv1->VelZ);
 	torque >>= 10;
 
@@ -2106,7 +2106,7 @@ static void DoDamage(Thing* p_car, VEH_Col* col)
 
 			if (speed > 0)
 			{
-				col->veh->Genus.Vehicle->Health -= speed>>1; 
+				col->veh->Genus.Vehicle->Health -= speed>>1;
 			}
 		}
 
@@ -2119,13 +2119,13 @@ static void DoDamage(Thing* p_car, VEH_Col* col)
 		SLONG		vel = Root(veh->VelX*veh->VelX + veh->VelZ*veh->VelZ);
 
 		if (vel > 20000) {
-			OB_damage(col->ob_index, 
-				p_car->WorldPos.X >> 8, p_car->WorldPos.Y >> 8, 
-				col->mid_x, col->mid_z, 
+			OB_damage(col->ob_index,
+				p_car->WorldPos.X >> 8, p_car->WorldPos.Y >> 8,
+				col->mid_x, col->mid_z,
 				get_vehicle_driver(p_car));
 			MFX_play_thing(THING_NUMBER(p_car),SOUND_Range(S_CAR_SMASH_START,S_CAR_SMASH_END),0,p_car);
 		} else {
-			if (vel > 10000) 
+			if (vel > 10000)
 			  MFX_play_thing(THING_NUMBER(p_car),SOUND_Range(S_CAR_SMASH_START,S_CAR_SMASH_END),0,p_car);
 			else // find a wimpy minor scrape?
 			if (vel>1000) // otherwise you get crunchy noises when 'stuck' against objects
@@ -2146,7 +2146,7 @@ static void DoDamage(Thing* p_car, VEH_Col* col)
 
 #define	COLL_FL		0x01		// front-left corner
 #define COLL_FR		0x02		// front-right corner
-#define COLL_BR		0x03		// back-right corner 
+#define COLL_BR		0x03		// back-right corner
 #define COLL_BL		0x04		// back-left corner
 #define COLL_FRONT	0x05		// front edge
 #define COLL_BACK	0x06		// back edge
@@ -2165,7 +2165,7 @@ static void process_car(Thing *p_car);
 //		1
 //   0    1
 //	8	    2
-//   3    2 
+//   3    2
 //     4
 void	nudge_car(Thing* p_car,SLONG flags,SLONG *x,SLONG *z,SLONG neg)
 {
@@ -2257,7 +2257,7 @@ static SLONG CollideCar(Thing* p_car, SLONG step)
 	int			ii;
 
 	car_hit_flags=0;
-	
+
 #ifdef _DEBUG
 	if (Keys[KB_H] && is_driven_by_player(p_car))	return 0;
 #endif
@@ -2273,7 +2273,7 @@ static SLONG CollideCar(Thing* p_car, SLONG step)
 
 #if DUMP_COORDS
 	GetCarPoints(p_car, x, y, z, 0);
-	
+
 	if (is_driven_by_player(p_car))
 	{
 		TRACE("Before move\n");
@@ -2301,11 +2301,11 @@ static SLONG CollideCar(Thing* p_car, SLONG step)
 	UBYTE	flags = 0,pflags=0;
 	static UBYTE flags_to_code[16] =
 	{
-		COLL_NONE, COLL_FRONT, COLL_NONE,  COLL_FR, 
+		COLL_NONE, COLL_FRONT, COLL_NONE,  COLL_FR,
 		COLL_BACK, COLL_LEFT,  COLL_BR,    COLL_RIGHT,
 		COLL_NONE, COLL_FL,    COLL_FRONT, COLL_FRONT,
 		COLL_BL,   COLL_LEFT,  COLL_BACK,  COLL_ALL
-//		COLL_NONE, COLL_FRONT, COLL_RIGHT, COLL_FR, 
+//		COLL_NONE, COLL_FRONT, COLL_RIGHT, COLL_FR,
 //		COLL_BACK, COLL_LEFT,  COLL_BR,    COLL_RIGHT,
 //		COLL_LEFT, COLL_FL,    COLL_FRONT, COLL_FRONT,
 //		COLL_BL,   COLL_LEFT,  COLL_BACK,  COLL_ALL
@@ -2328,7 +2328,7 @@ static SLONG CollideCar(Thing* p_car, SLONG step)
 				if (aa == 2)	flags |= 32;	// Z wall
 
 				if (veh->Scrapin<10) veh->Scrapin++;
-				
+
 //				if (is_driven_by_player(p_car))
 //				AENG_world_line((x[ii] + x[jj]) / 2, (y[ii] + y[jj]) / 2, (z[ii] + z[jj]) / 2, 32, 0xffffff,
 //								(x[ii] + x[jj]) / 2, (y[ii] + y[jj]) / 2 + 0xC00, (z[ii] + z[jj]) / 2, 0, 0xffffff,
@@ -2345,7 +2345,7 @@ static SLONG CollideCar(Thing* p_car, SLONG step)
 
 		if (((flags & 15) == 8) || ((flags & 15) == 2) || ((flags & 15) == 10))
 		{
-//			if (is_driven_by_player(p_car))	TRACE("Facet my flags up [%2.2X]\n", flags);	
+//			if (is_driven_by_player(p_car))	TRACE("Facet my flags up [%2.2X]\n", flags);
 			flags |= 1;	// front
 		}
 	}
@@ -2364,7 +2364,7 @@ static SLONG CollideCar(Thing* p_car, SLONG step)
 			for (ii = 0; ii < 4; ii++)
 			{
 				int jj = (ii + 1) & 3;
-				
+
 				if (flags & (1 << ii))
 				{
 					px += x[ii] + x[jj];
@@ -2379,7 +2379,7 @@ static SLONG CollideCar(Thing* p_car, SLONG step)
 #ifndef	PSX
 			DIRT_new_sparks(px,y[0],pz,2);
 #endif
-		
+
 /*			AENG_world_line(px, y[0], pz, 32, 0xFFFFFF,
 							(x[0] + x[1] + x[2] + x[3])/4, y[0], (z[0] + z[1] + z[2] + z[3])/4, 0, 0xFFFFFF,
 							TRUE);*/
@@ -2400,8 +2400,8 @@ static SLONG CollideCar(Thing* p_car, SLONG step)
 			{
 				int kk = (jj + 1) & 3;
 
-				if (collide_box_with_line(  vc->mid_x, 
-											vc->mid_z, 
+				if (collide_box_with_line(  vc->mid_x,
+											vc->mid_z,
 											vc->min_x,
 											vc->min_z,
 											vc->max_x,
@@ -2433,7 +2433,7 @@ static SLONG CollideCar(Thing* p_car, SLONG step)
 		else
 		{
 			int	jj;
-			
+
 			ASSERT(vc->type == VEH_COL_TYPE_CYLINDER);
 
 			for (jj = 0; jj < 4; jj++)
@@ -2452,7 +2452,7 @@ static SLONG CollideCar(Thing* p_car, SLONG step)
 //					if (is_driven_by_player(p_car))
 //					AENG_world_line((x[kk] + x[jj]) / 2, (y[kk] + y[jj]) / 2, (z[kk] + z[jj]) / 2, 32, 0xff00,
 //									(x[kk] + x[jj]) / 2, (y[kk] + y[jj]) / 2 + 0xC00, (z[kk] + z[jj]) / 2, 0, 0xff00,
-//									TRUE);		
+//									TRUE);
 
 					DoDamage(p_car, vc);
 
@@ -2491,7 +2491,7 @@ static SLONG CollideCar(Thing* p_car, SLONG step)
 
 		if ((((flags|pflags) & 15) == 8) || (((flags|pflags) & 15) == 2) || (((flags|pflags) & 15) == 10))
 		{
-//			if (is_driven_by_player(p_car))	TRACE("Fix my flags up [%2.2X]\n", flags);	
+//			if (is_driven_by_player(p_car))	TRACE("Fix my flags up [%2.2X]\n", flags);
 			SLONG	dsf = ((x[0] + x[1])/2 - vc->mid_x) * ((x[0] + x[1])/2 - vc->mid_x) + ((z[0] + z[1])/2 - vc->mid_z) * ((z[0] + z[1])/2 - vc->mid_z);
 			SLONG	dsb = ((x[2] + x[3])/2 - vc->mid_x) * ((x[2] + x[3])/2 - vc->mid_x) + ((z[2] + z[3])/2 - vc->mid_z) * ((z[2] + z[3])/2 - vc->mid_z);
 			if (dsf < dsb)	pflags |= 1;	// front
@@ -2523,7 +2523,7 @@ static SLONG CollideCar(Thing* p_car, SLONG step)
 	//
 	// There has been a collision...
 	// Damage the car depending on how fast it is going
-	// 
+	//
 
 #if !defined(FAST_EDDIE) || !defined(_DEBUG)
 	{
@@ -2622,7 +2622,7 @@ static SLONG CollideCar(Thing* p_car, SLONG step)
 			if (there_is_a_los_car(x[ii],y[ii],z[ii], x[jj],y[jj],z[jj]))
 			{
 				// fucked it all up - don't move anywhere or we'll be in the shite
-//				if (is_driven_by_player(p_car))	TRACE("ARSE CUNT MOTHERFUCKER\n", flags);	
+//				if (is_driven_by_player(p_car))	TRACE("ARSE CUNT MOTHERFUCKER\n", flags);
 				veh->VelX = 0;
 				veh->VelY = 0;
 				veh->VelZ = 0;
@@ -2634,7 +2634,7 @@ static SLONG CollideCar(Thing* p_car, SLONG step)
 				if (is_driven_by_player(p_car))
 				{
 					GetCarPoints(p_car, x, y, z, step);
-				
+
 					TRACE("After halt vs walls\n");
 					for (ii = 0; ii < 4; ii++)
 					{
@@ -2671,12 +2671,12 @@ static SLONG CollideCar(Thing* p_car, SLONG step)
 				{
 					int kk = (jj + 1) & 3;
 
-					if (collide_box_with_line(  vc->mid_x, 
-												vc->mid_z, 
-												vc->min_x + 0x10,	 
-												vc->min_z + 0x10,	
-												vc->max_x - 0x10,	 
-												vc->max_z - 0x10,	
+					if (collide_box_with_line(  vc->mid_x,
+												vc->mid_z,
+												vc->min_x + 0x10,
+												vc->min_z + 0x10,
+												vc->max_x - 0x10,
+												vc->max_z - 0x10,
 												vc->radius_or_yaw,
 												x[jj], z[jj],
 												x[kk], z[kk]))
@@ -2702,7 +2702,7 @@ static SLONG CollideCar(Thing* p_car, SLONG step)
 							if (is_driven_by_player(p_car))
 							{
 								GetCarPoints(p_car, x, y, z, step);
-							
+
 								TRACE("After halt vs square prim\n");
 								for (ii = 0; ii < 4; ii++)
 								{
@@ -2713,12 +2713,12 @@ static SLONG CollideCar(Thing* p_car, SLONG step)
 								{
 									int	kk = (jj + 1) & 3;
 
-									ASSERT(!collide_box_with_line(vc->mid_x, 
-												vc->mid_z, 
-												vc->min_x + 0x10,	 
-												vc->min_z + 0x10,	
-												vc->max_x - 0x10,	 
-												vc->max_z - 0x10,	
+									ASSERT(!collide_box_with_line(vc->mid_x,
+												vc->mid_z,
+												vc->min_x + 0x10,
+												vc->min_z + 0x10,
+												vc->max_x - 0x10,
+												vc->max_z - 0x10,
 												vc->radius_or_yaw,
 												x[jj], z[jj],
 												x[kk], z[kk]));
@@ -2752,12 +2752,12 @@ static SLONG CollideCar(Thing* p_car, SLONG step)
 		{
 			int		jj;
 			bool	slide;
-			
+
 			ASSERT(vc->type == VEH_COL_TYPE_CYLINDER);
 
 			slide = false;
 
-			do 
+			do
 			{
 				for (jj = 0; jj < 4; jj++)
 				{
@@ -2789,7 +2789,7 @@ static SLONG CollideCar(Thing* p_car, SLONG step)
 							if (is_driven_by_player(p_car))
 							{
 								GetCarPoints(p_car, x, y, z, step);
-							
+
 								TRACE("After halt vs round prim\n");
 								for (ii = 0; ii < 4; ii++)
 								{
@@ -2852,7 +2852,7 @@ static void CollideWithKerb(Thing* p_car)
 		SLONG wx = vinfo->DX[wheel];
 		SLONG wy = 0;
 		SLONG wz = vinfo->DZ[wheel];
-		
+
 		apply_car_matrix(&wx, &wy, &wz);
 
 		SLONG	papx = wx + (p_car->WorldPos.X >> 8);
@@ -3007,7 +3007,7 @@ void VEH_driving(Thing *p_thing)
 			//
 
 			if (veh->Driver)
-			{	
+			{
 				VEH_throw_out_person(TO_THING(veh->Driver), p_thing);
 			}
 
@@ -3068,9 +3068,9 @@ void VEH_driving(Thing *p_thing)
 	// Move it.
 	//
 
-	if (!(veh->Flags & FLAG_FURN_DRIVING) && 
-		!p_thing->Genus.Vehicle->VelX && 
-		!p_thing->Genus.Vehicle->VelZ && 
+	if (!(veh->Flags & FLAG_FURN_DRIVING) &&
+		!p_thing->Genus.Vehicle->VelX &&
+		!p_thing->Genus.Vehicle->VelZ &&
 		(veh->Stable >= STABLE_COUNT))
 	{
 		if (p_thing->State != STATE_DEAD)
@@ -3078,7 +3078,7 @@ void VEH_driving(Thing *p_thing)
 			//
 			// Dead cars need to execute the above code so they can dissapear
 			// from the map after a while.
-			// 
+			//
 
 			siren(veh, 0);
 			p_thing->StateFn = NULL;
@@ -3091,7 +3091,7 @@ void VEH_driving(Thing *p_thing)
 
 	//
 	// If this car is on the road, there is no need to collide with the walls.
-	// 
+	//
 
 	VEH_collide_line_ignore_walls = VEH_on_road(p_thing, 0) && VEH_on_road(p_thing, TICK_RATIO);
 
@@ -3261,7 +3261,7 @@ void VEH_driving(Thing *p_thing)
 				//
 				// Rotate this person into the space of the prim.
 				//
-				
+
 				tx = p_found->WorldPos.X - p_thing->WorldPos.X >> 8;
 				tz = p_found->WorldPos.Z - p_thing->WorldPos.Z >> 8;
 
@@ -3379,7 +3379,7 @@ void VEH_driving(Thing *p_thing)
 			p_thing->WorldPos.Y - get_vehicle_body_offset(p_thing->Genus.Vehicle->Type) >> 8,
 			p_thing->WorldPos.Z                                                         >> 8,
 			p_thing->Genus.Vehicle->Angle);
-	}		
+	}
 
 	//	Do the engine noise.
 
@@ -3395,7 +3395,7 @@ void VEH_driving(Thing *p_thing)
 	if (p_thing->Velocity > 500)
 	{
 		dx = -SIN(p_thing->Genus.Vehicle->Angle) << 1;
-		dz = -COS(p_thing->Genus.Vehicle->Angle) << 1; 
+		dz = -COS(p_thing->Genus.Vehicle->Angle) << 1;
 
 		//
 		// Scare nearby people.
@@ -3460,12 +3460,12 @@ void steering_wheel(Vehicle* veh, SLONG velocity, bool player)
 	if (!(veh->Flags & FLAG_FURN_DRIVING) || (veh->Flags & FLAG_VEH_IN_AIR))
 	{
 		// bring wheel in
-		if (veh->Wheel > inc)		
+		if (veh->Wheel > inc)
 			veh->Wheel -= inc;
-		else 
-			if (veh->Wheel < -inc)	
+		else
+			if (veh->Wheel < -inc)
 				veh->Wheel += inc;
-		else						
+		else
 			veh->Wheel = 0;
 	}
 	else
@@ -3474,7 +3474,7 @@ void steering_wheel(Vehicle* veh, SLONG velocity, bool player)
 		{
 			velocity = abs(velocity);
 
-			if (velocity > 1000)	
+			if (velocity > 1000)
 				velocity = 1000;
 
 			if (veh->IsAnalog)
@@ -3551,7 +3551,7 @@ static void siren(Vehicle* veh, UBYTE play)
 
 	if ((veh->Type==VEH_TYPE_POLICE)||
 		(veh->Type==VEH_TYPE_AMBULANCE)||
-		(veh->Type==VEH_TYPE_MEATWAGON)) 
+		(veh->Type==VEH_TYPE_MEATWAGON))
 	{
 		if (play)
 			MFX_play_ambient(VEHICLE_NUMBER(veh),S_CAR_SIREN1,MFX_LOOPED);
@@ -3844,7 +3844,7 @@ static void do_car_input(Thing *p_thing)
 			return;
 		}
 /*
-		if (is_driven_by_player(p_thing))	
+		if (is_driven_by_player(p_thing))
 		{
 			TRACE("Velocity = %d\n", p_thing->Velocity);
 		}
@@ -3920,7 +3920,7 @@ static void do_car_input(Thing *p_thing)
 //				if (p_thing->Velocity < 800)	veh->Skid = 0;
 				veh->Skid = 0;
 			}
-		}		
+		}
 
 		if (!veh->VelX && !veh->VelZ && !p_thing->Velocity)
 		{
@@ -4017,7 +4017,7 @@ static void do_car_input(Thing *p_thing)
 		{
 			if (abs(veh->DY[1]) < (angle << 2))	veh->DY[1] += angle << 1;
 			if (abs(veh->DY[3]) < (angle << 2))	veh->DY[3] += angle << 1;
-		
+
 			dangle = -angle;
 		}
 		else
@@ -4107,7 +4107,7 @@ static void do_car_input(Thing *p_thing)
 			av = (ax * vz) - (az * vx);
 
 			// if abs((av * 256 / vv) >> 8) > SKID_FORCE
-			if (abs(av) > SKID_FORCE * vv)		
+			if (abs(av) > SKID_FORCE * vv)
 				veh->Skid = SKID_START;
 			else
 				if (abs(av) > ((NEAR_SKID_FORCE*vinfo->FwdAccel)>>5) * vv)
@@ -4188,10 +4188,10 @@ static void do_car_input(Thing *p_thing)
 		}
 
 		veh->LastSoundState=state;
-		
+
 
 /*		UBYTE state=(veh->DControl==VEH_ACCEL)|((veh->DControl==VEH_DECEL)<<1)|((veh->Dir==-2)<<3);
-		
+
 		if ((veh->DControl == VEH_ACCEL) && !veh->Skid)
 		{
 			if (!(veh->Flags & FLAG_VEH_FX_STATE))
@@ -4218,7 +4218,7 @@ static void do_car_input(Thing *p_thing)
 					MFX_play_ambient(THING_NUMBER(p_thing),S_CAR_REVERSE_LOOP,MFX_MOVING|MFX_QUEUED|MFX_SHORT_QUEUE|MFX_LOOPED);
 					veh->Flags|=FLAG_VEH_FX_STATE;
 				}
-					
+
 			} else
 
 			if (veh->Flags & FLAG_VEH_FX_STATE)
@@ -4355,7 +4355,7 @@ extern SLONG in_right_place_for_car(Thing *p_person, Thing *p_vehicle, SLONG *do
 			wx[wheel] = info->DX[wheel];
 			wy[wheel] = 0;
 			wz[wheel] = info->DZ[wheel];
-			
+
 			apply_car_matrix(&wx[wheel],&wy[wheel],&wz[wheel]);
 
 			SLONG	papx = wx[wheel] + (p_car->WorldPos.X >> 8);
@@ -4399,7 +4399,7 @@ extern SLONG in_right_place_for_car(Thing *p_person, Thing *p_vehicle, SLONG *do
 					// wheel on the floor - push car upwards
 					vp->DY[wheel] = apply_thrust_to_suspension(&vp->Spring[wheel], vp->DY[wheel], height - y_pos);
 	//				TRACE("s-floor: %d\n",vp->DY[wheel]);
-					squeaky+=abs(vp->DY[wheel]);			
+					squeaky+=abs(vp->DY[wheel]);
 					crunchy+=vp->DY[wheel];
 				}
 				else

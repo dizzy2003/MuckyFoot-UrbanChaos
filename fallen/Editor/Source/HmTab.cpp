@@ -5,9 +5,9 @@
 #include "Editor.hpp"
 #include "EditMod.hpp"
 #include "ModeTab.hpp"
-#include	"c:\fallen\headers\memory.h"
+#include	"fallen/headers/memory.h"
 
-#include "c:\fallen\headers\hm.h"
+#include "fallen/headers/hm.h"
 
 
 //
@@ -266,7 +266,7 @@ void HMTAB_save_primgrids(CBYTE *fname)
 	return;
 
   file_error:;
-  
+
 	fclose(handle);
 
 	TRACE("Error saving file %s\n", fname);
@@ -324,7 +324,7 @@ void HMTAB_load_primgrids(CBYTE *fname)
 		hp->x_res   = hm_pg.x_res;
 		hp->y_res   = hm_pg.y_res;
 		hp->z_res   = hm_pg.z_res;
-		
+
 		for (j = 0; j < HM_MAX_RES; j++)
 		{
 			hp->x_point[j] = hm_pg.x_point[j];
@@ -342,7 +342,7 @@ void HMTAB_load_primgrids(CBYTE *fname)
 	return;
 
   file_error:;
-  
+
 	fclose(handle);
 
 	TRACE("Error loading file %s\n", fname);
@@ -388,7 +388,7 @@ void HmTab::draw_prim(UWORD prim)
 
 			ASSERT(WITHIN(p1, 1, next_prim_point - 1));
 			ASSERT(WITHIN(p2, 1, next_prim_point - 1));
-			
+
 			pp1 = &prim_points[p1];
 			pp2 = &prim_points[p2];
 
@@ -425,7 +425,7 @@ void HmTab::draw_prim(UWORD prim)
 
 			ASSERT(WITHIN(p1, 1, next_prim_point - 1));
 			ASSERT(WITHIN(p2, 1, next_prim_point - 1));
-			
+
 			pp1 = &prim_points[p1];
 			pp2 = &prim_points[p2];
 
@@ -487,7 +487,7 @@ void HmTab::draw_grid(UWORD prim)
 	PrimInfo   *pi =  get_prim_info(prim);
 	PrimObject *po = &prim_objects [prim];
 	HMTAB_Prim *hp = &HMTAB_prim   [prim];
-	
+
 	if (!hp->defined)
 	{
 		//
@@ -541,7 +541,7 @@ void HmTab::draw_grid(UWORD prim)
 
 	VD_transform(px1, py1, pz1, &gx1, &gy1);
 	VD_transform(px1, py2, pz2, &gx2, &gy2);
-	
+
 	if (VD_cam_view != VD_CAM_VIEW_X)
 	{
 		//
@@ -770,7 +770,7 @@ void HmTab::draw_cog(UWORD prim)
 	PrimInfo   *pi =  get_prim_info(prim);
 	PrimObject *po = &prim_objects [prim];
 	HMTAB_Prim *hp = &HMTAB_prim   [prim];
-	
+
 	if (!hp->defined)
 	{
 		//
@@ -804,7 +804,7 @@ void HmTab::draw_cog(UWORD prim)
 	hm_index = HM_create(
 					prim,
 					0, 0, 0,
-					0, 0, 0, 
+					0, 0, 0,
 					0, 0, 0,
 					hp->x_res,
 					hp->y_res,
@@ -849,7 +849,7 @@ void HmTab::draw_cog(UWORD prim)
 
 		//
 		// Destroy the hm_object.
-		// 
+		//
 
 		HM_destroy(hm_index);
 	}
@@ -896,7 +896,7 @@ SLONG move_point(UWORD prim, SLONG mouse_x, SLONG mouse_y)
 	PrimInfo   *pi =  get_prim_info(prim);
 	PrimObject *po = &prim_objects [prim];
 	HMTAB_Prim *hp = &HMTAB_prim   [prim];
-	
+
 	if (!hp->defined)
 	{
 		//
@@ -959,7 +959,7 @@ SLONG move_point(UWORD prim, SLONG mouse_x, SLONG mouse_y)
 		for (i = 0; i < hp->x_res; i++)
 		{
 			px = pi->minx + MUL64(bbdx, hp->x_point[i]);
-			
+
 			VD_transform(px, py1, pz1, &x, &y);
 
 			dx = abs(x - mouse_x);
@@ -985,7 +985,7 @@ SLONG move_point(UWORD prim, SLONG mouse_x, SLONG mouse_y)
 		for (i = 0; i < hp->y_res; i++)
 		{
 			py = pi->miny + MUL64(bbdy, hp->y_point[i]);
-			
+
 			VD_transform(px1, py, pz1, &x, &y);
 
 			dx = abs(x - mouse_x);
@@ -1011,7 +1011,7 @@ SLONG move_point(UWORD prim, SLONG mouse_x, SLONG mouse_y)
 		for (i = 0; i < hp->z_res; i++)
 		{
 			pz = pi->minz + MUL64(bbdz, hp->z_point[i]);
-			
+
 			VD_transform(px1, py1, pz, &x, &y);
 
 			dx = abs(x - mouse_x);
@@ -1057,21 +1057,21 @@ SLONG move_point(UWORD prim, SLONG mouse_x, SLONG mouse_y)
 
 #define CTRL_NEXT_PRIM		1
 #define CTRL_PREV_PRIM		2
-							
+
 #define CTRL_RES_X_UP		3
 #define CTRL_RES_X_DOWN		4
 #define CTRL_RES_Y_UP		5
 #define CTRL_RES_Y_DOWN		6
 #define CTRL_RES_Z_UP		7
 #define CTRL_RES_Z_DOWN		8
-							
+
 #define CTRL_GRAV_U			9
 #define CTRL_GRAV_D			10
 #define CTRL_GRAV_L			11
 #define CTRL_GRAV_R			12
-							
+
 #define CTRL_GRAV_CENTRE	13
-							
+
 #define CTRL_SAVE			14
 
 ControlDef HMTab_def[] =
@@ -1159,13 +1159,13 @@ void HmTab::DrawTabContent()
 	// Fill with the standard colour.
 	//
 
-	content_rect = ContentRect;	
+	content_rect = ContentRect;
 	content_rect.ShrinkRect(1,1);
 	content_rect.FillRect(CONTENT_COL);
 
 	//
 	// Draw the buttons.
-	// 
+	//
 
 	SetWorkWindowBounds(ContentLeft()+1,ContentTop()+1,ContentWidth()-1,ContentHeight()-1);
 	DrawControlSet();
@@ -1255,7 +1255,7 @@ UWORD HmTab::HandleTabClick(UBYTE flags, MFPoint *clicked_point)
 			while(current_control)
 			{
 				if(!(current_control->GetFlags()&CONTROL_INACTIVE) && current_control->PointInControl(&local_point))
-				{	
+				{
 					//
 					// A click on this button.
 					//
@@ -1320,7 +1320,7 @@ void HmTab::HandleControl(UWORD control_id)
 	{
 		case CTRL_NEXT_PRIM: HMTAB_current_prim += 1; break;
 		case CTRL_PREV_PRIM: HMTAB_current_prim -= 1; break;
-		
+
 		case CTRL_RES_X_UP:   hp->x_res += 1; break;
 		case CTRL_RES_X_DOWN: hp->x_res -= 1; break;
 
@@ -1547,7 +1547,7 @@ SLONG HmTab::HandleModuleContentClick(MFPoint *clicked_point, UBYTE flags, SLONG
 		SLONG wwy = WorkWindowRect.Top;
 		SLONG www = WorkWindowRect.Width;
 		SLONG wwh = WorkWindowRect.Height;
-		
+
 		SetWorkWindowBounds(x, y, w - 1, h - 1);
 
 		DrawModuleContent  (x + 1, y + 1, w, h);

@@ -1,6 +1,6 @@
 
 #include	"Editor.hpp"
-#include	"c:\fallen\headers\memory.h"
+#include	"fallen/headers/memory.h"
 
 
 void	(*scan_function)(SLONG face,SLONG x,SLONG y,SLONG z,SLONG extra);
@@ -30,7 +30,7 @@ void	scan_a_prim_at(UWORD	prim,SLONG x,SLONG y,SLONG z)
 
 void	scan_a_building(UWORD	prim,SLONG x,SLONG y,SLONG z)
 {
-	
+
 	SLONG	c0;
 	struct	BuildingObject	*p_obj;
 
@@ -69,7 +69,7 @@ void	scan_map_thing(SLONG	map_thing)
 	switch(p_mthing->Type)
 	{
 		case	MAP_THING_TYPE_PRIM:
-			//3ds Prim Mesh 
+			//3ds Prim Mesh
 			if(p_mthing->IndexOther<1000)
 			if(!prim_done[p_mthing->IndexOther])
 			{
@@ -106,7 +106,7 @@ void	scan_game_map_thing(SLONG	map_thing)
 	{
 		//case	MAP_THING_TYPE_PRIM:
 		case	DT_PRIM:
-			//3ds Prim Mesh 
+			//3ds Prim Mesh
 			if(p_thing->Index<1000)
 			if(!prim_done[p_thing->Index])
 			{
@@ -140,7 +140,7 @@ void	scan_map(void)
 	SLONG	mx,my,mz;
 	struct	EditMapElement	*p_ele;
 	UWORD	index,count;
-	
+
 
 	mx=(engine.X>>8)>>ELE_SHIFT;
 	my=(engine.Y>>8)>>ELE_SHIFT;
@@ -156,7 +156,7 @@ void	scan_map(void)
 			scan_map_thing(index);
 			index=map_things[index].MapChild;
 		}
-		
+
 		count=0;
 		index=MAP2(dx,dz).MapWho;
 		while(index&&count++<20)
@@ -164,7 +164,7 @@ void	scan_map(void)
 			scan_game_map_thing(index);
 			index=TO_THING(index)->Child;
 		}
-		
+
 	}
 
 	if(background_prim)

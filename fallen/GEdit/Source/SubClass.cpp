@@ -15,11 +15,11 @@
 #include	"pap.h"
 #include	"gi.h"
 
-#include	"C:\fallen\Editor\Headers\Anim.h"
+#include	"fallen/Editor/Headers/Anim.h"
 #include	"io.h"
 #include	"ob.h"
-#include	"c:\fallen\Editor\headers\map.h"
-#include	"c:\fallen\Editor\Headers\Thing.h"
+#include	"fallen/Editor/headers/map.h"
+#include	"fallen/Editor/Headers/Thing.h"
 
 #include	"supermap.h"
 #include	"inside2.h"
@@ -165,7 +165,7 @@ void SetCrimeRate(Mission *mission) {
 	itoa(mission->CrimeRate,txt,10);
 	InputBox("Set crime rate", "Enter new crime rate:", txt);
 	mission->CrimeRate=atoi(txt);
-	
+
 }
 
 void SetWanderingCivsRate(Mission *mission) {
@@ -173,7 +173,7 @@ void SetWanderingCivsRate(Mission *mission) {
 	itoa(mission->CivsRate,txt,10);
 	InputBox("Set fake wandering people rate", "Enter number of civs:", txt);
 	mission->CivsRate=atoi(txt);
-	
+
 }
 
 void SetWanderingCarsRate(Mission *mission) {
@@ -277,7 +277,7 @@ void DeleteCivs(Mission *mission) {
 		SLONG messcount;
 		CBYTE fname[256];
 		FILE *handle;
-	
+
 		extern CBYTE old_path[_MAX_PATH];
 
 		SetCurrentDirectory(old_path);
@@ -340,7 +340,7 @@ void DeleteCivs(Mission *mission) {
 		if (handle)
 		{
 			sprintf(str, "I've create a citsez file called \"%s\". Shall I make it the citsez text for this mission?", fname);
-			
+
 			if (MessageBox(0,str,"Update CitSez text",MB_YESNO|MB_ICONEXCLAMATION) == IDYES)
 			{
 				strcpy(current_mission->CitSezMapName, fname);
@@ -390,11 +390,11 @@ void DeleteCars(Mission *mission) {
 						// saved
 						ep_tst=0; break;
 					}
-					if ((ep_tst->EPRefBool)&&(ep_tst->TriggeredBy==TT_PERSON_IN_VEHICLE)&&(ep_tst->EPRefBool==current_ep)) { 
-						ep_tst=0; break; 
+					if ((ep_tst->EPRefBool)&&(ep_tst->TriggeredBy==TT_PERSON_IN_VEHICLE)&&(ep_tst->EPRefBool==current_ep)) {
+						ep_tst=0; break;
 					}
 					if ((ep_tst->WaypointType==WPT_STALL_CAR)||(ep_tst->WaypointType==WPT_LOCK_VEHICLE)) {
-						if ((ep_tst->Data[0])&&(ep_tst->Data[0]==current_ep)) { 
+						if ((ep_tst->Data[0])&&(ep_tst->Data[0]==current_ep)) {
 							ep_tst=0; break;
 						}
 					}
@@ -430,7 +430,7 @@ void DeleteCars(Mission *mission) {
 								ep_tst=0; break;
 							}
 							/*if ((ep_tst->WaypointType==WPT_STALL_CAR)||(ep_tst->WaypointType==WPT_LOCK_VEHICLE)) {
-								if ((ep_tst->Data[0])&&(ep_tst->Data[0]==current_ep)) { 
+								if ((ep_tst->Data[0])&&(ep_tst->Data[0]==current_ep)) {
 									ep_tst=0; break;
 								}
 							}*/
@@ -442,7 +442,7 @@ void DeleteCars(Mission *mission) {
 				}
 				if (winner) { TrashFlags[i]|=2; TrashList[i++]=ep; }
 			}
-		} 
+		}
 
 		current_ep	=	ep->Next;
 	}
@@ -538,7 +538,7 @@ void	save_prim_map(CBYTE *name)
 		MessageBox(GEDIT_edit_wnd,"File create error.","Error.",MB_ICONEXCLAMATION|MB_OK);
 		return;
 	}
-	
+
 	FileRead(handle,(UBYTE*)&save_type,4);
 	FileWrite(handout,(UBYTE*)&save_type,4);
 
@@ -550,7 +550,7 @@ void	save_prim_map(CBYTE *name)
 		MessageBox(GEDIT_edit_wnd,"This is an out-of-date map file. Please try again with a version 24 or later file.","Error.",MB_ICONEXCLAMATION|MB_OK);
 		return;
 	}
-	
+
 	FileRead(handle,(UBYTE*)&ob_size1,4);
 	FileWrite(handout,(UBYTE*)&ob_size2,4);
 
@@ -623,7 +623,7 @@ void	save_prim_map(CBYTE *name)
 		data3 = new UBYTE[size3];
 		data4 = new UBYTE[size4];
 		data5 = new UBYTE[size5];
-		
+
 		FileRead(handle,data1, size1);
 		FileRead(handle,data2, size2);
 		FileRead(handle,data3, size3);
@@ -685,7 +685,7 @@ void	save_prim_map(CBYTE *name)
 	//
 	// All this ob nonsense are the objects on the map (like lamposts)
 	//
-	// load the old ones 
+	// load the old ones
 
 	FileRead(handle,(UBYTE*)&dummy_obctr,sizeof(OB_ob_upto));
 	FileRead(handle,(UBYTE*)&dummy_OB_ob[0],sizeof(OB_Ob)*dummy_obctr);
@@ -736,7 +736,7 @@ void	save_prim_map(CBYTE *name)
 	strcpy(name3,name);
 	strcat(name3,".bak");
 	DeleteFile(name3);
-	
+
 	// shift original to backup
 	rename(name,name3);
 
@@ -820,7 +820,7 @@ void update_prims_on_map(CBYTE *orig_name) {
 	FileRead(handle,buffer,size);
 	FileWrite(handout,buffer,size);
 	delete [] buffer;
-	
+
 /*
 	size=sizeof(struct DepthStrip)*EDIT_MAP_WIDTH*EDIT_MAP_DEPTH;
 	buffer=(UBYTE*)malloc(size);
@@ -929,7 +929,7 @@ void update_prims_on_map(CBYTE *orig_name) {
 	strcpy(name3,name);
 	strcat(name3,".bak");
 	DeleteFile(name3);
-	
+
 	// shift original to backup
 	rename(name,name3);
 
@@ -962,7 +962,7 @@ void show_mission_info()
 	for (i = 0; i < MAX_EVENTPOINTS; i++)
 	{
 		ep = &current_mission->EventPoints[i];
-		
+
 		if (ep->WaypointType == WPT_CREATE_ITEM)
 		{
 			switch(ep->Data[0])
@@ -1046,7 +1046,7 @@ void ws_refresh_all()
 		if (current_mission->Flags & MISSION_FLAG_USED)
 			refresh_mission();
 	}
-	
+
 	current_mission=previous_mission;
 
 	ResetFreelist(current_mission);
@@ -1084,7 +1084,7 @@ void		remove_children(HTREEITEM parent);
 
   remove_children(current);
   free_map(current_map-game_maps);
-  
+
 }
 
 //---------------------------------------------------------------
@@ -1155,11 +1155,11 @@ LRESULT	CALLBACK	sc_tree_proc	(
 //--- mission ---//
 				case	ID_MISSIONROOT_ADDMISSIONBRIEF:
 					return	0;
-				
+
 				case	ID_MISSIONROOT_ADDLIGHTMAP:
 					ws_add_light_map();
 					return	0;
-				
+
 				case	ID_MISSIONROOT_ADDSEWERMAP:
 					ws_add_citsez_map();
 					return	0;
@@ -1198,7 +1198,7 @@ LRESULT	CALLBACK	sc_tree_proc	(
 								break;
 						}
 					}
-					
+
 					return 0;
 
 				case ID_MISSIONROOT_BOREDOM:

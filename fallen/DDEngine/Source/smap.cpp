@@ -5,8 +5,8 @@
 #include "game.h"
 #include "smap.h"
 #include "aa.h"
-#include "c:\fallen\headers\person.h"
-#include "c:\fallen\headers\fmatrix.h"
+#include "fallen/headers/person.h"
+#include "fallen/headers/fmatrix.h"
 #include "matrix.h"
 #include "memory.h"
 #include <math.h>
@@ -66,7 +66,7 @@ void SMAP_get_world_pos(
 
 		//
 		// Position of (0,0) of the shadow map.
-		// 
+		//
 
 		float *world_x,
 		float *world_y,
@@ -75,7 +75,7 @@ void SMAP_get_world_pos(
 		//
 		// The vector along on pixel in the u and v direction.
 		//
-		
+
 		float *world_dxdu,
 		float *world_dydu,
 		float *world_dzdu,
@@ -99,7 +99,7 @@ void SMAP_get_world_pos(
 
 //
 // The plane, passing through the origin of the world.
-// 
+//
 
 float SMAP_plane_ux;
 float SMAP_plane_uy;
@@ -115,7 +115,7 @@ float SMAP_plane_nz;
 
 //
 // The bounding values in all the points.
-// 
+//
 
 
 float SMAP_u_min;
@@ -138,7 +138,7 @@ float SMAP_v_map_mul_slong;
 
 //
 // The bitmap.
-// 
+//
 
 UBYTE *SMAP_bitmap;
 SLONG  SMAP_res_u;
@@ -147,7 +147,7 @@ SLONG  SMAP_res_v;
 
 //
 // The points.
-// 
+//
 
 typedef struct
 {
@@ -299,7 +299,7 @@ SLONG SMAP_point_add(
 
 	//
 	// Update the bounding values.
-	// 
+	//
 
 	if (sp->along_n < SMAP_n_min) {SMAP_n_min = sp->along_n;}
 	if (sp->along_n > SMAP_n_max) {SMAP_n_max = sp->along_n;}
@@ -490,7 +490,7 @@ SLONG SMAP_prim_points(
 
 	//
 	// Calculate the objects rotation matrix.
-	// 
+	//
 
 	MATRIX_calc(
 		matrix,
@@ -535,7 +535,7 @@ SLONG SMAP_prim_points(
 #ifdef BIKE
 
 void SMAP_bike(
-		Thing *p_bike, 
+		Thing *p_bike,
 		UBYTE *bitmap,	// 0 => transparent 255 => opaque
 		UBYTE  u_res,
 		UBYTE  v_res,
@@ -620,7 +620,7 @@ void SMAP_bike(
 
 	//
 	// Add the triangles and quads for each bit of the bike.
-	// 
+	//
 
 	SMAP_add_prim_triangles(PRIM_OBJ_BIKE_FRAME,  i_frame);
 
@@ -684,12 +684,12 @@ UWORD SMAP_add_tweened_points(
 
 	//
 	// Matrix functions we use.
-	// 
+	//
 
 	void matrix_transform   (Matrix31* result, Matrix33* trans, Matrix31* mat2);
 	void matrix_transformZMY(Matrix31* result, Matrix33* trans, Matrix31* mat2);
 	void matrix_mult33      (Matrix33* result, Matrix33* mat1,  Matrix33* mat2);
-	
+
 //	mat		 = &anim_info     ->Matrix;
 //	mat_next = &anim_info_next->Matrix;
 
@@ -707,7 +707,7 @@ UWORD SMAP_add_tweened_points(
 
 	x += temp.X;
 	y += temp.Y;
-	z += temp.Z;	
+	z += temp.Z;
 
 	//
 	// Create a temporary "tween" matrix between current and next
@@ -743,7 +743,7 @@ UWORD SMAP_add_tweened_points(
 	mat2.M[2][0] = (mat2.M[2][0] * character_scale) / 256;
 	mat2.M[2][1] = (mat2.M[2][1] * character_scale) / 256;
 	mat2.M[2][2] = (mat2.M[2][2] * character_scale) / 256;
-	
+
 	//
 	// Apply local rotation matrix to get mat_final that rotates
 	// the point into world space.
@@ -787,11 +787,11 @@ UWORD SMAP_add_tweened_points(
 
 
 void SMAP_person(
-		Thing     *p_thing, 
+		Thing     *p_thing,
 		UBYTE     *bitmap,	// 0 => transparent 255 => opaque
 		UBYTE      u_res,
 		UBYTE      v_res,
-		SLONG      light_dx, 
+		SLONG      light_dx,
 		SLONG      light_dy,
 		SLONG      light_dz)
 {
@@ -854,7 +854,7 @@ void SMAP_person(
 	//
 
 	ae1 = dt->CurrentFrame->FirstElement;
-	ae2 = dt->NextFrame   ->FirstElement;   
+	ae2 = dt->NextFrame   ->FirstElement;
 
 	if (!ae1 || !ae2)
 	{
@@ -1019,7 +1019,7 @@ void SMAP_person(
 	{
 		//
 		// Add the triangles and quads for each bit of the bike.
-		// 
+		//
 
 		/*
 		SMAP_add_prim_triangles(PRIM_OBJ_BIKE_FRAME,  i_frame);
@@ -1028,7 +1028,7 @@ void SMAP_person(
 		SMAP_add_prim_triangles(PRIM_OBJ_BIKE_BWHEEL, i_fwheel);
 		SMAP_add_prim_triangles(PRIM_OBJ_BIKE_BWHEEL, i_bwheel);
 	}
-	
+
 	#endif
 }
 
@@ -1139,7 +1139,7 @@ SMAP_Link *SMAP_project_onto_poly(SVector_F quad[], SLONG num_points)
 
 	//
 	// Clear the old points.
-	// 
+	//
 
 	SMAP_link_upto = 0;
 
@@ -1337,7 +1337,7 @@ SMAP_Link *SMAP_project_onto_poly(SVector_F quad[], SLONG num_points)
 
 	//
 	// Early outs?
-	// 
+	//
 
 	if ( clip_and) {return NULL;}
 	if (!clip_or)  {if (SMAP_wrong_side(poly)) {return NULL;} else {SMAP_convert_uvs(poly); return poly;}}
@@ -1442,7 +1442,7 @@ SMAP_Link *SMAP_project_onto_poly(SVector_F quad[], SLONG num_points)
 
 	//
 	// Early outs?
-	// 
+	//
 
 	if ( clip_and) {return NULL;}
 	if (!clip_or)  {if (SMAP_wrong_side(poly)) {return NULL;} else {SMAP_convert_uvs(poly); return poly;}}
@@ -1547,7 +1547,7 @@ SMAP_Link *SMAP_project_onto_poly(SVector_F quad[], SLONG num_points)
 
 	//
 	// Early outs?
-	// 
+	//
 
 	if ( clip_and) {return NULL;}
 	if (!clip_or)  {if (SMAP_wrong_side(poly)) {return NULL;} else {SMAP_convert_uvs(poly); return poly;}}
@@ -1652,7 +1652,7 @@ SMAP_Link *SMAP_project_onto_poly(SVector_F quad[], SLONG num_points)
 
 	//
 	// Early outs?
-	// 
+	//
 
 	if ( clip_and) {return NULL;}
 	if (!clip_or)  {if (SMAP_wrong_side(poly)) {return NULL;} else {SMAP_convert_uvs(poly); return poly;}}

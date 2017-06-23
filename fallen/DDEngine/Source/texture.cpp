@@ -4,27 +4,27 @@
 
 #include "game.h"
 #include <DDLib.h>
-#include "c:\fallen\ddlibrary\headers\tga.h"
+#include "fallen/ddlibrary/headers/tga.h"
 #include "texture.h"
-#include "c:\fallen\headers\animtmap.h"
-#include "c:\fallen\headers\supermap.h"
+#include "fallen/headers/animtmap.h"
+#include "fallen/headers/supermap.h"
 #include "poly.h"
 #include "pap.h"
 #include "ns.h"
 #include "memory.h"
-#include "c:\fallen\headers\io.h"
-#include "c:\fallen\headers\inside2.h"
+#include "fallen/headers/io.h"
+#include "fallen/headers/inside2.h"
 #include "sound.h"
-#include "c:\fallen\headers\noserver.h"
+#include "fallen/headers/noserver.h"
 #include "ware.h"
 #include "truetype.h"
 #include "font2d.h"
 #include "env.h"
 #include "drive.h"
-#include "c:\fallen\headers\attract.h"
+#include "fallen/headers/attract.h"
 #include "crinkle.h"
 #ifdef TARGET_DC
-#include "c:\fallen\ddlibrary\headers\GDisplay.h"
+#include "fallen/ddlibrary/headers/GDisplay.h"
 #endif
 int	TEXTURE_create_clump = 0;
 
@@ -95,7 +95,7 @@ UBYTE TEXTURE_needed[TEXTURE_MAX_TEXTURES];
 
 //
 // The texture pages.
-// 
+//
 
 D3DTexture TEXTURE_texture[TEXTURE_MAX_TEXTURES];
 
@@ -270,7 +270,7 @@ void TEXTURE_DC_pack_load_page(SLONG page)
 	//
 	// Does this page get packed or does it become a normal page?
 	//
-	
+
 	if (POLY_page_flag[page])
 	{
 		//
@@ -369,7 +369,7 @@ void TEXTURE_DC_pack_load_page(SLONG page)
 
 				base_x = (TEXTURE_DC_pack_page_pos % 3) * 64 + 32;
 				base_y = (TEXTURE_DC_pack_page_pos / 3) * 64 + 32;
-				
+
 				//
 				// The pitch is returned in bytes!
 				//
@@ -436,7 +436,7 @@ void TEXTURE_DC_pack_load_page(SLONG page)
 					pixel |= (tga[fx + fy * 64].blue  >> tt->mask_red) << tt->mask_blue;
 
 					bitmap[tx + ty * pitch] = pixel;
-					
+
 					//
 					// Left...
 					//
@@ -509,7 +509,7 @@ void TEXTURE_DC_pack_load_page(SLONG page)
 				pixel |= (tga[fx + fy * 64].blue  >> tt->mask_red) << tt->mask_blue;
 
 				bitmap[tx + ty * pitch] = pixel;
-				
+
 				//
 				// Top right...
 				//
@@ -1086,7 +1086,7 @@ void TEXTURE_initialise_clumping(CBYTE *fname_level)
 
 #endif //#else //#ifdef TARGET_DC
 
-	
+
 extern void SetLastClumpfile(char* file, size_t size);	// in GDisplay.cpp, horrible bodge
 
 	if (!clumping)
@@ -1293,11 +1293,11 @@ extern void ATTRACT_loadscreen_draw(SLONG completion);
 #endif
 	TEXTURE_num_textures         = TEXTURE_NUM_STANDARD + 90 + 20;
 
-	
+
 
 	//
 	// Where we load the extra textures from.
-	// 
+	//
 
 #ifdef	NO_SERVER
 	#define TEXTURE_EXTRA_DIR "server\\textures\\extras\\"
@@ -1596,7 +1596,7 @@ LOADED_THIS_MANY_TEXTURES(3);
 	DO_DC_CONVERT(TEXTURE_EXTRA_DIR"DC\\button PADDOWN.tga"		);
 	DO_DC_CONVERT(TEXTURE_EXTRA_DIR"DC\\button PADUP.tga"		);
 	DO_DC_CONVERT(TEXTURE_EXTRA_DIR"DC\\page_joybutts.tga"		);
-	
+
 
 	DO_DC_CONVERT("server\\textures\\shared\\people\\page_darci1.tga");
 	DO_DC_CONVERT("server\\textures\\extras\\page_misc_alpha.tga");
@@ -1617,7 +1617,7 @@ LOADED_THIS_MANY_TEXTURES(3);
 
 	//
 	// The video page.
-	// 
+	//
 
 //not used anymore?	TEXTURE_texture[86].CreateUserPage(TEXTURE_VIDEO_SIZE, FALSE);
 
@@ -1967,7 +1967,7 @@ LOADED_THIS_MANY_TEXTURES(1);
 
 	#if !defined(TARGET_DC)
 		for (i = 0; i < NS_PAGE_NUMBER; i++)
-		{	
+		{
 			page = NS_page[i].page;
 
 			if (TEXTURE_texture[page].Type == D3DTEXTURE_TYPE_UNUSED)
@@ -2008,7 +2008,7 @@ LOADED_THIS_MANY_TEXTURES(1);
 #ifdef TRUETYPE
 	TT_Init();
 #endif
-	
+
 	#if 0	// Didn't work anyway...
 
 	//
@@ -2139,7 +2139,7 @@ void TEXTURE_free()
 	//
 	// Initialise all the crinkles.
 	//
-	
+
 	CRINKLE_init();
 
 	for (i = 0; i < TEXTURE_num_textures; i++)
@@ -2171,7 +2171,7 @@ void TEXTURE_free_unneeded ( void )
 	//
 	// Initialise all the crinkles.
 	//
-	
+
 	CRINKLE_init();
 
 #ifdef DEBUG
@@ -2383,7 +2383,7 @@ void TEXTURE_get_minitexturebits_uvs(
 			base_size = 64.0F / 256.0F;
 		}
 	}
-	
+
 	#endif
 
 	if (*page >= TEXTURE_page_num_standard)
@@ -2439,7 +2439,7 @@ void TEXTURE_get_minitexturebits_uvs(
 			*v0 = base_v + base_size;
 			*u2 = base_u + base_size;
 			*v2 = base_v + base_size;
-			break;	   
+			break;
 	}
 }
 
@@ -2468,7 +2468,7 @@ void TEXTURE_fix_texture_styles(void)
 
 			av_u = base_u/TEXTURE_NORM_SIZE;
 			av_v = base_v/TEXTURE_NORM_SIZE;
-			
+
 			page = av_u + av_v * TEXTURE_NORM_SQUARES + textures_xy[style][piece].Page * TEXTURE_NORM_SQUARES * TEXTURE_NORM_SQUARES;
 			dx_textures_xy[style][piece].Page=page;
 			dx_textures_xy[style][piece].Flip=textures_xy[style][piece].Flip;
@@ -2750,7 +2750,7 @@ void TEXTURE_set_colour_key(SLONG page)
 	DDCOLORKEY ck;
 
 	return;
-	
+
 
 	ASSERT(WITHIN(page, 0, TEXTURE_num_textures - 1));
 
@@ -2999,7 +2999,7 @@ SLONG TEXTURE_looks_like(SLONG page)
 		if (av_g > av_r && av_g > av_b)
 		{
 			SLONG rb;
-			
+
 			rb   = av_r + av_b;
 			rb >>= 1;
 			rb  += rb >> 1;
@@ -3102,7 +3102,7 @@ SLONG TEXTURE_looks_like(SLONG page)
 			r1 = ((pixel >> dt->shift_red  ) & (0xff >> dt->mask_red  )) << dt->mask_red  ;
 			g1 = ((pixel >> dt->shift_green) & (0xff >> dt->mask_green)) << dt->mask_green;
 			b1 = ((pixel >> dt->shift_blue ) & (0xff >> dt->mask_blue )) << dt->mask_blue ;
-			
+
 			//
 			// Work out the average difference in colour to the left/right/along the line.
 			//

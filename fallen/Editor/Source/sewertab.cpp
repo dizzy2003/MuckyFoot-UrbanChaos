@@ -3,12 +3,12 @@
 
 #include	"SewerTab.hpp"
 #include	"engine.h"
-#include	"c:\fallen\headers\enter.h"
-#include	"c:\fallen\headers\id.h"
+#include	"fallen/headers/enter.h"
+#include	"fallen/headers/id.h"
 #include	"extra.h"
-#include	"c:\fallen\headers\supermap.h"
-#include	"c:\fallen\headers\inside2.h"
-#include	"c:\fallen\headers\memory.h"
+#include	"fallen/headers/supermap.h"
+#include	"fallen/headers/inside2.h"
+#include	"fallen/headers/memory.h"
 
 extern	void	draw_quad_now(SLONG x,SLONG y,SLONG w,SLONG h,UBYTE tx,UBYTE ty,UBYTE page,UBYTE flip,UBYTE flags);
 
@@ -25,7 +25,7 @@ void	cross_work_window(void)
 {
 	DrawLineC(0,0,WorkWindowWidth-1,WorkWindowHeight-1,255);
 	DrawLineC(0,WorkWindowHeight-1,WorkWindowWidth-1,0,255);
-	
+
 }
 */
 //---------------------------------------------------------------
@@ -38,7 +38,7 @@ struct EnterableBuilding
 struct	EnterStorey
 {
 	 UWORD	NextStorey;
-	 
+
 };
 
 
@@ -100,7 +100,7 @@ MenuDef2		style_menu[64];
 
 
 
-ControlDef	inside_tab_def[]	=	
+ControlDef	inside_tab_def[]	=
 {
 	{	BUTTON,		0,	"New Walls",				10,		 40,	0,	0		},
 	{	BUTTON,		0,	"New Door",					10,		 60,	0,	0		},
@@ -132,7 +132,7 @@ ControlDef	inside_tab_def[]	=
 	{	CHECK_BOX,	0,	"Y Free",					120,	213-10,	0,	10		},
 	{	CHECK_BOX,	0,	"Z Free",					120,	226-10,	0,	10		},
 	{	BUTTON,		0,	"New Building",				10,		 40,	0,	0		},
-	{	BUTTON,		0,	"Next Storey",				10,		 80,	0,	0		},		 
+	{	BUTTON,		0,	"Next Storey",				10,		 80,	0,	0		},
 	{	BUTTON,		0,	"Duplicate Storey",			10,		100,	0,	0		},
 	{	BUTTON,		0,	"Toggle Tiled Roof",		10,		120,	0,	0		},
 	{	BUTTON,		0,	"Add Flat Roof Quad",		10,		140,	0,	0		},
@@ -271,7 +271,7 @@ void	SewerTab::ResetSewerTab(void)
 			}
 		}
 	}
-	
+
 }
 
 
@@ -314,7 +314,7 @@ void	SewerTab::DrawTabContent(void)
 
 	EdRect		content_rect;
 
-	content_rect	=	ContentRect;	
+	content_rect	=	ContentRect;
 	content_rect.ShrinkRect(1,1);
 	content_rect.FillRect(CONTENT_COL);
 
@@ -357,7 +357,7 @@ void	SewerTab::AddHeightOffset(SLONG *x,SLONG *y)
 
 	*x-=((-CurrentY)*(ViewSize+3))/(BLOCK_SIZE<<3);
 	*y-=-((-CurrentY)*(ViewSize+3))/(BLOCK_SIZE<<3);
-	
+
 }
 
 
@@ -373,7 +373,7 @@ SLONG	SewerTab::GetHeightColour(SLONG	storey)
 
 
 		return(0);
-	
+
 }
 
 void	SewerTab::HighlightVertexes(SLONG x,SLONG y,SLONG w,SLONG h)
@@ -403,13 +403,13 @@ void	SewerTab::HighlightVertexes(SLONG x,SLONG y,SLONG w,SLONG h)
 
 			while(storey_index)
 			{
-																				  
-				
+
+
 				x1=storey_list[storey_index].DX;
 				y1=storey_list[storey_index].DY;
 				z1=storey_list[storey_index].DZ;
 
-				
+
 
 
 				CurrentY=storey_list[storey_index].DY;
@@ -435,7 +435,7 @@ void	SewerTab::HighlightVertexes(SLONG x,SLONG y,SLONG w,SLONG h)
 						rect.SetRect(x1-rect_size,z1-rect_size,rect_size<<1,rect_size<<1);
 						rect.OutlineRect(GetHeightColour(storey_index));
 
-						index=wall_list[index].Next;	
+						index=wall_list[index].Next;
 					}
 				}
 
@@ -462,7 +462,7 @@ SLONG	SewerTab::ClickInVertexStoreyList(SLONG building,SLONG storey_index,SLONG 
 	rect_size=ViewSize>>2;
 	while(storey_index>0)
 	{
-		
+
 
 
 		x1=storey_list[storey_index].DX;
@@ -484,7 +484,7 @@ SLONG	SewerTab::ClickInVertexStoreyList(SLONG building,SLONG storey_index,SLONG 
 			{
 				if(storey_index==EditStorey)
 				{
-					
+
 					EditBuilding=storey_list[storey_index].BuildingHead;
 					EditStorey=storey_index;
 					EditY=0;//storey_list[EditStorey].DY;
@@ -530,7 +530,7 @@ SLONG	SewerTab::ClickInVertexStoreyList(SLONG building,SLONG storey_index,SLONG 
 					}
 				}
 
-				index=wall_list[index].Next;	
+				index=wall_list[index].Next;
 			}
 		}
 		storey_index=storey_list[storey_index].Next;
@@ -546,10 +546,10 @@ SLONG	SewerTab::ClickInVertexStoreyList(SLONG building,SLONG storey_index,SLONG 
 		DrawTabContent();
 
 		return(1);
-		
+
 	}
 	return(0);
-	
+
 }
 
 SLONG	SewerTab::ClickInVertex(SLONG x,SLONG y,SLONG w,SLONG h,MFPoint	*mouse_point)
@@ -571,7 +571,7 @@ SLONG	SewerTab::ClickInVertex(SLONG x,SLONG y,SLONG w,SLONG h,MFPoint	*mouse_poi
 		index=storey_list[storey_index].InsideIDIndex;
 		for(c0=0;c0<MAX_STAIRS_PER_FLOOR;c0++)
 		{
-			
+
 			if(room_ids[index].StairFlags[c0])
 			{
 				SLONG	dir;
@@ -634,7 +634,7 @@ SLONG	SewerTab::ClickInVertex(SLONG x,SLONG y,SLONG w,SLONG h,MFPoint	*mouse_poi
 					CurrentY=storey_list[OutsideEditStorey].DY;
 					AddHeightOffset(&x1,&z1);
 					AddHeightOffset(&x2,&z2);
-				
+
 				drawrect.SetRect(x1,z1,x2-x1,z2-z1);
 				if(drawrect.PointInRect(mouse_point))
 				{
@@ -693,7 +693,7 @@ SLONG 	SewerTab::DrawWall(SLONG px,SLONG pz,SLONG x1,SLONG z1,SLONG index,SLONG 
 	{
 		wcount=dist/(BLOCK_SIZE*3);
 		wwidth=dist/(wcount*2+1);
-		
+
 	}
 	else
 	{
@@ -757,11 +757,11 @@ void	SewerTab::DrawContentLine(SLONG x1,SLONG y1,SLONG x2,SLONG y2,SLONG col)
 	y2=((y2>>ELE_SHIFT)-(ViewZ>>ELE_SHIFT))*ViewSize+(WorkWindowRect.Height>>1);
 */
 
-		
+
 
 	x1=((((x1)-(ViewX))*ViewSize)/ELE_SIZE)+(WorkWindowRect.Width>>1);
 	y1=((((y1)-(ViewZ))*ViewSize)/ELE_SIZE)+(WorkWindowRect.Height>>1);
-	   
+
 	x2=((((x2)-(ViewX))*ViewSize)/ELE_SIZE)+(WorkWindowRect.Width>>1);
 	y2=((((y2)-(ViewZ))*ViewSize)/ELE_SIZE)+(WorkWindowRect.Height>>1);
 
@@ -786,7 +786,7 @@ void	SewerTab::DrawContentLineY(SLONG x1,SLONG y1,SLONG z1,SLONG x2,SLONG y2,SLO
 	temp=CurrentY;
 	x1=((((x1)-(ViewX))*ViewSize)/ELE_SIZE)+(WorkWindowRect.Width>>1);
 	z1=((((z1)-(ViewZ))*ViewSize)/ELE_SIZE)+(WorkWindowRect.Height>>1);
-	   
+
 	x2=((((x2)-(ViewX))*ViewSize)/ELE_SIZE)+(WorkWindowRect.Width>>1);
 	z2=((((z2)-(ViewZ))*ViewSize)/ELE_SIZE)+(WorkWindowRect.Height>>1);
 
@@ -1117,7 +1117,7 @@ void	SewerTab::DrawModuleContent(SLONG x,SLONG y,SLONG w,SLONG h)
 
 			for(c0=0;c0<MAX_STAIRS_PER_FLOOR;c0++)
 			{
-				
+
 				if(room_ids[index].StairFlags[c0])
 				{
 					SLONG	dir;
@@ -1217,12 +1217,12 @@ void	SewerTab::DrawModuleContent(SLONG x,SLONG y,SLONG w,SLONG h)
 				mouse_point.Y	=	MouseY;
 				sprintf(str,"%d\n",RoomID);
 				Parent->GlobalToLocal(&mouse_point);
-				
+
 				QuickText(mouse_point.X,mouse_point.Y,str,0);
 			}
 */
 
-		
+
 		while(storey_index)
 		{
 			UBYTE	drawn_normal=0;
@@ -1249,12 +1249,12 @@ void	SewerTab::DrawModuleContent(SLONG x,SLONG y,SLONG w,SLONG h)
 				case	STOREY_TYPE_NORMAL:
 					drawn_normal=1;
 					break;
-				
+
 			}
 
 			if(Mode==BUILD_MODE_CONT_STOREY)
 			{
-				
+
 				CurrentY=storey_list[EditStorey].DY;
 				mouse_point.X+= ((-CurrentY)*(ViewSize+3))/(BLOCK_SIZE<<3);
 				mouse_point.Y+=-((-CurrentY)*(ViewSize+3))/(BLOCK_SIZE<<3);
@@ -1266,7 +1266,7 @@ void	SewerTab::DrawModuleContent(SLONG x,SLONG y,SLONG w,SLONG h)
 
 			if(index==0)
 			{
-				
+
 				if(Mode==BUILD_MODE_CONT_STOREY&&storey_index==EditStorey)
 					DrawContentLine(x1,z1,fx,fz,GetHeightColour(storey_index));
 			}
@@ -1291,7 +1291,7 @@ void	SewerTab::DrawModuleContent(SLONG x,SLONG y,SLONG w,SLONG h)
 						y1=pz;
 						x1=((((x1)-(ViewX))*ViewSize)/ELE_SIZE)+(WorkWindowRect.Width>>1);
 						y1=((((y1)-(ViewZ))*ViewSize)/ELE_SIZE)+(WorkWindowRect.Height>>1);
-						   
+
 						x2=x1;
 						y2=y1;
 
@@ -1323,13 +1323,13 @@ void	SewerTab::DrawModuleContent(SLONG x,SLONG y,SLONG w,SLONG h)
 					px=x1;
 					py=y1;
 					pz=z1;
-					index=wall_list[index].Next;	
+					index=wall_list[index].Next;
 				}
 				if(Mode==BUILD_MODE_CONT_STOREY&&storey_index==EditStorey)
 					DrawContentLine(px,pz,fx,fz,GetHeightColour(storey_index));
 			}
 
-	
+
 			if(pass==1)
 			{
 				pass=0;
@@ -1345,7 +1345,7 @@ void	SewerTab::DrawModuleContent(SLONG x,SLONG y,SLONG w,SLONG h)
 
 	//
 	// Draw the edge of the map...
-	// 
+	//
 
 	#define EDGE_COLOUR RED_COL
 
@@ -1389,7 +1389,7 @@ void	SewerTab::DrawModuleContent(SLONG x,SLONG y,SLONG w,SLONG h)
 void	SewerTab::HandleTab(MFPoint *current_point)
 {
 	SLONG		   update	=	0;
-	
+
 
 	ModeTab::HandleTab(current_point);
 	KeyboardInterface();
@@ -1545,7 +1545,7 @@ SLONG	SewerTab::DragEngine(UBYTE flags,MFPoint *clicked_point)
 				engine.Z = (old_z+(-nz+start_z));
 
 //				engine.Z=nz<<8;
-				
+
 				DrawModuleContent(Parent->ContentLeft()+1,Parent->ContentTop()+1,Parent->ContentWidth(),Parent->ContentHeight());
 				SetWorkWindowBounds(Parent->ContentLeft()+1,Parent->ContentTop()+1,Parent->ContentWidth(),Parent->ContentHeight());
 				ShowWorkWindow(0);
@@ -1554,7 +1554,7 @@ SLONG	SewerTab::DragEngine(UBYTE flags,MFPoint *clicked_point)
 				engine.X=old_x;
 				engine.Y=old_y;
 				engine.Z=old_z;
-				
+
 			}
 		}
 		if(flag)
@@ -1615,12 +1615,12 @@ SLONG	SewerTab::CalcMapCoord(SLONG	*mapx,SLONG	*mapy,SLONG	*mapz,SLONG	x,SLONG	y
 	else
 		dz=((dz+(ViewSize>>1))<<GridFlag)/ViewSize+(mz<<GridFlag);
 
-	
+
 
 	*mapx=dx<<(ELE_SHIFT-GridFlag);
 	*mapy=0;
 	*mapz=dz<<(ELE_SHIFT-GridFlag);
-	
+
 	return(1);
 }
 
@@ -1657,10 +1657,10 @@ SLONG	SewerTab::MouseInContent(void)
 
 		SetWorkWindowBounds(wwx,wwy,www,wwh); //RESTORE CLIP RECT
 
-		
+
 	}
 	return(0);
-	
+
 }
 
 SLONG	SewerTab::DragPaint(UBYTE flags)
@@ -1829,7 +1829,7 @@ SLONG	SewerTab::DragBuilding(UBYTE flags,UBYTE type)
 			dz=mz-storey_list[EditStorey].DZ;
 		}
 //		move_building(EditBuilding,dx,0,dz);
-		
+
 
 		DrawModuleContent(Parent->ContentLeft()+1,Parent->ContentTop()+1,Parent->ContentWidth(),Parent->ContentHeight());
 		SetWorkWindowBounds(Parent->ContentLeft()+1,Parent->ContentTop()+1,Parent->ContentWidth(),Parent->ContentHeight());
@@ -1910,7 +1910,7 @@ SLONG	SewerTab::DragVertex(UBYTE flags)
 				dz=mz-storey_list[EditStorey].DZ;
 			}
 //			move_building(EditBuilding,dx,0,dz);
-			
+
 
 		}
 		else
@@ -2036,7 +2036,7 @@ void	SewerTab::DeleteVertex(void)
 		}
 	}
 	else
-	{			   
+	{
 		SLONG	next;
 		next=storey_list[EditStorey].WallHead;
 		if(next)
@@ -2076,7 +2076,7 @@ SLONG	SewerTab::ClickNearWall(SLONG x,SLONG y,SLONG w,SLONG h,MFPoint	*mouse_poi
 
 			while(storey_index)
 			{
-				
+
 				x1=storey_list[storey_index].DX;
 				z1=storey_list[storey_index].DZ;
 				CurrentY=storey_list[storey_index].DY;
@@ -2113,9 +2113,9 @@ SLONG	SewerTab::ClickNearWall(SLONG x,SLONG y,SLONG w,SLONG h,MFPoint	*mouse_poi
 							best_storey=storey_index;
 							best_wall=index;
 							best_dist=dist;
-							
+
 						}
-						index=wall_list[index].Next;	
+						index=wall_list[index].Next;
 						px=x1;
 						pz=z1;
 					}
@@ -2135,7 +2135,7 @@ SLONG	SewerTab::ClickNearWall(SLONG x,SLONG y,SLONG w,SLONG h,MFPoint	*mouse_poi
 					{
 						storey_index=temp_index;
 						roof_flag=1;
-						
+
 					}
 					else
 					*/
@@ -2445,7 +2445,7 @@ SLONG	SewerTab::FenceOptions(void)
 	flags			=	0;
 
 //	storey_list[EditStorey].StoreyFlags&=~0x1f;
-	
+
 	for(c0=0;c0<6;c0++)
 	{
 
@@ -2510,7 +2510,7 @@ void	SewerTab::CheckStoreyIntegrity(UWORD storey)
 
 	if(storey_list[storey].WallHead&&wall_list[storey_list[storey].WallHead].Next)
 	{
-		
+
 		x1=storey_list[storey].DX;
 		z1=storey_list[storey].DZ;
 
@@ -2528,11 +2528,11 @@ void	SewerTab::CheckStoreyIntegrity(UWORD storey)
 		if(!is_it_clockwise_xy(x1,z1,x2,z2,x3,z3))
 		{
 			flip_storey(storey);
-			
+
 		}
 */
 	}
-	
+
 }
 
 
@@ -2573,7 +2573,7 @@ SLONG	SewerTab::HandleModuleContentClick(MFPoint	*clicked_point,UBYTE flags,SLON
 										{
 											if(EditWall<0)
 											{
-												
+
 												EditWall=0;
 												storey_list[EditStorey].Height++;
 												return(1);
@@ -2586,7 +2586,7 @@ SLONG	SewerTab::HandleModuleContentClick(MFPoint	*clicked_point,UBYTE flags,SLON
 												SLONG	size=4;
 												if(ShiftFlag)
 													size=1;
-												
+
 												EditWall=0;
 												storey_list[EditStorey].Height+=size;
 												return(1);
@@ -2616,7 +2616,7 @@ SLONG	SewerTab::HandleModuleContentClick(MFPoint	*clicked_point,UBYTE flags,SLON
 
 											}
 										break;
-									
+
 								}
 
 								LogText(" dragging editwall %d\n",EditWall);
@@ -2660,7 +2660,7 @@ SLONG	SewerTab::HandleModuleContentClick(MFPoint	*clicked_point,UBYTE flags,SLON
 										{
 											if(EditWall<0)
 											{
-												
+
 												EditWall=0;
 												storey_list[EditStorey].Height--;
 												return(1);
@@ -2673,7 +2673,7 @@ SLONG	SewerTab::HandleModuleContentClick(MFPoint	*clicked_point,UBYTE flags,SLON
 												SLONG	size=4;
 												if(ShiftFlag)
 													size=1;
-												
+
 												EditWall=0;
 												storey_list[EditStorey].Height-=size;
 												return(1);
@@ -2703,7 +2703,7 @@ SLONG	SewerTab::HandleModuleContentClick(MFPoint	*clicked_point,UBYTE flags,SLON
 
 											}
 										break;
-									
+
 								}
 								if(EditWall>0)
 								{
@@ -2712,7 +2712,7 @@ SLONG	SewerTab::HandleModuleContentClick(MFPoint	*clicked_point,UBYTE flags,SLON
 									index=get_new_wall();
 									wall_list[index].StoreyHead=EditStorey;
 									wall_list[index].WallFlags=1; //|FLAG_WALL_AUTO_WINDOWS;
-										
+
 									wall_list[EditWall].Next=index;
 
 									wall_list[index].DX=wall_list[EditWall].DX;
@@ -2729,7 +2729,7 @@ SLONG	SewerTab::HandleModuleContentClick(MFPoint	*clicked_point,UBYTE flags,SLON
 								else
 								{
 									//trying to drag one of the root
-									
+
 								}
 							}
 						}
@@ -2756,7 +2756,7 @@ SLONG	SewerTab::HandleModuleContentClick(MFPoint	*clicked_point,UBYTE flags,SLON
 										break;
 								}
 								return(1);
-								
+
 							}
 						}
 						//delete vertex
@@ -2886,7 +2886,7 @@ SLONG	SewerTab::HandleModuleContentClick(MFPoint	*clicked_point,UBYTE flags,SLON
 						CurrentY=storey_list[EditStorey].DY;
 						clicked_point->X+= ((-CurrentY)*(ViewSize+3))/(BLOCK_SIZE<<3);
 						clicked_point->Y+=-((-CurrentY)*(ViewSize+3))/(BLOCK_SIZE<<3);
-					
+
 						CalcMapCoord(&mx,&my,&mz,x,y,w,h,clicked_point);
 						storey_list[EditStorey].DX=mx;
 		//				storey_list[EditStorey].DY=my;
@@ -2917,7 +2917,7 @@ SLONG	SewerTab::HandleModuleContentClick(MFPoint	*clicked_point,UBYTE flags,SLON
 //						wall_list[index].WindowCount=0;
 						if(EditWall)
 						{
-							
+
 							wall_list[EditWall].Next=index;
 						}
 						else
@@ -2951,7 +2951,7 @@ SLONG	SewerTab::HandleModuleContentClick(MFPoint	*clicked_point,UBYTE flags,SLON
 				break;
 	}
 	return(0);
-	
+
 }
 
 UWORD	SewerTab::HandleTabClick(UBYTE flags,MFPoint *clicked_point)
@@ -3027,7 +3027,7 @@ SLONG  SewerTab::DoZoom(void)
 		update=2;
 	}
 	return(update);
-	
+
 }
 
 SLONG  SewerTab::DoKeys(void)
@@ -3056,7 +3056,7 @@ SLONG  SewerTab::DoKeys(void)
 	}
 	if(!ShiftFlag)
 	{
-		
+
 		if(Keys[KB_UP])
 		{
 			ViewZ-=scroll_step;
@@ -3077,7 +3077,7 @@ SLONG  SewerTab::DoKeys(void)
 				Keys[KB_UP]=0;
 				EditStorey=storey_list[EditStorey].Next;
 				EditY=0;//storey_list[EditStorey].DY;
-				
+
 			}
 			update=2;
 		}
@@ -3132,7 +3132,7 @@ SLONG	SewerTab::SetWorldMouse(ULONG flag)
 	}
 	else
 	{
-		
+
 		engine.ClipFlag=temp;
 		return(0);
 	}
@@ -3355,7 +3355,7 @@ void	SewerTab::HandleControl(UWORD control_id)
 					}
 					else
 					{
-						
+
 
 						UWORD	storey;
 						storey=get_new_storey();
@@ -3407,7 +3407,7 @@ void	SewerTab::HandleControl(UWORD control_id)
 					}
 					else
 					{
-						
+
 
 						UWORD	storey;
 						storey=get_new_storey();
@@ -3448,7 +3448,7 @@ void	SewerTab::HandleControl(UWORD control_id)
 				if(EditBuilding)
 				{
 
-						
+
 					SLONG	storey;
 					storey=get_new_storey();
 					if(storey)
@@ -3484,7 +3484,7 @@ void	SewerTab::HandleControl(UWORD control_id)
 
 /*
 		case	CTRL_NEXT_STOREY:
-		
+
 			if (WITHIN(EditBuilding, 1, MAX_BUILDINGS - 1) &&
 				WITHIN(EditStorey, 1, MAX_STOREYS - 1))
 			{
@@ -3504,7 +3504,7 @@ void	SewerTab::HandleControl(UWORD control_id)
 
 
 		case	CTRL_PREV_STOREY:
-		
+
 			if (WITHIN(EditBuilding, 1, MAX_BUILDINGS - 1) &&
 				WITHIN(EditStorey, 1, MAX_STOREYS - 1))
 			{
@@ -3583,7 +3583,7 @@ void	SewerTab::DoStairPopUp(SLONG stair,MFPoint *clicked_point)
 		the_control->SetItemState(c0,CTRL_ACTIVE);
 
 	//
-	// Select Cut,Copy,Paste 
+	// Select Cut,Copy,Paste
 	//
 	control_id				=	the_control->TrackControl(&local_point);
 	switch(control_id>>8)
@@ -3631,7 +3631,7 @@ void	SewerTab::DoStairPopUp(SLONG stair,MFPoint *clicked_point)
 		delete	the_control;
 	}
 	RequestUpdate();
-}			
+}
 
 
 

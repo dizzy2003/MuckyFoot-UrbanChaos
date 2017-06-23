@@ -7,7 +7,7 @@
 #include <windows.h>
 #include <MFStdLib.h>
 #include "perstex.h"
-#include "c:\fallen\headers\noserver.h"
+#include "fallen/headers/noserver.h"
 
 #ifdef	NO_SERVER
 #define TEXTURE_DIR "server\\"
@@ -102,7 +102,7 @@ SLONG PERSTEX_get_number(CBYTE *fname)
 	// the pages in the n:\urbanchaos\textures\shared\people directory to find the
 	// first unused slot.
 	//
-	
+
 	page_number = PERSTEX_PAGENUMBER_QMARK;
 
 	for (i = 1; i < 128; i++)	// Page 0 is reserved for qmark.tga

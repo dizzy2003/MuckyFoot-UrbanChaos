@@ -2,7 +2,7 @@
 // Guy Simmons, 19th February 1997.
 
 #include	"Editor.hpp"
-#include	"c:\fallen\headers\sound.h"
+#include	"fallen/headers/sound.h"
 #include	"mfx.h"
 
 //#include	"DXEngine.h"
@@ -275,9 +275,9 @@ void	editor(void)
 		// Control + Number keys selects the current texture set.
 		//
 
-		if (Keys[KB_TILD]) 
+		if (Keys[KB_TILD])
 		{
-			Keys[KB_TILD] = 0; 
+			Keys[KB_TILD] = 0;
 			editor_texture_set = 1;
 			free_game_textures(FREE_UNSHARED_TEXTURES);
 			load_game_textures(LOAD_UNSHARED_TEXTURES);
@@ -609,7 +609,7 @@ UBYTE	editor_loop(void)
 			editor();
 
 			destroy_editor_modules();
-			
+
 			delete	InterfaceDefaults;
 		}
 		ClearWorkScreen(0);
@@ -626,7 +626,7 @@ void	free_edit_memory(void);
 	free_edit_memory();
 
 	SetDisplay(640,480,16);
-	
+
 
 	return	0;
 }

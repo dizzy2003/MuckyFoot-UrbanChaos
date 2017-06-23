@@ -6,8 +6,8 @@
 #endif
 
 #include	"DDLib.h"
-#include	"c:\fallen\headers\env.h"
-#include	"c:\fallen\headers\game.h"
+#include	"fallen/headers/env.h"
+#include	"fallen/headers/game.h"
 #include	<tchar.h>
 #ifdef	TARGET_DC
 #include "target.h"
@@ -24,7 +24,7 @@ DDDriverManager		the_manager;
 
 BOOL WINAPI DriverEnumCallback	(
 									GUID FAR	*lpGuid,
-									LPTSTR		lpDesc, 
+									LPTSTR		lpDesc,
 									LPTSTR		lpName,
 									LPVOID		lpExtra
 								)
@@ -59,7 +59,7 @@ BOOL WINAPI DriverEnumCallback	(
     }
 
 	// Add To Global Driver List
-	result	=	the_manager.AddDriver(new_driver);	
+	result	=	the_manager.AddDriver(new_driver);
 	if(FAILED(result))
 	{
 		// Error, Driver Create Failed
@@ -127,7 +127,7 @@ HRESULT WINAPI ModeEnumCallback (
 
     // Update mode count
     the_info->Count++;
-        
+
     return DDENUMRET_OK;
 }
 
@@ -197,7 +197,7 @@ HRESULT WINAPI DeviceEnumCallback	(
 
     // Update D3D device Driver count
     the_info->Count++;
-        
+
     return DDENUMRET_OK;
 }
 
@@ -263,7 +263,7 @@ HRESULT WINAPI	TextureFormatEnumCallback	(
 
 	// Update format count
 	the_info->Count++;
-        
+
 	return	DDENUMRET_OK;
 }
 
@@ -297,7 +297,7 @@ HRESULT WINAPI ZFormatEnumCallback(LPDDPIXELFORMAT lpZFormat, LPVOID lpExtra)
         // Error, invalid pointer
         return DDENUMRET_CANCEL;
 	}
-	
+
 	if (!the_info->Count)
 	{
 		//
@@ -338,7 +338,7 @@ HRESULT WINAPI ZFormatEnumCallback(LPDDPIXELFORMAT lpZFormat, LPVOID lpExtra)
 
 	// Update format count
 	the_info->Count++;
-        
+
 	return	DDENUMRET_OK;
 }
 #endif
@@ -401,7 +401,7 @@ BOOL	IsPalettized(LPDDPIXELFORMAT lp_dd_pf)
 {
 	if(!lp_dd_pf)
 	{
-        // Error, 
+        // Error,
 		return FALSE;
 	}
 
@@ -514,7 +514,7 @@ BOOL	GetFullscreenMode	(
 		// many don't support 8 bpp, so pick 16
 		w		=	DEFAULT_WIDTH;
 		h		=	DEFAULT_HEIGHT;
-		bpp		=	DEFAULT_DEPTH;	
+		bpp		=	DEFAULT_DEPTH;
 	}
 
 	// Get Compatible Mode
@@ -598,7 +598,7 @@ D3DDeviceInfo	*ValidateDevice	(
 
 DDModeInfo	*ValidateMode	(
 								DDDriverInfo	*the_driver,
-								DWORD			w,	
+								DWORD			w,
 								DWORD			h,
 								DWORD			bpp,
 								DWORD			refresh,
@@ -653,7 +653,7 @@ DDModeInfo::DDModeInfo(const DDSURFACEDESC & ddDesc)
 
 //---------------------------------------------------------------
 
-DDModeInfo::~DDModeInfo() 
+DDModeInfo::~DDModeInfo()
 {
 	Prev	=	NULL;
 	Next	=	NULL;
@@ -672,7 +672,7 @@ SLONG	DDModeInfo::GetWidth(void)
 	// Get Bits Per Pixel
 	return	ddSurfDesc.dwWidth;
 }
- 
+
 //---------------------------------------------------------------
 
 SLONG	DDModeInfo::GetHeight(void)
@@ -764,7 +764,7 @@ BOOL	DDModeInfo::ModeSupported(D3DDeviceInfo *the_device)
 	// Not Supported !!!
 	return FALSE;
 }
-  
+
 //---------------------------------------------------------------
 
 BOOL	DDModeInfo::Match(SLONG w,SLONG h,SLONG bpp)
@@ -855,9 +855,9 @@ D3DDeviceInfo::~D3DDeviceInfo()
 
 HRESULT	D3DDeviceInfo::Create	(
 									LPGUID          lpD3DGuid,
-									LPTSTR          lpD3DName, 
-									LPTSTR          lpD3DDesc, 
-									LPD3DDEVICEDESC lpD3DHal, 
+									LPTSTR          lpD3DName,
+									LPTSTR          lpD3DDesc,
+									LPD3DDEVICEDESC lpD3DHal,
 									LPD3DDEVICEDESC lpD3DHel
 								)
 {
@@ -865,12 +865,12 @@ HRESULT	D3DDeviceInfo::Create	(
 					str_size;
 	LPTSTR			szTemp;
 
-    
+
 	// Copy GUID
     if(!lpD3DGuid)
         return DDERR_INVALIDPARAMS;
     guid	=	*lpD3DGuid;
-    
+
 	// Copy Name
     if(!lpD3DName)
 		szTemp	=	TEXT("UNKNOWN");
@@ -882,7 +882,7 @@ HRESULT	D3DDeviceInfo::Create	(
 	szName	=	(LPTSTR)MemAlloc(str_size);
 	if(szName)
 		_tcscpy(szName,szTemp);
-    
+
     // Copy Description
     if(!lpD3DDesc)
 		szTemp	=	TEXT("UNKNOWN");
@@ -945,10 +945,10 @@ void D3DDeviceInfo::CheckCaps(LPDIRECT3DDEVICE3 the_device)
 
 	InitStruct(hw);
 	InitStruct(sw);
-	
+
 	rc = the_device->GetCaps(&hw, &sw);
 	if (FAILED(rc))	return;
-	
+
 #ifndef TARGET_DC
 	if (hw.dpcTriCaps.dwTextureBlendCaps & D3DPTBLENDCAPS_MODULATEALPHA)
 	{
@@ -1027,7 +1027,7 @@ HRESULT	D3DDeviceInfo::LoadFormats(LPDIRECT3DDEVICE3 the_d3d_device)
 			// Output error.
 			return	result;
 		}
-		
+
 		// Enumerate all Texture Formats for this device
 		callback_info.Result	=	TRUE;
 		callback_info.Count		=	0L;
@@ -1040,7 +1040,7 @@ HRESULT	D3DDeviceInfo::LoadFormats(LPDIRECT3DDEVICE3 the_d3d_device)
 			// Output error.
 			return	result;
 		}
-	
+
 		// Double check count
 		if((!callback_info.Result) || (callback_info.Count==0) || (FormatCount!=callback_info.Count))
 		{
@@ -1081,16 +1081,16 @@ void D3DDeviceInfo::FindOpaqueTexFmt()
 			{
 				SLONG score  = 0x100;
 				score -= mi->ddSurfDesc.ddpfPixelFormat.dwRGBBitCount;
-									
+
 				if (mi->ddSurfDesc.ddpfPixelFormat.dwFlags & DDPF_ALPHAPIXELS)
 				{
 					//
 					// Knock off score for alpha
 					//
-					
+
 					score -= 1;
 				}
-					
+
 				if (score > best_score)
 				{
 					best_score = score;
@@ -1113,7 +1113,7 @@ void D3DDeviceInfo::FindAlphaTexFmt()
 	SLONG try_shift_red;
 	SLONG try_shift_green;
 	SLONG try_shift_blue;
-		  
+
 	SLONG try_mask_alpha;
 	SLONG try_mask_red;
 	SLONG try_mask_green;
@@ -1160,7 +1160,7 @@ void D3DDeviceInfo::FindAlphaTexFmt()
 						score = 0x300;
 					}
 					else
-					{	
+					{
 						score = 0x200;
 					}
 
@@ -1239,7 +1239,7 @@ HRESULT	D3DDeviceInfo::DestroyFormats(void)
 			next_format	=	current_format->Next;
 
 			MFdelete(current_format);
-		
+
 			current_format	=	next_format;
 		}
 
@@ -1269,7 +1269,7 @@ HRESULT	D3DDeviceInfo::AddFormat(DDModeInfo *the_format)
 	// Add Format to end of list.
 	the_format->Prev	=	FormatListEnd;
 	the_format->Next	=	NULL;
-	
+
 	// Update list end.
 	if(FormatListEnd)
 		FormatListEnd->Next	=	the_format;
@@ -1296,8 +1296,8 @@ HRESULT	D3DDeviceInfo::DelFormat(DDModeInfo	*the_format)
 BOOL	D3DDeviceInfo::IsHardware(void)
 {
 	SLONG	colour_model;
- 
-	
+
+
 	colour_model	=	d3dHalDesc.dcmColorModel;
 	if(colour_model)
 		return TRUE;
@@ -1313,7 +1313,7 @@ BOOL	D3DDeviceInfo::Match(GUID *the_guid)
 
     if(!IsValid())
         return	FALSE;
-    
+
     if(*the_guid!=guid)
         return	FALSE;
 
@@ -1391,7 +1391,7 @@ DDDriverInfo::~DDDriverInfo()
 
 HRESULT DDDriverInfo::Create(
 								GUID	*lpGuid,
-								LPTSTR	lpDriverName, 
+								LPTSTR	lpDriverName,
 								LPTSTR	lpDriverDesc
 							)
 {
@@ -1477,7 +1477,7 @@ HRESULT DDDriverInfo::Create(
 	result	=	LoadDevices(lpD3D);
 	if(FAILED(result))
 		goto	cleanup;
-        
+
 
 	// Enumerate all Modes for this DD Driver
 	ModeCount	=	0;
@@ -1514,13 +1514,13 @@ HRESULT DDDriverInfo::Create(
 
 cleanup:
 	// Cleanup the Interfaces before leaving
-    if(lpD3D) 
+    if(lpD3D)
     {
         lpD3D->Release();
         lpD3D	=	NULL;
     }
 
-    if(lpDD4) 
+    if(lpDD4)
     {
         lpDD4->Release();
         lpDD4	=	NULL;
@@ -1610,7 +1610,7 @@ HRESULT	DDDriverInfo::LoadModes(LPDIRECTDRAW4 lpDD4)
 			result	=	DDERR_GENERIC;
 			return result;
 		}
-		
+
 		// Enumerate all modes for this driver.
 		callback_info.Result	=	TRUE;
 		callback_info.Count		=	0L;
@@ -1676,7 +1676,7 @@ HRESULT	DDDriverInfo::AddMode(DDModeInfo *the_mode)
 		// Add Mode to end of List.
 		the_mode->Prev	=	ModeListEnd;
 		the_mode->Next	=	NULL;
-		
+
 		// Update list end.
 		if(ModeListEnd)
 			ModeListEnd->Next=	the_mode;
@@ -1715,7 +1715,7 @@ HRESULT	DDDriverInfo::AddMode(DDModeInfo *the_mode)
 		if (the_mode->GetWidth()  ==  640 && the_mode->GetHeight() == 480) {DriverFlags |= DD_DRIVER_MODE_640;}
 		if (the_mode->GetWidth()  ==  800 && the_mode->GetHeight() == 600) {DriverFlags |= DD_DRIVER_MODE_800;}
 		if (the_mode->GetWidth()  == 1024 && the_mode->GetHeight() == 768) {DriverFlags |= DD_DRIVER_MODE_1024;}
-			
+
 
 		ModeCount++;
 	}
@@ -1796,7 +1796,7 @@ HRESULT	DDDriverInfo::LoadDevices(LPDIRECT3D3 lpD3D3)
 			result	=	DDERR_GENERIC;
 			return	result;
 		}
-		
+
 		// Enumerate all D3D Devices for this driver.
 		callback_info.Result	=	TRUE;
 		callback_info.Count		=	0L;
@@ -1861,7 +1861,7 @@ HRESULT	DDDriverInfo::AddDevice(D3DDeviceInfo *the_device)
 	// Add Device to end of List.
 	the_device->Prev	=	DeviceListEnd;
 	the_device->Next	=	NULL;
-	
+
 	// Update list end.
 	if(DeviceListEnd)
 		DeviceListEnd->Next	=	the_device;
@@ -1886,7 +1886,7 @@ HRESULT	DDDriverInfo::DeleteDevice(D3DDeviceInfo *the_device)
 //---------------------------------------------------------------
 
 D3DDeviceInfo	*DDDriverInfo::FindDevice	(
-												GUID			*the_guid, 
+												GUID			*the_guid,
 												D3DDeviceInfo	**next_best,
 												D3DDeviceInfo	*start_device
 											)
@@ -1914,17 +1914,17 @@ D3DDeviceInfo	*DDDriverInfo::FindDevice	(
 	{
 		if(!SOFTWARE)
 		{
-			if(current_device->Match(the_guid)) 
+			if(current_device->Match(the_guid))
 				return	current_device;
 
 
-	        
+
 			if(current_device->IsHardware())
 				if(!hardware_device)
 					hardware_device	=	current_device;
-	
+
 		}
-		
+
 		if(current_device->guid==IID_IDirect3DRGBDevice)
 			if(!rgb_device)
 			{
@@ -1963,7 +1963,7 @@ D3DDeviceInfo	*DDDriverInfo::FindDevice	(
 //---------------------------------------------------------------
 
 D3DDeviceInfo	*DDDriverInfo::FindDeviceSupportsMode	(
-															GUID			*the_guid, 
+															GUID			*the_guid,
 															DDModeInfo		*the_mode,
 															D3DDeviceInfo	**next_best_device,
 															D3DDeviceInfo	*start_device
@@ -2029,8 +2029,8 @@ D3DDeviceInfo	*DDDriverInfo::FindDeviceSupportsMode	(
 //---------------------------------------------------------------
 
 DDModeInfo	*DDDriverInfo::FindModeSupportsDevice	(
-														SLONG			w, 
-														SLONG			h, 
+														SLONG			w,
+														SLONG			h,
 														SLONG			bpp,
 														SLONG			refresh,
 														D3DDeviceInfo	*the_device,
@@ -2246,7 +2246,7 @@ DDDriverInfo	*DDDriverManager::FindDriver(GUID *the_guid, DDDriverInfo **next_be
 {
 	DDDriverInfo	*current_driver;
 
-/*    
+/*
 #ifdef DEBUG
     if(!IsInitialized())
     {
@@ -2390,7 +2390,7 @@ extern int Video3DMode;
 	}
 
 	*/
-    
+
     // Failure, user could use next best instead
     return NULL;
 }
@@ -2401,7 +2401,7 @@ DDDriverInfo	*DDDriverManager::FindDriver(DDCAPS *hal,DDCAPS *hel,DDDriverInfo *
 {
     DDDriverInfo	*current_driver, lpNextDrv;
 
-    
+
     // Get Start node
 	if(!start_driver)
 		current_driver	=	the_manager.DriverList;

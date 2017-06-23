@@ -16,8 +16,8 @@
 #include "mav.h"
 
 #ifndef PSX
-#include "c:\fallen\ddengine\headers\poly.h"
-#include "c:\fallen\ddengine\headers\texture.h"
+#include "fallen/ddengine/headers/poly.h"
+#include "fallen/ddengine/headers/texture.h"
 #endif
 
 
@@ -239,11 +239,11 @@ void OB_process()
 	for (i = 0; i < OB_MAX_HYDRANTS; i++)
 	{
 		oh = &OB_hydrant[i];;
-		
+
 		if (oh->life)
 		{
 			if (oh->life < tick)
-			{	
+			{
 				oh->life = 0;
 				MFX_stop(MAX_THINGS + i, S_FIRE_HYDRANT);
 			}
@@ -507,7 +507,7 @@ SLONG OB_avoid(
 
 		case PRIM_COLLIDE_CYLINDER:
 			ob_radius = 0x40 + OB_AVOID_LOOK_EXTRA;
-			break;	
+			break;
 
 		case PRIM_COLLIDE_NONE:
 			return 0;
@@ -542,7 +542,7 @@ SLONG OB_avoid(
 
 	SLONG roomy1 = !MAV_inside(px1, ob_y + 0x40, pz1);
 	SLONG roomy2 = !MAV_inside(px2, ob_y + 0x40, pz2);
-	
+
 	#else
 
 	SLONG roomy1 = there_is_a_los(ob_x, ob_y + 0x40, ob_z, px1, ob_y + 0x40, pz1, LOS_FLAG_IGNORE_SEETHROUGH_FENCE_FLAG);
@@ -605,10 +605,10 @@ void	load_general_prims(void)
 	//
 	//  Stat Up's
 	//
-	load_prim_object(71); 
-	load_prim_object(94); 
-	load_prim_object(81); 
-	load_prim_object(39); 
+	load_prim_object(71);
+	load_prim_object(94);
+	load_prim_object(81);
+	load_prim_object(39);
 
 	//
 	// Needed for helicopters...
@@ -616,8 +616,8 @@ void	load_general_prims(void)
 
 
 
-	load_prim_object(PRIM_OBJ_CHOPPER); 
-	load_prim_object(PRIM_OBJ_CHOPPER_BLADES); 
+	load_prim_object(PRIM_OBJ_CHOPPER);
+	load_prim_object(PRIM_OBJ_CHOPPER_BLADES);
 
 	//
 	// The van and the car
@@ -628,7 +628,7 @@ void	load_general_prims(void)
 	load_prim_object(PRIM_OBJ_CAR_WHEEL);
 	load_prim_object(PRIM_OBJ_CAR_BODY);
 	load_prim_object(PRIM_OBJ_TAXI_BODY);
-	load_prim_object(PRIM_OBJ_POLICE_BODY);		  
+	load_prim_object(PRIM_OBJ_POLICE_BODY);
 	load_prim_object(PRIM_OBJ_AMBULANCE_BODY);
 	load_prim_object(PRIM_OBJ_JEEP_BODY);
 	load_prim_object(PRIM_OBJ_MEATWAGON_BODY);
@@ -645,7 +645,7 @@ void	load_general_prims(void)
 	load_prim_object(PRIM_OBJ_BARREL);
 	load_prim_object(PRIM_OBJ_TRAFFIC_CONE);
 	load_prim_object(145);
-	
+
 	#ifdef BIKE
 
 	//
@@ -718,7 +718,7 @@ void OB_load_needed_prims()
 	SLONG j;
 
 #ifdef EDITOR
-	if (is_in_mission_editor) 
+	if (is_in_mission_editor)
 	{
 		for (i=0;i<256;i++) {
 			load_prim_object(i);
@@ -1067,7 +1067,7 @@ void OB_add_walkable_faces()
 				for (i = po->StartFace4; i < po->EndFace4; i++)
 				{
 					f4 = &prim_faces4[i];
-					
+
 					if (f4->FaceFlags & FACE_FLAG_WALKABLE)
 					{
 						//
@@ -1095,7 +1095,7 @@ void OB_add_walkable_faces()
 
 							//
 							// Snap the points to mapsquare boundaries.
-							// 
+							//
 
 							#define OB_SNAP_WIDTH 6
 
@@ -1182,9 +1182,9 @@ void OB_remove(OB_Info *oi)
 
 	//
 	// Make sure the OB_ob with this index is indeed on this
-	// mapsquare.		   
+	// mapsquare.
 	//
-	
+
 	ASSERT(WITHIN(oi->index, om->index, om->index + om->num));
 
 	//
@@ -1200,7 +1200,7 @@ void OB_remove(OB_Info *oi)
 	SLONG i;
 
 	PrimFace4 *f4;
-	
+
 	for (i = 1; i < next_prim_face4; i++)
 	{
 		f4 = &prim_faces4[i];
@@ -1432,7 +1432,7 @@ SLONG OB_find_min_y(SLONG prim)
 
 
 //
-// any ob's locked to floor need to have their height changed 
+// any ob's locked to floor need to have their height changed
 // taking into account water and stuff like that
 
 void	OB_height_fiddle_de_dee(void)
@@ -1524,7 +1524,7 @@ void OB_damage(
 
 			if (cprod > 0) {oo->flags |= OB_FLAG_RESERVED1;}
 			if (dprod > 0) {oo->flags |= OB_FLAG_RESERVED2;}
-			
+
 			oo->flags |= Random() & 0xc0;
 		}
 		else
@@ -1535,7 +1535,7 @@ void OB_damage(
 			//
 
 			UBYTE crumple;
-			
+
 			crumple  = oo->flags >> 6;
 			crumple += 1;
 
@@ -1579,7 +1579,7 @@ void OB_damage(
 			//
 			// Explode this bomb.
 			//
-	
+
 			/*
 
 			PYRO_construct(

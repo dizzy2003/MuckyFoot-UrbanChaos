@@ -11,8 +11,8 @@
 #include "drawxtra.h"
 #include "sound.h"
 #include "MFx.h"
-#include    "C:\fallen\DDLibrary\headers\D3DTexture.h"
-#include    "C:\fallen\DDLibrary\headers\GDisplay.h"
+#include    "fallen/DDLibrary/headers/D3DTexture.h"
+#include    "fallen/DDLibrary/headers/GDisplay.h"
 #include "interfac.h"
 
 #define RECT_LEFT	1
@@ -72,13 +72,13 @@ void	BUTTON_Draw(Widget *widget);
 void	BUTTON_Push(Widget *widget);
 BOOL	BUTTON_HitTest(Widget *widget, SLONG x, SLONG y);
 
-void	STATIC_Init(Widget *widget); 
+void	STATIC_Init(Widget *widget);
 
 void	CHECK_Draw (Widget *widget);
 void	CHECK_Push (Widget *widget);
 void	RADIO_Push (Widget *widget);
 
-void	INPUT_Init (Widget *widget); 
+void	INPUT_Init (Widget *widget);
 void	INPUT_Free (Widget *widget);
 void	INPUT_Draw (Widget *widget);
 BOOL	INPUT_Char (Widget *widget, CBYTE key);
@@ -90,7 +90,7 @@ BOOL	LISTS_Char (Widget *widget, CBYTE key);
 SLONG	LISTS_Data (Widget *widget, SLONG code, SLONG data1, SLONG data2);
 void	LISTS_Push (Widget *widget);
 
-void	TEXTS_Init (Widget *widget); 
+void	TEXTS_Init (Widget *widget);
 void	TEXTS_Free (Widget *widget);
 void	TEXTS_Draw (Widget *widget);
 BOOL	TEXTS_Char (Widget *widget, CBYTE key);
@@ -269,7 +269,7 @@ void CHECK_Draw(Widget *widget) {
 	WidgetPoint pt,wp = WIDGET_Centre(widget);
 	CBYTE check[2] = {0,0};
 
-	MENUFONT_Dimensions("°",pt.x,pt.y);
+	MENUFONT_Dimensions("ï¿½",pt.x,pt.y);
 
 	wp.x=widget->x+pt.x+6+widget->form->x;
 
@@ -278,9 +278,9 @@ void CHECK_Draw(Widget *widget) {
 	flags|=(widget->state&WIDGET_STATE_FOCUS) ? MENUFONT_GLIMMER : 0;
 	if (widget->state&WIDGET_STATE_DISABLED) rgb=((rgb>>1)&0xFF000000) | (rgb&0xFFFFFF);
 	if (widget->methods->Push==CHECK_Push)
-		check[0] = (widget->data[0] ? '÷' : '°');
+		check[0] = (widget->data[0] ? 'ï¿½' : 'ï¿½');
 	else
-		check[0] = (widget->data[0] ? '·' : '°');
+		check[0] = (widget->data[0] ? 'ï¿½' : 'ï¿½');
 	MENUFONT_Draw(widget->x+widget->form->x,wp.y,256,check,rgb,flags|MENUFONT_SUPER_YCTR);
 	MENUFONT_Draw(wp.x,wp.y,256,(CBYTE*)widget->caption,rgb,flags);
 }
@@ -362,7 +362,7 @@ void INPUT_Draw (Widget *widget) {
 	} else
 		MENUFONT_Draw(pt.x+6,pt.y+((widget->oy-widget->y)>>1),256,str,rgb,flags);
 	if (widget->data[1] & WIF_PASS) MemFree(str);
-	
+
 }
 
 void INPUT_caretchk(Widget *widget) {
@@ -432,7 +432,7 @@ BOOL INPUT_Char (Widget *widget, CBYTE key) {
 			WIDGET_snd(WS_MOVE);
 			memmove(str+widget->data[2]-1,str+widget->data[2],(len+1)-widget->data[2]);
 			widget->data[2]--;
-			
+
 		}
 		break;
 	case 5:
@@ -442,7 +442,7 @@ BOOL INPUT_Char (Widget *widget, CBYTE key) {
 			if (widget->data[2]>=len) { WIDGET_snd(WS_FAIL); break; }
 			WIDGET_snd(WS_MOVE);
 			memmove(str+widget->data[2],str+widget->data[2]+1,(len+1)-widget->data[2]);
-			
+
 		}
 		break;
 	default:
@@ -455,7 +455,7 @@ BOOL INPUT_Char (Widget *widget, CBYTE key) {
 			if (len<255)
 			{
 				if (widget->data[2]==len) {
-					*(str+widget->data[2]+1)=0; 
+					*(str+widget->data[2]+1)=0;
 				} else {
 					memmove(str+widget->data[2]+1,str+widget->data[2],(len+1)-widget->data[2]);
 				}
@@ -565,7 +565,7 @@ void TEXTS_Draw (Widget *widget) {
 		if (subctr>0) {
 //			shift=1;
 //			rgb=ShiftAlpha(widget->form->textcolour,shift);
-			
+
 			// nasty brightness bodge
 			rgb=ShiftAlpha(AlterAlpha(widget->form->textcolour,0xff),shift);
 			/////////////////////////
@@ -853,9 +853,9 @@ void GLYPH_Draw (Widget *widget) {
 
   pt =FORM_To_Screen(widget->form,TO_WIDGETPNT(widget->x,widget->y));
   pt2=FORM_To_Screen(widget->form,TO_WIDGETPNT(widget->ox,widget->oy));
-  x=(float)widget->data[1] / 256.0f; 
-  y=(float)widget->data[2] / 256.0f; 
-  ox=(float)widget->data[3] / 256.0f; 
+  x=(float)widget->data[1] / 256.0f;
+  y=(float)widget->data[2] / 256.0f;
+  ox=(float)widget->data[3] / 256.0f;
   oy=(float)widget->data[4] / 256.0f;
   rgb = (widget->state & WIDGET_STATE_FOCUS) ? 0xFFFFFF7f : 0xFF7fFF7f;
   DRAW2D_Sprite(pt.x,pt.y,pt2.x,pt2.y,x,y,ox,oy,widget->data[0],rgb);
@@ -912,7 +912,7 @@ void WIDGET_menu(Form *form, ...) {
 		count=0;
 		while (va_arg(marker,CBYTE*)) count++;
 	va_end(marker);
-	
+
 	yofs=oy/count;
 
 	va_start(marker, form);
@@ -972,7 +972,7 @@ Widget*	FORM_AddWidget(Form *form, Widget *widget) {
 			FORM_Focus(form,widget);						// so focus it
 
 	}
-	
+
 	return widget;
 }
 
@@ -984,11 +984,11 @@ void	FORM_DelWidget(Widget *widget) {
 
 	if (widget->next) widget->next->prev=widget->prev;
 	if (widget->prev) widget->prev->next=widget->next;
-		else form->children=widget->next;	
+		else form->children=widget->next;
 
 	widget->prev=widget->next=0;
 	widget->form=0;
-	
+
 }
 
 inline BOOL	FORM_KeyProc(SLONG key) {
@@ -1007,7 +1007,7 @@ SLONG	FORM_Process(Form* form) {
 	static int input = 0, lastinput = 0;
 	static int ticker=0;
 
-	if (!form->age) 
+	if (!form->age)
 		if (form->children) WIDGET_snd(WS_FADEIN); else WIDGET_snd(WS_FAIL);
 
 	WidgetTick++;

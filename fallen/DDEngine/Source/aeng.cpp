@@ -45,22 +45,22 @@
 #include "text.h"
 #include "pap.h"
 #include "night.h"
-#include "c:\fallen\headers\supermap.h"
+#include "fallen/headers/supermap.h"
 #include "hook.h"
 #include "sm.h"
 #include "ns.h"
 #include "cloth.h"
 #include "facet.h"
-//#include "c:\fallen\sedit\headers\es.h"
+//#include "fallen/sedit/headers/es.h"
 #include "ic.h"
 #include "comp.h"
 #include "cam.h"
-#include "c:\fallen\headers\tracks.h"
+#include "fallen/headers/tracks.h"
 #include "pcom.h"
 #include "drawxtra.h"
 #include "balloon.h"
 #include "snipe.h"
-#include "c:\fallen\headers\inside2.h"
+#include "fallen/headers/inside2.h"
 #include "psystem.h"
 #include "fc.h"
 #include "memory.h"
@@ -69,12 +69,12 @@
 #include "pow.h"
 #include "FMatrix.h"
 #include "eway.h"
-#include "c:\fallen\headers\env.h"
+#include "fallen/headers/env.h"
 #include "animate.h"
 #include "oval.h"
 #include "crinkle.h"
 #include "sw.h"
-#include "c:\fallen\headers\sound.h"
+#include "fallen/headers/sound.h"
 
 #include "vertexbuffer.h"
 
@@ -327,7 +327,7 @@ void	use_global_cloud(ULONG *col)
 }
 
 //
-// Take a co-ord in the world, calcultae how much shadow the clouds are producing at that point 
+// Take a co-ord in the world, calcultae how much shadow the clouds are producing at that point
 // and darken the colour accordingly
 
 
@@ -383,10 +383,10 @@ inline void	apply_cloud(SLONG x,SLONG y,SLONG z,ULONG *col)
 
 
 	r=((*col)&0xff0000)>>16;
-	
+
 	//
 	// use the redness that's there as a general brightness factor for the vertex
-	// 
+	//
 
 	//
 	// adjust the shadow factor so dark things only get affected a little, & light things get affected a lot
@@ -531,7 +531,7 @@ void AENG_set_draw_distance(SLONG dist)
 
 //
 // The camera.
-// 
+//
 
 float AENG_cam_x;
 float AENG_cam_y;
@@ -957,7 +957,7 @@ void AENG_create_dx_prim_points()
 }
 
 void AENG_world_line(
-		SLONG x1, SLONG y1, SLONG z1, SLONG width1, ULONG colour1, 
+		SLONG x1, SLONG y1, SLONG z1, SLONG width1, ULONG colour1,
 		SLONG x2, SLONG y2, SLONG z2, SLONG width2, ULONG colour2,
 		SLONG sort_to_front)
 {
@@ -991,7 +991,7 @@ void AENG_world_line(
 
 
 void AENG_world_line_nondebug (
-		SLONG x1, SLONG y1, SLONG z1, SLONG width1, ULONG colour1, 
+		SLONG x1, SLONG y1, SLONG z1, SLONG width1, ULONG colour1,
 		SLONG x2, SLONG y2, SLONG z2, SLONG width2, ULONG colour2,
 		SLONG sort_to_front)
 {
@@ -1017,7 +1017,7 @@ void AENG_world_line_nondebug (
 
 
 void AENG_world_line_infinite(
-		SLONG ix1, SLONG iy1, SLONG iz1, SLONG iwidth1, ULONG colour1, 
+		SLONG ix1, SLONG iy1, SLONG iz1, SLONG iwidth1, ULONG colour1,
 		SLONG ix2, SLONG iy2, SLONG iz2, SLONG iwidth2, ULONG colour2,
 		SLONG sort_to_front)
 {
@@ -1072,7 +1072,7 @@ void AENG_world_line_infinite(
 	dr *= oversteps;
 	dg *= oversteps;
 	db *= oversteps;
-	
+
 	float f;
 
 	for (f = 0.0F; f < steps; f += 1.0F)
@@ -1802,7 +1802,7 @@ void AENG_do_cached_lighting_old(void)
 	SLONG	kept=0,new_squares=0;
 
 	NIGHT_Square *nq;
-	
+
 extern	SLONG	HEAP_max_free(void);
 
 	if(HEAP_max_free()<4000 || Keys[KB_Q])
@@ -1976,7 +1976,7 @@ void AENG_mark_night_squares_as_deleteme(void)
 
 		//
 		// Do this to all NIGHT_squares... not just the used ones.
-		// 
+		//
 
 		nq->flag |= NIGHT_SQUARE_FLAG_DELETEME;
 	}
@@ -2045,7 +2045,7 @@ void AENG_ensure_appropriate_caching(SLONG ware)
 void AENG_get_rid_of_deleteme_squares()
 {
 	SLONG i;
-	
+
 	NIGHT_Square *nq;
 
 	for (i = 1; i < NIGHT_MAX_SQUARES; i++)
@@ -2064,7 +2064,7 @@ void AENG_get_rid_of_deleteme_squares()
 
 //
 // Adds a projected shadow poly to the POLY module.
-// 
+//
 
 float AENG_project_offset_u;
 float AENG_project_offset_v;
@@ -2481,7 +2481,7 @@ void AENG_draw_rain()
 	// where a,b are between -1 and 1 and c is between 0 and 1
 	// gives a place in the world that the camera can see...
 	//
-	
+
 	matrix[0] *= 640.0F / 480.0F;
 	matrix[1] *= 640.0F / 480.0F;
 	matrix[2] *= 640.0F / 480.0F;
@@ -2489,7 +2489,7 @@ void AENG_draw_rain()
 	matrix[0] /= AENG_LENS;
 	matrix[1] /= AENG_LENS;
 	matrix[2] /= AENG_LENS;
-	           
+
 	matrix[3] /= AENG_LENS;
 	matrix[4] /= AENG_LENS;
 	matrix[5] /= AENG_LENS;
@@ -2561,7 +2561,7 @@ void AENG_draw_rain()
 
 		colour = col;
 #endif
-						   
+
 		SHAPE_droplet(
 			SLONG(x1),
 			SLONG(y1),
@@ -2578,7 +2578,7 @@ void AENG_draw_drips(UBYTE puddles_only)
 {
 	//
 	// Draw the drips.
-	// 
+	//
 
 	SLONG i;
 
@@ -2624,10 +2624,10 @@ void AENG_draw_drips(UBYTE puddles_only)
 
 	while(di = DRIP_get_next())
 	{
-		
-		if (puddles_only != (di->flags&DRIP_FLAG_PUDDLES_ONLY)) 
+
+		if (puddles_only != (di->flags&DRIP_FLAG_PUDDLES_ONLY))
 			continue;  // Abandon this drip.
-			
+
 
 		midx  = float(di->x);
 		midy  = float(di->y);
@@ -2813,7 +2813,7 @@ void AENG_draw_cloth(void)
 					//
 
 					dprod =
-						light_x * ci->p[i].nx + 
+						light_x * ci->p[i].nx +
 					    light_y * ci->p[i].ny +
 					    light_z * ci->p[i].nz;
 
@@ -2907,7 +2907,7 @@ void AENG_draw_sparks()
 			NGAMUT_point_gamut[z].xmin,
 			NGAMUT_point_gamut[z].xmax,
 			z);
-		
+
 		while(gi = GLITTER_get_next())
 		{
 			SHAPE_glitter(
@@ -2924,7 +2924,7 @@ void AENG_draw_sparks()
 
 //
 // Draws the hook.
-// 
+//
 
 void AENG_draw_hook(void)
 {
@@ -3269,10 +3269,10 @@ void AENG_draw_dirt()
 			dz = float(dd->z) - AENG_cam_z;
 
 			float dprod;
-			
+
 			dprod =
-				dx * AENG_cam_matrix[6] + 
-				dy * AENG_cam_matrix[7] + 
+				dx * AENG_cam_matrix[6] +
+				dy * AENG_cam_matrix[7] +
 				dz * AENG_cam_matrix[8];
 
 			if (dprod < 64.0F)
@@ -3295,7 +3295,7 @@ void AENG_draw_dirt()
 		{
 			case DIRT_TYPE_LEAF:
 			case DIRT_TYPE_SNOW:
-				
+
 				{
 					//
 					// Get four vertices from the leaf page.
@@ -3331,7 +3331,7 @@ void AENG_draw_dirt()
 
 						AENG_dirt_lvert_upto = 0;
 						AENG_dirt_index_upto = 0;
-						
+
 						lv = AENG_dirt_lvert;
 					}
 					else
@@ -3403,21 +3403,21 @@ void AENG_draw_dirt()
 						//
 
 						float base_x = float(dd->x);
-						float base_y = float(dd->y + LEAF_UP); 
+						float base_y = float(dd->y + LEAF_UP);
 						float base_z = float(dd->z);
 
 						lv[0].x = base_x + matrix[6] + matrix[0];
 						lv[0].y = base_y + matrix[7] + matrix[1];
 						lv[0].z = base_z + matrix[8] + matrix[2];
-						
+
 						lv[1].x = base_x + matrix[6] - matrix[0];
 						lv[1].y = base_y + matrix[7] - matrix[1];
 						lv[1].z = base_z + matrix[8] - matrix[2];
-						
+
 						lv[2].x = base_x - matrix[6] + matrix[0];
 						lv[2].y = base_y - matrix[7] + matrix[1];
 						lv[2].z = base_z - matrix[8] + matrix[2];
-						
+
 						lv[3].x = base_x - matrix[6] - matrix[0];
 						lv[3].y = base_y - matrix[7] - matrix[1];
 						lv[3].z = base_z - matrix[8] - matrix[2];
@@ -3610,7 +3610,7 @@ void AENG_draw_dirt()
 							lv[1].x = lv[0].x - matrix[6] + matrix[0];
 							lv[1].y = lv[0].y - matrix[7] + matrix[1];
 							lv[1].z = lv[0].z - matrix[8] + matrix[2];
-									  
+
 							lv[2].x = lv[0].x - matrix[6] - matrix[0];
 							lv[2].y = lv[0].y - matrix[7] - matrix[1];
 							lv[2].z = lv[0].z - matrix[8] - matrix[2];
@@ -3685,7 +3685,7 @@ void AENG_draw_dirt()
 				break;
 
 			case DIRT_TYPE_HELDCAN:
-				
+
 				//
 				// Don't draw inside the car?!
 				//
@@ -3894,7 +3894,7 @@ void AENG_draw_dirt()
 
 				if ((di.pitch | di.roll) == 0)
 				{
-					
+
 				}
 
 				//
@@ -3920,19 +3920,19 @@ void AENG_draw_dirt()
 					matrix[6] *= 24.0F;
 					matrix[7] *= 24.0F;
 					matrix[8] *= 24.0F;
-					
+
 					temp[0].X = float(di.x) + matrix[6] + matrix[0];
 					temp[0].Y = float(di.y) + matrix[7] + matrix[1];
 					temp[0].Z = float(di.z) + matrix[8] + matrix[2];
-					
+
 					temp[1].X = float(di.x) + matrix[6] - matrix[0];
 					temp[1].Y = float(di.y) + matrix[7] - matrix[1];
 					temp[1].Z = float(di.z) + matrix[8] - matrix[2];
-					
+
 					temp[2].X = float(di.x) - matrix[6] + matrix[0];
 					temp[2].Y = float(di.y) - matrix[7] + matrix[1];
 					temp[2].Z = float(di.z) - matrix[8] + matrix[2];
-					
+
 					temp[3].X = float(di.x) - matrix[6] - matrix[0];
 					temp[3].Y = float(di.y) - matrix[7] - matrix[1];
 					temp[3].Z = float(di.z) - matrix[8] - matrix[2];
@@ -4283,7 +4283,7 @@ typedef struct aeng_pow
 	float Z;
 
 	struct aeng_pow *next;
- 
+
 } AENG_Pow;
 
 #define AENG_MAX_POWS 256
@@ -4388,7 +4388,7 @@ void AENG_draw_pows(void)
 		ppt[1].colour = 0xffffffff;
 		ppt[2].colour = 0xffffffff;
 		ppt[3].colour = 0xffffffff;
-		  
+
 		ppt[0].specular = 0xff000000;
 		ppt[1].specular = 0xff000000;
 		ppt[2].specular = 0xff000000;
@@ -4893,7 +4893,7 @@ void AENG_draw_people_messages()
 									str);
 //									PCOM_person_state_debug(p_thing));
 
-									
+
 							}
 
 							break;
@@ -4927,7 +4927,7 @@ void AENG_set_bike_wheel_rotation(UWORD rot, UBYTE prim)
 	//
 
 
- 
+
 // Oh no they're not.
 #if 0
 	// All the textures are symmetrical, so you can't tell if they rotate.
@@ -4978,7 +4978,7 @@ void AENG_set_bike_wheel_rotation(UWORD rot, UBYTE prim)
 
 		f4[1].UV[i][0] |= u;
 		f4[1].UV[i][1] |= v;
-	} 
+	}
 
 #else
 
@@ -5028,7 +5028,7 @@ void AENG_set_bike_wheel_rotation(UWORD rot, UBYTE prim)
 
 		f4[1].UV[i][0] |= u;
 		f4[1].UV[i][1] |= v;
-	} 
+	}
 #endif
 }
 
@@ -5130,7 +5130,7 @@ void AENG_draw_warehouse_floor_near_door(DFacet *df)
 
 			//
 			// Completely fogged out...
-			// 
+			//
 
 			AENG_upper[mx][mz].colour &= 0x00ffffff;
 
@@ -5333,7 +5333,7 @@ float AENG_draw_some_polys(bool large, bool blend)
 
 	if (large)
 	{
-		
+
 		HRESULT res = DRAW_INDEXED_PRIMITIVE(D3DPT_TRIANGLELIST, D3DFVF_TLVERTEX, (D3DTLVERTEX*)vert, 300, ind, 300, D3DDP_DONOTUPDATEEXTENTS | D3DDP_DONOTLIGHT);
 		//HRESULT res = DRAW_INDEXED_PRIMITIVE(D3DPT_TRIANGLELIST, D3DFVF_TLVERTEX, vert->GetTLVert(), 300, ind, 300, D3DDP_DONOTUPDATEEXTENTS | D3DDP_DONOTLIGHT);
 		ASSERT(!FAILED(res));
@@ -5370,7 +5370,7 @@ void AENG_guess_detail_levels()
 	AENG_estimate_detail_levels = 0;
 
 	int		generation;
-	
+
 	// 0 = software or 1-2 for hardware
 	D3DDeviceInfo*	dev = the_display.GetDeviceInfo();
 
@@ -5434,8 +5434,8 @@ void AENG_guess_detail_levels()
 
 #ifdef TARGET_DC
 // Fewer things to set.
-void AENG_get_detail_levels(//int* stars, 
-							int* shadows, 
+void AENG_get_detail_levels(//int* stars,
+							int* shadows,
 							int* puddles,
 							int* dirt,
 							int* mist,
@@ -5443,10 +5443,10 @@ void AENG_get_detail_levels(//int* stars,
 							int* skyline,
 							int* crinkles)
 #else
-void AENG_get_detail_levels(int* stars, 
-							int* shadows, 
-							int* moon_reflection, 
-							int* people_reflection, 
+void AENG_get_detail_levels(int* stars,
+							int* shadows,
+							int* moon_reflection,
+							int* people_reflection,
 							int* puddles,
 							int* dirt,
 							int* mist,
@@ -5475,7 +5475,7 @@ void AENG_get_detail_levels(int* stars,
 //#pragma optimize( "a", on )
 
 
-#define	MAX_WIDTH_DRAWN	100  
+#define	MAX_WIDTH_DRAWN	100
 
 
 #define	MAX_FLOOR_TILES_FOR_STRIPS	(16) // I doubt we will get more than 32 very often (map is 128 wide)
@@ -5544,7 +5544,7 @@ float	how_good(void)
 	{
 		for(x=0;x<128;x++)
 		{
-			
+
 			ph = &PAP_2HI(x,z);
 			ASSERT(bucket_group[0]<128*128);
 			ASSERT(bucket_length[0]<128*128);
@@ -5605,7 +5605,7 @@ float	how_good(void)
 				bucket++;
 				bucket%=MAX_PREV;
 
-				
+
 				total_length+=bucket_length[bucket];
 				ASSERT(bucket_length[bucket]<128);
 				strip_count++;
@@ -5677,7 +5677,7 @@ float	init_groups2(void)
 				ph = &PAP_2HI(x-1,z);	   //to the left
 				p2=ph->Texture&0x3ff;
 				if(p1!=p2)
-					page_next[p1][p2]++;     
+					page_next[p1][p2]++;
 			}
 			if(x<127)
 			{
@@ -5691,7 +5691,7 @@ float	init_groups2(void)
 
 			frequency[p1]++;
 		}
-		
+
 	}
 	//
 	// for every texture we now know how many times every other texture appears next to it
@@ -5779,7 +5779,7 @@ float	init_groups2(void)
 						if(frequency[c0])
 						{
 							perc=0;
-							
+
 							for(c2=0;c2<g_count;c2++)
 								perc+=(page_next[groups[g_index][c2]][c0]);// /frequency[c0];
 
@@ -5828,7 +5828,7 @@ float	init_groups2(void)
 			group_count[g_index]=g_count;
 		}
 	}
-	
+
 	for(c0=0;c0<64*10;c0++)
 	{
 		if(!in_group[c0] && frequency[c0])
@@ -5949,7 +5949,7 @@ inline	void cache_a_row(SLONG x,SLONG z,struct FloorStore *p2,SLONG endx)
 
 //	TRACE(" cache row %d -> %d \n",x,endx);
 
-	
+
 
 	for (ph = &PAP_2HI(x,z); x <= endx; x++, ph += PAP_SIZE_HI)
 	{
@@ -5975,7 +5975,7 @@ inline	void cache_a_row(SLONG x,SLONG z,struct FloorStore *p2,SLONG endx)
 		ASSERT(NIGHT_square[square].flag & NIGHT_SQUARE_FLAG_USED);
 
 		nq = &NIGHT_square[square];
-		
+
 		/*
 
 		{
@@ -6028,7 +6028,7 @@ inline	void cache_a_row(SLONG x,SLONG z,struct FloorStore *p2,SLONG endx)
 		}
 
 		*/
-		
+
 //		p2->x=x;
 //		p2->z=z;
 
@@ -6056,7 +6056,7 @@ inline	SLONG	add_kerb(float alt1,float alt2,SLONG x,SLONG z,SLONG dx,SLONG dz,D3
 
 
 	//   0   1	     0    1	       1
-	//							  
+	//
 	//	 3   2		 3	       3   2
 
 	pv->x = x   * 256.0F;
@@ -6246,7 +6246,7 @@ inline void	draw_i_prim ( LPDIRECT3DTEXTURE2 page, D3DLVERTEX *verts, UWORD *ind
 	res=DrawIndPrimMM (the_display.lp_D3D_Device,D3DFVF_LVERTEX ,mm_draw_floor,*vert_count,indicies,*index_count);
 	//TRACE ( "F1" );
 
-	
+
 
 	ASSERT(res == DD_OK);	 //761 		//0x887602f9
 
@@ -6281,7 +6281,7 @@ UBYTE	m_vert_mem_block32[sizeof(D3DLVERTEX)*KERB_VERTS+sizeof(D3DLVERTEX)*MAX_VE
 UWORD	m_indicies[IPRIM_COUNT][MAX_INDICES_FOR_STRIPS+1];    //data for verts, on stack or not?
 
 
-struct	GroupInfo	
+struct	GroupInfo
 {
 	LPDIRECT3DTEXTURE2 page; //ptr to actual page to use for drawing
 #ifndef TOMS_TEST_FIXUP_CODE
@@ -6425,10 +6425,10 @@ void	draw_quick_floor(SLONG warehouse)
 	struct	FloorStore	*p1,*p2;
 	SLONG	startx,endx,offsetx;
 	SLONG	no_floor=0;
-	SLONG	is_shadow;	
+	SLONG	is_shadow;
 
 
-#ifdef	TEX_EMBED	
+#ifdef	TEX_EMBED
 	pp=&POLY_Page[0];
 
 	kerb_du		=pp->m_UOffset;
@@ -6515,14 +6515,14 @@ void	draw_quick_floor(SLONG warehouse)
 
 	z=NGAMUT_zmin;
 
-	
+
 	startx	=	NGAMUT_point_gamut[z].xmin;
 	endx	=	NGAMUT_point_gamut[z].xmax;
 
 	extern SLONG NGAMUT_xmin;
 
 	offsetx=startx-(NGAMUT_xmin);
-	
+
 	ASSERT(offsetx<MAX_DRAW_WIDTH);
 	ASSERT(offsetx+endx-startx<MAX_DRAW_WIDTH);
 	if(z&1)
@@ -6534,7 +6534,7 @@ void	draw_quick_floor(SLONG warehouse)
 		p1=&row[MAX_DRAW_WIDTH+offsetx];
 	}
 	cache_a_row(startx,z,p1,endx);
-	
+
 
 	if(!INDOORS_INDEX)
 	for (z = NGAMUT_zmin; z <= NGAMUT_zmax; z++)
@@ -6557,7 +6557,7 @@ void	draw_quick_floor(SLONG warehouse)
 			p2=&row[0+offsetx];
 			memset(&row[0],0,MAX_DRAW_WIDTH*sizeof(struct FloorStore));
 		}
-		
+
 		cache_a_row(startx,z+1,p2,endx);
 
 
@@ -6576,7 +6576,7 @@ void	draw_quick_floor(SLONG warehouse)
 			p1=&row[MAX_DRAW_WIDTH+offsetx];
 			p2=&row[0+offsetx];
 		}
-		
+
 		//
 		//
 		//
@@ -6763,7 +6763,7 @@ void	draw_quick_floor(SLONG warehouse)
 						oldest=age[c0];
 					}
 				}
-				
+
 			}
 			else
 			{
@@ -6833,7 +6833,7 @@ void	draw_quick_floor(SLONG warehouse)
 
 
 			//   0   1	     0    1	       1
-			//							  
+			//
 			//	 3   2		 3	       3   2
 
 			pv->x = x       * 256.0F;
@@ -7002,7 +7002,7 @@ extern DIJOYSTATE the_state;
 							along[i] = 8.0F - dprod;
 
 							zclip |= 1 << i;
-							
+
 						}
 					}
 
@@ -7045,7 +7045,7 @@ extern DIJOYSTATE the_state;
 				pv[4]=pv[3];
 
 				// to be compatible with shadow.h we have to rotate quad by 180 Degrees
-				
+
 
 				//     3		   2   4
 				//
@@ -7062,7 +7062,7 @@ extern DIJOYSTATE the_state;
 						HALF_COL(pv[3].color);
 
 						break;
-						
+
 					case 2:
 					case 6:
 						HALF_COL(pv[4].color);
@@ -7071,28 +7071,28 @@ extern DIJOYSTATE the_state;
 						//HALF_COL(pv[2].color);
 
 						break;
-						
+
 					case 3:
 						HALF_COL(pv[4].color);
 						HALF_COL(pv[3].color);
 
 
 						break;
-						
+
 					case 4:
 						HALF_COL(pv[2].color);
 						HALF_COL(pv[3].color);
 						HALF_COL(pv[4].color);
 
 						break;
-						
+
 					case 5:
 						HALF_COL(pv[2].color);
 						HALF_COL(pv[0].color);
 						HALF_COL(pv[4].color);
 						HALF_COL(pv[3].color);
 						break;
-						
+
 					case 7:
 						HALF_COL(pv[2].color);
 						HALF_COL(pv[4].color);
@@ -7293,7 +7293,7 @@ extern DIJOYSTATE			the_state;
 
 
 UBYTE	index_lookup[]={0,1,3,2};
-			   
+
 void AENG_draw_city()
 {
 
@@ -7318,7 +7318,7 @@ void AENG_draw_city()
 	SLONG dy;
 	SLONG dz;
 	SLONG dist;
-	
+
 	SLONG nx;
 	SLONG nz;
 
@@ -7424,7 +7424,7 @@ extern	SLONG	tick_tock_unclipped;
 					switch(p_thing->Class)
 					{
 						case CLASS_PERSON:
-							
+
 							//
 							// We only have a rejection test for people now.
 							//
@@ -7892,7 +7892,7 @@ extern	UBYTE	player_visited[16][128];
 
 			ASSERT(AENG_AA_BUF_SIZE    == 32);
 			ASSERT(TEXTURE_SHADOW_SIZE == 64);
-			
+
 			offset_x = (i & 1) << 5;
 			offset_y = (i & 2) << 4;
 
@@ -7989,7 +7989,7 @@ extern	UBYTE	player_visited[16][128];
 
 				//
 				// Colvects we have already done.
-				// 
+				//
 
 				#define AENG_MAX_DONE 8
 
@@ -8446,7 +8446,7 @@ extern	UBYTE	player_visited[16][128];
 									//
 									// The height of the water is given by the lo-res mapsquare corresponding
 									// to the hi-res mapsquare that Darci is standing on.
-									// 
+									//
 
 									pl = &PAP_2LO(
 											p_thing->WorldPos.X >> (8 + PAP_SHIFT_LO),
@@ -8464,7 +8464,7 @@ extern	UBYTE	player_visited[16][128];
 								if (WITHIN(bbox_upto, 0, AENG_MAX_BBOXES - 1))
 								{
 									//
-									// Create a new bounding box 
+									// Create a new bounding box
 									//
 
 									bbox[bbox_upto].x1 = MAX(FIGURE_reflect_x1 - AENG_BBOX_PUSH_OUT, AENG_BBOX_PUSH_IN);
@@ -8501,7 +8501,7 @@ extern	UBYTE	player_visited[16][128];
 			{
 				//
 				// On map?
-				// 
+				//
 
 				mx = oi->x >> 8;
 				mz = oi->z >> 8;
@@ -8511,7 +8511,7 @@ extern	UBYTE	player_visited[16][128];
 				{
 					//
 					// On a reflective square?
-					// 
+					//
 
 					if (PAP_2HI(mx,mz).Flags & (PAP_FLAG_WATER|PAP_FLAG_REFLECTIVE))
 					{
@@ -8555,7 +8555,7 @@ extern	UBYTE	player_visited[16][128];
 		// Drips inside puddles only...
 		//
 
-		AENG_draw_drips(1); 
+		AENG_draw_drips(1);
 
 		//
 		// Draw the reflections and drips.  Clear the poly lists.
@@ -8579,7 +8579,7 @@ extern	UBYTE	player_visited[16][128];
 		SLONG i;
 
 		PUDDLE_Info *pi;
-	
+
 		float px1;
 		float pz1;
 		float px2;
@@ -8661,7 +8661,7 @@ extern	UBYTE	player_visited[16][128];
 						//
 						// Choose somewhere in the puddle to put a drip.
 						//
-		
+
 						drip_along_x = float(rand() & 0xff) * (1.0F / 256.0F);
 						drip_along_z = float(rand() & 0xff) * (1.0F / 256.0F);
 
@@ -8746,7 +8746,7 @@ extern	UBYTE	player_visited[16][128];
 							{
 								//
 								// This box always gets wibbled anyway.
-								// 
+								//
 
 								continue;
 							}
@@ -8842,9 +8842,9 @@ extern	UBYTE	player_visited[16][128];
 					quad[2] = &AENG_upper[(x + 0) & 63][(z + 1) & 63];
 					quad[3] = &AENG_upper[(x + 1) & 63][(z + 1) & 63];
 				}
-				
+
 				if (POLY_valid_quad(quad))
-				{	
+				{
 					//
 					// Darken the quad.
 					//
@@ -8862,7 +8862,7 @@ extern	UBYTE	player_visited[16][128];
 						quad[i]->specular = 0xff000000;
 					}
 
-					// 
+					//
 					// Texture the quad.
 					//
 
@@ -8958,7 +8958,7 @@ extern	UBYTE	player_visited[16][128];
 			for (x = NGAMUT_lo_gamut[z].xmin; x <= NGAMUT_lo_gamut[z].xmax; x++)
 			{
 				pl = &PAP_2LO(x,z);
-				
+
 				if (pl->water == PAP_LO_NO_WATER)
 				{
 					//
@@ -8976,7 +8976,7 @@ extern	UBYTE	player_visited[16][128];
 					//
 					// Look for water in the hi-res mapsquare enclosed by this
 					// lo-res mapsqure.
-					// 
+					//
 
 					for (dmx = 0; dmx < 4; dmx++)
 					for (dmz = 0; dmz < 4; dmz++)
@@ -9075,7 +9075,7 @@ extern	UBYTE	player_visited[16][128];
 
 	//
 	// The sky.
-	// 
+	//
 
 	LOG_ENTER ( AENG_Draw_Sky )
 
@@ -9221,7 +9221,7 @@ extern	void SKY_draw_poly_sky_old(float world_camera_x,float world_camera_y,floa
 				{
 					//
 					// We don't draw the ground because it is covered by water.
-					// 
+					//
 				}
 				else
 
@@ -9325,13 +9325,13 @@ extern	void SKY_draw_poly_sky_old(float world_camera_x,float world_camera_y,floa
 
 						}
 					}
-					
+
 					if (POLY_valid_quad(quad))
 					{
 						num_squares_drawn += 1;
 
 						{
-							// 
+							//
 							// Texture the quad.
 							//
 	/*
@@ -9435,7 +9435,7 @@ extern	void SKY_draw_poly_sky_old(float world_camera_x,float world_camera_y,floa
 
 								//
 								// Create four darkened points.
-								// 
+								//
 
 								ps[0] = *(quad[0]);
 								ps[1] = *(quad[1]);
@@ -9486,7 +9486,7 @@ extern	void SKY_draw_poly_sky_old(float world_camera_x,float world_camera_y,floa
 										POLY_add_triangle(tri, page, TRUE);
 
 										break;
-										
+
 									case 2:
 
 										tri[0] = &ps [0];
@@ -9502,7 +9502,7 @@ extern	void SKY_draw_poly_sky_old(float world_camera_x,float world_camera_y,floa
 										POLY_add_triangle(tri, page, TRUE);
 
 										break;
-										
+
 									case 3:
 
 										//ps[2].colour += 0x00101010;
@@ -9520,7 +9520,7 @@ extern	void SKY_draw_poly_sky_old(float world_camera_x,float world_camera_y,floa
 										POLY_add_triangle(tri, page, TRUE);
 
 										break;
-										
+
 									case 4:
 
 										tri[0] = quad[0];
@@ -9536,7 +9536,7 @@ extern	void SKY_draw_poly_sky_old(float world_camera_x,float world_camera_y,floa
 										POLY_add_triangle(tri, page, TRUE);
 
 										break;
-										
+
 									case 5:
 
 										tri[0] = &ps [0];
@@ -9552,7 +9552,7 @@ extern	void SKY_draw_poly_sky_old(float world_camera_x,float world_camera_y,floa
 										POLY_add_triangle(tri, page, TRUE);
 
 										break;
-										
+
 									case 6:
 
 										tri[0] = &ps [0];
@@ -9568,7 +9568,7 @@ extern	void SKY_draw_poly_sky_old(float world_camera_x,float world_camera_y,floa
 										POLY_add_triangle(tri, page, TRUE);
 
 										break;
-										
+
 									case 7:
 
 										tri[0] = quad[0];
@@ -9688,7 +9688,7 @@ extern	void SKY_draw_poly_sky_old(float world_camera_x,float world_camera_y,floa
 						SLONG dsx;
 						SLONG dsz;
 
-					} curb[4] = 
+					} curb[4] =
 					{
 						{0,0,0,1,-1,0},
 						{0,1,1,1,0,+1},
@@ -9763,7 +9763,7 @@ extern	void SKY_draw_poly_sky_old(float world_camera_x,float world_camera_y,floa
 
 	dfacets_drawn_this_gameturn = 0;
 	{
-	
+
 		LOG_ENTER ( AENG_Draw_Prims )
 
 		for (z = NGAMUT_lo_zmin; z <= NGAMUT_lo_zmax; z++)
@@ -9779,7 +9779,7 @@ extern	void SKY_draw_poly_sky_old(float world_camera_x,float world_camera_y,floa
 
 				ASSERT(WITHIN(x, 0, PAP_SIZE_LO - 1));
 				ASSERT(WITHIN(z, 0, PAP_SIZE_LO - 1));
-				
+
 				//ASSERT(WITHIN(NIGHT_cache[x][z], 1, NIGHT_MAX_SQUARES - 1));
 
 				col = NIGHT_square[NIGHT_cache[x][z]].colour;
@@ -9848,10 +9848,10 @@ extern HWND GEDIT_edit_wnd;
 							}
 						}
 						else
-						if (!(NIGHT_flag & NIGHT_FLAG_DAYTIME) && !SOFTWARE) 
+						if (!(NIGHT_flag & NIGHT_FLAG_DAYTIME) && !SOFTWARE)
 						{
 
-							switch (oi->prim) 
+							switch (oi->prim)
 							{
 							case 2:
 								/*
@@ -9869,7 +9869,7 @@ extern HWND GEDIT_edit_wnd;
 
 						//
 						// As good a place as any to put this!
-						// 
+						//
 
 						if (prim_objects[oi->prim].flag & PRIM_FLAG_ITEM)
 						{
@@ -9908,7 +9908,7 @@ extern HWND GEDIT_edit_wnd;
 
 				ASSERT(WITHIN(x, 0, PAP_SIZE_LO - 1));
 				ASSERT(WITHIN(z, 0, PAP_SIZE_LO - 1));
-				
+
 				//
 				// Look at the colvects on this square.
 				//
@@ -9948,12 +9948,12 @@ extern HWND GEDIT_edit_wnd;
 								//
 								// The last facet in the list for each square
 								// is negative.
-								// 
+								//
 
 								facet = -facet;
 								exit  =  TRUE;
 							}
-							
+
 							if(dfacets[facet].Counter[AENG_cur_fc_cam] != SUPERMAP_counter[AENG_cur_fc_cam])
 							{
 //								ASSERT(facet!=676);
@@ -9991,15 +9991,15 @@ extern HWND GEDIT_edit_wnd;
 								{
 									//
 									// Draw the facet.
-									// 
+									//
 
 									show_facet(facet);
 									FACET_draw(facet,0);
 
 									//
 									// Has this facet's building been processed this
-									// gameturn yet?   
-									// 
+									// gameturn yet?
+									//
 
 									switch(dfacets[facet].FacetType)
 									{
@@ -10103,7 +10103,7 @@ extern HWND GEDIT_edit_wnd;
 								{
 									//
 									// Draw some wheels above Darci's head!
-									// 
+									//
 
 									AENG_set_bike_wheel_rotation((GAME_TURN << 3) & 2047, PRIM_OBJ_BIKE_BWHEEL);
 
@@ -10252,14 +10252,14 @@ extern HWND GEDIT_edit_wnd;
 
 										{
 											GameCoord oldpos = p_thing->WorldPos;
-																	
+
 
 											p_thing->WorldPos = newpos;
 											FIGURE_draw(p_thing);
 
 											p_thing->WorldPos = oldpos;
 										}
-							
+
 										/*
 
 
@@ -10302,7 +10302,7 @@ extern HWND GEDIT_edit_wnd;
 
 											if(dist<AENG_DRAW_PEOPLE_DIST)
 											{
-											
+
 												FIGURE_draw(p_thing);
 											}
 										}
@@ -10390,11 +10390,11 @@ extern HWND GEDIT_edit_wnd;
 											px += p_thing->WorldPos.X >> 8;
 											py += p_thing->WorldPos.Y >> 8;
 											pz += p_thing->WorldPos.Z >> 8;
-											
+
 											//
 											// Ripped from the DRAWXTRA_special!
 											//
-											
+
 											// (So why didn't you put it there?!)
 
 											{
@@ -10457,11 +10457,11 @@ extern HWND GEDIT_edit_wnd;
 							case DT_BIKE:
 
 								ASSERT(p_thing->Class == CLASS_BIKE);
-								{	
+								{
 									//
 									// Nasty eh! But I can't be arsed to create a new drawtype.
-									// 
-									
+									//
+
 									BIKE_Drawinfo bdi = BIKE_get_drawinfo(p_thing);
 
 									//
@@ -10511,10 +10511,10 @@ extern HWND GEDIT_edit_wnd;
 //										FMATRIX_calc(matrix, 1024-bdi.steer, bdi.pitch, bdi.roll);
 										FMATRIX_calc(matrix, bdi.steer, bdi.pitch, bdi.roll);
 										FMATRIX_TRANSPOSE(matrix);
-										vector[2]=-255; vector[1]=0; vector[0]=0; 
+										vector[2]=-255; vector[1]=0; vector[0]=0;
 										FMATRIX_MUL(matrix,vector[0],vector[1],vector[2]);
 										dx=vector[0]; dy=vector[1]; dz=vector[2];
-										vector[2]=25; vector[1]=80; vector[0]=0; 
+										vector[2]=25; vector[1]=80; vector[0]=0;
 										FMATRIX_MUL(matrix,vector[0],vector[1],vector[2]);
 										BLOOM_draw(bdi.front_x+vector[0],bdi.front_y+vector[1],bdi.front_z+vector[2],dx,dy,dz,0x606040,BLOOM_LENSFLARE|BLOOM_BEAM);
 
@@ -10555,7 +10555,7 @@ extern HWND GEDIT_edit_wnd;
 
 								{
 #if 1
-									ULONG car_colours[6] = 
+									ULONG car_colours[6] =
 									{
 										0xffffff00,
 										0xffff00ff,
@@ -10759,7 +10759,7 @@ extern	void	ANIMAL_draw(Thing *p_thing);
 							}
 						}
 					}
-				
+
 					t_index = p_thing->Child;
 				}
 			}
@@ -10773,7 +10773,7 @@ extern	void	ANIMAL_draw(Thing *p_thing);
 
 	//
 	// The dirt.
-	// 
+	//
 
 	LOG_ENTER ( AENG_Draw_Dirt )
 
@@ -11051,7 +11051,7 @@ extern	void	ANIMAL_draw(Thing *p_thing);
 //                    draw_flames(sx,sy,sz,lod);
 			}
 		}
-*/  
+*/
 
 
 //	if (Keys[KB_RBRACE] && !ShiftFlag) {Keys[KB_RBRACE] = 0; AENG_torch_on ^= TRUE;}
@@ -11085,7 +11085,7 @@ extern	void	ANIMAL_draw(Thing *p_thing);
 		   &x,
 		   &y,
 		   &z);
-		
+
 		x += darci->WorldPos.X >> 8;
 		y += darci->WorldPos.Y >> 8;
 		z += darci->WorldPos.Z >> 8;
@@ -11235,7 +11235,7 @@ extern	void	ANIMAL_draw(Thing *p_thing);
 
 	//
 	// Draw the drips... again!
-	// 
+	//
 
 	LOG_ENTER ( AENG_Draw_Drips2 )
 
@@ -11283,7 +11283,7 @@ extern	void	ANIMAL_draw(Thing *p_thing);
 
 	//
 	// Draw the cloth.
-	// 
+	//
 
 
 //	if(!INDOORS_INDEX||outside)
@@ -11350,7 +11350,7 @@ extern	void	ANIMAL_draw(Thing *p_thing);
 
 	//
 	// This really _is_ shite!
-	// 
+	//
 
 	if (ShiftFlag)
 	{
@@ -11427,7 +11427,7 @@ void	AENG_draw_far_facets(void)
 
 				ASSERT(WITHIN(x, 0, PAP_SIZE_LO - 1));
 				ASSERT(WITHIN(z, 0, PAP_SIZE_LO - 1));
-				
+
 				//
 				// Look at the colvects on this square.
 				//
@@ -11461,12 +11461,12 @@ void	AENG_draw_far_facets(void)
 								//
 								// The last facet in the list for each square
 								// is negative.
-								// 
+								//
 
 								facet = -facet;
 								exit  =  TRUE;
 							}
-							
+
 							if(dfacets[facet].Counter[AENG_cur_fc_cam] != SUPERMAP_counter[AENG_cur_fc_cam])
 							{
 
@@ -11494,7 +11494,7 @@ void	AENG_draw_far_facets(void)
 								{
 									//
 									// Draw the facet.
-									// 
+									//
 
 
 									show_facet(facet);
@@ -11617,7 +11617,7 @@ void AENG_draw_warehouse()
 				switch(p_thing->Class)
 				{
 					case CLASS_PERSON:
-						
+
 						//
 						// Only draw people who are in warehouses.
 						//
@@ -11655,7 +11655,7 @@ void AENG_draw_warehouse()
 
 				t_index = p_thing->Child;
 			}
-		
+
 			NIGHT_square[NIGHT_cache[x][z]].flag &= ~NIGHT_SQUARE_FLAG_DELETEME;
 		}
 	}
@@ -11859,7 +11859,7 @@ void AENG_draw_warehouse()
 
 			ASSERT(AENG_AA_BUF_SIZE    == 32);
 			ASSERT(TEXTURE_SHADOW_SIZE == 64);
-			
+
 			offset_x = (i & 1) << 5;
 			offset_y = (i & 2) << 4;
 
@@ -11949,7 +11949,7 @@ void AENG_draw_warehouse()
 
 				//
 				// Colvects we have already done.
-				// 
+				//
 
 				#define AENG_MAX_DONE 8
 
@@ -12132,7 +12132,7 @@ void AENG_draw_warehouse()
 								poly[3].X=(float)((mx));
 								poly[3].Y=(float)(rf->Y+(rf->DY[2]<<ROOF_SHIFT));
 								poly[3].Z=(float)((mz)+256);
-								
+
 								//
 								// Assuming its coplanar!
 								//
@@ -12209,7 +12209,7 @@ void AENG_draw_warehouse()
 								break;
 						}
 					}
-				
+
 					t_index = p_thing->Child;
 				}
 			}
@@ -12219,7 +12219,7 @@ void AENG_draw_warehouse()
 #ifdef	NEW_FLOOR
 	draw_quick_floor(1);
 #endif
-	
+
 	//
 	// Create all the squares.
 	//
@@ -12250,7 +12250,7 @@ void AENG_draw_warehouse()
 			quad[1] = &AENG_upper[(x + 1) & 63][(z + 0) & 63];
 			quad[2] = &AENG_upper[(x + 0) & 63][(z + 1) & 63];
 			quad[3] = &AENG_upper[(x + 1) & 63][(z + 1) & 63];
-			
+
 			if (POLY_valid_quad(quad))
 			{
 				TEXTURE_get_minitexturebits_uvs(
@@ -12342,7 +12342,7 @@ void AENG_draw_warehouse()
 
 					//
 					// As good a place as any to put this!
-					// 
+					//
 
 					if (prim_objects[oi->prim].flag & PRIM_FLAG_ITEM)
 					{
@@ -12373,12 +12373,12 @@ void AENG_draw_warehouse()
 					{
 						//
 						// The last facet in the list for each square is negative.
-						// 
+						//
 
 						facet = -facet;
 						exit  =  TRUE;
 					}
-					
+
 					df = &dfacets[facet];
 
 					if ( ( df->FacetType == STOREY_TYPE_NORMAL ) || ( df->FacetType == STOREY_TYPE_DOOR ) ||( df->FacetType == STOREY_TYPE_FENCE )||( df->FacetType == STOREY_TYPE_FENCE_FLAT ))
@@ -12387,20 +12387,20 @@ void AENG_draw_warehouse()
 
 						//
 						// Has this facet's building been processed this gameturn yet?
-						// 
+						//
 
 						if (df->Counter[AENG_cur_fc_cam] != SUPERMAP_counter[AENG_cur_fc_cam])
 						{
 							//
 							// warehouse walls only drawn if they are inside walls
-							// 
+							//
 
 							if ( (dbuildings[build].Type == BUILDING_TYPE_WAREHOUSE && (df->FacetFlags&FACET_FLAG_INSIDE))||
 								  dbuildings[build].Type == BUILDING_TYPE_CRATE_IN||df->FacetType == STOREY_TYPE_DOOR)
 							{
 								//
 								// Draw the facet.
-								// 
+								//
 
 								if (df->FacetType == STOREY_TYPE_DOOR)
 								{
@@ -12510,7 +12510,7 @@ void AENG_draw_warehouse()
 
 								if(dist<AENG_DRAW_PEOPLE_DIST)
 								{
-								
+
 									FIGURE_draw(p_thing);
 								}
 							}
@@ -12644,7 +12644,7 @@ void AENG_draw_warehouse()
 
 	//
 	// Restore cloud to default value.
-	// 
+	//
 
 	aeng_draw_cloud_flag = old_aeng_draw_cloud_flag;
 }
@@ -12666,7 +12666,7 @@ typedef struct
 {
 	UBYTE      height[4];
 	POLY_Point pp[4];
-	
+
 } AENG_Nswater;
 
 AENG_Nswater AENG_nswater[5][5];
@@ -12806,7 +12806,7 @@ void AENG_draw_ns()
 
 	//
 	// Shadows.
-	// 
+	//
 
 	if (Keys[KB_3]) {Keys[KB_3] = 0; AENG_shadows_on ^= TRUE;}
 
@@ -12919,7 +12919,7 @@ void AENG_draw_ns()
 
 		SLONG mx;
 		SLONG mz;
-		
+
 		SLONG light_x;
 		SLONG light_y;
 		SLONG light_z;
@@ -12977,7 +12977,7 @@ void AENG_draw_ns()
 
 			//
 			// Draw the shadow of the person from the light.
-			// 
+			//
 
 			memset(AENG_aa_buffer, 0, sizeof(AENG_aa_buffer));
 
@@ -12996,7 +12996,7 @@ void AENG_draw_ns()
 
 			ASSERT(AENG_AA_BUF_SIZE    == 32);
 			ASSERT(TEXTURE_SHADOW_SIZE == 64);
-			
+
 			offset_x = (i & 1) << 5;
 			offset_y = (i & 2) << 4;
 
@@ -13102,7 +13102,7 @@ void AENG_draw_ns()
 					//
 					// The origin of this lo-res mapsquare.
 					//
-					
+
 					base_x = mx << PAP_SHIFT_LO;
 					base_z = mz << PAP_SHIFT_LO;
 
@@ -13125,7 +13125,7 @@ void AENG_draw_ns()
 
 							px = base_x + (np->x << 3);
 							pz = base_z + (np->z << 3);
-							
+
 							py = (np->y << 5) + -32 * 0x100;
 
 							poly[k].X = float(px);
@@ -13204,7 +13204,7 @@ void AENG_draw_ns()
 								if (WITHIN(bbox_upto, 0, AENG_MAX_BBOXES - 1))
 								{
 									//
-									// Create a new bounding box 
+									// Create a new bounding box
 									//
 
 									bbox[bbox_upto].x1 = MAX(FIGURE_reflect_x1 - AENG_BBOX_PUSH_OUT, AENG_BBOX_PUSH_IN);
@@ -13355,7 +13355,7 @@ void AENG_draw_ns()
 								}
 
 								if (answ->height[j] == 0)
-								{	
+								{
 									//
 									// We must create a new point.
 									//
@@ -13636,7 +13636,7 @@ void AENG_draw_ns()
 					//
 					// Find the texture page.
 					//
-	
+
 					ASSERT(WITHIN(nf->page, 0, NS_PAGE_NUMBER - 1));
 
 					//
@@ -13654,7 +13654,7 @@ void AENG_draw_ns()
 
 			//
 			// The sewer mapwho.
-			// 
+			//
 
 			for (i = nl->st; i; i = nst->next)
 			{
@@ -13665,7 +13665,7 @@ void AENG_draw_ns()
 				switch(nst->type)
 				{
 					case NS_ST_TYPE_PRIM:
-						
+
 						MESH_draw_poly(
 							nst->prim.prim,
 							(x << PAP_SHIFT_LO) + (nst->prim.x << 3),
@@ -13678,7 +13678,7 @@ void AENG_draw_ns()
 						break;
 
 					case NS_ST_TYPE_LADDER:
-						
+
 						FACET_draw_ns_ladder(
 							nst->ladder.x1,
 							nst->ladder.z1,
@@ -13691,7 +13691,7 @@ void AENG_draw_ns()
 					default:
 						ASSERT(0);
 						break;
-							
+
 				}
 			}
 
@@ -13722,19 +13722,19 @@ void AENG_draw_ns()
 							//
 							// The last facet in the list for each square
 							// is negative.
-							// 
+							//
 
 							facet = -facet;
 							exit  =  TRUE;
 						}
-						
+
 						if (dfacets[facet].Counter[AENG_cur_fc_cam] != SUPERMAP_counter[AENG_cur_fc_cam])
 						{
 							if (dfacets[facet].FacetType == STOREY_TYPE_LADDER)
 							{
 								//
 								// Draw the facet.
-								// 
+								//
 
 								FACET_draw(facet,0);
 							}
@@ -13822,13 +13822,13 @@ void AENG_draw_ns()
 
 	//
 	// The dirt.
-	// 
+	//
 
 	AENG_draw_dirt();
 
 	//
 	// Draw the drips.
-	// 
+	//
 
 //	AENG_draw_drips(0);
 
@@ -13883,7 +13883,7 @@ void AENG_draw_scanner(
 	float screen_mid_y = float(screen_y1 + screen_y2 >> 1);
 	float angle        = float(map_angle) * (-2.0F * PI / 2048.0F);
 	float zoom         = float(map_zoom)  * (1.0F / 65536.0F);
-	
+
 	float sin_yaw = sin(angle);
 	float cos_yaw = cos(angle);
 	float matrix[4];
@@ -13900,7 +13900,7 @@ void AENG_draw_scanner(
 
 	//
 	// Set the clipping rectangle.
-	// 
+	//
 
 	POLY_clip_line_box(
 		left,
@@ -14027,16 +14027,16 @@ void AENG_draw_scanner(
 	#define AENG_CROSS_COLOUR	0x0033aa33
 
 	POLY_clip_line_add(
-		screen_mid_x - AENG_CROSS_SIZE, 
+		screen_mid_x - AENG_CROSS_SIZE,
 		screen_mid_y - AENG_CROSS_SIZE,
-		screen_mid_x + AENG_CROSS_SIZE, 
+		screen_mid_x + AENG_CROSS_SIZE,
 		screen_mid_y + AENG_CROSS_SIZE,
 		AENG_CROSS_COLOUR);
 
 	POLY_clip_line_add(
-		screen_mid_x - AENG_CROSS_SIZE, 
+		screen_mid_x - AENG_CROSS_SIZE,
 		screen_mid_y + AENG_CROSS_SIZE,
-		screen_mid_x + AENG_CROSS_SIZE, 
+		screen_mid_x + AENG_CROSS_SIZE,
 		screen_mid_y - AENG_CROSS_SIZE,
 		AENG_CROSS_COLOUR);
 
@@ -14183,7 +14183,7 @@ void AENG_draw_power(SLONG x,SLONG y,SLONG w,SLONG h,SLONG val,SLONG max)
 
 	//
 	// Set the clipping rectangle.
-	// 
+	//
 	POLY_clip_line_box(
 		x,
 		y,
@@ -14248,7 +14248,7 @@ void AENG_draw_power(SLONG x,SLONG y,SLONG w,SLONG h,SLONG val,SLONG max)
 	quad[3] = &pp[3];
 
 	POLY_add_quad(quad, POLY_PAGE_COLOUR, FALSE, TRUE);
-	
+
 	POLY_frame_draw(TRUE,TRUE);
 
 	*/
@@ -14350,7 +14350,7 @@ void AENG_draw_FPS()
 		the_display.screen_unlock();
 	}
 */
-	
+
 	if (allow_debug_keys)
 	{
 		CBYTE	str[100];
@@ -14401,7 +14401,7 @@ void AENG_draw_messages()
 #endif
 
 	#if ARGH
-	
+
 	static SLONG px[3] = {4 << 16,  8 << 16, 8 << 16};
 	static SLONG py[3] = {4 << 16,  4 << 16, 8 << 16};
 
@@ -15375,7 +15375,7 @@ void AENG_draw_sewer_editor(
 					py,
 					pz,
 				   &pp[i]);
-					
+
 				if (!pp[i].MaybeValid())
 				{
 					goto abandon_this_square;
@@ -15433,7 +15433,7 @@ void AENG_draw_sewer_editor(
 						wy,
 						pz,
 					   &pp[i]);
-						
+
 					if (!pp[i].MaybeValid())
 					{
 						goto abandon_this_water;
@@ -15456,7 +15456,7 @@ void AENG_draw_sewer_editor(
 				pp[3].colour = 0x00ffffff;
 
 			  abandon_this_water:;
-				
+
 			}
 
 			if (eh->flag & ES_FLAG_ENTRANCE)
@@ -15538,13 +15538,13 @@ void AENG_draw_sewer_editor(
 				break;
 
 			case ES_THING_TYPE_PRIM:
-				
+
 				MESH_draw_poly(
 					et->prim,
 					et->x,
 					et->y,
 					et->z,
-					et->yaw, 0, 0, 
+					et->yaw, 0, 0,
 					NULL,0xff,0);
 
 				break;
@@ -15560,7 +15560,7 @@ void AENG_draw_sewer_editor(
 		//
 		// Highlight the square the mouse is over.
 		//
-		
+
 		AENG_e_draw_3d_mapwho_y(
 			*mouse_over_x >> 8,
 			*mouse_over_y,
@@ -15865,7 +15865,7 @@ void AENG_clear_viewport()
 		CLEAR_VIEWPORT;
 	}
 	else
-	{		
+	{
 		if (draw_3d)
 		{
 			SLONG white = NIGHT_sky_colour.red + NIGHT_sky_colour.green + NIGHT_sky_colour.blue;
@@ -16224,7 +16224,7 @@ extern void store_thing_data();
 
 		//
 		// Restore the old camera.
-		// 
+		//
 
 		fc->x     = old_cam_x;
 		fc->y	  = old_cam_y;
@@ -16358,7 +16358,7 @@ extern void store_thing_data();
 //#if !USE_TOMS_ENGINE_PLEASE_BOB
 	//
 	// Do it here so that AENG_world_line works during the game.
-	// 
+	//
 
 #ifndef TARGET_DC
 	POLY_frame_init(FALSE, FALSE);
@@ -16444,7 +16444,7 @@ void AENG_read_detail_levels()
 
 //
 // Draws a small inside of the warehouse.
-// 
+//
 
 void AENG_draw_box_around_recessed_door(DFacet *df, SLONG inside_out)
 {
@@ -16494,7 +16494,7 @@ void AENG_draw_box_around_recessed_door(DFacet *df, SLONG inside_out)
 	POLY_Point *quad[4];
 
 	if (inside_out)
-	{	
+	{
 		SWAP(df->x[0], df->x[1]);
 		SWAP(df->z[0], df->z[1]);
 	}
@@ -16607,7 +16607,7 @@ void AENG_draw_box_around_recessed_door(DFacet *df, SLONG inside_out)
 		{
 			break;
 		}
-		
+
 		x += dx;
 		z += dz;
 	}
@@ -16616,7 +16616,7 @@ void AENG_draw_box_around_recessed_door(DFacet *df, SLONG inside_out)
 
 	//
 	// The faces on the floor and the ceiling.
-	// 
+	//
 
 	x = df->x[0];
 	z = df->z[0];
@@ -16628,7 +16628,7 @@ void AENG_draw_box_around_recessed_door(DFacet *df, SLONG inside_out)
 
 		//
 		// The floor.
-		// 
+		//
 
 		ph = &PAP_2HI(mx,mz);
 
@@ -16651,12 +16651,12 @@ void AENG_draw_box_around_recessed_door(DFacet *df, SLONG inside_out)
 				   &quad[3]->u,
 				   &quad[3]->v);
 
-			POLY_add_quad(quad, page, FALSE);			
+			POLY_add_quad(quad, page, FALSE);
 		}
 
 		//
 		// The ceiling.
-		// 
+		//
 
 		quad[0] = &upper[i + 0][0];
 		quad[1] = &upper[i + 0][1];
@@ -16727,7 +16727,7 @@ void AENG_draw_box_around_recessed_door(DFacet *df, SLONG inside_out)
 	}
 
 	if (inside_out)
-	{	
+	{
 		SWAP(df->x[0], df->x[1]);
 		SWAP(df->z[0], df->z[1]);
 	}

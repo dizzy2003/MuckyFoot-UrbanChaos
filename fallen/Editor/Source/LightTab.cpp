@@ -2,7 +2,7 @@
 
 #include	"LightTab.hpp"
 #include	"engine.h"
-#include	"c:\fallen\headers\memory.h"
+#include	"fallen/headers/memory.h"
 
 static		counter;
 #define	SHADOW_LIGHT_SHIFT		(5)
@@ -15,7 +15,7 @@ void	cross_work_window(void)
 {
 	DrawLineC(0,0,WorkWindowWidth-1,WorkWindowHeight-1,255);
 	DrawLineC(0,WorkWindowHeight-1,WorkWindowWidth-1,0,255);
-	
+
 }
 */
 //---------------------------------------------------------------
@@ -50,8 +50,8 @@ void	remove_ambient_from_floor(void);
 #define CTRL_LIGHT_PARAM			23
 
 
-ControlDef	light_tab_def[]	=	
-{														 
+ControlDef	light_tab_def[]	=
+{
 	{	CHECK_BOX,	0,	"X Free",					20,  150,	0,	10	},
 	{	CHECK_BOX,	0,	"Y Free",					20,  165,	0,	10	},
 	{	CHECK_BOX,	0,	"Z Free",					20,  180,	0,	10	},
@@ -139,7 +139,7 @@ void	LightTab::DrawTabContent(void)
 
 
 
-	content_rect	=	ContentRect;	
+	content_rect	=	ContentRect;
 	content_rect.ShrinkRect(1,1);
 	content_rect.FillRect(CONTENT_COL);
 
@@ -214,7 +214,7 @@ SLONG	sum_shared_brightness(SWORD shared_point)
 					count++;
 				}
 			}
-			
+
 		}
 	}
 	if(count)
@@ -350,7 +350,7 @@ void	LightTab::RecalcAllLights(void)
 	edit_info.amb_flags|=2;
 
 	scan_function=scan_apply_ambient;
-	scan_map();	
+	scan_map();
 	apply_ambient_to_floor();
 
 	//now re-apply all lights
@@ -374,18 +374,18 @@ void	redraw_tab(void)
 
 	switch(the_lighttab->Mode)
 	{
-		
+
 		case LIGHT_TAB_MODE_PLACE_AMBIENT:
 
 			scan_function=scan_undo_ambient;
-			scan_map();	
+			scan_map();
 			remove_ambient_from_floor();
 
 
 		 	edit_info.amb_bright =	((CHSlider*)the_lighttab->GetControlPtr(CTRL_LIGHT_BRIGHT))->GetCurrentValue();
 //			link_all_lights();
 			scan_function=scan_apply_ambient;
-			scan_map();	
+			scan_map();
 			apply_ambient_to_floor();
 			the_lighttab->DrawTabContent();
 			the_lighttab->Parent->DrawContent();
@@ -399,7 +399,7 @@ void	redraw_tab(void)
 				break;
 
 		default:
-				
+
 			the_lighttab->DrawTabContent();
 			the_lighttab->Parent->DrawContent();
 			SetWorkWindowBounds(the_lighttab->Parent->GetLeft(),
@@ -465,7 +465,7 @@ void	LightTab::DrawModuleContent(SLONG x,SLONG y,SLONG w,SLONG h)
 void	LightTab::HandleTab(MFPoint *current_point)
 {
 	SLONG		   update	=	0;
-	
+
 
 	ModeTab::HandleTab(current_point);
 	KeyboardInterface();
@@ -672,7 +672,7 @@ void	link_all_lights(void)
 			light_head=c0;
 		}
 	}
-	
+
 }
 
 void	apply_all_lights_to_this_face(SLONG face,SLONG x,SLONG y,SLONG z,SLONG extra)
@@ -800,7 +800,7 @@ void	scan_unlight(SLONG face,SLONG x,SLONG y,SLONG z,SLONG extra)
 		prim_faces4[face].Bright[2]=0;
 		prim_faces4[face].Bright[3]=0;
 	}
-	
+
 }
 
 void	scan_undo_ambient(SLONG face,SLONG x,SLONG y,SLONG z,SLONG extra)
@@ -925,7 +925,7 @@ void	apply_light_to_map(SLONG x,SLONG y,SLONG z,SLONG bright)
 	light_z=z;
 	light_bright=bright;
 	scan_function=scan_apply_light;
-	scan_map();	
+	scan_map();
 }
 
 
@@ -992,7 +992,7 @@ SLONG	LightTab::ClickOnLight(MFPoint *clicked_point)
 	w=Parent->ContentWidth();
 	h=Parent->ContentHeight();
 
-	
+
 	SetWorkWindowBounds(x,y,w-1,h/2-3);
 	set_camera_plan();
 
@@ -1042,7 +1042,7 @@ SLONG	LightTab::DragALight(UBYTE flags,MFPoint *clicked_point,UWORD copy)
 	h=Parent->ContentHeight();
 
 	col++;
-	
+
 	SetWorkWindowBounds(x,y,w-1,h/2-3);
 	set_camera_plan();
 
@@ -1082,7 +1082,7 @@ SLONG	LightTab::DragALight(UBYTE flags,MFPoint *clicked_point,UWORD copy)
 		offset_x=map_things[drag].X-engine.MousePosX;
 		offset_y=map_things[drag].Y-engine.MousePosY;
 		offset_z=map_things[drag].Z-engine.MousePosZ;
-		
+
 		CurrentLight=drag;
 
 		while(SHELL_ACTIVE && ((copy==0&&LeftButton)||(copy==1&&RightButton)))
@@ -1124,7 +1124,7 @@ SLONG	LightTab::DragALight(UBYTE flags,MFPoint *clicked_point,UWORD copy)
 			ShowWorkWindow(0);
 			screen_change=1;
 
-			SetWorkWindowBounds(this->ContentLeft()+1,this->ContentTop()+1,this->ContentWidth(),this->ContentHeight()); 
+			SetWorkWindowBounds(this->ContentLeft()+1,this->ContentTop()+1,this->ContentWidth(),this->ContentHeight());
 //			ContentRect.FillRect(CONTENT_COL);
 
 			DrawBox(0,0,this->ContentWidth(),this->ContentHeight(),CONTENT_COL);
@@ -1144,7 +1144,7 @@ SLONG	LightTab::DragALight(UBYTE flags,MFPoint *clicked_point,UWORD copy)
 		}
 		RequestUpdate();
 	}
-//	SetWorkWindowBounds(this->ContentLeft()+1,this->ContentTop()+1,this->ContentWidth(),this->ContentHeight()); 
+//	SetWorkWindowBounds(this->ContentLeft()+1,this->ContentTop()+1,this->ContentWidth(),this->ContentHeight());
 //	DrawBox(0,0,this->ContentWidth(),this->ContentHeight(),CONTENT_COL);
 //	ContentRect.FillRect(CONTENT_COL);
 //	UpdatePrimPickWindow();
@@ -1159,12 +1159,12 @@ void	LightTab::SetAmbientAngle(void)
 	//there has been a left click in a content window
 	while(SHELL_ACTIVE && LeftButton)
 	{
-		
+
 		if(SetWorldMouse(0))
 		{
 //			link_all_lights();
 			scan_function=scan_undo_ambient;
-			scan_map();	
+			scan_map();
 			remove_ambient_from_floor();
 
 			edit_info.amb_dx=engine.MousePosX-(engine.X>>8);
@@ -1175,7 +1175,7 @@ void	LightTab::SetAmbientAngle(void)
 		 	edit_info.amb_bright =	((CHSlider*)GetControlPtr(CTRL_LIGHT_BRIGHT))->GetCurrentValue();
 //			link_all_lights();
 			scan_function=scan_apply_ambient;
-			scan_map();	
+			scan_map();
 			apply_ambient_to_floor();
 
 			if(LockWorkScreen())
@@ -1187,7 +1187,7 @@ void	LightTab::SetAmbientAngle(void)
 			ShowWorkWindow(0);
 
 			{
-				SetWorkWindowBounds(this->ContentLeft()+1,this->ContentTop()+1,this->ContentWidth(),this->ContentHeight()); 
+				SetWorkWindowBounds(this->ContentLeft()+1,this->ContentTop()+1,this->ContentWidth(),this->ContentHeight());
 
 				DrawBox(0,0,this->ContentWidth(),this->ContentHeight(),CONTENT_COL);
 				set_camera();
@@ -1196,7 +1196,7 @@ void	LightTab::SetAmbientAngle(void)
 				ShowWorkWindow(0);
 				editor_user_interface(0);
 				KeyboardInterface();
-			}			
+			}
 
 
 	//		RedrawModuleContent=1;
@@ -1247,7 +1247,7 @@ SLONG	LightTab::DragEngine(UBYTE flags,MFPoint *clicked_point)
 				engine.Z = (old_z+(-nz+start_z));
 
 //				engine.Z=nz<<8;
-				
+
 				DrawModuleContent(Parent->ContentLeft()+1,Parent->ContentTop()+1,Parent->ContentWidth(),Parent->ContentHeight());
 				SetWorkWindowBounds(Parent->ContentLeft()+1,Parent->ContentTop()+1,Parent->ContentWidth(),Parent->ContentHeight());
 				ShowWorkWindow(0);
@@ -1256,7 +1256,7 @@ SLONG	LightTab::DragEngine(UBYTE flags,MFPoint *clicked_point)
 				engine.X=old_x;
 				engine.Y=old_y;
 				engine.Z=old_z;
-				
+
 			}
 		}
 		if(flag)
@@ -1333,7 +1333,7 @@ SLONG	LightTab::HandleModuleContentClick(MFPoint	*clicked_point,UBYTE flags,SLON
 			break;
 	}
 	return(0);
-	
+
 }
 
 UWORD	LightTab::HandleTabClick(UBYTE flags,MFPoint *clicked_point)
@@ -1438,7 +1438,7 @@ SLONG	LightTab::SetWorldMouse(ULONG flag)
 void	delete_all_lights(void)
 {
 	SLONG	c0;
-	
+
 
 	for(c0=1;c0<MAX_MAP_THINGS;c0++)
 	{
@@ -1449,7 +1449,7 @@ void	delete_all_lights(void)
 	}
 
 	scan_function=scan_unlight;
-	scan_map();	
+	scan_map();
 
 	edit_info.amb_offset=0;
 	edit_info.amb_bright=0;

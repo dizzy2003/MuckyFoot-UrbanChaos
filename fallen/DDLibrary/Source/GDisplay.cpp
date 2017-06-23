@@ -2,11 +2,11 @@
 // Guy Simmons, 13th November 1997.
 
 #include	"DDLib.h"
-#include	"c:\fallen\headers\demo.h"
-#include	"c:\fallen\headers\interfac.h"
+#include	"fallen/headers/demo.h"
+#include	"fallen/headers/interfac.h"
 #include	"BinkClient.h"
-#include	"c:\fallen\headers\env.h"
-#include	"c:\fallen\headers\xlat_str.h"
+#include	"fallen/headers/env.h"
+#include	"fallen/headers/xlat_str.h"
 
 #include "poly.h"
 #include "vertexbuffer.h"
@@ -15,7 +15,7 @@
 #include "polypage.h"
 #include "gdisplay.h"
 #include "panel.h"
-#include	"c:\fallen\headers\game.h"
+#include	"fallen/headers/game.h"
 
 #ifdef TARGET_DC
 #include "target.h"
@@ -63,9 +63,9 @@ LPDIRECTDRAWSURFACE4 lpBackgroundCache2 = NULL;
 
 
 #ifdef DEBUG
-HRESULT WINAPI EnumSurfacesCallbackFunc( 
-  LPDIRECTDRAWSURFACE4 lpDDSurface,  
-  LPDDSURFACEDESC2 lpDDSurfaceDesc,  
+HRESULT WINAPI EnumSurfacesCallbackFunc(
+  LPDIRECTDRAWSURFACE4 lpDDSurface,
+  LPDDSURFACEDESC2 lpDDSurfaceDesc,
   LPVOID lpContext )
 {
 	TRACE ( "Surf: width %i height %i bpp %i", lpDDSurfaceDesc->dwWidth, lpDDSurfaceDesc->dwHeight, lpDDSurfaceDesc->ddpfPixelFormat.dwRGBBitCount );
@@ -426,7 +426,7 @@ void RenderStreamToSurface(IDirectDrawSurface *pSurface, IMultiMediaStream *pMMS
 	}
 
 	hres = pMMStream->SetState(STREAMSTATE_STOP);
-	hres = pSample->Release();    
+	hres = pSample->Release();
 	hres = pDDStream->Release();
 	hres = pPrimaryVidStream->Release();
 
@@ -442,7 +442,7 @@ void RenderStreamToSurface(IDirectDrawSurface *pSurface, IMultiMediaStream *pMMS
 
 
 void RenderFileToMMStream(const char * szFileName, IMultiMediaStream **ppMMStream, IDirectDraw *pDD)
-{	
+{
 	IAMMultiMediaStream *pAMStream = NULL;
 
 	HRESULT hres;
@@ -602,9 +602,9 @@ int _CRTAPI1 do_intro(void)
 	IDirectDrawSurface *back_surface;
 
 #ifdef TARGET_DC
-					CoInitializeEx(NULL,COINIT_MULTITHREADED);	
+					CoInitializeEx(NULL,COINIT_MULTITHREADED);
 #else
-                	CoInitialize(NULL);	
+                	CoInitialize(NULL);
 #endif
 
 	/*
@@ -671,9 +671,9 @@ int _CRTAPI1 do_only_game_intro(void)
 	IDirectDrawSurface *back_surface;
 
 #ifdef TARGET_DC
-	CoInitializeEx(NULL,COINIT_MULTITHREADED);	
+	CoInitializeEx(NULL,COINIT_MULTITHREADED);
 #else
-	CoInitialize(NULL);	
+	CoInitialize(NULL);
 #endif
 
 	// get a IDirectDrawSurface from the IDirectDrawSurface4 since M$ don't seem to have
@@ -721,7 +721,7 @@ void	InitBackImage(CBYTE *name)
 void	FRONTEND_scr_img_load_into_screenfull(CBYTE *name, CompressedBackground *screen);
 	FRONTEND_scr_img_load_into_screenfull ( name, &(the_display.lp_DD_Background) );
 
-	
+
 #else
 
 
@@ -919,11 +919,11 @@ SLONG	SetDisplay(ULONG width,ULONG height,ULONG depth)
 
 SLONG			ClearDisplay(UBYTE r,UBYTE g,UBYTE b)
 {
-	DDBLTFX		dd_bltfx; 
- 
+	DDBLTFX		dd_bltfx;
+
 	dd_bltfx.dwSize			=	sizeof(dd_bltfx);
 	dd_bltfx.dwFillColor	=	0;
- 
+
 	the_display.lp_DD_FrontSurface->Blt(NULL,NULL,NULL,DDBLT_COLORFILL,&dd_bltfx);
 
 	return	0;
@@ -1085,8 +1085,8 @@ void DumpBackToRaw()
 
 	//
 	// Find the first available file.
-	// 
-	
+	//
+
 	for (i = 0; i < 100; i++)
 	{
 		sprintf(fname, "c:\\tmp\\shot%03d.raw", i);
@@ -1104,7 +1104,7 @@ void DumpBackToRaw()
 		else
 		{
 			handle = MF_Fopen(fname, "wb");
-	
+
 			if (handle)
 			{
 				goto found_file;
@@ -1274,7 +1274,7 @@ HRESULT	Display::Init(void)
 cleanup:
 		Fini();
 		return	DDERR_GENERIC;
-		
+
 	}
 	return	DD_OK;
 }
@@ -1397,7 +1397,7 @@ HRESULT	Display::InitInterfaces(void)
 
     // Get DD Guid.
     the_guid	=	CurrDriver->GetGuid();
-    
+
     // Create DD interface
     result	=	DirectDrawCreate(the_guid,&lp_DD,NULL);
     if(FAILED(result))
@@ -1571,7 +1571,7 @@ static bool bink_flipper()
 {
 	fmv_primary->Blt(NULL, fmv_secondary, NULL, DDBLT_WAIT, NULL);
 
-	ULONG input = get_hardware_input(INPUT_TYPE_JOY) | get_hardware_input(INPUT_TYPE_KEY);		
+	ULONG input = get_hardware_input(INPUT_TYPE_JOY) | get_hardware_input(INPUT_TYPE_KEY);
 
 	if (input & (INPUT_MASK_JUMP|INPUT_MASK_START|INPUT_MASK_SELECT|INPUT_MASK_KICK|INPUT_MASK_PUNCH|INPUT_MASK_ACTION))
 	{
@@ -1840,9 +1840,9 @@ void PlayQuickMovie(SLONG type, SLONG language)
 		else
 		{
 			sprintf(filename, "%s" FMV3 ".avi", pcDirectory, type );
-		} 
+		}
 
-		
+
 
 #if 1
 #ifdef DEBUG
@@ -2150,11 +2150,11 @@ extern LPDIRECTSOUND g_pds;
 		DDBLTFX ddbf;
 		ddbf.dwSize      = sizeof(DDBLTFX);
 		ddbf.dwFillColor = 0;
-		the_display.lp_DD_BackSurface->Blt(NULL, NULL, NULL, 
+		the_display.lp_DD_BackSurface->Blt(NULL, NULL, NULL,
 								DDBLT_WAIT | DDBLT_COLORFILL, &ddbf);
 		the_display.lp_DD_FrontSurface->Flip(NULL, DDFLIP_WAIT);
-		the_display.lp_DD4->WaitForVerticalBlank(DDWAITVB_BLOCKEND, NULL);				
-		the_display.lp_DD_BackSurface->Blt(NULL, NULL, NULL, 
+		the_display.lp_DD4->WaitForVerticalBlank(DDWAITVB_BLOCKEND, NULL);
+		the_display.lp_DD_BackSurface->Blt(NULL, NULL, NULL,
 								DDBLT_WAIT | DDBLT_COLORFILL, &ddbf);
 
 
@@ -2308,11 +2308,11 @@ extern LPDIRECTSOUND g_pds;
 		// Draw black screens again.
 		ddbf.dwSize      = sizeof(DDBLTFX);
 		ddbf.dwFillColor = 0;
-		the_display.lp_DD_BackSurface->Blt(NULL, NULL, NULL, 
+		the_display.lp_DD_BackSurface->Blt(NULL, NULL, NULL,
 								DDBLT_WAIT | DDBLT_COLORFILL, &ddbf);
 		the_display.lp_DD_FrontSurface->Flip(NULL, DDFLIP_WAIT);
-		the_display.lp_DD4->WaitForVerticalBlank(DDWAITVB_BLOCKEND, NULL);				
-		the_display.lp_DD_BackSurface->Blt(NULL, NULL, NULL, 
+		the_display.lp_DD4->WaitForVerticalBlank(DDWAITVB_BLOCKEND, NULL);
+		the_display.lp_DD_BackSurface->Blt(NULL, NULL, NULL,
 								DDBLT_WAIT | DDBLT_COLORFILL, &ddbf);
 
 		mwPlyStop(ply);
@@ -2522,7 +2522,7 @@ extern LPSTR lpszGlobalArgs;
 	// Er.. just do some non-display-related regional checking here as well.
 	BYTE bCountry = FirmwareGetCountryCode();
 
-	
+
 	if ( NULL != strstr ( lpszGlobalArgs, "EUROPE_ONLY" ) )
 	{
 		// This is a European build, and should only work there.
@@ -2700,7 +2700,7 @@ extern LPSTR lpszGlobalArgs;
     {
 		// Make sure we use Mode 13 instead of Mode X
 		flags	=	DDSDM_STANDARDVGAMODE;
-    } 
+    }
 
     // Set Requested Fullscreen mode
     result	=	lp_DD4->SetDisplayMode(w,h,bpp,refresh,flags);
@@ -2800,7 +2800,7 @@ HRESULT	Display::FiniFullscreenMode(void)
 // The formula is...
 //
 //	PIXEL(r,g,b) = ((r >> mask) << shift) | ((g >> mask) << shift) | ((b >> mask) << shift);
-// 
+//
 // THIS ASSUMES that r,g,b are 8-bit values.
 //
 
@@ -2902,7 +2902,7 @@ HRESULT	Display::InitFront(void)
 
 		dd_sd.dwFlags			=	DDSD_CAPS | DDSD_BACKBUFFERCOUNT;
 		dd_sd.ddsCaps.dwCaps	=	DDSCAPS_COMPLEX|DDSCAPS_FLIP|DDSCAPS_PRIMARYSURFACE|DDSCAPS_3DDEVICE;
-		dd_sd.dwBackBufferCount	=	1;			
+		dd_sd.dwBackBufferCount	=	1;
 	}
 #ifndef TARGET_DC
 	else
@@ -2956,7 +2956,7 @@ HRESULT	Display::InitFront(void)
 		TRACE("Gamma control OK\n");
 
 		int	black, white;
-		
+
 		GetGamma(&black, &white);
 		SetGamma(black, white);
 	}
@@ -2975,7 +2975,7 @@ HRESULT	Display::InitFront(void)
 
 	//
 	// It must be an RGB mode!
-	// 
+	//
 
 	ASSERT(dd_sd.ddpfPixelFormat.dwFlags & DDPF_RGB);
 
@@ -3041,7 +3041,7 @@ HRESULT	Display::InitPalette(void)
     // Destroy old palette
     FiniPalette();
 
-    // Make sure we are properly intialized 
+    // Make sure we are properly intialized
     // for this to work
 	if((!lp_DD4) || (!lp_DD_FrontSurface))
 	{
@@ -3108,7 +3108,7 @@ HRESULT	Display::InitPalette(void)
 		CopyMemory(lp_CurrPalette,lp_SysPalette,pal_mem_size);
     }
 	ReleaseDC(NULL,hdc);
-	
+
 	if(dd_sd.ddpfPixelFormat.dwFlags&DDPF_PALETTEINDEXED1)
 	{
 		flags	=	DDPCAPS_1BIT;
@@ -3235,7 +3235,7 @@ HRESULT	Display::InitBack(void)
 	// Check Initialization
 	if	(
 			(!hDDLibWindow) || (!IsWindow(hDDLibWindow)) ||
-			(!CurrDevice) || (!CurrMode) || 
+			(!CurrDevice) || (!CurrMode) ||
 			(!lp_DD4) || (!lp_D3D) || (!lp_DD_FrontSurface)
 		)
 	{
@@ -3392,7 +3392,7 @@ HRESULT	Display::InitBack(void)
 
 
 	}
-	
+
 #ifndef TARGET_DC
 	if(IsUseWork())
 	{
@@ -3430,7 +3430,7 @@ HRESULT	Display::InitBack(void)
 			WorkScreenWidth			=	w;
 			WorkScreenHeight		=	h;
 		}
-		
+
 	}
 #endif
 
@@ -3441,7 +3441,7 @@ HRESULT	Display::InitBack(void)
 #ifdef TARGET_DC
 	InitBackCache();
 #endif
-	
+
 	// Success
 	return DD_OK;
 }
@@ -3939,7 +3939,7 @@ void Display::SetUserColour(UBYTE red, UBYTE green, UBYTE blue)
 	result = lp_D3D_User->SetMaterial(&material);
 
 	ASSERT(!FAILED(result));
-		   
+
 	result = lp_D3D_User->GetHandle(lp_D3D_Device,&user_handle);
 
 	ASSERT(!FAILED(result));
@@ -4316,7 +4316,7 @@ HRESULT	Display::ChangeDevice	(
 			VB_Init();
 			TheVPool->Create(lp_D3D, !CurrDevice->IsHardware());
 		}
-		
+
 		result	=	InitBack();
 		if(FAILED(result))
 		{
@@ -4400,7 +4400,7 @@ HRESULT	Display::ChangeMode	(
         return	result;
 	}
 
-	// 
+	//
 	// Step 2.   Check if Device needs to be changed as well
 	//
 	if(new_mode->ModeSupported(old_device))
@@ -4423,7 +4423,7 @@ HRESULT	Display::ChangeMode	(
 		}
 	}
 
-	// 
+	//
 	// Step 3.	Destroy current Mode
 	//
 	FiniBack();
@@ -4662,7 +4662,7 @@ HRESULT	Display::toGDI(void)
 
 /*
 	// Restore system palette.
-	if(lpddpPalette) 
+	if(lpddpPalette)
 	{
 		// Save the current palette
 		hResult = lpddpPalette->GetEntries (0, 0, cPalette, lppeCurr);
@@ -4683,7 +4683,7 @@ HRESULT	Display::toGDI(void)
 */
 
 	// Flip to GDI Surface
-	if(lp_DD4) 
+	if(lp_DD4)
 	{
 		result	=	lp_DD4->FlipToGDISurface();
 		if(FAILED(result))
@@ -4717,7 +4717,7 @@ HRESULT	Display::fromGDI(void)
 	if (lpddpPalette)
 	{
 		hResult = lpddpPalette->SetEntries (0, 0, cPalette, lppeCurr);
-		if (FAILED (hResult)) 
+		if (FAILED (hResult))
 			return hResult;
 	}
 */
@@ -4910,7 +4910,7 @@ void Display::GetPixel(SLONG x, SLONG y, UBYTE *red, UBYTE *green, UBYTE *blue)
 				SLONG  index = x + x + y * screen_pitch;
 
 				dest   = (UWORD *) (&(screen[index]));
-				colour = dest[0];		
+				colour = dest[0];
 			}
 			else
 			{
@@ -4948,7 +4948,7 @@ void Display::blit_back_buffer()
 
 		ClientToScreen(
 			hDDLibWindow,
-			&clientpos);		
+			&clientpos);
 
 		GetClientRect(
 			hDDLibWindow,
@@ -5611,7 +5611,7 @@ HRESULT			Display::Flip(LPDIRECTDRAWSURFACE4 alt,SLONG flags)
 
 	// Draw the screensaver (if any).
 	PANEL_screensaver_draw();
-	
+
 	if(IsFullScreen() && CurrDevice->IsHardware())
 	{
 #ifdef TARGET_DC
@@ -5746,7 +5746,7 @@ void Display::create_background_surface(UBYTE *image_data)
 		lp_DD_Background->Release();
 		lp_DD_Background = NULL;
 	}
-	
+
 	lp_DD_Background_use_instead = NULL;
 
 	//
@@ -6008,7 +6008,7 @@ SLONG CurrentVideo3DModeSupports(void)
 
 			if (secondary_driver->DriverFlags & DD_DRIVER_SUPPORTS_16BIT) {ans |= SUPPORTS_16;}
 			if (secondary_driver->DriverFlags & DD_DRIVER_SUPPORTS_32BIT) {ans |= SUPPORTS_32;}
-	
+
 			break;
 
 		case 2:
@@ -6023,7 +6023,7 @@ SLONG CurrentVideo3DModeSupports(void)
 			}
 
 			break;
-		
+
 		default:
 			ASSERT(0);
 			break;
@@ -6053,7 +6053,7 @@ static void InitDialog(HWND hWnd)
 
 	// localise this bastard
 	CBYTE *lang=ENV_get_value_string("language");
-	
+
 	if (!lang) lang="text\\lang_english.txt";
 	XLAT_load(lang);
 	XLAT_init();
@@ -6105,7 +6105,7 @@ static void InitDialog(HWND hWnd)
 	{
 		//
 		// Argh! Use primary!
-		// 
+		//
 
 		Video3DMode = 0;
 	}
@@ -6251,7 +6251,7 @@ static BOOL CALLBACK dlgproc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 			case IDCANCEL:
 				//
 				// End everything!
-				// 
+				//
 
 				extern void MilesTerm(void);
 
@@ -6512,7 +6512,7 @@ void GraphicsDialog(HINSTANCE hInst, HWND hWnd)
 	//
 	// Ban incompatible drivers?
 	//
-	
+
 	if (!valid_driver(primary_driver  )) {is_primary   = FALSE; primary_driver   = NULL;}
 	if (!valid_driver(secondary_driver)) {is_secondary = FALSE; secondary_driver = NULL;}
 

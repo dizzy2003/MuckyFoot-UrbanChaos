@@ -1,9 +1,9 @@
 #include <MFStdLib.h>
 #include "game.h"
 #ifndef	PSX
-#include "c:\fallen\ddlibrary\headers\net.h"
+#include "fallen/ddlibrary/headers/net.h"
 #else
-#include "c:\fallen\psxlib\headers\net.h"
+#include "fallen/psxlib/headers/net.h"
 #endif
 
 UBYTE CNET_network_game;
@@ -139,7 +139,7 @@ SLONG CNET_configure()
 		num_connections = NET_get_connection_number();
 
 		AENG_clear_screen();
-		
+
 		if (AENG_lock())
 		{
 			FONT_draw(50, 30, "Available connections");
@@ -260,7 +260,7 @@ SLONG CNET_configure()
 			//
 
 			word1 = rand() % NUM_WORDS;
-			
+
 			do
 			{
 				word2 = rand() % NUM_WORDS;
@@ -317,7 +317,7 @@ SLONG CNET_configure()
 
 			//
 			// Leave the session.
-			// 
+			//
 
 			NET_leave_session();
 

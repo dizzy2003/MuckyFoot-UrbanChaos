@@ -5,7 +5,7 @@
 #include "game.h"
 #include "mav.h"
 #ifndef	PSX
-#include "c:\fallen\ddengine\headers\aeng.h"
+#include "fallen/ddengine/headers/aeng.h"
 #endif
 #include "pap.h"
 #include "supermap.h"
@@ -230,7 +230,7 @@ void MAV_calc_height_array(SLONG ignore_warehouses)
 
 	//
 	// Nowadays there are buildings without roofs.
-	// 
+	//
 
 	for (x = 0; x < PAP_SIZE_HI; x++)
 	for (z = 0; z < PAP_SIZE_HI; z++)
@@ -374,7 +374,7 @@ void MAV_turn_off_square(
 
 //
 // Makes sure nobody can go into this square in any way.
-// 
+//
 
 void MAV_turn_off_whole_square(
 		SLONG x,
@@ -428,7 +428,7 @@ void MAV_turn_off_whole_square(
 
 //
 // Makes sure nobody can go into this square in any way.
-// 
+//
 
 void MAV_turn_off_whole_square_car(
 		SLONG x,
@@ -584,7 +584,7 @@ void MAV_precalculate()
 	SLONG x;
 	SLONG y;
 	SLONG z;
-	
+
 	SLONG x1;
 	SLONG y1;
 	SLONG z1;
@@ -637,7 +637,7 @@ void MAV_precalculate()
 	MAV_calc_height_array(FALSE);
 
 	//
-	// Make the staircase prims change the MAV_height array 
+	// Make the staircase prims change the MAV_height array
 	//
 
 	for (x = 0; x < PAP_SIZE_LO; x++)
@@ -782,7 +782,7 @@ void MAV_precalculate()
 						{
 							//
 							// We can always fall down becuase there is nothing in the way.
-							// 
+							//
 
 							opt[i] |= MAV_CAPS_FALL_OFF;
 						}
@@ -813,7 +813,7 @@ void MAV_precalculate()
 							}
 						}
 
-						if (there_is_a_los(x1,y,z1, x2,y,z2, 
+						if (there_is_a_los(x1,y,z1, x2,y,z2,
 							LOS_FLAG_IGNORE_PRIMS | LOS_FLAG_IGNORE_SEETHROUGH_FENCE_FLAG | LOS_FLAG_IGNORE_UNDERGROUND_CHECK))
 						{
 							caropts |= 1 << i;
@@ -943,7 +943,7 @@ void MAV_precalculate()
 						}
 					}
 
-					if (there_is_a_los(x1,y,z1, x2,y,z2, 
+					if (there_is_a_los(x1,y,z1, x2,y,z2,
 						LOS_FLAG_IGNORE_PRIMS | LOS_FLAG_IGNORE_SEETHROUGH_FENCE_FLAG | LOS_FLAG_IGNORE_UNDERGROUND_CHECK))
 					{
 						caropts |= 1 << i;
@@ -1149,8 +1149,8 @@ void MAV_precalculate()
 								MAV_turn_movement_on(rx,rz-1, MAV_DIR_ZL);
 							}
 						}
-					}					     
-					else				     
+					}
+					else
 					{
 						if (MAVHEIGHT(rx, rz) == MAVHEIGHT(rx, rz-1))
 						{
@@ -1506,7 +1506,7 @@ void MAV_draw(
 	{
 		//
 		// Draw a blue cross at the height we think the square is at.
-		// 
+		//
 
 		x1 = x + 0 << 8;
 		z1 = z + 0 << 8;
@@ -1986,7 +1986,7 @@ void MAV_create_nodelist_from_pos(UBYTE end_x, UBYTE end_z)
 			//
 			// Moves you two squares.
 			//
-			
+
 			x -= order[dir].dx;
 			z -= order[dir].dz;
 		}
@@ -2095,7 +2095,7 @@ MAV_Action MAV_do(
 		SLONG dx;
 		SLONG dz;
 
-	} order[4] = 
+	} order[4] =
 	{
 		{-1, 0},
 		{+1, 0},
@@ -2122,7 +2122,7 @@ MAV_Action MAV_do(
 	//
 	// Clear the flags.
 	//
-	
+
 	MAV_clear_bbox(
 		me_x - MAV_LOOKAHEAD,
 		me_z - MAV_LOOKAHEAD,
@@ -2631,7 +2631,7 @@ void MAV_precalculate_warehouse_nav(UBYTE ware)
 
 	SLONG dx;
 	SLONG dz;
-	
+
 	SLONG mx;
 	SLONG mz;
 
@@ -2684,7 +2684,7 @@ void MAV_precalculate_warehouse_nav(UBYTE ware)
 	MAV_nav_pitch =  ww->nav_pitch;
 
 	//
-	// Make the staircase prims change the MAV_height array 
+	// Make the staircase prims change the MAV_height array
 	//
 
 	OB_Info *oi;
@@ -2740,7 +2740,7 @@ void MAV_precalculate_warehouse_nav(UBYTE ware)
 
 				rx >>= 8;
 				rz >>= 8;
-	
+
 				if (WITHIN(rx, ww->minx, ww->maxx) &&
 					WITHIN(rz, ww->minz, ww->maxz))
 				{
@@ -2780,7 +2780,7 @@ void MAV_precalculate_warehouse_nav(UBYTE ware)
 			tz = z + dz;
 
 			if (!(PAP_2HI(x,z).Flags & PAP_FLAG_HIDDEN))
-			{	
+			{
 				//
 				// This square is outside the warehouse.
 				//
@@ -2800,7 +2800,7 @@ void MAV_precalculate_warehouse_nav(UBYTE ware)
 			}
 
 			if (!(PAP_2HI(tx,tz).Flags & PAP_FLAG_HIDDEN))
-			{	
+			{
 				//
 				// This square is outside the warehouse.
 				//
@@ -2844,7 +2844,7 @@ void MAV_precalculate_warehouse_nav(UBYTE ware)
 					{
 						//
 						// We can always fall down becuase there is nothing in the way.
-						// 
+						//
 
 						opt[i] |= MAV_CAPS_FALL_OFF;
 					}
@@ -3173,8 +3173,8 @@ void MAV_precalculate_warehouse_nav(UBYTE ware)
 									MAV_turn_movement_on(mx,mz-1, MAV_DIR_ZL);
 								}
 							}
-						}					     
-						else				     
+						}
+						else
 						{
 							if (MAVHEIGHT(rx, rz) == MAVHEIGHT(rx, rz-1))
 							{

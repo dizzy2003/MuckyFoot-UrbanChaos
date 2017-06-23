@@ -10,8 +10,8 @@
 #include <stdlib.h>
 #include <hm.h>
 #include <math.h>
-#include "c:\fallen\ddengine\headers\message.h"
-#include "c:\fallen\ddengine\headers\matrix.h"
+#include "fallen/ddengine/headers/message.h"
+#include "fallen/ddengine/headers/matrix.h"
 #include "maths.h"
 #include "pap.h"
 #include	"memory.h"
@@ -127,12 +127,12 @@ typedef struct hm_bump
 {
 	//
 	// The point that has entered the other object.
-	// 
+	//
 
 	UWORD point;
 	UWORD shit;
 
-	// 
+	//
 	// The other object the point is inside, and the cube
 	// of that object the point entered.
 	//
@@ -150,7 +150,7 @@ typedef struct hm_bump
 	float rel_x;
 	float rel_y;
 	float rel_z;
-	
+
 	//
 	// When this point recieves a force that tries to make it leave the
 	// cube, an equal and opposite force must be applied to the cube.
@@ -165,7 +165,7 @@ typedef struct hm_bump
 
 	//
 	// The next structure in the linked list
-	// 
+	//
 
 	struct hm_bump *next;
 } HM_Bump;
@@ -184,7 +184,7 @@ typedef struct
 	float x1, z1;
 	float x2, z2;
 	float len;
-	
+
 } HM_Col;
 
 
@@ -250,7 +250,7 @@ SLONG     HM_object_upto;
 
 //
 // Returns the index of the given point.
-// 
+//
 
 inline SLONG HM_index(HM_Object *ho, SLONG x, SLONG y, SLONG z)
 {
@@ -338,7 +338,7 @@ void HM_load(CBYTE *fname)
 	return;
 
   file_error:;
-  
+
 	MF_Fclose(handle);
 
 	TRACE("Error loading file %s\n", fname);
@@ -501,7 +501,7 @@ UBYTE HM_create(
 
 		//
 		// These go from 0 to 1.
-		// 
+		//
 
 		float elasticity,
 		float bounciness,
@@ -714,10 +714,10 @@ UBYTE HM_create(
 			num_points += 1;
 		}
 	}
-	
+
 	//
 	// Create the points array.
-	// 
+	//
 
 	ho->point = (HM_Point *) MemAlloc(num_points * sizeof(HM_Point));
 
@@ -768,7 +768,7 @@ UBYTE HM_create(
 	// Adjust the gravity of the points so that all objects have the
 	// same force of gravity acting on them!
 	//
-	
+
 	float grav_av = 0.0F;
 	float grav_adjust;
 
@@ -908,7 +908,7 @@ UBYTE HM_create(
 								goto found_size;
 							}
 						}
-						
+
 						ASSERT(WITHIN(ho->num_sizes, 0, HM_MAX_SIZES - 1));
 
 						//
@@ -1231,7 +1231,7 @@ void HM_colvect_add(
 
 	//
 	// Do we already have a colvect like this?
-	// 
+	//
 
 	for (i = 0; i < ho->num_cols; i++)
 	{
@@ -1808,7 +1808,7 @@ void HM_rel_cube_to_world(
 	//
 	// Convert from cube-space to world space.
 	//
-	
+
 	wx = rel_x;
 	wy = rel_y;
 	wz = rel_z;
@@ -1911,7 +1911,7 @@ void HM_process_bump(HM_Object *ho, HM_Bump *hb)
 	hp->dx += fx;
 	hp->dy += fy;
 	hp->dz += fz;
-	
+
 	#ifdef WE_WANT_TO_APPLY_THE_EQUAL_FORCE_TO_THE_CUBE
 
 	//
@@ -1954,7 +1954,7 @@ SLONG HM_bump_dead(HM_Object *ho, HM_Bump *hb)
 	HM_Object *ho2 = &HM_object[hb->hm_index];
 
 	//
-	// Check the cube the point entered originally first, as 
+	// Check the cube the point entered originally first, as
 	// an optimisation.
 	//
 
@@ -1970,7 +1970,7 @@ SLONG HM_bump_dead(HM_Object *ho, HM_Bump *hb)
 	{
 		return FALSE;
 	}
-			
+
 
 	for (sx = 0; sx < ho2->x_res - 1; sx++)
 	for (sy = 0; sy < ho2->y_res - 1; sy++)
@@ -2031,7 +2031,7 @@ void HM_collide(UBYTE hm_index1, UBYTE hm_index2)
 	float dpx;
 	float dpy;
 	float dpz;
-		   
+
 	float fx;
 	float fy;
 	float fz;
@@ -2159,7 +2159,7 @@ void HM_collide(UBYTE hm_index1, UBYTE hm_index2)
 				//
 				// So where did the point enter the cube?
 				//
-				
+
 				along_x = float(INFINITY);
 				along_y = float(INFINITY);
 				along_z = float(INFINITY);
@@ -2197,10 +2197,10 @@ void HM_collide(UBYTE hm_index1, UBYTE hm_index2)
 				//
 
 				if (last_rel_z > 1.0F && rel_z <= 1.0F && !HM_cube_exists(ho2, sx, sy, sz + 1))
-				{																		     
-					along_z = (1.0F - last_rel_z) / (rel_z - last_rel_z);				     
-				}																		     
-				else																	     
+				{
+					along_z = (1.0F - last_rel_z) / (rel_z - last_rel_z);
+				}
+				else
 				if (last_rel_z < 0.0F && rel_z >= 0.0F && !HM_cube_exists(ho2, sx, sy, sz - 1))
 				{
 					along_z = (0.0F - last_rel_z) / (rel_z - last_rel_z);
@@ -2220,7 +2220,7 @@ void HM_collide(UBYTE hm_index1, UBYTE hm_index2)
 				enter_rel_x = last_rel_x + along_enter * (rel_x - last_rel_x);
 				enter_rel_y = last_rel_y + along_enter * (rel_y - last_rel_y);
 				enter_rel_z = last_rel_z + along_enter * (rel_z - last_rel_z);
-				
+
 				//
 				// The point outside the cube.
 				//
@@ -2296,7 +2296,7 @@ void HM_collide(UBYTE hm_index1, UBYTE hm_index2)
 				//
 				// Create a new HM_Bump structure for this point.
 				//
-				
+
 				hb = (HM_Bump *) MemAlloc(sizeof(HM_Bump));
 
 				hb->point    = i;
@@ -2514,7 +2514,7 @@ void HM_process()
 			{
 				ASSERT(WITHIN(he->len, 0, ho->num_sizes - 1));
 
-				pdist    = squaredist;											
+				pdist    = squaredist;
 				wantdist = ho->size[he->len];
 				ddist    = pdist - wantdist;
 				squash   = ddist * ho->elasticity * ho->oversize[he->len];

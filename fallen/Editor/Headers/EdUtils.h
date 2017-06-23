@@ -1,7 +1,7 @@
 // EdUtils.h
 // Guy Simmons, 5th April 1997.
 
-#include "c:\fallen\headers\structs.h"
+#include "fallen/headers/structs.h"
 //#define	GAME_SCALE			2560.0
 
 extern SLONG					current_element;
@@ -54,7 +54,7 @@ inline	UWORD	calc_lights(SLONG x,SLONG y,SLONG z,struct SVector *p_vect)
 	return((UWORD)total);
 #else
 	return ( 0 );
-#endif	
+#endif
 }
 
 //---------------------------------------------------------------

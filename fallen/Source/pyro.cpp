@@ -6,12 +6,12 @@
 #include "game.h"
 #include "pyro.h"
 #include "statedef.h"
-#include "C:\fallen\DDEngine\Headers\Matrix.h"
-#include "C:\fallen\DDEngine\Headers\Sprite.h"
+#include "fallen/DDEngine/Headers/Matrix.h"
+#include "fallen/DDEngine/Headers/Sprite.h"
 #ifndef PSX
-#include "C:\fallen\DDEngine\Headers\poly.h"
+#include "fallen/DDEngine/Headers/poly.h"
 #else
-#include "c:\fallen\psxeng\headers\poly.h"
+#include "fallen/psxeng/headers/poly.h"
 #endif
 #include "dirt.h"
 #include "ribbon.h"
@@ -85,7 +85,7 @@ extern RadPoint PYRO_defaultpoints2[32];
 //
 
 Thing *alloc_pyro(UBYTE type)
-{		 
+{
 
 	SLONG i;
 
@@ -106,7 +106,7 @@ Thing *alloc_pyro(UBYTE type)
 		if (PYROS[i].PyroType == PYRO_NONE)
 		{
 			a_index = i;
-			
+
 			goto found_pyro;
 		}
 	}
@@ -142,13 +142,13 @@ Thing *alloc_pyro(UBYTE type)
 
 
 		//
-		// Set the draw type 
+		// Set the draw type
 		//
 
 		p_thing->DrawType  = DT_PYRO;
 
 //		PYRO_COUNT++;
-		
+
 		return p_thing;
 	}
 	else
@@ -158,7 +158,7 @@ Thing *alloc_pyro(UBYTE type)
 		//
 
 		TO_PYRO(a_index)->PyroType = PYRO_NONE;
-		
+
 		return NULL;
 	}
 }
@@ -189,7 +189,7 @@ void free_pyro(Thing *p_thing)
 		NIGHT_dlight_destroy(pyro->dlight);
 		break;
 	}
-	
+
 	pyro->soundid=0;
 
 	//
@@ -326,11 +326,11 @@ SLONG MergeSoundFX(Thing *thing, Pyro *pyro) {
 		col_thing = TO_THING(col_with[i]);
 
 		// skip all the dull things
-		if ((col_thing->State == STATE_DEAD)|| 
+		if ((col_thing->State == STATE_DEAD)||
 		    (col_thing->State == STATE_DYING)||	// Dead or dying things are of no interest
 			(col_thing->Genus.Pyro->PyroType!=pyro->PyroType)|| // nor non-matching kinds of pyro
 			(!col_thing->Genus.Pyro->soundid))  // can't share if it has no sound to share
-				continue; 
+				continue;
 
 		if ((pyro->PyroType==PYRO_EXPLODE2)&&(col_thing->Genus.Pyro->counter>50)) continue;
 
@@ -364,8 +364,8 @@ static void	normalise_val256(SLONG *vx,SLONG *vy,SLONG *vz)
 {
 	SLONG	len;
 
-//was	if ((abs(*vx)>512)&&(abs(*vy)>512)&&(abs(*vz)>512)) 
-	if ((abs(*vx)>32768)&&(abs(*vy)>32768)&&(abs(*vz)>32768)) 
+//was	if ((abs(*vx)>512)&&(abs(*vy)>512)&&(abs(*vz)>512))
+	if ((abs(*vx)>32768)&&(abs(*vy)>32768)&&(abs(*vz)>32768))
 	{
 		(*vx)>>=8;
 		(*vy)>>=8;
@@ -479,14 +479,14 @@ void PYRO_fn_init(Thing *thing)
 	switch (pyro->PyroType) {
 	case PYRO_BONFIRE:
 		pyro->dlight=NIGHT_dlight_create(
-			thing->WorldPos.X>>8, thing->WorldPos.Y>>8, thing->WorldPos.Z>>8, 
+			thing->WorldPos.X>>8, thing->WorldPos.Y>>8, thing->WorldPos.Z>>8,
 			100, 35, 30, 0);
 		pyro->Dummy=0;
 		pyro->soundid=MergeSoundFX(thing, pyro);
 		break;
 	case PYRO_WHOOMPH:
 		pyro->dlight=NIGHT_dlight_create(
-			thing->WorldPos.X>>8, thing->WorldPos.Y>>8, thing->WorldPos.Z>>8, 
+			thing->WorldPos.X>>8, thing->WorldPos.Y>>8, thing->WorldPos.Z>>8,
 			100, 1, 0, 0);
 		break;
 	case PYRO_IMMOLATE:
@@ -545,7 +545,7 @@ void PYRO_fn_init(Thing *thing)
 	case PYRO_HITSPANG:
 		GameCoord vec,old;
 
-		if (pyro->Dummy) { 
+		if (pyro->Dummy) {
 
 			// we're shooting a thing, so set up a hit location
 			// hopefully the creator has set a 'victim' by now
@@ -617,7 +617,7 @@ void PYRO_fn_init(Thing *thing)
 		TRACE("shot: %d %d %d : %d\n",pyro->target.X,pyro->target.Y,pyro->target.Z,tst);
 */
 		move_thing_on_map(pyro->thing,&vec);
-		
+
 		break;
 	}
 
@@ -651,7 +651,7 @@ void PYRO_fn_init_ex(Thing *thing)
 			radius=COS(i*350)>>8;
 
 			// generate ring x,y
-	
+
 			for (j=0;j<8;j++) {
 				pt->x=(radius*((SLONG)SIN(j*256)))/256;
 				pt->z=(radius*((SLONG)COS(j*256)))/256;
@@ -759,7 +759,7 @@ void PYRO_fn_normal(Thing *thing)
 #ifndef PSX
 				r=pyro->radius>>6;
 				r=(r<5)?5-r:1;
-				for (p=0;p<r;p++) 
+				for (p=0;p<r;p++)
 				{
 					q=Random()%15;
 					calc_sub_objects_position(
@@ -791,7 +791,7 @@ void PYRO_fn_normal(Thing *thing)
 #ifndef PSX
 				r=pyro->radius>>6;
 				r=(r<5)?5-r:1;
-				for (p=0;p<r;p++) 
+				for (p=0;p<r;p++)
 				{
 				q=Random()%15;
 					calc_sub_objects_position(
@@ -897,7 +897,7 @@ void PYRO_fn_normal(Thing *thing)
 
 			if (pyro->dlight) {
 				SLONG rgb;
-				
+
 				rgb=pyro->counter<<2;
 				if (rgb>512) rgb=512;
 				rgb=COS(rgb)>>10;
@@ -924,10 +924,10 @@ void PYRO_fn_normal(Thing *thing)
 		else
 			free_pyro(thing);
 		break;
-	
+
 	case PYRO_NEWDOME:
 		if (pyro->counter<249) {
-			if ((!pyro->counter)&&!(Random()&3)) 
+			if ((!pyro->counter)&&!(Random()&3))
 			{
 				if (Random()&1)
 					MFX_play_thing(THING_NUMBER(pyro->thing),S_BIG_BANG_START,MFX_OVERLAP,pyro->thing);
@@ -1132,7 +1132,7 @@ void PYRO_fn_normal(Thing *thing)
 			free_pyro(thing);
 		}
 		break;
-	
+
 	case PYRO_FIREBOMB:
 		if (pyro->radii[0]<0xfe00) {
 			//pyro->counter++;
@@ -1161,7 +1161,7 @@ void PYRO_fn_normal(Thing *thing)
 					ox,((Random()&0x1f)+0x1f)<<5,oz,
 					POLY_PAGE_SMOKECLOUD2,2+((Random()&3)<<2),0x7FFF0000,
 					PFLAG_SPRITEANI|PFLAG_SPRITELOOP|PFLAG_FADE|PFLAG_GRAVITY|PFLAG_RESIZE,130,30,1,10,-2);
-				
+
 				dr=rand()&2047;
 				dx=((SIN(dr)>>8)*sz)>>8;
 				dz=((COS(dr)>>8)*sz)>>8;
@@ -1191,7 +1191,7 @@ void PYRO_fn_normal(Thing *thing)
 	case PYRO_WHOOMPH:
 		if (pyro->counter<255-16)
 		{
-			if (pyro->dlight) 
+			if (pyro->dlight)
 			{
 				SWORD max=SIN(((UWORD)pyro->counter)<<1)>>11;
 				NIGHT_dlight_colour(pyro->dlight,max,max>>1,max>>3);
@@ -1234,7 +1234,7 @@ void PYRO_construct(GameCoord posn, SLONG types, SLONG scale) {
 		if (thing) {
 			SLONG cx,cz;
 			thing->Genus.Pyro->scale=scale;
-			
+
 			// do initial blast gust
 			cx=thing->WorldPos.X>>8;
 			cz=thing->WorldPos.Z>>8;
@@ -1263,7 +1263,7 @@ void PYRO_construct(GameCoord posn, SLONG types, SLONG scale) {
 		if (thing) {
 			SLONG cx,cz;
 			thing->Genus.Pyro->scale=scale;
-			
+
 			// do initial blast gust
 			cx=thing->WorldPos.X>>8;
 			cz=thing->WorldPos.Z>>8;
@@ -1306,7 +1306,7 @@ void PYRO_hitspang(Thing *p_person, Thing *victim) {
 	vec.Y+=p_person->WorldPos.Y;
 	vec.Z+=p_person->WorldPos.Z;
 	thing=PYRO_create(vec,PYRO_HITSPANG);
-	if (!thing) 
+	if (!thing)
 		return;
 	thing->Genus.Pyro->victim=victim;
 	thing->Genus.Pyro->Dummy=1; // arbitrarily using this to indicate 'person' target

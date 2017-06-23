@@ -7,13 +7,13 @@
 #include	"game.h"
 
 #ifndef	PSX
-#include "c:\fallen\ddengine\headers\font3d.h"
-#include "c:\fallen\ddengine\headers\poly.h"
-#include "c:\fallen\ddengine\headers\aeng.h"
+#include "fallen/ddengine/headers/font3d.h"
+#include "fallen/ddengine/headers/poly.h"
+#include "fallen/ddengine/headers/aeng.h"
 #endif
 #include "briefing.h"
-#include "C:\fallen\DDLibrary\headers\D3DTexture.h"
-#include "C:\fallen\DDLibrary\headers\GDisplay.h"
+#include "fallen/DDLibrary/headers/D3DTexture.h"
+#include "fallen/DDLibrary/headers/GDisplay.h"
 #include "sound.h"
 #include "io.h"
 
@@ -109,11 +109,11 @@ void BRIEFING_menu(void) {
 			text_colour*=0x7f;
 		else
 			text_colour*=0x50;
-		
+
 		font.DrawString(mission_names[c0],320,y,text_colour,2.5+(is_this*0.5f),is_this);
 		y+=50;
 	}
-	
+
 	font.DrawString("L LOAD",320,420,0xFFFFFF,2.0,0);
 	font.DrawString("S SAVE",320,440,0xFFFFFF,2.0,0);
 */
@@ -195,7 +195,7 @@ SBYTE BRIEFING_select(void) {
 			wave=S_EXPLODE_END;
 //		else
 //			wave=S_ARGH;
-	
+
 //		play_quick_wave_xyz(-150,0,-(30+(rand()&0x7f)),wave,0,0);
 //		play_quick_wave_xyz( 150,0,-(30+(rand()&0x7f)),wave,0,0);
 	}

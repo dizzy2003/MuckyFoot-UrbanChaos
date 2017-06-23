@@ -5,7 +5,7 @@
 #include	"statedef.h"
 #include	"cnet.h"
 #ifndef	PSX
-#include	"c:\fallen\ddlibrary\headers\net.h"
+#include	"fallen/ddlibrary/headers/net.h"
 #endif
 #include	"pap.h"
 #include	"pcom.h"
@@ -29,7 +29,7 @@ extern BOOL allow_debug_keys;
 UWORD	class_priority[]=
 {
 
-	
+
 	CLASS_CAMERA	,
 //	CLASS_PLAYER	,
 	CLASS_BARREL	,
@@ -290,7 +290,7 @@ void	add_thing_to_map(Thing *t_thing)
 
 
 	if(!(t_thing->Flags&FLAGS_ON_MAPWHO))				// Does thing currently exist on map?
-	{												   
+	{
 		mappos			=	MAP_INDEX(t_thing->WorldPos.X>>(ELE_SHIFT+8),t_thing->WorldPos.Z>>(ELE_SHIFT+8));
 
 		t_thing->Parent	=	0;
@@ -401,7 +401,7 @@ void	move_thing_on_map(Thing *t_thing,GameCoord *new_position)
 		t_thing->WorldPos = *new_position;
 
 		add_thing_to_map(t_thing);
-		
+
 	}
 	else
 	{
@@ -908,7 +908,7 @@ void store_thing(Thing* p_thing)
 void check_thing(Thing* p_thing)
 {
 	Thing	temp;
-	
+
 	copy_important_thing_bits(p_thing, &temp);
 
 	Thing	file;
@@ -1065,7 +1065,7 @@ void	process_things(SLONG frame_rate_independant)
 	SLONG	count=0;
 	UWORD	index=0;
 
-	
+
 
 //#ifdef	PSX
 //extern	SWORD	sync_count;
@@ -1086,7 +1086,7 @@ void	process_things(SLONG frame_rate_independant)
 	//
 	// Process things.
 	//
-		
+
 
 	//
 	// The people, because they are special in that they don't use statefn
@@ -1175,13 +1175,13 @@ extern	void WMOVE_process();
 		ASSERT(p_thing->Class==CLASS_PERSON);
 
 
-//		p_thing->Genus.Person->ComboHistory++; //now used left right and center for a random number // if someone only does something every 16 turns use this 
+//		p_thing->Genus.Person->ComboHistory++; //now used left right and center for a random number // if someone only does something every 16 turns use this
 		++PTIME(p_thing);
 
 #ifdef	PSX
 		//      if in view                  ||     or every 4th turn                           ||                              they are a fake person sent to attack you
 		if((p_thing->Flags & FLAGS_IN_VIEW) || (((index&0x3)==(GAME_TURN&0x3)))||(p_thing->Genus.Person->PersonType==PERSON_THUG_RASTA && (p_thing->Genus.Person->Flags2 & FLAG2_PERSON_FAKE_WANDER) ) )
-			/*&& !(p_thing->Genus.Person->pcom_ai       == PCOM_AI_CIV &&	p_thing->Genus.Person->pcom_ai_state == PCOM_AI_STATE_NORMAL && p_thing->Genus.Person->pcom_move == PCOM_MOVE_WANDER) )*/ 
+			/*&& !(p_thing->Genus.Person->pcom_ai       == PCOM_AI_CIV &&	p_thing->Genus.Person->pcom_ai_state == PCOM_AI_STATE_NORMAL && p_thing->Genus.Person->pcom_move == PCOM_MOVE_WANDER) )*/
 #endif
 		{
 
@@ -1190,7 +1190,7 @@ extern	void WMOVE_process();
 
 			SLONG	dx,dz;
 
-			
+
 
 			dx=abs(POLY_cam_x-(p_thing->WorldPos.X>>8));
 			dz=abs(POLY_cam_z-(p_thing->WorldPos.Z>>8));

@@ -4,13 +4,13 @@
 #include	"undo.hpp"
 #include	"edit.h"
 #include	"prim.h"
-#include	"c:\fallen\headers\memory.h"
+#include	"fallen/headers/memory.h"
 
 Undo::Undo(void)
 {
 	index=1;
 	index_undo=1;
-		
+
 }
 
 
@@ -51,7 +51,7 @@ void	Undo::retreat_current_undo(UBYTE undo_mode)
 void	Undo::MoveTexture(UBYTE undo_mode,UWORD page,UWORD face,UBYTE u1,UBYTE v1,UBYTE u2,UBYTE v2,UBYTE u3,UBYTE v3,UBYTE u4,UBYTE v4)
 {
 	struct	GenericUndo	*p_u;
-	
+
 	if(undo_mode)
 		p_u=&undo_undo_info[index_undo];
 	else
@@ -76,7 +76,7 @@ void	Undo::ApplyPrim4(UBYTE undo_mode,UWORD face,PrimFace4 *the_prim4)
 	SLONG				c0;
 	struct GenericUndo	*p_u;
 
-	
+
 	if(undo_mode)
 		p_u=&undo_undo_info[index_undo];
 	else
@@ -100,7 +100,7 @@ void	Undo::ApplyPrim3(UBYTE undo_mode,UWORD face,PrimFace3 *the_prim3)
 	SLONG				c0;
 	struct GenericUndo	*p_u;
 
-	
+
 	if(undo_mode)
 		p_u=&undo_undo_info[index_undo];
 	else
@@ -122,7 +122,7 @@ void	Undo::ApplyPrim3(UBYTE undo_mode,UWORD face,PrimFace3 *the_prim3)
 void	Undo::ApplyTexturePrim4(UBYTE undo_mode,UWORD page,UWORD face,UBYTE u1,UBYTE v1,UBYTE u2,UBYTE v2,UBYTE u3,UBYTE v3,UBYTE u4,UBYTE v4)
 {
 	struct	GenericUndo	*p_u;
-	
+
 	if(undo_mode)
 		p_u=&undo_undo_info[index_undo];
 	else
@@ -145,7 +145,7 @@ void	Undo::ApplyTexturePrim4(UBYTE undo_mode,UWORD page,UWORD face,UBYTE u1,UBYT
 void	Undo::ApplyTexturePrim3(UBYTE undo_mode,UWORD page,UWORD face,UBYTE u1,UBYTE v1,UBYTE u2,UBYTE v2,UBYTE u3,UBYTE v3)
 {
 	struct	GenericUndo	*p_u;
-	
+
 	if(undo_mode)
 		p_u=&undo_undo_info[index_undo];
 	else
@@ -166,7 +166,7 @@ void	Undo::ApplyTexturePrim3(UBYTE undo_mode,UWORD page,UWORD face,UBYTE u1,UBYT
 void	Undo::ApplyTextureCube(UBYTE undo_mode,UWORD ele,UWORD face,UWORD text1,UWORD text2)
 {
 	struct	GenericUndo	*p_u;
-	
+
 	if(undo_mode)
 		p_u=&undo_undo_info[index_undo];
 	else
@@ -183,7 +183,7 @@ void	Undo::ApplyTextureCube(UBYTE undo_mode,UWORD ele,UWORD face,UWORD text1,UWO
 void	Undo::PlaceObject(UBYTE undo_mode,UWORD prim,UWORD thing,SLONG x,SLONG y,SLONG z)
 {
 	struct	GenericUndo	*p_u;
-	
+
 	if(undo_mode)
 		p_u=&undo_undo_info[index_undo];
 	else
@@ -201,12 +201,12 @@ void	Undo::PlaceObject(UBYTE undo_mode,UWORD prim,UWORD thing,SLONG x,SLONG y,SL
 void	Undo::PlaceCube(UBYTE undo_mode,UWORD prev_cube,UWORD cur_cube,SLONG x,SLONG y,SLONG z)
 {
 	struct	GenericUndo	*p_u;
-	
+
 	if(undo_mode)
 		p_u=&undo_undo_info[index_undo];
 	else
 		p_u=&undo_info[index];
- 
+
 	p_u->Type=UNDO_PLACE_OBJECT;
 	p_u->Cube.PCube=prev_cube;
 	p_u->Cube.CCube=cur_cube;
@@ -219,12 +219,12 @@ void	Undo::PlaceCube(UBYTE undo_mode,UWORD prev_cube,UWORD cur_cube,SLONG x,SLON
 void	Undo::DelObject(UBYTE undo_mode,UWORD prim,UWORD thing,SLONG x,SLONG y,SLONG z)
 {
 	struct	GenericUndo	*p_u;
-	
+
 	if(undo_mode)
 		p_u=&undo_undo_info[index_undo];
 	else
 		p_u=&undo_info[index];
-  
+
 	p_u->Type=UNDO_DEL_OBJECT;
 	p_u->Object.Prim=prim;
 	p_u->Object.Thing=thing;
@@ -237,7 +237,7 @@ void	Undo::DelObject(UBYTE undo_mode,UWORD prim,UWORD thing,SLONG x,SLONG y,SLON
 void	Undo::MoveObject(UBYTE undo_mode,UWORD thing,SLONG dx,SLONG dy,SLONG dz)
 {
 	struct	GenericUndo	*p_u;
-	
+
 	if(undo_mode)
 		p_u=&undo_undo_info[index_undo];
 	else
@@ -304,7 +304,7 @@ SLONG	Undo::DoUndo(UBYTE undo_mode)
 			break;
 		case	UNDO_DEL_OBJECT:
 			break;
-		case	UNDO_MOVE_OBJECT:		
+		case	UNDO_MOVE_OBJECT:
 
 			MoveObject(undo_mode?0:1,p_u->Object.Thing,map_things[p_u->Object.Thing].X,map_things[p_u->Object.Thing].Y,map_things[p_u->Object.Thing].Z);
 			map_things[p_u->Object.Thing].X=p_u->Object.X;

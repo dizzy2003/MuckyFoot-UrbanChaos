@@ -10,7 +10,7 @@
 
 #include "MFx.h"
 #include "QSManager.h"
-#include "c:\fallen\headers\fc.h"
+#include "fallen/headers/fc.h"
 
 
 //#define DISABLE_MFX
@@ -231,7 +231,7 @@ void	MFX_play_xyz(UWORD channel_id, ULONG wave, ULONG flags, SLONG x, SLONG y, S
 		MFX_kill(chan);
 	}
 
-	MFX_std_chan_setup(chan,channel_id,wave,flags); 
+	MFX_std_chan_setup(chan,channel_id,wave,flags);
 	chan->source->SetPositionl(x,y,z);
 	chan->source->Play(flags&MFX_LOOPED);
 */
@@ -361,7 +361,7 @@ void	MFX_play_stereo(UWORD channel_id, ULONG wave, ULONG flags) {
 	return;
 #endif
 /*	MFX_Channel* chan=MFX_locate_for_play(channel_id, wave, flags);
-					  
+
 	if (!chan) return; // erk, no free channels
 
 	// we now have a channel which is either blank or can be stomped
@@ -383,7 +383,7 @@ void	MFX_stop(SLONG channel_id, ULONG wave) {
 
 	if (channel_id==MFX_CHANNEL_ALL) {
 
-		UWORD i;	
+		UWORD i;
 		for (i=0,chan=MFX_channels;i<MFX_MAX_CHANS;i++,chan++) {
 			MFX_kill(chan);
 		}

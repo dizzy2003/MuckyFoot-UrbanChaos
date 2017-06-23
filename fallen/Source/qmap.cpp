@@ -5,7 +5,7 @@
 #include "game.h"
 #include <MFStdLib.h>
 #include "qmap.h"
-#include "c:\fallen\ddengine\headers\qeng.h"
+#include "fallen/ddengine/headers/qeng.h"
 
 //
 // The actual data declared in the header file...
@@ -79,7 +79,7 @@ void QMAP_init()
 	QMAP_light_upto  = 0;
 	QMAP_prim_upto   = 0;
 	QMAP_all_upto    = 0;
-	
+
 	//
 	// Clear the map.
 	//
@@ -266,7 +266,7 @@ void QMAP_add_road(
 		// Copy this squares all info to the end of the array and
 		// insert an extra road at the same time.
 		//
-		
+
 		before = QMAP_ALL_INDEX_ROADS(qm) - qm->index_all;
 		after  = total_all - before;
 
@@ -385,7 +385,7 @@ void QMAP_add_cube(
 		// Copy this squares all info to the end of the array and
 		// insert an extra cube at the same time.
 		//
-		
+
 		before = QMAP_ALL_INDEX_CUBES(qm) - qm->index_all;
 		after  = total_all - before;
 
@@ -571,12 +571,12 @@ void QMAP_get_cube_coords(
 	QMAP_Cube *qc;
 
 	ASSERT(WITHIN(cube, 0, QMAP_cube_upto - 1));
-	
+
 	qc = &QMAP_cube[cube];
-	
+
 	//
 	// The cube we are creating.
-	// 
+	//
 
 	ASSERT(WITHIN(qc->size_x, 1, 32));
 	ASSERT(WITHIN(qc->size_y, 1, 32));
@@ -739,7 +739,7 @@ UWORD QMAP_get_style_texture(
 
 	index  = cy * qs->size_x + cx;
 	index += qs->index;
-	
+
 	ASSERT(WITHIN(index, 0, QMAP_texture_upto - 1));
 
 	texture = QMAP_texture[index];
@@ -813,18 +813,18 @@ void QMAP_create_cube(QMAP_Draw *qd, SLONG map_x, SLONG map_z, SLONG cube)
 	QMAP_Face  *qf;
 
 	ASSERT(WITHIN(cube, 0, QMAP_cube_upto - 1));
-	
+
 	qc = &QMAP_cube[cube];
-	
+
 	//
 	// The cube we are creating.
-	// 
+	//
 
 	QMAP_get_cube_coords(
 		 cube,
 		&x1, &y1, &z1,
 		&x2, &y2, &z2);
-	
+
 	//
 	// The mapsquare we are creating the cube in.
 	//
@@ -1096,11 +1096,11 @@ void QMAP_create_cube(QMAP_Draw *qd, SLONG map_x, SLONG map_z, SLONG cube)
 				}
 			}
 		}
-		
+
 		//
 		// Create the faces.
 		//
-		
+
 		for (z = lz1; z < lz2; z++)
 		{
 			i = z - z1;
@@ -1112,7 +1112,7 @@ void QMAP_create_cube(QMAP_Draw *qd, SLONG map_x, SLONG map_z, SLONG cube)
 			for (y = y1, j = 0; y < y2; y++, j++)
 			{
 				ASSERT(WITHIN(j, 0, 31));
-				
+
 				if (face_on[j] & mask)
 
 				//

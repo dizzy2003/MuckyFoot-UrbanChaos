@@ -1,15 +1,15 @@
 //
 // Draw a person.
-// 
+//
 
 #include "game.h"
 #include "aeng.h"
 #include "poly.h"
 #include "figure.h"
 #include "sprite.h"
-#include "c:\fallen\headers\fmatrix.h"
-#include "c:\fallen\headers\mav.h"
-#include "c:\fallen\headers\interact.h"
+#include "fallen/headers/fmatrix.h"
+#include "fallen/headers/mav.h"
+#include "fallen/headers/interact.h"
 #include "night.h"
 #include "shadow.h"
 #include "matrix.h"
@@ -27,10 +27,10 @@
 #include "Quaternion.h"
 #include "memory.h"
 
-#include "c:\fallen\headers\person.h"
-#include "c:\fallen\headers\pcom.h"
-#include "c:\fallen\headers\eway.h"
-#include "c:\fallen\headers\dirt.h"
+#include "fallen/headers/person.h"
+#include "fallen/headers/pcom.h"
+#include "fallen/headers/eway.h"
+#include "fallen/headers/dirt.h"
 #include	"ddlib.h"
 #include	"panel.h"
 
@@ -208,7 +208,7 @@ void BuildMMLightingTable ( Pyro *p, DWORD colour_and=0xffffffff )
 		// This solves the problem of a red light above, an anti-red below, and a soft green to the right.
 		// If the reds both pulled in opposite direction, the green would actually be the main one,
 		// which is silly as the object is obviously mainly red and black.
-		//if ( fBright > 0.0f )	
+		//if ( fBright > 0.0f )
 		{
 			// These are negative!
 			vTotal.x -= fBright * nf->dx;
@@ -446,7 +446,7 @@ struct EdgeList
     Module Name: optlist.cpp
 
     Abstract: Source code for Index List Optimizer
--------------------------------------------------------------------*/ 
+-------------------------------------------------------------------*/
 
 typedef struct tagIndexTri
 {
@@ -474,7 +474,7 @@ private:
     int     NextTri( int v1, int v2, int *v3 );
     void    ClearTempDone( int nValue );
     int     StripLen( int startTri, int dir, int setit, WORD *pwOut, int nMaxLen );
-    
+
 public:
             MSMesh();
             ~MSMesh();
@@ -560,7 +560,7 @@ int MSMesh::AddTri( WORD wV1, WORD wV2, WORD wV3 )
     m_aVert[v1].rgSharedTris[m_aVert[v1].nShareCount++] = trino;
     m_aVert[v2].rgSharedTris[m_aVert[v2].nShareCount++] = trino;
     m_aVert[v3].rgSharedTris[m_aVert[v3].nShareCount++] = trino;
-    
+
     m_aTri[trino].v1 = v1;
     m_aTri[trino].v2 = v2;
     m_aTri[trino].v3 = v3;
@@ -670,9 +670,9 @@ int MSMesh::GetStrip ( WORD *pwVT, int maxLen )
         for( dir = 0; dir<3; dir++ )
         {
             if( ( len = StripLen( trino, dir, 0, NULL, maxLen ) ) > bestLen )
-            {                                                   
-                bestLen = len;                                   
-                bestStart = trino;                                   
+            {
+                bestLen = len;
+                bestStart = trino;
                 bestDir = dir;
                 if( bestLen >= maxLen )
                 {
@@ -742,7 +742,7 @@ BOOL MSOptimizeIndexedList( WORD *pwIndices, int nTriangles )
    mesh.Clear();
 
    WORD *pwInd = pwIndices;
-   
+
    for ( int i = 0; i < nTriangles; i++ )
    {
       mesh.AddTri( pwInd[0], pwInd[1], pwInd[2] );
@@ -910,7 +910,7 @@ void	draw_steam(SLONG x,SLONG y,SLONG z,SLONG lod)
 			v=0.0;
 		else
 			v=0.5;
-		
+
 		dy=get_steam_rand()&0x1ff;
 		dy+=(GAME_TURN*((c0&3)+2));
 		dy%=500;
@@ -1086,7 +1086,7 @@ void	draw_flames(SLONG x,SLONG y,SLONG z,SLONG lod,SLONG offset)
 		wx2=(float)COS(((dy+c0)*10)&1023)*0.0001f;
 		wx3=(float)COS(((dy+c0)*8)&1023)*0.0001f;
 		wx4=(float)COS(((dy+c0)*9)&1023)*0.0001f;
-		
+
 
 		trans=255-dy;
 
@@ -1317,14 +1317,14 @@ void	draw_flame_element(SLONG x,SLONG y,SLONG z,SLONG c0,UBYTE base,UBYTE rand)
 				SPRITE_SORT_NORMAL);
 #endif //#else //#ifdef TARGET_DC
 		}
-	
+
 }
 #endif
 
 
 
 //void FIGURE_rotate_obj2(SLONG matrix[9], SLONG yaw, SLONG pitch, SLONG roll)
-void FIGURE_rotate_obj2(SLONG pitch,SLONG yaw,SLONG roll, Matrix33 *r3) 
+void FIGURE_rotate_obj2(SLONG pitch,SLONG yaw,SLONG roll, Matrix33 *r3)
 {
 	SLONG cy, cp, cr;
 	SLONG sy, sp, sr;
@@ -1332,7 +1332,7 @@ void FIGURE_rotate_obj2(SLONG pitch,SLONG yaw,SLONG roll, Matrix33 *r3)
 	cy = COS(yaw   & 2047);
 	cp = COS(pitch & 2047);
 	cr = COS(roll  & 2047);
-	
+
 	sy = SIN(yaw   & 2047);
 	sp = SIN(pitch & 2047);
 	sr = SIN(roll  & 2047);
@@ -1352,7 +1352,7 @@ void FIGURE_rotate_obj2(SLONG pitch,SLONG yaw,SLONG roll, Matrix33 *r3)
 	r3->M[2][2]= (MUL64( cy, cp))>>1;
 }
 
-void FIGURE_rotate_obj(SLONG xangle,SLONG yangle,SLONG zangle, Matrix33 *r3) 
+void FIGURE_rotate_obj(SLONG xangle,SLONG yangle,SLONG zangle, Matrix33 *r3)
 {
 	SLONG	sinx, cosx, siny, cosy, sinz, cosz;
  	SLONG	cxcz,sysz,sxsycz,sxsysz,sysx,cxczsy,sxsz,cxsysz,czsx,cxsy,sycz,cxsz;
@@ -1408,7 +1408,7 @@ UWORD	jacket_lookup[4][8]=
 	{64+22,10*64+3,10*64+3,10*64+33},
 	{64+24,10*64+4,10*64+4,10*64+36},
 	{64+25,10*64+5,10*64+5,10*64+37}
-	
+
 };
 
 
@@ -1939,7 +1939,7 @@ void FIGURE_TPO_add_prim_to_current_object ( SLONG prim, UBYTE ubSubObjectNumber
 
 
 // Compile the object - this actually does all the work.
-// pPrimObj the prim obj that was passed to FIGURE_TPO_init_3d_object 
+// pPrimObj the prim obj that was passed to FIGURE_TPO_init_3d_object
 // iThrashIndex - can be ignored normally.
 void FIGURE_TPO_finish_3d_object ( TomsPrimObject *pPrimObj, int iThrashIndex = 0  )
 {
@@ -2594,7 +2594,7 @@ void FIGURE_TPO_finish_3d_object ( TomsPrimObject *pPrimObj, int iThrashIndex = 
 							{
 								vAvNorm *= ( 1.0f / fLenAvNorm );
 							}
-							
+
 							// Find the normal to the edge.
 							D3DVECTOR vNormToEdge = CrossProduct ( vEdge, vAvNorm );
 							vNormToEdge = CrossProduct ( vNormToEdge, vEdge );
@@ -2609,7 +2609,7 @@ void FIGURE_TPO_finish_3d_object ( TomsPrimObject *pPrimObj, int iThrashIndex = 
 							{
 								vNormToEdge *= ( 1.0f / fLenNormToEdge );
 							}
-							
+
 							// Find the new midpoint.
 							// Adjust lambda until it's a "nice" value.
 							D3DVECTOR vPos3;
@@ -2639,7 +2639,7 @@ void FIGURE_TPO_finish_3d_object ( TomsPrimObject *pPrimObj, int iThrashIndex = 
 							// A blend of above, but hopefully more stable.
 							D3DVECTOR vNorm3 = ( 4 * vNormToEdge ) - vAvNorm;
 						#endif
-							
+
 							float fLenNorm3 = Magnitude ( vNorm3 );
 							if ( fLenNorm3 < 0.00001f )
 							{
@@ -3125,7 +3125,7 @@ void FIGURE_draw_prim_tween(
 	ULONG qc3;
 
 	SVector temp;
-	
+
 	PrimFace4   *p_f4;
 	PrimFace3   *p_f3;
 	PrimObject  *p_obj;
@@ -3145,16 +3145,16 @@ void FIGURE_draw_prim_tween(
 
 	//
 	// Matrix functions we use.
-	// 
+	//
 
 	void matrix_transform   (Matrix31* result, Matrix33* trans, Matrix31* mat2);
 	void matrix_transformZMY(Matrix31* result, Matrix33* trans, Matrix31* mat2);
 	void matrix_mult33      (Matrix33* result, Matrix33* mat1,  Matrix33* mat2);
-	
+
 	if (parent_base_mat)
 	{
 		// we've got hierarchy info!
-		
+
 		Matrix31	p;
 		p.M[0] = anim_info->OffsetX;
 		p.M[1] = anim_info->OffsetY;
@@ -3163,7 +3163,7 @@ void FIGURE_draw_prim_tween(
 		HIERARCHY_Get_Body_Part_Offset(&offset, &p,
 									   parent_base_mat, parent_base_pos,
 									   parent_curr_mat, parent_curr_pos);
-		
+
 		// pass data up the hierarchy
 		if (end_pos)
 			*end_pos = offset;
@@ -3177,7 +3177,7 @@ void FIGURE_draw_prim_tween(
 
 /* We don't have bikes.
 		if (p_thing->Class == CLASS_BIKE && part_number == 3)
-		{	
+		{
 			//offset.M[0] = 0x0;
 			//offset.M[1] = 0x900;
 			offset.M[2] = 0x3500;
@@ -3192,19 +3192,19 @@ void FIGURE_draw_prim_tween(
 //	matrix_transformZMY((struct Matrix31*)&temp,rot_mat, &offset);
 	// convert pos to floating point here to preserve accuracy and prevent overflow.
 	float	off_x = (float(offset.M[0]) / 256.f) * (float(rot_mat->M[0][0]) / 32768.f) +
-				    (float(offset.M[1]) / 256.f) * (float(rot_mat->M[0][1]) / 32768.f) + 
+				    (float(offset.M[1]) / 256.f) * (float(rot_mat->M[0][1]) / 32768.f) +
 				    (float(offset.M[2]) / 256.f) * (float(rot_mat->M[0][2]) / 32768.f);
 	float	off_y = (float(offset.M[0]) / 256.f) * (float(rot_mat->M[1][0]) / 32768.f) +
-				    (float(offset.M[1]) / 256.f) * (float(rot_mat->M[1][1]) / 32768.f) + 
+				    (float(offset.M[1]) / 256.f) * (float(rot_mat->M[1][1]) / 32768.f) +
 				    (float(offset.M[2]) / 256.f) * (float(rot_mat->M[1][2]) / 32768.f);
 	float	off_z = (float(offset.M[0]) / 256.f) * (float(rot_mat->M[2][0]) / 32768.f) +
-				    (float(offset.M[1]) / 256.f) * (float(rot_mat->M[2][1]) / 32768.f) + 
+				    (float(offset.M[1]) / 256.f) * (float(rot_mat->M[2][1]) / 32768.f) +
 				    (float(offset.M[2]) / 256.f) * (float(rot_mat->M[2][2]) / 32768.f);
 
 
 	SLONG	character_scale  = person_get_scale(p_thing);
 	float	character_scalef = float(character_scale) / 256.f;
-	
+
 	off_x *= character_scalef;
 	off_y *= character_scalef;
 	off_z *= character_scalef;
@@ -3245,7 +3245,7 @@ void FIGURE_draw_prim_tween(
 		// pass data up the hierarchy
 		if (end_mat)
 			*end_mat = mat2;
-	
+
 		//
 		// Apply local rotation matrix to get mat_final that rotates
 		// the point into world space.
@@ -3345,7 +3345,7 @@ void FIGURE_draw_prim_tween(
 #ifndef	BUILD_PSX
 	if (prim==256)
 	{
-		i=sp;		
+		i=sp;
 	}
 	else
 	// Or a shotgun
@@ -3453,7 +3453,7 @@ no_muzzle_calcs:
 			p1 = p_f4->Points[1] - sp;
 			p2 = p_f4->Points[2] - sp;
 			p3 = p_f4->Points[3] - sp;
-			
+
 			ASSERT(WITHIN(p0, 0, POLY_buffer_upto - 1));
 			ASSERT(WITHIN(p1, 0, POLY_buffer_upto - 1));
 			ASSERT(WITHIN(p2, 0, POLY_buffer_upto - 1));
@@ -3468,10 +3468,10 @@ no_muzzle_calcs:
 			{
 				quad[0]->u = float(p_f4->UV[0][0] & 0x3f) * (1.0F / 32.0F);
 				quad[0]->v = float(p_f4->UV[0][1]       ) * (1.0F / 32.0F);
-														
+
 				quad[1]->u = float(p_f4->UV[1][0]       ) * (1.0F / 32.0F);
 				quad[1]->v = float(p_f4->UV[1][1]       ) * (1.0F / 32.0F);
-														
+
 				quad[2]->u = float(p_f4->UV[2][0]       ) * (1.0F / 32.0F);
 				quad[2]->v = float(p_f4->UV[2][1]       ) * (1.0F / 32.0F);
 
@@ -3500,7 +3500,7 @@ no_muzzle_calcs:
 			p0 = p_f3->Points[0] - sp;
 			p1 = p_f3->Points[1] - sp;
 			p2 = p_f3->Points[2] - sp;
-			
+
 			ASSERT(WITHIN(p0, 0, POLY_buffer_upto - 1));
 			ASSERT(WITHIN(p1, 0, POLY_buffer_upto - 1));
 			ASSERT(WITHIN(p2, 0, POLY_buffer_upto - 1));
@@ -3513,10 +3513,10 @@ no_muzzle_calcs:
 			{
 				tri[0]->u = float(p_f3->UV[0][0] & 0x3f) * (1.0F / 32.0F);
 				tri[0]->v = float(p_f3->UV[0][1]       ) * (1.0F / 32.0F);
-														
+
 				tri[1]->u = float(p_f3->UV[1][0]       ) * (1.0F / 32.0F);
 				tri[1]->v = float(p_f3->UV[1][1]       ) * (1.0F / 32.0F);
-														
+
 				tri[2]->u = float(p_f3->UV[2][0]       ) * (1.0F / 32.0F);
 				tri[2]->v = float(p_f3->UV[2][1]       ) * (1.0F / 32.0F);
 
@@ -3600,7 +3600,7 @@ no_muzzle_calcs:
 			matTemp._42 = g_matWorld._41*g_matProjection._12 + g_matWorld._42*g_matProjection._22 + g_matWorld._43*g_matProjection._32 + g_matWorld._44*g_matProjection._42;
 			matTemp._43 = g_matWorld._41*g_matProjection._13 + g_matWorld._42*g_matProjection._23 + g_matWorld._43*g_matProjection._33 + g_matWorld._44*g_matProjection._43;
 			matTemp._44 = g_matWorld._41*g_matProjection._14 + g_matWorld._42*g_matProjection._24 + g_matWorld._43*g_matProjection._34 + g_matWorld._44*g_matProjection._44;
-		}   
+		}
 
 
 
@@ -3707,9 +3707,9 @@ extern DWORD g_dw3DStuffY;
 					ny,
 					nz);
 
-				dprod = 
-					nx * NIGHT_amb_norm_x + 
-					ny * NIGHT_amb_norm_y + 
+				dprod =
+					nx * NIGHT_amb_norm_x +
+					ny * NIGHT_amb_norm_y +
 					nz * NIGHT_amb_norm_z;
 
 				r = NIGHT_amb_red   << 0;
@@ -3739,9 +3739,9 @@ extern DWORD g_dw3DStuffY;
 				{
 					nf = &NIGHT_found[j];
 
-					dprod = 
-						nx * nf->dx + 
-						ny * nf->dy + 
+					dprod =
+						nx * nf->dx +
+						ny * nf->dy +
 						nz * nf->dz;
 
 					if (dprod < 0)
@@ -3758,7 +3758,7 @@ extern DWORD g_dw3DStuffY;
 
 				if (p)
 				{
-					r = (r > p->counter) ? (r - p->counter) : 10; 
+					r = (r > p->counter) ? (r - p->counter) : 10;
 					g = (g > p->counter) ? (g - p->counter) :  4;
 					b = (b > p->counter) ? (b - p->counter) :  3;
 				}
@@ -4067,7 +4067,7 @@ extern DIJOYSTATE the_state;
 			// there is no visually "right" thing to do. So leave it for now until someone complains. ATF.
 			//TRACE ( "Tried to draw an alpha/clipped prim!" );
 		}
-		
+
 
 
 		// Next material
@@ -4103,10 +4103,10 @@ extern DIJOYSTATE the_state;
 
 		fMyU[0] = float(p_f4->UV[0][0] & 0x3f) * (1.0F / 32.0F);
 		fMyV[0] = float(p_f4->UV[0][1]       ) * (1.0F / 32.0F);
-											
+
 		fMyU[1] = float(p_f4->UV[1][0]       ) * (1.0F / 32.0F);
 		fMyV[1] = float(p_f4->UV[1][1]       ) * (1.0F / 32.0F);
-											
+
 		fMyU[2] = float(p_f4->UV[2][0]       ) * (1.0F / 32.0F);
 		fMyV[2] = float(p_f4->UV[2][1]       ) * (1.0F / 32.0F);
 
@@ -4232,10 +4232,10 @@ extern DIJOYSTATE the_state;
 
 		fMyU[0] = float(p_f3->UV[0][0] & 0x3f) * (1.0F / 32.0F);
 		fMyV[0] = float(p_f3->UV[0][1]       ) * (1.0F / 32.0F);
-											
+
 		fMyU[1] = float(p_f3->UV[1][0]       ) * (1.0F / 32.0F);
 		fMyV[1] = float(p_f3->UV[1][1]       ) * (1.0F / 32.0F);
-											
+
 		fMyU[2] = float(p_f3->UV[2][0]       ) * (1.0F / 32.0F);
 		fMyV[2] = float(p_f3->UV[2][1]       ) * (1.0F / 32.0F);
 
@@ -4364,7 +4364,7 @@ extern DIJOYSTATE the_state;
 		p1 = p_f4->Points[1] - sp;
 		p2 = p_f4->Points[2] - sp;
 		p3 = p_f4->Points[3] - sp;
-		
+
 		ASSERT(WITHIN(p0, 0, POLY_buffer_upto - 1));
 		ASSERT(WITHIN(p1, 0, POLY_buffer_upto - 1));
 		ASSERT(WITHIN(p2, 0, POLY_buffer_upto - 1));
@@ -4388,10 +4388,10 @@ extern DIJOYSTATE the_state;
 			{
 				quad[0]->u = float(p_f4->UV[0][0] & 0x3f) * (1.0F / 32.0F);
 				quad[0]->v = float(p_f4->UV[0][1]       ) * (1.0F / 32.0F);
-												        
+
 				quad[1]->u = float(p_f4->UV[1][0]       ) * (1.0F / 32.0F);
 				quad[1]->v = float(p_f4->UV[1][1]       ) * (1.0F / 32.0F);
-												        
+
 				quad[2]->u = float(p_f4->UV[2][0]       ) * (1.0F / 32.0F);
 				quad[2]->v = float(p_f4->UV[2][1]       ) * (1.0F / 32.0F);
 
@@ -4546,7 +4546,7 @@ extern DIJOYSTATE the_state;
 					{
 
 						// Use the MM stuff.
-						
+
 						// Unlit untransformed vertices!
 						WORD wIndices[5] = {0,1,2,3,-1};
 						for ( int i = 0; i < 4; i++ )
@@ -4633,7 +4633,7 @@ extern DIJOYSTATE the_state;
 
 				//
 				// The colour of the face.
-				// 
+				//
 
 				r = ENGINE_palette[p_f4->Col2].red;
 				g = ENGINE_palette[p_f4->Col2].green;
@@ -4690,7 +4690,7 @@ extern DIJOYSTATE the_state;
 		p_f3->Bright[1]=store_dprod[p1];
 		p_f3->Bright[2]=store_dprod[p2];
 */
-		
+
 		ASSERT(WITHIN(p0, 0, POLY_buffer_upto - 1));
 		ASSERT(WITHIN(p1, 0, POLY_buffer_upto - 1));
 		ASSERT(WITHIN(p2, 0, POLY_buffer_upto - 1));
@@ -4705,10 +4705,10 @@ extern DIJOYSTATE the_state;
 			{
 				tri[0]->u = float(p_f3->UV[0][0] & 0x3f) * (1.0F / 32.0F);
 				tri[0]->v = float(p_f3->UV[0][1]       ) * (1.0F / 32.0F);
-												       
+
 				tri[1]->u = float(p_f3->UV[1][0]       ) * (1.0F / 32.0F);
 				tri[1]->v = float(p_f3->UV[1][1]       ) * (1.0F / 32.0F);
-												       
+
 				tri[2]->u = float(p_f3->UV[2][0]       ) * (1.0F / 32.0F);
 				tri[2]->v = float(p_f3->UV[2][1]       ) * (1.0F / 32.0F);
 
@@ -4870,9 +4870,9 @@ extern DIJOYSTATE the_state;
 
 
 						// Use the MM stuff.
-						
+
 						// Unlit untransformed vertices!
-						WORD wIndices[4] = {0,1,2,-1};						
+						WORD wIndices[4] = {0,1,2,-1};
 						for ( int i = 0; i < 3; i++ )
 						{
 							const float fNormScale = 1.0f / 256.0f;
@@ -4957,7 +4957,7 @@ extern DIJOYSTATE the_state;
 
 				//
 				// The colour of the face.
-				// 
+				//
 
 				r = ENGINE_palette[p_f3->Col2].red;
 				g = ENGINE_palette[p_f3->Col2].green;
@@ -5065,7 +5065,7 @@ extern DIJOYSTATE the_state;
 				p1 = p_f4->Points[1] - sp;
 				p2 = p_f4->Points[2] - sp;
 				p3 = p_f4->Points[3] - sp;
-				
+
 				ASSERT(WITHIN(p0, 0, POLY_buffer_upto - 1));
 				ASSERT(WITHIN(p1, 0, POLY_buffer_upto - 1));
 				ASSERT(WITHIN(p2, 0, POLY_buffer_upto - 1));
@@ -5105,7 +5105,7 @@ extern DIJOYSTATE the_state;
 				p0 = p_f3->Points[0] - sp;
 				p1 = p_f3->Points[1] - sp;
 				p2 = p_f3->Points[2] - sp;
-				
+
 				ASSERT(WITHIN(p0, 0, POLY_buffer_upto - 1));
 				ASSERT(WITHIN(p1, 0, POLY_buffer_upto - 1));
 				ASSERT(WITHIN(p2, 0, POLY_buffer_upto - 1));
@@ -5195,7 +5195,7 @@ void FIGURE_draw_prim_tween_warped(
 
 	SVector temp;
 	SVector_F temp2;
-	
+
 	PrimFace4  *p_f4;
 	PrimFace3  *p_f3;
 	PrimObject *p_obj;
@@ -5212,12 +5212,12 @@ void FIGURE_draw_prim_tween_warped(
 
 	//
 	// Matrix functions we use.
-	// 
+	//
 
 	void matrix_transform   (Matrix31* result, Matrix33* trans, Matrix31* mat2);
 	void matrix_transformZMY(Matrix31* result, Matrix33* trans, Matrix31* mat2);
 	void matrix_mult33      (Matrix33* result, Matrix33* mat1,  Matrix33* mat2);
-	
+
 	offset.M[0] = anim_info->OffsetX + ((anim_info_next->OffsetX + off_dx - anim_info->OffsetX) * tween >> 8);
 	offset.M[1] = anim_info->OffsetY + ((anim_info_next->OffsetY + off_dy - anim_info->OffsetY) * tween >> 8);
 	offset.M[2] = anim_info->OffsetZ + ((anim_info_next->OffsetZ + off_dz - anim_info->OffsetZ) * tween >> 8);
@@ -5232,7 +5232,7 @@ void FIGURE_draw_prim_tween_warped(
 
 	x += temp.X;
 	y += temp.Y;
-	z += temp.Z;	
+	z += temp.Z;
 
 	//
 	// Create a temporary "tween" matrix between current and next
@@ -5243,7 +5243,7 @@ void FIGURE_draw_prim_tween_warped(
 
 	build_tween_matrix(&mat2, &m1, &m2, tween);
 	normalise_matrix(&mat2);
-	
+
 	mat2.M[0][0] = (mat2.M[0][0] * character_scale) / 256;
 	mat2.M[0][1] = (mat2.M[0][1] * character_scale) / 256;
 	mat2.M[0][2] = (mat2.M[0][2] * character_scale) / 256;
@@ -5347,7 +5347,7 @@ void FIGURE_draw_prim_tween_warped(
 		// do some testy gnasty warp effect
 
 		//...
-/*		
+/*
 		angle=(temp2.Z+offset.M[2])*2;
 		angle=angle*PI/180;
 		sint=sin(angle);
@@ -5387,7 +5387,7 @@ void FIGURE_draw_prim_tween_warped(
 		p1 = p_f4->Points[1] - sp;
 		p2 = p_f4->Points[2] - sp;
 		p3 = p_f4->Points[3] - sp;
-		
+
 		ASSERT(WITHIN(p0, 0, POLY_buffer_upto - 1));
 		ASSERT(WITHIN(p1, 0, POLY_buffer_upto - 1));
 		ASSERT(WITHIN(p2, 0, POLY_buffer_upto - 1));
@@ -5404,10 +5404,10 @@ void FIGURE_draw_prim_tween_warped(
 			{
 				quad[0]->u = float(p_f4->UV[0][0] & 0x3f) * (1.0F / 32.0F);
 				quad[0]->v = float(p_f4->UV[0][1]       ) * (1.0F / 32.0F);
-												        
+
 				quad[1]->u = float(p_f4->UV[1][0]       ) * (1.0F / 32.0F);
 				quad[1]->v = float(p_f4->UV[1][1]       ) * (1.0F / 32.0F);
-												        
+
 				quad[2]->u = float(p_f4->UV[2][0]       ) * (1.0F / 32.0F);
 				quad[2]->v = float(p_f4->UV[2][1]       ) * (1.0F / 32.0F);
 
@@ -5426,7 +5426,7 @@ void FIGURE_draw_prim_tween_warped(
 			{
 				//
 				// The colour of the face.
-				// 
+				//
 
 				r = ENGINE_palette[p_f4->Col2].red;
 				g = ENGINE_palette[p_f4->Col2].green;
@@ -5468,7 +5468,7 @@ void FIGURE_draw_prim_tween_warped(
 		p0 = p_f3->Points[0] - sp;
 		p1 = p_f3->Points[1] - sp;
 		p2 = p_f3->Points[2] - sp;
-		
+
 		ASSERT(WITHIN(p0, 0, POLY_buffer_upto - 1));
 		ASSERT(WITHIN(p1, 0, POLY_buffer_upto - 1));
 		ASSERT(WITHIN(p2, 0, POLY_buffer_upto - 1));
@@ -5483,10 +5483,10 @@ void FIGURE_draw_prim_tween_warped(
 			{
 				tri[0]->u = float(p_f3->UV[0][0] & 0x3f) * (1.0F / 32.0F);
 				tri[0]->v = float(p_f3->UV[0][1]       ) * (1.0F / 32.0F);
-												       
+
 				tri[1]->u = float(p_f3->UV[1][0]       ) * (1.0F / 32.0F);
 				tri[1]->v = float(p_f3->UV[1][1]       ) * (1.0F / 32.0F);
-												       
+
 				tri[2]->u = float(p_f3->UV[2][0]       ) * (1.0F / 32.0F);
 				tri[2]->v = float(p_f3->UV[2][1]       ) * (1.0F / 32.0F);
 
@@ -5501,7 +5501,7 @@ void FIGURE_draw_prim_tween_warped(
 			{
 				//
 				// The colour of the face.
-				// 
+				//
 
 				r = ENGINE_palette[p_f3->Col2].red;
 				g = ENGINE_palette[p_f3->Col2].green;
@@ -5777,7 +5777,7 @@ extern int g_iCheatNumber;
 	if ( pPrimObj->wNumMaterials == 0 )
 	{
 		// Meshes have not been created yet - do so.
-		
+
 		// Set up the object.
 #if 0
 		// Use thrash slot 1 because the gun may bump it out later if it's
@@ -5817,7 +5817,7 @@ extern int g_iCheatNumber;
 
 
 
-				// Then draw the weapon & muzzle flash if present. However, these are 
+				// Then draw the weapon & muzzle flash if present. However, these are
 				// not part of the compiled person - they will be drawn individually
 				// after drawing the person.
 			}
@@ -5866,7 +5866,7 @@ extern int g_iCheatNumber;
 	}
 
 
-	
+
 	// Gets pre-incremented to 0 before use.
 	int iTPOPartNumber = -1;
 	bool bWholePersonVisible = TRUE;
@@ -5901,7 +5901,7 @@ extern int g_iCheatNumber;
 				iTPOPartNumber++;
 				ASSERT ( iTPOPartNumber < MAX_NUM_BODY_PARTS_AT_ONCE );
 				bool bVisible = FIGURE_draw_prim_tween_person_only_just_set_matrix (
-										iTPOPartNumber,									
+										iTPOPartNumber,
 										FIGURE_dhpr_data.start_object + body_part,
 										rot_mat,
 										FIGURE_dhpr_data.dx+dx,
@@ -5959,7 +5959,7 @@ extern int g_iCheatNumber;
 							if ( bDrawMuzzleFlash )
 							{
 #if 0
-								FIGURE_draw_prim_tween( prim, 
+								FIGURE_draw_prim_tween( prim,
 														FIGURE_dhpr_data.world_pos->M[0],
 														FIGURE_dhpr_data.world_pos->M[1],
 														FIGURE_dhpr_data.world_pos->M[2],
@@ -5970,7 +5970,7 @@ extern int g_iCheatNumber;
 														FIGURE_dhpr_data.dx+dx,
 														FIGURE_dhpr_data.dy+dy,
 														FIGURE_dhpr_data.dz+dz,
-														FIGURE_dhpr_data.colour, 
+														FIGURE_dhpr_data.colour,
 														FIGURE_dhpr_data.specular,
 														FIGURE_dhpr_rdata1[recurse_level].parent_base_mat,
 														FIGURE_dhpr_rdata1[recurse_level].parent_base_pos,
@@ -5983,7 +5983,7 @@ extern int g_iCheatNumber;
 #else
 								// Muzzle flashes are always drawn "normally"
 								FIGURE_draw_prim_tween_person_only(
-														prim, 
+														prim,
 														FIGURE_dhpr_data.world_mat,
 														FIGURE_dhpr_data.dx+dx,
 														FIGURE_dhpr_data.dy+dy,
@@ -5998,7 +5998,7 @@ extern int g_iCheatNumber;
 
 #if 0
 						FIGURE_draw_prim_tween(
-												255+(p_person->Draw.Tweened->PersonID>>5), 
+												255+(p_person->Draw.Tweened->PersonID>>5),
 												FIGURE_dhpr_data.world_pos->M[0],
 												FIGURE_dhpr_data.world_pos->M[1],
 												FIGURE_dhpr_data.world_pos->M[2],
@@ -6009,7 +6009,7 @@ extern int g_iCheatNumber;
 												FIGURE_dhpr_data.dx+dx,
 												FIGURE_dhpr_data.dy+dy,
 												FIGURE_dhpr_data.dz+dz,
-												FIGURE_dhpr_data.colour, 
+												FIGURE_dhpr_data.colour,
 												FIGURE_dhpr_data.specular,
 												FIGURE_dhpr_rdata1[recurse_level].parent_base_mat,
 												FIGURE_dhpr_rdata1[recurse_level].parent_base_pos,
@@ -6022,7 +6022,7 @@ extern int g_iCheatNumber;
 #else
 						// Weapons are always drawn "normally"
 						FIGURE_draw_prim_tween_person_only(
-												255+(p_person->Draw.Tweened->PersonID>>5), 
+												255+(p_person->Draw.Tweened->PersonID>>5),
 												FIGURE_dhpr_data.world_mat,
 												FIGURE_dhpr_data.dx+dx,
 												FIGURE_dhpr_data.dy+dy,
@@ -6120,7 +6120,7 @@ extern int g_iCheatNumber;
 	ULONG qc3;
 
 	SVector temp;
-	
+
 	PrimFace4   *p_f4;
 	PrimFace3   *p_f3;
 	PrimObject  *p_obj;
@@ -6368,7 +6368,7 @@ extern DIJOYSTATE the_state;
 			//TRACE ( "Tried to draw an alpha/clipped prim!" );
 		}
 #endif
-		
+
 
 
 		// Next material
@@ -6502,7 +6502,7 @@ extern int g_iCheatNumber;
 										FIGURE_dhpr_data.dx+dx,
 										FIGURE_dhpr_data.dy+dy,
 										FIGURE_dhpr_data.dz+dz,
-										FIGURE_dhpr_data.colour, //limb==PART_JACKET?jacket_col:(limb==PART_TROUSERS?leg_col:FIGURE_dhpr_data.colour), 
+										FIGURE_dhpr_data.colour, //limb==PART_JACKET?jacket_col:(limb==PART_TROUSERS?leg_col:FIGURE_dhpr_data.colour),
 										FIGURE_dhpr_data.specular,
 										FIGURE_dhpr_rdata1[recurse_level].parent_base_mat,
 										FIGURE_dhpr_rdata1[recurse_level].parent_base_pos,
@@ -6525,7 +6525,7 @@ extern int g_iCheatNumber;
 										FIGURE_dhpr_data.dx+dx,
 										FIGURE_dhpr_data.dy+dy,
 										FIGURE_dhpr_data.dz+dz,
-										//FIGURE_dhpr_data.colour, //limb==PART_JACKET?jacket_col:(limb==PART_TROUSERS?leg_col:FIGURE_dhpr_data.colour), 
+										//FIGURE_dhpr_data.colour, //limb==PART_JACKET?jacket_col:(limb==PART_TROUSERS?leg_col:FIGURE_dhpr_data.colour),
 										//FIGURE_dhpr_data.specular,
 										recurse_level,
 										//FIGURE_dhpr_rdata1[recurse_level].parent_base_mat,
@@ -6584,7 +6584,7 @@ extern int g_iCheatNumber;
 							if ( bDrawMuzzleFlash )
 							{
 #if 0
-								FIGURE_draw_prim_tween( prim, 
+								FIGURE_draw_prim_tween( prim,
 														FIGURE_dhpr_data.world_pos->M[0],
 														FIGURE_dhpr_data.world_pos->M[1],
 														FIGURE_dhpr_data.world_pos->M[2],
@@ -6595,7 +6595,7 @@ extern int g_iCheatNumber;
 														FIGURE_dhpr_data.dx+dx,
 														FIGURE_dhpr_data.dy+dy,
 														FIGURE_dhpr_data.dz+dz,
-														FIGURE_dhpr_data.colour, 
+														FIGURE_dhpr_data.colour,
 														FIGURE_dhpr_data.specular,
 														FIGURE_dhpr_rdata1[recurse_level].parent_base_mat,
 														FIGURE_dhpr_rdata1[recurse_level].parent_base_pos,
@@ -6608,7 +6608,7 @@ extern int g_iCheatNumber;
 #else
 								// Muzzle flashes are always drawn "normally"
 								FIGURE_draw_prim_tween_person_only(
-														prim, 
+														prim,
 														//FIGURE_dhpr_data.world_pos->M[0],
 														//FIGURE_dhpr_data.world_pos->M[1],
 														//FIGURE_dhpr_data.world_pos->M[2],
@@ -6619,7 +6619,7 @@ extern int g_iCheatNumber;
 														FIGURE_dhpr_data.dx+dx,
 														FIGURE_dhpr_data.dy+dy,
 														FIGURE_dhpr_data.dz+dz,
-														//FIGURE_dhpr_data.colour, 
+														//FIGURE_dhpr_data.colour,
 														//FIGURE_dhpr_data.specular,
 														recurse_level,
 														//FIGURE_dhpr_rdata1[recurse_level].parent_base_mat,
@@ -6638,7 +6638,7 @@ extern int g_iCheatNumber;
 
 #if 0
 						FIGURE_draw_prim_tween(
-												255+(p_person->Draw.Tweened->PersonID>>5), 
+												255+(p_person->Draw.Tweened->PersonID>>5),
 												FIGURE_dhpr_data.world_pos->M[0],
 												FIGURE_dhpr_data.world_pos->M[1],
 												FIGURE_dhpr_data.world_pos->M[2],
@@ -6649,7 +6649,7 @@ extern int g_iCheatNumber;
 												FIGURE_dhpr_data.dx+dx,
 												FIGURE_dhpr_data.dy+dy,
 												FIGURE_dhpr_data.dz+dz,
-												FIGURE_dhpr_data.colour, 
+												FIGURE_dhpr_data.colour,
 												FIGURE_dhpr_data.specular,
 												FIGURE_dhpr_rdata1[recurse_level].parent_base_mat,
 												FIGURE_dhpr_rdata1[recurse_level].parent_base_pos,
@@ -6662,7 +6662,7 @@ extern int g_iCheatNumber;
 #else
 						// Weapons are always drawn "normally"
 						FIGURE_draw_prim_tween_person_only(
-												255+(p_person->Draw.Tweened->PersonID>>5), 
+												255+(p_person->Draw.Tweened->PersonID>>5),
 												//FIGURE_dhpr_data.world_pos->M[0],
 												//FIGURE_dhpr_data.world_pos->M[1],
 												//FIGURE_dhpr_data.world_pos->M[2],
@@ -6673,7 +6673,7 @@ extern int g_iCheatNumber;
 												FIGURE_dhpr_data.dx+dx,
 												FIGURE_dhpr_data.dy+dy,
 												FIGURE_dhpr_data.dz+dz,
-												//FIGURE_dhpr_data.colour, 
+												//FIGURE_dhpr_data.colour,
 												//FIGURE_dhpr_data.specular,
 												recurse_level,
 												//FIGURE_dhpr_rdata1[recurse_level].parent_base_mat,
@@ -6902,7 +6902,7 @@ extern int g_iCheatNumber;
 										FIGURE_dhpr_data.dx+dx,
 										FIGURE_dhpr_data.dy+dy,
 										FIGURE_dhpr_data.dz+dz,
-										FIGURE_dhpr_data.colour, //limb==PART_JACKET?jacket_col:(limb==PART_TROUSERS?leg_col:FIGURE_dhpr_data.colour), 
+										FIGURE_dhpr_data.colour, //limb==PART_JACKET?jacket_col:(limb==PART_TROUSERS?leg_col:FIGURE_dhpr_data.colour),
 										FIGURE_dhpr_data.specular,
 										FIGURE_dhpr_rdata1[recurse_level].parent_base_mat,
 										FIGURE_dhpr_rdata1[recurse_level].parent_base_pos,
@@ -6951,7 +6951,7 @@ extern int g_iCheatNumber;
 									break;
 							}
 
-							FIGURE_draw_prim_tween( prim, 
+							FIGURE_draw_prim_tween( prim,
 													FIGURE_dhpr_data.world_pos->M[0],
 													FIGURE_dhpr_data.world_pos->M[1],
 													FIGURE_dhpr_data.world_pos->M[2],
@@ -6962,7 +6962,7 @@ extern int g_iCheatNumber;
 													FIGURE_dhpr_data.dx+dx,
 													FIGURE_dhpr_data.dy+dy,
 													FIGURE_dhpr_data.dz+dz,
-													FIGURE_dhpr_data.colour, 
+													FIGURE_dhpr_data.colour,
 													FIGURE_dhpr_data.specular,
 													FIGURE_dhpr_rdata1[recurse_level].parent_base_mat,
 													FIGURE_dhpr_rdata1[recurse_level].parent_base_pos,
@@ -6978,7 +6978,7 @@ extern int g_iCheatNumber;
 						}
 
 
-						FIGURE_draw_prim_tween( 255+(p_person->Draw.Tweened->PersonID>>5), 
+						FIGURE_draw_prim_tween( 255+(p_person->Draw.Tweened->PersonID>>5),
 												FIGURE_dhpr_data.world_pos->M[0],
 												FIGURE_dhpr_data.world_pos->M[1],
 												FIGURE_dhpr_data.world_pos->M[2],
@@ -6989,7 +6989,7 @@ extern int g_iCheatNumber;
 												FIGURE_dhpr_data.dx+dx,
 												FIGURE_dhpr_data.dy+dy,
 												FIGURE_dhpr_data.dz+dz,
-												FIGURE_dhpr_data.colour, 
+												FIGURE_dhpr_data.colour,
 												FIGURE_dhpr_data.specular,
 												FIGURE_dhpr_rdata1[recurse_level].parent_base_mat,
 												FIGURE_dhpr_rdata1[recurse_level].parent_base_pos,
@@ -7073,7 +7073,7 @@ SLONG get_sort_z_bodge(SLONG px,SLONG pz)
 			}
 
 		}
-		
+
 	}
 	else
 	{
@@ -7101,13 +7101,13 @@ SLONG get_sort_z_bodge(SLONG px,SLONG pz)
 			}
 
 		}
-		
+
 	}
 	return(0);
 
 }
 
-struct	
+struct
 {
 	SWORD	r,g,b;
 }peep_recol[]=
@@ -7209,7 +7209,7 @@ void FIGURE_draw(Thing *p_thing)
 	//
 
 	ae1 = dt->CurrentFrame->FirstElement;
-	ae2 = dt->NextFrame   ->FirstElement;   
+	ae2 = dt->NextFrame   ->FirstElement;
 
 #ifdef DEBUG
 	if (!ae1 || !ae2)
@@ -7679,7 +7679,7 @@ extern	struct	PrimPoint	*anim_mids; //[256];
 	//
 
 	ae1 = dt->CurrentFrame->FirstElement;
-	ae2 = dt->NextFrame   ->FirstElement;   
+	ae2 = dt->NextFrame   ->FirstElement;
 
 	if (!ae1 || !ae2)
 	{
@@ -7750,9 +7750,9 @@ extern	struct	PrimPoint	*anim_mids; //[256];
 	if (p_thing->Genus.Person->BurnIndex) {
 		Pyro *p=TO_PYRO(p_thing->Genus.Person->BurnIndex-1);
 		if (p->PyroType==PYRO_IMMOLATE) {
-			col.red=  (col.red>p->counter)  ?col.red-p->counter:0; 
-			col.green=(col.green>p->counter)?col.green-p->counter:0; 
-			col.blue= (col.blue>p->counter) ?col.blue-p->counter:0; 
+			col.red=  (col.red>p->counter)  ?col.red-p->counter:0;
+			col.green=(col.green>p->counter)?col.green-p->counter:0;
+			col.blue= (col.blue>p->counter) ?col.blue-p->counter:0;
 		}
 	}
 
@@ -7814,7 +7814,7 @@ extern	struct	PrimPoint	*anim_mids; //[256];
 
 	}
 */
-	
+
 /*	if (p_thing->Genus.Person->BurnIndex) {
 		Pyro *p=TO_PYRO(p_thing->Genus.Person->BurnIndex-1);
 		if (p->PyroType==PYRO_IMMOLATE) {
@@ -8155,7 +8155,7 @@ void ANIM_obj_draw(Thing *p_thing,DrawTween *dt)
 	//
 
 	ae1 = dt->CurrentFrame->FirstElement;
-	ae2 = dt->NextFrame   ->FirstElement;   
+	ae2 = dt->NextFrame   ->FirstElement;
 
 	if (!ae1 || !ae2)
 	{
@@ -8202,7 +8202,7 @@ void ANIM_obj_draw(Thing *p_thing,DrawTween *dt)
 			(p_thing->WorldPos.Z >> 8)),
 	   &colour,
 	   &specular);
-	
+
 	colour   &= ~POLY_colour_restrict;
 	specular &= ~POLY_colour_restrict;
 
@@ -8290,7 +8290,7 @@ void ANIM_obj_draw_warped(Thing *p_thing,DrawTween *dt)
 	//
 
 	ae1 = dt->CurrentFrame->FirstElement;
-	ae2 = dt->NextFrame   ->FirstElement;   
+	ae2 = dt->NextFrame   ->FirstElement;
 
 	if (!ae1 || !ae2)
 	{
@@ -8320,7 +8320,7 @@ void ANIM_obj_draw_warped(Thing *p_thing,DrawTween *dt)
 			(p_thing->WorldPos.Z >> 8)),
 	   &colour,
 	   &specular);
-	
+
 	colour   &= ~POLY_colour_restrict;
 	specular &= ~POLY_colour_restrict;
 
@@ -8362,7 +8362,7 @@ void ANIM_obj_draw_warped(Thing *p_thing,DrawTween *dt)
 #ifndef TARGET_DC
 
 // ========================================================
-// 
+//
 // DRAWING THE REFLECTION
 //
 // ========================================================
@@ -8449,7 +8449,7 @@ void FIGURE_draw_prim_tween_reflection(
 	Matrix33  mat_final;
 
 	SVector temp;
-	
+
 	PrimFace4  *p_f4;
 	PrimFace3  *p_f3;
 	PrimObject *p_obj;
@@ -8471,15 +8471,15 @@ void FIGURE_draw_prim_tween_reflection(
 	red   = (colour >> 16) & 0xff;
 	green = (colour >>  8) & 0xff;
 	blue  = (colour >>  0) & 0xff;
-  
+
 	//
 	// Matrix functions we use.
-	// 
+	//
 
 	void matrix_transform   (Matrix31* result, Matrix33* trans, Matrix31* mat2);
 	void matrix_transformZMY(Matrix31* result, Matrix33* trans, Matrix31* mat2);
 	void matrix_mult33      (Matrix33* result, Matrix33* mat1,  Matrix33* mat2);
-	
+
 	offset.M[0] = anim_info->OffsetX + ((anim_info_next->OffsetX + off_dx - anim_info->OffsetX) * tween >> 8);
 	offset.M[1] = anim_info->OffsetY + ((anim_info_next->OffsetY + off_dy - anim_info->OffsetY) * tween >> 8);
 	offset.M[2] = anim_info->OffsetZ + ((anim_info_next->OffsetZ + off_dz - anim_info->OffsetZ) * tween >> 8);
@@ -8493,7 +8493,7 @@ void FIGURE_draw_prim_tween_reflection(
 
 	x += temp.X;
 	y += temp.Y;
-	z += temp.Z;	
+	z += temp.Z;
 
 	//
 	// Create a temporary "tween" matrix between current and next
@@ -8505,7 +8505,7 @@ void FIGURE_draw_prim_tween_reflection(
 
 	build_tween_matrix(&mat2, &m1, &m2 ,tween);
 	normalise_matrix(&mat2);
-	
+
 	//
 	// Apply local rotation matrix to get mat_final that rotates
 	// the point into world space.
@@ -8652,7 +8652,7 @@ void FIGURE_draw_prim_tween_reflection(
 		p1 = p_f4->Points[1] - sp;
 		p2 = p_f4->Points[2] - sp;
 		p3 = p_f4->Points[3] - sp;
-		
+
 		ASSERT(WITHIN(p0, 0, FIGURE_rpoint_upto - 1));
 		ASSERT(WITHIN(p1, 0, FIGURE_rpoint_upto - 1));
 		ASSERT(WITHIN(p2, 0, FIGURE_rpoint_upto - 1));
@@ -8673,10 +8673,10 @@ void FIGURE_draw_prim_tween_reflection(
 			{
 				quad[0]->u = float(p_f4->UV[0][0] & 0x3f) * (1.0F / 32.0F);
 				quad[0]->v = float(p_f4->UV[0][1]       ) * (1.0F / 32.0F);
-												        
+
 				quad[1]->u = float(p_f4->UV[1][0]       ) * (1.0F / 32.0F);
 				quad[1]->v = float(p_f4->UV[1][1]       ) * (1.0F / 32.0F);
-												        
+
 				quad[2]->u = float(p_f4->UV[2][0]       ) * (1.0F / 32.0F);
 				quad[2]->v = float(p_f4->UV[2][1]       ) * (1.0F / 32.0F);
 
@@ -8700,7 +8700,7 @@ void FIGURE_draw_prim_tween_reflection(
 
 				//
 				// The colour of the face.
-				// 
+				//
 
 				r = ENGINE_palette[p_f4->Col2].red;
 				g = ENGINE_palette[p_f4->Col2].green;
@@ -8740,7 +8740,7 @@ void FIGURE_draw_prim_tween_reflection(
 		p0 = p_f3->Points[0] - sp;
 		p1 = p_f3->Points[1] - sp;
 		p2 = p_f3->Points[2] - sp;
-		
+
 		ASSERT(WITHIN(p0, 0, FIGURE_rpoint_upto - 1));
 		ASSERT(WITHIN(p1, 0, FIGURE_rpoint_upto - 1));
 		ASSERT(WITHIN(p2, 0, FIGURE_rpoint_upto - 1));
@@ -8759,10 +8759,10 @@ void FIGURE_draw_prim_tween_reflection(
 			{
 				tri[0]->u = float(p_f3->UV[0][0] & 0x3f) * (1.0F / 32.0F);
 				tri[0]->v = float(p_f3->UV[0][1]       ) * (1.0F / 32.0F);
-												       
+
 				tri[1]->u = float(p_f3->UV[1][0]       ) * (1.0F / 32.0F);
 				tri[1]->v = float(p_f3->UV[1][1]       ) * (1.0F / 32.0F);
-												       
+
 				tri[2]->u = float(p_f3->UV[2][0]       ) * (1.0F / 32.0F);
 				tri[2]->v = float(p_f3->UV[2][1]       ) * (1.0F / 32.0F);
 
@@ -8783,7 +8783,7 @@ void FIGURE_draw_prim_tween_reflection(
 
 				//
 				// The colour of the face.
-				// 
+				//
 
 				r = ENGINE_palette[p_f3->Col2].red;
 				g = ENGINE_palette[p_f3->Col2].green;
@@ -8873,7 +8873,7 @@ void FIGURE_draw_reflection(Thing *p_thing, SLONG height)
 	//
 
 	ae1 = dt->CurrentFrame->FirstElement;
-	ae2 = dt->NextFrame   ->FirstElement;   
+	ae2 = dt->NextFrame   ->FirstElement;
 
 	if (!ae1 || !ae2)
 	{
@@ -8906,7 +8906,7 @@ void FIGURE_draw_reflection(Thing *p_thing, SLONG height)
 	r_matrix.M[0][1] = -r_matrix.M[0][1];
 	r_matrix.M[1][1] = -r_matrix.M[1][1];
 	r_matrix.M[2][1] = -r_matrix.M[2][1];
-	
+
 	//
 	// Initialise the bounding box.
 	//
@@ -8959,7 +8959,7 @@ void FIGURE_draw_reflection(Thing *p_thing, SLONG height)
 		col,
 	   &colour,
 	   &specular);
-	
+
 	colour   &= ~POLY_colour_restrict;
 	specular &= ~POLY_colour_restrict;
 
@@ -9084,7 +9084,7 @@ bool FIGURE_draw_prim_tween_person_only_just_set_matrix
 	ULONG qc3;
 
 	SVector temp;
-	
+
 	PrimFace4   *p_f4;
 	PrimFace3   *p_f3;
 	PrimObject  *p_obj;
@@ -9104,16 +9104,16 @@ bool FIGURE_draw_prim_tween_person_only_just_set_matrix
 
 	//
 	// Matrix functions we use.
-	// 
+	//
 
 	void matrix_transform   (Matrix31* result, Matrix33* trans, Matrix31* mat2);
 	void matrix_transformZMY(Matrix31* result, Matrix33* trans, Matrix31* mat2);
 	void matrix_mult33      (Matrix33* result, Matrix33* mat1,  Matrix33* mat2);
-	
+
 	if (parent_base_mat)
 	{
 		// we've got hierarchy info!
-		
+
 		Matrix31	p;
 		p.M[0] = anim_info->OffsetX;
 		p.M[1] = anim_info->OffsetY;
@@ -9122,7 +9122,7 @@ bool FIGURE_draw_prim_tween_person_only_just_set_matrix
 		HIERARCHY_Get_Body_Part_Offset(&offset, &p,
 									   parent_base_mat, parent_base_pos,
 									   parent_curr_mat, parent_curr_pos);
-		
+
 		// pass data up the hierarchy
 		if (end_pos)
 			*end_pos = offset;
@@ -9144,19 +9144,19 @@ bool FIGURE_draw_prim_tween_person_only_just_set_matrix
 	// convert pos to floating point here to preserve accuracy and prevent overflow.
 	// It's also a shitload faster on P2 and SH4.
 	float	off_x = (float(offset.M[0]) / 256.f) * (float(rot_mat->M[0][0]) / 32768.f) +
-				    (float(offset.M[1]) / 256.f) * (float(rot_mat->M[0][1]) / 32768.f) + 
+				    (float(offset.M[1]) / 256.f) * (float(rot_mat->M[0][1]) / 32768.f) +
 				    (float(offset.M[2]) / 256.f) * (float(rot_mat->M[0][2]) / 32768.f);
 	float	off_y = (float(offset.M[0]) / 256.f) * (float(rot_mat->M[1][0]) / 32768.f) +
-				    (float(offset.M[1]) / 256.f) * (float(rot_mat->M[1][1]) / 32768.f) + 
+				    (float(offset.M[1]) / 256.f) * (float(rot_mat->M[1][1]) / 32768.f) +
 				    (float(offset.M[2]) / 256.f) * (float(rot_mat->M[1][2]) / 32768.f);
 	float	off_z = (float(offset.M[0]) / 256.f) * (float(rot_mat->M[2][0]) / 32768.f) +
-				    (float(offset.M[1]) / 256.f) * (float(rot_mat->M[2][1]) / 32768.f) + 
+				    (float(offset.M[1]) / 256.f) * (float(rot_mat->M[2][1]) / 32768.f) +
 				    (float(offset.M[2]) / 256.f) * (float(rot_mat->M[2][2]) / 32768.f);
 
 
 	SLONG	character_scale  = person_get_scale(p_thing);
 	float	character_scalef = float(character_scale) / 256.f;
-	
+
 	off_x *= character_scalef;
 	off_y *= character_scalef;
 	off_z *= character_scalef;
@@ -9256,7 +9256,7 @@ bool FIGURE_draw_prim_tween_person_only_just_set_matrix
 	// Check for being a gun
 	if (prim==256)
 	{
-		i=sp;		
+		i=sp;
 	}
 	else if (prim==258)
 	{
@@ -9523,7 +9523,7 @@ void FIGURE_draw_prim_tween_person_only(
 	ULONG qc3;
 
 	SVector temp;
-	
+
 	PrimFace4   *p_f4;
 	PrimFace3   *p_f3;
 	PrimObject  *p_obj;
@@ -9543,16 +9543,16 @@ void FIGURE_draw_prim_tween_person_only(
 
 	//
 	// Matrix functions we use.
-	// 
+	//
 
 	void matrix_transform   (Matrix31* result, Matrix33* trans, Matrix31* mat2);
 	void matrix_transformZMY(Matrix31* result, Matrix33* trans, Matrix31* mat2);
 	void matrix_mult33      (Matrix33* result, Matrix33* mat1,  Matrix33* mat2);
-	
+
 	if (parent_base_mat)
 	{
 		// we've got hierarchy info!
-		
+
 		Matrix31	p;
 		p.M[0] = anim_info->OffsetX;
 		p.M[1] = anim_info->OffsetY;
@@ -9561,7 +9561,7 @@ void FIGURE_draw_prim_tween_person_only(
 		HIERARCHY_Get_Body_Part_Offset(&offset, &p,
 									   parent_base_mat, parent_base_pos,
 									   parent_curr_mat, parent_curr_pos);
-		
+
 		// pass data up the hierarchy
 		if (end_pos)
 			*end_pos = offset;
@@ -9583,19 +9583,19 @@ void FIGURE_draw_prim_tween_person_only(
 	// convert pos to floating point here to preserve accuracy and prevent overflow.
 	// It's also a shitload faster on P2 and SH4.
 	float	off_x = (float(offset.M[0]) / 256.f) * (float(rot_mat->M[0][0]) / 32768.f) +
-				    (float(offset.M[1]) / 256.f) * (float(rot_mat->M[0][1]) / 32768.f) + 
+				    (float(offset.M[1]) / 256.f) * (float(rot_mat->M[0][1]) / 32768.f) +
 				    (float(offset.M[2]) / 256.f) * (float(rot_mat->M[0][2]) / 32768.f);
 	float	off_y = (float(offset.M[0]) / 256.f) * (float(rot_mat->M[1][0]) / 32768.f) +
-				    (float(offset.M[1]) / 256.f) * (float(rot_mat->M[1][1]) / 32768.f) + 
+				    (float(offset.M[1]) / 256.f) * (float(rot_mat->M[1][1]) / 32768.f) +
 				    (float(offset.M[2]) / 256.f) * (float(rot_mat->M[1][2]) / 32768.f);
 	float	off_z = (float(offset.M[0]) / 256.f) * (float(rot_mat->M[2][0]) / 32768.f) +
-				    (float(offset.M[1]) / 256.f) * (float(rot_mat->M[2][1]) / 32768.f) + 
+				    (float(offset.M[1]) / 256.f) * (float(rot_mat->M[2][1]) / 32768.f) +
 				    (float(offset.M[2]) / 256.f) * (float(rot_mat->M[2][2]) / 32768.f);
 
 
 	SLONG	character_scale  = person_get_scale(p_thing);
 	float	character_scalef = float(character_scale) / 256.f;
-	
+
 	off_x *= character_scalef;
 	off_y *= character_scalef;
 	off_z *= character_scalef;
@@ -9691,7 +9691,7 @@ void FIGURE_draw_prim_tween_person_only(
 	// Check for being a gun
 	if (prim==256)
 	{
-		i=sp;		
+		i=sp;
 	}
 	else if (prim==258)
 	{
@@ -9771,7 +9771,7 @@ no_muzzle_calcs:
 			p1 = p_f4->Points[1] - sp;
 			p2 = p_f4->Points[2] - sp;
 			p3 = p_f4->Points[3] - sp;
-			
+
 			ASSERT(WITHIN(p0, 0, POLY_buffer_upto - 1));
 			ASSERT(WITHIN(p1, 0, POLY_buffer_upto - 1));
 			ASSERT(WITHIN(p2, 0, POLY_buffer_upto - 1));
@@ -9786,10 +9786,10 @@ no_muzzle_calcs:
 			{
 				quad[0]->u = float(p_f4->UV[0][0] & 0x3f) * (1.0F / 32.0F);
 				quad[0]->v = float(p_f4->UV[0][1]       ) * (1.0F / 32.0F);
-														
+
 				quad[1]->u = float(p_f4->UV[1][0]       ) * (1.0F / 32.0F);
 				quad[1]->v = float(p_f4->UV[1][1]       ) * (1.0F / 32.0F);
-														
+
 				quad[2]->u = float(p_f4->UV[2][0]       ) * (1.0F / 32.0F);
 				quad[2]->v = float(p_f4->UV[2][1]       ) * (1.0F / 32.0F);
 
@@ -9818,7 +9818,7 @@ no_muzzle_calcs:
 			p0 = p_f3->Points[0] - sp;
 			p1 = p_f3->Points[1] - sp;
 			p2 = p_f3->Points[2] - sp;
-			
+
 			ASSERT(WITHIN(p0, 0, POLY_buffer_upto - 1));
 			ASSERT(WITHIN(p1, 0, POLY_buffer_upto - 1));
 			ASSERT(WITHIN(p2, 0, POLY_buffer_upto - 1));
@@ -9831,10 +9831,10 @@ no_muzzle_calcs:
 			{
 				tri[0]->u = float(p_f3->UV[0][0] & 0x3f) * (1.0F / 32.0F);
 				tri[0]->v = float(p_f3->UV[0][1]       ) * (1.0F / 32.0F);
-														
+
 				tri[1]->u = float(p_f3->UV[1][0]       ) * (1.0F / 32.0F);
 				tri[1]->v = float(p_f3->UV[1][1]       ) * (1.0F / 32.0F);
-														
+
 				tri[2]->u = float(p_f3->UV[2][0]       ) * (1.0F / 32.0F);
 				tri[2]->v = float(p_f3->UV[2][1]       ) * (1.0F / 32.0F);
 
@@ -10205,7 +10205,7 @@ extern DIJOYSTATE the_state;
 			// there is no visually "right" thing to do. So leave it for now until someone complains. ATF.
 			//TRACE ( "Tried to draw an alpha/clipped prim!" );
 		}
-		
+
 
 
 		// Next material

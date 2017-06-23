@@ -36,7 +36,7 @@ void            TraceText(CBYTE *error, ...);
 #include <stdlib.h>
 #include <cguid.h>
 
-#include "C:\fallen\headers\A3D\Ia3dapi.h"
+#include "fallen/headers/A3D/Ia3dapi.h"
 
 
 #define MAX_QUEUE_LENGTH	5
@@ -101,7 +101,7 @@ private:
 
 public:
 	A3DList		  srclist,datalist;
-	
+
 	// construct, destruct
 	A3DManager(SLONG features=0);
 	~A3DManager();

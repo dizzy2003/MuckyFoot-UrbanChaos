@@ -26,12 +26,12 @@
 #include	"Sound.h"
 #include	"gamemenu.h"
 #ifndef	PSX
-#include	"c:\fallen\ddengine\headers\menufont.h"
-#include	"c:\fallen\ddlibrary\headers\net.h"
+#include	"fallen/ddengine/headers/menufont.h"
+#include	"fallen/ddlibrary/headers/net.h"
 #endif
 #include	"bang.h"
 #include	"mav.h"
-#include	"c:\fallen\editor\headers\extra.h"
+#include	"fallen/editor/headers/extra.h"
 #include	"spark.h"
 #include	"statedef.h"
 #include	"glitter.h"
@@ -45,7 +45,7 @@
 #include	"cloth.h"
 #include	"ns.h"
 #include	"supermap.h"
-#include	"c:\fallen\sedit\headers\es.h"
+#include	"fallen/sedit/headers/es.h"
 #include	"build2.h"
 #include	"eway.h"
 #include	"elev.h"
@@ -68,9 +68,9 @@
 #include	"balloon.h"
 #include	"memory.h"
 #ifndef	PSX
-#include	"C:\fallen\DDEngine\Headers\console.h"
-#include	"C:\fallen\DDEngine\Headers\poly.h"
-#include	"c:\fallen\DDEngine\Headers\map.h"
+#include	"fallen/DDEngine/Headers/console.h"
+#include	"fallen/DDEngine/Headers/poly.h"
+#include	"fallen/DDEngine/Headers/map.h"
 #endif
 #include	"psystem.h"
 #include	"ribbon.h"
@@ -79,16 +79,16 @@
 #include	"grenade.h"
 #ifndef	PSX
 #include	"drawxtra.h"
-#include	"c:\fallen\ddlibrary\headers\ddlib.h"
-#include	"c:\fallen\ddengine\headers\planmap.h"
+#include	"fallen/ddlibrary/headers/ddlib.h"
+#include	"fallen/ddengine/headers/planmap.h"
 #include	<math.h>
-#include	"c:\fallen\ddengine\headers\BreakTimer.h"
+#include	"fallen/ddengine/headers/BreakTimer.h"
 #include	"frontend.h"
-#include	"c:\fallen\ddengine\headers\truetype.h"
+#include	"fallen/ddengine/headers/truetype.h"
 #include "panel.h"
 
 #else
-#include	"c:\fallen\psxeng\headers\psxeng.h"
+#include	"fallen/psxeng/headers/psxeng.h"
 #include	<ctrller.h>
 extern ControllerPacket	PAD_Input1,PAD_Input2;
 
@@ -101,13 +101,13 @@ extern ControllerPacket	PAD_Input1,PAD_Input2;
 #define	VERIFY_PLAYBACK	0	// !$$! set to 1 to verify demo playback
 
 #include "mfx.h"
-#include "c:\fallen\ddengine\headers\superfacet.h"
-#include "c:\fallen\ddengine\headers\farfacet.h"
-#include "c:\fallen\ddengine\headers\fastprim.h"
-#include "c:\fallen\ddengine\headers\supercrinkle.h"
+#include "fallen/ddengine/headers/superfacet.h"
+#include "fallen/ddengine/headers/farfacet.h"
+#include "fallen/ddengine/headers/fastprim.h"
+#include "fallen/ddengine/headers/supercrinkle.h"
 
 
-SLONG CAM_cur_x, CAM_cur_y, CAM_cur_z, 
+SLONG CAM_cur_x, CAM_cur_y, CAM_cur_z,
 	  CAM_cur_yaw, CAM_cur_pitch, CAM_cur_roll; // these are set appropriate to whichever cam
 
 #ifdef PSX
@@ -151,13 +151,13 @@ extern BOOL allow_debug_keys;
 
 #ifdef	VERSION_GERMAN
 //#error
-#undef	VIOLENCE_ALLOWED	
+#undef	VIOLENCE_ALLOWED
 #define	VIOLENCE_ALLOWED	0
 #endif
 
 #ifdef	VERSION_FRENCH
 //#error
-#undef	VIOLENCE_ALLOWED	
+#undef	VIOLENCE_ALLOWED
 #ifdef TARGET_DC
 // Hooray! We're allowed to roast live babies over open fires now!
 #define	VIOLENCE_ALLOWED	1
@@ -220,7 +220,7 @@ void global_load(void)
 #endif
 
 //---------------------------------------------------------------
-//#define	DebugText	
+//#define	DebugText
 void game_startup(void)
 {
 	GAME_STATE = 0;
@@ -347,7 +347,7 @@ extern VMU_Screen *pvmuscreenWait;
 	// Take setting up the display from here since it's about 10 seconds before
 	// anything useful gets drawn on it, lets do it someplace where it might not
 	// fucking fail Sony standards.
-	// 
+	//
 /*
 	if (OpenDisplay(640,480,16,FLAGS_USE_3D|FLAGS_USE_WORKSCREEN)==0)
 	{
@@ -367,7 +367,7 @@ extern UBYTE Eidos_Played;
 
 //	LoadWaveList("Data\\SFX\\1622\\","Data\\SFX\\Samples.txt");
 
-	
+
 	#endif
 
 	//
@@ -417,7 +417,7 @@ extern void *mem_all;
 
 	//
 	// PSX shutdown.
-	// 
+	//
 
 	if (mem_all)
 	{
@@ -570,7 +570,7 @@ BOOL	game_init(void)
 
 	//
 	// Set the seed and initialise game variables.
-	// 
+	//
 #if !defined(PSX) && !defined(TARGET_DC)
 	global_load();
 #endif
@@ -678,7 +678,7 @@ extern int m_iPanelYPos;
 	LoadWaveList("Data\\SFX\\1622\\","Data\\SFX\\Samples.txt");
 #else
 	A3DLoadWaveList("Data\\SFX\\1622\\","Data\\SFX\\Samples.txt");
-#endif							   
+#endif
 */
 
 	extern THING_INDEX PANEL_wide_top_person;
@@ -715,11 +715,11 @@ extern	void	load_whole_game(CBYTE	*gamename);
 		ret=1;
 //		load_whole_game(psx_game_name);
 #endif
-		
+
 	}
 	else
 	{
-		
+
 
 		// Play the loading music, coz it's all in memory.
 		DCLL_memstream_play();
@@ -752,7 +752,7 @@ extern	SLONG	save_psx;
 		if(ret==5||ret==1) //loaded a level
 		{
 			CBYTE	save_wad[100];
-			
+
 	extern	CBYTE ELEV_fname_level[];
 			process_things(0);
 
@@ -793,7 +793,7 @@ BOOL	game_create_psx(CBYTE *mission_name)
 
 	//
 	// Set the seed and initialise game variables.
-	// 
+	//
 #if !defined(PSX) && !defined(TARGET_DC)
 	global_load();
 #endif
@@ -852,7 +852,7 @@ extern	SLONG quick_load;
 		if(ret==5||ret==1) //loaded a level
 		{
 			CBYTE	save_wad[100];
-			
+
 	extern	CBYTE ELEV_fname_level[];
 			process_things(0);
 
@@ -884,7 +884,7 @@ BOOL	make_texture_clumps(CBYTE *mission_name)
 
 	//
 	// Set the seed and initialise game variables.
-	// 
+	//
 	global_load();
 
 	GAME_TURN  = 0;
@@ -965,7 +965,7 @@ void game_fini(void)
 	// but play the loading music, coz it's all in memory.
 	DCLL_memstream_play();
 
-	
+
 	//
 	// Free up the FASTPRIM memory.
 	//
@@ -1473,7 +1473,7 @@ void	edge_map_warning(SLONG flag)
 				form_leave_map,
 				WIDGET_Create(
 				   &STATIC_Methods,
-					0, 50, 
+					0, 50,
 					DisplayWidth,
 					100,
 					"Leaving the map will"));
@@ -1482,7 +1482,7 @@ void	edge_map_warning(SLONG flag)
 				form_leave_map,
 				WIDGET_Create(
 				   &STATIC_Methods,
-					0, 50 + 30 * 1, 
+					0, 50 + 30 * 1,
 					DisplayWidth,
 					100 + 30 * 1,
 					"abort the mission."));
@@ -1491,21 +1491,21 @@ void	edge_map_warning(SLONG flag)
 				form_leave_map,
 				WIDGET_Create(
 				   &STATIC_Methods,
-						0, 50 + 40 * 2,  
+						0, 50 + 40 * 2,
 					DisplayWidth,
 					100 + 40 * 2,
 					"Abort mission?"));
 
 			widget_yes = WIDGET_Create(
 						   &BUTTON_Methods,
-							0, DisplayHeight - 270, 
+							0, DisplayHeight - 270,
 							DisplayWidth,
 							DisplayHeight,
 							"Yes");
 
 			widget_no = WIDGET_Create(
 						   &BUTTON_Methods,
-							0, DisplayHeight - 200, 
+							0, DisplayHeight - 200,
 							DisplayWidth,
 							DisplayHeight,
 							"No");
@@ -1528,7 +1528,7 @@ void	edge_map_warning(SLONG flag)
 	{
 		//
 		// Abandon level!
-		// 
+		//
 
 		GAME_STATE = GS_LEVEL_LOST;
 	}
@@ -1643,7 +1643,7 @@ SLONG	psx_camera(void)
 	{
 		//
 		// We are using the cut-scene camera.
-		// 
+		//
 		warehouse = EWAY_camera_warehouse();
 	}
 	else
@@ -1831,7 +1831,7 @@ SLONG	special_keys(void)
 	if (Keys[KB_TAB] || (NET_PLAYER(0)->Genus.Player->Pressed & INPUT_MASK_START))
 	{
 		Keys[KB_TAB] = 0;
-		
+
 		draw_map_screen ^= TRUE;
 	}
 
@@ -1868,7 +1868,7 @@ void	handle_sfx(void)
 
 #ifndef PSX
 	process_ambient_effects();
-	process_weather();			
+	process_weather();
 #else
 	{
 		// heartbeat when you die
@@ -1888,7 +1888,7 @@ void	handle_sfx(void)
 	if (wad_level==14)
 	{
 		SLONG ware=NET_PERSON(PLAYER_ID)->Genus.Person->Ware;
-		
+
 		if (ware &&(WARE_ware[ware].ambience==4))
 		{
 			MUSIC_bodge_code=8;
@@ -1899,7 +1899,7 @@ void	handle_sfx(void)
 #endif
 
 extern SLONG BARREL_fx_rate;
-	if (BARREL_fx_rate>1) 
+	if (BARREL_fx_rate>1)
 		BARREL_fx_rate-=2;
 	else
 		BARREL_fx_rate=0;
@@ -1936,14 +1936,14 @@ SLONG	should_i_process_game(void)
 
 extern	SLONG PSX_inv_open;
 
-		if (PSX_inv_open) 
+		if (PSX_inv_open)
 		{
 			return(0);
 		}
 
 		if (GAME_FLAGS & GF_PAUSED)
 			return 0;
-		
+
 		if ((GAME_STATE != GS_LEVEL_LOST) && (GAME_STATE != GS_LEVEL_WON))
 			return(1);
 
@@ -1969,7 +1969,7 @@ void draw_debug_lines(void);
 inline	void	draw_screen(void)
 {
 	extern SLONG draw_3d;
-	
+
 #ifndef PSX
 
 #ifdef DEBUG
@@ -2169,7 +2169,7 @@ round_again:;
 			BreakStart();
 #ifndef	PSX
 		SLONG exit_game_loop = FALSE;
-	
+
 		//
 		// Stop the loading music.
 		//
@@ -2268,7 +2268,7 @@ extern void envmap_specials(void);
 				amb_colour,
 			   &NIGHT_amb_d3d_colour,
 			   &NIGHT_amb_d3d_specular);
-		
+
 		}
 #endif //#ifndef TARGET_DC
 #endif
@@ -2280,7 +2280,7 @@ extern void envmap_specials(void);
 		{
 #ifndef TARGET_DC
 			extern UBYTE build_dc;
-			
+
 			if (build_dc)
 			{
 				exit_game_loop = GAMEMENU_DO_NEXT_LEVEL;
@@ -2364,7 +2364,7 @@ extern int g_iCheatNumber;
 				}
 			}
 #else
-			
+
 			if (GAME_STATE&(GS_LEVEL_LOST|GS_LEVEL_WON))
 			{
 				//
@@ -2417,7 +2417,7 @@ extern int g_iCheatNumber;
 #endif
 						break;
 					}
-					
+
 				}
 				if(GAME_STATE&GS_LEVEL_WON)
 				{
@@ -2543,7 +2543,7 @@ void	check_pows(void);
 
 				EWAY_process();
 #ifndef PSX
-				
+
 //				TRACE("Process stuff2\n");
 
 				SPARK_show_electric_fences();
@@ -2614,17 +2614,17 @@ extern	void	do_packets(void);
 
 #endif
 
-			
+
 
 			//
 			//On screen Text
 			//
 //#ifndef FINAL
-			if (!(GAME_FLAGS & GF_PAUSED)) 
+			if (!(GAME_FLAGS & GF_PAUSED))
 				CONSOLE_draw();
 //#endif
 
-			
+
 #ifndef PSX
 			GAMEMENU_draw();
 
@@ -2648,7 +2648,7 @@ extern	void	do_packets(void);
 #ifdef	MIKE
 			if(Keys[KB_TAB])
 			{
-				BreakEnd("C:\\Windows\\Desktop\\BreakTimes.txt");	   
+				BreakEnd("C:\\Windows\\Desktop\\BreakTimes.txt");
 				Keys[KB_TAB]=0;
 			}
 #endif
@@ -2697,7 +2697,7 @@ extern	void	do_packets(void);
 		sw_hack = FALSE;
 #endif
 		// end timing
-		BreakEnd("C:\\Windows\\Desktop\\BreakTimes.txt");	   
+		BreakEnd("C:\\Windows\\Desktop\\BreakTimes.txt");
 
 		//
 		// Game has finished, what do we do now
@@ -2745,7 +2745,7 @@ extern	void	do_packets(void);
 
 #ifndef TARGET_DC
 				extern void OS_hack(void);
-				
+
 				the_end = TRUE;
 
 				OS_hack();

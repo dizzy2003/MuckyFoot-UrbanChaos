@@ -5,8 +5,8 @@
 #include	"prim.h"
 #include	"prim_draw.h"
 #include	"anim.h"
-#include	"c:\fallen\headers\animtmap.h"
-#include	"c:\fallen\headers\memory.h"
+#include	"fallen/headers/animtmap.h"
+#include	"fallen/headers/memory.h"
 
 #define	EDITOR	1
 
@@ -36,7 +36,7 @@ extern	SWORD	SelectDrawn;
 //void	rotate_thing_point(struct SVector *vect,struct Matrix33	*matrix)
 /*
 void	apply_matrix_to_vect(struct SVector *before,struct Matrix33	*matrix,struct SVector *result)
-{																			
+{
 	SLONG	x,y,z;
 	SLONG	lcosa,lsina;
 	SLONG	lcost,lsint;
@@ -60,13 +60,13 @@ void	add_quad_to_bucket(SLONG p0,SLONG p1,SLONG p2,SLONG p3,struct SVector *res,
 
 	if(current_bucket_pool>=end_bucket_pool)
 		return;
-		flag_and = flags[p0]&flags[p1]&flags[p2]&flags[p3];	
-		flag_or = flags[p0]|flags[p1]|flags[p2]|flags[p3];	
+		flag_and = flags[p0]&flags[p1]&flags[p2]&flags[p3];
+		flag_or = flags[p0]|flags[p1]|flags[p2]|flags[p3];
 
 		if((flag_or&EF_BEHIND_YOU)==0)
 		if(!(flag_and & EF_CLIPFLAGS))
 		{
-			
+
 			az=(res[p0].Z+res[p1].Z+res[p2].Z+res[p3].Z)>>2;
 
 			setPolyType4(
@@ -91,7 +91,7 @@ void	add_quad_to_bucket(SLONG p0,SLONG p1,SLONG p2,SLONG p3,struct SVector *res,
 					);
 
 			setZ4((struct BucketQuad*)current_bucket_pool,-res[p0].Z,-res[p1].Z,-res[p2].Z,-res[p3].Z);
-			
+
 
 //			setShade4((struct BucketQuad*)current_bucket_pool,p_f4->Bright[0],p_f4->Bright[1],p_f4->Bright[2],p_f4->Bright[3]);
 			setShade4((struct BucketQuad*)current_bucket_pool,
@@ -103,8 +103,8 @@ void	add_quad_to_bucket(SLONG p0,SLONG p1,SLONG p2,SLONG p3,struct SVector *res,
 			add_bucket((void *)current_bucket_pool,az);
 			current_bucket_pool	+=	sizeof(struct BucketQuad);
 		}
-	
-}	
+
+}
 
 inline void	add_split_quad_to_bucket(SLONG p0,SLONG p1,SLONG p3,SLONG p2,struct SVector *info,struct SVector *res,SLONG *flags)
 {
@@ -114,13 +114,13 @@ inline void	add_split_quad_to_bucket(SLONG p0,SLONG p1,SLONG p3,SLONG p2,struct 
 	if(current_bucket_pool>=end_bucket_pool)
 		return;
 
-	flag_and = flags[p0]&flags[p1]&flags[p2]&flags[p3];	
-	flag_or = flags[p0]|flags[p1]|flags[p2]|flags[p3];	
+	flag_and = flags[p0]&flags[p1]&flags[p2]&flags[p3];
+	flag_or = flags[p0]|flags[p1]|flags[p2]|flags[p3];
 
 	if((flag_or&EF_BEHIND_YOU)==0)
 	if(!(flag_and & EF_CLIPFLAGS))
 	{
-		
+
 		az=(res[p0].Z+res[p1].Z+res[p2].Z+res[p3].Z)>>2;
 
 		setPolyType4(
@@ -144,7 +144,7 @@ inline void	add_split_quad_to_bucket(SLONG p0,SLONG p1,SLONG p3,SLONG p2,struct 
 				);
 
 		setZ4((struct BucketQuad*)current_bucket_pool,-res[p0].Z,-res[p1].Z,-res[p2].Z,-res[p3].Z);
-		
+
 
 //			setShade4((struct BucketQuad*)current_bucket_pool,p_f4->Bright[0],p_f4->Bright[1],p_f4->Bright[2],p_f4->Bright[3]);
 		setShade4((struct BucketQuad*)current_bucket_pool,
@@ -154,8 +154,8 @@ inline void	add_split_quad_to_bucket(SLONG p0,SLONG p1,SLONG p3,SLONG p2,struct 
 		add_bucket((void *)current_bucket_pool,az);
 		current_bucket_pool	+=	sizeof(struct BucketQuad);
 	}
-	
-}	
+
+}
 
 
 
@@ -201,7 +201,7 @@ ULONG	should_i_split_it(SLONG p1,SLONG p2,SLONG p3,SLONG p4,struct SVector *res)
 	else
 		return(0);
 
-	
+
 }
 ULONG	check_flags(SLONG p1,SLONG p2,SLONG p3,SLONG p0,SLONG *flags)
 {
@@ -211,7 +211,7 @@ ULONG	check_flags(SLONG p1,SLONG p2,SLONG p3,SLONG p0,SLONG *flags)
 
 	if((flags_or&EF_BEHIND_YOU)==0||flags_or&EF_TOO_BIG)
 	{
-		
+
 		if(!(flags[p0]&flags[p1]&flags[p2]&flags[p3]& (EF_CLIPFLAGS|EF_BEHIND_YOU)))
 			return(1);
 	}
@@ -225,10 +225,10 @@ void	split_quad_r(SLONG p1,SLONG p2,SLONG p3,SLONG p4,struct SVector *res,struct
 	SLONG	new_flags[10];
 //	SWORD	new_bright[10];
 
-	new_points[1]=points[p1]; 
-	new_points[2]=points[p2];  
-	new_points[3]=points[p3];   
-	new_points[4]=points[p4];	 
+	new_points[1]=points[p1];
+	new_points[2]=points[p2];
+	new_points[3]=points[p3];
+	new_points[4]=points[p4];
 
 	new_flags[1]=flags[p1];
 	new_flags[2]=flags[p2];
@@ -316,10 +316,10 @@ inline void	split_quad(SLONG p1,SLONG p2,SLONG p3,SLONG p4,struct SVector *res,s
 //	SWORD	new_bright[10];
 
 
-	new_points[1]=points[p1]; 
-	new_points[2]=points[p2];  
-	new_points[3]=points[p3];   
-	new_points[4]=points[p4];	 
+	new_points[1]=points[p1];
+	new_points[2]=points[p2];
+	new_points[3]=points[p3];
+	new_points[4]=points[p4];
 
 
 	new_flags[1]=flags[p1];
@@ -367,7 +367,7 @@ inline void	split_quad(SLONG p1,SLONG p2,SLONG p3,SLONG p4,struct SVector *res,s
 	new_flags[9]=rotate_point_gte((struct SVector*)&new_points[9],&new_res[9]);
 
 //now we have all the texture info, all the draw coords, all the shades
-	
+
 	if(check_flags(1,5,9,8,new_flags))
 	{
 		depth=should_i_split_it(1,5,9,8,new_res);
@@ -428,11 +428,11 @@ void	draw_a_prim_at(UWORD	prim,SLONG x,SLONG y,SLONG z,UBYTE shade)
 
 	sp=p_obj->StartPoint;
 	ep=p_obj->EndPoint;
-	
+
 	engine.X-=x<<8;
 	engine.Y-=y<<8;
 	engine.Z-=z<<8;
-		
+
 	for(c0=sp;c0<ep;c0++)
 	{
 		SVector	pp;
@@ -467,7 +467,7 @@ void	draw_a_prim_at(UWORD	prim,SLONG x,SLONG y,SLONG z,UBYTE shade)
 		{
 			if(depth=should_i_split_it(p0,p1,p3,p2,global_res))
 			{
-				
+
 				if(check_flags(p0,p1,p3,p2,global_flags))
 					split_quad(p0,p1,p3,p2,global_res,(struct SVector*)&prim_points[sp],global_bright,global_flags,p_f4,depth);
 			}
@@ -476,28 +476,28 @@ void	draw_a_prim_at(UWORD	prim,SLONG x,SLONG y,SLONG z,UBYTE shade)
 */
 
 		{
-			
-	
-			flag_and = global_flags[p0]&global_flags[p1]&global_flags[p2]&global_flags[p3];	
-			flag_or = global_flags[p0]|global_flags[p1]|global_flags[p2]|global_flags[p3];	
+
+
+			flag_and = global_flags[p0]&global_flags[p1]&global_flags[p2]&global_flags[p3];
+			flag_or = global_flags[p0]|global_flags[p1]|global_flags[p2]|global_flags[p3];
 /*
 			if(c0==28334)
 			{
 				CBYTE	str[100];
 				sprintf(str," f0 %x f1 %x f2 %x f3 %x \n",global_flags[p0],global_flags[p1],global_flags[p2],global_flags[p3]);
 				QuickText(10,10,str,255);
-				
+
 			}
 */
 
 			if((p_f4->FaceFlags&FACE_FLAG_SMOOTH)&&ShiftFlag)
 			{
-				
+
 			}
 			else
 			{
 
-				
+
 				if( (!(flag_and & EF_CLIPFLAGS))&&((flag_or&EF_BEHIND_YOU)==0))
 				{
 					SLONG	wid,height;
@@ -576,7 +576,7 @@ void	draw_a_prim_at(UWORD	prim,SLONG x,SLONG y,SLONG z,UBYTE shade)
 					}
 
 					setZ4((struct BucketQuad*)current_bucket_pool,-global_res[p0].Z,-global_res[p1].Z,-global_res[p2].Z,-global_res[p3].Z);
-					
+
 
 		//			setShade4((struct BucketQuad*)current_bucket_pool,p_f4->Bright[0],p_f4->Bright[1],p_f4->Bright[2],p_f4->Bright[3]);
 					if(shade)
@@ -618,8 +618,8 @@ void	draw_a_prim_at(UWORD	prim,SLONG x,SLONG y,SLONG z,UBYTE shade)
 						cob++;
 
 
-		
-				}	
+
+				}
 //				LogText(" clipped face %d \n",c0);
 			}
 		}
@@ -655,8 +655,8 @@ void	draw_a_prim_at(UWORD	prim,SLONG x,SLONG y,SLONG z,UBYTE shade)
 		p1=p_f3->Points[1]-sp;
 		p2=p_f3->Points[2]-sp;
 
-		flag_and = global_flags[p0]&global_flags[p1]&global_flags[p2];	
-		flag_or  = global_flags[p0]|global_flags[p1]|global_flags[p2];	
+		flag_and = global_flags[p0]&global_flags[p1]&global_flags[p2];
+		flag_or  = global_flags[p0]|global_flags[p1]|global_flags[p2];
 
 		if((flag_or&EF_BEHIND_YOU)==0)
 		if(!(flag_and & EF_CLIPFLAGS))
@@ -759,7 +759,7 @@ void	draw_a_rot_prim_at(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct	Pr
 	p_f4     =&prim_faces4[p_obj->StartFace4];
 	p_f3     =&prim_faces3[p_obj->StartFace3];
 
-	
+
 	anim_info_next=&prim_multi_anims[anim_info->Next];
 
 	mat      = &anim_info->Mat;
@@ -780,11 +780,11 @@ void	draw_a_rot_prim_at(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct	Pr
 	y+=(anim_info->DY+(((anim_info_next->DY-anim_info->DY)*tween)>>8))>>2;
 	z+=(anim_info->DZ+(((anim_info_next->DZ-anim_info->DZ)*tween)>>8))>>2;
 */
-	
+
 
 	sp=p_obj->StartPoint;
 	ep=p_obj->EndPoint;
-	
+
 	engine.X-=x<<8;
 	engine.Y-=y<<8;
 	engine.Z-=z<<8;
@@ -801,7 +801,7 @@ void	draw_a_rot_prim_at(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct	Pr
 //apply local rotation matrix
 	matrix_mult33(&mat_final,rot_mat,&mat2);
 
-		
+
 	for(c0=sp;c0<ep;c0++)
 	{
 
@@ -832,13 +832,13 @@ void	draw_a_rot_prim_at(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct	Pr
 		p2=p_f4->Points[2]-sp;
 		p3=p_f4->Points[3]-sp;
 
-		flag_and = global_flags[p0]&global_flags[p1]&global_flags[p2]&global_flags[p3];	
-		flag_or = global_flags[p0]|global_flags[p1]|global_flags[p2]|global_flags[p3];	
+		flag_and = global_flags[p0]&global_flags[p1]&global_flags[p2]&global_flags[p3];
+		flag_or = global_flags[p0]|global_flags[p1]|global_flags[p2]|global_flags[p3];
 
 		if((flag_or&EF_BEHIND_YOU)==0)
 		if(!(flag_and & EF_CLIPFLAGS))
 		{
-			
+
 			az=(global_res[p0].Z+global_res[p1].Z+global_res[p2].Z+global_res[p3].Z)>>2;
 
 			setPolyGT4(current_bucket_pool);
@@ -881,8 +881,8 @@ void	draw_a_rot_prim_at(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct	Pr
 		p1=p_f3->Points[1]-sp;
 		p2=p_f3->Points[2]-sp;
 
-		flag_and = global_flags[p0]&global_flags[p1]&global_flags[p2];	
-		flag_or  = global_flags[p0]|global_flags[p1]|global_flags[p2];	
+		flag_and = global_flags[p0]&global_flags[p1]&global_flags[p2];
+		flag_or  = global_flags[p0]|global_flags[p1]|global_flags[p2];
 
 		if((flag_or&EF_BEHIND_YOU)==0)
 		if(!(flag_and & EF_CLIPFLAGS))
@@ -908,7 +908,7 @@ void	draw_a_rot_prim_at(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct	Pr
 		}
 		p_f3++;
 	}
-					
+
 }
 extern	void	build_tween_matrix(struct Matrix33 *mat,struct CMatrix33 *cmat1,struct CMatrix33 *cmat2,SLONG tween);
 
@@ -937,7 +937,7 @@ void	draw_anim_prim_tween(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct 
 	p_obj    =&prim_objects[prim];
 	p_f4     =&prim_faces4[p_obj->StartFace4];
 	p_f3     =&prim_faces3[p_obj->StartFace3];
-	
+
 //	mat      = &anim_info->Matrix;
 //	mat_next = &anim_info_next->Matrix;
 
@@ -957,7 +957,7 @@ void	draw_anim_prim_tween(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct 
 	matrix_transformZMY((struct Matrix31*)&temp,rot_mat, &offset);
 	x	+= temp.X;
 	y	+= temp.Y;
-	z	+= temp.Z;	
+	z	+= temp.Z;
 
 	CMatrix33	m1, m2;
 	GetCMatrix(anim_info, &m1);
@@ -966,7 +966,7 @@ void	draw_anim_prim_tween(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct 
 
 	sp=p_obj->StartPoint;
 	ep=p_obj->EndPoint;
-/*	
+/*
 	engine.X-=x<<8;
 	engine.Y-=y<<8;
 	engine.Z-=z<<8;
@@ -1012,13 +1012,13 @@ void	draw_anim_prim_tween(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct 
 		p2=p_f4->Points[2]-sp;
 		p3=p_f4->Points[3]-sp;
 
-		flag_and = flags[p0]&flags[p1]&flags[p2]&flags[p3];	
-		flag_or = flags[p0]|flags[p1]|flags[p2]|flags[p3];	
+		flag_and = flags[p0]&flags[p1]&flags[p2]&flags[p3];
+		flag_or = flags[p0]|flags[p1]|flags[p2]|flags[p3];
 
 		if((flag_or&EF_BEHIND_YOU)==0)
 		if(!(flag_and & EF_CLIPFLAGS))
 		{
-			
+
 			az=(res[p0].Z+res[p1].Z+res[p2].Z+res[p3].Z)>>2;
 			az-=200;
 
@@ -1050,7 +1050,7 @@ void	draw_anim_prim_tween(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct 
 					);
 
 			setZ4((struct BucketQuad*)current_bucket_pool,-res[p0].Z,-res[p1].Z,-res[p2].Z,-res[p3].Z);
-			
+
 			setShade4	(
 							(struct BucketQuad*)current_bucket_pool,
 							CLIP256(p_f4->Bright[0]+bright[p0]),
@@ -1080,8 +1080,8 @@ void	draw_anim_prim_tween(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct 
 		p2=p_f3->Points[2]-sp;
 		if(shadow)
 		{
-			flag_and = flags_shadow[p0]&flags_shadow[p1]&flags_shadow[p2];	
-			flag_or = flags_shadow[p0]|flags_shadow[p1]|flags_shadow[p2];	
+			flag_and = flags_shadow[p0]&flags_shadow[p1]&flags_shadow[p2];
+			flag_or = flags_shadow[p0]|flags_shadow[p1]|flags_shadow[p2];
 
 			if((flag_or&EF_BEHIND_YOU)==0)
 			if(!(flag_and & EF_CLIPFLAGS))
@@ -1092,7 +1092,7 @@ void	draw_anim_prim_tween(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct 
 				setPolyType3(
 								current_bucket_pool,
 								POLY_F
-								
+
 							);
 
 				setCol3	(
@@ -1112,7 +1112,7 @@ void	draw_anim_prim_tween(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct 
 
 				((struct BucketTri*)current_bucket_pool)->DebugInfo=c0;
 				((struct BucketTri*)current_bucket_pool)->DebugFlags=0;
-				
+
 				add_bucket((void *)current_bucket_pool,az);
 
 				current_bucket_pool+=sizeof(struct BucketTri);
@@ -1120,8 +1120,8 @@ void	draw_anim_prim_tween(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct 
 			}
 		}
 
-		flag_and = flags[p0]&flags[p1]&flags[p2];	
-		flag_or  = flags[p0]|flags[p1]|flags[p2];	
+		flag_and = flags[p0]&flags[p1]&flags[p2];
+		flag_or  = flags[p0]|flags[p1]|flags[p2];
 
 		if((flag_or&EF_BEHIND_YOU)==0)
 		if(!(flag_and & EF_CLIPFLAGS))
@@ -1169,8 +1169,8 @@ void	draw_anim_prim_tween(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct 
 			current_bucket_pool+=sizeof(struct BucketQuad);
 		}
 		p_f3++;
-	}	
-/*				
+	}
+/*
 	engine.X+=x<<8;
 	engine.Y+=y<<8;
 	engine.Z+=z<<8;
