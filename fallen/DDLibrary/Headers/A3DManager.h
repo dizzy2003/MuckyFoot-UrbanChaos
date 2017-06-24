@@ -6,7 +6,7 @@
 // requires either Aureal 3D sound card + drivers, OR normal sound card with A2D installed
 
 
-#ifndef _A3D_MANAGER_H_
+#if !defined(NO_SOUND) && defined(A3D_SOUND) && !defined(_A3D_MANAGER_H_)
 #define _A3D_MANAGER_H_
 
 

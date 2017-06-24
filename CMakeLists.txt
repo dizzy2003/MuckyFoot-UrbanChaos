@@ -28,14 +28,14 @@ endif(NOT FALLEN_ENABLE_AUDIO)
 # Build configuration for Windows desktop.
 if(WIN32)
     # Windows-specifc optional features.
-    set(FALLEN_AUDIO_ENABLE_A3D_BACKEND ON
+    set(FALLEN_AUDIO_ENABLE_A3D_BACKEND OFF
         CACHE BOOL
         "Whether to build support for audio playback via Aureal A3D.")
     # TODO: not sure if DirectSound support was actually implemented...
-    set(FALLEN_AUDIO_ENABLE_DIRECTSOUND_BACKEND ON
+    set(FALLEN_AUDIO_ENABLE_DIRECTSOUND_BACKEND OFF
         CACHE BOOL
         "Whether to build support for audio playback via DirectSound.")
-    set(FALLEN_AUDIO_ENABLE_QMDX_BACKEND ON
+    set(FALLEN_AUDIO_ENABLE_QMDX_BACKEND OFF
         CACHE BOOL
         "Whether to build support for audio playback via QMDX.")
     if(FALLEN_ENABLE_AUDIO)
@@ -50,7 +50,7 @@ if(WIN32)
             add_definitions(-DA3D_SOUND)
             include_directories(SYSTEM ${IA3DAPI_H_PATH})
         endif(FALLEN_AUDIO_ENABLE_A3D_BACKEND)
-        if(FALLEN_AUDIO_ENABLE_DIRECTSOUND_BACKEND)
+        if(FALLEN_AUDIO_ENABLE_QMDX_BACKEND)
             # Locate the QMDX SDK (it's out there too!).
             message(STATUS "Looking for `qmdx.h`")
             find_path(QMDX_H_PATH qmdx.h
@@ -59,12 +59,12 @@ if(WIN32)
                 message(FATAL_ERROR "could not find `qmdx.h`")
             endif(${QMDX_H_PATH} EQUAL "QMDX_H_PATH-NOTFOUND")
             include_directories(SYSTEM ${QMDX_H_PATH})
-            add_definitions(-DDS_SOUND)
-            link_directories(${QMDX_H_PATH})
-        endif(FALLEN_AUDIO_ENABLE_DIRECTSOUND_BACKEND)
-        if(FALLEN_AUDIO_ENABLE_QMDX_BACKEND)
             add_definitions(-DQ_SOUND)
+            link_directories(${QMDX_H_PATH})
         endif(FALLEN_AUDIO_ENABLE_QMDX_BACKEND)
+        if(FALLEN_AUDIO_ENABLE_DIRECTSOUND_BACKEND)
+            add_definitions(-DDS_SOUND)
+        endif(FALLEN_AUDIO_ENABLE_DIRECTSOUND_BACKEND)
     endif(FALLEN_ENABLE_AUDIO)
     # MSVC users need to install the DirectX SDK (August 2007), as several DirectX components were
     # removed from later SDKs.

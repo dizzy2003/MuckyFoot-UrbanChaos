@@ -11,12 +11,10 @@ set(DDLIBRARY_HEADERS
     Headers/GDisplay.h
     Headers/GWorkScreen.h
     Headers/MFx.h
-    Headers/QSManager.h
     Headers/Tga.h
     Headers/WindProcs.h
     Headers/net.h)
 set(DDLIBRARY_SOURCES
-    Source/A3DManager.cpp
     Source/BinkClient.cpp
     Source/D3DTexture.cpp
     Source/DCLowLevel.cpp
@@ -31,21 +29,52 @@ set(DDLIBRARY_SOURCES
     Source/GMouse.cpp
     Source/GWorkScreen.cpp
     Source/MFX_DC.cpp
-    Source/QSManager.cpp
     Source/Tga.cpp
     Source/WindProcs.cpp
     Source/net.cpp)
+if(FALLEN_ENABLE_AUDIO)
+    if(FALLEN_AUDIO_ENABLE_A3D_BACKEND)
+        set(DDLIBRARY_AUDIO_HEADERS
+            ${DDLIBRARY_AUDIO_HEADERS}
+            Headers/A3DManager.h)
+        set(DDLIBRARY_AUDIO_SOURCES
+            ${DDLIBRARY_AUDIO_SOURCES}
+            Source/A3DManager.cpp)
+    endif(FALLEN_AUDIO_ENABLE_A3D_BACKEND)
+    if(FALLEN_AUDIO_ENABLE_QMDX_BACKEND)
+        set(DDLIBRARY_AUDIO_HEADERS
+            ${DDLIBRARY_AUDIO_HEADERS}
+            Headers/QSManager.h)
+        set(DDLIBRARY_AUDIO_SOURCES
+            ${DDLIBRARY_AUDIO_SOURCES}
+            Source/QSManager.cpp)
+    endif(FALLEN_AUDIO_ENABLE_QMDX_BACKEND)
+    if(FALLEN_AUDIO_ENABLE_DIRECTSOUND_BACKEND)
+        set(DDLIBRARY_AUDIO_HEADERS
+            ${DDLIBRARY_AUDIO_HEADERS}
+            Headers/DSManager.h)
+        set(DDLIBRARY_AUDIO_SOURCES
+            ${DDLIBRARY_AUDIO_SOURCES}
+            Source/DSManager.cpp)
+    endif(FALLEN_AUDIO_ENABLE_DIRECTSOUND_BACKEND)
+endif(FALLEN_ENABLE_AUDIO)
 set(DDLIBRARY_RESOURCES
     )
 source_group(Headers
-    FILES ${DDLIBRARY_HEADERS})
+    FILES
+        ${DDLIBRARY_HEADERS}
+        ${DDLIBRARY_AUDIO_HEADERS})
 source_group(Source
-    FILES ${DDLIBRARY_SOURCES})
+    FILES
+        ${DDLIBRARY_SOURCES}
+        ${DDLIBRARY_AUDIO_SOURCES})
 source_group(Resources
     FILES ${DDLIBRARY_RESOURCES})
 add_library(DDLibrary STATIC
     ${DDLIBRARY_HEADERS}
+    ${DDLIBRARY_AUDIO_HEADERS}
     ${DDLIBRARY_SOURCES}
+    ${DDLIBRARY_AUDIO_SOURCES}
     ${DDLIBRARY_RESOURCES})
 target_include_directories(DDLibrary
     PUBLIC Headers

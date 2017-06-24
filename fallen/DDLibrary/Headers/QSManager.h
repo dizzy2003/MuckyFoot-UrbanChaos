@@ -1,7 +1,7 @@
 //	QSManager.h
 //	Guy Simmons, 6th May 1998.
 
-#ifndef	QSMANAGER_H
+#if !defined(NO_SOUND) && defined(Q_SOUND) && !defined(QSMANAGER_H)
 #define	QSMANAGER_H
 
 //---------------------------------------------------------------
