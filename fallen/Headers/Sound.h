@@ -7,7 +7,9 @@
 #include "Structs.h"
 #include "MFX.h"
 
+#if !defined(NO_SOUND) && defined(A3D_SOUND)
 #define USE_A3D
+#endif
 
 // because the versions in MFStdLib.h are misspelt...
 #define	WAVE_PLAY_INTERRUPT		0
