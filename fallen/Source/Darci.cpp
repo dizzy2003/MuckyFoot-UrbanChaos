@@ -1203,7 +1203,7 @@ void	set_thing_velocity(Thing *t_thing,SLONG vel)
 
 extern	SLONG dist_to_line(	SLONG x1, SLONG z1,	SLONG x2, SLONG z2,	SLONG a,  SLONG b);
 extern	void nearest_point_on_line(	SLONG x1, SLONG z1,	SLONG x2, SLONG z2,	SLONG a,  SLONG b,SLONG *ret_x,SLONG *ret_z);
-extern	calc_things_height(struct MapThing *p_thing); //editor\collide.c
+extern	void calc_things_height(struct MapThing *p_thing); //editor\collide.c
 //extern	struct	CollisionVect		col_vects[];
 #ifdef	DOG_POO
 SLONG	setup_person_for_jump_grab(Thing *p_thing)

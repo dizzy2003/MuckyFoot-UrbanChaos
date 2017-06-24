@@ -6417,7 +6417,7 @@ void	draw_quick_floor(SLONG warehouse)
 
 	D3DMULTIMATRIX	mm_draw_floor;
 
-	static	init_stats=1;
+	static	SLONG	init_stats=1;
 
 	static	SLONG	biggest=0;
 
@@ -7372,8 +7372,8 @@ void AENG_draw_city()
 	OB_Info *oi;
 
 	LIGHT_Colour pcol;
-	static	outside=1;
-	static	sea_offset=0;
+	static	SLONG outside=1;
+	static	SLONG sea_offset=0;
 
 	AENG_total_polys_drawn = 0;
 void	draw_all_boxes(void);
@@ -10294,9 +10294,9 @@ extern HWND GEDIT_edit_wnd;
 										{
 											SLONG	dx,dy,dz,dist;
 
-											dx=abs((p_thing->WorldPos.X >> 8)-AENG_cam_x);
-											dy=abs((p_thing->WorldPos.Y >> 8)-AENG_cam_y);
-											dz=abs((p_thing->WorldPos.Z >> 8)-AENG_cam_z);
+											dx=fabs((p_thing->WorldPos.X >> 8)-AENG_cam_x);
+											dy=fabs((p_thing->WorldPos.Y >> 8)-AENG_cam_y);
+											dz=fabs((p_thing->WorldPos.Z >> 8)-AENG_cam_z);
 
 											dist=QDIST3(dx,dy,dz);
 
@@ -12502,9 +12502,9 @@ void AENG_draw_warehouse()
 							{
 								SLONG	dx,dy,dz,dist;
 
-								dx=abs((p_thing->WorldPos.X >> 8)-AENG_cam_x);
-								dy=abs((p_thing->WorldPos.Y >> 8)-AENG_cam_y);
-								dz=abs((p_thing->WorldPos.Z >> 8)-AENG_cam_z);
+								dx=fabs((p_thing->WorldPos.X >> 8)-AENG_cam_x);
+								dy=fabs((p_thing->WorldPos.Y >> 8)-AENG_cam_y);
+								dz=fabs((p_thing->WorldPos.Z >> 8)-AENG_cam_z);
 
 								dist=QDIST3(dx,dy,dz);
 

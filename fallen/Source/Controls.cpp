@@ -3468,7 +3468,7 @@ extern void PYRO_fn_init(Thing *thing);
 		}*/
 	}
 	if (ribbon_id!=-1) {
-		static ribbon_tick=0;
+		static SLONG ribbon_tick=0;
 		ribbon_tick++;
 		if (ribbon_tick&1) {
 			SLONG dx,dz,ang;
@@ -3615,7 +3615,7 @@ extern void PYRO_fn_init(Thing *thing);
 	*/
 
 	{
-		static dlight = NULL;
+		static UBYTE dlight = NULL;
 
 		if (Keys[KB_L])
 		{
@@ -3832,7 +3832,7 @@ extern void PYRO_fn_init(Thing *thing);
 
 	if (ShiftFlag)
 	{
-		static	skill=0;
+		static	SLONG skill=0;
 		if(Keys[KB_A])
 		{
 			UWORD	index;

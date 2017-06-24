@@ -40,7 +40,6 @@
 #include "font2d.h"
 #include "env.h"
 #include "drive.h"
-#include "snd_type.h"
 #include "sound.h"
 #include "MFX.h"
 #include "MFX_Miles.h"

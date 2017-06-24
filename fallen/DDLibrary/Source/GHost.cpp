@@ -4,7 +4,6 @@
 #include	"DDLib.h"
 #include	"fallen/headers/Sound.h"
 #include	"a3dmanager.h"
-#include	"snd_type.h"
 #include	"mfx.h"
 #include	"mfx_miles.h"
 

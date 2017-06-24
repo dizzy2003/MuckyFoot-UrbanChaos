@@ -438,7 +438,7 @@ void CRINKLE_write_bin(FileClump* tclump, CRINKLE_Handle hnd, int id)
 		bptr += sizeof(*cp);
 	}
 
-	for (ii = 0; ii < cc->num_faces; ii++)
+	for (int ii = 0; ii < cc->num_faces; ii++)
 	{
 		memcpy(bptr, cf, sizeof(*cf));
 		cf++;
@@ -735,7 +735,7 @@ void CRINKLE_do(
 				//
 				// Backup the old lighting.
 				//
-					
+
 				ULONG c0 = tri[0]->colour;
 				ULONG c1 = tri[1]->colour;
 				ULONG c2 = tri[2]->colour;
@@ -748,7 +748,7 @@ void CRINKLE_do(
 				//
 				// Each colour in turn...
 				//
-				
+
 				r = ((c0 >> 16) & 0xff) + drgb;
 				g = ((c0 >>  8) & 0xff) + drgb;
 				b = ((c0 >>  0) & 0xff) + drgb;
@@ -780,7 +780,7 @@ void CRINKLE_do(
 #else
 				tri[1]->colour = (a << 24) | (r << 16) | (g << 8) | (b << 0);
 #endif
-				
+
 				r = ((c2 >> 16) & 0xff) + drgb;
 				g = ((c2 >>  8) & 0xff) + drgb;
 				b = ((c2 >>  0) & 0xff) + drgb;

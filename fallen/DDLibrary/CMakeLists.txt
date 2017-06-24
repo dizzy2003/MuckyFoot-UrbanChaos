@@ -1,0 +1,63 @@
+set(DDLIBRARY_HEADERS
+    Headers/BinkClient.h
+    Headers/D3DTexture.h
+    Headers/DCLowLevel.h
+    Headers/DDManager.h
+    Headers/DDlib.h
+    Headers/DIManager.h
+    Headers/Debug.h
+    Headers/Drive.h
+    Headers/FileClump.h
+    Headers/GDisplay.h
+    Headers/GWorkScreen.h
+    Headers/MFx.h
+    Headers/QSManager.h
+    Headers/Tga.h
+    Headers/WindProcs.h
+    Headers/net.h)
+set(DDLIBRARY_SOURCES
+    Source/A3DManager.cpp
+    Source/BinkClient.cpp
+    Source/D3DTexture.cpp
+    Source/DCLowLevel.cpp
+    Source/DDManager.cpp
+    Source/DIManager.cpp
+    Source/Drive.cpp
+    Source/FileClump.cpp
+    Source/GDebug.cpp
+    Source/GDisplay.cpp
+    Source/GHost.cpp
+    Source/GKeyboard.cpp
+    Source/GMouse.cpp
+    Source/GWorkScreen.cpp
+    Source/MFX_DC.cpp
+    Source/QSManager.cpp
+    Source/Tga.cpp
+    Source/WindProcs.cpp
+    Source/net.cpp)
+set(DDLIBRARY_RESOURCES
+    )
+source_group(Headers
+    FILES ${DDLIBRARY_HEADERS})
+source_group(Source
+    FILES ${DDLIBRARY_SOURCES})
+source_group(Resources
+    FILES ${DDLIBRARY_RESOURCES})
+add_library(DDLibrary STATIC
+    ${DDLIBRARY_HEADERS}
+    ${DDLIBRARY_SOURCES}
+    ${DDLIBRARY_RESOURCES})
+target_include_directories(DDLibrary
+    PUBLIC Headers
+    PRIVATE
+        ../..
+        ../Headers
+        ../DDEngine/Headers)
+target_link_libraries(DDLibrary
+    MFStdLib
+    amstrmid
+    ddraw
+    dinput
+    dplayx
+    dsound
+    winmm)

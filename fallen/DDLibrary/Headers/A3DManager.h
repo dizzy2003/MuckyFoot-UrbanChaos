@@ -36,7 +36,7 @@ void            TraceText(CBYTE *error, ...);
 #include <stdlib.h>
 #include <cguid.h>
 
-#include "fallen/headers/A3D/Ia3dapi.h"
+#include <Ia3dapi.h>
 
 
 #define MAX_QUEUE_LENGTH	5
@@ -79,8 +79,8 @@ public:
 	inline SLONG Count()						{ return count; }
 	inline A3DBase *Head()						{ return list; }
 	inline A3DBase *Tail()						{ return tail; }
-	inline operator+=(A3DBase *item)			{ Add(item); return ( NULL ); };
-	inline operator-=(A3DBase *item)			{ Del(item); return ( NULL ); };
+	inline A3DBase *operator+=(A3DBase *item)	{ Add(item); return ( NULL ); };
+	inline A3DBase *operator-=(A3DBase *item)	{ Del(item); return ( NULL ); };
 	inline A3DBase* operator[](SLONG index)		{ return Index(index);	};
 };
 

@@ -9,7 +9,6 @@
 
 // Standard 'C' includes.
 #if !defined(TARGET_DC)
-#include	<iostream.h>
 #include	<time.h>
 #endif
 #include	<stdio.h>
@@ -32,6 +31,7 @@
 #define D3D_OVERLOADS
 #include	<windows.h>
 #include	<windowsx.h>
+#include	<initguid.h>
 #include	<d3dtypes.h>
 #include	<ddraw.h>
 #ifndef TARGET_DC
@@ -178,7 +178,7 @@ void			DebugText(CBYTE *error, ...);
 // Input.
 
 #define	MOUSE			DIDEVTYPE_MOUSE
-#define	KEYBOARD		DIDEVTYPE_KEYBOARD 
+#define	KEYBOARD		DIDEVTYPE_KEYBOARD
 #define	JOYSTICK		DIDEVTYPE_JOYSTICK
 
 

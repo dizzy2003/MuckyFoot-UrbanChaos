@@ -11,9 +11,6 @@
 #include "texture.h"
 #include "message.h"
 #include "night.h"
-#ifndef TARGET_DC
-#include "clip.h"
-#endif
 #include "vertexbuffer.h"
 #include "polypoint.h"
 #include "renderstate.h"
@@ -92,7 +89,7 @@ void POLY_load_texture_flags(CBYTE *fname, SLONG offset)
 		while(fgets(line, 256, handle))
 		{
 			match = sscanf(line, "Page %d:", &page);
-			
+
 			page += offset;
 
 			if (match == 1 && WITHIN(page, 0, POLY_NUM_PAGES - 1))
@@ -167,7 +164,7 @@ void POLY_load_texture_flags(CBYTE *fname, SLONG offset)
 }
 
 // POLY_init_render_states
-// 
+//
 // initialize all the render states for each page
 
 #ifdef TARGET_DC
@@ -219,7 +216,7 @@ void POLY_init_render_states()
 	PolyPage*	pa;
 
 
-	for (ii = 0; ii < POLY_NUM_PAGES; ii++)
+	for (int ii = 0; ii < POLY_NUM_PAGES; ii++)
 	{
 		pa = &POLY_Page[ii];
 
@@ -905,7 +902,7 @@ void POLY_init_render_states()
 					SET_TEXTURE((TEXTURE_page_droplet));
 					//SET_RENDER_STATE(D3DRENDERSTATE_FOGENABLE,FALSE);
 					SET_RENDER_STATE(D3DRENDERSTATE_ZWRITEENABLE,FALSE);
-					break;				
+					break;
 
 				case POLY_PAGE_RAINDROP:
 					SET_RENDER_STATE(D3DRENDERSTATE_TEXTUREMAPBLEND,D3DTBLEND_MODULATEALPHA);
@@ -925,7 +922,7 @@ void POLY_init_render_states()
 					SET_TEXTURE((TEXTURE_page_sparkle));
 					//SET_RENDER_STATE(D3DRENDERSTATE_FOGENABLE,FALSE);
 					SET_RENDER_STATE(D3DRENDERSTATE_ZWRITEENABLE,FALSE);
-					break;				
+					break;
 
 				case POLY_PAGE_FLAMES:
 					SET_RENDER_STATE(D3DRENDERSTATE_TEXTUREMAPBLEND,D3DTBLEND_MODULATE);
@@ -1013,7 +1010,7 @@ void POLY_init_render_states()
 					SET_RENDER_STATE(D3DRENDERSTATE_SRCBLEND,D3DBLEND_SRCALPHA);
 					SET_RENDER_STATE(D3DRENDERSTATE_DESTBLEND,D3DBLEND_INVSRCALPHA);
 					SET_TEXTURE((TEXTURE_page_footprint));
-					SET_RENDER_STATE(D3DRENDERSTATE_FOGENABLE,TRUE);			
+					SET_RENDER_STATE(D3DRENDERSTATE_FOGENABLE,TRUE);
 					break;
 
 				case POLY_PAGE_FONT2D:
@@ -1046,7 +1043,7 @@ void POLY_init_render_states()
 					SET_EFFECT(RS_InvAlphaPremult);
 
 					sw_page = SW_PAGE_ADDITIVE;
-							
+
 					break;
 
 				case POLY_PAGE_FLAMES3:
@@ -1155,7 +1152,7 @@ void POLY_init_render_states()
 					SET_RENDER_STATE(D3DRENDERSTATE_SRCBLEND,D3DBLEND_SRCALPHA);
 					SET_RENDER_STATE(D3DRENDERSTATE_DESTBLEND,D3DBLEND_INVSRCALPHA);
 					SET_TEXTURE((TEXTURE_page_tyretrack_alpha));
-					SET_RENDER_STATE(D3DRENDERSTATE_FOGENABLE,TRUE);			
+					SET_RENDER_STATE(D3DRENDERSTATE_FOGENABLE,TRUE);
 					break;
 
 				case POLY_PAGE_TYRESKID:
@@ -1406,7 +1403,7 @@ void POLY_init_render_states()
 					SET_RENDER_STATE(D3DRENDERSTATE_DESTBLEND,D3DBLEND_INVSRCALPHA);
 					SET_TEXTURE((TEXTURE_page_smokecloud));
 					//SET_RENDER_STATE(D3DRENDERSTATE_FOGENABLE,FALSE);
-					
+
 					sw_page = SW_PAGE_ALPHA;
 
 					break;
@@ -1636,7 +1633,7 @@ void POLY_init_render_states()
 
 									SET_RENDER_STATE(D3DRENDERSTATE_ALPHABLENDENABLE,TRUE);
 									SET_RENDER_STATE(D3DRENDERSTATE_TEXTUREMAPBLEND,D3DTBLEND_DECAL);
-					
+
 									break;
 							}
 						}
@@ -1754,7 +1751,7 @@ extern int iPolyNumPagesRender;
 
 #ifndef TARGET_DC
 #ifdef _DEBUG
-	for (ii = 0; ii < POLY_NUM_PAGES; ii++)
+	for (int ii = 0; ii < POLY_NUM_PAGES; ii++)
 	{
 		if (char* err = POLY_Page[ii].RS.Validate())
 		{

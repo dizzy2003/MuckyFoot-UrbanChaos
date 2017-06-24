@@ -1051,7 +1051,7 @@ void reinit_vehicle(Thing* p_thing)
 
 	SLONG	height;
 
-	for (ii = 0; ii < 4; ii++)
+	for (int ii = 0; ii < 4; ii++)
 	{
 		vp->DY[ii] = 0;
 		vp->Spring[ii].Compression = 4300;

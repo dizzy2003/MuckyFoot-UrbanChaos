@@ -187,7 +187,7 @@ reinit_because_of_language_change:
 		FRONTEND_init ( bReinitBecauseOfLanguageChange );
 	}
 #else
-	FRONTEND_init ( bReinitBecauseOfLanguageChange )
+	FRONTEND_init ( bReinitBecauseOfLanguageChange );
 #endif
 
 

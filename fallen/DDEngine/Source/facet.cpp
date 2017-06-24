@@ -1644,7 +1644,9 @@ static void FillFacetPoints(SLONG count, ULONG base_row, SLONG foundation, SLONG
 	SLONG	row1 = FacetRows[base_row];
 	SLONG	row2 = FacetRows[base_row+1];
 
-	for (SLONG c0 = 0; c0 < row2 - row1 - 1; c0++)
+	SLONG c0;
+
+	for (c0 = 0; c0 < row2 - row1 - 1; c0++)
 	{
 		if (facet_backwards)
 		{
@@ -1907,7 +1909,9 @@ inline void FillFacetPointsCommon(SLONG count, ULONG base_row, SLONG foundation,
 	FACET_Facetinfo *ff;
 	#endif
 
-	for (SLONG c0 = 0; c0 < row2 - row1 - 1; c0++)
+	SLONG c0;
+
+	for (c0 = 0; c0 < row2 - row1 - 1; c0++)
 	{
 		{
 			quad[0] = &POLY_buffer[row2+c0+1];

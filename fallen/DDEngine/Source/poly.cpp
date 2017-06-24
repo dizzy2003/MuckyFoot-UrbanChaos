@@ -11,9 +11,6 @@
 #include "texture.h"
 #include "message.h"
 #include "night.h"
-#ifndef TARGET_DC
-#include "clip.h"
-#endif
 #include "vertexbuffer.h"
 #include "polypoint.h"
 #include "renderstate.h"
@@ -418,7 +415,7 @@ void POLY_camera_set(
 
 			POLY_screen_clip_top	= POLY_screen_height;
 			POLY_screen_clip_bottom	= float(DisplayHeight);
-			
+
 			POLY_screen_mid_y		= POLY_screen_height * 1.50F;
 			POLY_screen_mul_y		= POLY_screen_height * 0.50F / POLY_ZCLIP_PLANE;
 
@@ -490,15 +487,15 @@ void POLY_camera_set(
 	matTemp._11 = 1.0f;
 	matTemp._21 = 0.0f;
 	matTemp._31 = 0.0f;
-	matTemp._41 = 0.0f;			
+	matTemp._41 = 0.0f;
 	matTemp._12 = 0.0f;
 	matTemp._22 = 1.0f;
 	matTemp._32 = 0.0f;
-	matTemp._42 = 0.0f;			
+	matTemp._42 = 0.0f;
 	matTemp._13 = 0.0f;
 	matTemp._23 = 0.0f;
 	matTemp._33 = 1.0f;
-	matTemp._43 = 0.0f;			
+	matTemp._43 = 0.0f;
 	matTemp._14 = 0.0f;
 	matTemp._24 = 0.0f;
 	matTemp._34 = 0.0f;
@@ -616,7 +613,7 @@ void POLY_camera_set(
 
 #endif //#if USE_TOMS_ENGINE_PLEASE_BOB
 
-	
+
 #ifdef TARGET_DC
 	m_iCurrentCombo = COMBO_DIRTY;
 	SetupFTRVMatrix ( COMBO_FALSE );
@@ -1321,7 +1318,7 @@ SLONG POLY_sphere_visible(
 	//
 	// Rotate into viewspace.
 	//
-	
+
 	view_x = world_x - POLY_cam_x;
 	view_y = world_y - POLY_cam_y;
 	view_z = world_z - POLY_cam_z;
@@ -1438,7 +1435,7 @@ void POLY_frame_init(SLONG keep_shadow_page, SLONG keep_text_page)
 		}
 		else
 		{
-			fog_colour = 
+			fog_colour =
 				(NIGHT_sky_colour.red   << 16) |
 				(NIGHT_sky_colour.green <<  8) |
 				(NIGHT_sky_colour.blue  <<  0);
@@ -1450,7 +1447,7 @@ void POLY_frame_init(SLONG keep_shadow_page, SLONG keep_text_page)
 
 			white /= 3;
 
-			fog_colour = 
+			fog_colour =
 				(white << 16) |
 				(white <<  8) |
 				(white <<  0);
@@ -1727,7 +1724,9 @@ SLONG POLY_clip_against_nearplane(POLY_Point** rptr, float* dptr, SLONG count, P
 	POLY_Point*		p1;
 	POLY_Point*		p2;
 
-	for (SLONG ii = 0; ii < count - 1; ii++)
+	SLONG			ii;
+
+	for (ii = 0; ii < count - 1; ii++)
 	{
 		p1 = rptr[ii];
 		p2 = rptr[ii+1];
@@ -1791,7 +1790,9 @@ SLONG POLY_clip_against_side_X(POLY_Point** rptr, float* dptr, SLONG count, POLY
 	POLY_Point*		p1;
 	POLY_Point*		p2;
 
-	for (SLONG ii = 0; ii < count - 1; ii++)
+	SLONG			ii;
+
+	for (ii = 0; ii < count - 1; ii++)
 	{
 		p1 = rptr[ii];
 		p2 = rptr[ii+1];
@@ -1851,7 +1852,9 @@ SLONG POLY_clip_against_side_Y(POLY_Point** rptr, float* dptr, SLONG count, POLY
 	POLY_Point*		p1;
 	POLY_Point*		p2;
 
-	for (SLONG ii = 0; ii < count - 1; ii++)
+	SLONG			ii;
+
+	for (ii = 0; ii < count - 1; ii++)
 	{
 		p1 = rptr[ii];
 		p2 = rptr[ii+1];
@@ -1980,7 +1983,7 @@ void POLY_add_poly(POLY_Point** poly, SLONG poly_points, SLONG page)
 		}
 		clip_or &= s_ClipMask;
 	}
-	
+
 #ifndef TARGET_DC
 	if (sw_hack)
 	{
@@ -2224,7 +2227,7 @@ void POLY_add_nearclipped_triangle(POLY_Point *pt[3], SLONG page, SLONG backface
 #endif
 		pv->SetColour  (ppt->colour);
 		pv->SetSpecular(ppt->specular);
-		
+
 		pv++;
 
 		laura = 2;
@@ -2241,7 +2244,7 @@ void POLY_add_nearclipped_triangle(POLY_Point *pt[3], SLONG page, SLONG backface
 #endif
 			pv->SetColour  (ppt->colour);
 			pv->SetSpecular(ppt->specular);
-			
+
 			pv++;
 
 			ppt = rptr[laura];
@@ -2254,7 +2257,7 @@ void POLY_add_nearclipped_triangle(POLY_Point *pt[3], SLONG page, SLONG backface
 #endif
 			pv->SetColour  (ppt->colour);
 			pv->SetSpecular(ppt->specular);
-			
+
 			laura++;
 
 			if (laura >= poly_points)
@@ -2298,7 +2301,7 @@ void POLY_add_nearclipped_triangle(POLY_Point *pt[3], SLONG page, SLONG backface
 	#endif
 			pv->SetColour  (ppt->colour);
 			pv->SetSpecular(ppt->specular);
-			
+
 			pv++;
 		}
 
@@ -2447,7 +2450,7 @@ void POLY_add_quad_fast(POLY_Point *pt[4], SLONG page, SLONG backface_cull, SLON
 {
 
 	LOG_ENTER ( POLY_add_quad )
-	
+
 	if (generate_clip_flags)
 	{
 		POLY_setclip(pt[0]);
@@ -2775,7 +2778,7 @@ void POLY_add_quad_slow(POLY_Point *pp[4], SLONG page, SLONG backface_cull, SLON
 		FONT2D_DrawString(str,pp[0]->X,pp[0]->Y,0xff0000);
 	}
 #endif
-	
+
 
 /*
 	if(ShiftFlag)
@@ -3036,7 +3039,7 @@ void POLY_add_line_tex_uv(POLY_Point *p1, POLY_Point *p2, float width1, float wi
 
 	len     = (fabsf(dx) > fabsf(dy)) ? fabsf(dx) + 0.414F * fabsf(dy) : fabsf(dy) + 0.414F * fabsf(dx);
 	overlen = 1.0F / len;
-	
+
 	dx *= overlen;
 	dy *= overlen;
 
@@ -3089,7 +3092,7 @@ void POLY_add_line_tex_uv(POLY_Point *p1, POLY_Point *p2, float width1, float wi
 
 	pt[2].X += dx2;
 	pt[2].Y += dy2;
-	
+
 	pt[3].X -= dx2;
 	pt[3].Y -= dx2;
 
@@ -3160,7 +3163,7 @@ void POLY_add_line(POLY_Point *p1, POLY_Point *p2, float width1, float width2, S
 
 	len     = (fabsf(dx) > fabsf(dy)) ? fabsf(dx) + 0.414F * fabsf(dy) : fabsf(dy) + 0.414F * fabsf(dx);
 	overlen = 1.0F / len;
-	
+
 	dx *= overlen;
 	dy *= overlen;
 
@@ -3322,7 +3325,7 @@ void  POLY_add_line_2d(float sx1, float sy1, float sx2, float sy2, ULONG colour)
 
 	len     = (fabsf(dx) > fabsf(dy)) ? fabsf(dx) + 0.414F * fabsf(dy) : fabsf(dy) + 0.414F * fabsf(dx);
 	overlen = 0.5F / len;
-	
+
 	dx *= overlen;
 	dy *= overlen;
 
@@ -3438,7 +3441,7 @@ void POLY_clip_line_add(float sx1, float sy1, float sx2, float sy2, ULONG colour
 			if (clip1 & clip2)
 			{
 				return;
-			}			
+			}
 
 			clip_xor = clip1 ^ clip2;
 		}
@@ -3463,7 +3466,7 @@ void POLY_clip_line_add(float sx1, float sy1, float sx2, float sy2, ULONG colour
 			if (clip1 & clip2)
 			{
 				return;
-			}			
+			}
 
 			clip_xor = clip1 ^ clip2;
 		}
@@ -3488,7 +3491,7 @@ void POLY_clip_line_add(float sx1, float sy1, float sx2, float sy2, ULONG colour
 			if (clip1 & clip2)
 			{
 				return;
-			}			
+			}
 
 			clip_xor = clip1 ^ clip2;
 		}
@@ -3513,7 +3516,7 @@ void POLY_clip_line_add(float sx1, float sy1, float sx2, float sy2, ULONG colour
 			if (clip1 & clip2)
 			{
 				return;
-			}			
+			}
 
 			clip_xor = clip1 ^ clip2;
 		}
@@ -3675,7 +3678,7 @@ void POLY_frame_draw(SLONG draw_shadow_page, SLONG draw_text_page)
 		}
 		else
 		{
-			fog_colour = 
+			fog_colour =
 				(NIGHT_sky_colour.red   << 16) |
 				(NIGHT_sky_colour.green <<  8) |
 				(NIGHT_sky_colour.blue  <<  0);
@@ -3687,7 +3690,7 @@ void POLY_frame_draw(SLONG draw_shadow_page, SLONG draw_text_page)
 
 			white /= 3;
 
-			fog_colour = 
+			fog_colour =
 				(white << 16) |
 				(white <<  8) |
 				(white <<  0);
@@ -3704,7 +3707,7 @@ void POLY_frame_draw(SLONG draw_shadow_page, SLONG draw_text_page)
 
 	//
 	// Draw the sky first...
-	// 
+	//
 
 #ifndef TARGET_DC
 	pa = &POLY_Page[POLY_PAGE_SKY];
@@ -3727,7 +3730,7 @@ void POLY_frame_draw(SLONG draw_shadow_page, SLONG draw_text_page)
 		//
 //		BreakTime("FRAMEDRAW start alphasort");
 
-		
+
 #ifdef TEX_EMBED
 		for (i = 0; i <= iPolyNumPagesRender; i++)		// <= because we skip POLY_PAGE_COLOUR...
 		{
@@ -4266,7 +4269,7 @@ void POLY_frame_draw_focused(float focus)
 
 	//
 	// Set-up renderstates.
-	// 
+	//
 
 	SET_RENDER_STATE(D3DRENDERSTATE_SHADEMODE,D3DSHADE_GOURAUD);
 	SET_RENDER_STATE(D3DRENDERSTATE_TEXTUREPERSPECTIVE,TRUE);
@@ -4298,7 +4301,7 @@ void POLY_frame_draw_focused(float focus)
 	//
 
 	for (i = 0; i < TEXTURE_page_num_standard; i++)
-	{	
+	{
 		ASSERT(WITHIN(i, 0, POLY_NUM_PAGES - 1));
 
 		pa = &POLY_Page[i];
@@ -4339,7 +4342,7 @@ void POLY_frame_draw_focused(float focus)
 
 		//
 		// Render the polys.
-		// 
+		//
 
 		the_display.lp_D3D_Device->DrawIndexedPrimitive(
 										D3DPT_TRIANGLELIST,
@@ -4363,7 +4366,7 @@ void POLY_frame_draw_focused(float focus)
 	//
 
 	for (i = 0; i < TEXTURE_page_num_standard; i++)
-	{	
+	{
 		ASSERT(WITHIN(i, 0, POLY_NUM_PAGES - 1));
 
 		pa = &POLY_page[i];
@@ -4399,7 +4402,7 @@ void POLY_frame_draw_focused(float focus)
 
 		//
 		// Render the polys.
-		// 
+		//
 
 		the_display.lp_D3D_Device->DrawIndexedPrimitive(
 										D3DPT_TRIANGLELIST,
@@ -4646,7 +4649,7 @@ LABEL2:	// too near
 		fstp	st(0)
 		mov		eax,64
 		mov		WORD PTR [edx+24],ax
-	
+
 LABEL3: // return
 
 #ifdef _DEBUG
@@ -4746,7 +4749,7 @@ LABEL11: // bottom clip
 		movzx	eax,WORD PTR [edx+24]
 		or		eax,8
 		mov		WORD PTR [edx+24],ax
-		
+
 #ifdef _DEBUG
 		pop	edi
 		pop	esi
@@ -4868,7 +4871,7 @@ LABEL5:
 		fstp	st(0)
 		mov		eax,32
 		mov		WORD PTR [edx+24],ax
-		
+
 		pop		ebx
 
 #ifdef _DEBUG

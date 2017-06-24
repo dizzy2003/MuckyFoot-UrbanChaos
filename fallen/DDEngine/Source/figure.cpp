@@ -271,7 +271,7 @@ void BuildMMLightingTable ( Pyro *p, DWORD colour_and=0xffffffff )
 		cvLight.g += fDotProd * NIGHT_amb_green;
 		cvLight.b += fDotProd * NIGHT_amb_blue;
 	}
-	for (j = 0; j < NIGHT_found_upto; j++)
+	for (int j = 0; j < NIGHT_found_upto; j++)
 	{
 		nf = &NIGHT_found[j];
 		// These are negative!
@@ -374,7 +374,7 @@ void BuildMMLightingTable ( Pyro *p, DWORD colour_and=0xffffffff )
 	}
 
 	// Ramp up to full brightness.
-	for ( i = 0; i < 64; i++ )
+	for ( int i = 0; i < 64; i++ )
 	{
 		if ( cvCur.r > 255.0f )
 		{
@@ -2805,7 +2805,7 @@ void FIGURE_TPO_finish_3d_object ( TomsPrimObject *pPrimObj, int iThrashIndex = 
 					WORD wIndex1 = -1;
 					bool bOdd = FALSE;
 					bool bFirst = TRUE;
-					for ( i = pMaterial->wNumListIndices / 3; i > 0; i-- )
+					for ( int i = pMaterial->wNumListIndices / 3; i > 0; i-- )
 					{
 						// Can we continue the list?
 						WORD wNextIndex = -1;
@@ -3304,7 +3304,7 @@ void FIGURE_draw_prim_tween(
 
 	if (prim == 267)
 	{
-		static count = 0;
+		static SLONG count = 0;
 
 		count += 1;
 

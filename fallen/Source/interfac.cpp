@@ -8363,8 +8363,8 @@ SLONG	continue_moveing(Thing *p_person)
 		{
 			SLONG	angle,dx,dy;
 
-			dx=abs(GET_JOYX(input));
-			dy=abs(GET_JOYY(input));
+			dx=labs(GET_JOYX(input));
+			dy=labs(GET_JOYY(input));
 			if(QDIST2(dx,dy)<ANALOGUE_MIN_VELOCITY)
 			{
 				return(0);

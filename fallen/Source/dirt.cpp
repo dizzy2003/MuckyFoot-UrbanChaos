@@ -1760,7 +1760,7 @@ void DIRT_process(void)
 
 				if (dd->y <= floor)
 				{
-					static tick = 0;
+					static SLONG tick = 0;
 
 					dd->y = floor + 1;
 

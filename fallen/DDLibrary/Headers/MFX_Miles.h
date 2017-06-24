@@ -3,7 +3,7 @@
 // Miles Sound System
 
 
-#ifndef TARGET_DC
+#if !defined(TARGET_DC) && defined(M_SOUND)
 
 #ifndef _MFX_MILES_H_
 #define _MFX_MILES_H_
