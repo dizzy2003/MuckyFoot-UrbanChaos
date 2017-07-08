@@ -1,0 +1,8 @@
+[workspace]
+members = ["openchaos-config", "openchaos-ffi"]
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"

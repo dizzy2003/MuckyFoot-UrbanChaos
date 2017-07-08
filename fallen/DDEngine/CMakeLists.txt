@@ -87,6 +87,7 @@ target_include_directories(DDEngine
     PUBLIC Headers
     PRIVATE
         ../..
+        ../../openchaos-ffi/include
         ../Headers
         ../DDLibrary/Headers)
 target_link_libraries(DDEngine MFStdLib)

@@ -7020,15 +7020,18 @@ extern TGA_Info TGA_load_from_file(const CBYTE *file, SLONG max_width, SLONG max
 #endif
 
 
-	CBYTE *str, *lang=ENV_get_value_string("language");
-
+	CBYTE *str, *lang=ENV_get_value_string("language", "Game");
+	if (lang == NULL) {
 #ifdef VERSION_FRENCH
-	// Kludge for the DC converter
-	if (!lang) lang="text\\lang_french.txt";
+		// Kludge for the DC converter
+		XLAT_load("text/lang_french.txt");
 #else
-	if (!lang) lang="text\\lang_english.txt";
+		XLAT_load("text/lang_english.txt");
 #endif
-	XLAT_load(lang);
+	} else {
+		XLAT_load(lang);
+		ENV_free_string(lang);
+	}
 	XLAT_init();
 
 	IsEnglish=!stricmp(XLAT_str(X_THIS_LANGUAGE_IS),"English");

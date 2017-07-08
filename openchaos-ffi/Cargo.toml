@@ -1,0 +1,23 @@
+[package]
+name = "openchaos-ffi"
+version = "0.1.0"
+authors = ["FaultyRAM <explodingpsu@gmail.com>"]
+publish = false
+workspace = ".."
+description = "Provides replacements for C functions in OpenChaos."
+repository = "https://github.com/FaultyRAM/OpenChaos"
+readme = "../README.md"
+keywords = ["FFI"]
+license = "(Apache-2.0 OR MIT)"
+
+[lib]
+crate-type = ["staticlib"]
+
+[dependencies.lazy_static]
+version = "0.2"
+
+[dependencies.openchaos-config]
+path = "../openchaos-config"
+
+[dependencies.toml]
+version = "0.4"

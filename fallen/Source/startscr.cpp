@@ -492,10 +492,14 @@ SLONG	do_start_menu(void)
 	static  BOOL doneload=0;
 
 	if (!doneload) {
-		CBYTE *lang=ENV_get_value_string("language");
+		CBYTE *lang=ENV_get_value_string("language", "Game");
 		doneload=1;
-		if (!lang) lang="text\\lang_english.txt";
-		XLAT_load(lang);
+		if (lang == NULL) {
+			XLAT_load("text/lang_english.txt");
+		} else {
+			XLAT_load(lang);
+			ENV_free_string(lang);
+		}
 		XLAT_init();
 		LoadFont_CRT();
 #define	NO_MAP	1

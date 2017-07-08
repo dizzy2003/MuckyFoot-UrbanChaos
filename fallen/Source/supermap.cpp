@@ -11,7 +11,7 @@
 #include	"noserver.h"
 #ifndef	PSX
 #include	"fallen/ddengine/headers/texture.h"
-#include	"fallen/headers/env.h"
+#include	"env.h"
 #endif
 
 #ifdef EDITOR
@@ -3699,8 +3699,9 @@ void	save_all_nads(void)
 	while(levels[c0].level)
 	{
 		CBYTE	name[100];
-
-		sprintf(name,"%s\\%s.ucm",ENV_get_value_string("level_dir","Secret"),levels[c0].name);
+		const CBYTE *level_dir = ENV_get_value_string("level_dir", "Secret");
+		sprintf(name,"%s\\%s.ucm",level_dir,levels[c0].name);
+		ENV_free_string(level_dir);
 //#ifdef	MIKE
 //		TesterText("Level: %s \n",levels[c0].name);
 //		TRACE("aLevel: %s \n",levels[c0].name);

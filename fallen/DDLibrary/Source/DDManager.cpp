@@ -6,7 +6,7 @@
 #endif
 
 #include	"DDLib.h"
-#include	"fallen/headers/env.h"
+#include	"env.h"
 #include	"fallen/headers/game.h"
 #include	<tchar.h>
 #ifdef	TARGET_DC

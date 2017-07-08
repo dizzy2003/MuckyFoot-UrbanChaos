@@ -50,7 +50,7 @@
 #include "xlat_str.h"
 #include "mist.h"
 #include "gamemenu.h"
-#include	"fallen/headers/env.h"
+#include	"env.h"
 
 
 #ifdef TARGET_DC
@@ -1996,7 +1996,9 @@ void EWAY_load_fake_wander_text(CBYTE *fname)
 
 	if(save_psx)
 	{
-		sprintf(str,"%s",ENV_get_value_string("level_dir","Secret"));
+		CBYTE *level_dir = ENV_get_value_string("level_dir", "Secret");
+		sprintf(str, "%s", level_dir);
+		ENV_free_string(level_dir);
 
 		if (!stricmp(str,"glevels"))
 		{
