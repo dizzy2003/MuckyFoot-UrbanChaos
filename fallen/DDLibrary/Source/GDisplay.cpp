@@ -5,7 +5,7 @@
 #include	"fallen/headers/demo.h"
 #include	"fallen/headers/interfac.h"
 #include	"BinkClient.h"
-#include	"fallen/headers/env.h"
+#include	"env.h"
 #include	"fallen/headers/xlat_str.h"
 
 #include "poly.h"
@@ -6053,10 +6053,13 @@ static void InitDialog(HWND hWnd)
 	SetWindowPos(hWnd, NULL, xoff, yoff, 0,0, SWP_NOZORDER | SWP_NOSIZE);
 
 	// localise this bastard
-	CBYTE *lang=ENV_get_value_string("language");
-
-	if (!lang) lang="text\\lang_english.txt";
-	XLAT_load(lang);
+	CBYTE *lang=ENV_get_value_string("language", "Game");
+	if (lang == NULL) {
+		XLAT_load("text/lang_english.txt");
+	} else {
+		XLAT_load(lang);
+		ENV_free_string(lang);
+	}
 	XLAT_init();
 	//SetWindowText(hWnd,XLAT_str(X_GRAPHICS));
 	SetDlgItemTextA(hWnd,IDC_GRAPHICS_OPTIONS,XLAT_str(X_GRAPHICS));

@@ -1,6 +1,6 @@
 //
 // The new ECTS level stuff!
-// 
+//
 
 //
 // Richard Reed's phone number in London, Hilton. 0171 636 1000 (room 343)
@@ -141,7 +141,7 @@ void ES_build_sewers(void)
 
 //
 // This is the last map to be loaded.
-// 
+//
 
 CBYTE ELEV_last_map_loaded[MAX_PATH];
 
@@ -158,15 +158,15 @@ void		TesterText(CBYTE *error, ...)
 	{
 		llog_handle	=	FileCreate("tester.log",1);
 		if(llog_handle==FILE_CREATION_ERROR)
-			llog_handle	=	NULL;			
+			llog_handle	=	NULL;
 	}
 
 	if(llog_handle)
 	{
-		va_start(argptr,error); 
-		vsprintf(buf, error,argptr); 
+		va_start(argptr,error);
+		vsprintf(buf, error,argptr);
 		va_end(argptr);
-		
+
 		FileWrite(llog_handle,buf,strlen(buf));
 	}
 }
@@ -203,7 +203,7 @@ void ELEV_load_level(CBYTE *fname_level)
 	SLONG version;
 	SLONG load_ok = FALSE;
 	SLONG flag;
-	
+
 	SLONG ew_id;
 	SLONG ew_type;
 	SLONG ew_subtype;
@@ -223,7 +223,7 @@ void ELEV_load_level(CBYTE *fname_level)
 	SLONG mess_count  =  0;
 	SLONG cutscene_count = 0;
 	SLONG water_level = -0x80;
-	
+
 	MFFileHandle handle = NULL;
 	CBYTE       *error;
 
@@ -244,14 +244,14 @@ void ELEV_load_level(CBYTE *fname_level)
 
 	//
 	// Clear all waypoint info.
-	// 
+	//
 
 	GAME_TURN=0;
 	SAVE_VALID=0;
 
-	EWAY_init();	
+	EWAY_init();
 
-	iamapsx=ENV_get_value_number("iamapsx", FALSE);
+	iamapsx=ENV_get_value_number("iamapsx", FALSE, "Game");
 
 	//
 	// Start off with no players.
@@ -309,7 +309,7 @@ void ELEV_load_level(CBYTE *fname_level)
 			CRIME_RATE = junk[0];
 
 			if (CRIME_RATE == 0)
-			{	
+			{
 				//
 				// If the mission hasn't been given a crime rate.
 				//
@@ -344,7 +344,7 @@ void ELEV_load_level(CBYTE *fname_level)
 				}
 			}
 
-			
+
 			for(i=0;i<FAKE_CIVS;i++)
 
 			{
@@ -502,7 +502,7 @@ SLONG	WAND_find_good_start_point_near(SLONG *mapx,SLONG *mapz);
 							break;
 
 						case TT_BOOLEANAND:
-						
+
 							//
 							// Booleans are always dependencies.
 							//
@@ -522,7 +522,7 @@ SLONG	WAND_find_good_start_point_near(SLONG *mapx,SLONG *mapz);
 							break;
 
 						case TT_BOOLEANOR:
-							
+
 							//
 							// Booleans are always dependencies.
 							//
@@ -714,9 +714,9 @@ SLONG	WAND_find_good_start_point_near(SLONG *mapx,SLONG *mapz);
 							{
 								default:
 								case PT_DARCI:
-									ed.subtype = PLAYER_DARCI; 
+									ed.subtype = PLAYER_DARCI;
 									break;
-								case PT_ROPER: 
+								case PT_ROPER:
 									ed.subtype = PLAYER_ROPER;
 									break;
 								case PT_COP:
@@ -750,7 +750,7 @@ SLONG	WAND_find_good_start_point_near(SLONG *mapx,SLONG *mapz);
 
 							//
 							// The HIWORD of Data[2] contains the HAS_* flags.
-							// 
+							//
 
 							ee.pcom_has = 0;
 
@@ -888,7 +888,7 @@ extern	SWORD	people_types[50];
 							{
 								//
 								// MIB never have a low skill...
-								// 
+								//
 
 								ee.ai_skill = 8 + (ee.ai_skill >> 1);
 							}
@@ -903,7 +903,7 @@ extern	SWORD	people_types[50];
 
 								//
 								// Fight test dummies are always invulnerable.
-								// 
+								//
 
 								ee.zone |= 1 << 4; // ugh!
 							}
@@ -912,7 +912,7 @@ extern	SWORD	people_types[50];
 							// What does this person drop when he dies?
 							//
 
-							ee.drop = 0;							
+							ee.drop = 0;
 
 							for (j = 0; j < 32; j++)
 							{
@@ -933,7 +933,7 @@ extern	SWORD	people_types[50];
 
 							//
 							// What key to unlock the vehicle?
-							// 
+							//
 
 							switch(event_point.Data[3])
 							{
@@ -1018,7 +1018,7 @@ extern	SWORD	people_types[50];
 						case WPT_CREATE_ITEM:
 
 							if (version < 4)
-							{	
+							{
 								//
 								// This is using the old list of hundreds of items.
 								//
@@ -1044,7 +1044,7 @@ extern	SWORD	people_types[50];
 										break;
 								}
 							}
-#endif							
+#endif
 
 							switch(event_point.Data[0])
 							{
@@ -1083,7 +1083,7 @@ extern	SWORD	people_types[50];
 
 									for (j = 0; j < event_point.Data[1]; j++)
 									{
-										
+
 
 										BARREL_alloc(
 											BARREL_TYPE_NORMAL,
@@ -1116,7 +1116,7 @@ extern	SWORD	people_types[50];
 							ed.arg2 = ew_delay;
 
 							ed.subtype = 0;
-							
+
 							if (event_point.Data[4]) {ed.subtype |= EWAY_SUBTYPE_CAMERA_LOCK_PLAYER;}
 							if (event_point.Data[5]) {ed.subtype |= EWAY_SUBTYPE_CAMERA_LOCK_DIRECTION;}
 							if (event_point.Data[6]) {ed.subtype |= EWAY_SUBTYPE_CAMERA_CANT_INTERRUPT;}
@@ -1160,7 +1160,7 @@ extern	SWORD	people_types[50];
 							ew_delay = event_point.Data[3];
 
 							if (ew_speed < 4) {ew_speed = 4;}
-							
+
 							ed.arg1 = ew_speed;
 							ed.arg2 = ew_delay;
 
@@ -1190,7 +1190,7 @@ extern	SWORD	people_types[50];
 							ed.arg1    = mess_count++;
 							ed.arg2    = event_point.Data[1];
 							break;
-							
+
 						case WPT_SOUND_EFFECT:
 							ed.type    = EWAY_DO_SOUND_EFFECT;
 							ed.subtype = event_point.Data[0];
@@ -1239,7 +1239,7 @@ extern	SWORD	people_types[50];
 							break;
 
 						case WPT_ACTIVATE_PRIM:
-							
+
 							switch(event_point.Data[0])
 							{
 								case AP_DOOR:
@@ -1291,7 +1291,7 @@ extern	SWORD	people_types[50];
 
 								//
 								// Fight test dummies are always invulnerable.
-								// 
+								//
 
 								ee.zone |= 1 << 4; // ugh!
 							}
@@ -1341,11 +1341,11 @@ extern	SWORD	people_types[50];
 							break;
 
 						case WPT_CREATE_BARREL:
-							
+
 							{
 								UWORD barrel_type;
 								UWORD prim;
-							
+
 
 								switch(event_point.Data[0])
 								{
@@ -1491,7 +1491,7 @@ extern	SWORD	people_types[50];
 							break;
 
 						case WPT_MAKE_SEARCHABLE:
-							
+
 							//
 							// Look for the nearest ob and flag it as searchable.
 							//
@@ -1639,7 +1639,7 @@ extern	SWORD	people_types[50];
 					}
 //					if(0)
 
-					if (save_psx || ENV_get_value_number("iamapsx", FALSE))
+					if (save_psx || ENV_get_value_number("iamapsx", FALSE, "Game"))
 					{
 						//
 						// Skip waypoints marked as optional. We do it here so that
@@ -1655,7 +1655,7 @@ extern	SWORD	people_types[50];
 
 					//
 					// Create the waypoint.
-					// 
+					//
 
 
 					EWAY_create(
@@ -1716,7 +1716,7 @@ extern	SWORD	people_types[50];
 		if(BOREDOM_RATE<4)
 			BOREDOM_RATE=4;
 
-		if (version>8) 
+		if (version>8)
 		{
 //			FileSeek(handle,SEEK_MODE_CURRENT,1);
 			FileRead(handle,&FAKE_CARS,1);
@@ -1738,7 +1738,7 @@ extern	SWORD	people_types[50];
 
 				if (version>4) FileRead(handle,&l,4); else l=_MAX_PATH;
 				if (FileRead(handle, junk, l) == FILE_READ_ERROR) goto file_error;
-				
+
 				//
 				// Tell the EWAY module what each message is.
 				//
@@ -1758,7 +1758,7 @@ extern	SWORD	people_types[50];
 				switch (what) {
 				case 1: // message
 					ZeroMemory(junk,sizeof(junk));
-					FileRead(handle,&l,4); 
+					FileRead(handle,&l,4);
 					if (FileRead(handle, junk, l) == FILE_READ_ERROR) goto file_error;
 					//
 					// Tell the EWAY module what each message is.
@@ -1905,7 +1905,7 @@ extern	SWORD	people_types[50];
 		//
 
 extern SLONG WAND_find_good_start_point_for_car(SLONG* posx, SLONG* posz, SLONG* yaw, SLONG anywhere);
-	
+
 		if(FAKE_CARS && save_psx)
 		{
 			FAKE_CARS=(FAKE_CARS+1)>>1;
@@ -1931,24 +1931,24 @@ extern SLONG WAND_find_good_start_point_for_car(SLONG* posx, SLONG* posz, SLONG*
 			if (!watchdog)	continue;
 
 			SLONG	ix = PCOM_create_person(
-				PERSON_CIV, 
-				0, 
-				0, 
-				PCOM_AI_DRIVER, 
-				0, 
-				0, 
-				PCOM_MOVE_WANDER, 
-				0, 
-				0, 
-				0, 
-				0, 
-				0, 
-				x << 8, 
-				0, 
-				z << 8, 
-				0, 
-				0, 
-				0, 
+				PERSON_CIV,
+				0,
+				0,
+				PCOM_AI_DRIVER,
+				0,
+				0,
+				PCOM_MOVE_WANDER,
+				0,
+				0,
+				0,
+				0,
+				0,
+				x << 8,
+				0,
+				z << 8,
+				0,
+				0,
+				0,
 				FLAG2_PERSON_FAKE_WANDER);
 
 			TO_THING(ix)->Genus.Person->sewerbits = (Random()%20)+20;
@@ -2067,7 +2067,7 @@ extern SLONG WAND_find_good_start_point_for_car(SLONG* posx, SLONG* posz, SLONG*
 
 			tx = x + (SIN(angle) >> 9);
 			tz = z + (COS(angle) >> 9);
-			
+
 			ty = PAP_calc_height_at(tx,tz);
 
 			NET_PERSON(i) = create_player(
@@ -2314,7 +2314,7 @@ void	init_gangattack(void);
 	//
 void	init_ambient(void);
 	init_ambient();
-	
+
 extern void MAP_beacon_init();
 extern void MAP_pulse_init();
 
@@ -2323,7 +2323,7 @@ extern void MAP_pulse_init();
 
 	//
 	// Load the map.
-	// 
+	//
 
 	load_game_map(fname_map);
 
@@ -2351,7 +2351,7 @@ extern void MAP_pulse_init();
 	//
 	// We have to call DIRT_init() after we've loaded the map because
 	// it looks for trees to put clumps of leaves around.
-	// 
+	//
 
 	DIRT_init(100, 1, 0, INFINITY, INFINITY, INFINITY, INFINITY);
 
@@ -2410,7 +2410,7 @@ extern void MAP_pulse_init();
 
 	//
 	// Load the level.
-	// 
+	//
 
 	ELEV_load_level(fname_level);
 
@@ -2588,7 +2588,7 @@ extern void SND_BeginAmbient();
 					MFX_play_xyz(0,S_ACIEEED,MFX_LOOPED|MFX_OVERLAP,((i << 10) + (oo->x << 2))<<8, oo->y<<8, ((j << 10) + (oo->z << 2))<<8);
 				index++;
 			}
-			
+
 		}
 
 
@@ -2710,7 +2710,7 @@ void ELEV_create_similar_name(
 		{
 			break;
 		}
-		
+
 		if (*ch == '\\')
 		{
 			ch++;
@@ -2739,7 +2739,7 @@ void ELEV_create_similar_name(
 
 	//
 	// Add the extension.
-	// 
+	//
 
 	*ci++ = '.';
 
@@ -2864,7 +2864,7 @@ SLONG ELEV_load_name(CBYTE *fname_level)
 
 	FileClose(handle);
 
-	return TRUE;	
+	return TRUE;
 }
 
 extern MFFileHandle	playback_file;
@@ -2970,7 +2970,7 @@ try_again:;
 
 //extern CBYTE* STARTSCR_mission;
 extern CBYTE STARTSCR_mission[_MAX_PATH];
-	if (*STARTSCR_mission) 
+	if (*STARTSCR_mission)
 	{
 		//
 		// need to record level name for Restart
@@ -2987,7 +2987,7 @@ extern CBYTE STARTSCR_mission[_MAX_PATH];
 			// store string
 			strcpy(fname,ELEV_fname_level);
 			cname=fname;
-			if (strnicmp(fname,curr_directory,strlen(curr_directory))==0) 
+			if (strnicmp(fname,curr_directory,strlen(curr_directory))==0)
 			{
 			  cname+=strlen(curr_directory);
 			  if (*cname='\\') cname++;
@@ -3003,17 +3003,17 @@ extern CBYTE STARTSCR_mission[_MAX_PATH];
 		return res;
 	}
 
-	
+
 #ifdef TARGET_DC
 	// Should never get here on DC.
 	ASSERT ( FALSE );
 
 #else //#ifdef TARGET_DC
 
-	
+
 	//
 	// So we can see the dialog boxes!
-	// 
+	//
 
 	the_display.toGDI();
 
@@ -3065,11 +3065,11 @@ extern CBYTE STARTSCR_mission[_MAX_PATH];
 
 			//
 			// Restore our current directory.
-			// 
-			
+			//
+
 			SetCurrentDirectory(curr_directory);
 
-				
+
 			if(GAME_STATE&GS_RECORD)
 			{
 				UWORD c=1;
@@ -3080,7 +3080,7 @@ extern CBYTE STARTSCR_mission[_MAX_PATH];
 				// store string
 				strcpy(fname,ELEV_fname_level);
 				cname=fname;
-				if (strnicmp(fname,curr_directory,strlen(curr_directory))==0) 
+				if (strnicmp(fname,curr_directory,strlen(curr_directory))==0)
 				{
 				  cname+=strlen(curr_directory);
 				  if (*cname='\\') cname++;
@@ -3175,7 +3175,7 @@ extern	void	load_whole_game(CBYTE	*gamename);
 
 			//
 			// Create the default lighting filename.
-			// 
+			//
 
 			ELEV_create_similar_name(
 				ELEV_fname_lighting,
@@ -3184,14 +3184,14 @@ extern	void	load_whole_game(CBYTE	*gamename);
 
 			//
 			// Restore our current directory.
-			// 
-			
+			//
+
 			SetCurrentDirectory(curr_directory);
 
 			//
 			// Get the lighting filename.
-			// 
-	
+			//
+
 
 			ofn.lStructSize       = sizeof(OPENFILENAME);
 			ofn.hwndOwner         = hDDLibWindow;
@@ -3222,10 +3222,10 @@ extern	void	load_whole_game(CBYTE	*gamename);
 			{
 				fname_lighting = ELEV_fname_lighting;
 			}
-			
+
 			//
 			// Create the default citsez filename.
-			// 
+			//
 
 			ELEV_create_similar_name(
 				ELEV_fname_citsez,
@@ -3234,8 +3234,8 @@ extern	void	load_whole_game(CBYTE	*gamename);
 
 			//
 			// Restore our current directory.
-			// 
-			
+			//
+
 			SetCurrentDirectory(curr_directory);
 
 			//
@@ -3275,13 +3275,13 @@ extern	void	load_whole_game(CBYTE	*gamename);
 			//
 			// We don't have a level.
 			//
-			
+
 			fname_level = NULL;
 
 			//
 			// Restore our current directory.
-			// 
-			
+			//
+
 			SetCurrentDirectory(curr_directory);
 
 			//
@@ -3409,7 +3409,7 @@ extern	void	end_record(void);
 	 mem_all=0;
 	 MFX_OffKey=-1;
 	 MFX_render();
-	 
+
 	 ClearOTag(the_display.CurrentDisplayBuffer->ot,OTSIZE);
 	 PSXOverLay(OVERLAY_NAME,OVERLAY_SIZE);
 //	 setup_textures(0);

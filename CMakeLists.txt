@@ -99,5 +99,14 @@ if(WIN32)
         message(FATAL_ERROR "MFC not found; ensure that MFC is installed and try again")
     endif(NOT ${MFC_FOUND})
 endif(WIN32)
+# Rust bails out during the linker phase if you try to cross-compile under a Visual Studio command
+# prompt. Just build the Rust libs manually then run CMake...
+if(${CMAKE_BUILD_TYPE} MATCHES "Debug")
+    set(OPENCHAOS_FFI_DIR $ENV{OPENCHAOS_RUST_OUTPUT_DIR}/debug)
+else(${CMAKE_BUILD_TYPE} MATCHES "Debug")
+    set(OPENCHAOS_FFI_DIR $ENV{OPENCHAOS_RUST_OUTPUT_DIR}/release)
+endif(${CMAKE_BUILD_TYPE} MATCHES "Debug")
+link_directories(${OPENCHAOS_FFI_DIR})
+# Build the C++ code.
 add_subdirectory(MFStdLib)
 add_subdirectory(fallen)

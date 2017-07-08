@@ -7,7 +7,6 @@ set(FALLEN_HEADERS
     Headers/Attract.h
     Headers/Controls.h
     Headers/Cop.h
-    Headers/Env.h
     Headers/FMatrix.h
     Headers/Game.h
     Headers/Hierarchy.h
@@ -109,7 +108,6 @@ set(FALLEN_SOURCES
     Source/drip.cpp
     Source/drawtype.cpp
     Source/elev.cpp
-    Source/env2.cpp
     Source/eway.cpp
     Source/fc.cpp
     Source/fire.cpp
@@ -172,6 +170,7 @@ add_executable(fallen WIN32 MACOSX_BUNDLE
 target_include_directories(fallen
     PRIVATE
         ..
+        ../openchaos-ffi/include
         Headers
         GEdit/Headers
         Ledit/Headers
@@ -179,4 +178,7 @@ target_include_directories(fallen
 target_link_libraries(fallen
     DDEngine
     DDLibrary
-    Outro)
+    Outro
+    openchaos_ffi
+    ws2_32
+    userenv)

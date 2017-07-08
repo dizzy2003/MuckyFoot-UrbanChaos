@@ -1,0 +1,25 @@
+[package]
+name = "openchaos-config"
+version = "0.1.0"
+authors = ["FaultyRAM <explodingpsu@gmail.com>"]
+publish = false
+workspace = ".."
+description = "Configuration file support for OpenChaos."
+repository = "https://github.com/FaultyRAM/OpenChaos"
+readme = "../README.md"
+keywords = ["configuration", "TOML"]
+categories = ["config"]
+license = "(Apache-2.0 OR MIT)"
+
+[dependencies.clippy]
+version = "0.0"
+optional = true
+
+[dependencies.serde]
+version = "1"
+
+[dependencies.serde_derive]
+version = "1"
+
+[dependencies.toml]
+version = "0.4"

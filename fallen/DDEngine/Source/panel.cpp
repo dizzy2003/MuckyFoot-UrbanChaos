@@ -5904,7 +5904,7 @@ extern DWORD m_dwSizeOfQueue;
 
 	if (!i_know)
 	{
-		the_answer = ENV_get_value_number("iamapsx",FALSE);
+		the_answer = ENV_get_value_number("iamapsx",FALSE,"Game");
 		i_know     = TRUE;
 	}
 
