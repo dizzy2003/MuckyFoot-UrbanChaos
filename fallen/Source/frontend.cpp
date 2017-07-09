@@ -66,7 +66,7 @@ extern	BOOL	allow_debug_keys;
 
 
 #ifndef TARGET_DC
-UBYTE build_dc = TRUE;		// Set to TRUE to save out all the dreamcast DAD files.
+UBYTE build_dc = FALSE;		// Set to TRUE to save out all the dreamcast DAD files.
 UBYTE build_dc_mission;
 #endif
 
@@ -812,7 +812,7 @@ void ChangeDoorResetStatus ( bool bAllowReset )
 
 #ifndef TARGET_DC
 // define this to save backgrounds out again in DC file format.
-#define SAVE_MY_BACKGROUNDS_PLEASE_BOB defined
+// #define SAVE_MY_BACKGROUNDS_PLEASE_BOB defined
 #endif
 
 
@@ -3704,7 +3704,7 @@ void	FRONTEND_MissionHierarchy(CBYTE *script) {
 	FileCloseScript();
 
 
-#if 0
+#if !defined(TARGET_DC)
 	if ( !IsEnglish )
 	{
 		// Never show breakout in French.
@@ -7203,7 +7203,7 @@ void MENUFONT_MergeLower(void);
 		#ifdef TARGET_DC
 		MFX_QUICK_play("data\\sfx\\1622DC\\GeneralMusic\\FrontLoopMONO.wav",TRUE,0,0,0);
 		#else
-		MFX_QUICK_play("data\\sfx\\1622\\GeneralMusic\\FrontLoopMONO.wav",TRUE,0,0,0);
+		MFX_QUICK_play("data\\sfx\\1622\\GeneralMusic\\FrontLoop.wav",TRUE,0,0,0);
 		#endif
 	}
 

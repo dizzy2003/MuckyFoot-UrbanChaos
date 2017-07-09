@@ -7588,7 +7588,7 @@ SLONG check_vector_against_mapsquare(
 					// Found a strange facet type!
 					//
 
-					iy = iy;
+					// iy = iy;
 				}
 			}
 		}

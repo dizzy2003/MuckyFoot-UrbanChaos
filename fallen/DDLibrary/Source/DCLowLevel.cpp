@@ -242,7 +242,7 @@ Function:
 Description:
 
     Get the Wave File header, size, and data pointer...
-    
+
 Arguments:
 
     void         *pvWaveFile     -  Pointer to the wav file to parse
@@ -358,7 +358,7 @@ Function:
 Description:
 
     Load a WAV file from the executable's Resource file or the specified file.
-    
+
 Arguments:
 
     LPCTSTR      tszName         -  Name of the WAV file to load
@@ -616,7 +616,7 @@ Function:
 Description:
 
     Copies the Sound data to the specified DirecSoundBuffer's data file
-    
+
 Arguments:
 
     LPCTSTR      tszName         -  Name of the WAV file to load
@@ -663,7 +663,7 @@ FillSoundBuffer(IDirectSoundBuffer *pdsb, BYTE *pbWaveData, DWORD dwWaveSize)
 
 
 // Have you learned nothing of what I have taught you, young Adami?
-#if 0
+#if 1
     memcpy(pMem1, pbWaveData, dwSize1);
 
     if (dwSize2 != 0)
@@ -694,7 +694,7 @@ Function:
 Description:
 
     Creates a DirectSoundBuffer and loads the specified file into it.
-    
+
 Arguments:
 
     LPCTSTR      tszName         -  Name of the WAV file to load
@@ -795,7 +795,7 @@ LoadSoundBuffer(char *szName, SLONG is_3d)
 
 
 			#ifdef TARGET_DC
-			
+
 			DSBCAPS dsbcaps;
 			ZeroMemory ( (void *)&dsbcaps, sizeof ( dsbcaps ) );
 			dsbcaps.dwSize = sizeof ( dsbcaps );
@@ -1355,7 +1355,7 @@ DWORD DCLL_stream_process(int nUnused)
 							}
 #endif
 						}
-		
+
 						/*
 
 						memset(block1_mem, 0, block1_length);
@@ -1396,7 +1396,7 @@ DWORD DCLL_stream_process(int nUnused)
 						// If the buffer is playing, then we  close
 						// the current file handle and stop the sound playing.
 						//
-						
+
 						if (DCLL_stream_file_handle)
 						{
 							FileClose(DCLL_stream_file_handle);
@@ -1420,7 +1420,7 @@ DWORD DCLL_stream_process(int nUnused)
 						//
 
 #ifdef CRAPPY_STREAMING_ADPCM_HACK
-						// Always load this 
+						// Always load this
 						if ( strstr ( DCLL_stream_new_fname, "FrontLoop" ) )
 						{
 							strcpy ( DCLL_stream_new_fname, "Data\\sfx\\1622DC\\GeneralMusic\\FrontLoopMONOAD.wav" );
@@ -1518,7 +1518,7 @@ DWORD DCLL_stream_process(int nUnused)
 									//
 									// Fill the remainder of the buffer with silence and close the file.
 									//
-								
+
 									// Can't use memset - must use DWORD writes.
 									//memset(block1_mem + bytes_read, 0, block1_length - bytes_read);
 									DWORD *dst1 = (DWORD *)( block1_mem + bytes_read );
@@ -1665,7 +1665,7 @@ void DCLL_stream_init(void)
 	//
     // No longer need the DirectSoundNotify interface, so release it
 	//
-	
+
     pdsn->Release();
 }
 
@@ -1981,7 +1981,7 @@ void DCLL_set_volume(DCLL_Sound *ds, float volume)
 	{
 		return;
 	}
-	
+
 	SATURATE(volume, 0.0F, 1.0F);
 
 	volume = powf(volume, 0.1F);
@@ -2435,7 +2435,7 @@ DWORD DCLL_memstream_process(void)
 
 			#endif
 
-			for (i = count; i > 0; i--)
+			for (i = count; src != NULL && i > 0; i--)
 			{
 				*dst++ = *src++;
 
@@ -2454,7 +2454,7 @@ DWORD DCLL_memstream_process(void)
 #endif
 
 
-	}	
+	}
 
 	// Doesn't ever exit, but the DC compiler
 	// complains that it doesn't return a value.
@@ -2518,7 +2518,7 @@ void DCLL_memstream_init()
 	//
     // No longer need the DirectSoundNotify interface, so release it
 	//
-	
+
     pdsn->Release();
 }
 
@@ -2595,7 +2595,7 @@ void DCLL_memstream_load(CBYTE *fname)
 	bytes_read = FileRead(handle, DCLL_memstream_sound, DCLL_memstream_sound_length);
 
 	ASSERT(bytes_read == (unsigned)DCLL_memstream_sound_length);
-	
+
 	//
 	// Lock the sound buffer.
 	//

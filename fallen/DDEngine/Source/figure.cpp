@@ -5768,7 +5768,7 @@ extern int g_iCheatNumber;
 
 	// Save this for possible restoration later.
 	structFIGURE_dhpr_rdata1	FIGURE_dhpr_rdata1_0_copy	= FIGURE_dhpr_rdata1[0];
-	structFIGURE_dhpr_data		FIGURE_dhpr_data_copy		= FIGURE_dhpr_data_copy;
+	// structFIGURE_dhpr_data		FIGURE_dhpr_data_copy		= FIGURE_dhpr_data_copy;
 
 
 	ASSERT ( iIndex < MAX_NUMBER_D3D_PEOPLE );
@@ -5860,7 +5860,7 @@ extern int g_iCheatNumber;
 
 		// Restore the saved data.
 		FIGURE_dhpr_rdata1[0] = FIGURE_dhpr_rdata1_0_copy;
-		FIGURE_dhpr_data_copy = FIGURE_dhpr_data_copy;
+		// FIGURE_dhpr_data_copy = FIGURE_dhpr_data_copy;
 
 
 	}
@@ -6085,7 +6085,7 @@ extern int g_iCheatNumber;
 			TRACE ( "Partial person drawn\n" );
 			// Restore the saved data.
 			FIGURE_dhpr_rdata1[0] = FIGURE_dhpr_rdata1_0_copy;
-			FIGURE_dhpr_data_copy = FIGURE_dhpr_data_copy;
+			// FIGURE_dhpr_data_copy = FIGURE_dhpr_data_copy;
 			FIGURE_draw_hierarchical_prim_recurse_individual_cull ( p_person );
 		}
 		else
