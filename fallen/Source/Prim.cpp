@@ -16,7 +16,7 @@
 #ifndef PSX
 #include	"matrix.h"
 #else
-#include	"c:\fallen\psxeng\headers\matrix.h"
+#include	"fallen/psxeng/headers/matrix.h"
 #endif
 
 
@@ -278,7 +278,7 @@ SLONG	sum_shared_brightness_prim(SWORD shared_point,struct PrimObject *p_obj)
 
 	for(face=p_obj->StartFace3;face<p_obj->EndFace3;face++)
 		for(point=0;point<3;point++)
-		{		
+		{
 			if(prim_faces3[face].Points[point]==shared_point)
 			{
 				bright+=prim_faces3[face].Bright[point];
@@ -290,12 +290,12 @@ SLONG	sum_shared_brightness_prim(SWORD shared_point,struct PrimObject *p_obj)
 		for(point=0;point<4;point++)
 		{
 			if(prim_faces4[face].Points[point]==shared_point)
-			{		
+			{
 				bright+=prim_faces4[face].Bright[point];
 				count++;
 			}
 		}
-			
+
 	if(count)
 		return(bright/count);
 	else
@@ -384,7 +384,7 @@ SLONG	copy_prim_to_end(UWORD prim,UWORD direct,SWORD thing)
 
 	sp=p_obj->StartPoint;
 	ep=p_obj->EndPoint;
-	
+
 	for(c0=ep-1;c0>=sp;c0--)
 	{
 		prim_points[end_prim_point]=prim_points[c0];
@@ -459,7 +459,7 @@ void	delete_prim_points(SLONG start,SLONG end)
 			prim_faces3[c0].Points[1]-=offset;
 		if(prim_faces3[c0].Points[2]>=start)
 			prim_faces3[c0].Points[2]-=offset;
-		
+
 	}
 	for(c0=1;c0<next_prim_face4;c0++)
 	{
@@ -621,7 +621,7 @@ void	calc_normal(SWORD	face,struct SVector *p_normal)
 	vy= -p_op0->Y + p_op1->Y;   //vector from point 0 to point 1
 	vz= -p_op0->Z + p_op1->Z;
 
-	wx=p_op2->X - p_op1->X;   //vector from point 1 to point 2 
+	wx=p_op2->X - p_op1->X;   //vector from point 1 to point 2
 	wy=p_op2->Y - p_op1->Y;
 	wz=p_op2->Z - p_op1->Z;
 
@@ -644,7 +644,7 @@ void	calc_normal(SWORD	face,struct SVector *p_normal)
 	length=Root(wx*wx+wy*wy+wz*wz);
 	if(length==0)
 		length=1;  //bodge around divide by zero
-	
+
 	wx=(wx<<8)/length;
 	wy=(wy<<8)/length; //same to vect W
 	wz=(wz<<8)/length;
@@ -656,7 +656,7 @@ void	calc_normal(SWORD	face,struct SVector *p_normal)
 	length=Root((nx*nx+ny*ny+nz*nz));
 	if(length==0)
 		length=1;
-	nx=(nx<<8)/length; 
+	nx=(nx<<8)/length;
 	ny=(ny<<8)/length;   //normalise result  //pos opt this out
 	nz=(nz<<8)/length;
 	if(nx==0&&ny==0&&nz==0)
@@ -698,7 +698,7 @@ void	quick_normal(SWORD	face,SLONG *nx,SLONG *ny,SLONG *nz)
 	vy= -p_op0->Y + p_op1->Y;   //vector from point 0 to point 1
 	vz= -p_op0->Z + p_op1->Z;
 
-	wx=p_op2->X - p_op1->X;   //vector from point 1 to point 2 
+	wx=p_op2->X - p_op1->X;   //vector from point 1 to point 2
 	wy=p_op2->Y - p_op1->Y;
 	wz=p_op2->Z - p_op1->Z;
 
@@ -720,7 +720,7 @@ UWORD	apply_ambient_light_to_object(UWORD object,SLONG lnx,SLONG lny,SLONG lnz,U
 	struct	MyObject *mo;
 	SLONG	count,offset=0,fred=0;
 	struct	PrimFace3 *this_face;
-	SLONG	nx,ny,nz;	
+	SLONG	nx,ny,nz;
 	SLONG	tmp_shade;
 	UWORD	no_faces;
 	UWORD	start_face,current_face;
@@ -796,9 +796,9 @@ UWORD	apply_ambient_light_to_object(UWORD object,SLONG lnx,SLONG lny,SLONG lnz,U
 				this_face->Bright[2]=light;
 			}
 		}
-			
+
 //early_out:;
-	}	
+	}
 
 	for(current_face=0;current_face<no_faces4;current_face++)
 	{
@@ -812,7 +812,7 @@ UWORD	apply_ambient_light_to_object(UWORD object,SLONG lnx,SLONG lny,SLONG lnz,U
 		nz=normal.Z;
 		//nx,ny,nz is unit vector of normal out of poly
 
-		light=(nx*lnx+ny*lny+nz*lnz)>>8;			
+		light=(nx*lnx+ny*lny+nz*lnz)>>8;
 		light=(light*intense)>>8;
 		if(light<intense>>3)
 			light=intense>>3;
@@ -867,7 +867,7 @@ UWORD	apply_ambient_light_to_object(UWORD object,SLONG lnx,SLONG lny,SLONG lnz,U
 		}
 //early_out4:;
 	}
-	
+
 	return	next;
 	//	printf( " REPEAT %d , out of %d \n",repeat,no_faces);
 }
@@ -1276,7 +1276,7 @@ void calc_prim_normals(void)
 			}
 		}
 
-		
+
 		//
 		// Normalise the length of each normal to be 256.
 		//
@@ -1512,7 +1512,7 @@ void calc_slide_edges()
 
 	SLONG px;
 	SLONG pz;
-	
+
 	SLONG x1;
 	SLONG z1;
 	SLONG x2;
@@ -1697,7 +1697,7 @@ void calc_slide_edges()
 							{
 								jp1 = g->Points[point_order[ej]];
 								jp2 = g->Points[point_order[(ej + 1) & 0x3]];
-								
+
 								//
 								// The world-space position of these points.
 								//
@@ -1723,7 +1723,7 @@ void calc_slide_edges()
 									 ip2x == jp1x &&
 									 ip2y == jp1y &&
 									 ip2z == jp1z))
-								{	 
+								{
 									//
 									// Clear the edge flags on the two faces.
 									//
@@ -1907,8 +1907,8 @@ void get_rotated_point_world_pos(
 
 	FMATRIX_calc(
 		matrix,
-		prim_yaw,	
-		prim_pitch,	
+		prim_yaw,
+		prim_pitch,
 		prim_roll);
 
 	if (point == -1)
@@ -2001,7 +2001,7 @@ SLONG slide_along_prim(
 	{
 		y_top = y_bot + (y_top - y_bot >> 2);
 	}
-	
+
 	if (WITHIN(y1, y_bot, y_top))
 	{
 		if (slide_around_box(
@@ -2170,7 +2170,7 @@ void	create_anim_prim(SLONG x,SLONG y,SLONG z,SLONG prim, SLONG yaw)
 		switch(get_anim_prim_type(t_thing->Index))
 		{
 			case ANIM_PRIM_TYPE_NORMAL:
-				
+
 				//
 				// Start off doing the first animation.
 				//
@@ -2332,7 +2332,7 @@ void toggle_anim_prim_switch_state(SLONG anim_prim_thing_index)
 void expand_anim_prim_bbox(
 		SLONG prim,
 		GameKeyFrameElement *anim_info,
-		
+
 		SLONG *min_x,
 		SLONG *min_y,
 		SLONG *min_z,
@@ -2446,7 +2446,7 @@ void find_anim_prim_bboxes()
 		pmb->maxx = -INFINITY;
 		pmb->maxy = -INFINITY;
 		pmb->maxz = -INFINITY;
-	
+
 		if (anim_chunk[i].MultiObject[0] == 0)
 		{
 			//
@@ -2464,7 +2464,7 @@ void find_anim_prim_bboxes()
 
 		ele_count = anim_chunk[i].ElementCount;
 		start_object = prim_multi_objects[anim_chunk[i].MultiObject[0]].StartObject;
-		
+
 		//
 		// Expand the bouding box with each prim.
 		//
@@ -2529,7 +2529,7 @@ void	re_center_prim(SLONG prim,SLONG dx,SLONG dy,SLONG dz)
 
 	sp=p_obj->StartPoint;
 	ep=p_obj->EndPoint;
-	
+
 	for(c0=sp;c0<ep;c0++)
 	{
 		DebugText(" prim %d x %d y %d  z %d \n",prim,prim_points[c0].X,prim_points[c0].Y,prim_points[c0].Z);
@@ -2579,7 +2579,7 @@ SLONG does_fence_lie_along_line(SLONG x1, SLONG z1, SLONG x2, SLONG z2)
 	SLONG f_list;
 	SLONG exit;
 	SLONG facet;
-	
+
 	DFacet *df;
 
 	SATURATE(mx1, 0, PAP_SIZE_LO - 1);

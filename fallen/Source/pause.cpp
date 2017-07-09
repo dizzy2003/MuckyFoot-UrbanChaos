@@ -2,7 +2,7 @@
  *
  *   pause.cpp
  *   Handles pause mode
- * 
+ *
  *   Prolly overkill giving it one of these all of it's own
  *   but game.cpp is messy enuff already...
  *
@@ -17,11 +17,11 @@
 #include	"xlat_str.h"
 
 #ifndef	PSX
-#include	"c:\fallen\ddengine\headers\poly.h"
-#include    "C:\fallen\DDLibrary\headers\D3DTexture.h"
-#include    "C:\fallen\DDLibrary\headers\GDisplay.h"
-#include    "c:\fallen\ddengine\headers\font3d.h"
-#include    "c:\fallen\ddengine\headers\font2d.h"
+#include	"fallen/ddengine/headers/poly.h"
+#include    "fallen/DDLibrary/headers/D3DTexture.h"
+#include    "fallen/DDLibrary/headers/GDisplay.h"
+#include    "fallen/ddengine/headers/font3d.h"
+#include    "fallen/ddengine/headers/font2d.h"
 #endif
 
 #ifdef TARGET_DC
@@ -85,7 +85,7 @@ extern BOOL ReadInputDevice(void);
 
 		if (the_state.lY > AXIS_MAX) input |= PAUSED_KEY_DOWN;
 
-		if (the_state.lY < AXIS_MIN) 
+		if (the_state.lY < AXIS_MIN)
 			input |= PAUSED_KEY_UP;
 
 		for (i = 0; i < 8; i++)	{
@@ -215,7 +215,7 @@ extern BOOL ReadInputDevice(void);
 	// temporary! replace!
 
 	the_display.lp_D3D_Viewport->Clear(1, &the_display.ViewportRect, D3DCLEAR_ZBUFFER);
-	
+
 	POLY_frame_init(FALSE, FALSE);
 
 	//font.DrawString(startmenu2[c0+start_menu[menu].StartIndex].Str,200,y,text_colour,2.0+(isthis*0.5f),isthis);

@@ -13,7 +13,7 @@
 
 #include	"EdStrings.h"
 #include	"GEdit.h"
-#include	"C:\fallen\headers\sound_id.h"
+#include	"fallen/headers/sound_id.h"
 #include	"mmsystem.h"
 
 
@@ -61,11 +61,11 @@ SLONG SelectToID(HWND hWnd) {
 		i++;
 	}
 	return 0;
-	
+
 }
 
 void IDToSelect(HWND hWnd, SLONG id) {
-	SendMessage(GetDlgItem(hWnd,IDC_LIST1),LB_SELECTSTRING,-1,(LPARAM)sound_list[id]);	
+	SendMessage(GetDlgItem(hWnd,IDC_LIST1),LB_SELECTSTRING,-1,(LPARAM)sound_list[id]);
 }
 
 
@@ -77,7 +77,7 @@ BOOL	CALLBACK	sfx_proc(HWND hWnd,UINT message,WPARAM wParam,LPARAM lParam)
 	CBYTE		pc[_MAX_PATH],pc2[_MAX_PATH];
 	SLONG		sel;
 
-	
+
 	switch(message)
 	{
 		case	WM_INITDIALOG:

@@ -5,7 +5,7 @@
 #include "game.h"
 #include "wmove.h"
 #include "build2.h"
-#include "c:\fallen\headers\memory.h"
+#include "fallen/headers/memory.h"
 #include "fmatrix.h"
 #include "statedef.h"
 
@@ -115,7 +115,7 @@ void WMOVE_get_pos(
 	switch(p_thing->Class)
 	{
 		case CLASS_PERSON:
-			
+
 			//
 			// A square on top of this person's head.
 			//
@@ -160,7 +160,7 @@ void WMOVE_get_pos(
 					UBYTE p[3];
 
 				} WMOVE_Tri;
-				
+
 				const static WMOVE_Tri tri_van[1] =
 				{
 					{{1,2,21}}
@@ -198,12 +198,12 @@ void WMOVE_get_pos(
 					{{11,30, 9}},
 					{{ 9,28,19}}
 				};
-				
+
 				/*
 
 				I think the meatwagon is the same mesh as the jeep nowadays...
 
-				const static WMOVE_Tri tri_meatwagon[4] = 
+				const static WMOVE_Tri tri_meatwagon[4] =
 				{
 					{{25,44, 4}},
 					{{ 4, 6,22}},
@@ -329,7 +329,7 @@ void WMOVE_get_pos(
 			zb = MUL64(txb, matrix[2]) + MUL64(tzb, matrix[3]);
 
 			y = (p_thing->WorldPos.Y >> 8) + pi->maxy + 0x10;
-			
+
 			if (p_thing->Class == CLASS_VEHICLE)
 			{
 				//
@@ -410,7 +410,7 @@ void WMOVE_create(Thing *p_thing)
 #endif
 
 
-	
+
 //	#ifdef PSX
 #ifndef PSX
 	if(save_psx)
@@ -463,7 +463,7 @@ void WMOVE_create(Thing *p_thing)
 		// Create four primpoints using these positions.
 		//
 
-		ASSERT(next_prim_point + 4 <= MAX_PRIM_POINTS);	
+		ASSERT(next_prim_point + 4 <= MAX_PRIM_POINTS);
 
 		pp = &prim_points[next_prim_point];
 
@@ -564,7 +564,7 @@ void WMOVE_remove(UBYTE which_class)
 
 			//
 			// Copy over this face.
-			// 
+			//
 
 			memmove((UBYTE*)wf, (UBYTE *)(wf + 1), (WMOVE_face_upto - i - 1) * sizeof(WMOVE_Face));
 
@@ -618,7 +618,7 @@ void WMOVE_process()
 		p_thing = TO_THING(wf->thing);
 
 		ASSERT(WITHIN(wf->face4, 1, next_prim_face4 - 1));
-		
+
 		f4 = &prim_faces4[wf->face4];
 
 		ASSERT(WITHIN(f4->Points[0], 1, next_prim_point - 1));
@@ -658,7 +658,7 @@ void WMOVE_process()
 					//
 
 					remove_walkable_from_map(wf->face4);
-					
+
 					//
 					// Mark as unused.
 					//
@@ -778,7 +778,7 @@ void WMOVE_relative_pos(
 	//
 
 	ASSERT(WITHIN(wf->face4, 1, next_prim_face4 - 1));
-	
+
 	f4 = &prim_faces4[wf->face4];
 
 	ASSERT(WITHIN(f4->Points[0], 1, next_prim_point - 1));
@@ -921,9 +921,9 @@ void WMOVE_draw()
 	PrimPoint  *pp1;
 	PrimPoint  *pp2;
 	PrimPoint  *pp3;
-	
+
 	ULONG colour;
-	
+
 	if ((!allow_debug_keys)||!ControlFlag)
 	{
 		return;
@@ -934,7 +934,7 @@ void WMOVE_draw()
 		wf = &WMOVE_face[i];
 
 		ASSERT(WITHIN(wf->face4, 1, next_prim_face4 - 1));
-		
+
 		f4 = &prim_faces4[wf->face4];
 
 		ASSERT(WITHIN(f4->Points[0], 1, next_prim_point - 1));

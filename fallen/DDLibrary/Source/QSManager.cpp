@@ -5,7 +5,7 @@
 #ifndef TARGET_DC
 
 #include	"DDLib.h"
-#include	"C:\fallen\DDEngine\Headers\Matrix.h"
+#include	"fallen/DDEngine/Headers/Matrix.h"
 
 //---------------------------------------------------------------
 //
@@ -60,7 +60,7 @@ void	SetListenerPosition(SLONG x,SLONG y,SLONG z,SLONG scale)
 	position.x	=	(float)x*f_scale;
 	position.y	=	(float)y*f_scale;
 	position.z	=	(float)z*f_scale;
-	
+
 	r	=	QS(SetListenerPosition(the_qs_sound_manager.GetHQMixer(),&position,0));
 	if(r)
 	{
@@ -218,7 +218,7 @@ HRESULT	QSManager::LoadWaves(CBYTE *wave_path,CBYTE *script_name)
 	HRESULT			result	=	DSERR_GENERIC;
 	Wave			*new_wave;
 
-	
+
 	// Get rid of any existing samples.
 	FreeWaves();
 //	LogText
@@ -266,7 +266,7 @@ HRESULT	QSManager::LoadWave(CBYTE *wave_name)
 	HRESULT			result	=	DSERR_GENERIC;
 	Wave			*new_wave;
 
-	
+
 	new_wave	=	new Wave;
 	if(new_wave)
 	{
@@ -406,7 +406,7 @@ HRESULT	QSManager::PlayWave(SLONG wave_ref,SLONG wave_id,SLONG play_type,WavePar
 //		DebugText("Got new channel - %ld\n",channel);
 
 		//	Check to see we have a channel, otherwise try & grab one with a lower priority.
-		
+
 
 		//	Set up the channel info.
 		Channels[channel].SetUserRef(wave_ref);
@@ -426,7 +426,7 @@ HRESULT	QSManager::PlayWave(SLONG wave_ref,SLONG wave_id,SLONG play_type,WavePar
 					break;
 				case	WAVE_POLAR:
 
-					break;		
+					break;
 				case	WAVE_CARTESIAN:
 					f_scale	=	1.0f/(float)the_params->Mode.Cartesian.Scale;
 					wave_position.x	=	(float)the_params->Mode.Cartesian.X*f_scale;
@@ -514,16 +514,16 @@ HRESULT	QSManager::PlayWave(SLONG wave_ref,SLONG wave_id,SLONG play_type,WavePar
 			QS(GetErrorText(r,error_text,256));
 //			DebugText("PlayWave: %s\n",error_text);
 		}
-		
+
 		//	Free up the channel if the wave is not playing.
 		if(QS(IsChannelDone(HQMixer,channel)))
-			Channels[channel].SetUserRef(-1);	
+			Channels[channel].SetUserRef(-1);
 	}
 
 	//	return	success.
 	return	DS_OK;
 }
- 
+
 //---------------------------------------------------------------
 
 HRESULT	QSManager::StopWave(SLONG wave_ref,SLONG wave_id)
@@ -533,7 +533,7 @@ HRESULT	QSManager::StopWave(SLONG wave_ref,SLONG wave_id)
 	TCHAR			error_text[256];
 	QMIX_RESULT		r;
 
-	
+
 	//	Try & match the wave ref & channel.
 	for(c0=0;c0<MAX_CHANNELS;c0++)
 	{
@@ -653,14 +653,14 @@ Channel::~Channel()
 
 void	Channel::Open(void)
 {
-	
+
 }
 
 //---------------------------------------------------------------
 
 void	Channel::Close(void)
 {
-	
+
 }
 
 //---------------------------------------------------------------

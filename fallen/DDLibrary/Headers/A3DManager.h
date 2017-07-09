@@ -6,7 +6,7 @@
 // requires either Aureal 3D sound card + drivers, OR normal sound card with A2D installed
 
 
-#ifndef _A3D_MANAGER_H_
+#if !defined(NO_SOUND) && defined(A3D_SOUND) && !defined(_A3D_MANAGER_H_)
 #define _A3D_MANAGER_H_
 
 
@@ -36,7 +36,7 @@ void            TraceText(CBYTE *error, ...);
 #include <stdlib.h>
 #include <cguid.h>
 
-#include "C:\fallen\headers\A3D\Ia3dapi.h"
+#include <Ia3dapi.h>
 
 
 #define MAX_QUEUE_LENGTH	5
@@ -79,8 +79,8 @@ public:
 	inline SLONG Count()						{ return count; }
 	inline A3DBase *Head()						{ return list; }
 	inline A3DBase *Tail()						{ return tail; }
-	inline operator+=(A3DBase *item)			{ Add(item); return ( NULL ); };
-	inline operator-=(A3DBase *item)			{ Del(item); return ( NULL ); };
+	inline A3DBase *operator+=(A3DBase *item)	{ Add(item); return ( NULL ); };
+	inline A3DBase *operator-=(A3DBase *item)	{ Del(item); return ( NULL ); };
 	inline A3DBase* operator[](SLONG index)		{ return Index(index);	};
 };
 
@@ -101,7 +101,7 @@ private:
 
 public:
 	A3DList		  srclist,datalist;
-	
+
 	// construct, destruct
 	A3DManager(SLONG features=0);
 	~A3DManager();

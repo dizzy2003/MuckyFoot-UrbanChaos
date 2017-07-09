@@ -5,15 +5,15 @@
 #include	"coltab.hpp"
 //#include	"collide.hpp"
 #include	"map.h"
-#include    "c:\fallen\headers\game.h"
-#include	"c:\fallen\headers\light.h"
+#include    "fallen/headers/game.h"
+#include	"fallen/headers/light.h"
 #include	"extra.h"
-#include	"c:\fallen\headers\animtmap.h"
-#include	"c:\fallen\headers\pap.h"
-#include	"c:\fallen\headers\ob.h"
-#include	"c:\fallen\headers\supermap.h"
-#include	"c:\fallen\headers\io.h"
-#include	"c:\fallen\headers\memory.h"
+#include	"fallen/headers/animtmap.h"
+#include	"fallen/headers/pap.h"
+#include	"fallen/headers/ob.h"
+#include	"fallen/headers/supermap.h"
+#include	"fallen/headers/io.h"
+#include	"fallen/headers/memory.h"
 
 #define	SET_TEXTURE_ROCKS(t)	{t.X=4;t.Y=4;t.Width=2;t.Height=2;t.Page=0;t.DrawFlags=(POLY_FLAG_GOURAD|POLY_FLAG_TEXTURED);}
 
@@ -58,7 +58,7 @@ struct	Light	d_lights[MAX_D_LIGHTS];
 UWORD	next_d_light=1;
 
 //extern	ULONG		WorkWindowHeight,   //just for now as application does not get these
-//					WorkWindowWidth; 
+//					WorkWindowWidth;
 extern	void	create_bucket_3d_line(SLONG x1,SLONG y1,SLONG z1,SLONG x2,SLONG y2,SLONG z2,SLONG col);
 extern	void	create_bucket_3d_line_whole(SLONG x1,SLONG y1,SLONG z1,SLONG x2,SLONG y2,SLONG z2,SLONG col);
 
@@ -82,7 +82,7 @@ EditFace		hilited_face,
 struct SVector	selected_prim_xyz;
 
 
-struct	EditInfo	edit_info;	
+struct	EditInfo	edit_info;
 
 
 
@@ -107,7 +107,7 @@ void	swap_maps()
 	}
 	else
 	{
-		if(create)		
+		if(create)
 			create_city(BUILD_MODE_EDITOR);
 	}
 }
@@ -168,7 +168,7 @@ SLONG	face_is_in_list(SWORD face)
 			return(c0);
 	}
 	return(0);
-	
+
 }
 
 void	add_face_to_list(SWORD face)
@@ -198,7 +198,7 @@ void	add_face_to_list(SWORD face)
 
 //	LogText(" face %d added to pos %d  \n",face,next_face_selected);
 
-	face_selected_list[next_face_selected]=face;						
+	face_selected_list[next_face_selected]=face;
 	if(face<0)
 		prim_faces3[-face].FaceFlags|=FACE_FLAG_OUTLINE;
 	else
@@ -287,7 +287,7 @@ SLONG	place_anim_prim_at(UWORD prim,SLONG x,SLONG y,SLONG z)
 }
 
 SLONG	is_thing_on_map(SLONG index)
-{					
+{
 	struct MapThing *p_thing;
 	SLONG	map;
 
@@ -329,7 +329,7 @@ void	save_game_map(CBYTE *name)
 	MFFileHandle	jandle	=	FILE_OPEN_ERROR;
 
 
-	
+
 	//
 	// Change the extension of 'name'...
 	//
@@ -516,7 +516,7 @@ extern	void	add_flat_roof_to_pap(void);
 			switch(t_mthing->Type)
 			{
 
-				case	MAP_THING_TYPE_ANIM_PRIM:		
+				case	MAP_THING_TYPE_ANIM_PRIM:
 					temp++;
 					break;
 
@@ -531,7 +531,7 @@ extern	void	add_flat_roof_to_pap(void);
 
 			switch(t_mthing->Type)
 			{
-				case	MAP_THING_TYPE_ANIM_PRIM:		
+				case	MAP_THING_TYPE_ANIM_PRIM:
 					io_thing.Type=t_mthing->Type;
 					io_thing.X=t_mthing->X;
 					io_thing.Y=t_mthing->Y;
@@ -651,7 +651,7 @@ void	save_tex_remap(CBYTE *name)
 		FileWrite(handle,(UBYTE*)&page_remap,sizeof(UWORD)*count);
 	}
 	FileClose(handle);
-	
+
 }
 
 void	load_tex_remap(CBYTE *name)
@@ -703,7 +703,7 @@ void	load_tex_remap(CBYTE *name)
 		psx_remap[c0]=page_remap[c0];
 
 	FileClose(handle);
-	
+
 }
 
 void	save_map(CBYTE	*name,SLONG quick)
@@ -760,7 +760,7 @@ void	save_map(CBYTE	*name,SLONG quick)
 		FileWrite(handle,(UBYTE*)tex_map,sizeof(UWORD)*EDIT_MAP_WIDTH*EDIT_MAP_DEPTH);
 
 		FileWrite(handle,(UBYTE*)edit_map_roof_height,sizeof(SBYTE)*EDIT_MAP_WIDTH*EDIT_MAP_DEPTH);
-		
+
 		FileWrite(handle,(UBYTE*)&end_prim_point,sizeof(UWORD));
 		FileWrite(handle,(UBYTE*)&end_prim_face4,sizeof(UWORD));
 		FileWrite(handle,(UBYTE*)&end_prim_face3,sizeof(UWORD));
@@ -921,7 +921,7 @@ SLONG	fix_storey(SLONG	storey,SLONG	building,UBYTE magnify)
 
 /*
 		wall=storey_list[roof].WallHead;
-		LogText("Build %d  storey %d roofhead %d \n",c0,roof,wall); 
+		LogText("Build %d  storey %d roofhead %d \n",c0,roof,wall);
 		while(wall)
 		{
 			LogText("r wall %d set to storey %d\n",wall,storey);
@@ -930,12 +930,12 @@ SLONG	fix_storey(SLONG	storey,SLONG	building,UBYTE magnify)
 			wall_list[wall].DZ<<=1;
 			wall=wall_list[wall].Next;
 
-			
+
 		}
 */
 
 		wall=storey_list[storey].WallHead;
-		//LogText("building %d storey %d wallhead %d \n",c0,storey,wall); 
+		//LogText("building %d storey %d wallhead %d \n",c0,storey,wall);
 		while(wall)
 		{
 			some_walls=1;
@@ -951,7 +951,7 @@ SLONG	fix_storey(SLONG	storey,SLONG	building,UBYTE magnify)
 				wall_list[wall].DY=(wall_list[wall].DY*4)/5;
 			}
 			wall=wall_list[wall].Next;
-			
+
 		}
 		storey=storey_list[storey].Next;
 	}
@@ -962,7 +962,7 @@ SLONG	fix_storey(SLONG	storey,SLONG	building,UBYTE magnify)
 
 void	fix_buildings(UBYTE	magnify)
 {
-	SLONG	c0;	
+	SLONG	c0;
 	SLONG	roof,storey,wall;
 
 	for(c0=1;c0<MAX_STOREYS;c0++)
@@ -1053,7 +1053,7 @@ void	save_texture_styles_psx(UBYTE world)
 	SLONG	si,pi;
 	struct	TXTY	temp_t[200][5];
 
-	
+
 	for(si=0;si<200;si++)
 	{
 		for(pi=0;pi<5;pi++)
@@ -1071,7 +1071,7 @@ void	save_texture_styles_psx(UBYTE world)
 			temp_t[si][pi].Flip=textures_xy[si][pi].Flip;
 			temp_t[si][pi].Flip^=(page>>14)&3;
 
-			
+
 
 		}
 	}
@@ -1130,20 +1130,20 @@ void	fix_style_names(void)
 
 //typical map data breakdown cumlative data used
 /*
- load map data\COLMAP.MAP 
- after map 131072 
- after prim points 426636 
- after prim face4 732908 
- after prim face3 786696 
- after prim objects 809208 
- after prims 809208 
- after things 973210 
- after col_info 973276 
+ load map data\COLMAP.MAP
+ after map 131072
+ after prim points 426636
+ after prim face4 732908
+ after prim face3 786696
+ after prim objects 809208
+ after prims 809208
+ after things 973210
+ after col_info 973276
  after windows 2413284    1.5 Mb (unused)
- after walls 2863284 
- after storeys 2933284 
- after buildings 2959284 
- total size read 2959284 
+ after walls 2863284
+ after storeys 2933284
+ after buildings 2959284
+ total size read 2959284
 */
 
 
@@ -1178,7 +1178,7 @@ void	get_a_strip(ULONG	minsize,ULONG maxsize,UBYTE	dir)
 				texs=edit_map[x][z].Texture&0x3fff;
 				for(dx=0;dx<EDIT_MAP_WIDTH-x;dx++)
 				{
-					
+
 					tex=edit_map[x][z+dx].Texture&0x3fff;
 					if(tex!=texs || strips[x][z+dz])
 						break;
@@ -1216,7 +1216,7 @@ void	process_map()
 		for(z=0;z<EDIT_MAP_WIDTH;z+=8)
 		{
 			count=0;
-			
+
 			for(dx=0;dx<8;dx++)
 			{
 				for(dz=0;dz<8;dz++)
@@ -1508,7 +1508,7 @@ SLONG	load_map(CBYTE	*name)
 
 		LogText(" after prims %d \n",size);
 
-		
+
 		for(c0=end_prim_face3+1;c0<MAX_PRIM_FACES3;c0++)
 		{
 			prim_faces3[c0].Points[0]+=-temp_end_prim_point+end_prim_point;
@@ -1717,7 +1717,7 @@ SLONG	load_map(CBYTE	*name)
 						}
 
 					}
-					
+
 				}
 			}
 		}
@@ -1730,12 +1730,12 @@ SLONG	load_map(CBYTE	*name)
 			offset_buildings(64<<ELE_SHIFT,0,64<<ELE_SHIFT);
 
 		if(save_type==10)
-			fix_buildings(2); // make sure next/prev tally by resetting the prev field 
+			fix_buildings(2); // make sure next/prev tally by resetting the prev field
 		else
 		if(save_type<10)
-			fix_buildings(3); // make sure next/prev tally by resetting the prev field 
+			fix_buildings(3); // make sure next/prev tally by resetting the prev field
 		else
-			fix_buildings(0); // make sure next/prev tally by resetting the prev field 
+			fix_buildings(0); // make sure next/prev tally by resetting the prev field
 		if(save_type==12)
 		{
 			SLONG	c0;
@@ -1886,7 +1886,7 @@ UWORD	is_it_clockwise(struct SVector *res,SLONG p1,SLONG p2,SLONG p3)
 {
 	SLONG	z;
 	SLONG	vx,vy,wx,wy;
-	
+
 	vx=res[p2].X-res[p1].X;
 	wx=res[p3].X-res[p2].X;
 	vy=res[p2].Y-res[p1].Y;
@@ -1937,7 +1937,7 @@ UWORD	is_it_clockwise_xy(SLONG x1,SLONG y1,SLONG x2,SLONG y2,SLONG x3,SLONG y3)
 {
 	SLONG	z;
 	SLONG	vx,vy,wx,wy;
-	
+
 	vx=x2-x1; //point2->X-point1->X;
 	wx=x3-x2; //point3->X-point2->X;
 	vy=y2-y1; //point2->Y-point1->Y;
@@ -2026,7 +2026,7 @@ UBYTE	check_big_point_triangle(SLONG x,SLONG y,SLONG ux,SLONG uy,SLONG vx,SLONG 
 	top	=	(y-uy)*(wx-ux)+(ux-x)*(wy-uy);
 	bot	=	(vy-uy)*(wx-ux)-(vx-ux)*(wy-uy);
 
-	
+
 //	if(next_col_column<5)
 //		printf(" top %d bot %d \n",top,bot);
 
@@ -2161,9 +2161,9 @@ void	check_mouse_quad(struct EditMapElement *p_ele,struct SVector *res,SLONG p1,
 			if(az < hilited_face.Z||hilited_face.EditTurn!=editor_turn)
 			{
 				count++;
-				hilited_face.MapX=wx;				
-				hilited_face.MapY=wy;				
-				hilited_face.MapZ=wz;				
+				hilited_face.MapX=wx;
+				hilited_face.MapY=wy;
+				hilited_face.MapZ=wz;
 				hilited_face.Face=face;
 				hilited_face.EditTurn=editor_turn;
 				hilited_face.PEle=p_ele;
@@ -2203,7 +2203,7 @@ void	gamut_fiddle(void)
 	SLONG	c0,temp;
 	static	SLONG	gamut=0;
 	UBYTE	*pal;
-	
+
 	if((pal=PALETTE)==0)
 		return;
 
@@ -2297,7 +2297,7 @@ ULONG	engine_keys_scroll_game(void)
 
 			change=1;
 		}
-		
+
 		if(Keys[KB_UP])
 		{
 			dx=-(SIN( ((engine.AngleY>>8)+2048)&2047)*150)>>16;
@@ -2330,7 +2330,7 @@ ULONG	engine_keys_scroll_game(void)
 		engine.Z+=dz<<8;
 	}
 	return(change);
-	
+
 }
 
 SLONG	calc_step_size(void)
@@ -2355,7 +2355,7 @@ ULONG	engine_keys_scroll(void)
 
 	if(ControlFlag)
 	{
-		
+
 		if(Keys[KB_1])
 		{
 			engine.Z=0;
@@ -2504,7 +2504,7 @@ ULONG	engine_keys_spin(void)
 //			engine.AngleY=1536<<8;
 		update	=	1;
 	}
-		
+
 	if(Keys[KB_HOME])
 	{
 		engine.AngleX+=2048;
@@ -2555,7 +2555,7 @@ ULONG	editor_user_interface(UBYTE type)
 	static	UWORD	current_texture_l=0;
 	static	UWORD	current_texture_r=0;
 	CBYTE	str[100];
-/*	
+/*
 	if(Keys[KB_R]&&!ControlFlag)
 	{
 		Keys[KB_R]=0;
@@ -2587,7 +2587,7 @@ loop:
 //				update|=engine_keys_zoom();
 				break;
 
-		
+
 	}
 	return	update;
 }
@@ -2610,7 +2610,7 @@ void	draw_3d_line(SLONG x1,SLONG y1,SLONG z1,SLONG x2,SLONG y2,SLONG z2,SLONG co
 	p2.X=x2;
 	p2.Y=y2;
 	p2.Z=z2;
-	
+
 	f1=rotate_point_gte(&p1,&res1);
 	f2=rotate_point_gte(&p2,&res2);
 	if(!( (f1&f2) & EF_CLIPFLAGS))
@@ -2691,7 +2691,7 @@ void	create_bucket_3d_line_whole(SLONG x1,SLONG y1,SLONG z1,SLONG x2,SLONG y2,SL
 
 void	draw_grid2(void)
 {
-	
+
 	SLONG	x,y;
 	SLONG	left,right,top,bottom;
 	SLONG	col=LOLITE_COL;
@@ -2751,7 +2751,7 @@ void	draw_cube_hilight(void)
 	create_bucket_3d_line(x+HALF_ELE_SIZE,y-HALF_ELE_SIZE,z-HALF_ELE_SIZE,x+HALF_ELE_SIZE,y-HALF_ELE_SIZE,z+HALF_ELE_SIZE,WHITE_COL);
 	create_bucket_3d_line(x+HALF_ELE_SIZE,y+HALF_ELE_SIZE,z-HALF_ELE_SIZE,x+HALF_ELE_SIZE,y+HALF_ELE_SIZE,z+HALF_ELE_SIZE,WHITE_COL);
 	create_bucket_3d_line(x-HALF_ELE_SIZE,y+HALF_ELE_SIZE,z-HALF_ELE_SIZE,x-HALF_ELE_SIZE,y+HALF_ELE_SIZE,z+HALF_ELE_SIZE,WHITE_COL);
-	
+
 }
 
 void	draw_editor_grid(void)
@@ -2786,7 +2786,7 @@ void	draw_editor_grid(void)
 	create_bucket_3d_line(x+HALF_ELE_SIZE,y+HALF_ELE_SIZE,z-HALF_ELE_SIZE*8,x+HALF_ELE_SIZE,y+HALF_ELE_SIZE,z+HALF_ELE_SIZE*8,1);
 	create_bucket_3d_line(x-HALF_ELE_SIZE,y+HALF_ELE_SIZE,z-HALF_ELE_SIZE*8,x-HALF_ELE_SIZE,y+HALF_ELE_SIZE,z+HALF_ELE_SIZE*8,1);
 
-#ifdef	POO	
+#ifdef	POO
 	points[0].X=x-HALF_ELE_SIZE;
 	points[0].Y=y-HALF_ELE_SIZE*8;
 	points[0].Z=z-HALF_ELE_SIZE;
@@ -2794,7 +2794,7 @@ void	draw_editor_grid(void)
 	points[1].X=x+HALF_ELE_SIZE;
 	points[1].Y=y-HALF_ELE_SIZE*8;
 	points[1].Z=z-HALF_ELE_SIZE;
-	
+
 	points[2].X=x+HALF_ELE_SIZE;
 	points[2].Y=y+HALF_ELE_SIZE*8;
 	points[2].Z=z-HALF_ELE_SIZE;
@@ -2836,7 +2836,7 @@ void	draw_editor_grid(void)
 	points[1].X=x+HALF_ELE_SIZE*8;
 	points[1].Y=y-HALF_ELE_SIZE;
 	points[1].Z=z-HALF_ELE_SIZE;
-	
+
 	points[2].X=x+HALF_ELE_SIZE*8;
 	points[2].Y=y+HALF_ELE_SIZE;
 	points[2].Z=z-HALF_ELE_SIZE;
@@ -2878,11 +2878,11 @@ void	draw_editor_grid(void)
 	points[1].X=x+HALF_ELE_SIZE;
 	points[1].Y=y-HALF_ELE_SIZE;
 	points[1].Z=z-HALF_ELE_SIZE*8;
-	
+
 	points[2].X=x+HALF_ELE_SIZE;
 	points[2].Y=y+HALF_ELE_SIZE;
 	points[2].Z=z-HALF_ELE_SIZE*8;
-							   
+
 	points[3].X=x-HALF_ELE_SIZE;
 	points[3].Y=y+HALF_ELE_SIZE;
 	points[3].Z=z-HALF_ELE_SIZE*8;
@@ -2942,7 +2942,7 @@ void	calc_things_screen_box(SLONG	map_thing,EdRect *rect)
 			set_screen_box(p_mthing->X,p_mthing->Y,p_mthing->Z,rect,20,20);
 			break;
 		case	MAP_THING_TYPE_PRIM:
-			//3ds Prim Mesh 
+			//3ds Prim Mesh
 			set_camera_angledy(p_mthing->AngleY);
 			calc_prims_screen_box(p_mthing->IndexOther,p_mthing->X,p_mthing->Y,p_mthing->Z,rect);
 			set_camera_angledy(0);
@@ -2972,7 +2972,7 @@ SLONG	hilight_map_things(UWORD type)
 	if(col==0)
 		col=250;
 
-	
+
 	mx=(engine.X>>8)>>ELE_SHIFT;
 	my=(engine.Y>>8)>>ELE_SHIFT;
 	mz=(engine.Z>>8)>>ELE_SHIFT;
@@ -2983,12 +2983,12 @@ SLONG	hilight_map_things(UWORD type)
 //		if(dx+mx>0&&dx+mx<EDIT_MAP_WIDTH&&dz+mz>0&&dz+mz<EDIT_MAP_DEPTH)
 		if(on_edit_map(dx+mx,dz+mz))
 		{
-			
+
 			index=edit_map[(dx+mx)][(dz+mz)].MapThingIndex;
 			while(index)
 			{
 				if(map_things[index].Type==type)
-				{							   
+				{
 					calc_things_screen_box(index,&prim_rect);
 					prim_rect.OutlineRect(col);
 					{
@@ -3064,7 +3064,7 @@ SLONG	select_map_things(MFPoint *mouse,UWORD type)
 	static	UBYTE col=0;
 	SLONG	screen_change=0;
 	col++;
-	
+
 	mx=(engine.X>>8)>>ELE_SHIFT;
 	my=(engine.Y>>8)>>ELE_SHIFT;
 	mz=(engine.Z>>8)>>ELE_SHIFT;
@@ -3075,13 +3075,13 @@ SLONG	select_map_things(MFPoint *mouse,UWORD type)
 //		if(dx+mx>0&&dx+mx<EDIT_MAP_WIDTH&&dz+mz>0&&dz+mz<EDIT_MAP_DEPTH)
 		if(on_edit_map(dx+mx,dz+mz))
 		{
-			
+
 			index=edit_map[(dx+mx)][(dz+mz)].MapThingIndex;
 			while(index)
 			{
 				if(map_things[index].Type==type)
 				{
-					
+
 					calc_things_screen_box(index,&prim_rect);
 					if(prim_rect.PointInRect(mouse))
 						return(index);
@@ -3136,7 +3136,7 @@ extern	void	draw_anim_prim_tween(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,
 
 			break;
 		case	MAP_THING_TYPE_PRIM:
-			//3ds Prim Mesh 
+			//3ds Prim Mesh
 //			engine.AngleDY=p_mthing->AngleY;
 			set_camera_angledy(p_mthing->AngleY);
 
@@ -3160,7 +3160,7 @@ extern	SLONG find_alt_for_this_pos(SLONG  x,SLONG  z);
 				p_mthing->Y=y;
 			}
 			else
-			if(prim_objects[p_mthing->IndexOther].flag & PRIM_FLAG_JUST_FLOOR) 
+			if(prim_objects[p_mthing->IndexOther].flag & PRIM_FLAG_JUST_FLOOR)
 			{
 
 				SLONG	px,py,pz,y;
@@ -3241,7 +3241,7 @@ void	scan_a_prim_at(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG *mid_x,SLONG *mid_y
 
 	sp=p_obj->StartPoint;
 	ep=p_obj->EndPoint;
-	
+
 	*mid_x=0;
 	*mid_y=0;
 	*mid_z=0;
@@ -3275,7 +3275,7 @@ void	scan_a_prim_at_dist(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG mid_x,SLONG mi
 
 	sp=p_obj->StartPoint;
 	ep=p_obj->EndPoint;
-	
+
 
 	for(c0=sp;c0<ep;c0++)
 	{
@@ -3450,16 +3450,16 @@ SLONG	add_floor_face_to_bucket(SLONG	x1,SLONG	y1,SLONG	z1,SLONG	x2,SLONG	y2,SLON
 		tsize=31; //floor_texture_sizes[((struct	MiniTextureBits*)(&tex))->Size]-1;
 		switch(((struct	MiniTextureBits*)(&tex))->Rot)
 		{
-			case	0:		
+			case	0:
 				SET_TX_TY(tx,ty,tx+tsize,ty,tx,ty+tsize,tx+tsize,ty+tsize);
 				break;
-			case	1:		
+			case	1:
 				SET_TX_TY(	,tx+tsize,ty,tx+tsize,ty+tsize,tx,ty,tx,ty+tsize);
 				break;
-			case	2:	
+			case	2:
 				SET_TX_TY(	,tx+tsize,ty+tsize,tx,ty+tsize,tx+tsize,ty,tx,ty);
 				break;
-			case	3:	
+			case	3:
 				SET_TX_TY(	,tx,ty+tsize,tx,ty,tx+tsize,ty+tsize,tx+tsize,ty);
 				break;
 		}
@@ -3490,21 +3490,21 @@ SLONG	add_floor_face_to_bucket(SLONG	x1,SLONG	y1,SLONG	z1,SLONG	x2,SLONG	y2,SLON
 				add_floor_tri_to_bucket(x2,y2,z2,x3,y3,z3,x1,y1,z1,p_map,s2,s3,s1,0,tx2,ty2,tx3,ty3,tx1,ty1,page);
 				return(ret);
 			case	3:
-				// . 
+				// .
 				// ..
 				// ...
 				add_floor_tri_to_bucket(x1,y1,z1,x4,y4,z4,x3,y3,z3,p_map,s1,s4,s3,1,tx1,ty1,tx4,ty4,tx3,ty3,page);
 				add_floor_tri_to_bucket(x1,y1,z1,x2,y2,z2,x4,y4,z4,p_map,s1,s2,s4,0,tx1,ty1,tx2,ty2,tx4,ty4,page);
 				return(ret);
 			case	4:
-				// ... 
+				// ...
 				// ..
 				// .
 				add_floor_tri_to_bucket(x1,y1,z1,x2,y2,z2,x3,y3,z3,p_map,s1,s2,s3,1,tx1,ty1,tx2,ty2,tx3,ty3,page);
 				add_floor_tri_to_bucket(x2,y2,z2,x4,y4,z4,x3,y3,z3,p_map,s2,s4,s3,0,tx2,ty2,tx4,ty4,tx3,ty3,page);
 				return(ret);
 			case	5:
-				// ... 
+				// ...
 				//  ..
 				//   .
 				add_floor_tri_to_bucket(x1,y1,z1,x2,y2,z2,x4,y4,z4,p_map,s1,s2,s4,1,tx1,ty1,tx2,ty2,tx4,ty4,page);
@@ -3512,8 +3512,8 @@ SLONG	add_floor_face_to_bucket(SLONG	x1,SLONG	y1,SLONG	z1,SLONG	x2,SLONG	y2,SLON
 				return(ret);
 		}
 	}
-	
-	
+
+
 	setPolyType4(
 					current_bucket_pool,
 					POLY_GT
@@ -3542,7 +3542,7 @@ SLONG	add_floor_face_to_bucket(SLONG	x1,SLONG	y1,SLONG	z1,SLONG	x2,SLONG	y2,SLON
 
 	setZ4((struct BucketQuad*)current_bucket_pool,z1,z2,z3,z4);
 
-	
+
 
 //			setShade4((struct BucketQuad*)current_bucket_pool,p_f4->Bright[0],p_f4->Bright[1],p_f4->Bright[2],p_f4->Bright[3]);
 	setShade4((struct BucketQuad*)current_bucket_pool,s1,s2,s3,s4);
@@ -3575,7 +3575,7 @@ SLONG	add_floor_face_to_bucket(SLONG	x1,SLONG	y1,SLONG	z1,SLONG	x2,SLONG	y2,SLON
 	temp_ptr_flag=prev_row_flag_ptr;	\
 	prev_row_flag_ptr=row_flag_ptr;		\
 	row_flag_ptr=temp_ptr_flag;		\
-}	
+}
 
 
 #define	DRAW_WIDTH	24
@@ -3620,7 +3620,7 @@ void	draw_map_floor(void)
 
 	for(dz=(-DRAW_WIDTH)+1;dz<DRAW_WIDTH;dz++)
 	{
-	
+
 //		dz=(-DRAW_WIDTH)+1;
 		for(row_count=0,dx=-DRAW_WIDTH;dx<DRAW_WIDTH;dx++,row_count++)
 		{
@@ -3633,7 +3633,7 @@ void	draw_map_floor(void)
 		//		point.Y=0;
 				point.Z=(dz*ELE_SIZE)+(mz<<ELE_SHIFT); //(engine.Z>>8);
 				*row_flag_ptr=rotate_point_gte(&point,row_ptr);
-			}						  
+			}
 			else
 	//		if(dx+mx-1>0&&dx+mx+1<EDIT_MAP_WIDTH&&dz+mz-1>0&&dz+mz+1<EDIT_MAP_DEPTH)
 			{
@@ -3643,7 +3643,7 @@ void	draw_map_floor(void)
 				//point.Y=0;
 				point.Z=(dz*ELE_SIZE)+(mz<<ELE_SHIFT); //(engine.Z>>8);
 				row_flag_ptr[row_count]=rotate_point_gte(&point,&row_ptr[row_count]);
-				
+
 //				if(dx+mx-1>0&&dx+mx+1<EDIT_MAP_WIDTH&&dz+mz-1>0&&dz+mz+1<EDIT_MAP_DEPTH)
 
 				if( on_edit_map(dx+mx-1,dz+mz-1) )
@@ -3698,11 +3698,11 @@ void	draw_map_floor(void)
 					}
 				}
 			}
-			
+
 		}
 		SWAP_ROW()
 	}
-	
+
 }
 
 void	find_map_clip(SLONG *minx,SLONG *maxx,SLONG *minz,SLONG *maxz)
@@ -3822,7 +3822,7 @@ void	draw_editor_map(ULONG flags)
 
 	animate_texture_maps();
 //	LogText(" draw editor \n");
-	
+
 	engine.TrueY=engine.Y;
 	mx=(engine.X>>8)>>ELE_SHIFT;
 	my=(engine.Y>>8)>>ELE_SHIFT;
@@ -3837,7 +3837,7 @@ void	draw_editor_map(ULONG flags)
 //		if(dx+mx>0&&dx+mx<EDIT_MAP_WIDTH&&dz+mz>0&&dz+mz<EDIT_MAP_DEPTH)
 		if(on_edit_map(dx+mx,dz+mz))
 		{
-			
+
 			index=edit_map[(dx+mx)][(dz+mz)].MapThingIndex;
 			while(index)
 			{
@@ -3896,7 +3896,7 @@ void	draw_editor_map(ULONG flags)
 
 //	if(!flags)
 //		draw_editor_grid();
-//	draw_cube_hilight();		
+//	draw_cube_hilight();
 	{
 		SLONG	x,y,z;
 		CBYTE	str[100];
@@ -3907,7 +3907,7 @@ void	draw_editor_map(ULONG flags)
 
 		sprintf(str," x %d y %d z %d ",x,y,z);
 		QuickText(20,20,str,0);
-		
+
 	}
 void	process_map();
 		process_map();
@@ -3991,7 +3991,7 @@ void	process_map();
         - Added face edge visibility info.
         - Finally!! Those flags that mark when the texture is wrapping
           around inside a face. This happens when you apply spherical
-          or cylindrical coordinates, the faces along the 0§ axis don't
+          or cylindrical coordinates, the faces along the 0ï¿½ axis don't
           get proper mapping coords. Someone describe how to fix this?
         - Added -quiet parm, only displays minimal chunk info.
         - Object parent number is stored in CHUNK_TRACKOBJNAME.
@@ -4093,7 +4093,7 @@ enum {
     // Forward declaration.
 void ChunkReader(FILE *f, int ind, long p);
 
-void SkipReader(FILE *f, int ind, long p) 
+void SkipReader(FILE *f, int ind, long p)
 {
 }
 
@@ -4232,7 +4232,7 @@ void SpotLightReader(FILE *f, int ind, long p) {
     printf("%*s    Target X: %f, Y: %f, Z: %f; Hotspot %f, Falloff %f\n",
            ind, "", c[0], c[1], c[2], c[3], c[4]);
 }
- 
+
 void CameraReader(FILE *f, int ind, long p) {
     float c[8];
     if (fread(&c, sizeof(c), 1, f) != 1) return;
@@ -4297,7 +4297,7 @@ void SplineFlagsReader(FILE *f, int ind, word flags) {
     int i;
     float dat;
 
-    for (i = 0; i < 16; i++) 
+    for (i = 0; i < 16; i++)
 	{
         static const char *flagnames[] = {
             "SPLINETension",
@@ -4350,14 +4350,14 @@ void TrackRotReader(FILE *f, int ind, long p) {
     if (fread(&n, sizeof(n), 1, f) != 1) return;
     printf("%*sRotation keys: %d\n", ind, "", n);
     fseek(f, 2, SEEK_CUR);
-    while (n-- > 0) 
+    while (n-- > 0)
 	{
-        if (fread(&nf, sizeof(nf), 1, f) != 1) 
+        if (fread(&nf, sizeof(nf), 1, f) != 1)
 		{
 			printf(" error nf\n");
 			return;
 		}
-        if (fread(&unkown, sizeof(unkown), 1, f) != 1) 
+        if (fread(&unkown, sizeof(unkown), 1, f) != 1)
 		{
 			printf(" error unknown\n");
 			return;
@@ -4370,12 +4370,12 @@ void TrackRotReader(FILE *f, int ind, long p) {
 		printf("%*s  Frame %3d: Flags 0x%X\n", ind, "", nf, flags);
 
         SplineFlagsReader(f, ind, flags);
-        if (fread(&pos, sizeof(pos), 1, f) != 1) 
+        if (fread(&pos, sizeof(pos), 1, f) != 1)
 		{
 			printf(" error pos\n");
 			return;
 		}
-        printf("%*s             Angle: %f§, X: %f, Y: %f, Z: %f\n",ind, "", pos[0], pos[1], pos[2], pos[3]);
+        printf("%*s             Angle: %fï¿½, X: %f, Y: %f, Z: %f\n",ind, "", pos[0], pos[1], pos[2], pos[3]);
     }
 }
 
@@ -4486,22 +4486,22 @@ void ChunkReader(FILE *f, int ind, long p) {
 	TChunkHeader h;
 	int n;
 	long pc;
-	
-	while (ftell(f) < p) 
+
+	while (ftell(f) < p)
 	{
 		pc = ftell(f);
-		if (fread(&h, sizeof(h), 1, f) != 1) 
+		if (fread(&h, sizeof(h), 1, f) != 1)
 			return;
-		if (h.len == 0) 
+		if (h.len == 0)
 			return;
 		n = FindChunk(h.id);
-		if (n < 0) 
+		if (n < 0)
 		{
 			if (Verbose)
 				printf("%*sUnknown chunk: 0x%04X, offset 0x%lX, size: %d bytes.\n",	ind, "", h.id, pc, h.len);
 			fseek(f, pc + h.len, SEEK_SET);
-		} 
-		else 
+		}
+		else
 		{
 			if (!Quiet || ChunkNames[n].func == NULL)
 				printf("%*sChunk type \"%s\", offset 0x%lX, size %d bytes\n",ind, "", ChunkNames[n].name, pc, h.len);
@@ -4523,14 +4523,14 @@ void ChunkReader(FILE *f, int ind, long p) {
 // ------------------------------------
 
 
-void read_3ds(void) 
+void read_3ds(void)
 {
     FILE *f;
     long p;
 	return;
 
     f = fopen("darci1.3ds", "rb");
-    if (f == NULL) 
+    if (f == NULL)
 	{
         printf("Can't open %s!\n");
 		return;
@@ -4579,7 +4579,7 @@ void	build_radius_info(void)
 			{
 				for(radius_offset=-4;radius_offset<4;radius_offset++)
 				{
-					
+
 					dx=(SIN(angle)*(radius+radius_offset))>>(16+2);
 					dz=(COS(angle)*(radius+radius_offset))>>(16+2);
 					actual_radius=Root(SDIST2(dx,dz));
@@ -4625,7 +4625,7 @@ void	init_editor(void)
 
 	load_palette("data\\tex01.pal");
 	build_radius_info();
-	init_poly_system();	
+	init_poly_system();
 //	clear_map();
 //	read_3ds();
 	PAP_clear();
@@ -4775,7 +4775,7 @@ void	draw_quick_map(void)
 
 		if(on_edit_map(dx+mx-MAX_RADIUS-1,dz+mz-MAX_RADIUS-1))
 		{
-			
+
 			index=edit_map[(dx+mx-MAX_RADIUS)][(dz+mz-MAX_RADIUS)].MapThingIndex;
 			while(index)
 			{
@@ -4828,7 +4828,7 @@ void	draw_quick_map(void)
 
 		}
 		ptr_flag++;
-	
+
 	}
 
 }

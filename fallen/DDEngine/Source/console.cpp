@@ -9,8 +9,8 @@
 #include "game.h"
 #include "console.h"
 #include "poly.h"
-#include "C:\fallen\DDLibrary\headers\D3DTexture.h"
-#include "C:\fallen\DDLibrary\headers\GDisplay.h"
+#include "fallen/DDLibrary/headers/D3DTexture.h"
+#include "fallen/DDLibrary/headers/GDisplay.h"
 //#include "font3d.h"
 #include "font2d.h"
 #include "panel.h"
@@ -142,7 +142,7 @@ void CONSOLE_draw() {
 
 	// probably want to change this to only blank areas we'll be writing to
 //	the_display.lp_D3D_Viewport->Clear(1, &the_display.ViewportRect, D3DCLEAR_ZBUFFER);
-	
+
 	POLY_frame_init(FALSE, FALSE);
 	if (*status_text) FONT2D_DrawString(status_text,10,10,0x7f00ff00,256,POLY_PAGE_FONT2D);
 /*
@@ -198,7 +198,7 @@ void	draw_a_3d_menu(Font3D &font, SLONG	menu);
 				cm->delay -= this_tick - last_tick;
 
 				if (cm->delay < 0)
-				{	
+				{
 					cm->delay = 0;
 				}
 			}

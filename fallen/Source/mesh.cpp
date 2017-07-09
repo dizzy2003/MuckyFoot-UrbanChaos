@@ -6,11 +6,11 @@
 #include "aeng.h"
 #include "matrix.h"
 #include "mesh.h"
-#include "c:\fallen\headers\night.h"
-#include "c:\fallen\headers\light.h"
+#include "fallen/headers/night.h"
+#include "fallen/headers/light.h"
 #include "poly.h"
-#include "c:\fallen\headers\animtmap.h"
-#include "c:\fallen\headers\morph.h"
+#include "fallen/headers/animtmap.h"
+#include "fallen/headers/morph.h"
 #include <math.h>
 
 #define	POLY_FLAG_GOURAD		(1<<0)
@@ -116,7 +116,7 @@ NIGHT_Colour *MESH_draw_guts(
 		p1 = p_f4->Points[1] - sp;
 		p2 = p_f4->Points[2] - sp;
 		p3 = p_f4->Points[3] - sp;
-		
+
 		ASSERT(WITHIN(p0, 0, POLY_buffer_upto - 1));
 		ASSERT(WITHIN(p1, 0, POLY_buffer_upto - 1));
 		ASSERT(WITHIN(p2, 0, POLY_buffer_upto - 1));
@@ -195,7 +195,7 @@ NIGHT_Colour *MESH_draw_guts(
 		p0 = p_f3->Points[0] - sp;
 		p1 = p_f3->Points[1] - sp;
 		p2 = p_f3->Points[2] - sp;
-		
+
 		ASSERT(WITHIN(p0, 0, POLY_buffer_upto - 1));
 		ASSERT(WITHIN(p1, 0, POLY_buffer_upto - 1));
 		ASSERT(WITHIN(p2, 0, POLY_buffer_upto - 1));
@@ -210,10 +210,10 @@ NIGHT_Colour *MESH_draw_guts(
 			{
 				tri[0]->u = float(p_f3->UV[0][0] & 0x3f) * (1.0F / 32.0F);
 				tri[0]->v = float(p_f3->UV[0][1]       ) * (1.0F / 32.0F);
-												       
+
 				tri[1]->u = float(p_f3->UV[1][0]       ) * (1.0F / 32.0F);
 				tri[1]->v = float(p_f3->UV[1][1]       ) * (1.0F / 32.0F);
-												       
+
 				tri[2]->u = float(p_f3->UV[2][0]       ) * (1.0F / 32.0F);
 				tri[2]->v = float(p_f3->UV[2][1]       ) * (1.0F / 32.0F);
 
@@ -251,7 +251,7 @@ NIGHT_Colour *MESH_draw_guts(
 				p1 = p_f4->Points[3] - sp;
 				p2 = p_f4->Points[0] - sp;
 				p3 = p_f4->Points[1] - sp;
-				
+
 				ASSERT(WITHIN(p0, 0, POLY_buffer_upto - 1));
 				ASSERT(WITHIN(p1, 0, POLY_buffer_upto - 1));
 				ASSERT(WITHIN(p2, 0, POLY_buffer_upto - 1));
@@ -309,7 +309,7 @@ NIGHT_Colour *MESH_draw_poly(
 	yaw   = float(i_yaw)   * (2.0F * PI / 2048.0F);
 	pitch = float(i_pitch) * (2.0F * PI / 2048.0F);
 	roll  = float(i_roll)  * (2.0F * PI / 2048.0F);
-	
+
 	MATRIX_calc(
 		matrix,
 		yaw,
@@ -345,7 +345,7 @@ NIGHT_Colour *MESH_draw_poly_inv_matrix(
 	yaw   = float(i_yaw)   * (2.0F * PI / 2048.0F);
 	pitch = float(i_pitch) * (2.0F * PI / 2048.0F);
 	roll  = float(i_roll)  * (2.0F * PI / 2048.0F);
-	
+
 	MATRIX_calc(
 		matrix,
 		yaw,
@@ -406,7 +406,7 @@ NIGHT_Colour *MESH_draw_poly(
 	yaw   = float(i_yaw)   * (2.0F * PI / 2048.0F);
 	pitch = float(i_pitch) * (2.0F * PI / 2048.0F);
 	roll  = float(i_roll)  * (2.0F * PI / 2048.0F);
-	
+
 	MATRIX_calc(
 		matrix,
 		yaw,
@@ -479,7 +479,7 @@ NIGHT_Colour *MESH_draw_poly(
 		p1 = p_f4->Points[1] - sp;
 		p2 = p_f4->Points[2] - sp;
 		p3 = p_f4->Points[3] - sp;
-		
+
 		ASSERT(WITHIN(p0, 0, POLY_buffer_upto - 1));
 		ASSERT(WITHIN(p1, 0, POLY_buffer_upto - 1));
 		ASSERT(WITHIN(p2, 0, POLY_buffer_upto - 1));
@@ -558,7 +558,7 @@ NIGHT_Colour *MESH_draw_poly(
 		p0 = p_f3->Points[0] - sp;
 		p1 = p_f3->Points[1] - sp;
 		p2 = p_f3->Points[2] - sp;
-		
+
 		ASSERT(WITHIN(p0, 0, POLY_buffer_upto - 1));
 		ASSERT(WITHIN(p1, 0, POLY_buffer_upto - 1));
 		ASSERT(WITHIN(p2, 0, POLY_buffer_upto - 1));
@@ -573,10 +573,10 @@ NIGHT_Colour *MESH_draw_poly(
 			{
 				tri[0]->u = float(p_f3->UV[0][0] & 0x3f) * (1.0F / 32.0F);
 				tri[0]->v = float(p_f3->UV[0][1]       ) * (1.0F / 32.0F);
-												       
+
 				tri[1]->u = float(p_f3->UV[1][0]       ) * (1.0F / 32.0F);
 				tri[1]->v = float(p_f3->UV[1][1]       ) * (1.0F / 32.0F);
-												       
+
 				tri[2]->u = float(p_f3->UV[2][0]       ) * (1.0F / 32.0F);
 				tri[2]->v = float(p_f3->UV[2][1]       ) * (1.0F / 32.0F);
 
@@ -605,7 +605,7 @@ void MESH_draw_morph(
 		SLONG         prim,
 		UBYTE         morph1,
 		UBYTE         morph2,
-		UWORD		  tween,		// 0 - 256         
+		UWORD		  tween,		// 0 - 256
 		MAPCO16	      at_x,
 		MAPCO16       at_y,
 		MAPCO16	      at_z,
@@ -660,7 +660,7 @@ void MESH_draw_morph(
 	yaw   = float(i_yaw)   * (2.0F * PI / 2048.0F);
 	pitch = float(i_pitch) * (2.0F * PI / 2048.0F);
 	roll  = float(i_roll)  * (2.0F * PI / 2048.0F);
-	
+
 	MATRIX_calc(
 		matrix,
 		yaw,
@@ -688,7 +688,7 @@ void MESH_draw_morph(
 	POLY_shadow_upto = 0;
 
 	ASSERT(
-		MORPH_get_num_points(morph1) == 
+		MORPH_get_num_points(morph1) ==
 		MORPH_get_num_points(morph2));
 
 	num_points = MORPH_get_num_points(morph1);
@@ -703,7 +703,7 @@ void MESH_draw_morph(
 		px1 = float(mp1->x);
 		py1 = float(mp1->y);
 		pz1 = float(mp1->z);
-		
+
 		px2 = float(mp2->x);
 		py2 = float(mp2->y);
 		pz2 = float(mp2->z);
@@ -751,7 +751,7 @@ void MESH_draw_morph(
 		p1 = p_f4->Points[1] - sp;
 		p2 = p_f4->Points[2] - sp;
 		p3 = p_f4->Points[3] - sp;
-		
+
 		ASSERT(WITHIN(p0, 0, POLY_buffer_upto - 1));
 		ASSERT(WITHIN(p1, 0, POLY_buffer_upto - 1));
 		ASSERT(WITHIN(p2, 0, POLY_buffer_upto - 1));
@@ -833,7 +833,7 @@ void MESH_draw_morph(
 		p0 = p_f3->Points[0] - sp;
 		p1 = p_f3->Points[1] - sp;
 		p2 = p_f3->Points[2] - sp;
-		
+
 		ASSERT(WITHIN(p0, 0, POLY_buffer_upto - 1));
 		ASSERT(WITHIN(p1, 0, POLY_buffer_upto - 1));
 		ASSERT(WITHIN(p2, 0, POLY_buffer_upto - 1));
@@ -848,10 +848,10 @@ void MESH_draw_morph(
 			{
 				tri[0]->u = float(p_f3->UV[0][0] & 0x3f) * (1.0F / 32.0F);
 				tri[0]->v = float(p_f3->UV[0][1]       ) * (1.0F / 32.0F);
-												       
+
 				tri[1]->u = float(p_f3->UV[1][0]       ) * (1.0F / 32.0F);
 				tri[1]->v = float(p_f3->UV[1][1]       ) * (1.0F / 32.0F);
-												       
+
 				tri[2]->u = float(p_f3->UV[2][0]       ) * (1.0F / 32.0F);
 				tri[2]->v = float(p_f3->UV[2][1]       ) * (1.0F / 32.0F);
 
@@ -915,7 +915,7 @@ MESH_Reflection MESH_reflection[MESH_MAX_REFLECTIONS];
 void MESH_init_reflections()
 {
 	SLONG i;
-	
+
 	MESH_Reflection *mr;
 
 	for (i = 0; i < MESH_MAX_REFLECTIONS; i++)
@@ -995,7 +995,7 @@ SLONG MESH_add_point(
 
 	//
 	// We must create a new point.
-	// 
+	//
 
 	if (mr->num_points >= mr->max_points)
 	{
@@ -1170,7 +1170,7 @@ void MESH_add_poly(MESH_Reflection *mr, MESH_Add poly[], SLONG num_points, SLONG
 
 	//
 	// Which is the highest and lowest point?
-	// 
+	//
 
 	top        = 0;
 	bot        = 0;
@@ -1210,7 +1210,7 @@ void MESH_add_poly(MESH_Reflection *mr, MESH_Add poly[], SLONG num_points, SLONG
 
 		ASSERT(WITHIN(p1, 0, MESH_add_upto - 1));
 		ASSERT(WITHIN(p2, 0, MESH_add_upto - 1));
-	
+
 		mp1 = &MESH_add[p1];
 		mp2 = &MESH_add[p2];
 
@@ -1232,7 +1232,7 @@ void MESH_add_poly(MESH_Reflection *mr, MESH_Add poly[], SLONG num_points, SLONG
 		ASSERT(WITHIN(p1,   0, MESH_add_upto - 1));
 		ASSERT(WITHIN(p2,   0, MESH_add_upto - 1));
 		ASSERT(WITHIN(last, 0, MESH_add_upto - 1));
-	
+
 		mp1 = &MESH_add[p1];
 		mp2 = &MESH_add[p2];
 		mpl = &MESH_add[last];
@@ -1249,7 +1249,7 @@ void MESH_add_poly(MESH_Reflection *mr, MESH_Add poly[], SLONG num_points, SLONG
 
 			break;
 		}
-			
+
 
 		//
 		// Make sure each of the points has been added to the object.
@@ -1320,7 +1320,7 @@ void MESH_create_reflection(SLONG prim)
 
 	po = &prim_objects[prim];
 	pi =  get_prim_info(prim);
-	
+
 	//
 	// Initialise it.
 	//
@@ -1336,7 +1336,7 @@ void MESH_create_reflection(SLONG prim)
 
 	//
 	// The height about which the reflection takes place.
-	// 
+	//
 
 	reflect_height = float(pi->miny);
 
@@ -1378,7 +1378,7 @@ void MESH_create_reflection(SLONG prim)
 		{
 			//
 			// This whole poly is faded out.
-			// 
+			//
 		}
 		else
 		{
@@ -1422,7 +1422,7 @@ void MESH_create_reflection(SLONG prim)
 		{
 			//
 			// This whole poly is faded out.
-			// 
+			//
 		}
 		else
 		{
@@ -1461,7 +1461,7 @@ void MESH_draw_reflection(
 	POLY_Point      *tri[3];
 	MESH_Face       *mf;
 	MESH_Reflection *mr;
-	
+
 	if(prim==83)
 	{
 		return;
@@ -1483,7 +1483,7 @@ void MESH_draw_reflection(
 
 	//
 	// This mesh's rotation matrix.
-	// 
+	//
 
 	MATRIX_calc(
 		matrix,
@@ -1542,7 +1542,7 @@ void MESH_draw_reflection(
 
 			//
 			// Fade out with depth too.
-			// 
+			//
 
 			fog   = pp->specular >> 24;
 			fog  *= 255 - mr->mp[i].fade;

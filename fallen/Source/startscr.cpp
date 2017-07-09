@@ -16,12 +16,12 @@ CBYTE STARTSCR_mission[_MAX_PATH] = {0};
 #include	"startscr.h"
 
 #ifndef		PSX
-#include	"c:\fallen\ddengine\headers\poly.h"
-#include	"c:\fallen\ddengine\headers\text.h"
-#include    "c:\fallen\ddengine\headers\flamengine.h"
-#include    "c:\fallen\ddengine\headers\font3d.h"
-#include    "C:\fallen\DDLibrary\headers\D3DTexture.h"
-#include    "C:\fallen\DDLibrary\headers\GDisplay.h"
+#include	"fallen/ddengine/headers/poly.h"
+#include	"fallen/ddengine/headers/text.h"
+#include    "fallen/ddengine/headers/flamengine.h"
+#include    "fallen/ddengine/headers/font3d.h"
+#include    "fallen/DDLibrary/headers/D3DTexture.h"
+#include    "fallen/DDLibrary/headers/GDisplay.h"
 #include	"sound.h"
 #include	"menufont.h"
 #include	"texture.h"
@@ -29,10 +29,10 @@ CBYTE STARTSCR_mission[_MAX_PATH] = {0};
 #include	"night.h"
 #include	"io.h"
 #include	"ob.h"
-#include	"C:\fallen\DDEngine\headers\vertexbuffer.h"
-#include	"C:\fallen\DDEngine\headers\polypoint.h"
-#include	"C:\fallen\DDEngine\headers\renderstate.h"
-#include	"C:\fallen\DDEngine\headers\polypage.h"
+#include	"fallen/DDEngine/headers/vertexbuffer.h"
+#include	"fallen/DDEngine/headers/polypoint.h"
+#include	"fallen/DDEngine/headers/renderstate.h"
+#include	"fallen/DDEngine/headers/polypage.h"
 #include	"password.h"
 #include	"interfac.h"
 #include	"env.h"
@@ -135,7 +135,7 @@ struct	StartMenu	start_menu[]=
 {
 
 	{0,0,0,0}, // dummy
-	{0,7,0,0}, // Main Menu 
+	{0,7,0,0}, // Main Menu
 	{6,4,0,0}, // Options
 	{10,3,0,0}, // multiplayer
 	{6,4,0,1}, // sfx
@@ -210,7 +210,7 @@ void	draw_a_menu(SLONG	menu)
 			CBYTE	*str;
 			item=startmenu2[c0+start_menu[menu].StartIndex].Item;
 			draw_text_at(150, y,startmenu2[c0+start_menu[menu].StartIndex].Str,0);
-			
+
 			str=startmenu2[c0+start_menu[menu].StartIndex].Strb[item];
 			if(str)
 				draw_text_at(350, y,str,0);
@@ -223,7 +223,7 @@ void	draw_a_menu(SLONG	menu)
 #ifndef	PSX
 
 #if 0
-void	draw_a_3d_menu(Font3D &font, SLONG	menu) 
+void	draw_a_3d_menu(Font3D &font, SLONG	menu)
 {
 	SLONG	c0;
 	SLONG	y;
@@ -260,7 +260,7 @@ void	draw_a_3d_menu(Font3D &font, SLONG	menu)
 			item=startmenu2[c0+start_menu[menu].StartIndex].Item;
 //			draw_text_at(150, y,startmenu2[c0+start_menu[menu].StartIndex].Str,0);
 			font.DrawString(startmenu2[c0+start_menu[menu].StartIndex].Str,200,y,text_colour,2.0+(isthis*0.5f),isthis);
-			
+
 			str=startmenu2[c0+start_menu[menu].StartIndex].Strb[item];
 			if(str) font.DrawString(str,500,y,text_colour,2.0+(isthis*0.5f),isthis);
 
@@ -275,7 +275,7 @@ void	draw_a_3d_menu(Font3D &font, SLONG	menu)
 //void MENUFONT_Draw_floats(float x, float y, UWORD scale, CBYTE *msg, SLONG rgb, UBYTE flags, UBYTE haloscale);
 
 
-void	draw_a_new_menu(SLONG	menu, SLONG localctr) 
+void	draw_a_new_menu(SLONG	menu, SLONG localctr)
 {
 	SLONG	c0;
 	SLONG	y,rgb;
@@ -301,21 +301,21 @@ void	draw_a_new_menu(SLONG	menu, SLONG localctr)
 		{
 			str=startmenu[c0+start_menu[menu].StartIndex].Str;
 			flags = MENUFONT_HSCALEONLY|MENUFONT_CENTRED | ( isthis ? MENUFONT_SHAKE : 0);
-			if (localctr<0xff) 
+			if (localctr<0xff)
 			{
-				if (str) 
+				if (str)
 					MENUFONT_Draw(436,y,256,str,rgb,flags);
 				// I don't like these MikeD
 //					MENUFONT_Draw_floats(388,y,localctr,str,rgb,flags);
-			} 
+			}
 			else
 			{
-				if (str) 
+				if (str)
 				{
 					MENUFONT_Draw(388,y,256,str,rgb,flags);
 				// I don't like these MikeD
 					/*
-					if (localctr<0x1ff) 
+					if (localctr<0x1ff)
 					{
 						rgb=((0x1ff-localctr)>>1)<<24;
 						rgb|=0x7fffcf;
@@ -335,7 +335,7 @@ void	draw_a_new_menu(SLONG	menu, SLONG localctr)
 //			font.DrawString(startmenu2[c0+start_menu[menu].StartIndex].Str,200,y,text_colour,2.0+(isthis*0.5f),isthis);
 			flags = MENUFONT_RIGHTALIGN | ( isthis ? MENUFONT_SHAKE : 0);
 			MENUFONT_Draw(420,y,256,startmenu2[c0+start_menu[menu].StartIndex].Str,rgb,flags);
-			
+
 			flags = ( isthis ? MENUFONT_SHAKE : 0);
 			str=startmenu2[c0+start_menu[menu].StartIndex].Strb[item];
 			if (str)MENUFONT_Draw(436,y,256,str,rgb,flags);
@@ -381,9 +381,9 @@ void SaveAString(MFFileHandle &file, CBYTE *txt) {
 
 
 
-void LoadFont_CRT(void) 
+void LoadFont_CRT(void)
 {
-//	MENUFONT_Load("font2.tga",POLY_PAGE_NEWFONT,"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz$%&()+-\"?,.;:/#0123456789°·×_|}{÷");
+//	MENUFONT_Load("font2.tga",POLY_PAGE_NEWFONT,"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz$%&()+-\"?,.;:/#0123456789ï¿½ï¿½ï¿½_|}{ï¿½");
 //	MENUFONT_Load("data\\textures\\extras\\olyfont2.tga",POLY_PAGE_NEWFONT_INVERSE,"abcdefghijklmnopqrstuvwxyz0123456789.,!\":;'#$*-()[]\\/?");
 #ifdef TARGET_DC
 	MENUFONT_Load("olyfont2dc.tga",POLY_PAGE_NEWFONT_INVERSE,"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!\":;'#$*-()[]\\/?");
@@ -391,12 +391,12 @@ void LoadFont_CRT(void)
 	MENUFONT_Load("olyfont2.tga",POLY_PAGE_NEWFONT_INVERSE,"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!\":;'#$*-()[]\\/?");
 #endif
 
-void MENUFONT_MergeLower(void);	
+void MENUFONT_MergeLower(void);
 	MENUFONT_MergeLower();
 }
 
 void LoadFont_LCD(void) {
-//	MENUFONT_Load("data\\textures\\extras\\font3.tga",POLY_PAGE_NEWFONT_INVERSE,"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz$%&()+-\"?,.;:/#0123456789°·×_|}{÷");
+//	MENUFONT_Load("data\\textures\\extras\\font3.tga",POLY_PAGE_NEWFONT_INVERSE,"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz$%&()+-\"?,.;:/#0123456789ï¿½ï¿½ï¿½_|}{ï¿½");
 }
 
 SLONG MainWidgetLoop(void);
@@ -492,10 +492,14 @@ SLONG	do_start_menu(void)
 	static  BOOL doneload=0;
 
 	if (!doneload) {
-		CBYTE *lang=ENV_get_value_string("language");
+		CBYTE *lang=ENV_get_value_string("language", "Game");
 		doneload=1;
-		if (!lang) lang="text\\lang_english.txt";
-		XLAT_load(lang);
+		if (lang == NULL) {
+			XLAT_load("text/lang_english.txt");
+		} else {
+			XLAT_load(lang);
+			ENV_free_string(lang);
+		}
 		XLAT_init();
 		LoadFont_CRT();
 #define	NO_MAP	1
@@ -516,7 +520,7 @@ SLONG	do_start_menu(void)
 
 	// Do this outside POLY_xxx block because it needs to, well, fuck things
 	// up royally.
-//    fire.Run();	
+//    fire.Run();
 
 	POLY_frame_init(FALSE, FALSE);
 //	draw_a_menu(menu);
@@ -561,7 +565,7 @@ extern void calc_camera_pos(void);
 	POLY_frame_draw(FALSE,TRUE);
 	return res;
 #endif
-	
+
 #ifdef USE_WIDGETS
 //void test_the_widgets(void);
 
@@ -574,7 +578,7 @@ extern void calc_camera_pos(void);
 		MFX_set_listener(0,0,0,0,0,0);
 		MFX_render();
 		return res;
-	} else 
+	} else
 		draw_a_new_menu(menu, localctr+=6);
 #endif
 
@@ -592,7 +596,7 @@ extern void calc_camera_pos(void);
 
 #ifndef USE_WIDGETS
 
-	if (realmenu) 
+	if (realmenu)
 		return res;
 
 	if(Keys[KB_ENTER])
@@ -804,7 +808,7 @@ BOOL game_dlg(Form *form, Widget *widget, SLONG message) {
 				}
 				wig=FORM_AddWidget(form,WIDGET_Create(&SHADE_Methods,10,100,320,200,"-"));
 				dist=LoadMissionList(form,MISSION_SCRIPT,dist);
-				if (!dist) 
+				if (!dist)
 					wig->methods->Free(wig);
 				else {
 					wig->data[0]=3;
@@ -850,7 +854,7 @@ void DrawPolaroid() {
 	pp[1].X=640;	pp[1].Y=218;
 	pp[2].X=378;	pp[2].Y=462;
 	pp[3].X=630;	pp[3].Y=480;
-	
+
 	POLY_add_quad(quad,POLY_PAGE_COLOUR,FALSE,TRUE);
 
 	pp[0].colour=0xFFFFFF; pp[0].specular=0;
@@ -867,7 +871,7 @@ void DrawPolaroid() {
 	pp[1].u=1;		pp[1].v=0;
 	pp[2].u=0;		pp[2].v=1;
 	pp[3].u=1;		pp[3].v=1;
-	
+
 	POLY_add_quad(quad,POLY_PAGE_POLAROID,FALSE,TRUE);
 }
 
@@ -876,7 +880,7 @@ UWORD save_slot;
 BOOL save_dlg(Form *form, Widget *widget, SLONG message) {
 	if (widget) {
 		switch(widget->tag) {
-		case 1: 
+		case 1:
 			save_slot=form->children->data[4];
 			form->returncode=1; break;
 		case 2: form->returncode=-1; break;
@@ -938,7 +942,7 @@ void	SaveQuickGame(Form* form) {
 	slot++; // it was 0 based*/
 	slot=save_slot+1;
 
-//	if (!PathIsDirectory("saves")) 
+//	if (!PathIsDirectory("saves"))
 	{ // sod it...
 		CreateDirectory("saves",NULL);
 	};
@@ -997,7 +1001,7 @@ void	LoadMissionList(Widget *list, CBYTE *script) {
 	SLONG a,b,c,d,e;
 	SLONG ver, mapx, mapy;
 
-	text = (CBYTE*)MemAlloc(4096); 
+	text = (CBYTE*)MemAlloc(4096);
 	memset(text,0,4096);
 
 	file = FileOpen(script);
@@ -1029,24 +1033,24 @@ void	ParseMissionData(CBYTE *text, CBYTE version, MissionData *mdata) {
 	switch(version) {
 	case 2:
 		sscanf(text,"%d : %d : %d : %d : %d : %s : *%d : %*d : %[^:] : %*s",
-			&mdata->ObjID, &mdata->GroupID, &mdata->ParentID, &mdata->ParentIsGroup, 
+			&mdata->ObjID, &mdata->GroupID, &mdata->ParentID, &mdata->ParentIsGroup,
 			&mdata->Type, mdata->fn, mdata->ttl);
 		mdata->Flags=0; mdata->District=-1;
 		break;
 	case 3:
 		sscanf(text,"%d : %d : %d : %d : %d : %d : %s : %[^:] : %*s",
-			&mdata->ObjID, &mdata->GroupID, &mdata->ParentID, &mdata->ParentIsGroup, 
+			&mdata->ObjID, &mdata->GroupID, &mdata->ParentID, &mdata->ParentIsGroup,
 			&mdata->Type, &mdata->District, mdata->fn, mdata->ttl);
 		mdata->Flags=0;
 		break;
 	case 4:
 		debug=sscanf(text,"%d : %d : %d : %d : %d : %d : %d : %s : %[^:] : %*s",
-			&mdata->ObjID, &mdata->GroupID, &mdata->ParentID, &mdata->ParentIsGroup, 
+			&mdata->ObjID, &mdata->GroupID, &mdata->ParentID, &mdata->ParentIsGroup,
 			&mdata->Type, &mdata->Flags, &mdata->District, mdata->fn, mdata->ttl);
 		break;
 	default:
-		sscanf(text,"%d : %d : %d : %d : %d : %s : %[^:] : %*s", 
-			&mdata->ObjID, &mdata->GroupID, &mdata->ParentID, &mdata->ParentIsGroup, 
+		sscanf(text,"%d : %d : %d : %d : %d : %s : %[^:] : %*s",
+			&mdata->ObjID, &mdata->GroupID, &mdata->ParentID, &mdata->ParentIsGroup,
 			&mdata->Type, mdata->fn, mdata->ttl);
 		mdata->Flags=0; mdata->District=-1;
 	}
@@ -1059,7 +1063,7 @@ void	MissionListCallback(CBYTE *script, MISSION_callback cb) {
 	SLONG ver=0;
 	MissionData *mdata = MFnew<MissionData>();
 
-	text = (CBYTE*)MemAlloc(4096); 
+	text = (CBYTE*)MemAlloc(4096);
 	memset(text,0,4096);
 
 	file = FileOpen(script);
@@ -1097,7 +1101,7 @@ SLONG	LoadMissionList(Form *form, CBYTE *script, SLONG district, UBYTE firstonly
 	SLONG i,ver, mapx, mapy, dumpy=100, ct=0;
 	MissionData *mdata = MFnew<MissionData>();
 
-	text = (CBYTE*)MemAlloc(4096); 
+	text = (CBYTE*)MemAlloc(4096);
 	memset(text,0,4096);
 
 	i=100;
@@ -1118,7 +1122,7 @@ SLONG	LoadMissionList(Form *form, CBYTE *script, SLONG district, UBYTE firstonly
 		// quick uppercase force
 		  for(script=mdata->ttl;*script;script++)
 			if (*script>96) *script^=32;
-		  
+
 //			if (mapx&&mapy) FORM_AddWidget(form,WIDGET_Create(&BUTTON_Methods,mapx,mapy,640,mapy+20,title))->tag=++i;
 		  Widget *widget;
 
@@ -1186,7 +1190,7 @@ void	LoadDistrictList(Form *form, CBYTE *script) {
 		// quick uppercase force
 		  for(script=title;*script;script++)
 			if (*script>96) *script^=32;
-		  
+
 		  Widget *widget;
 
 		  widget=FORM_AddWidget(form,WIDGET_Create(&GLYPH_Methods,mapx,mapy,mapx+18,mapy+18,title));
@@ -1243,7 +1247,7 @@ void	LoadSpecificDistrict(Form *form, CBYTE *script, UWORD district) {
 		// quick uppercase force
 			  for(script=title;*script;script++)
 				if (*script>96) *script^=32;
-			  
+
 			  Widget *widget;
 
 			  widget=FORM_AddWidget(form,WIDGET_Create(&GLYPH_Methods,mapx,mapy,mapx+18,mapy+18,title));
@@ -1273,7 +1277,7 @@ void QuickDistrictList(Form *form, CBYTE *script) {
 	UBYTE index=0;
 	MissionData *mdata = MFnew<MissionData>();
 
-	text = (CBYTE*)MemAlloc(4096); 
+	text = (CBYTE*)MemAlloc(4096);
 	memset(text,0,4096);
 
 	file = FileOpen(script);
@@ -1294,7 +1298,7 @@ void QuickDistrictList(Form *form, CBYTE *script) {
 
 	MemFree(text);
 	MFdelete(mdata);
-	
+
 #endif
 }
 
@@ -1309,7 +1313,7 @@ UBYTE LoadMissionNumFromId(CBYTE *script, UBYTE id) {
 	UBYTE index=0;
 	MissionData *mdata = MFnew<MissionData>();
 
-	text = (CBYTE*)MemAlloc(4096); 
+	text = (CBYTE*)MemAlloc(4096);
 	memset(text,0,4096);
 
 	file = FileOpen(script);
@@ -1343,7 +1347,7 @@ void	LoadMissionFilename(CBYTE *script, UBYTE index, CBYTE* fn, UBYTE *id) {
 	MissionData *mdata = MFnew<MissionData>();
 	SLONG ver=0;
 
-	text = (CBYTE*)MemAlloc(4096); 
+	text = (CBYTE*)MemAlloc(4096);
 	memset(text,0,4096);
 
 	index++;
@@ -1383,7 +1387,7 @@ void	LoadNextMissionFilename(UBYTE &current_index, CBYTE *fn, CBYTE *mtitle, CBY
 	MissionData *mdata = MFnew<MissionData>();
 
 
-	text = (CBYTE*)MemAlloc(8192); 
+	text = (CBYTE*)MemAlloc(8192);
 	memset(text,0,8192);
 
 	file = FileOpen(script);
@@ -1431,7 +1435,7 @@ CBYTE*	LoadMissionBriefing(CBYTE *script, UBYTE index) {
 	CBYTE fn[_MAX_PATH],mfn[_MAX_PATH];
 	SLONG a,b,c,d,e,n,ver;
 
-	text = (CBYTE*)MemAlloc(8192); 
+	text = (CBYTE*)MemAlloc(8192);
 	memset(text,0,8192);
 
 	index++;
@@ -1445,7 +1449,7 @@ CBYTE*	LoadMissionBriefing(CBYTE *script, UBYTE index) {
 		} else index--;
 	}
 	FileClose(file);
-	
+
 	if (*text==0) { MemFree(text); return 0; }
 
 	switch(ver) {
@@ -1468,7 +1472,7 @@ CBYTE*	LoadMissionBriefing(CBYTE *script, UBYTE index) {
 
 
 //	text=strrchr(text,':');
-	for (a=0;a<n;a++) 
+	for (a=0;a<n;a++)
 		text=strchr(text,':')+1;
 	text++;
 
@@ -1482,7 +1486,7 @@ CBYTE*	LoadMissionBriefing(CBYTE *script, UBYTE index) {
 	pt=strchr(mfn,'.'); if (pt) *pt=0;
 	sprintf(fn,"photos\\%s.tga",mfn);
 	TEXTURE_set_tga(TEXTURE_page_polaroid,fn);
-		
+
 #endif
 
 	return text;
@@ -1561,10 +1565,10 @@ BOOL TimeoutCheck() {
 		CloseHandle(handle);
 		// ftime2 is when the file was created
 		// ftime3 is when it was modified
-		
+
 		// first, check these make sense, otherwise the file has been dicked with
 		if (CompareFileTime(&ftime2,&ftime3)>0) arse=1;
-		
+
 		// now, ensure the file modified time is older than the current time, otherwise
 		// the system clock has been dicked with
 		if (CompareFileTime(&ftime3,&ftime1)>0) arse=1;
@@ -1668,9 +1672,9 @@ SLONG	MainWidgetLoop(void) {
 			  QuickDistrictList(form,MISSION_SCRIPT);
 			else
 			  LoadDistrictList(form,MISSION_SCRIPT);
-			
+
 			FORM_AddWidget(form,WIDGET_Create(&BUTTON_Methods,530,450,620,470,"BACK"))->tag=999;
-			
+
 //			widget->methods->Char(widget,13);
 //			FORM_AddWidget(form,WIDGET_Create(&BUTTON_Methods,30,195,335,225,"view briefing"))->tag=2;
 //			FORM_AddWidget(form,WIDGET_Create(&BUTTON_Methods,30,235,335,255,"start mission"))->tag=1;
@@ -1757,7 +1761,7 @@ extern volatile HWND	hDDLibWindow;
 		GetCursorPos(&pt);
 		DRAW2D_Sprite(pt.x,pt.y,pt.x+17,pt.y+17,0.5,0.5, 0.5625, 0.5625,POLY_PAGE_MENULOGO,0xFFFFFFFF);
 	}
-	
+
 	result=FORM_Process(form);
 	if (result) {
 		FORM_Free(form); form=0;
@@ -1771,7 +1775,7 @@ extern volatile HWND	hDDLibWindow;
 			case 5: return STARTS_EXIT;
 			default:
 				mode=1+result;
-			}		
+			}
 			break;
 		case 2:
 			switch (result) {
@@ -1794,7 +1798,7 @@ extern volatile HWND	hDDLibWindow;
 			}
 			break;
 		case 3:
-			if (result==-1) 
+			if (result==-1)
 				mode=1;
 			else {
 				LoadQuickGame();
@@ -1842,7 +1846,7 @@ void	make_all_wads(void)
 		ELEV_load_user(1);
 		ASSERT(OB_ob_upto<3000);
 
-			
+
 			process_things(0);
 
 

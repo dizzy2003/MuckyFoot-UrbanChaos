@@ -1,5 +1,5 @@
 #include <MFStdLib.h>
-#include "c:\fallen\ddengine\headers\matrix.h"
+#include "fallen/ddengine/headers/matrix.h"
 
 #include <math.h>
 
@@ -78,7 +78,7 @@ void MATRIX_calc_int(SLONG matrix[9], SLONG yaw, SLONG pitch, SLONG roll)
 	cy = cos(yaw);
 	cp = cos(pitch);
 	cr = cos(roll);
-	
+
 	//
 	// Jan I trust you... but only becuase I've already seen it working!
 	//
@@ -340,7 +340,7 @@ Direction MATRIX_find_angles_old(float matrix[9])
 	// so...  cos(roll) = matrix[4] /  cos(pitch)
 	//        sin(roll) = matrix[1] / -cos(pitch)
 	//
-	
+
 	float cos_roll;
 	float sin_roll;
 	float cos_pitch;

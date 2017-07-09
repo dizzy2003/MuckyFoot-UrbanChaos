@@ -1,6 +1,6 @@
 #include	"game.h"
 #include	"Hierarchy.h"
-#include	"c:\fallen\headers\FMatrix.h"
+#include	"fallen/headers/FMatrix.h"
 
 // functions and data for animating people
 
@@ -48,7 +48,7 @@ SLONG	body_part_parent_numbers[]=
 
 //**************************************************************************************************
 //! JCL - nor this!!
-SLONG	body_part_children[][5] = 
+SLONG	body_part_children[][5] =
 {
 	{1, 4, 12, -1, 0},
 	{2, -1, 0, 0, 0},
@@ -137,4 +137,4 @@ void	HIERARCHY_Get_Body_Part_Offset( Matrix31 *dest_position, Matrix31 *base_pos
 	dest_position->M[2] += parent_curr_position->M[2];
 
 }
-	
+

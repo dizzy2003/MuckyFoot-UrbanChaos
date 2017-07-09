@@ -1,7 +1,7 @@
 #ifndef	COLLISION_H
 #define	COLLISION_H			1
 
-//#include "c:\fallen\headers\collide.h"
+//#include "fallen/headers/collide.h"
 //DEFINES
 
 // STRUCTS

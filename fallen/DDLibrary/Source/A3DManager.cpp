@@ -12,7 +12,6 @@
 
 
 #include "A3DManager.h"
-#include "snd_type.h"
 //#include "A3DPlay.h"
 
 extern volatile HWND	hDDLibWindow;
@@ -107,7 +106,7 @@ static void RegDBSetKeyValue(
 		HKEY_CLASSES_ROOT,	/* handle of an open key  */
         szKey,				/* lpSubKey address of subkey name  */
 		0,					/* reserved word */
-		"REG_SZ",			/* address of class string */ 
+		"REG_SZ",			/* address of class string */
 		dwOptions,			/* special options flag */
 		samDesired,			/* desired security access */
 		NULL,				/* address of key security structure */
@@ -115,14 +114,14 @@ static void RegDBSetKeyValue(
 		&dwDisposition);	/* address of disposition value buffer */
 
 	/* Just write to it. */
-    RegSetValueExA( 
+    RegSetValueExA(
 		  hKey,								/* handle of key to set value for  */
           szName,							/* address of value to set */
 		  0,								/* reserved */
 		  REG_SZ,							/* flag for value type */
 		  (CONST BYTE *)szValue,			/* address of value data */
 		  strlen(szValue)					/* length of value buffer */
-		  ); 
+		  );
 
 	/* close the key. */
 	RegCloseKey(hKey);
@@ -134,8 +133,8 @@ static void RegDBSetKeyValue(
 //
 // Returns:
 //
-//   S_OK		
-//		
+//   S_OK
+//
 // =============================================================*/
 
 HRESULT A3dRegister(void)
@@ -207,7 +206,7 @@ void A3DManager::Init(SLONG features) {
 	a3droot->Init(NULL, features,A3DRENDERPREFS_DEFAULT);
 
 	// set the coop level
-	
+
 	a3droot->SetCooperativeLevel(hDDLibWindow,A3D_CL_NORMAL);
 //	a3droot->SetCooperativeLevel(GetDesktopWindow(),A3D_CL_NORMAL);
 
@@ -300,7 +299,7 @@ void A3DManager::Fini(void) {
 	datalist.Clear();
 	if (a3dlis)
 		a3dlis->Release();
-	if (a3dgeom) a3dgeom->Release();	
+	if (a3dgeom) a3dgeom->Release();
 	if (a3droot)
 		a3droot->Release();
 	a3dgeom=0;
@@ -509,7 +508,7 @@ UBYTE A3DSource::CBEnded() {
 		DoChange(queue[0].original);
 		SetPositionl(queue[0].x,queue[0].y,queue[0].z);
 		Flags=queue[0].flags;
-		if (queue[0].flags&A3D_LOOP) 
+		if (queue[0].flags&A3D_LOOP)
 			Play(1);
 		else
 			Play(0);
@@ -550,7 +549,7 @@ void A3DSource::Rewind() {
 	}
 }
 
- 
+
 /**************************************************************************************
  *
  *		A3DData -- a source that simply holds data. no transport, location, etc
@@ -565,7 +564,7 @@ A3DData::A3DData(CBYTE *fn, UBYTE ntype) {
 	a3dsrc=NULL;
 
 	owner=0;
-	
+
 	type=ntype;
 	hr = a3droot->NewSource(type,&a3dsrc);
     if (FAILED(hr)) {
@@ -607,7 +606,7 @@ A3DList::~A3DList() {
 void A3DList::Clear() {
 	// this may require some explanation.
 	// the action of deleting list calls list's destructor -- which actually adjusts list
-	// itself to point to the next item, ready for the next turn. 
+	// itself to point to the next item, ready for the next turn.
 	while (list) delete list;
 }
 
@@ -691,7 +690,7 @@ BOOL A3DBase::HasEnded(UBYTE early_out) {
 	ULONG t,c;
 
 	if (a3dsrc) {
-		
+
 		if (early_out) {
 			a3dsrc->GetWavePosition(&t);
 			c=a3dsrc->GetWaveSize();

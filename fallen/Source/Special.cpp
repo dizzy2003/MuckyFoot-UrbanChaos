@@ -2,7 +2,7 @@
 //	Guy Simmons, 28th March 1998.
 //
 //
-// 
+//
 // WILLIAM SHAKESPEARE (1564-1616)
 //
 // Shall I compare thee to a summer's day?
@@ -18,8 +18,8 @@
 // Nor shall Death brag thou wander'st in his shade,
 // When in eternal lines to time thou grow'st:
 // So long as men can breathe or eyes can see,
-// So long lives this, and this gives life to thee. 
-// 
+// So long lives this, and this gives life to thee.
+//
 
 
 #include	"Game.h"
@@ -37,9 +37,9 @@
 #include	"sound.h"
 #include	"grenade.h"
 #ifndef		PSX
-#include	"c:\fallen\ddengine\headers\panel.h"
+#include	"fallen/ddengine/headers/panel.h"
 #else
-#include	"c:\fallen\psxeng\headers\panel.h"
+#include	"fallen/psxeng/headers/panel.h"
 #endif
 
 extern	void	add_damage_text(SWORD x,SWORD y,SWORD z,CBYTE *text);
@@ -87,7 +87,7 @@ void free_special(Thing *s_thing);
 
 
 //
-// Adds/removes the special from a person's 
+// Adds/removes the special from a person's
 //
 
 void special_pickup(Thing *p_special, Thing *p_person)
@@ -185,7 +185,7 @@ void special_drop(Thing *p_special, Thing *p_person)
 				//
 
 				switch(p_special->Genus.Special->SpecialType)
-				{	
+				{
 					case SPECIAL_SHOTGUN:
 						p_special->Genus.Special->ammo = (Random() & 0x1) + 2;
 						break;
@@ -282,7 +282,7 @@ SLONG should_person_get_item(Thing *p_person, Thing *p_special)
 			return (!p_has || p_person->Genus.Person->ammo_packs_ak47 < 255-SPECIAL_AMMO_IN_A_AK47);
 
 		case SPECIAL_BASEBALLBAT:
-			
+
 			//
 			// We can only carry one two-handed weapon at once.
 			//
@@ -290,7 +290,7 @@ SLONG should_person_get_item(Thing *p_person, Thing *p_special)
 			return !person_has_special(p_person, SPECIAL_BASEBALLBAT);
 
 		case SPECIAL_SHOTGUN:
-			
+
 			p_has = person_has_special(p_person, SPECIAL_SHOTGUN);
 
 			return (!p_has || p_person->Genus.Person->ammo_packs_shotgun < 255-SPECIAL_AMMO_IN_A_SHOTGUN);
@@ -327,13 +327,13 @@ SLONG should_person_get_item(Thing *p_person, Thing *p_special)
 		// Only pickup ammo when you have that weapon.
 		//
 
-		case SPECIAL_AMMO_SHOTGUN: 
+		case SPECIAL_AMMO_SHOTGUN:
 			return(p_person->Genus.Person->ammo_packs_shotgun<255-SPECIAL_AMMO_IN_A_SHOTGUN);
 			return (SLONG) person_has_special(p_person, SPECIAL_SHOTGUN);
-		case SPECIAL_AMMO_AK47:    
+		case SPECIAL_AMMO_AK47:
 			return(p_person->Genus.Person->ammo_packs_ak47<255-SPECIAL_AMMO_IN_A_AK47);
 			return (SLONG) person_has_special(p_person, SPECIAL_AK47);
-		case SPECIAL_AMMO_PISTOL:  
+		case SPECIAL_AMMO_PISTOL:
 			return(p_person->Genus.Person->ammo_packs_pistol<255-SPECIAL_AMMO_IN_A_PISTOL);
 			return p_person->Flags & FLAGS_HAS_GUN;
 
@@ -427,7 +427,7 @@ void person_get_item(Thing *p_person, Thing *p_special)
 			p_person->Genus.Person->ammo_packs_pistol += SPECIAL_AMMO_IN_A_PISTOL;
 
 			x_message = X_AMMO;
-			
+
 			break;
 
 		case SPECIAL_MINE:
@@ -439,7 +439,7 @@ void person_get_item(Thing *p_person, Thing *p_special)
 			ASSERT(0);
 
 			/*
-	
+
 			ASSERT(p_special->SubState == SPECIAL_SUBSTATE_ACTIVATED);
 
 			//
@@ -456,7 +456,7 @@ void person_get_item(Thing *p_person, Thing *p_special)
 			break;
 
 		case SPECIAL_SHOTGUN:
-			
+
 			{
 				Thing *p_gun = person_has_special(p_person, SPECIAL_SHOTGUN);
 
@@ -612,7 +612,7 @@ void person_get_item(Thing *p_person, Thing *p_special)
 				if(p_special->SubState == SPECIAL_SUBSTATE_ACTIVATED)
 				{
 					//This is active lets make it inactive
-					p_special->SubState = SPECIAL_SUBSTATE_NONE;  
+					p_special->SubState = SPECIAL_SUBSTATE_NONE;
 
 				}
 
@@ -808,7 +808,7 @@ void special_normal(Thing *s_thing)
 	SLONG dz;
 
 	SLONG dist;
-	
+
 	if (s_thing->Flags & FLAG_SPECIAL_HIDDEN)
 	{
 		//
@@ -891,7 +891,7 @@ void special_normal(Thing *s_thing)
 			{
 				//
 				// The grenade has gone off!
-				// 
+				//
 #ifndef PSX
 				CreateGrenadeExplosion(s_thing->WorldPos.X, s_thing->WorldPos.Y + 2256, s_thing->WorldPos.Z, p_owner);
 #else
@@ -971,7 +971,7 @@ void special_normal(Thing *s_thing)
 								s_thing->WorldPos,
 							   -1,
 								256);
-#else					   
+#else
 							POW_create(
 								POW_CREATE_LARGE_SEMI,
 								s_thing->WorldPos.X,
@@ -1004,7 +1004,7 @@ void special_normal(Thing *s_thing)
 					{
 						//
 						// Bang!
-						// 
+						//
 
 #ifndef PSX
 						PYRO_construct(
@@ -1107,7 +1107,7 @@ void special_normal(Thing *s_thing)
 						switch(p_found->Class)
 						{
 							case CLASS_BAT:
-								
+
 								if (p_found->Genus.Bat->type == BAT_TYPE_BALROG)
 								{
 									dx = abs(p_found->WorldPos.X - s_thing->WorldPos.X);
@@ -1205,7 +1205,7 @@ void special_normal(Thing *s_thing)
 										   &wx,
 										   &wy,
 										   &wz);
-										
+
 										dx = abs(wx - (s_thing->WorldPos.X >> 8));
 										dy = abs(wy - (s_thing->WorldPos.Y >> 8));
 										dz = abs(wz - (s_thing->WorldPos.Z >> 8));
@@ -1258,7 +1258,7 @@ void special_normal(Thing *s_thing)
 
 							//
 							// Near enough to pick it up.
-							// 
+							//
 
 							switch(s_thing->Draw.Mesh->ObjectId)
 							{
@@ -1371,7 +1371,7 @@ extern	SWORD health[];
 				{
 					//
 					// Don't pickup activated grenades.
-					// 
+					//
 
 					break;
 				}
@@ -1441,7 +1441,7 @@ SLONG	find_empty_special(void)
 	for(c0=1;c0<MAX_SPECIALS;c0++)
 	{
 		if(SPECIALS[c0].SpecialType==SPECIAL_NONE)
-		{			
+		{
 			return(c0);
 		}
 	}
@@ -1755,7 +1755,7 @@ void SPECIAL_throw_mine(Thing *p_special)
 	owner = p_special->Genus.Special->OwnerThing;
 
 	//
-	// Create some dirt that is going to process the physics of the mine 
+	// Create some dirt that is going to process the physics of the mine
 	// being thrown through the air.
 	//
 
@@ -1810,7 +1810,7 @@ void SPECIAL_set_explosives(Thing *p_person)
 			//
 			// Create a new explosives special...
 			//
-			
+
 			p_special = alloc_special(
 							SPECIAL_EXPLOSIVES,
 							SPECIAL_SUBSTATE_NONE,

@@ -66,7 +66,8 @@ Grenade	*global_g;
 
 bool CreateGrenade(Thing* owner, SLONG x, SLONG y, SLONG z, SLONG dx, SLONG dy, SLONG dz, SLONG timer)
 {
-	for (int ix = 0; ix < MAX_GRENADES; ix++)
+	int ix;
+	for (ix = 0; ix < MAX_GRENADES; ix++)
 	{
 		if (!GrenadeArray[ix].owner)	break;
 	}
@@ -331,10 +332,10 @@ void CreateGrenadeExplosion(SLONG x, SLONG y, SLONG z, Thing* owner)
 
 	MFX_play_xyz(0, S_EXPLODE_START, MFX_OVERLAP, x, y, z);
 
-	PARTICLE_Add(x, y, z, 0, 0, 0, (Random()&1)?POLY_PAGE_EXPLODE1_ADDITIVE:POLY_PAGE_EXPLODE2_ADDITIVE, 2, 
+	PARTICLE_Add(x, y, z, 0, 0, 0, (Random()&1)?POLY_PAGE_EXPLODE1_ADDITIVE:POLY_PAGE_EXPLODE2_ADDITIVE, 2,
 									0x00FFFFFF, PFLAG_SPRITEANI|PFLAG_RESIZE|PFLAG_BOUNCE, 120, 190+(Random()&0x3f), 1, 0, 20);
-	PARTICLE_Add(x+(((Random()&0xff)-0x7f)<<4), y+(((Random()&0xff)-0x7f)<<4), z+(((Random()&0xff)-0x7f)<<4), 
-		0, 0, 0, (Random()&1)?POLY_PAGE_EXPLODE1_ADDITIVE:POLY_PAGE_EXPLODE2_ADDITIVE, 2, 
+	PARTICLE_Add(x+(((Random()&0xff)-0x7f)<<4), y+(((Random()&0xff)-0x7f)<<4), z+(((Random()&0xff)-0x7f)<<4),
+		0, 0, 0, (Random()&1)?POLY_PAGE_EXPLODE1_ADDITIVE:POLY_PAGE_EXPLODE2_ADDITIVE, 2,
 									0x7fFFFFFF, PFLAG_SPRITEANI|PFLAG_RESIZE, 70, 120+(Random()&0x7f), 1, 0, 40);
 
 
@@ -348,34 +349,34 @@ void CreateGrenadeExplosion(SLONG x, SLONG y, SLONG z, Thing* owner)
 		// Smoky cloud.
 		PARTICLE_Add(x + (((Random()&0x7f)-0x3f)<<9), y + (((Random()&0x3f)-0x1f)<<6), z + (((Random()&0x7f)-0x3f)<<9),
 						((Random()&0x1f)-0xf)<<1, (1+(Random()&0xf))<<7, ((Random()&0x1f)-0xf)<<1,
-						POLY_PAGE_SMOKECLOUD, 2, 0xFFFFFFFF, PFLAG_SPRITEANI|PFLAG_SPRITELOOP|PFLAG_FADE|PFLAG_RESIZE, 
+						POLY_PAGE_SMOKECLOUD, 2, 0xFFFFFFFF, PFLAG_SPRITEANI|PFLAG_SPRITELOOP|PFLAG_FADE|PFLAG_RESIZE,
 						150+(Random()&0x3f), 20+(Random()&0x7f), 1, 2+(Random()&3), 3);
 
 		// Flamey bits of the cloud.
 		PARTICLE_Add(x + (((Random()&0x7f)-0x3f)<<9), y + (((Random()&0x3f)-0x1f)<<6), z + (((Random()&0x7f)-0x3f)<<9),
 						((Random()&0x1f)-0xf)<<1, (1+(Random()&0xf))<<6, ((Random()&0x1f)-0xf)<<1,
 						(Random()&1)?POLY_PAGE_EXPLODE1_ADDITIVE:POLY_PAGE_EXPLODE2_ADDITIVE, 2,
-						0x7FFFFFFF, PFLAG_SPRITEANI|PFLAG_FADE|PFLAG_RESIZE, 
+						0x7FFFFFFF, PFLAG_SPRITEANI|PFLAG_FADE|PFLAG_RESIZE,
 						250+(Random()&0x3f), 50+(Random()&0x7f), 1, 2+(Random()&3), 3);
 
 
 		// Little bouncy particles.
 #if 0
 		// These are all too small to see. I dunno - either they're too small or they're too big....
-		PARTICLE_Add(x, y, z, ((Random()&0x1f)-0xf)<<6, (Random()&0xf)<<6, ((Random()&0x1f)-0xf)<<6, 
-						POLY_PAGE_EXPLODE1-(Random()&1), 2+((Random()&3)<<2), 0xFFFFFF, PFLAG_GRAVITY|PFLAG_RESIZE2|PFLAG_FADE, 
+		PARTICLE_Add(x, y, z, ((Random()&0x1f)-0xf)<<6, (Random()&0xf)<<6, ((Random()&0x1f)-0xf)<<6,
+						POLY_PAGE_EXPLODE1-(Random()&1), 2+((Random()&3)<<2), 0xFFFFFF, PFLAG_GRAVITY|PFLAG_RESIZE2|PFLAG_FADE,
 						240, 20+(Random()&0x1f), 1, 3+(Random()&3), 0);
 
 		if (Random()&3)
 		{
-			PARTICLE_Add(x, y, z, ((Random()&0x1f)-0xf)<<8, (Random()&0x1f)<<8, ((Random()&0x1f)-0xf)<<8, 
+			PARTICLE_Add(x, y, z, ((Random()&0x1f)-0xf)<<8, (Random()&0x1f)<<8, ((Random()&0x1f)-0xf)<<8,
 						POLY_PAGE_EXPLODE1-(Random()&1), 2+((Random()&1)<<2), 0xFFFFFF, PFLAG_GRAVITY|PFLAG_FADE|PFLAG_BOUNCE,
 						240, 3, 1, 2+(Random()&3), 0);
 		}
 		else
 		{
-			PARTICLE_Add(x, y, z, ((Random()&0x1f)-0xf)<<12, (Random()&0x1f)<<8, ((Random()&0x1f)-0xf)<<12, 
-						POLY_PAGE_EXPLODE1-(Random()&1), 2+((Random()&3)<<2), 0xFFFFFF, PFLAG_GRAVITY|PFLAG_FADE, 
+			PARTICLE_Add(x, y, z, ((Random()&0x1f)-0xf)<<12, (Random()&0x1f)<<8, ((Random()&0x1f)-0xf)<<12,
+						POLY_PAGE_EXPLODE1-(Random()&1), 2+((Random()&3)<<2), 0xFFFFFF, PFLAG_GRAVITY|PFLAG_FADE,
 						240, 3, 1, 3, 0);
 		}
 #endif
@@ -389,10 +390,10 @@ void CreateGrenadeExplosion(SLONG x, SLONG y, SLONG z, Thing* owner)
 	{
 		PARTICLE_Add(x + (((Random()&0x7f)-0x3f)<<9), y + (((Random()&0x3f)-0x1f)<<6), z + (((Random()&0x7f)-0x3f)<<9),
 						((Random()&0x1f)-0xf)<<1, (1+(Random()&0xf))<<6, ((Random()&0x1f)-0xf)<<1,
-						POLY_PAGE_SMOKECLOUD, 2, 0xFFFFFFFF, PFLAG_SPRITEANI|PFLAG_SPRITELOOP|PFLAG_FADE|PFLAG_RESIZE, 
+						POLY_PAGE_SMOKECLOUD, 2, 0xFFFFFFFF, PFLAG_SPRITEANI|PFLAG_SPRITELOOP|PFLAG_FADE|PFLAG_RESIZE,
 						150, 20+(Random()&0x7f), 1, 2+(Random()&3), 3);
-		PARTICLE_Add(x, y, z, ((Random()&0x1f)-0xf)<<6, (Random()&0x1f)<<6, ((Random()&0x1f)-0xf)<<6, 
-						POLY_PAGE_EXPLODE1-(Random()&1), 2+((Random()&3)<<2), 0xFFFFFF, PFLAG_GRAVITY|PFLAG_RESIZE2|PFLAG_FADE|PFLAG_INVALPHA, 
+		PARTICLE_Add(x, y, z, ((Random()&0x1f)-0xf)<<6, (Random()&0x1f)<<6, ((Random()&0x1f)-0xf)<<6,
+						POLY_PAGE_EXPLODE1-(Random()&1), 2+((Random()&3)<<2), 0xFFFFFF, PFLAG_GRAVITY|PFLAG_RESIZE2|PFLAG_FADE|PFLAG_INVALPHA,
 						240, 20+(Random()&0x1f), 1, 3+(Random()&3), 0);
 #ifdef	PSX
 		if(ii&1)
@@ -401,12 +402,12 @@ void CreateGrenadeExplosion(SLONG x, SLONG y, SLONG z, Thing* owner)
 
 
 			if (Random()&3)
-				PARTICLE_Add(x, y, z, ((Random()&0x1f)-0xf)<<8, (Random()&0x1f)<<8, ((Random()&0x1f)-0xf)<<8, 
+				PARTICLE_Add(x, y, z, ((Random()&0x1f)-0xf)<<8, (Random()&0x1f)<<8, ((Random()&0x1f)-0xf)<<8,
 							POLY_PAGE_EXPLODE1-(Random()&1), 2+((Random()&1)<<2), 0xFFFFFF, PFLAG_GRAVITY|PFLAG_RESIZE2|PFLAG_FADE|PFLAG_INVALPHA|PFLAG_BOUNCE,
 							240, 5, 1, 2+(Random()&3), 0);
 			else
-				PARTICLE_Add(x, y, z, ((Random()&0x1f)-0xf)<<12, (Random()&0x1f)<<8, ((Random()&0x1f)-0xf)<<12, 
-							POLY_PAGE_EXPLODE1-(Random()&1), 2+((Random()&3)<<2), 0xFFFFFF, PFLAG_GRAVITY|PFLAG_RESIZE2|PFLAG_FADE|PFLAG_INVALPHA, 
+				PARTICLE_Add(x, y, z, ((Random()&0x1f)-0xf)<<12, (Random()&0x1f)<<8, ((Random()&0x1f)-0xf)<<12,
+							POLY_PAGE_EXPLODE1-(Random()&1), 2+((Random()&3)<<2), 0xFFFFFF, PFLAG_GRAVITY|PFLAG_RESIZE2|PFLAG_FADE|PFLAG_INVALPHA,
 							240, 5, 1, 3, 0);
 #ifdef	PSX
 		}
@@ -464,7 +465,7 @@ void	show_grenade_path(Thing *p_person)
 			y1=gp->y>>8;
 			z1=gp->z>>8;
 
-			
+
 			if ( ( ( count&7 ) == 0 ) || ( ( count&7 ) == 1 ) )
 			{
 				AENG_world_line_nondebug (
@@ -477,7 +478,7 @@ void	show_grenade_path(Thing *p_person)
 					TRUE);
 			}
 
-			
+
 
 			count++;
 			x=x1;

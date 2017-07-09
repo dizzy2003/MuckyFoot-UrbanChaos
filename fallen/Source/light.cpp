@@ -204,10 +204,10 @@ void LIGHT_map_place(LIGHT_Index l_index)
 
 	//
 	// The map square.
-	// 
+	//
 
 	ls = &LIGHT_map[map_x][map_z];
-	
+
 	//
 	// Place it on the map.
 	//
@@ -242,10 +242,10 @@ void LIGHT_map_remove(LIGHT_Index l_index)
 
 	//
 	// The map square.
-	// 
+	//
 
 	ls = &LIGHT_map[map_x][map_z];
-	
+
 	//
 	// Look for this light in the linked list above this square.
 	//
@@ -378,7 +378,7 @@ UBYTE LIGHT_slot_get(void)
 		return ans;
 	}
 }
-	
+
 //
 // Gives up a slot.
 //
@@ -845,7 +845,7 @@ void LIGHT_hf_light_down(LIGHT_Index l_index)
 	CollisionVect *p_vect;
 
 	//
-	// When we light up a building, we put this value in 
+	// When we light up a building, we put this value in
 	//
 
 	litkey = rand();
@@ -996,7 +996,7 @@ void LIGHT_recalc_hf(void)
 	{
 		//
 		// The height of this point.
-		// 
+		//
 
 		ho = LIGHT_hf.get_height(x,z);
 
@@ -1131,7 +1131,7 @@ void LIGHT_recalc_hf(void)
 
 					#endif
 				}
-				
+
 				#if WE_WANT_LIGHTING_ON_A_PER_FACE_INSTEAD_OF_PER_POINT_BASIS
 
 				//
@@ -1197,7 +1197,7 @@ void LIGHT_init()
 
 	//
 	// Mark all lights as unused.
-	// 
+	//
 
 	for (i = 0; i < LIGHT_MAX_LIGHTS; i++)
 	{
@@ -1358,7 +1358,7 @@ void LIGHT_process()
 			if (ll->type == LIGHT_TYPE_PULSE)
 			{
 				//
-				// If the counter > (ll->param / 2) then 
+				// If the counter > (ll->param / 2) then
 				// the light is off, otherwise it is on.
 				//
 
@@ -1368,7 +1368,7 @@ void LIGHT_process()
 				{
 					just_off = TRUE;
 				}
-				
+
 				if (ll->counter >= ll->param)
 				{
 					ll->counter = 0;
@@ -1413,7 +1413,7 @@ void LIGHT_process()
 			{
 				LIGHT_hf_light_up(i);
 			}
-			
+
 			if (just_off)
 			{
 				LIGHT_hf_light_down(i);
@@ -1493,7 +1493,7 @@ SLONG LIGHT_get_context(THING_INDEX t_index)
 			ASSERT(WITHIN(next, 1, LIGHT_MAX_LIGHTS - 1));
 
 			ll = &LIGHT_light[next];
-			
+
 			if (IMPLIES(ll->type == LIGHT_TYPE_BROKEN, ll->counter & 0x80) &&
 				IMPLIES(ll->type == LIGHT_TYPE_PULSE,  ll->counter > (ll->param >> 1)))
 			{
@@ -1587,7 +1587,7 @@ LIGHT_Colour LIGHT_get_point(SLONG x, SLONG y, SLONG z)
 
 	LIGHT_Light *ll;
 	LIGHT_Colour ans;
-	
+
 	//
 	// Since we have no normal info, assume that only
 	// have the ambient light shines off this point.
@@ -1911,8 +1911,8 @@ void LIGHT_prim_use_normals(THING_INDEX t_index)
 	for (i = 0; i < num_points; i++)
 	{
 		dprod =
-			amb_x * prim_normal[p_obj->StartPoint + i].X + 
-			amb_y * prim_normal[p_obj->StartPoint + i].Y + 
+			amb_x * prim_normal[p_obj->StartPoint + i].X +
+			amb_y * prim_normal[p_obj->StartPoint + i].Y +
 			amb_z * prim_normal[p_obj->StartPoint + i].Z;
 
 		dprod >>= 9;
@@ -2051,7 +2051,7 @@ void LIGHT_prim_use_normals(THING_INDEX t_index)
 
 
 #ifdef	EDITOR
-#include	"c:\fallen\editor\headers\scan.h"
+#include	"fallen/editor/headers/scan.h"
 extern	void	scan_undo_ambient(SLONG face,SLONG x,SLONG y,SLONG z,SLONG extra);
 extern	void	apply_ambient_to_floor(void);
 extern	void	remove_ambient_from_floor(void);
@@ -2063,15 +2063,15 @@ void	apply_global_amb_to_map(void)
 #ifdef	EDITOR
 
 	scan_function=scan_undo_ambient;
-	scan_map();	
+	scan_map();
 	remove_ambient_from_floor();
 extern	void	setup_ambient(SLONG dx,SLONG dy,SLONG dz,SLONG bright,SLONG flags);
 // 	setup_ambient(100,100,-70,1024,2);
  	setup_ambient(90,-100,-90,655,2);
 	scan_function=scan_apply_ambient;
-	scan_map();	
+	scan_map();
 	apply_ambient_to_floor();
 #endif
-	
+
 }
 #endif

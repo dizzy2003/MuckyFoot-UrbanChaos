@@ -5,7 +5,7 @@
 #define	EDITOR_LIB_H
 
 #include	<MFStdLib.h>
-#include	"c:\fallen\ddlibrary\headers\DDLib.h"
+#include	"fallen/ddlibrary/headers/DDLib.h"
 
 void	Time(struct MFTime *the_time);
 

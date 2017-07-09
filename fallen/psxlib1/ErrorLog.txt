@@ -1,3 +1,0 @@
-WATCOM Make Version 10.5
-Copyright by WATCOM International Corp. 1988, 1995. All rights reserved.
-WATCOM is a trademark of WATCOM International Corp.

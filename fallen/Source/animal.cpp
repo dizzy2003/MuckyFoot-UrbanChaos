@@ -9,10 +9,10 @@
 #include "animal.h"
 #include "canid.h"
 #include "statedef.h"
-#include "C:\fallen\DDEngine\Headers\Matrix.h"
-#include "C:\fallen\Editor\Headers\prim.h"
-#include "C:\fallen\DDEngine\Headers\figure.h"
-#include "C:\fallen\DDEngine\Headers\poly.h"
+#include "fallen/DDEngine/Headers/Matrix.h"
+#include "fallen/Editor/Headers/prim.h"
+#include "fallen/DDEngine/Headers/figure.h"
+#include "fallen/DDEngine/Headers/poly.h"
 #include "night.h"
 #include	"memory.h"
 
@@ -165,7 +165,7 @@ DrawTween *alloc_tween(SLONG type, SLONG part) {
 //
 
 Thing *alloc_animal(UBYTE type)
-{		 
+{
 
 	SLONG i;
 
@@ -189,7 +189,7 @@ Thing *alloc_animal(UBYTE type)
 		if (ANIMALS[i].AnimalType == ANIMAL_NONE)
 		{
 			a_index = i;
-			
+
 			goto found_animal;
 		}
 	}
@@ -241,7 +241,7 @@ Thing *alloc_animal(UBYTE type)
 		p_thing->DrawType  = DT_ANIMAL_PRIM;
 //		p_thing->DrawType  = DT_ANIM_PRIM;
 		p_thing->Draw.Tweened = dt;
-		
+
 		return p_thing;
 	}
 	else
@@ -273,7 +273,7 @@ void free_animal(Thing *p_thing) {
 //	for (i=0;i<animal_bodies[animal->AnimalType].size;i++)
 //	  free_draw_tween(animal->dts[i]);
 
-	
+
 	//
 	// Free the animal structure and the thing structure.
 	//
@@ -448,7 +448,7 @@ void ANIM_obj_draw_diddled(Thing *p_thing,DrawTween *dt,float xd,float yd,float 
 	//
 
 	ae1 = dt->CurrentFrame->FirstElement;
-	ae2 = dt->NextFrame   ->FirstElement;   
+	ae2 = dt->NextFrame   ->FirstElement;
 
 	if (!ae1 || !ae2)
 	{
@@ -481,7 +481,7 @@ void ANIM_obj_draw_diddled(Thing *p_thing,DrawTween *dt,float xd,float yd,float 
 			(p_thing->WorldPos.Z >> 8)),
 	   &colour,
 	   &specular);
-	
+
 	colour   &= ~POLY_colour_restrict;
 	specular &= ~POLY_colour_restrict;
 
@@ -544,7 +544,7 @@ GameCoord GetChunkCentre(GameKeyFrameChunk *chunk) {
 	GameCoord ctr = {0,0,0};
 	PrimMultiObject *pmo;
 	PrimObject *po;
-	GameKeyFrameElement	*element; 
+	GameKeyFrameElement	*element;
 
 	counter=0;
 //	for (i=0;(i<10)&&chunk->MultiObject[i];i++) {
@@ -577,16 +577,16 @@ SetChunkCentre(GameKeyFrameChunk *chunk, GameCoord centre) {
 	SLONG i,j,k;
 	PrimMultiObject *pmo;
 	PrimObject *po;
-	GameKeyFrameElement	*element; 
+	GameKeyFrameElement	*element;
 //	return;
 	centre.Z=64;
 //	for (i=0;(i<10)&&chunk->MultiObject[i];i++) {
 		pmo=&prim_multi_objects[chunk->MultiObject[0]];
-		for (j=pmo->StartObject;j<pmo->EndObject;j++) 
+		for (j=pmo->StartObject;j<pmo->EndObject;j++)
 		{
 		  po=&prim_objects[j];
 
-		  for (k=po->StartPoint;k<po->EndPoint;k++) 
+		  for (k=po->StartPoint;k<po->EndPoint;k++)
 		  {
 			  prim_points[k].X-=centre.X;
 			  prim_points[k].Y-=centre.Y;
@@ -603,7 +603,7 @@ SetChunkCentre(GameKeyFrameChunk *chunk, GameCoord centre) {
 		element++;
 	}
 
-	
+
 }
 */
 

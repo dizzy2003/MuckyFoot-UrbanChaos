@@ -4,16 +4,16 @@
 
 #include	"Editor.hpp"
 #include	"FileReq.hpp"
-#include	"c:\fallen\editor\headers\Prim.h"
-#include	"c:\fallen\headers\FMatrix.h"
-#include	"c:\fallen\headers\animtmap.h"
-#include	"c:\fallen\headers\animate.h"
-#include	"c:\fallen\headers\memory.h"
-#include	"c:\fallen\headers\io.h"
+#include	"fallen/editor/headers/Prim.h"
+#include	"fallen/headers/FMatrix.h"
+#include	"fallen/headers/animtmap.h"
+#include	"fallen/headers/animate.h"
+#include	"fallen/headers/memory.h"
+#include	"fallen/headers/io.h"
 
 // JCL
-#include	"c:\fallen\ddengine\headers\Quaternion.h"
-#include	"c:\fallen\headers\Hierarchy.h"
+#include	"fallen/ddengine/headers/Quaternion.h"
+#include	"fallen/headers/Hierarchy.h"
 
 #define	CONTROLS_HEIGHT			400
 #define	CONTROLS_WIDTH			300
@@ -199,7 +199,7 @@ static	UWORD	local_object_flags=0;
 
 SLONG	CurrentMesh;
 
-ControlDef	kframe_def[]	=	
+ControlDef	kframe_def[]	=
 {
 	{	BUTTON,			0,	"Load Anim Into Bank 1",	2,	CONTROLS_HEIGHT-(20+KEY_FRAME_IMAGE_SIZE+40),	0,						10			},
 	{	H_SLIDER,		0,	"",						2,	CONTROLS_HEIGHT-20,								6*KEY_FRAME_IMAGE_SIZE,	0			},
@@ -214,7 +214,7 @@ ControlDef	kframe_def[]	=
 	{	BUTTON,			0,	"Sync Both",		200,	280,		0,		0			},
 	{	BUTTON,			0,	"Next Mesh",		130,	230,	0,		0			},
 	{	BUTTON,			0,	"Prev Mesh",		130,	245,	0,		0			},
-	
+
 	{	BUTTON,			0,	"Re-Cen All",	130,	260,	0,		0			},
 	{	BUTTON,			0,	"Re-Cen Start",	130,	275,	0,		0			},
 //	{	BUTTON,			0,	"Re-Cen End",	130,	290,	0,		0			},
@@ -295,7 +295,7 @@ class	KeyFrameList	:	public	EditorModule
 	private:
 		KeyFrameEditor		*ParentEdit;
 		EdRect				KeyFrameRect;
-		SLONG				KeyFrameSize;		
+		SLONG				KeyFrameSize;
 
 	protected:
 
@@ -457,7 +457,7 @@ void	KeyFrameList::DrawKeyFrames(void)
 				if(TheAnim)
 					ParentEdit->SetSelectedFrame(current_frame);
 			}
-			
+
 			if(TheAnim==0)
 				current_frame=&test_chunk->KeyFrames[first_frame+c0];
 
@@ -840,7 +840,7 @@ void	KeyFrameEditor::DrawPeopleTypes(void)
 		*/
 
 //		GlobalToLocal(&mouse_point);
-//		mouse_point.X -= 
+//		mouse_point.X -=
 
 		name_rect.SetRect(x-1,y-1,CharactersRect.GetWidth()-2,13);
 		if(c0==PersonID)
@@ -927,7 +927,7 @@ void	KeyFrameEditor::HandleContentClick(UBYTE flags,MFPoint *clicked_point)
 		case	NO_CLICK:
 			break;
 		case	LEFT_CLICK:
-			if(AnimFrameRect.PointInRect(&local_point) && CurrentAnim[Bank]) 
+			if(AnimFrameRect.PointInRect(&local_point) && CurrentAnim[Bank])
 			{
 				//
 				// Left click on keyframe (on current playing animation) to drag and drop it somewhere
@@ -992,7 +992,7 @@ void	KeyFrameEditor::HandleContentClick(UBYTE flags,MFPoint *clicked_point)
 					if(the_key_list[0])
 					{
 						the_key_list[0]->TheAnim=CurrentAnim[Bank];
-						((CHSlider*)the_key_list[0]->KeyControls.GetControlPtr(CTRL_KEY_SLIDER))->SetValueRange(0,the_key_list[0]->TheAnim->GetFrameCount()-1); 
+						((CHSlider*)the_key_list[0]->KeyControls.GetControlPtr(CTRL_KEY_SLIDER))->SetValueRange(0,the_key_list[0]->TheAnim->GetFrameCount()-1);
 						the_key_list[0]->DrawContent();
 						ShowWorkScreen(0);
 					}
@@ -1040,10 +1040,10 @@ void	KeyFrameEditor::HandleContentClick(UBYTE flags,MFPoint *clicked_point)
 			}
 			break;
 		case	RIGHT_CLICK:
-			if(AnimFrameRect.PointInRect(&local_point) && CurrentAnim[Bank]) 
+			if(AnimFrameRect.PointInRect(&local_point) && CurrentAnim[Bank])
 			{
 				//
-				// Right click in keyframe (on current playing animation) to select it 
+				// Right click in keyframe (on current playing animation) to select it
 				//
 				selected_frame	=	NULL;
 				max_frames	=	AnimFrameRect.GetWidth()/KEY_FRAME_IMAGE_SIZE;
@@ -1111,7 +1111,7 @@ void	KeyFrameEditor::HandleContentClick(UBYTE flags,MFPoint *clicked_point)
 					the_control->SetItemState(3,CTRL_INACTIVE);
 
 				//
-				// Select Cut,Copy,Paste 
+				// Select Cut,Copy,Paste
 				//
 				control_id				=	the_control->TrackControl(&local_point);
 				switch(control_id>>8)
@@ -1195,7 +1195,7 @@ void	KeyFrameEditor::HandleContentClick(UBYTE flags,MFPoint *clicked_point)
 				{
 					delete	the_control;
 				}
-			}			
+			}
 			break;
 	}
 }
@@ -1682,7 +1682,7 @@ SLONG	KeyFrameEditor::HandleModuleKeys(void)
 
 			SLONG   sn = SIN(ROTATION_STEP & (2048-1));
 			SLONG   cs = COS(ROTATION_STEP & (2048-1));
-			
+
 			SLONG	ox, oz;
 
 			ox = AnimOffsetX[0] - centrex;
@@ -1914,7 +1914,7 @@ void	KeyFrameEditor::HandleModule(void)
 	AnimControls.HandleControlSet(&mouse_point);
 
 	if(PointInControls(&mouse_point))
-	{		
+	{
 		local_point	=	mouse_point;
 		WindowControls.GlobalToLocal(&local_point);
 		if(KeyFrameRect.PointInRect(&local_point))
@@ -2128,7 +2128,7 @@ void	KeyFrameEditor::HandleModule(void)
 
 void	KeyFrameEditor::AddKeyFrameChunk(void)
 {
-	
+
 }
 
 //---------------------------------------------------------------
@@ -2280,10 +2280,10 @@ void	KeyFrameEditor::HandleControl(ULONG control_id)
 			{
 				SetAnimBank(1);
 			}
-			
+
 				((CHSlider*)WindowControls.GetControlPtr(CTRL_FRAME_SLIDER))->SetValueRange(0,test_chunk->KeyFrameCount-2);
 			/*	if(AnimList[Bank])
-					((CHSlider*)the_key_list[0]->KeyControls.GetControlPtr(CTRL_KEY_SLIDER))->SetValueRange(0,the_key_list[0]->TheAnim->GetFrameCount()+20); 
+					((CHSlider*)the_key_list[0]->KeyControls.GetControlPtr(CTRL_KEY_SLIDER))->SetValueRange(0,the_key_list[0]->TheAnim->GetFrameCount()+20);
 			*/
 
 				max_range	=	AnimCount[Bank]-22;
@@ -2518,7 +2518,7 @@ extern	SLONG	save_psx;
 				{
 					the_key_list[0]->TheAnim=AnimList[Bank];
 					if(AnimList[Bank])
-						((CHSlider*)the_key_list[0]->KeyControls.GetControlPtr(CTRL_KEY_SLIDER))->SetValueRange(0,the_key_list[0]->TheAnim->GetFrameCount()+20); 
+						((CHSlider*)the_key_list[0]->KeyControls.GetControlPtr(CTRL_KEY_SLIDER))->SetValueRange(0,the_key_list[0]->TheAnim->GetFrameCount()+20);
 				}
 				SetPersonBits();
 				AnimTween[Bank]		=	0;
@@ -2613,7 +2613,7 @@ SLONG				c1,
 					sp,ep;
 struct PrimObject	*p_obj;
 
-					
+
 					for(c0=prim_multi_objects[test_chunk->MultiObject].StartObject;c0<prim_multi_objects[test_chunk->MultiObject].EndObject;c0++)
 					{
 						p_obj   =	&prim_objects[c0];
@@ -2627,7 +2627,7 @@ struct PrimObject	*p_obj;
 							prim_points[c1].Z	-=	z_centre;
 						}
 					}
-				}				
+				}
 
 //				LoadMultiVUE(test_chunk);
 				load_multi_vue(test_chunk);
@@ -2639,7 +2639,7 @@ struct PrimObject	*p_obj;
 				{
 					the_key_list[0]->TheAnim=AnimList[Bank];
 					if(AnimList[Bank])
-						((CHSlider*)the_key_list[0]->KeyControls.GetControlPtr(CTRL_KEY_SLIDER))->SetValueRange(0,the_key_list[0]->TheAnim->GetFrameCount()+20); 
+						((CHSlider*)the_key_list[0]->KeyControls.GetControlPtr(CTRL_KEY_SLIDER))->SetValueRange(0,the_key_list[0]->TheAnim->GetFrameCount()+20);
 				}
 			}
 			SetPersonBits();
@@ -2653,7 +2653,7 @@ struct PrimObject	*p_obj;
 			if(LockWorkScreen())
 			{
 				 DrawKeyFrames();
-				UnlockWorkScreen();					  
+				UnlockWorkScreen();
 				ShowWorkWindow(0);
 			}
 			break;
@@ -2926,7 +2926,7 @@ extern	void	bring_module_to_front(EditorModule *the_module);
 						render_view(0);
 						engine.ShowDebug=	1;
 					}
-					
+
 					UnlockWorkScreen();
 					ShowWorkScreen(0);
 				}
@@ -2955,10 +2955,10 @@ extern	void	bring_module_to_front(EditorModule *the_module);
 			RequestUpdate();
 			break;
 		case	CTRL_ANIM_SAVE_ANIMS:
-			SaveAllAnims(test_chunk,0);			
+			SaveAllAnims(test_chunk,0);
 			break;
 		case	CTRL_ANIM_SAVE_GAME_ANIM:
-			SaveAllAnims(test_chunk,1);			
+			SaveAllAnims(test_chunk,1);
 			break;
 		case	CTRL_ANIM_RESET_VIEW:
 			AnimAngleX[0]		=	0;
@@ -2982,7 +2982,7 @@ extern	void	bring_module_to_front(EditorModule *the_module);
 			AnimOffsetZ[1]		=	0;
 
 			AnimScale			=	2000; //296;
-			
+
 			Flip1 = 0;
 			Flip2 = 0;
 			AnimControls.SetControlState(CTRL_ANIM_FLIP_1,CTRL_DESELECTED);
@@ -2998,7 +2998,7 @@ struct	LinkSort
 {
 	SWORD	Z;
 	SWORD	Item;
-	SWORD	Next;	
+	SWORD	Next;
 };
 
 
@@ -3014,7 +3014,7 @@ SLONG	calc_z_for_piece(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct Key
 	SLONG	tx,ty,tz;
 
 
-	prim=prim;	
+	prim=prim;
 
 
 	offset.M[0]	=	(anim_info->OffsetX+(((anim_info_next->OffsetX-anim_info->OffsetX)*tween)>>8))>>TWEEN_OFFSET_SHIFT;
@@ -3037,7 +3037,7 @@ SLONG	calc_z_for_piece(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct Key
 
 //apply local rotation matrix
 
-		
+
 	flags=rotate_point_gte((struct SVector*)&temp,&res);
 
 
@@ -3055,7 +3055,7 @@ void	DumpList(void)
 	index=link_head;
 	while(index)
 	{
-		LogText(" [z %d item %d] ",link_sorts[index].Z,link_sorts[index].Item);  
+		LogText(" [z %d item %d] ",link_sorts[index].Z,link_sorts[index].Item);
 		index=link_sorts[index].Next;
 		LogText("\n");
 	}
@@ -3149,7 +3149,7 @@ void	test_draw_z(SLONG az,UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct 
 	p_obj    =&prim_objects[prim];
 	p_f4     =&prim_faces4[p_obj->StartFace4];
 	p_f3     =&prim_faces3[p_obj->StartFace3];
-	
+
 //	anim_info_next	=	&TheElements[anim_info->Next];
 //	anim_info_next	=	&&TestChunkTestChunk->KeyFrames[3].FirstElement;
 
@@ -3169,7 +3169,7 @@ void	test_draw_z(SLONG az,UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct 
 	y+=(anim_info->DY+(((anim_info_next->DY-anim_info->DY)*tween)>>8))>>2;
 	z+=(anim_info->DZ+(((anim_info_next->DZ-anim_info->DZ)*tween)>>8))>>2;
 */
-	
+
 
 	sp=p_obj->StartPoint;
 	ep=p_obj->EndPoint;
@@ -3203,7 +3203,7 @@ void	test_draw_z(SLONG az,UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct 
 //apply local rotation matrix
 	matrix_mult33(&mat_final,rot_mat,&mat2);
 
-		
+
 	for(c0=sp;c0<ep;c0++)
 	{
 
@@ -3213,7 +3213,7 @@ void	test_draw_z(SLONG az,UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct 
 //		swap(temp.Y,temp.Z)  //MDOPT do this inside the matrix multiply
 //		temp.Y=-temp.Y;
 
-		
+
 		flags[c0-sp]	=	rotate_point_gte((struct SVector*)&temp,&res[c0-sp]);
 //		LogText(" after rot (%d,%d,%d)  \n",res[c0-sp].X,res[c0-sp].Y,res[c0-sp].Z);
 	}
@@ -3233,14 +3233,14 @@ void	test_draw_z(SLONG az,UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct 
 		p2=p_f4->Points[2]-sp;
 		p3=p_f4->Points[3]-sp;
 
-		flag_and	=	flags[p0]&flags[p1]&flags[p2]&flags[p3];	
-		flag_or		=	flags[p0]|flags[p1]|flags[p2]|flags[p3];	
+		flag_and	=	flags[p0]&flags[p1]&flags[p2]&flags[p3];
+		flag_or		=	flags[p0]|flags[p1]|flags[p2]|flags[p3];
 //		LogText(" test draw face %d  p0 x (%d,%d,%d)\n",c0,res[p0].X,res[p0].Y,res[p0].Z);
 //		DrawLineC(engine.VW2,engine.VH2,res[p0].X,res[p0].Y,0);
 //		if((flag_or&EF_BEHIND_YOU)==0)
 		if(!(flag_and & EF_CLIPFLAGS))
 		{
-			
+
 //			az=(res[p0].Z+res[p1].Z+res[p2].Z+res[p3].Z)>>2;
 
 			setPolyType4(
@@ -3271,7 +3271,7 @@ void	test_draw_z(SLONG az,UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct 
 					);
 
 			setZ4((struct BucketQuad*)current_bucket_pool,-res[p0].Z,-res[p1].Z,-res[p2].Z,-res[p3].Z);
-			
+
 			setShade4	(
 							(struct BucketQuad*)current_bucket_pool,
 							(p_f4->Bright[0]),
@@ -3296,8 +3296,8 @@ void	test_draw_z(SLONG az,UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct 
 		p1=p_f3->Points[1]-sp;
 		p2=p_f3->Points[2]-sp;
 
-		flag_and = flags[p0]&flags[p1]&flags[p2];	
-		flag_or  = flags[p0]|flags[p1]|flags[p2];	
+		flag_and = flags[p0]&flags[p1]&flags[p2];
+		flag_or  = flags[p0]|flags[p1]|flags[p2];
 
 		if((flag_or&EF_BEHIND_YOU)==0)
 		if(!(flag_and & EF_CLIPFLAGS))
@@ -3342,7 +3342,7 @@ void	test_draw_z(SLONG az,UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct 
 			current_bucket_pool+=sizeof(struct BucketQuad);
 		}
 		p_f3++;
-	}					
+	}
 }
 
 //extern	void	create_bucket_3d_line(SLONG x1,SLONG y1,SLONG z1,SLONG x2,SLONG y2,SLONG z2,SLONG col);
@@ -3644,12 +3644,12 @@ void	KeyFrameEditor::DoAnimRecurse(SLONG part_number, struct Matrix33 *mat, SLON
 
 	SLONG	ox, oy, oz;
 	SLONG	sn, cs;
-	
+
 	sn = SIN(AnimGlobalAngleY & (2048-1));
 	cs = COS(AnimGlobalAngleY & (2048-1));
 	ox = x - centrex;
 	oz = z - centrez;
-	
+
 	x = centrex + ((ox * cs) >> 16) + ((oz * sn) >> 16);
 	z = centrez - ((ox * sn) >> 16) + ((oz * cs) >> 16);
 
@@ -3657,7 +3657,7 @@ void	KeyFrameEditor::DoAnimRecurse(SLONG part_number, struct Matrix33 *mat, SLON
 	cs = COS(AnimGlobalAngleX & (2048-1));
 	oy = y - centrey;
 	oz = z - centrez;
-	
+
 	y = centrey + ((oy * cs) >> 16) - ((oz * sn) >> 16);
 	z = centrez + ((oy * sn) >> 16) + ((oz * cs) >> 16);
 
@@ -3665,7 +3665,7 @@ void	KeyFrameEditor::DoAnimRecurse(SLONG part_number, struct Matrix33 *mat, SLON
 	y += AnimGlobalOffsetY;
 
 	test_draw(start_object+object_offset,x, y, z + 100,AnimTween[Bank],
-			  the_element,the_next_element, 
+			  the_element,the_next_element,
 		      mat,
 			  parent_pos, parent_mat, parent_element,
 			  &end_pos, &end_mat);
@@ -3762,7 +3762,7 @@ void	KeyFrameEditor::DoCurrentAnim(void)
 					CurrentFrame[bank]	=	CurrentFrame[bank]->PrevFrame;
 			}
 		}
-	}					 
+	}
 
 	if(CurrentFrame[Bank]&&CurrentFrame[Bank]->FirstElement) //&&CurrentFrame[Bank]->PrevFrame) //MD
 	{
@@ -3831,7 +3831,7 @@ void	KeyFrameEditor::DoCurrentAnim(void)
 		if(CurrentFrame[Bank])
 		{
 			SLONG	o_count,c2,index,az;
-			
+
 			temp_scale	=	engine.Scale;
 			engine.Scale	=	AnimScale;
 
@@ -3843,7 +3843,7 @@ void	KeyFrameEditor::DoCurrentAnim(void)
 			{
 				c1=link_sorts[index].Item;
 				c0=c1+prim_multi_objects[test_chunk->MultiObject].StartObject;
-//				LogText("%d ",c1);	
+//				LogText("%d ",c1);
 				the_element			=	&CurrentFrame[Bank]->FirstElement[c1];
 				if(VideoMode==VIDEO_MODE_PREV_FRAME||VideoMode==VIDEO_MODE_PAUSE_BACK)
 				{
@@ -3864,7 +3864,7 @@ void	KeyFrameEditor::DoCurrentAnim(void)
 				test_draw_z(az+(c2<<2),c0,AnimOffsetX[Bank] + AnimGlobalOffsetX,AnimOffsetY[Bank] + AnimGlobalOffsetY,100,AnimTween[Bank],the_element,the_next_element,&r_matrix);
 				index=link_sorts[index].Next;
 			}
-//				LogText("]\n");	
+//				LogText("]\n");
 			engine.Scale	=	temp_scale;
 		}
 #else
@@ -3925,7 +3925,7 @@ void	KeyFrameEditor::DoCurrentAnim(void)
 						else
 							parent_next_element	=	the_element;
 					}*/
-					
+
 					test_draw(start_object+object_offset,AnimOffsetX[Bank] + AnimGlobalOffsetX,AnimOffsetY[Bank] + AnimGlobalOffsetY,100,AnimTween[Bank],the_element,the_next_element,&r_matrix, NULL, NULL, NULL, NULL, NULL);
 
 					local_object_flags=0;
@@ -4002,7 +4002,7 @@ void MATRIX_calc(float *matrix, float yaw, float pitch, float roll)
 	cy = cos(yaw);
 	cp = cos(pitch);
 	cr = cos(roll);
-	
+
 	sy = sin(yaw);
 	sp = sin(pitch);
 	sr = sin(roll);
@@ -4059,7 +4059,7 @@ void	MATRIX_find_angles(float *matrix,float *yaw,float *pitch,float * roll)
 
 	if (fabs(xz) + fabs(y) < MATRIX_FA_VECTOR_TOO_SMALL)
 	{
-		if (y < 0) 
+		if (y < 0)
 		{
 			*pitch = -PI;
 		}
@@ -4080,7 +4080,7 @@ void	MATRIX_find_angles(float *matrix,float *yaw,float *pitch,float * roll)
 	// so...  cos(roll) = matrix[4] /  cos(pitch)
 	//        sin(roll) = matrix[1] / -cos(pitch)
 	//
-	
+
 	float cos_roll;
 	float sin_roll;
 	float cos_pitch;
@@ -4122,11 +4122,11 @@ void	convert_float_to_mat(Matrix33 *mat_m,float *mat_f)
 	mat_m->M[0][0]=(SLONG)(mat_f[0]*32768.0);
 	mat_m->M[0][1]=(SLONG)(mat_f[1]*32768.0);
 	mat_m->M[0][2]=(SLONG)(mat_f[2]*32768.0);
-	              	        		
+
 	mat_m->M[1][0]=(SLONG)(mat_f[3]*32768.0);
 	mat_m->M[1][1]=(SLONG)(mat_f[4]*32768.0);
 	mat_m->M[1][2]=(SLONG)(mat_f[5]*32768.0);
-	              	        		
+
 	mat_m->M[2][0]=(SLONG)(mat_f[6]*32768.0);
 	mat_m->M[2][1]=(SLONG)(mat_f[7]*32768.0);
 	mat_m->M[2][2]=(SLONG)(mat_f[8]*32768.0);
@@ -4202,7 +4202,7 @@ void	build_tween_matrix(Matrix33 *mat_res,Matrix33 *mat1,Matrix33 *mat2,SLONG tw
 {
 	float	mata[9],yaw1,pitch1,roll1,yaw2,pitch2,roll2;
 
-	
+
 	convert_mat_to_float(mata,mat1);
 	MATRIX_find_angles(mata,&yaw1,&pitch1,&roll1);
 
@@ -4252,7 +4252,7 @@ void	test_draw(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,
 	p_obj    =&prim_objects[prim];
 	p_f4     =&prim_faces4[p_obj->StartFace4];
 	p_f3     =&prim_faces3[p_obj->StartFace3];
-	
+
 //	anim_info_next	=	&TheElements[anim_info->Next];
 //	anim_info_next	=	&&TestChunkTestChunk->KeyFrames[3].FirstElement;
 
@@ -4260,7 +4260,7 @@ void	test_draw(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,
 	mat_next = &anim_info_next->Matrix;
 
 	//move object "tweened quantity"  , z&y flipped
-	
+
 
 	//!JCL - temp - use the quaternion from the "parent" node to generate the position.
 	// or don't bother if we haven't got a parent...
@@ -4335,7 +4335,7 @@ void	test_draw(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,
 
 	matrix_mult33(&mat_final,rot_mat,&mat2);
 
-		
+
 	for(c0=sp;c0<ep;c0++)
 	{
 
@@ -4345,7 +4345,7 @@ void	test_draw(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,
 //		swap(temp.Y,temp.Z)  //MDOPT do this inside the matrix multiply
 //		temp.Y=-temp.Y;
 
-		
+
 		flags[c0-sp]	=	rotate_point_gte((struct SVector*)&temp,&res[c0-sp]);
 //		LogText(" after rot (%d,%d,%d)  \n",res[c0-sp].X,res[c0-sp].Y,res[c0-sp].Z);
 	}
@@ -4368,14 +4368,14 @@ void	test_draw(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,
 		   goto	next_face4;
 
 
-		flag_and	=	flags[p0]&flags[p1]&flags[p2]&flags[p3];	
-		flag_or		=	flags[p0]|flags[p1]|flags[p2]|flags[p3];	
+		flag_and	=	flags[p0]&flags[p1]&flags[p2]&flags[p3];
+		flag_or		=	flags[p0]|flags[p1]|flags[p2]|flags[p3];
 //		LogText(" test draw face %d  p0 x (%d,%d,%d)\n",c0,res[p0].X,res[p0].Y,res[p0].Z);
 //		DrawLineC(engine.VW2,engine.VH2,res[p0].X,res[p0].Y,0);
 //		if((flag_or&EF_BEHIND_YOU)==0)
 		if(!(flag_and & EF_CLIPFLAGS))
 		{
-			
+
 			az=(res[p0].Z+res[p1].Z+res[p2].Z+res[p3].Z)>>2;
 
 			setPolyType4(
@@ -4409,7 +4409,7 @@ void	test_draw(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,
 			ASSERT(p_f4->TexturePage>=0);
 
 			setZ4((struct BucketQuad*)current_bucket_pool,-res[p0].Z,-res[p1].Z,-res[p2].Z,-res[p3].Z);
-			
+
 			setShade4	(
 							(struct BucketQuad*)current_bucket_pool,
 							(p_f4->Bright[0]),
@@ -4445,8 +4445,8 @@ next_face4:;
 		if(!is_it_clockwise(res,p0,p1,p2))
 		   goto	next_face3;
 
-		flag_and = flags[p0]&flags[p1]&flags[p2];	
-		flag_or  = flags[p0]|flags[p1]|flags[p2];	
+		flag_and = flags[p0]&flags[p1]&flags[p2];
+		flag_or  = flags[p0]|flags[p1]|flags[p2];
 
 		if((flag_or&EF_BEHIND_YOU)==0)
 		if(!(flag_and & EF_CLIPFLAGS))
@@ -4495,7 +4495,7 @@ next_face4:;
 		}
 next_face3:;
 		p_f3++;
-	}					
+	}
 }
 
 void	test_draw_all_get_sizes(SWORD multi_prim,struct KeyFrame *the_frame,SLONG x,SLONG y,SLONG z,SLONG tween,struct Matrix33 *rot_mat,SLONG *width,SLONG *height,SLONG *mid_x,SLONG *mid_y)
@@ -4540,7 +4540,7 @@ void	test_draw_all_get_sizes(SWORD multi_prim,struct KeyFrame *the_frame,SLONG x
 		p_obj    =&prim_objects[prim];
 		p_f4     =&prim_faces4[p_obj->StartFace4];
 		p_f3     =&prim_faces3[p_obj->StartFace3];
-		
+
 
 		mat      = &the_element->Matrix;
 		mat_next = &the_element->Matrix;
@@ -4553,7 +4553,7 @@ void	test_draw_all_get_sizes(SWORD multi_prim,struct KeyFrame *the_frame,SLONG x
 		x	= temp.X;
 		y	= temp.Y;
 		z	= temp.Z;
-		
+
 
 		sp=p_obj->StartPoint;
 		ep=p_obj->EndPoint;
@@ -4574,7 +4574,7 @@ void	test_draw_all_get_sizes(SWORD multi_prim,struct KeyFrame *the_frame,SLONG x
 	//apply local rotation matrix
 		matrix_mult33(&mat_final,rot_mat,&mat2);
 
-			
+
 		for(c0=sp;c0<ep;c0++)
 		{
 
@@ -4633,7 +4633,7 @@ void	test_draw_game(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct GameKe
 	p_obj    =&prim_objects[prim];
 	p_f4     =&prim_faces4[p_obj->StartFace4];
 	p_f3     =&prim_faces3[p_obj->StartFace3];
-	
+
 //	anim_info_next	=	&TheElements[anim_info->Next];
 //	anim_info_next	=	&&TestChunkTestChunk->KeyFrames[3].FirstElement;
 
@@ -4641,12 +4641,12 @@ void	test_draw_game(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct GameKe
 	//mat_next = &anim_info_next->CMatrix;
 
 	//move object "tweened quantity"  , z&y flipped
-	
+
 
 	offset.M[0]	=	(anim_info->OffsetX+(((anim_info_next->OffsetX-anim_info->OffsetX)*tween)>>8))>>TWEEN_OFFSET_SHIFT;
 	offset.M[1]	=	(anim_info->OffsetY+(((anim_info_next->OffsetY-anim_info->OffsetY)*tween)>>8))>>TWEEN_OFFSET_SHIFT;
 	offset.M[2]	=	(anim_info->OffsetZ+(((anim_info_next->OffsetZ-anim_info->OffsetZ)*tween)>>8))>>TWEEN_OFFSET_SHIFT;
-/*	
+/*
 	len=SDIST3(anim_info->OffsetX,anim_info->OffsetY,anim_info->OffsetZ);
 	len=sqrl(len);
 
@@ -4674,7 +4674,7 @@ void	test_draw_game(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct GameKe
 	y+=(anim_info->DY+(((anim_info_next->DY-anim_info->DY)*tween)>>8))>>2;
 	z+=(anim_info->DZ+(((anim_info_next->DZ-anim_info->DZ)*tween)>>8))>>2;
 */
-	
+
 
 	sp=p_obj->StartPoint;
 	ep=p_obj->EndPoint;
@@ -4706,7 +4706,7 @@ void	test_draw_game(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct GameKe
 
 	GetCMatrix(anim_info, &m1);
 	GetCMatrix(anim_info_next, &m2);
-	
+
 	build_tween_matrix(&mat2, &m1, &m2, tween);
 	normalise_matrix(&mat2);
 
@@ -4714,7 +4714,7 @@ void	test_draw_game(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct GameKe
 //apply local rotation matrix
 	matrix_mult33(&mat_final,rot_mat,&mat2);
 
-		
+
 	for(c0=sp;c0<ep;c0++)
 	{
 
@@ -4724,7 +4724,7 @@ void	test_draw_game(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct GameKe
 //		swap(temp.Y,temp.Z)  //MDOPT do this inside the matrix multiply
 //		temp.Y=-temp.Y;
 
-		
+
 		flags[c0-sp]	=	rotate_point_gte((struct SVector*)&temp,&res[c0-sp]);
 //		LogText(" after rot (%d,%d,%d)  \n",res[c0-sp].X,res[c0-sp].Y,res[c0-sp].Z);
 	}
@@ -4747,14 +4747,14 @@ void	test_draw_game(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct GameKe
 		   goto	next_face4;
 
 
-		flag_and	=	flags[p0]&flags[p1]&flags[p2]&flags[p3];	
-		flag_or		=	flags[p0]|flags[p1]|flags[p2]|flags[p3];	
+		flag_and	=	flags[p0]&flags[p1]&flags[p2]&flags[p3];
+		flag_or		=	flags[p0]|flags[p1]|flags[p2]|flags[p3];
 //		LogText(" test draw face %d  p0 x (%d,%d,%d)\n",c0,res[p0].X,res[p0].Y,res[p0].Z);
 //		DrawLineC(engine.VW2,engine.VH2,res[p0].X,res[p0].Y,0);
 //		if((flag_or&EF_BEHIND_YOU)==0)
 		if(!(flag_and & EF_CLIPFLAGS))
 		{
-			
+
 			az=(res[p0].Z+res[p1].Z+res[p2].Z+res[p3].Z)>>2;
 
 			setPolyType4(
@@ -4788,7 +4788,7 @@ void	test_draw_game(UWORD	prim,SLONG x,SLONG y,SLONG z,SLONG tween,struct GameKe
 			ASSERT(p_f4->TexturePage>=0);
 
 			setZ4((struct BucketQuad*)current_bucket_pool,-res[p0].Z,-res[p1].Z,-res[p2].Z,-res[p3].Z);
-			
+
 			setShade4	(
 							(struct BucketQuad*)current_bucket_pool,
 							(p_f4->Bright[0]),
@@ -4824,8 +4824,8 @@ next_face4:;
 		if(!is_it_clockwise(res,p0,p1,p2))
 		   goto	next_face3;
 
-		flag_and = flags[p0]&flags[p1]&flags[p2];	
-		flag_or  = flags[p0]|flags[p1]|flags[p2];	
+		flag_and = flags[p0]&flags[p1]&flags[p2];
+		flag_or  = flags[p0]|flags[p1]|flags[p2];
 
 		if((flag_or&EF_BEHIND_YOU)==0)
 		if(!(flag_and & EF_CLIPFLAGS))
@@ -4874,7 +4874,7 @@ next_face4:;
 		}
 next_face3:;
 		p_f3++;
-	}					
+	}
 }
 
 void	test_draw_all_get_sizes_game(SWORD multi_prim,struct GameKeyFrame *the_frame,SLONG x,SLONG y,SLONG z,SLONG tween,struct Matrix33 *rot_mat,SLONG *width,SLONG *height,SLONG *mid_x,SLONG *mid_y)
@@ -4919,7 +4919,7 @@ void	test_draw_all_get_sizes_game(SWORD multi_prim,struct GameKeyFrame *the_fram
 		p_obj    =&prim_objects[prim];
 		p_f4     =&prim_faces4[p_obj->StartFace4];
 		p_f3     =&prim_faces3[p_obj->StartFace3];
-		
+
 
 //		mat      = &the_element->Matrix;
 //		mat_next = &the_element->Matrix;
@@ -4932,7 +4932,7 @@ void	test_draw_all_get_sizes_game(SWORD multi_prim,struct GameKeyFrame *the_fram
 		x	= temp.X;
 		y	= temp.Y;
 		z	= temp.Z;
-		
+
 		// (jcl) don't blame me - I didn't write this...
 		CMatrix33	m1, m2;
 		GetCMatrix(the_element, &m1);
@@ -4959,7 +4959,7 @@ void	test_draw_all_get_sizes_game(SWORD multi_prim,struct GameKeyFrame *the_fram
 	//apply local rotation matrix
 		matrix_mult33(&mat_final,rot_mat,&mat2);
 
-			
+
 		for(c0=sp;c0<ep;c0++)
 		{
 
@@ -5066,7 +5066,7 @@ void	KeyFrameEditor::DrawKeyFrame(UWORD multi_object,EdRect *bounds_rect,struct 
 						);
 	set_camera();
 //	set_camera_to_base();
-	
+
 
 //md	LogText(" width %d height %d \n",width,height);
 	test_draw_all_get_sizes(test_chunk->MultiObject,the_frame,0,0,0,0,r_matrix,&width,&height,&mid_x,&mid_y);
@@ -5207,7 +5207,7 @@ void	drawkeyframebox(UWORD multi_object,EdRect *bounds_rect,struct KeyFrame *the
 						);
 	set_camera();
 //	set_camera_to_base();
-	
+
 
 //md	LogText(" width %d height %d \n",width,height);
 	test_draw_all_get_sizes(test_chunk->MultiObject,the_frame,0,0,0,0,r_matrix,&width,&height,&mid_x,&mid_y);
@@ -5351,7 +5351,7 @@ void	drawkeyframeboxgamechunk(UWORD multi_object,EdRect *bounds_rect,struct Game
 */
 	set_camera();
 //	set_camera_to_base();
-	
+
 
 //md	LogText(" width %d height %d \n",width,height);
 	test_draw_all_get_sizes_game(the_chunk->MultiObject[0],the_frame,0,0,0,0,r_matrix,&width,&height,&mid_x,&mid_y);
@@ -5489,7 +5489,7 @@ void	KeyFrameEditor::DrawKeyFrames(void)
 			mouse_point.Y	=	MouseY;
 			if(frame_rect.PointInRect(&mouse_point))
 				hilite_rect.FillRect(HILITE_COL);
-			
+
 			DrawKeyFrame(test_chunk->MultiObject,&frame_rect,&test_chunk->KeyFrames[first_frame+c0],&r_matrix);
 
 			sprintf(text,"%d",(first_frame+c0));
@@ -5734,7 +5734,7 @@ void	KeyFrameEditor::InsertAnim(Anim *insert_here)
 				the_anim->SetNextAnim(AnimList[Bank]);
 				AnimList[Bank]->SetLastAnim(the_anim);
 				AnimList[Bank]=the_anim;
-				
+
 			}
 		}
 		CurrentAnim[Bank]	=	the_anim;
@@ -5797,7 +5797,7 @@ void	KeyFrameEditor::LoadAllAnims(KeyFrameChunk *the_chunk)
 			FileRead(file_handle,&anim_count,sizeof(anim_count));
 
 			LoadBodyPartInfo(file_handle,version,the_chunk);
-			
+
 		}
 
 		for(c0=0;c0<anim_count;c0++)
@@ -5944,7 +5944,7 @@ void	KeyFrameEditor::LoadAnim(MFFileHandle file_handle,Anim *the_anim)
 	SWORD			chunk_id;
 	SWORD			fixed=0;
 	CBYTE			version=0;
-	
+
 
 	FileRead(file_handle,&version,1);
 
@@ -6152,7 +6152,7 @@ void	KeyFrameEditor::SaveChunkTextureInfo(KeyFrameChunk *the_chunk)
 				p_obj		=	&prim_objects[c0];
 				p_f4		=	&prim_faces4[p_obj->StartFace4];
 				p_f3		=	&prim_faces3[p_obj->StartFace3];
-				
+
 				count=p_obj->EndFace4-p_obj->StartFace4;
 				FileWrite(file_handle,&count,sizeof(count));
 				for(c1=p_obj->StartFace4;c1<p_obj->EndFace4;c1++,p_f4++)
@@ -6235,7 +6235,7 @@ void	KeyFrameEditor::LoadChunkTextureInfo(KeyFrameChunk *the_chunk)
 				p_f4		=	&prim_faces4[p_obj->StartFace4];
 				p_f3		=	&prim_faces3[p_obj->StartFace3];
 
-				
+
 				//FileRead(file_handle,&count,sizeof(count));
 				for(c1=p_obj->StartFace4;c1<p_obj->EndFace4;c1++,p_f4++,count--)
 				{
@@ -6267,7 +6267,7 @@ void	KeyFrameEditor::LoadChunkTextureInfo(KeyFrameChunk *the_chunk)
 		}
 		FileClose(file_handle);
 	}
-*/	
+*/
 }
 
 //---------------------------------------------------------------
@@ -6280,7 +6280,7 @@ void	draw_key_frames(void)
 //---------------------------------------------------------------
 
 void	draw_anim_frames(void)
-{ 
+{
 	if(the_editor->GetCurrentAnim())
 		the_editor->DrawAnimFrames(the_editor->GetCurrentAnim(),FALSE);
 }

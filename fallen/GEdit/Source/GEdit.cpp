@@ -24,7 +24,7 @@
 #include	"ob.h"
 #include	"game.h"
 #include	"inside2.h"
-#include	"c:\fallen\headers\memory.h"
+#include	"fallen/headers/memory.h"
 
 //---------------------------------------------------------------
 // from supermap.cpp
@@ -288,7 +288,7 @@ void	fini_mission_editor(void)
  */
 
 BOOL CALLBACK		waypoint_tab_proc (HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam ) {
-	HWND  the_ctrl, hwndParent = GetParent(hWnd); 
+	HWND  the_ctrl, hwndParent = GetParent(hWnd);
 /*
 	if (message==WM_MOUSEWHEEL) {
 		wParam=HIWORD(wParam); // don't ask...
@@ -351,7 +351,7 @@ BOOL CALLBACK		waypoint_tab_proc (HWND hWnd, UINT message, WPARAM wParam, LPARAM
 			SLONG	the_value;
 			SWORD	the_wheel;
 			SLONG	diff;
-				
+
 			the_wheel = wParam;    // wheel rotation
 			the_ctrl = GetDlgItem(hWnd,IDC_SPIN1);
 			the_value = SendMessage(the_ctrl, UDM_GETPOS, 0, 0);
@@ -360,9 +360,9 @@ BOOL CALLBACK		waypoint_tab_proc (HWND hWnd, UINT message, WPARAM wParam, LPARAM
 //				diff=(the_wheel<0) ? diff=-128 : diff=260;
 //				selected_ep->Y=INDOORS_INDEX=calc_inside_for_xyz(selected_ep->X, GetEventY(selected_ep)+diff, selected_ep->Z,&INDOORS_ROOM);
 
-extern SLONG GetNextFloor(EventPoint *ep, SBYTE dir, UWORD *room);				
+extern SLONG GetNextFloor(EventPoint *ep, SBYTE dir, UWORD *room);
 				selected_ep->Y=INDOORS_INDEX=GetNextFloor(selected_ep,the_wheel,&INDOORS_ROOM);
-				if (INDOORS_INDEX) 
+				if (INDOORS_INDEX)
 					INDOORS_DBUILDING=inside_storeys[INDOORS_INDEX].Building;
 				else INDOORS_DBUILDING=0;
 
@@ -443,7 +443,7 @@ extern SLONG GetNextFloor(EventPoint *ep, SBYTE dir, UWORD *room);
 				TextOut(item->hDC,item->rcItem.left+4,item->rcItem.top+4,colour_strings[item->itemData],strlen(colour_strings[item->itemData]));
 			}
 
-			if (item->itemState & ODS_FOCUS) 
+			if (item->itemState & ODS_FOCUS)
 				DrawFocusRect(item->hDC,&item->rcItem);
 
 			return TRUE;
@@ -509,7 +509,7 @@ void condition_tab_update(HWND hWnd) {
 
 
 BOOL CALLBACK		condition_tab_proc (HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam ) {
-	HWND  the_ctrl, hwndParent = GetParent(hWnd); 
+	HWND  the_ctrl, hwndParent = GetParent(hWnd);
 	SLONG c0;
 	LPTSTR lbitem_str;
 /*
@@ -609,7 +609,7 @@ BOOL CALLBACK		condition_tab_proc (HWND hWnd, UINT message, WPARAM wParam, LPARA
 			default:
 				return TRUE;
 			}
-			
+
 			the_wheel = wParam;    // wheel rotation
 			the_ctrl = GetDlgItem(hWnd,ctlidx);
 			the_value = SendMessage(the_ctrl, UDM_GETPOS, 0, 0);
@@ -726,7 +726,7 @@ void action_tab_update(HWND hWnd) {
 }
 
 BOOL CALLBACK		action_tab_proc (HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam ) {
-	HWND  the_ctrl, hwndParent = GetParent(hWnd); 
+	HWND  the_ctrl, hwndParent = GetParent(hWnd);
 	SLONG c0;
 	LPTSTR lbitem_str;
 /*
@@ -838,7 +838,7 @@ HRESULT combo_draw(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 	SetBkColor(item->hDC,bk);
 	SetTextColor(item->hDC,tx);
 
-	if (item->itemState & ODS_FOCUS) 
+	if (item->itemState & ODS_FOCUS)
 		DrawFocusRect(item->hDC,&item->rcItem);
 	return TRUE;
 }
@@ -867,7 +867,7 @@ BOOL CALLBACK		mission_editor_proc	(
 	HTREEITEM			item_handle;
 	TV_HITTESTINFO		hit_test;
 	TV_ITEM				the_item;
-	
+
 /*
 	// heh heh heh
 	if (message==WM_MOUSEWHEEL) {
@@ -879,7 +879,7 @@ BOOL CALLBACK		mission_editor_proc	(
 			CONSOLE_text("WIN95 WHEEL CONVERT");
 		}
 	}
-*/	
+*/
 	switch(message)
 	{
 		case	WM_INITDIALOG:
@@ -941,7 +941,7 @@ BOOL CALLBACK		mission_editor_proc	(
 			}
 			SendMessage(the_ctrl,CB_SETCURSEL,0,0);
 
-			
+
 //			EnableWindow(GetDlgItem(hWnd,IDC_EDIT2),FALSE);
 
 			ShowWindow(GetDlgItem(hWnd,IDC_CHECK1),SW_HIDE);
@@ -1028,7 +1028,7 @@ BOOL CALLBACK		mission_editor_proc	(
 
 
 		case	WM_CLOSE:
-			
+
 			// restore normality to list box
 			ticklist_close(hWnd, IDC_LIST1);
 
@@ -1067,7 +1067,7 @@ BOOL CALLBACK		mission_editor_proc	(
 					return	TRUE;
 
 				case	ID_FILE_EXITALL:
-					EditorResult=-1; // fallthru 
+					EditorResult=-1; // fallthru
 				case	ID_FILE_EXIT:
 					SendMessage(hWnd,WM_CLOSE,0,0);
 					return	TRUE;
@@ -1119,7 +1119,7 @@ BOOL CALLBACK		mission_editor_proc	(
 
 					}
 					return	TRUE;
-				
+
 				case	ID_TOOLBAR_WAYPOINT:
 					edit_mode=0;
 					ShowWindow(GetDlgItem(hWnd,IDC_COMBO1),SW_HIDE);
@@ -1545,7 +1545,7 @@ void	ep_to_controls(EventPoint *ep,ULONG flags)
 						(LPARAM)edit_text
 					);
 
-		SendMessage	(	
+		SendMessage	(
 						//	This will submit an invalid char to the edit control & force
 						//	the correct group update.
 						GetDlgItem(GEDIT_edit_wnd,IDC_EDIT1),
@@ -1689,7 +1689,7 @@ void ep_to_controls2(EventPoint *ep, SWORD tabpage, HWND tab) {
 		SendMessage(GetDlgItem(tab,IDC_CHECK2),BM_SETCHECK,((ep->Flags&WPT_FLAGS_OPTIONAL)?1:0),0);
 
 		if (WaypointUses[ep->TriggeredBy] & WPU_TIME)
-			SendMessage(GetDlgItem(tab,IDC_SPIN3),UDM_SETPOS,0,MAKELONG((short) (ep->Radius/100),0));	// timer and 
+			SendMessage(GetDlgItem(tab,IDC_SPIN3),UDM_SETPOS,0,MAKELONG((short) (ep->Radius/100),0));	// timer and
 
 		if (WaypointUses[ep->TriggeredBy] & WPU_COUNTER)
 			SendMessage(GetDlgItem(tab,IDC_SPIN3),UDM_SETPOS,0,MAKELONG((short) ep->Radius,0));		// counter and
@@ -1762,7 +1762,7 @@ void controls_to_ep2(EventPoint *ep, SWORD tabpage, HWND tab) {
 
 //		if (IsWindowEnabled(ctl=GetDlgItem(tab,IDC_SPIN1)))
 		if (WaypointUses[ndx] & (WPU_DEPEND|WPU_COUNTER))
-			ep->EPRef		= LOWORD(SendMessage(GetDlgItem(tab,IDC_SPIN1),UDM_GETPOS,0,0));	
+			ep->EPRef		= LOWORD(SendMessage(GetDlgItem(tab,IDC_SPIN1),UDM_GETPOS,0,0));
 
 
 		ep->Flags&=~(WPT_FLAGS_INVERSE|WPT_FLAGS_OPTIONAL);
@@ -1772,12 +1772,12 @@ void controls_to_ep2(EventPoint *ep, SWORD tabpage, HWND tab) {
 
 //		if (IsWindowEnabled(ctl=GetDlgItem(tab,IDC_SPIN2)))
 		if (WaypointUses[ndx] & WPU_BOOLEAN)
-			ep->EPRefBool	= LOWORD(SendMessage(GetDlgItem(tab,IDC_SPIN2),UDM_GETPOS,0,0));	
+			ep->EPRefBool	= LOWORD(SendMessage(GetDlgItem(tab,IDC_SPIN2),UDM_GETPOS,0,0));
 
 //		if (IsWindowEnabled(ctl=GetDlgItem(tab,IDC_SPIN3)))
 		if (WaypointUses[ndx] & WPU_TIME)
-//			ep->Radius	= LOWORD(SendMessage(GetDlgItem(tab,IDC_SPIN3),UDM_GETPOS,0,0))*100;	// timer and 
-			ep->Radius	= (SendMessage(GetDlgItem(tab,IDC_SPIN3),UDM_GETPOS,0,0)&0xffff)*100;	// timer and 
+//			ep->Radius	= LOWORD(SendMessage(GetDlgItem(tab,IDC_SPIN3),UDM_GETPOS,0,0))*100;	// timer and
+			ep->Radius	= (SendMessage(GetDlgItem(tab,IDC_SPIN3),UDM_GETPOS,0,0)&0xffff)*100;	// timer and
 
 //		if (IsWindowEnabled(ctl=GetDlgItem(tab,IDC_SPIN4)))
 		if (WaypointUses[ndx] & WPU_COUNTER)

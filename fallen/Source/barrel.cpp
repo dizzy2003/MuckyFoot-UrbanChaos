@@ -19,7 +19,7 @@
 #ifndef PSX
 #include "panel.h"
 #else
-#include "c:\fallen\psxeng\headers\panel.h"
+#include "fallen/psxeng/headers/panel.h"
 #endif
 
 BARREL_Sphere *BARREL_sphere; //[BARREL_MAX_SPHERES];
@@ -28,7 +28,7 @@ SLONG          BARREL_sphere_last;	  // MARK!!! WTF, you usuall call thing BLAH_
 
 //
 // The states a barrel can be in.
-// 
+//
 
 #define BARREL_FLAG_STACKED  (1 << 0)
 #define BARREL_FLAG_STILL    (1 << 1)
@@ -45,7 +45,7 @@ extern BOOL allow_debug_keys;
 Barrel *BARREL_barrel;//[BARREL_MAX_BARRELS];
 SLONG   BARREL_barrel_upto;
 
-		 
+
 //
 // The radius and height of a barrel. A barrel has its pivot in the middle of itself,
 // not at its base!
@@ -299,7 +299,7 @@ void BARREL_convert_moving_to_stationary(Thing *p_barrel)
 	bb->on    = 0;
 	bb->flag |= BARREL_FLAG_STILL;
 
-	if (BARREL_fx_rate>4) 
+	if (BARREL_fx_rate>4)
 		BARREL_fx_rate-=3;
 	else
 		BARREL_fx_rate=0;
@@ -338,7 +338,7 @@ void BARREL_hit_with_sphere(
 	BARREL_Sphere *bs;
 
 	SLONG       num;
-	
+
 	num = THING_find_sphere(
 			x, y, z,
 			radius,
@@ -361,7 +361,7 @@ void BARREL_hit_with_sphere(
 		bb      = p_found->Genus.Barrel;
 
 	  try_this_again:;
-		
+
 		if (bb->flag & (BARREL_FLAG_STACKED | BARREL_FLAG_STILL))
 		{
 			//
@@ -483,7 +483,7 @@ void BARREL_hit_with_prim(
 	SLONG minx;
 	SLONG miny;
 	SLONG minz;
-          
+
 	SLONG maxx;
 	SLONG maxy;
 	SLONG maxz;
@@ -543,7 +543,7 @@ void BARREL_hit_with_prim(
 	matrix[1] =  sin_yaw;
 	matrix[2] = -sin_yaw;
 	matrix[3] =  cos_yaw;
-	
+
 	for (i = 0; i < num; i++)
 	{
 		ASSERT(TO_THING(found_barrel[i])->Class == CLASS_BARREL);
@@ -702,7 +702,7 @@ void BARREL_hit_with_prim(
 						bs->dx += dx / 8;
 						bs->dy += dy / 8;
 						bs->dz += dz / 8;
-						
+
 						BARREL_hit_noise(p_found);
 					}
 				}
@@ -1076,7 +1076,7 @@ void BARREL_process_normal(Thing *p_barrel)
 			{
 				//
 				// We are okay.
-				// 
+				//
 			}
 			else
 			{
@@ -1331,7 +1331,7 @@ UWORD BARREL_alloc(
 
 		return NULL;
 	}
-	
+
 	bb = &BARREL_barrel[BARREL_barrel_upto++];
 
 	//
@@ -1482,7 +1482,7 @@ UWORD BARREL_alloc(
 		{
 			//
 			// Free up the thing and the barrel.
-			// 
+			//
 
 			BARREL_barrel_upto -= 1;
 			free_thing(p_thing);
@@ -1696,7 +1696,7 @@ GameCoord BARREL_fire_pos(Thing *p_barrel)
 	SLONG sy;
 	SLONG sz;
 	SLONG sradius;
-	
+
 	BARREL_Sphere *bs;
 
 	GameCoord ans;
@@ -1898,7 +1898,7 @@ void BARREL_shoot(
 #else
 		PYRO_create(barrelpos,PYRO_FIREBOMB);
 #endif
-		
+
 		PCOM_oscillate_tympanum(
 			PCOM_SOUND_BANG,
 			p_shooter,

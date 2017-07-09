@@ -4,9 +4,9 @@
 #include	"Editor.hpp"
 #include	"EdCom.h"
 #include	"Edway.h"
-#include	"c:\fallen\headers\game.h"
-#include	"c:\fallen\headers\animtmap.h"
-#include	"c:\fallen\headers\memory.h"
+#include	"fallen/headers/game.h"
+#include	"fallen/headers/animtmap.h"
+#include	"fallen/headers/memory.h"
 
 #define	MODE_PLACE		1
 #define	MODE_SELECT		2
@@ -226,7 +226,7 @@ void	GameEditor::HandleContentClick(UBYTE flags,MFPoint *clicked_point)
 								map_things[new_thing].Genus	=	ThingMode->GetCurrentGenus();
 								map_things[new_thing].CommandRef	=	0;
 								map_things[new_thing].Data[0]		=	256;
-		
+
 								SelectedItem.ItemType	=	ED_ITEM_THING;
 								SelectedItem.ItemRef	=	new_thing;
 								ThingMode->SetCurrentThing(new_thing);
@@ -512,7 +512,7 @@ UWORD	GameEditor::EngineKeys(void)
 	UBYTE			change	=	0;
 	EngineStuff		temp_engine;
 
-	
+
 	// Backup current engine stuff.
 	temp_engine	=	engine;
 	engine		=	EdEngine;
@@ -552,7 +552,7 @@ void	GameEditor::DoBlockPopup(MFPoint *clicked_point)
 	local_point	=	*clicked_point;
 	GlobalToLocal(&local_point);
 	block_popup_def.ControlLeft	=	local_point.X+4;
-	block_popup_def.ControlTop	=	local_point.Y-4;	 
+	block_popup_def.ControlTop	=	local_point.Y-4;
 
 	block_popup_def.TheMenuDef	=	block_popup;
 	the_control		=	new CPopUp(&block_popup_def);
@@ -603,7 +603,7 @@ void	GameEditor::DoThingPopup(MFPoint *clicked_point)
 	local_point	=	*clicked_point;
 	GlobalToLocal(&local_point);
 	thing_popup_def.ControlLeft	=	local_point.X+4;
-	thing_popup_def.ControlTop	=	local_point.Y-4;	 
+	thing_popup_def.ControlTop	=	local_point.Y-4;
 
 	thing_popup_def.TheMenuDef	=	thing_popup;
 	the_control		=	new CPopUp(&thing_popup_def);
@@ -733,7 +733,7 @@ void	GameEditor::DoWaypointPopup(MFPoint *clicked_point)
 	local_point	=	*clicked_point;
 	GlobalToLocal(&local_point);
 	way_popup_def.ControlLeft	=	local_point.X+4;
-	way_popup_def.ControlTop	=	local_point.Y-4;	 
+	way_popup_def.ControlTop	=	local_point.Y-4;
 
 	way_popup_def.TheMenuDef	=	way_popup;
 	the_control		=	new CPopUp(&way_popup_def);
@@ -759,7 +759,7 @@ void	GameEditor::DoWaypointPopup(MFPoint *clicked_point)
 		case	2:	// Blank Line.
 			break;
 		case	3:	// Link to Next.
-			SetSelectMode(SELECT_NEXT_WAYPOINT);			
+			SetSelectMode(SELECT_NEXT_WAYPOINT);
 			break;
 		case	4:	// Link to Previous.
 			SetSelectMode(SELECT_PREV_WAYPOINT);
@@ -863,7 +863,7 @@ void	GameEditor::GameEdEngine(void)
 		{
 			if(current_bucket_pool>=end_bucket_pool)
 				goto	exit;
-			
+
 			point.X	=	edit_waypoints[c0].X;
 			point.Y	=	edit_waypoints[c0].Y;
 			point.Z	=	edit_waypoints[c0].Z;
@@ -894,7 +894,7 @@ void	GameEditor::GameEdEngine(void)
 		{
 			if(current_bucket_pool>=end_bucket_pool)
 				goto	exit;
-			
+
 			((BucketLine*)current_bucket_pool)->BucketType	=	BT_LINE;
 			((BucketLine*)current_bucket_pool)->X1			=	wp_points[c0].X;
 			((BucketLine*)current_bucket_pool)->Y1			=	wp_points[c0].Y;
@@ -1034,7 +1034,7 @@ void	GameEditor::GameEdEngine(void)
 						{
 							if(current_bucket_pool>=end_bucket_pool)
 								goto	exit;
-							
+
 							((BucketLine*)current_bucket_pool)->BucketType	=	BT_LINE;
 							((BucketLine*)current_bucket_pool)->X1			=	new_point.X;
 							((BucketLine*)current_bucket_pool)->Y1			=	new_point.Y;
@@ -1069,7 +1069,7 @@ void	GameEditor::GameEdEngine(void)
 					CurrentThing	=	(((dx+mx-MAX_RADIUS)<<8)|(dz+mz-MAX_RADIUS));
 
 					az	=	buffer_points[dx+dz*MAX_RADIUS*2].Z;
-					
+
 					setPolyType4(
 									current_bucket_pool,
 									POLY_GT
@@ -1095,16 +1095,16 @@ void	GameEditor::GameEdEngine(void)
 					tsize	=	31;//floor_texture_sizes[((struct	MiniTextureBits*)(&p_map->Texture))->Size]-1;
 					switch(((struct	MiniTextureBits*)(&p_map->Texture))->Rot)
 					{
-						case	0:		
+						case	0:
 							setUV4(	(struct BucketQuad*)current_bucket_pool,tx,ty,tx+tsize,ty,tx,ty+tsize,tx+tsize,ty+tsize,page);
 							break;
-						case	1:		
+						case	1:
 							setUV4(	(struct BucketQuad*)current_bucket_pool,tx+tsize,ty,tx+tsize,ty+tsize,tx,ty,tx,ty+tsize,page);
 							break;
-						case	2:		
+						case	2:
 							setUV4(	(struct BucketQuad*)current_bucket_pool,tx+tsize,ty+tsize,tx,ty+tsize,tx+tsize,ty,tx,ty,page);
 							break;
-						case	3:		
+						case	3:
 							setUV4(	(struct BucketQuad*)current_bucket_pool,tx,ty+tsize,tx,ty,tx+tsize,ty+tsize,tx+tsize,ty,page);
 							break;
 					}
@@ -1169,11 +1169,11 @@ SLONG	GameEditor::DrawFacet(UWORD facet_index,SLONG x,SLONG y,SLONG z)
 	sp	=	p_facet->StartPoint;
 	mp	=	p_facet->MidPoint;
 	ep	=	p_facet->EndPoint;
-	
+
 	engine.X	-=	x<<8;
 	engine.Y	-=	y<<8;
 	engine.Z	-=	z<<8;
-		
+
 	for(c0=sp;c0<mp;c0++)
 	{
 		struct	SVector	pp;
@@ -1256,7 +1256,7 @@ SLONG	GameEditor::DrawFacet(UWORD facet_index,SLONG x,SLONG y,SLONG z)
 						);
 			}
 			setZ4((struct BucketQuad*)current_bucket_pool,global_res[p0].Z,global_res[p1].Z,global_res[p2].Z,global_res[p3].Z);
-			
+
 			setShade4((struct BucketQuad*)current_bucket_pool,
 			CLIP256(p_f4->Bright[0]+global_bright[p0]),
 			CLIP256(p_f4->Bright[1]+global_bright[p1]),
@@ -1282,7 +1282,7 @@ SLONG	GameEditor::DrawFacet(UWORD facet_index,SLONG x,SLONG y,SLONG z)
 				cot++;
 			if(flag_and&EF_OFF_BOTTOM)
 				cob++;
-		}	
+		}
 
 		p_f4++;
 	}
@@ -1496,7 +1496,7 @@ void	GameEditor::ScanEngine(void)
 							break;
 						case	BT_RECT_AREA:
 							break;
-					}			
+					}
 					bucket	=	((BucketGeneric*)bucket)->BucketPtr;
 				}
 			}
@@ -1544,7 +1544,7 @@ void	GameEditor::RenderEngine(void)
 		case 4:
 			render_span=render_span32;
 			break;
-		
+
 	}
 
 	p	=	&bucket_heads[engine.BucketSize-1];
@@ -1589,7 +1589,7 @@ void	GameEditor::RenderEngine(void)
 						}
 
 						if(the_quad->DrawFlags&POLY_FLAG_DOUBLESIDED)
-							my_quad_noz(&the_quad->P[2],&the_quad->P[3],&the_quad->P[1],&the_quad->P[0]);							
+							my_quad_noz(&the_quad->P[2],&the_quad->P[3],&the_quad->P[1],&the_quad->P[0]);
 						my_quad_noz(&the_quad->P[0],&the_quad->P[1],&the_quad->P[3],&the_quad->P[2]);
 						break;
 					case	BT_TRI:
@@ -1732,7 +1732,7 @@ void	GameEditor::RenderEngine(void)
 					case	BT_RECT_AREA:
 
 						break;
-				}			
+				}
 				bucket	=	((BucketGeneric*)bucket)->BucketPtr;
 			}
 		}

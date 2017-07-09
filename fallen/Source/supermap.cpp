@@ -1,17 +1,17 @@
 #include	"game.h"
-#include	"c:\fallen\headers\supermap.h"
-#include	"c:\fallen\headers\pap.h"
-#include	"c:\fallen\headers\inside2.h"
-#include	"c:\fallen\headers\ob.h"
+#include	"fallen/headers/supermap.h"
+#include	"fallen/headers/pap.h"
+#include	"fallen/headers/inside2.h"
+#include	"fallen/headers/ob.h"
 #ifndef	PSX
-#include	"c:\fallen\editor\headers\Editor.hpp"
+#include	"fallen/editor/headers/Editor.hpp"
 #endif
 #include	"memory.h"
 #include	"mav.h"
 #include	"noserver.h"
 #ifndef	PSX
-#include	"c:\fallen\ddengine\headers\texture.h"
-#include	"c:\fallen\headers\env.h"
+#include	"fallen/ddengine/headers/texture.h"
+#include	"env.h"
 #endif
 
 #ifdef EDITOR
@@ -29,7 +29,7 @@ extern	UBYTE	roper_pickup;
 "Performance Analyser"  -PA
 
 This piece of kit really is the most fantastic programming tool that has ever existed on any platform.
-I really can't complement it enough. 
+I really can't complement it enough.
 
 Programmers thrive on information, games development is sort of like having a black box with mysterious inner workings, you change the stuff you put into the box (the code) then you watch the different results that get displayed on the screen. And you have to deduce what's going on in the black box from this poke it and see what happens sort of trial and error. Of course it's not quite this bad, as the black box usually has lots of documentation about what's inside it. But when you cosider the black box that is the playstation contains multiple processors all doing millions of things a second, and all interacting with each other you can see that no matter how much documentation you have it's not going to tell you what your particular bit of code is doing.
 
@@ -43,7 +43,7 @@ Another cool trick it has, is it can show you polygon overwrite, it shows you ho
 The PA easily doubled the speed of Urban Chaos on the PSX after just 3 weeks of use.
 
 
-The only other trick up the playstation sleave is it's age means that the are a lot of very experienced programmers out there who are capable of pushing it to the limit. 
+The only other trick up the playstation sleave is it's age means that the are a lot of very experienced programmers out there who are capable of pushing it to the limit.
 
 The dreamcast could run at very high resolutions, but the great equaliser is the NTSC/PAL/SECAM television standards which limit the resolutions of consoles  to 640x256 (higher than this requires interlace mode which looks nasty) So on screen resolution the PSX,N64 and Dreamcast are playing on a level pitch (until HD TV arrives)
 
@@ -54,7 +54,7 @@ P.S I hope this is the sort of thing you wanted, I also hope I haven't crossed a
 
 
 This piece of kit really is the most fantastic programming tool that has ever existed on any platform.
-I really can't complement it enough. 
+I really can't complement it enough.
 
 Programmers thrive on information, games development is sort of like having a black box with mysterious inner workings, you change the stuff you put into the box (the code) then you watch the different results that get displayed on the screen. And you have to deduce what's going on in the black box from this poke it and see what happens sort of trial and error. Of course it's not quite this bad, as the black box usually has lots of documentation about what's inside it. But when you cosider the black box that is the playstation contains multiple processors all doing millions of things a second, and all interacting with each other you can see that no matter how much documentation you have it's not going to tell you what your particular bit of code is doing.
 
@@ -63,7 +63,7 @@ And this is where the PA comes in.
 It basically tells you exactly what each part of the playstation is doing in time steps of the order of a millionth of a second and it does it in nice colour coded histograms that let you zoom in and out without loss of information. At its furthest zoom out, (seeing the whole of a gameturn on screen at once) you can see exactly how much work the polygon drawing hardware (gpu)  was doing compared to the processor. The perfect game would have both running to capacity, with neither waiting for the other. So the PA lets you tweak the code until it as nearly as possible reaches this state of perfection.
 
 The PA has a few other nifty features, it's operated by a foot peddle, so to the uninitialised it looks like your operating it by mind control. The PA is constantly storing information about the running of your program ( or even released games, so you can have a snoop on the opposition)  and when you press the trigger it dumps the information it has stored so far (upto about 8 60ths of a second worth), so when you get a glitch onscreen you press the trigger and it dumps the information showing you what lead upto the glitch (and hopefully the cause).
-Another cool trick it has, is it can show you polygon overwrite, it shows you how many times each on screen pixel has been written or read. Everytime a polygon overwrites 
+Another cool trick it has, is it can show you polygon overwrite, it shows you how many times each on screen pixel has been written or read. Everytime a polygon overwrites
   */
 
 SLONG	find_connect_wall(SLONG x1,SLONG z1,SLONG x2,SLONG z2,SLONG *connect_storey,SLONG storey);
@@ -448,7 +448,7 @@ void	add_inside_facets(SLONG storey,SLONG offset_y)
 					4,
 					style_index,
 					STOREY_TYPE_INSIDE_DOOR,
-					0,		// No facet flags 
+					0,		// No facet flags
 					offset_y,
 					64);	//need an offset_y
 			}
@@ -497,7 +497,7 @@ void	add_inside_facets(SLONG storey,SLONG offset_y)
 
 //***************
 
-							
+
 			px=x;
 			pz=z;
 
@@ -785,7 +785,7 @@ SLONG	create_inside_rect(SLONG storey,SLONG offset_y)
 	//
 	for(c0=0;c0<MAX_STAIRS_PER_FLOOR;c0++)
 	{
-		
+
 		if(room_ids[inside_room].StairFlags[c0])
 		{
 			add_stairs_to_inside(inside_index,room_ids[inside_room].StairsX[c0],room_ids[inside_room].StairsY[c0],room_ids[inside_room].StairFlags[c0],0,0);
@@ -920,7 +920,7 @@ void	clear_storey_data(UWORD building)
 	while(storey)
 	{
 		storey_list[storey].StoreyFlags&=~FLAG_STOREY_FACET_LINKED;
-		
+
 		switch(storey_list[storey].StoreyType)
 		{
 			case	STOREY_TYPE_NORMAL:
@@ -1017,7 +1017,7 @@ SLONG	add_dfacet(SLONG x1,SLONG z1,SLONG x2,SLONG z2,SLONG y,SLONG count,SLONG s
 	offsety_unclip=offsety;
 	offsety&=(~63);
 
-	
+
 
 	if(next_dfacet>MAX_DFACETS-5)
 		return(0);
@@ -1210,7 +1210,7 @@ SLONG	find_slow_connect_wall(SLONG x1,SLONG z1,SLONG x2,SLONG z2,SLONG y,SLONG *
 				{
 					fx1=storey_list[storey].DX;
 					fz1=storey_list[storey].DZ;
-					
+
 					wall=storey_list[storey].WallHead;
 					while(wall)
 					{
@@ -1281,12 +1281,12 @@ void	create_cable_dfacet(SLONG x1,SLONG y1,SLONG z1,SLONG x2,SLONG y2,SLONG z2,S
 			len=1;
 		m=(abs(dy)*190)/len;
 
-		c1=128;  //== 0.5   along 
+		c1=128;  //== 0.5   along
 		c2=128;  //=0.5
 
 
 		if(dy<0)
-		{	  
+		{
 
 			//
 			// its going down hill so slow stepangle1 and fast step angle2
@@ -1370,7 +1370,7 @@ void	create_dfacets_for_building(SLONG building)
 	clear_storey_data(building);
 
 	start_inside=next_inside_storey;
-	
+
 	storey=building_list[building].StoreyHead;
 	if(storey_list[storey].StoreyType==STOREY_TYPE_NORMAL)
 	{
@@ -1439,7 +1439,7 @@ void	create_dfacets_for_building(SLONG building)
 							dstyles[next_dstyle-1]=-add_painted_textures(texture,count,dstyles[next_dstyle-1]);
 
 						}
-						
+
 						if (building_list[building].BuildingType == BUILDING_TYPE_WAREHOUSE  )
 						{
 							SLONG	count2;
@@ -1468,7 +1468,7 @@ void	create_dfacets_for_building(SLONG building)
 						if(connect_wall)
 						{
 		//					LogText(" found a connect wall %d\n",connect_wall);
-						
+
 							while(connect_wall)
 							{
 
@@ -1591,7 +1591,7 @@ void	create_dfacets_for_building(SLONG building)
 					x2=wall_list[wall].DX;
 					y2=wall_list[wall].DY;
 					z2=wall_list[wall].DZ;
-					
+
 					create_cable_dfacet(x1,y1,z1,x2,y2,z2,wall);
 
 					wall=wall_list[wall].Next;
@@ -1611,7 +1611,7 @@ void	create_dfacets_for_building(SLONG building)
 
 			case	STOREY_TYPE_OUTSIDE_DOOR:
 			case	STOREY_TYPE_FENCE_FLAT:
-				height=storey_list[storey].Height/64;				
+				height=storey_list[storey].Height/64;
 
 do_fence:;
 				x1=storey_list[storey].DX;
@@ -1665,7 +1665,7 @@ do_fence:;
 				break;
 
 			case	STOREY_TYPE_LADDER:
-				height=storey_list[storey].Height;				
+				height=storey_list[storey].Height;
 
 				x1=storey_list[storey].DX;
 				z1=storey_list[storey].DZ;
@@ -1754,7 +1754,7 @@ void	load_walkables(MFFileHandle	handle,SLONG save_type)
 	FileRead(handle,&roof_faces4[0],sizeof(struct RoofFace4)*next_roof_face4);
 
 
-/*	
+/*
 	FileRead(handle,&next_dwalkable,2);
 	FileRead(handle,&next_point,2);
 	FileRead(handle,&next_face3,2);
@@ -1989,7 +1989,7 @@ void	save_walkables_old(MFFileHandle	handle)
 	//
 	//This fucks up if you save twice in a row
 	//
-	
+
 
 	for(c0=1;c0<next_dwalkable;c0++)
 	{
@@ -2086,7 +2086,7 @@ void	save_walkables_old(MFFileHandle	handle)
 	FileWrite(handle,&points[0],sizeof(struct PrimPoint)*next_point);
 	FileWrite(handle,&faces3[0],sizeof(struct PrimFace3)*next_face3);
 	FileWrite(handle,&faces4[0],sizeof(struct PrimFace4)*next_face4);
-	
+
 	if(points)
 	{
 		MemFree(points);
@@ -2125,7 +2125,7 @@ SLONG	save_to_psx(SLONG index)
 		case	176:
 		case	183:
 			return(0);
-		
+
 	}
 		return(1);
 }
@@ -2147,7 +2147,7 @@ void	save_ob_ob(MFFileHandle	handle)
 			switch(t_mthing->Type)
 			{
 
-				case	MAP_THING_TYPE_PRIM:		
+				case	MAP_THING_TYPE_PRIM:
 					{
 						UWORD	inside=0,room=0;
 						UBYTE	flag=0;
@@ -2156,7 +2156,7 @@ void	save_ob_ob(MFFileHandle	handle)
 
 						//
 						// This isn't the flavour of the month with the artists anymore.
-						// 
+						//
 
 						if(t_mthing->Flags&FLAG_EDIT_PRIM_ON_FLOOR || (prim_objects[t_mthing->IndexOther].flag & PRIM_FLAG_ON_FLOOR) )
 						{
@@ -2186,10 +2186,10 @@ void	save_ob_ob(MFFileHandle	handle)
 							0,
 							0,
 							t_mthing->IndexOther,flag,inside,room);	// PrimObject.
-					} 
+					}
 
 					break;
-				case	MAP_THING_TYPE_ANIM_PRIM:		
+				case	MAP_THING_TYPE_ANIM_PRIM:
 					temp++;
 					break;
 
@@ -2228,7 +2228,7 @@ void	save_super_map(MFFileHandle	handle)
 
 	FileWrite(handle,&next_paint_mem,2);
 	FileWrite(handle,&next_dstorey,2);
-	
+
 	FileWrite(handle,&dbuildings[0],sizeof(struct DBuilding)*next_dbuilding);
 	FileWrite(handle,&dfacets[0],sizeof(struct DFacet)*next_dfacet);
 	FileWrite(handle,&dstyles[0],sizeof(UWORD)*next_dstyle);
@@ -2275,7 +2275,7 @@ void	load_super_map(MFFileHandle	handle,SLONG save_type)
 		FileRead(handle,&next_paint_mem,2);
 		FileRead(handle,&next_dstorey,2);
 	}
-	
+
 	FileRead(handle,&dbuildings[0],sizeof(struct DBuilding)*next_dbuilding);
 	FileRead(handle,&dfacets[0],sizeof(struct DFacet)*next_dfacet);
 	FileRead(handle,&dstyles[0],sizeof(UWORD)*next_dstyle);
@@ -2356,7 +2356,7 @@ void add_sewer_ladder(
 
 	//
 	// Create the dfacet.
-	// 
+	//
 
 	df = &dfacets[next_dfacet];
 
@@ -2460,12 +2460,12 @@ SLONG find_electric_fence_dbuilding(
 					//
 					// The last facet in the list for each square
 					// is negative.
-					// 
+					//
 
 					facet = -facet;
 					exit  =  TRUE;
 				}
-				
+
 				dist = distance_to_line(
 							dfacets[facet].x[0] << 8,
 							dfacets[facet].z[0] << 8,
@@ -2527,7 +2527,7 @@ void SUPERMAP_counter_increase(UBYTE which)
 
 		//
 		// It has wrapped around. We must clear the counter in every dfacet.
-		// 
+		//
 
 		for (i = 1; i < next_dfacet; i++)
 		{
@@ -2581,7 +2581,7 @@ struct	Levels levels2[]=
 
 struct	Levels levels[]=
 {
-	
+
 	{"FTutor1","fight1.map",1,0},    //0
 
 	{"assault1","assault.map",2,0},	 //1
@@ -2591,7 +2591,7 @@ struct	Levels levels[]=
 	{"testdrive2","road4_2.map",6,0},//5
 	{"fight2","fight1.map",7,0},	 //6
 
-									 
+
 	{"police2","disturb1.map",8,0},	 //7
 	{"testdrive3","road4_3.map",9,0},//8
 	{"bankbomb1","gang1.map",10,0},	 //9
@@ -2696,10 +2696,10 @@ SLONG	load_alt_pal(char *fname,UBYTE *pal)
 		goto file_error;
 	}
 
-	if (fread(&pal[0], 1, 24, phandle) != 24) 
+	if (fread(&pal[0], 1, 24, phandle) != 24)
 			goto file_error;
 
-	if (fread(&remap_pal[0], 1, 256*4, phandle) != 256*4) 
+	if (fread(&remap_pal[0], 1, 256*4, phandle) != 256*4)
 			goto file_error;
 
 	{
@@ -2747,7 +2747,7 @@ void	save_tim(char *fname,unsigned char dat[256][128],SLONG index,SLONG copy_tom
 	handle = MF_Fopen(fname, "wb");
 	if(handle)
 	{
-		fwrite(&dat[0][0], 1,256*128, handle); 
+		fwrite(&dat[0][0], 1,256*128, handle);
 		MF_Fclose(handle);
 #ifdef EDITOR
 		if(copy_tom)
@@ -2761,7 +2761,7 @@ void	save_tim(char *fname,unsigned char dat[256][128],SLONG index,SLONG copy_tom
 
 	handle = MF_Fopen(fname, "wb");
 
-	struct	
+	struct
 	{
 		SLONG	ID;
 		SLONG	Flag;
@@ -2808,7 +2808,7 @@ void	save_tim_pal16(char *fname,UWORD index,SLONG	dy,SLONG height)
 	ASSERT(height<256);
 	handle = MF_Fopen(fname, "wb");
 
-	struct	
+	struct
 	{
 		int	ID;
 		int	Flag;
@@ -2856,7 +2856,7 @@ void	save_tim_pal16(char *fname,UWORD index,SLONG	dy,SLONG height)
 	handle = MF_Fopen(fname, "wb");
 	if(handle)
 	{
-		fwrite(&pals16[0][0], 2, 256*64, handle); 
+		fwrite(&pals16[0][0], 2, 256*64, handle);
 		MF_Fclose(handle);
 	}
 #ifdef EDITOR
@@ -2930,7 +2930,7 @@ void	make_psx_pal(UWORD page_id,UBYTE *pal)
 
 }
 
-#ifdef EDITOR 
+#ifdef EDITOR
 
 void	copyfile_to_level(CBYTE *str)
 {
@@ -2945,7 +2945,7 @@ void	copyfile_to_level(CBYTE *str)
 		{
 			fname=c0+1;
 			break;
-			
+
 
 		}
 		len++;
@@ -3013,7 +3013,7 @@ void	build_floor_tims(void)
 						sprintf(str,TEXTURE_DIR"world%d\\tex%03dhi.tga",editor_texture_set,file_page_id);
 				}
 			}
-			
+
 			if(!FileExists(str))
 			{
 				if(file_page_id>=4*64)
@@ -3072,7 +3072,7 @@ void	build_wall_tims(void)
 //			page_id=moved_from[page_id];
 
 			sprintf(str,TEXTURE64_DIR"world%d\\tex%03dhi.tga",editor_texture_set,page_id);
-			
+
 			if(!FileExists(str))
 			{
 				sprintf(str,TEXTURE64_DIR"world%d\\tex%03d.tga",editor_texture_set,page_id);
@@ -3241,7 +3241,7 @@ SLONG	setup_psx_jackets(SLONG level_no,SLONG next_page,SLONG start_page)
 	remap_a_prim_face(1*64+22,&next_page,level_no,start_page);
 	remap_a_prim_face(10*64+3,&next_page,level_no,start_page);
 	remap_a_prim_face(10*64+33,&next_page,level_no,start_page);
-				
+
 	remap_a_prim_face(1*64+24,&next_page,level_no,start_page);
 	remap_a_prim_face(10*64+4,&next_page,level_no,start_page);
 	remap_a_prim_face(10*64+36,&next_page,level_no,start_page);
@@ -3299,7 +3299,7 @@ SLONG	build_tims_ingame(CBYTE *name)
 
 	FILE *handle;
 
-	
+
 
 	memset((UBYTE*)prims_remap,0,30*64*2);
 
@@ -3316,7 +3316,7 @@ SLONG	build_tims_ingame(CBYTE *name)
 		//
 		// find number f textures used by map
 		//
-		fread((UBYTE*)&next_texture, 1,2, handle); 
+		fread((UBYTE*)&next_texture, 1,2, handle);
 		MF_Fclose(handle);
 		psx_start_page=next_texture;
 	}
@@ -3344,7 +3344,7 @@ SLONG	build_tims_ingame(CBYTE *name)
 	handle = MF_Fopen(str, "rb");
 	if(handle)
 	{
-//		fwrite(&dat[0][0], 1,256*128, handle); 
+//		fwrite(&dat[0][0], 1,256*128, handle);
 		fread(&psx_tim_page[0][0], 1, 256*128, handle);
 		MF_Fclose(handle);
 	}
@@ -3405,7 +3405,7 @@ SLONG	build_tims_ingame(CBYTE *name)
 				break;
 
 		}
-  
+
 		new_page =	remap_a_prim_face(page,&next_page,level_no,(next_texture>>6));
 		new_page-= (next_texture>>6)*64;
 
@@ -3580,7 +3580,7 @@ UWORD	get_split_bits(UWORD tex)
 
 }
 
-#ifdef EDITOR 
+#ifdef EDITOR
 SLONG	remap_floor_psx(void)
 {
 	SLONG	x,z;
@@ -3617,7 +3617,7 @@ SLONG	remap_floor_psx(void)
 
 					edit_map[x][z].Texture|=split_bits;
 
-					
+
 
 
 				}
@@ -3653,9 +3653,9 @@ SLONG	remap_walls()
 }
 void	remap_textures_psx(void)
 {
-	
+
 	//
-	// 
+	//
 	//
 	memset(moved_from,0,64*8*2);
 	memset(moved_to,0,64*8*2);
@@ -3699,8 +3699,9 @@ void	save_all_nads(void)
 	while(levels[c0].level)
 	{
 		CBYTE	name[100];
-
-		sprintf(name,"%s\\%s.ucm",ENV_get_value_string("level_dir","Secret"),levels[c0].name);
+		const CBYTE *level_dir = ENV_get_value_string("level_dir", "Secret");
+		sprintf(name,"%s\\%s.ucm",level_dir,levels[c0].name);
+		ENV_free_string(level_dir);
 //#ifdef	MIKE
 //		TesterText("Level: %s \n",levels[c0].name);
 //		TRACE("aLevel: %s \n",levels[c0].name);

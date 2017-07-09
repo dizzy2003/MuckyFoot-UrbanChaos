@@ -1,0 +1,93 @@
+set(DDENGINE_HEADERS
+    Headers/BreakTimer.h
+    Headers/Crinkle.h
+    Headers/DrawXtra.h
+    Headers/Font.h
+    Headers/Matrix.h
+    Headers/NGamut.h
+    Headers/Quaternion.h
+    Headers/Text.h
+    Headers/aa.h
+    Headers/aeng.h
+    Headers/comp.h
+    Headers/cone.h
+    Headers/console.h
+    Headers/facet.h
+    Headers/farfacet.h
+    Headers/fastprim.h
+    Headers/font2d.h
+    Headers/ic.h
+    Headers/map.h
+    Headers/menufont.h
+    Headers/mesh.h
+    Headers/oval.h
+    Headers/panel.h
+    Headers/planmap.h
+    Headers/poly.h
+    Headers/polypage.h
+    Headers/renderstate.h
+    Headers/shape.h
+    Headers/sky.h
+    Headers/smap.h
+    Headers/sprite.h
+    Headers/superfacet.h
+    Headers/sw.h
+    Headers/truetype.h
+    Headers/vertexbuffer.h
+    Headers/wibble.h)
+set(DDENGINE_SOURCES
+    Source/BreakTimer.cpp
+    Source/Crinkle.cpp
+    Source/Font.cpp
+    Source/Matrix.cpp
+    Source/Message.cpp
+    Source/NGamut.cpp
+    Source/Quaternion.cpp
+    Source/Text.cpp
+    Source/aa.cpp
+    Source/aeng.cpp
+    Source/comp.cpp
+    Source/cone.cpp
+    Source/console.cpp
+    Source/drawxtra.cpp
+    Source/facet.cpp
+    Source/farfacet.cpp
+    Source/fastprim.cpp
+    Source/figure.cpp
+    Source/font2d.cpp
+    Source/ic.cpp
+    Source/map.cpp
+    Source/menufont.cpp
+    Source/mesh.cpp
+    Source/oval.cpp
+    Source/panel.cpp
+    Source/planmap.cpp
+    Source/poly.cpp
+    Source/polypage.cpp
+    Source/polyrenderstate.cpp
+    Source/renderstate.cpp
+    Source/shape.cpp
+    Source/sky.cpp
+    Source/smap.cpp
+    Source/sprite.cpp
+    Source/superfacet.cpp
+    Source/sw.cpp
+    Source/texture.cpp
+    Source/truetype.cpp
+    Source/vertexbuffer.cpp
+    Source/wibble.cpp)
+source_group(Headers
+    FILES ${DDENGINE_HEADERS})
+source_group(Source
+    FILES ${DDENGINE_SOURCES})
+add_library(DDEngine STATIC
+    ${DDENGINE_HEADERS}
+    ${DDENGINE_SOURCES})
+target_include_directories(DDEngine
+    PUBLIC Headers
+    PRIVATE
+        ../..
+        ../../openchaos-ffi/include
+        ../Headers
+        ../DDLibrary/Headers)
+target_link_libraries(DDEngine MFStdLib)

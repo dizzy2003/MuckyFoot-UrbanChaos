@@ -1,7 +1,7 @@
 
 #include	"game.h"
 #include	"shadow.h"
-#include "c:\fallen\headers\animtmap.h"
+#include "fallen/headers/animtmap.h"
 #include	"pap.h"
 #include	"supermap.h"
 #include	"io.h"
@@ -9,7 +9,7 @@
 
 #ifndef PSX
 #ifdef	EDITOR
-#include	"c:\fallen\editor\headers\Editor.hpp"
+#include	"fallen/editor/headers/Editor.hpp"
 #else
 #define PSX
 
@@ -31,8 +31,8 @@ SLONG	insert_collision_vect(SLONG x1,SLONG y1,SLONG z1,SLONG x2,SLONG y2,SLONG z
 {
 	return 0;
 }
-//psx#include	"c:\fallen\editor\headers\Editor.hpp"
-//#include	"c:\fallen\editor\headers\engine.h"
+//psx#include	"fallen/editor/headers/Editor.hpp"
+//#include	"fallen/editor/headers/engine.h"
 //#include	"engine.h"
 //#include	"math.h"
 //#include	"thing.h"
@@ -68,34 +68,34 @@ UWORD	end_prim_multi_object=MAX_PRIM_MOBJECTS-2;
 #ifndef PSX
 struct	TXTY	texture_xy2[]=
 {
-	{0,0,0},				//0 
-	{0,32,0},				//1 
-	{0,64,0},				//2 
-	{0,0,32},				//3 
-	{0,32,32},			//4 
-	{0,64,32},			//5 
-	{0,96,32},			//6 
-	{0,128,32},			//7 
-	{0,0,64},				//8 
-	{0,32,64},			//9 
-	{0,64,64},			//10 
-	{0,96,64},			//11  
-	{0,128,64},			//12 
-	{0,0,96},				//13  
-	{0,32,96},			//14  
-	{0,64,96},			//15  
-	{0,96,96},			//16  
-	{0,128,96},			//17  
-	{0,0,128},			//18  
-	{0,32,128},			//19 
-	{0,64,128},			//20 
-	{0,96,128},			//21  
-	{0,128,128},			//22 
-	{0,0,160},			//23  
-	{0,32,160},			//24 
-	{0,64,160},			//25 
-	{0,96,160},			//26  
-	{0,128,160},			//27 
+	{0,0,0},				//0
+	{0,32,0},				//1
+	{0,64,0},				//2
+	{0,0,32},				//3
+	{0,32,32},			//4
+	{0,64,32},			//5
+	{0,96,32},			//6
+	{0,128,32},			//7
+	{0,0,64},				//8
+	{0,32,64},			//9
+	{0,64,64},			//10
+	{0,96,64},			//11
+	{0,128,64},			//12
+	{0,0,96},				//13
+	{0,32,96},			//14
+	{0,64,96},			//15
+	{0,96,96},			//16
+	{0,128,96},			//17
+	{0,0,128},			//18
+	{0,32,128},			//19
+	{0,64,128},			//20
+	{0,96,128},			//21
+	{0,128,128},			//22
+	{0,0,160},			//23
+	{0,32,160},			//24
+	{0,64,160},			//25
+	{0,96,160},			//26
+	{0,128,160},			//27
 	{3,4*32,6*32},			//28
 	{0,0}
 
@@ -105,20 +105,20 @@ struct	TXTY	texture_xy2[]=
 // textures[piece][style]
 /*
 =
-{//     TL      TM     TR       ML      MM      MR      MM1    MM2       
+{//     TL      TM     TR       ML      MM      MR      MM1    MM2
 	{{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}},
-					   		     		   		     		   		     		   
-	{{0,0,0,0},{0,1,0,0},{0,2,0,0},{0,0,1,0},{0,1,1,0},{0,2,1,0},{0,3,1,0},{0,4,1,0}},   //BROWN_BRICK1		
+
+	{{0,0,0,0},{0,1,0,0},{0,2,0,0},{0,0,1,0},{0,1,1,0},{0,2,1,0},{0,3,1,0},{0,4,1,0}},   //BROWN_BRICK1
 	{{0,0,2,0},{0,1,2,0},{0,2,2,0},{0,0,3,0},{0,1,3,0},{0,2,3,0},{0,3,3,0},{0,4,3,0}},   //BROWN_BRICK2
-	{{0,6,5,0},{0,6,5,0},{0,6,5,0},{0,6,5,0},{0,6,5,0},{0,6,5,0},{0,6,5,0},{0,6,5,0}},	 //GREY_RIM2			
-	{{0,0,4,0},{0,0,4,0},{0,0,4,0},{0,0,4,0},{0,0,4,0},{0,0,4,0},{0,1,4,0},{0,2,4,0}},	 //GREY_RIM1			
-	{{0,3,7,0},{0,3,7,0},{0,3,7,0},{0,3,7,0},{0,3,7,0},{0,3,7,0},{0,3,7,0},{0,3,7,0}},	 //RED_WINDOW			
-	{{0,4,7,0},{0,4,7,0},{0,4,7,0},{0,4,7,0},{0,4,7,0},{0,4,7,0},{0,5,7,0},{0,5,7,0}},	 //GREY_CORIGATED		
-	{{0,7,7,0},{0,7,7,0},{0,7,7,0},{0,7,7,0},{0,7,7,0},{0,7,7,0},{0,7,7,0},{0,7,7,0}},	 //CRATES_SMALL_BROWN	
-	{{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}},	 //GREY_POSH			
-	{{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}},	 //HOTEL_SIGN1			
-	{{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}},	 //HOTEL_SIGN2			
-	{{0,5,5,0},{0,5,5,0},{0,5,5,0},{0,5,5,0},{0,5,5,0},{0,5,5,0},{0,5,5,0},{0,5,5,0}},	 //Fence			
+	{{0,6,5,0},{0,6,5,0},{0,6,5,0},{0,6,5,0},{0,6,5,0},{0,6,5,0},{0,6,5,0},{0,6,5,0}},	 //GREY_RIM2
+	{{0,0,4,0},{0,0,4,0},{0,0,4,0},{0,0,4,0},{0,0,4,0},{0,0,4,0},{0,1,4,0},{0,2,4,0}},	 //GREY_RIM1
+	{{0,3,7,0},{0,3,7,0},{0,3,7,0},{0,3,7,0},{0,3,7,0},{0,3,7,0},{0,3,7,0},{0,3,7,0}},	 //RED_WINDOW
+	{{0,4,7,0},{0,4,7,0},{0,4,7,0},{0,4,7,0},{0,4,7,0},{0,4,7,0},{0,5,7,0},{0,5,7,0}},	 //GREY_CORIGATED
+	{{0,7,7,0},{0,7,7,0},{0,7,7,0},{0,7,7,0},{0,7,7,0},{0,7,7,0},{0,7,7,0},{0,7,7,0}},	 //CRATES_SMALL_BROWN
+	{{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}},	 //GREY_POSH
+	{{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}},	 //HOTEL_SIGN1
+	{{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}},	 //HOTEL_SIGN2
+	{{0,5,5,0},{0,5,5,0},{0,5,5,0},{0,5,5,0},{0,5,5,0},{0,5,5,0},{0,5,5,0},{0,5,5,0}},	 //Fence
 
 };
 */
@@ -243,7 +243,7 @@ void	build_ledge(SLONG x,SLONG y,SLONG z,SLONG wall,SLONG storey,SLONG height);
 SLONG	build_ledge2(SLONG y,SLONG storey,SLONG out,SLONG height,SLONG dip);
 SLONG	create_strip_points(SLONG x1,SLONG y1,SLONG z1,SLONG x2,SLONG y2,SLONG z2,SLONG len,SLONG numb,SLONG end_flag);
 SLONG	build_outline(SLONG *sx,SLONG *sz,SLONG storey,SLONG wall,SLONG y,SLONG out);
-void	calc_building_normals(void);	   
+void	calc_building_normals(void);
 
 
 UWORD	next_building_object=1;
@@ -597,13 +597,13 @@ void	add_walk_face_to_map(SWORD face,SLONG x,SLONG z)
 			{
 				return;
 			}
-			
+
 			index = walk_links[index].Next;
 		}
 	}
 
 	walk_links[next_walk_link].Face=face;
-	walk_links[next_walk_link].Next=get_map_walkable(x,z); 
+	walk_links[next_walk_link].Next=get_map_walkable(x,z);
 	set_map_walkable(x,z,next_walk_link);
 	next_walk_link++;
 }
@@ -632,10 +632,10 @@ void scan_walk_triangle(SLONG x0, SLONG y0, SLONG z0,SLONG x1, SLONG y1, SLONG z
 	vy = y1 - y0;   //vector from point 0 to point 1
 	vz = z1 - z0;
 
-	wx = x2 - x0;   //vector from point 1 to point 2 
+	wx = x2 - x0;   //vector from point 1 to point 2
 	wy = y2 - y0;
 	wz = z2 - z0;
-	
+
 	len=(Root(vx*vx+vy*vy+vz*vz)>>7);
 	if(len<2)
 		len=2;
@@ -748,7 +748,7 @@ SLONG	place_building_at(UWORD building,UWORD prim,SLONG x,SLONG y,SLONG z)
 
 				//
 				// Link the building to the editor MapThing.
-				// 
+				//
 
 				building_list[building].ThingIndex = map_thing;
 
@@ -783,7 +783,7 @@ SLONG	place_building_at(UWORD building,UWORD prim,SLONG x,SLONG y,SLONG z)
 
 						//
 						// Link the building to the thing.
-						// 
+						//
 
 						building_list[building].ThingIndex = new_thing;
 
@@ -834,7 +834,7 @@ SLONG	build_row_wall_points_at_y(SLONG y,SLONG x1,SLONG z1,SLONG x2,SLONG z2,SLO
 		wwidth=dist/(wcount*2+1);
 //		wall_list[wall].WindowCount=wcount;
 		WindowCount=wcount;
-		
+
 	}
 	else
 	{
@@ -874,7 +874,7 @@ SLONG	build_row_wall_points_at_y(SLONG y,SLONG x1,SLONG z1,SLONG x2,SLONG z2,SLO
 	add_point(x1,y,z1);
 
 	return(start_point);
-	
+
 }
 
 SLONG	build_row_wall_points_at_floor_alt(SLONG y,SLONG x1,SLONG z1,SLONG x2,SLONG z2,SLONG wall)
@@ -901,7 +901,7 @@ SLONG	build_row_wall_points_at_floor_alt(SLONG y,SLONG x1,SLONG z1,SLONG x2,SLON
 		wwidth=dist/(wcount*2+1);
 //		wall_list[wall].WindowCount=wcount;
 		WindowCount=wcount;
-		
+
 	}
 	else
 	{
@@ -946,7 +946,7 @@ SLONG	build_row_wall_points_at_floor_alt(SLONG y,SLONG x1,SLONG z1,SLONG x2,SLON
 	add_point(x1,y,z1);
 
 	return(start_point);
-	
+
 }
 
 SLONG	build_row_wall_only_points_at_y(SLONG y,SLONG x1,SLONG z1,SLONG x2,SLONG z2,SLONG wall)
@@ -993,7 +993,7 @@ SLONG	build_row_wall_only_points_at_y(SLONG y,SLONG x1,SLONG z1,SLONG x2,SLONG z
 	add_point(x2,y,z2); //make sure last point is spot on.
 
 	return(start_point);
-	
+
 }
 
 SLONG	build_row_wall_only_points_at_floor_alt(SLONG dy,SLONG x1,SLONG z1,SLONG x2,SLONG z2,SLONG wall)
@@ -1051,7 +1051,7 @@ SLONG	build_row_wall_only_points_at_floor_alt(SLONG dy,SLONG x1,SLONG z1,SLONG x
 	add_point(x2,y,z2); //make sure last point is spot on.
 
 	return(start_point);
-	
+
 }
 
 SLONG	build_row_window_depth_points_at_y(SLONG y,SLONG x1,SLONG z1,SLONG x2,SLONG z2,SLONG wall)
@@ -1079,7 +1079,7 @@ SLONG	build_row_window_depth_points_at_y(SLONG y,SLONG x1,SLONG z1,SLONG x2,SLON
 		wwidth=dist/(wcount*2+1);
 		//wall_list[wall].WindowCount=wcount;
 		WindowCount=wcount;
-		
+
 	}
 	else
 	{
@@ -1105,7 +1105,7 @@ SLONG	build_row_window_depth_points_at_y(SLONG y,SLONG x1,SLONG z1,SLONG x2,SLON
 	pdz=(pdz*20)>>10;
 
 	x1+=pdx;
-	z1+=pdz;	  
+	z1+=pdz;
 
 
 //	add_point(x1,y,z1);
@@ -1129,7 +1129,7 @@ SLONG	build_row_window_depth_points_at_y(SLONG y,SLONG x1,SLONG z1,SLONG x2,SLON
 //	add_point(x1,y,z1);
 
 	return(start_point);
-	
+
 }
 
 struct	Edge
@@ -1516,7 +1516,7 @@ SLONG	build_edge_list(SLONG storey,SLONG flag)
 			angles=1;
 		}
 		px=wall_list[wall].DX;
-		pz=wall_list[wall].DZ-edge_min_z;			
+		pz=wall_list[wall].DZ-edge_min_z;
 
 		wall=wall_list[wall].Next;
 
@@ -1556,7 +1556,7 @@ void	build_more_edge_list(SLONG min_z,SLONG max_z,SLONG storey,SLONG flag)
 
 		if(z>edge_min_z&&z<max_z)
 		{
-		
+
 			if(scan_line(px,pz,wall_list[wall].DX,z-edge_min_z,flag))
 			{
 				scan_line_z(px,pz,wall_list[wall].DX,z-edge_min_z,flag);
@@ -1804,7 +1804,7 @@ void	build_free_tri_texture_info(struct PrimFace3 *p_f3,SLONG mx,SLONG mz)
 	//SLONG	dtx_across,dty_across;
 
 //	texture=edit_map[mx][mz].Texture;
-	texture=get_map_texture(mx,mz); 
+	texture=get_map_texture(mx,mz);
 
 	tx=((struct	MiniTextureBits*)(&texture))->X<<5;
 	ty=((struct	MiniTextureBits*)(&texture))->Y<<5;
@@ -1973,7 +1973,7 @@ void	scan_45(SLONG x1,SLONG z1,SLONG dx,SLONG dz)
 	count=abs(dx)>>ELE_SHIFT;
 	x1=x1>>ELE_SHIFT;
 	z1=z1>>ELE_SHIFT;
-	
+
 	if(dx<0)
 	{
 		dx=-1;
@@ -2044,7 +2044,7 @@ SLONG	build_storey_lip(SLONG storey,SLONG y)
 {
 	SLONG	flag=0;
 	SLONG	out,height,dip;
-	
+
 	if(storey_list[storey].StoreyFlags&(FLAG_STOREY_ROOF_RIM))
 		flag|=1;
 	if(storey_list[storey].StoreyFlags&(FLAG_STOREY_ROOF_RIM2))
@@ -2073,7 +2073,7 @@ SLONG	build_storey_lip(SLONG storey,SLONG y)
 
 
 	}
-	
+
 	y=build_ledge2(y,storey,out,height,dip);
 
 	return(y);
@@ -2119,7 +2119,7 @@ void	create_walkable_structure(SLONG left,SLONG right,SLONG top,SLONG bottom,SLO
 			LogText(" face %d p0 %d p1 %d p2 %d p3 %d  SP %d  EP %d \n",c0,prim_faces4[c0].Points[0],prim_faces4[c0].Points[1],prim_faces4[c0].Points[2],prim_faces4[c0].Points[3],sp,next_prim_point);
 		}
 	}
-	
+
 
 	next_dwalkable++;
 
@@ -3450,7 +3450,7 @@ SLONG	build_easy_roof(SLONG min_x,SLONG edge_min_z,SLONG max_x,SLONG depth,SLONG
 	SLONG	sp,ep,sf4,ef4;
 	if(edit_info.HideMap&4)
 		return(0);
-	
+
 	sp=next_prim_point;
 	sf4=next_prim_face4;
 
@@ -3479,13 +3479,13 @@ SLONG	build_easy_roof(SLONG min_x,SLONG edge_min_z,SLONG max_x,SLONG depth,SLONG
 				//
 				// crossed an edge so flip the priority
 				//
-				DebugText("%d",edge_pool_ptr[edge].Count);	
+				DebugText("%d",edge_pool_ptr[edge].Count);
 
 				polarity+=edge_pool_ptr[edge].Count;
 				edge=edge_pool_ptr[edge].Next;
 			}
 //	else
-//		DebugText("0");	
+//		DebugText("0");
 
 			if(polarity&1)
 //			if(edit_map[(x>>ELE_SHIFT)][z+(edge_min_z>>ELE_SHIFT)].Flags&PAP_FLAG_REFLECTIVE)
@@ -3493,7 +3493,7 @@ SLONG	build_easy_roof(SLONG min_x,SLONG edge_min_z,SLONG max_x,SLONG depth,SLONG
 				SLONG	tl,tr,bl,br;
 				SLONG	texture;
 
-				DebugText("[]");	
+				DebugText("[]");
 
 				if(x<lmin_x)
 					lmin_x=x;
@@ -3621,7 +3621,7 @@ SLONG	build_easy_roof(SLONG min_x,SLONG edge_min_z,SLONG max_x,SLONG depth,SLONG
 				DebugText("..");
 				//
 				// this block should not be filled
-				// 
+				//
 				if(flag_blocks[(x>>ELE_SHIFT)+z*MAX_BOUND_SIZE])
 					flag_blocks[(x>>ELE_SHIFT)+z*MAX_BOUND_SIZE]=-flag_blocks[(x>>ELE_SHIFT)+z*MAX_BOUND_SIZE];
 
@@ -3640,10 +3640,10 @@ SLONG	build_easy_roof(SLONG min_x,SLONG edge_min_z,SLONG max_x,SLONG depth,SLONG
 		SLONG	t_min_x,t_max_x;
 		SLONG	dx,dz;
 		SLONG	oz=(edge_min_z>>ELE_SHIFT);
-		
+
 		t_min_x=lmin_x>>8;
 		t_max_x=lmax_x>>8;
-		
+
 		for(z=lmin_z;z<lmax_z;z++)
 		{
 			LogText("\n");
@@ -3710,7 +3710,7 @@ SLONG	build_easy_roof(SLONG min_x,SLONG edge_min_z,SLONG max_x,SLONG depth,SLONG
 			}
 			DebugText("\n");
 		}
-		
+
 			DebugText("\n");
 
 		{
@@ -3790,7 +3790,7 @@ SLONG	build_roof_grid(SLONG storey,SLONG y,SLONG flat_flag)
 	BOUNDS(storey_list[storey].DX,storey_list[storey].DZ);
 
 
-	
+
 	sstorey=building_list[building].StoreyHead;
 	while(sstorey)
 	{
@@ -3836,7 +3836,7 @@ SLONG	build_roof_grid(SLONG storey,SLONG y,SLONG flat_flag)
 	dump_edge_list(depth);
 	if(storey_list[storey].Next)
 	{
-		SLONG	s;	   
+		SLONG	s;
 		SLONG	storey_height;
 		storey_height=storey_list[storey].Height;
 
@@ -3912,7 +3912,7 @@ SLONG	do_storeys_overlap(SLONG s1,SLONG s2);
 				else
 				if(x==edge_pool_ptr[edge].X)
 				{
-					//grid[][]			
+					//grid[][]
 					polarity++;
 					//if(polarity&1)
 					{
@@ -4113,7 +4113,7 @@ SLONG	do_storeys_overlap(SLONG s1,SLONG s2);
 							else
 							if(zl)
 							{
-								//   
+								//
 								//	pa
 								//	p3	 p2
 								pa=next_prim_point;
@@ -4125,7 +4125,7 @@ SLONG	do_storeys_overlap(SLONG s1,SLONG s2);
 							else
 							if(zr)
 							{
-								//   
+								//
 								//		 pa
 								//	p3	 p2
 								pa=next_prim_point;
@@ -4160,7 +4160,7 @@ SLONG	do_storeys_overlap(SLONG s1,SLONG s2);
 						{
 							//  p0 pa
 							//
-							//	p3	
+							//	p3
 							pa=next_prim_point;
 							add_point(xt,y,(z<<ELE_SHIFT)+edge_min_z);
 							p_f3=create_a_tri(p3,pa,p0,0,0);
@@ -4170,9 +4170,9 @@ SLONG	do_storeys_overlap(SLONG s1,SLONG s2);
 						else
 						if(xb)
 						{
-							//  p0 
+							//  p0
 							//
-							//	p3 pa	
+							//	p3 pa
 							pa=next_prim_point;
 							add_point(xb,y,((z+1)<<ELE_SHIFT)+edge_min_z);
 							p_f3=create_a_tri(p3,pa,p0,0,0);
@@ -4185,9 +4185,9 @@ SLONG	do_storeys_overlap(SLONG s1,SLONG s2);
 							zr=cut_blocks[(x)*4+(z)*MAX_BOUND_SIZE*4+CUT_BLOCK_RIGHT];
 							if(zr)
 							{
-								//  p0 
+								//  p0
 								//	    pa
-								//	p3	
+								//	p3
 								pa=next_prim_point;
 								add_point((x+1)<<ELE_SHIFT,y,zr+edge_min_z);
 								create_a_tri(p3,pa,p0,0,0);
@@ -4220,9 +4220,9 @@ SLONG	do_storeys_overlap(SLONG s1,SLONG s2);
 						else
 						if(zl)
 						{
-							//  p0   p1 
+							//  p0   p1
 							//	pa
-							//		 
+							//
 							pa=next_prim_point;
 							add_point(x<<ELE_SHIFT,y,zl+edge_min_z);
 							p_f3=create_a_tri(pa,p1,p0,0,0);
@@ -4232,9 +4232,9 @@ SLONG	do_storeys_overlap(SLONG s1,SLONG s2);
 						else
 						if(zr)
 						{
-							//  p0   p1 
+							//  p0   p1
 							//		 pa
-							//	
+							//
 							pa=next_prim_point;
 							add_point((x+1)<<ELE_SHIFT,y,zr+edge_min_z);
 							p_f3=create_a_tri(pa,p1,p0,0,0);
@@ -4288,7 +4288,7 @@ SLONG	do_storeys_overlap(SLONG s1,SLONG s2);
 							if(zl==(z+1)<<ELE_SHIFT||zl==0)
 							{
 								//   pa p1
-								//	
+								//
 								//	p3	p2
 	//							LogText("special 1b \n");
 								pa=next_prim_point;
@@ -4335,7 +4335,7 @@ SLONG	do_storeys_overlap(SLONG s1,SLONG s2);
 						{
 							if(xt==x<<ELE_SHIFT||xt==0)
 							{
-								//  pa  
+								//  pa
 								//		pb
 								//	p3	p2
 								LogText("special 2 \n");
@@ -4350,8 +4350,8 @@ SLONG	do_storeys_overlap(SLONG s1,SLONG s2);
 							else
 							if(zr==((z+1)<<ELE_SHIFT)||zr==0)
 							{
-								//  p0 pa  
-								//		
+								//  p0 pa
+								//
 								//	p3	p2
 								LogText("special 2b \n");
 								pb=next_prim_point;
@@ -4397,8 +4397,8 @@ SLONG	do_storeys_overlap(SLONG s1,SLONG s2);
 							if(zr==((z+1)<<ELE_SHIFT)||zr==0)
 							{
 								//  p0  p1
-								//		
-								//	p3 pa	
+								//
+								//	p3 pa
 								LogText("special 3 \n");
 								pa=next_prim_point;
 								add_point((xb),y,((z+1)<<ELE_SHIFT)+edge_min_z);
@@ -4413,7 +4413,7 @@ SLONG	do_storeys_overlap(SLONG s1,SLONG s2);
 							{
 								//  p0  p1
 								//		pb
-								//	pa3	
+								//	pa3
 								LogText("special 3b \n");
 								pb=next_prim_point;
 								add_point((x+1)<<ELE_SHIFT,y,zr+edge_min_z);
@@ -4474,7 +4474,7 @@ SLONG	do_storeys_overlap(SLONG s1,SLONG s2);
 							if(zl==(z)<<ELE_SHIFT||zl==0)
 							{
 								//  pb   p1
-								//	
+								//
 								//	  pa p2
 								LogText("special 4b \n");
 								pa=next_prim_point;
@@ -4560,7 +4560,7 @@ SLONG	do_storeys_overlap(SLONG s1,SLONG s2);
 
 						if(xb&&zl)
 						{
-							//  pb  
+							//  pb
 							//	p3 pa
 
 							pa=next_prim_point;
@@ -4686,7 +4686,7 @@ void	set_floor_hidden(SLONG storey,UWORD	lower,UWORD flags)
 				else
 				if(x==edge_pool_ptr[edge].X)
 				{
-					//grid[][]			
+					//grid[][]
 					polarity+=edge_pool_ptr[edge].Count;
 					if(polarity&1)
 					{
@@ -4711,7 +4711,7 @@ void	set_floor_hidden(SLONG storey,UWORD	lower,UWORD flags)
 			}
 		}
 	}
-	
+
 	if(0) //lower)
 	{
 		for(z=0;z<depth;z++)
@@ -4755,7 +4755,7 @@ void	build_fe_mid_points(SLONG y,SLONG x1,SLONG z1,SLONG x2,SLONG z2,SLONG	flag)
 
 	if(dist==0)
 		return;
-	
+
 	dx=(dx*BLOCK_SIZE)/dist;
 	dz=(dz*BLOCK_SIZE)/dist;
 
@@ -4781,7 +4781,7 @@ void	build_fire_escape_points(UWORD	storey,SLONG	y,SLONG	flag)
 		walls[count++]=wall;
 		if(flag==0)
 		{
-			
+
 			add_point(wall_list[wall].DX,y,wall_list[wall].DZ);
 //			LogText(" point %d is rest of wall \n",p0++);
 		}
@@ -4800,7 +4800,7 @@ void	build_fire_escape_points(UWORD	storey,SLONG	y,SLONG	flag)
 //			LogText(" point %d is middle left \n",p0++);
 		add_point(mx2,y,mz2);
 //			LogText(" point %d is middle right \n",p0++);
-		
+
 	}
 	build_fe_mid_points(y,mx,mz,mx2,mz2,flag);
 //			LogText(" point %d is middle mid left \n",p0++);
@@ -4831,17 +4831,17 @@ void	build_face_texture_info(struct PrimFace4 *p_f4,UWORD texture)
 	rot=(rot+3)&3;
 	switch(rot)
 	{
-		case	0:		
-			
+		case	0:
+
 			PsetUV4(	p_f4,tx,ty,tx+tsize,ty,tx,ty+tsize,tx+tsize,ty+tsize,page);
 			break;
-		case	1:		
+		case	1:
 			PsetUV4(	p_f4,tx+tsize,ty,tx+tsize,ty+tsize,tx,ty,tx,ty+tsize,page);
 			break;
-		case	2:		
+		case	2:
 			PsetUV4(	p_f4,tx+tsize,ty+tsize,tx,ty+tsize,tx+tsize,ty,tx,ty,page);
 			break;
-		case	3:		
+		case	3:
 			PsetUV4(	p_f4,tx,ty+tsize,tx,ty,tx+tsize,ty+tsize,tx+tsize,ty,page);
 			break;
 	}
@@ -4961,7 +4961,7 @@ struct	PrimFace4*	create_a_quad(UWORD p1,UWORD p0,UWORD p3,UWORD p2,SWORD	textur
 
 
 
-		
+
 
 
 		tx=textures_xy[texture_style][texture_piece].Tx<<5;
@@ -5143,7 +5143,7 @@ struct	PrimFace4*	create_a_quad_tex(UWORD p1,UWORD p0,UWORD p3,UWORD p2,UWORD	te
 	}
 
 
-	p4->DrawFlags=POLY_GT; 
+	p4->DrawFlags=POLY_GT;
 	if(flipx)
 		flip^=1;
 
@@ -5218,7 +5218,7 @@ struct	PrimFace3*	create_a_tri(UWORD p2,UWORD p1,UWORD p0,SWORD	texture_id,SWORD
 	}
 */
 	return(p3);
-	
+
 }
 
 void	set_texture_fe(struct	PrimFace4 *p4,SLONG xw,SLONG xh,SLONG type)
@@ -5248,16 +5248,16 @@ void	set_texture_fe(struct	PrimFace4 *p4,SLONG xw,SLONG xh,SLONG type)
 	p4->UV[3][0]=tx+32*xw;
 	p4->UV[3][1]=ty+32*xh;
 	p4->TexturePage=1;
-	
+
 }
 
-//     0--------------------------1 
+//     0--------------------------1
 //
 //
-//	   4		6		  7		  5 
+//	   4		6		  7		  5
 //
 //
-//	   3	    8		  9		  2 
+//	   3	    8		  9		  2
 //
 
 #ifdef	OLD_DOG_POO_OF_A_SYSTEM_OR_IS_IT
@@ -5273,7 +5273,7 @@ struct	FaceLink
 };
 
 UWORD	face_type_index[50];  // for face type %1  returns index into face_links which you add your ID to , to pull out an inde and number of faces connected to
-struct	FaceLink	face_links[50*20]; // 
+struct	FaceLink	face_links[50*20]; //
 UWORD	face_connection_pool[2000];
 
 
@@ -5371,7 +5371,7 @@ void	build_firescape(SLONG storey)
 	while(count<storey_list[storey].Height)
 	{
 
-		start_point[count]=next_prim_point;		
+		start_point[count]=next_prim_point;
 		if(count==0)
 		{
 			build_fire_escape_points(storey,y,1);
@@ -5418,7 +5418,7 @@ void	build_firescape(SLONG storey)
 			OR_SORT_LEVEL(p4->FaceFlags,SORT_LEVEL_FIRE_ESCAPE);
 
 
-			// floors			
+			// floors
 			p4=create_a_quad(start_point[count],start_point[count]+1,start_point[count]+4,start_point[count]+5,0,0);
 			set_texture_fe(p4,1,1,1);
 			p4->DrawFlags=POLY_T|POLY_FLAG_DOUBLESIDED|POLY_FLAG_MASKED;
@@ -5464,7 +5464,7 @@ void	build_firescape(SLONG storey)
 			p4->ID=FE_FIRST_SLOPE;
 			add_quad_to_walkable_list(next_prim_face4-1);
 
-			
+
 			//bannister
 			p4=create_a_quad(start_point[count]+9+10,start_point[count-1]+3,start_point[count]+9,start_point[count-1]+1,0,0);
 			set_texture_fe(p4,1,1,1);
@@ -5495,7 +5495,7 @@ void	build_firescape(SLONG storey)
 			OR_SORT_LEVEL(p4->FaceFlags,SORT_LEVEL_FIRE_ESCAPE);
 			p4->Type=FACE_TYPE_FIRE_ESCAPE;
 			p4->ID=FE_SLOPE2_RAIL;
-			
+
 		}
 
 		count++;
@@ -5508,7 +5508,7 @@ void	build_firescape(SLONG storey)
 //
 //
 //
-//   
+//
 
 #define	LADDER_SPINE_WIDTH		12
 void	build_ladder_points(SLONG x1,SLONG z1,SLONG x2,SLONG z2,SLONG	y,SLONG	flag)
@@ -5572,7 +5572,7 @@ void	calc_ladder_pos(SLONG *x1,SLONG *z1,SLONG *x2,SLONG *z2,SLONG *y,SLONG *ext
 
 		if(ty<min_y)
 			min_y=ty;
-		
+
 		*y=min_y;
 		*extra_height = abs(min_y)>>6;
 	}
@@ -5603,7 +5603,7 @@ SLONG	flat_fill_a_quad_of_points(SLONG start_point,SLONG w,SLONG h,SLONG texture
 	SLONG	c0;
 	SLONG	texture=TEXTURE_PIECE_RIGHT;
 	struct	PrimFace4	*p_f4;
-	
+
 
 	y=prim_points[start_point].Y;
 
@@ -5771,7 +5771,7 @@ void	build_ladder(SLONG storey)
 
 	wall=-wall;
 	y=storey_list[storey].DY;
-	calc_ladder_pos(&x1,&z1,&x2,&z2,&y,&extra_height);	
+	calc_ladder_pos(&x1,&z1,&x2,&z2,&y,&extra_height);
 
 	insert_collision_vect(x1,y,z1,x2,y,z2,STOREY_TYPE_LADDER,storey_list[storey].Height,wall);
 
@@ -5839,7 +5839,7 @@ void	build_ladder(SLONG storey)
 
 		for(c0=1;c0<=count;c0++)
 		{
-			start_point[c0]=next_prim_point;		
+			start_point[c0]=next_prim_point;
 			build_ladder_points(x1,z1,x2,z2,y+size*c0,1);
 
 			p4=create_a_quad(start_point[c0]+0,start_point[c0]+1,start_point[c0-1]+0+0,start_point[c0-1]+1+0,texture_style,TEXTURE_PIECE_MIDDLE);
@@ -5869,7 +5869,7 @@ void	build_ladder(SLONG storey)
 	for(c0=0;c0<storey_list[storey].Height;c0++)
 	{
 		SLONG	spr;
-		spr=next_prim_point;		
+		spr=next_prim_point;
 
 		build_ladder_points(x1,z1,x2,z2,y+BLOCK_SIZE*(c0+1)-8,0);
 		build_ladder_points(x1,z1,x2,z2,y+BLOCK_SIZE*(c0+1),0);
@@ -5905,7 +5905,7 @@ void	build_ladder_old(SLONG storey)
 
 	wall=-wall;
 	y=storey_list[storey].DY;
-	calc_ladder_pos(&x1,&z1,&x2,&z2,&y,&extra_height);	
+	calc_ladder_pos(&x1,&z1,&x2,&z2,&y,&extra_height);
 
 	insert_collision_vect(x1,y,z1,x2,y,z2,STOREY_TYPE_LADDER,0,wall);
 //	prim_points[start_point[count-1]].X,prim_points[start_point[count-1]].Y,prim_points[start_point[count-1]].Z,
@@ -5914,7 +5914,7 @@ void	build_ladder_old(SLONG storey)
 	while(count<(storey_list[storey].Height))
 	{
 
-		start_point[count]=next_prim_point;		
+		start_point[count]=next_prim_point;
 		if(count==0)
 		{
 //   plan view
@@ -5976,7 +5976,7 @@ void	build_ladder_old(SLONG storey)
 		for(c0=0;c0<4;c0++)
 		{
 			SLONG	spr;
-			spr=next_prim_point;		
+			spr=next_prim_point;
 
 			build_ladder_points(x1,z1,x2,z2,y+BLOCK_SIZE*(c0+1)-8,0);
 			build_ladder_points(x1,z1,x2,z2,y+BLOCK_SIZE*(c0+1),0);
@@ -6096,7 +6096,7 @@ void	calc_new_corner_point(SLONG	x1,SLONG z1,SLONG x2,SLONG z2,SLONG x3,SLONG z3
 	if(z>0)
 	{
 		dist=-dist;
-		
+
 	}
 
 
@@ -6168,7 +6168,7 @@ void	build_ledge(SLONG x,SLONG y,SLONG z,SLONG wall,SLONG storey,SLONG height)
 		prim_points[next_prim_point].Y=y+2;
 		prim_points[next_prim_point].Z=prim_points[c0].Z;
 		next_prim_point++;
-		
+
 	}
 
 	start_point[3]=next_prim_point;
@@ -6352,7 +6352,7 @@ void	build_ledge_around_ladder(SLONG	p0,SLONG p1,SLONG p2,SLONG p3)
 
 
 
-	
+
 
 }
   */
@@ -6593,7 +6593,7 @@ void	append_recessed_wall_prim(SLONG x,SLONG y,SLONG z,SLONG wall,SLONG storey,S
 		else
 		if(c0==WindowCount-1)
 		{
-			
+
 				texture=TEXTURE_PIECE_LEFT;
 		}
 		else
@@ -6685,7 +6685,7 @@ void	append_foundation_wall(SLONG x,SLONG y,SLONG z,SLONG wall,SLONG storey,SLON
 			else
 			if(c0==WindowCount-1)
 			{
-				
+
 //				if(storey_list[storey].Next==0)
 //					texture=TEXTURE_PIECE_TOP_LEFT;
 //				else
@@ -6697,7 +6697,7 @@ void	append_foundation_wall(SLONG x,SLONG y,SLONG z,SLONG wall,SLONG storey,SLON
 //					texture=TEXTURE_PIECE_TOP_MIDDLE;
 //				else
 					texture=TEXTURE_PIECE_MIDDLE;
-				
+
 			}
 			if(ptexture && (count<tcount) && ptexture[count])
 			{
@@ -6816,11 +6816,11 @@ void	append_wall_prim(SLONG x,SLONG y,SLONG z,SLONG wall,SLONG storey,SLONG heig
 //					texture=TEXTURE_PIECE_TOP_RIGHT;
 //				else
 					texture=TEXTURE_PIECE_RIGHT;
-			}	
+			}
 			else
 			if(c0==WindowCount-1)
 			{
-				
+
 //				if(storey_list[storey].Next==0)
 //					texture=TEXTURE_PIECE_TOP_LEFT;
 //				else
@@ -6832,7 +6832,7 @@ void	append_wall_prim(SLONG x,SLONG y,SLONG z,SLONG wall,SLONG storey,SLONG heig
 //					texture=TEXTURE_PIECE_TOP_MIDDLE;
 //				else
 					texture=TEXTURE_PIECE_MIDDLE;
-				
+
 			}
 
 
@@ -6918,7 +6918,7 @@ void	append_wall_prim(SLONG x,SLONG y,SLONG z,SLONG wall,SLONG storey,SLONG heig
 	}
 	else
 	{
-		
+
 /*
 		start_point[0]=build_row_wall_points_at_y(y+height      ,x,z,wall_list[wall].DX,wall_list[wall].DZ,wall);
 		start_point[1]=build_row_wall_points_at_y(y+(height*2)/3,x,z,wall_list[wall].DX,wall_list[wall].DZ,wall);
@@ -6945,7 +6945,7 @@ void	append_wall_prim(SLONG x,SLONG y,SLONG z,SLONG wall,SLONG storey,SLONG heig
 		}
 		for(c0=0;c0<WindowCount;c0++)
 		{
-			p_f4=create_a_quad(start_point[1]+c0*2+1,start_point[1]+c0*2+2,start_point[4]+c0*2,start_point[4]+c0*2+1,0,0);  //lid 
+			p_f4=create_a_quad(start_point[1]+c0*2+1,start_point[1]+c0*2+2,start_point[4]+c0*2,start_point[4]+c0*2+1,0,0);  //lid
 			p_f4->ThingIndex=-wall;
 			p_f4=create_a_quad(start_point[1]+c0*2+1,start_point[4]+c0*2,start_point[2]+c0*2+1,start_point[5]+c0*2,0,0);  //side1
 			p_f4->ThingIndex=-wall;
@@ -6989,7 +6989,7 @@ void	create_recessed_storey_points(SLONG y,SLONG storey,SLONG count,SLONG size)
 	SLONG	wall;
 	SLONG	sp;
 
-	count=count;	
+	count=count;
 	sp=next_prim_point;
 
 	px=storey_list[storey].DX;
@@ -7046,10 +7046,10 @@ void scan_triangle(SLONG x0, SLONG y0, SLONG z0,SLONG x1, SLONG y1, SLONG z1,SLO
 	vy = y1 - y0;   //vector from point 0 to point 1
 	vz = z1 - z0;
 
-	wx = x2 - x0;   //vector from point 1 to point 2 
+	wx = x2 - x0;   //vector from point 1 to point 2
 	wy = y2 - y0;
 	wz = z2 - z0;
-	
+
 	len=(Root(vx*vx+vy*vy+vz*vz)>>7);
 	if(len<2)
 		len=2;
@@ -7190,7 +7190,7 @@ SLONG	build_roof(UWORD storey,SLONG y,SLONG flat_flag)
 
 	if((storey_list[storey].StoreyFlags&FLAG_STOREY_ROOF_RIM)&&0)
 	{
-		
+
 		if(storey_list[storey].WallHead)// && storey_list[storey].Roof)
 		{
 
@@ -7198,7 +7198,7 @@ SLONG	build_roof(UWORD storey,SLONG y,SLONG flat_flag)
 			// Roof points arround top of wall
 			//
 
-			start_point[0]=next_prim_point;  
+			start_point[0]=next_prim_point;
 			add_point(storey_list[storey].DX,y+2,storey_list[storey].DZ);
 			wall=storey_list[storey].WallHead;
 			count=0;
@@ -7229,7 +7229,7 @@ SLONG	build_roof(UWORD storey,SLONG y,SLONG flat_flag)
 				z=prim_points[c0+start_point[1]].Z;
 
 				add_point(x,y+(overlap_height),z);
-				
+
 			}
 
 	//	BUILD RAISED/CENTER POINTS FOR ANGLED/FLAT ROOF
@@ -7290,7 +7290,7 @@ SLONG	build_roof(UWORD storey,SLONG y,SLONG flat_flag)
 					z=prim_points[c0+start_point[4]].Z;
 
 					add_point(x,y,z);
-					
+
 				}
 			}
 
@@ -7302,11 +7302,11 @@ SLONG	build_roof(UWORD storey,SLONG y,SLONG flat_flag)
 				start_point[6]=next_prim_point;
 				roof_rim=next_prim_point;
 				create_recessed_storey_points(y,storey,count,-overlap*2);
-				
+
 			}
 	*/
 
-			
+
 		//
 		// Brind overlap back to storey position and a bit more
 		//
@@ -7336,7 +7336,7 @@ SLONG	build_roof(UWORD storey,SLONG y,SLONG flat_flag)
 			 		create_a_quad(start_point[4]+c0,start_point[4]+c0+1,start_point[2]+c0,start_point[2]+c0+1,0,23);
 			 		create_a_quad(start_point[5]+c0,start_point[5]+c0+1,start_point[4]+c0,start_point[4]+c0+1,0,23);
 				}
-				
+
 			}
 			if( (roof_flags&(FLAG_ROOF_WALLED|FLAG_ROOF_FLAT)) ==(FLAG_ROOF_WALLED)) //ANGLED ROOF WITH WALL
 			{
@@ -7656,9 +7656,9 @@ void	center_object(SLONG sp,SLONG ep)
 		prim_points[c0].Z-=az;
 	}
 */
-	
 
-	
+
+
 }
 
 void	center_object_about_xz(SLONG sp,SLONG ep,SLONG x,SLONG z)
@@ -7686,7 +7686,7 @@ void	center_object_about_xz(SLONG sp,SLONG ep,SLONG x,SLONG z)
 		prim_points[c0].X-=x;
 		prim_points[c0].Z-=z;
 	}
-*/	
+*/
 }
 
 
@@ -7825,13 +7825,13 @@ struct	LedgeInfo
 	SWORD	Storey,Wall;
 	SWORD	Y;
 	SLONG   X1,Z1,X2,Z2,X3,Z3,X4,Z4;
-	
+
 };
 
 
 void	build_single_ledge(struct LedgeInfo	*p_ledge)
 {
-	
+
 	SLONG	sp[4],count=0;
 	SLONG	rx,rz,rx2,rz2;
 
@@ -7922,10 +7922,10 @@ SLONG	find_wall_for_fe(SLONG fe_x,SLONG fe_y,SLONG storey)
 		{
 			best_wall=wall_count;
 			best_dist=dist;
-			
+
 		}
 
-		wall_count++;		
+		wall_count++;
 		wall=wall_list[wall].Next;
 		px=x1;
 		pz=z1;
@@ -7933,7 +7933,7 @@ SLONG	find_wall_for_fe(SLONG fe_x,SLONG fe_y,SLONG storey)
 	if(best_wall==-1)
 		LogText(" best wall=-1\n");
 	return(best_wall);
-	
+
 }
 
 SLONG	sp_stairs[300];
@@ -7954,7 +7954,7 @@ void	build_staircase(SLONG	storey)
 	struct	 StairVect
 	{
 		SLONG	X1,Z1,X2,Z2;
-		
+
 	};
 
 	struct	StairVect	s_vects[50];
@@ -7990,7 +7990,7 @@ void	build_staircase(SLONG	storey)
 		{
 			s_vects[count-1].X1 = wall_list[wall].DX;
 			s_vects[count-1].Z1 = wall_list[wall].DZ;
-			
+
 		}
 		else
 		{
@@ -7999,7 +7999,7 @@ void	build_staircase(SLONG	storey)
 
 			s_vects[pos-1].X2=wall_list[wall].DX;
 			s_vects[pos-1].Z2=wall_list[wall].DZ;
-			
+
 		}
 
 		count++;
@@ -8073,11 +8073,11 @@ void	build_staircase(SLONG	storey)
 			step_pos=-1;
 */
 
-			
+
 		}
 //		else
 		{
-			
+
 			sp_stairs[row]=next_prim_point;
 			for(c0=0;c0<(wall_count>>1);c0++)
 			{
@@ -8101,14 +8101,14 @@ void	build_staircase(SLONG	storey)
 			}
 			else
 			{
-				
+
 				y+=step_height;
 				row+=1;
 			}
 		}
 
 	}
-	
+
 	wall=storey_list[storey].WallHead;
 
 	for(c1=0; c1<(row-1) ;c1++)
@@ -8146,7 +8146,7 @@ void get_wall_start_and_end(
 		// These are 16-bit map coordinates...
 		//
 
-		SLONG *x1, SLONG *z1,	
+		SLONG *x1, SLONG *z1,
 		SLONG *x2, SLONG *z2)
 {
 	SLONG wall;
@@ -8157,7 +8157,7 @@ void get_wall_start_and_end(
 	p_storey = &storey_list[wall_list[want_wall].StoreyHead];
 
    *x1 = p_storey->DX;
-   *z1 = p_storey->DZ;	
+   *z1 = p_storey->DZ;
 
 	wall = p_storey->WallHead;
 
@@ -8175,7 +8175,7 @@ void get_wall_start_and_end(
 
 	   *x1 = *x2;
 	   *z1 = *z2;
-	   	
+
 
 		wall = p_wall->Next;
 	}
@@ -8465,7 +8465,7 @@ SLONG	create_suspended_light(SLONG x,SLONG y,SLONG z,SLONG flags)
 */
 //conv	apply_light_to_map(x,50,z,150);
 
-   return(0);	
+   return(0);
 }
 
 void	build_cable(SLONG x1,SLONG y1,SLONG z1,SLONG x2,SLONG y2,SLONG z2,SWORD wall,SWORD type,SLONG saggysize)
@@ -8518,12 +8518,12 @@ void	build_cable(SLONG x1,SLONG y1,SLONG z1,SLONG x2,SLONG y2,SLONG z2,SWORD wal
 			len=1;
 		m=(abs(dy)*190)/len;
 
-		c1=128;  //== 0.5   along 
+		c1=128;  //== 0.5   along
 		c2=128;  //=0.5
 
 
 		if(dy<0)
-		{	  
+		{
 
 			//
 			// its going down hill so slow stepangle1 and fast step angle2
@@ -8584,7 +8584,7 @@ void	build_cable(SLONG x1,SLONG y1,SLONG z1,SLONG x2,SLONG y2,SLONG z2,SWORD wal
 			light_x=ex;
 			light_y=ey;
 			light_z=ez;
-			
+
 		}
 		p1=next_prim_point;
 		add_point(ex,ey,ez);
@@ -8599,12 +8599,12 @@ void	build_cable(SLONG x1,SLONG y1,SLONG z1,SLONG x2,SLONG y2,SLONG z2,SWORD wal
 		px=ex;
 		py=ey;
 		pz=ez;
-		
+
 	}
 
 
 
-	
+
 }
 
 void	build_cable_old(SLONG x1,SLONG y1,SLONG z1,SLONG x2,SLONG y2,SLONG z2,SWORD wall,SWORD type)
@@ -8660,7 +8660,7 @@ void	build_cable_old(SLONG x1,SLONG y1,SLONG z1,SLONG x2,SLONG y2,SLONG z2,SWORD
 			light_x=ex;
 			light_y=ey;
 			light_z=ez;
-			
+
 		}
 		p1=next_prim_point;
 		add_point(ex,ey,ez);
@@ -8674,7 +8674,7 @@ void	build_cable_old(SLONG x1,SLONG y1,SLONG z1,SLONG x2,SLONG y2,SLONG z2,SWORD
 		px=ex;
 		py=ey;
 		pz=ez;
-		
+
 	}
 
 
@@ -8696,7 +8696,7 @@ void	build_cable_old(SLONG x1,SLONG y1,SLONG z1,SLONG x2,SLONG y2,SLONG z2,SWORD
 	//prim=build_prim_object(start_point,start_face3,start_face4);
 
 	//place_prim_at(prim,build_x,0,build_z);
-	
+
 }
 
 SLONG	build_cables(SWORD storey,SLONG prev_facet)
@@ -8902,11 +8902,11 @@ void	build_fence_points_and_faces(SLONG y1,SLONG y2,SLONG x1,SLONG z1,SLONG x2,S
 //		p_f4=create_a_quad(p+0,p+2,p1,p1+2,texture_style,TEXTURE_PIECE_LEFT);
 //		p_f4->ThingIndex=-wall;
 
-		
+
 		wcount--;
 
 	}
-	
+
 }
 
 void	build_high_chain_fence(SLONG x,SLONG y,SLONG z,SLONG wall,SLONG storey,SLONG height,UBYTE alt_mode)
@@ -9048,11 +9048,11 @@ void	build_height_fence(SLONG x,SLONG y,SLONG z,SLONG wall,SLONG storey,SLONG he
 
 
 
-//   p1 .. 
+//   p1 ..
 //        ..p2
 //           .
 //            .
-//             .p3  
+//             .p3
 //
 
 /*
@@ -9097,7 +9097,7 @@ void	build_thick_wall_polys(SLONG *x,SLONG *z,SLONG y,SLONG height,SLONG flag,SL
 	sp[2]=build_row_wall_only_points_at_y(y+height      ,x[2],z[2],x[3],z[3],wall);
 	sp[3]=build_row_wall_only_points_at_y(y		        ,x[2],z[2],x[3],z[3],wall);
 	sp[4]=next_prim_point;
-	
+
 	for(c0=0;c0<WindowCount;c0++)
 	{
 
@@ -9191,7 +9191,7 @@ SLONG	build_brick_wall(SLONG storey)
 
 
 		calc_new_corner_point(x[0],z[0],x[1],z[1],wall_list[nwall].DX,wall_list[nwall].DZ,WALL_WIDTH,&x[3],&z[3]);
-	
+
 		build_thick_wall_polys(&x[0],&z[0],y,height,0,storey,wall);
 		wall=nwall;
 		nwall=wall_list[wall].Next;
@@ -9245,7 +9245,7 @@ SLONG	build_brick_wall(SLONG storey)
 	*/
 
 	place_building_at(building,prim,build_x,0,build_z);
-	
+
 	return(prev_facet);
 }
 
@@ -9264,7 +9264,7 @@ void	build_fence(SLONG x,SLONG y,SLONG z,SLONG wall,SLONG storey,SLONG height)
 
 	switch(storey_list[storey].StoreyType)
 	{
-		case	STOREY_TYPE_FENCE: //   3/4 
+		case	STOREY_TYPE_FENCE: //   3/4
 			build_fence_points_and_faces(y,y+((height*3)>>2)+2,x,z,wall_list[wall].DX,wall_list[wall].DZ,wall,1);
 			break;
 		case	STOREY_TYPE_FENCE_BRICK:
@@ -9486,7 +9486,7 @@ void	setup_storey_data(UWORD building,SWORD *wall_for_ladder)
 	while(storey)
 	{
 		storey_list[storey].StoreyFlags&=~FLAG_STOREY_FACET_LINKED;
-		
+
 		switch(storey_list[storey].StoreyType)
 		{
 			case	STOREY_TYPE_NORMAL:
@@ -9581,7 +9581,7 @@ void insert_recessed_wall_vect(
 {
 	SLONG x1o;
 	SLONG z1o;
-	
+
 	SLONG x2o;
 	SLONG z2o;
 
@@ -9589,7 +9589,7 @@ void insert_recessed_wall_vect(
 	SLONG dz;
 
 	SLONG len;
-				
+
 	dx = x2 - x1;
 	dz = z2 - z1;
 
@@ -9780,9 +9780,9 @@ SLONG	build_trench(SLONG prev_facet,SLONG storey)
 /*
 
   A facet is used for sorting and quick back face culling (but not yet)
-  For Each piece of wall on the bottom storey find vertically identical pieces to become 
+  For Each piece of wall on the bottom storey find vertically identical pieces to become
   a facet.
-	
+
 */
 SWORD	wall_for_fe[100];
 SWORD	wall_for_ladder[100];
@@ -9848,7 +9848,7 @@ SLONG	create_building_prim(UWORD building,SLONG	*small_y)
 
 	setup_storey_data(building,&wall_for_ladder[0]); //clear connection flags
 	storey=building_list[building].StoreyHead;
-	
+
 	if(circular)
 	{
 //		build_max_y=0;
@@ -9959,7 +9959,7 @@ SLONG	create_building_prim(UWORD building,SLONG	*small_y)
 							if(connect_wall)
 							{
 	//							LogText(" found a connect wall %d\n",connect_wall);
-							
+
 								while(connect_wall)
 								{
 									SLONG	ty;
@@ -9973,7 +9973,7 @@ SLONG	create_building_prim(UWORD building,SLONG	*small_y)
 							else
 							{
 								//
-								//	
+								//
 								//
 							}
 						}
@@ -10028,7 +10028,7 @@ SLONG	create_building_prim(UWORD building,SLONG	*small_y)
 					}
 //					else
 //						LogText(" allready done through connection \n");
-					
+
 					x1=x2;
 					z1=z2;
 					textures=wall_list[wall].Textures;
@@ -10058,7 +10058,7 @@ SLONG	create_building_prim(UWORD building,SLONG	*small_y)
 			case	STOREY_TYPE_STAIRCASE:
 				build_staircase(storey);
 				prev_facet=build_facet(start_point,next_prim_point,start_face3,start_face4,next_prim_face4,prev_facet,0,0);
-				
+
 				start_point=next_prim_point;
 				start_face3=next_prim_face3;
 				start_face4=next_prim_face4;
@@ -10102,8 +10102,8 @@ SLONG	create_building_prim(UWORD building,SLONG	*small_y)
 			bound=build_roof(storey,storey_list[storey].DY+offset_y+storey_list[storey].Height,flat);
 		}
 
-		
-		
+
+
 		if(0) //storey_list[storey].Roof)
 		{
 /*
@@ -10124,14 +10124,14 @@ SLONG	create_building_prim(UWORD building,SLONG	*small_y)
 							LogText(" building 3   build ladder\n");
 						build_ladder(storey);
 				break;
-				
+
 			}
 */
 		}
 		else
 		{
 			switch(storey_list[storey].StoreyType)
-			{	
+			{
 				case	STOREY_TYPE_LADDER:
 						if(building==3)
 							LogText(" building 3   build ladder\n");
@@ -10144,7 +10144,7 @@ SLONG	create_building_prim(UWORD building,SLONG	*small_y)
 				break;
 			}
 		}
-		
+
 		prev_facet=build_facet(start_point,next_prim_point,start_face3,start_face4,next_prim_face4,prev_facet,FACET_FLAG_ROOF,0);
 		start_point=next_prim_point;
 		start_face3=next_prim_face3;
@@ -10214,7 +10214,7 @@ SLONG	create_building_prim(UWORD building,SLONG	*small_y)
 		//
 		// We want crates to always have the 'crate' texture.
 		//
-	
+
 		if(0)
 		if (building_list[building].BuildingType == BUILDING_TYPE_CRATE_IN ||
 			building_list[building].BuildingType == BUILDING_TYPE_CRATE_OUT)
@@ -10333,7 +10333,7 @@ void	clear_map2(void)
 		MAP2(x,z).ColVectHead=0;
 		MAP2(x,z).Walkable=0;
 		//edit_map[x][z].Flags&=~(FLOOR_HIDDEN|FLOOR_LADDER);
-		
+
 	}
 
 //	memset(edit_map,0,sizeof(struct DepthStrip)*EDIT_MAP_WIDTH*EDIT_MAP_DEPTH);
@@ -10465,7 +10465,7 @@ SLONG	calc_win(UWORD *attack,SLONG c1,UWORD *def,SLONG c2)
 	SLONG	wins=0;
 
 	memcpy((UBYTE*)data,(UBYTE*)def,10);
-	
+
 	if(data[0]<data[1])
 	{
 		SWAP(data[0],data[1]);
@@ -10558,7 +10558,7 @@ void	count_floor(void)
 	for(x=0;x<128;x++)
 	for(z=0;z<128;z++)
 	{
-		texture=get_map_texture(x,z); 
+		texture=get_map_texture(x,z);
 
 		tx=((struct	MiniTextureBits*)(&texture))->X;
 		ty=((struct	MiniTextureBits*)(&texture))->Y;
@@ -10615,7 +10615,7 @@ void	create_city(UBYTE mode)
 	temp_next_building_object=next_building_object;
 	temp_next_building_facet =next_building_facet;
 #endif
-	
+
 
 /*
 	LogText("*************\n");
@@ -10640,7 +10640,7 @@ void	create_city(UBYTE mode)
 			if(prim)
 			{
 				/*
-				
+
 				//
 				// No (x,y,z), buildings have a ThingIndex instead... it is
 				// set in place_building_at()
@@ -10658,7 +10658,7 @@ void	create_city(UBYTE mode)
 
 	extern	void save_asc(UWORD building,UWORD version);
 	//			save_asc(c0,1);
-				
+
 				//clip_building_prim(prim,build_x,y,build_z);
 //				LogText(" after building %d, nextprimpoint %d \n",bcount,next_prim_point);
 				bcount++;
@@ -10752,7 +10752,7 @@ void	attach_walkable_to_map(SLONG face);
 			}
 
 
-			
+
 			attach_walkable_to_map(face);
 			prim_faces4[face].FaceFlags|=FACE_FLAG_WALKABLE;
 
@@ -10781,7 +10781,7 @@ void	offset_buildings(SLONG x,SLONG y,SLONG z)
 	//		storey_list[c0].DY=-storey_list[c0].DY+(SWORD)y;
 			storey_list[c0].DZ+=(SWORD)z;
 		}
-		
+
 	}
 	for (c0=1;c0<MAX_WALLS;c0++ )
 	{
@@ -10808,11 +10808,11 @@ void	calc_buildings_screen_box(UWORD	prim,SLONG x,SLONG y,SLONG z,EdRect *rect)
 
 	sp=p_obj->StartPoint;
 	ep=p_obj->EndPoint;
-	
+
 	engine.X-=x<<8;
 	engine.Y-=y<<8;
 	engine.Z-=z<<8;
-		
+
 	for(c0=sp;c0<ep;c0++)
 	{
 		//transform all points for this Object
@@ -10831,7 +10831,7 @@ void	calc_buildings_screen_box(UWORD	prim,SLONG x,SLONG y,SLONG z,EdRect *rect)
 			if(global_res[c0-sp].Y>max_y)
 				max_y=global_res[c0-sp].Y;
 		}
-		
+
 	}
 
 	engine.X+=x<<8;
@@ -10856,8 +10856,8 @@ void	calc_buildings_world_box(UWORD	prim,SLONG x,SLONG y,SLONG z,EdRect *rect)
 
 	sp=p_obj->StartPoint;
 	ep=p_obj->EndPoint;
-	
-		
+
+
 	for(c0=sp;c0<ep;c0++)
 	{
 		global_res[c0-sp].X=prim_points[c0].X+x;
@@ -10876,7 +10876,7 @@ void	calc_buildings_world_box(UWORD	prim,SLONG x,SLONG y,SLONG z,EdRect *rect)
 			if(global_res[c0-sp].Y>max_y)
 				max_y=global_res[c0-sp].Y;
 		}
-		
+
 	}
 
 	if(min_x<0)
@@ -11068,7 +11068,7 @@ void calc_building_normals(void)
 			}
 		}
 
-		
+
 		//
 		// Normalise the length of each normal to be 256.
 		//
@@ -11175,13 +11175,13 @@ SLONG	draw_a_facet_at(UWORD	facet,SLONG x,SLONG y,SLONG z)
 	sp=p_facet->StartPoint;
 	mp=p_facet->MidPoint;
 	ep=p_facet->EndPoint;
-	
+
 //	LogText(" draw a facet %d at %d %d %d, sp %d ep %d sf4 %d ef4 %d \n",facet,x,y,z,sp,ep,p_facet->StartFace4,p_facet->EndFace4);
 
 	engine.X-=x<<8;
 	engine.Y-=y<<8;
 	engine.Z-=z<<8;
-		
+
 	for(c0=sp;c0<mp;c0++)
 	{
 		struct	SVector	pp;
@@ -11285,7 +11285,7 @@ SLONG	draw_a_facet_at(UWORD	facet,SLONG x,SLONG y,SLONG z)
 			if(dy>=edit_info.TileScale)
 				height_ok=0;
 
-			
+
 		}
 
 		if(height_ok)
@@ -11297,8 +11297,8 @@ SLONG	draw_a_facet_at(UWORD	facet,SLONG x,SLONG y,SLONG z)
 	/*
 			if(shadow)
 			{
-				flag_and = flags_shadow[p0]&flags_shadow[p1]&flags_shadow[p2]&flags_shadow[p3];	
-				flag_or = flags_shadow[p0]|flags_shadow[p1]|flags_shadow[p2]|flags_shadow[p3];	
+				flag_and = flags_shadow[p0]&flags_shadow[p1]&flags_shadow[p2]&flags_shadow[p3];
+				flag_or = flags_shadow[p0]|flags_shadow[p1]|flags_shadow[p2]|flags_shadow[p3];
 
 				if((flag_or&EF_BEHIND_YOU)==0)
 				if(!(flag_and & EF_CLIPFLAGS))
@@ -11328,7 +11328,7 @@ SLONG	draw_a_facet_at(UWORD	facet,SLONG x,SLONG y,SLONG z)
 					setZ4((struct BucketQuad*)current_bucket_pool,-res_shadow[p0].Z,-res_shadow[p1].Z,-res_shadow[p2].Z,-res_shadow[p3].Z);
 					((struct BucketQuad*)current_bucket_pool)->DebugInfo=c0;
 					((struct BucketQuad*)current_bucket_pool)->DebugFlags=0;
-					
+
 					add_bucket((void *)current_bucket_pool,az);
 
 					current_bucket_pool+=sizeof(struct BucketQuad);
@@ -11338,19 +11338,19 @@ SLONG	draw_a_facet_at(UWORD	facet,SLONG x,SLONG y,SLONG z)
 	*/
 
 			{
-				
-		
-				flag_and = global_flags[p0]&global_flags[p1]&global_flags[p2]&global_flags[p3];	
-				flag_or = global_flags[p0]|global_flags[p1]|global_flags[p2]|global_flags[p3];	
+
+
+				flag_and = global_flags[p0]&global_flags[p1]&global_flags[p2]&global_flags[p3];
+				flag_or = global_flags[p0]|global_flags[p1]|global_flags[p2]|global_flags[p3];
 
 				if((p_f4->FaceFlags&FACE_FLAG_SMOOTH)&&ShiftFlag)
 				{
-					
+
 				}
 				else
 				{
 
-					
+
 					if( (!(flag_and & EF_CLIPFLAGS))&&((flag_or&EF_BEHIND_YOU)==0))
 					{
 						SLONG	wid,height;
@@ -11374,7 +11374,7 @@ SLONG	draw_a_facet_at(UWORD	facet,SLONG x,SLONG y,SLONG z)
 	/*
 						if(!AltFlag)
 						{
-			
+
 							az=global_res[p0].Z+1000;
 
 							if(az<global_res[p1].Z)
@@ -11398,7 +11398,7 @@ SLONG	draw_a_facet_at(UWORD	facet,SLONG x,SLONG y,SLONG z)
 							else
 							{
 								az=best_z-(sort_level<<2);
-								
+
 							}
 
 						}
@@ -11491,7 +11491,7 @@ SLONG	draw_a_facet_at(UWORD	facet,SLONG x,SLONG y,SLONG z)
 						}
 
 						setZ4((struct BucketQuad*)current_bucket_pool,global_res[p0].Z,global_res[p1].Z,global_res[p2].Z,global_res[p3].Z);
-						
+
 
 						setShade4((struct BucketQuad*)current_bucket_pool,
 						CLIP256(p_f4->Bright[0]+global_bright[p0]),
@@ -11555,8 +11555,8 @@ skip_wall:;
 		p1=p_f3->Points[1]-sp;
 		p2=p_f3->Points[2]-sp;
 
-		flag_and = global_flags[p0]&global_flags[p1]&global_flags[p2];	
-		flag_or  = global_flags[p0]|global_flags[p1]|global_flags[p2];	
+		flag_and = global_flags[p0]&global_flags[p1]&global_flags[p2];
+		flag_or  = global_flags[p0]|global_flags[p1]|global_flags[p2];
 
 		if((flag_or&EF_BEHIND_YOU)==0)
 		if(!(flag_and & EF_CLIPFLAGS))
@@ -11648,7 +11648,7 @@ void	draw_a_building_at(UWORD building,SLONG x,SLONG y,SLONG z)
 			best_z=az;
 		index=building_facets[index].NextFacet;
 	}
-	
+
 }
 #endif
 #endif

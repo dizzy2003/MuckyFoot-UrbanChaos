@@ -1,7 +1,7 @@
 #include "game.h"
-#include "c:\fallen\headers\cam.h"
-#include "c:\fallen\headers\statedef.h"
-#include "c:\fallen\ddengine\headers\panel.h"
+#include "fallen/headers/cam.h"
+#include "fallen/headers/statedef.h"
+#include "fallen/ddengine/headers/panel.h"
 #include "fc.h"
 #include "animate.h"
 #include "memory.h"
@@ -10,12 +10,12 @@
 #include "eway.h"
 #ifndef PSX
 #include "ddlib.h"
-#include "c:\fallen\ddengine\headers\planmap.h"
-#include "c:\fallen\ddengine\headers\poly.h"
+#include "fallen/ddengine/headers/planmap.h"
+#include "fallen/ddengine/headers/poly.h"
 #include "font2d.h"
 #else
-#include "c:\fallen\psxeng\headers\psxeng.h"
-#include "c:\fallen\psxeng\headers\panel.h"
+#include "fallen/psxeng/headers/psxeng.h"
+#include "fallen/psxeng/headers/panel.h"
 #endif
 #include	"interfac.h"
 
@@ -197,7 +197,7 @@ void	arrow_pos(SLONG x,SLONG y,SLONG z,SLONG dir,SLONG type)
 
 //	add_damage_text(x,y,z, help_text[type]);
 	add_damage_text(x,y,z, XLAT_str(help_xlat[type]));
-	
+
 	/*
 
 	if(dir==1)
@@ -324,7 +324,7 @@ void	highlight_cable_grab(void)
 				{
 					CBYTE	str[100];
 					SLONG	dy;
-					
+
 					my=find_cable_y_along(df,along);
 
 //extern	FONT2D_DrawString_3d(CBYTE*str, ULONG world_x, ULONG world_y,ULONG world_z, ULONG rgb, SLONG text_size, SWORD fade);
@@ -436,11 +436,11 @@ SLONG	help_system(void)
 						extern	void	get_car_enter_xz(Thing *p_vehicle,SLONG *cx,SLONG *cz);
 
 						get_car_enter_xz(p_found,&cx,&cz);
-						 
+
 						switch(p_found->Genus.Vehicle->Type)
 						{
 							case VEH_TYPE_VAN:
-							case VEH_TYPE_AMBULANCE:	
+							case VEH_TYPE_AMBULANCE:
 							case VEH_TYPE_MEATWAGON:
 							case VEH_TYPE_JEEP:
 							case VEH_TYPE_WILDCATVAN:
@@ -478,7 +478,7 @@ SLONG	help_system(void)
 					{
 						SLONG	cx,cz;
 						show_help_text(HELP_USE_BIKE);
-						 
+
 						arrow_object(p_found,1,HELP_USE_BIKE);
 						//draw_arrow(cx,(p_found->WorldPos.Y>>8)+150,cz,1);
 
@@ -529,7 +529,7 @@ SLONG	help_system(void)
 	highlight_cable_grab();
 
 //	find_thing_for_this_pos
-		
+
 	return(0);
 }
 #endif
@@ -561,7 +561,7 @@ void	track_enemy(Thing *p_thing)
 	{
 		SLONG	face;
 		switch(p_thing->Genus.Person->PersonType)
-		{				
+		{
 			case	0:
 				//PERSON_DARCI
 			case	1:
@@ -594,7 +594,7 @@ void	track_enemy(Thing *p_thing)
 		panel_enemy[unused].Timer=15000; //5 seconds
 		panel_enemy[unused].Face=face; //5 seconds
 	}
-	
+
 	#endif
 }
 
@@ -646,7 +646,7 @@ void	track_gun_sight(Thing *p_thing,SLONG accuracy)
 		panel_gun_sight[unused].Face=accuracy; //5 seconds
 	}
 */
-	
+
 }
 
 #ifndef PSX
@@ -793,7 +793,7 @@ void	OVERLAY_draw_health(void)
 		ph=0;
 	PANEL_draw_health_bar(10,10,ph>>1);
 
-	
+
 }
 
 void	OVERLAY_draw_stamina(void)
@@ -804,7 +804,7 @@ void	OVERLAY_draw_stamina(void)
 		ph=0;
 	PANEL_draw_health_bar(10,30,(ph*100)>>8);
 
-	
+
 }
 #endif
 
@@ -859,7 +859,7 @@ void	OVERLAY_draw_enemy_health(void)
 
 					break;
 			}
-						
+
 		}
 	}
 }
@@ -1087,7 +1087,7 @@ extern	SLONG	globdx,globdz;
 	}
 
 
-#endif	
+#endif
 #if 0
 	if(MFX_QUICK_still_playing())
 	{
@@ -1251,7 +1251,7 @@ extern	SLONG	tick_tock_unclipped;
 
 #ifdef	PSX
 		FONT2D_DrawString(str,20,212,0xffffff,256);
-		
+
 
 #else
 		FONT2D_DrawString(str,2,2,0xffffff,256);
@@ -1371,14 +1371,14 @@ extern	SLONG	tick_tock_unclipped;
 /*
 void	set_beacon(SLONG bx,SLONG by,SLONG bz)
 {
-	
+
 	if(beacon_upto<(MAX_BEACON-1))
 	{
 		beacons[beacon_upto].X=bx;
 		beacons[beacon_upto].Z=bz;
 		beacon_upto++;
 	}
-	
+
 }
 
 
@@ -1489,7 +1489,7 @@ void	add_damage_value(SWORD x,SWORD y,SWORD z,SLONG value)
 //		ASSERT(0);
 	}
 #endif
-	
+
 }
 
 void	add_damage_text(SWORD x,SWORD y,SWORD z,CBYTE *text)
@@ -1512,7 +1512,7 @@ void	add_damage_text(SWORD x,SWORD y,SWORD z,CBYTE *text)
 //
 		ASSERT(0);
 	}
-#endif	
+#endif
 }
 
 void	add_damage_value_thing(Thing *p_thing,SLONG value)
@@ -1527,7 +1527,7 @@ void	add_damage_value_thing(Thing *p_thing,SLONG value)
 
 	add_damage_value(dx,dy,dz,value);
 #endif
-	
+
 }
 
 #ifdef	DAMAGE_TEXT
@@ -1544,7 +1544,7 @@ void	OVERLAY_draw_damage_values(void)
 
 extern	void FONT2D_DrawString_3d(CBYTE*str, ULONG world_x, ULONG world_y,ULONG world_z, ULONG rgb, SLONG text_size, SWORD fade);
 
-		
+
 			{
 				UWORD	fade;
 				ULONG	col;

@@ -8,9 +8,9 @@
 #include "sm.h"
 #include "inline.h"
 #ifndef PSX
-#include "c:\fallen\ddengine\headers\aeng.h"
+#include "fallen/ddengine/headers/aeng.h"
 #else
-#include "c:\fallen\psxeng\headers\psxeng.h"
+#include "fallen/psxeng/headers/psxeng.h"
 #endif
 
 //
@@ -156,7 +156,7 @@ void SM_create_cube(
 	cx1 <<= 8;
 	cy1 <<= 8;
 	cz1 <<= 8;
-	
+
 	cx2 <<= 8;
 	cy2 <<= 8;
 	cz2 <<= 8;
@@ -217,7 +217,7 @@ void SM_create_cube(
 	{
 		//
 		// The position of this sphere.
-		// 
+		//
 
 		sx = cx1 + i * dx + (dx >> 1);
 		sy = cy1 + j * dy + (dy >> 1);
@@ -268,7 +268,7 @@ void SM_create_cube(
 			sx2 = cx1 + i2 * dx + (dx >> 1);
 			sy2 = cy1 + j2 * dy + (dy >> 1);
 			sz2 = cz1 + k2 * dx + (dx >> 1);
-			
+
 			dsx = sx2 - sx;
 			dsy = sy2 - sy;
 			dsz = sz2 - sz;
@@ -377,7 +377,7 @@ void SM_process()
 
 	//
 	// Process each object.
-	// 
+	//
 
 	for (i = 0; i < SM_object_upto; i++)
 	{

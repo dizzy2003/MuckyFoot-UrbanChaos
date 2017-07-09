@@ -4,14 +4,14 @@
 #include "Game.h"
 #include "cam.h"
 #ifndef	PSX
-#include "c:\fallen\ddlibrary\headers\ddlib.h"
+#include "fallen/ddlibrary/headers/ddlib.h"
 #include "font2d.h"
 #include "poly.h"
 #include "panel.h"
 #else
-#include "c:\fallen\psxeng\headers\psxeng.h"
-#include "c:\fallen\psxeng\headers\poly.h"
-#include "c:\ps\psx\include\ctrller.h"
+#include "fallen/psxeng/headers/psxeng.h"
+#include "fallen/psxeng/headers/poly.h"
+#include "ps/psx/include/ctrller.h"
 extern ControllerPacket PAD_Input1,PAD_Input2;
 #endif
 #include "startscr.h"
@@ -187,7 +187,7 @@ reinit_because_of_language_change:
 		FRONTEND_init ( bReinitBecauseOfLanguageChange );
 	}
 #else
-	FRONTEND_init ( bReinitBecauseOfLanguageChange )
+	FRONTEND_init ( bReinitBecauseOfLanguageChange );
 #endif
 
 
@@ -252,7 +252,7 @@ reinit_because_of_language_change:
 extern LPDIRECT3DTEXTURE2	TEXTURE_get_handle(SLONG page);
 extern SLONG TEXTURE_page_water;
 	dev->SetTexture ( 0, TEXTURE_get_handle(TEXTURE_page_water) );
-	
+
 	dev->SetTextureStageState(1, D3DTSS_COLOROP, D3DTOP_DISABLE);
 	dev->SetTextureStageState(1, D3DTSS_ALPHAOP, D3DTOP_DISABLE);
 
@@ -386,7 +386,7 @@ extern	BOOL	allow_debug_keys;
 		{
 			SLONG	res;
 
-#ifdef NEW_FRONTEND	
+#ifdef NEW_FRONTEND
 			res=FRONTEND_loop();
 #else
 			res=do_start_menu();
@@ -505,7 +505,7 @@ extern void FRONTEND_scr_unload_theme ( void );
 
 				}
 			}
-			
+
 		}
 
 		if(y<57.0F)
@@ -681,7 +681,7 @@ extern	SLONG	stat_arrested_innocent;
 extern	SLONG	stat_count_bonus;
 extern	SLONG	stat_start_time,stat_game_time;
 
-void ScoresDraw(void) 
+void ScoresDraw(void)
 {
 #ifndef PSX
 
@@ -743,7 +743,7 @@ void ScoresDraw(void)
 
 
 extern	SLONG	playing_real_mission(void);
-	
+
 	if(playing_real_mission())
 	{
 		if (NET_PERSON(0)->Genus.Person->PersonType != PERSON_DARCI &&
@@ -820,7 +820,7 @@ extern	SLONG	playing_real_mission(void);
 				SLONG  mins;
 				SLONG  secs;
 				CBYTE *who;
-			 
+
 			} Mime;	// A mucky time!
 
 #if 0
@@ -915,7 +915,7 @@ extern	SLONG	playing_real_mission(void);
 			while(1)
 			{
 				Mime *mm = &mucky_times[i];
-				
+
 				if (!mm->level_fname)
 				{
 					break;
@@ -942,7 +942,7 @@ extern bool g_bPunishMePleaseICheatedOnThisLevel;
 					else
 					{
 						SLONG hash;
-						
+
 						hash  = (i + 1) * (m + 1) * (s + 1) * 3141;
 						hash  = hash % 12345;
 						hash += 0x9a2f;
@@ -1084,7 +1084,7 @@ void level_won(void)
 		//
 		// Lock frame-rate to 30 FPS
 		//
-#ifndef PSX		
+#ifndef PSX
 		do {
 			tick2 = GetTickCount();
 			timet = tick2 - tick1;
@@ -1192,7 +1192,7 @@ void	level_lost(void)
 		//
 		// Lock frame-rate to 30 FPS
 		//
-#ifndef PSX		
+#ifndef PSX
 		while(1)
 		{
 			tick2 = GetTickCount();

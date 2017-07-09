@@ -2,9 +2,8 @@
 // Guy Simmons, 20th November 1997.
 
 #include	"DDLib.h"
-#include	"c:\fallen\headers\Sound.h"
+#include	"fallen/headers/Sound.h"
 #include	"a3dmanager.h"
-#include	"snd_type.h"
 #include	"mfx.h"
 #include	"mfx_miles.h"
 
@@ -78,7 +77,7 @@ DWORD	DDLibThread(LPVOID param)
 	ShellActive	=	TRUE;
 	while(GetMessage(&msg,NULL,0,0))
 	{
-		TranslateMessage(&msg); 
+		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 	}
 	ShellActive	=	FALSE;
@@ -374,7 +373,7 @@ BOOL	LibShellActive(void)
 	// release any remembered keys
 	//
 	ClearLatchedKeys();
-	
+
 	while(1)
 	{
 		while(PeekMessage(&msg,NULL,0,0,PM_NOREMOVE))
@@ -443,7 +442,7 @@ BOOL	LibShellMessage(const char *pMessage, const char *pFile, ULONG dwLine)
 	BOOL		result;
 	CBYTE		buff1[512],
 				buff2[512];
-	ULONG		flag; 
+	ULONG		flag;
 
 	if (pMessage == NULL)
 	{

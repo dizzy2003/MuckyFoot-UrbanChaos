@@ -7,12 +7,12 @@
 #include "ware.h"
 #include "mav.h"
 
-//#include	"c:\fallen\editor\headers\collide.hpp"
-#include	"c:\fallen\editor\headers\map.h"
+//#include	"fallen/editor/headers/collide.hpp"
+#include	"fallen/editor/headers/map.h"
 #include	"animate.h"
 #include	"FMatrix.h"
 #ifndef	PSX
-#include	"c:\fallen\editor\headers\prim_draw.h"
+#include	"fallen/editor/headers/prim_draw.h"
 #else
 extern	void rotate_obj(SWORD xangle,SWORD yangle,SWORD zangle, Matrix33 *r3);
 
@@ -24,10 +24,10 @@ extern	void rotate_obj(SWORD xangle,SWORD yangle,SWORD zangle, Matrix33 *r3);
   jumping through the air in grab mode
   Jumping vertically in grab mode
   standing on a face and jumping vertically
-  
+
 
   so we should probably look for the edge of a walkable face within a certain radius
-  and a certain height range 
+  and a certain height range
 
 
 
@@ -82,7 +82,7 @@ SLONG	calc_angle(SLONG dx,SLONG dz)
 	*/
 
 	angle=angle&2047;
-	
+
 	return(angle);
 
 }
@@ -141,7 +141,7 @@ SLONG	find_cable_y_along(struct DFacet *p_facet,SLONG along)
 {
 	SLONG	max_at,y;
 	SLONG	angle_step1,angle_step2,count;
-	
+
 
 	angle_step1=(SWORD)p_facet->StyleIndex;
 	angle_step2=(SWORD)p_facet->Building;
@@ -266,7 +266,7 @@ extern	SLONG nearest_point_on_line_and_dist_and_along(	SLONG x1, SLONG z1,	SLONG
 		return(0);
 	}
 
-	
+
 	bot = p_facet->Y[0];
 	top = bot + p_facet->Height * 64;
 
@@ -566,7 +566,7 @@ round_again:;
 						else
 
 						{
-							rf	 = &roof_faces4[-face];	
+							rf	 = &roof_faces4[-face];
 
 							grab_px[0]=(rf->RX&127)<<8;
 							grab_pz[0]=(rf->RZ&127)<<8;
@@ -613,7 +613,7 @@ round_again:;
 							//
 							ULONG faceflag;
 							ULONG edgeflag;
-							
+
 							if(pass==0)
 							{
 								switch(i)
@@ -641,14 +641,14 @@ round_again:;
 							{
 								if(rf)
 								{
-									faceflag   = rf->DrawFlags;     
+									faceflag   = rf->DrawFlags;
 								}
 								edgeflag   = RFACE_FLAG_SLIDE_EDGE;
 								edgeflag <<= i;
 							}
 							else
 							{
-								faceflag   = p_f4->FaceFlags;     
+								faceflag   = p_f4->FaceFlags;
 								edgeflag   = FACE_FLAG_SLIDE_EDGE;
 								edgeflag <<= i;
 							}
@@ -708,7 +708,7 @@ round_again:;
 												&near_x,
 												&near_y,
 												&near_z);
-									
+
 									if (dist < radius && abs(near_y - y) < dy)
 									{
 										if (face > 0)
@@ -778,7 +778,7 @@ round_again:;
 											// Distance okay. Is this place too near a wall?
 											//
 
-											
+
 											SLONG cx1 = near_x;
 											SLONG cy1 = grab_py[p0];
 											SLONG cz1 = near_z;
@@ -819,7 +819,7 @@ round_again:;
 
 											cx3 += (+dx) * CHECK_WIDTH - (-dz) * CHECK_FORWARD;
 											cz3 += (+dz) * CHECK_WIDTH - (+dx) * CHECK_FORWARD;
-																	                          
+
 											cx4 += (-dx) * CHECK_WIDTH - (-dz) * CHECK_FORWARD;
 											cz4 += (-dz) * CHECK_WIDTH - (+dx) * CHECK_FORWARD;
 
@@ -830,7 +830,7 @@ round_again:;
 
 											SLONG face1;
 											SLONG face2;
-	
+
 											if (p_person->Genus.Person->Ware)
 											{
 												height1 = WARE_calc_height_at(p_person->Genus.Person->Ware, cx1,cz1);
@@ -992,7 +992,7 @@ round_again:;
 						floor_height = PAP_2HI(
 											(x >> PAP_SHIFT_HI) + MIN(dx, 0),
 											(z >> PAP_SHIFT_HI) + MIN(dz, 0)).Alt << FLOOR_HEIGHT_SHIFT;
-							
+
 						if(abs(floor_height-y)<dy)
 						{
 							if(dx==-1)
@@ -1169,7 +1169,7 @@ SLONG find_grab_face_in_sewers(
 								best_x     = x;
 								best_angle = 0;
 								break;
-								
+
 							default:
 								ASSERT(0);
 								break;
@@ -1256,7 +1256,7 @@ extern	struct	PrimPoint	*anim_mids; //[256];
 #endif
 
 
-	if (object==SUB_OBJECT_PREFERRED_HAND) 
+	if (object==SUB_OBJECT_PREFERRED_HAND)
 	{
 	//	object=(p_mthing->Genus.Person->Flags&FLAG_PERSON_OTHERHAND) ? SUB_OBJECT_RIGHT_HAND : SUB_OBJECT_LEFT_HAND;
 		object=SUB_OBJECT_LEFT_HAND;
@@ -1270,7 +1270,7 @@ extern	struct	PrimPoint	*anim_mids; //[256];
 	//	anim_info_next=&p_mthing->NextAnimElements[object];
 
 
-		
+
 		offset.M[0]	=	((anim_info->OffsetX+(((anim_info_next->OffsetX-anim_info->OffsetX)*tween)>>8))>>TWEEN_OFFSET_SHIFT)+wx;
 		offset.M[1]	=	((anim_info->OffsetY+(((anim_info_next->OffsetY-anim_info->OffsetY)*tween)>>8))>>TWEEN_OFFSET_SHIFT)+wy;
 		offset.M[2]	=	((anim_info->OffsetZ+(((anim_info_next->OffsetZ-anim_info->OffsetZ)*tween)>>8))>>TWEEN_OFFSET_SHIFT)+wz;
@@ -1284,7 +1284,7 @@ extern	struct	PrimPoint	*anim_mids; //[256];
 			FMATRIX_calc(
 				matrix,
 				p_mthing->Draw.Tweened->Angle,
-				p_mthing->Draw.Tweened->Tilt, 
+				p_mthing->Draw.Tweened->Tilt,
 				p_mthing->Draw.Tweened->Roll);
 
 			if (p_mthing->Class == CLASS_PERSON)
@@ -1314,7 +1314,7 @@ extern	struct	PrimPoint	*anim_mids; //[256];
 				offset.M[0],
 				offset.M[1],
 				offset.M[2]);
-		
+
 		   *x = offset.M[0];//+wx;
 		   *y = offset.M[1];//+wy;
 		   *z = offset.M[2];//+wz;
@@ -1407,7 +1407,7 @@ extern	struct	PrimPoint	*anim_mids; //[256];
 	//	anim_info_next=&p_mthing->NextAnimElements[object];
 
 
-		
+
 		offset.M[0]	=	((anim_info->OffsetX<<8)+(((anim_info_next->OffsetX-anim_info->OffsetX)*tween)>>0))>>(TWEEN_OFFSET_SHIFT+3)+wx;
 		offset.M[1]	=	((anim_info->OffsetY<<8)+(((anim_info_next->OffsetY-anim_info->OffsetY)*tween)>>0))>>(TWEEN_OFFSET_SHIFT+3)+wy;
 		offset.M[2]	=	((anim_info->OffsetZ<<8)+(((anim_info_next->OffsetZ-anim_info->OffsetZ)*tween)>>0))>>(TWEEN_OFFSET_SHIFT+3)+wz;
@@ -1489,7 +1489,7 @@ extern	struct	PrimPoint	*anim_mids; //[256];
 	//	anim_info_next=&p_mthing->NextAnimElements[object];
 
 
-		
+
 		offset.M[0]	=	((anim_info->OffsetX+(((anim_info_next->OffsetX-anim_info->OffsetX)*tween)>>8))>>TWEEN_OFFSET_SHIFT)+wx;
 		offset.M[1]	=	((anim_info->OffsetY+(((anim_info_next->OffsetY-anim_info->OffsetY)*tween)>>8))>>TWEEN_OFFSET_SHIFT)+wy;
 		offset.M[2]	=	((anim_info->OffsetZ+(((anim_info_next->OffsetZ-anim_info->OffsetZ)*tween)>>8))>>TWEEN_OFFSET_SHIFT)+wz;
@@ -1567,7 +1567,7 @@ extern	struct	PrimPoint	*anim_mids; //[256];
 	//	anim_info_next=&p_mthing->NextAnimElements[object];
 
 
-		
+
 		*x	=	(anim_info->OffsetX+(((anim_info_next->OffsetX-anim_info->OffsetX)*tween)>>8))>>TWEEN_OFFSET_SHIFT;
 		*y	=	(anim_info->OffsetY+(((anim_info_next->OffsetY-anim_info->OffsetY)*tween)>>8))>>TWEEN_OFFSET_SHIFT;
 		*z	=	(anim_info->OffsetZ+(((anim_info_next->OffsetZ-anim_info->OffsetZ)*tween)>>8))>>TWEEN_OFFSET_SHIFT;

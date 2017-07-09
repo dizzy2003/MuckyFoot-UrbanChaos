@@ -63,7 +63,7 @@ void OpenTGAClump(const char* clumpfn, size_t maxid, bool readonly)
 
 	delete tclump;
 	tclump = NULL;
-	
+
 	writing = !readonly;
 
 	tclump = new FileClump(clumpfn, maxid, readonly);
@@ -273,7 +273,7 @@ TGA_Info TGA_load_from_file(const CBYTE *file, SLONG max_width, SLONG max_height
 		MF_Fclose(fd);
 		return ans;
 	}
-	
+
 	if (tga_width  > max_width ||
 		tga_height > max_height)
 	{
@@ -304,7 +304,7 @@ TGA_Info TGA_load_from_file(const CBYTE *file, SLONG max_width, SLONG max_height
 		SLONG entries      = header[5] + header[6] * 256;
 		SLONG bitsperentry = header[7];
 		ULONG length;
-		
+
 		length = ( entries * bitsperentry + 7 ) >> 3;
 		ASSERT(length<=256*3);
 
@@ -511,14 +511,14 @@ static void WriteSquished(UWORD* buffer, size_t nwords, ULONG id)
 	{
 		UWORD*	squished = new UWORD[(bits_required + 15) / 16];
 		UWORD*	sptr = squished;
-		
+
 		*sptr++ = 0xFFFF;	// marker for compressed file
 		*sptr++ = buffer[0];
 		*sptr++ = buffer[1];
 		*sptr++ = buffer[2];
 		*sptr++ = total;
 
-		for (ii = 0; ii < total; ii++)
+		for (size_t ii = 0; ii < total; ii++)
 		{
 			*sptr++ = mapping[ii];
 		}
@@ -530,7 +530,7 @@ static void WriteSquished(UWORD* buffer, size_t nwords, ULONG id)
 		UWORD	cword = 0;	// current word
 		UWORD	cbits = 0;	// # bits in current word
 
-		for (ii = 3; ii < nwords; ii++)
+		for (size_t ii = 3; ii < nwords; ii++)
 		{
 			UWORD	encoded = used[buffer[ii]] - 1;
 
@@ -589,7 +589,7 @@ static UBYTE* ReadSquished(ULONG id)
 
 	UBYTE*	output = new UBYTE[2 * (nwords + 3)];
 	UWORD*	optr = (UWORD*)output;
-	
+
 	// copy header
 	*optr++ = *bptr++;
 	*optr++ = *bptr++;
@@ -612,7 +612,7 @@ static UBYTE* ReadSquished(ULONG id)
 	int		cbits = 16;
 	UWORD	cword = *bptr++;
 
-	for (ii = 0; ii < nwords; ii++)
+	for (size_t ii = 0; ii < nwords; ii++)
 	{
 		UWORD	encoded;
 
@@ -817,10 +817,10 @@ TGA_Info TGA_load_remap(const CBYTE *file,const CBYTE *pname,SLONG max_width,SLO
 		return ans;
 	}
 
-	if (fread(&pal[0], 1, 24, phandle) != 24) 
+	if (fread(&pal[0], 1, 24, phandle) != 24)
 			goto file_error;
 
-	if (fread(&remap_pal[0], 1, 256*4, phandle) != 256*4) 
+	if (fread(&remap_pal[0], 1, 256*4, phandle) != 256*4)
 			goto file_error;
 
 	MF_Fclose(phandle);
@@ -891,7 +891,7 @@ TGA_Info TGA_load_remap(const CBYTE *file,const CBYTE *pname,SLONG max_width,SLO
 		return ans;
 	}
 
-	
+
 	if (tga_width  > max_width ||
 		tga_height > max_height)
 	{
@@ -909,7 +909,7 @@ TGA_Info TGA_load_remap(const CBYTE *file,const CBYTE *pname,SLONG max_width,SLO
 	//
 	// Skip past the image identification field.
 	//
-	
+
 	for (i = 0; i < tga_id_length; i++)
 	{
 		if (fread(&junk, sizeof(UBYTE), 1, handle) != 1) goto file_error;
@@ -925,18 +925,18 @@ TGA_Info TGA_load_remap(const CBYTE *file,const CBYTE *pname,SLONG max_width,SLO
 		SLONG entries      = header[5] + header[6] * 256;
 		SLONG bitsperentry = header[7];
 		SLONG length;
-		
+
 		length = ( entries * bitsperentry + 7 ) >> 3;
 		ASSERT(length<=256*3);
-		
+
 		{
-			if (fread(&pal[0], sizeof(UBYTE), length, handle) != length) 
+			if (fread(&pal[0], sizeof(UBYTE), length, handle) != length)
 				goto file_error;
-			
+
 		}
 		for (i = 0; i < tga_width * tga_height; i++)
 		{
-			if (fread(&col, sizeof(UBYTE), 1, handle) != 1) 
+			if (fread(&col, sizeof(UBYTE), 1, handle) != 1)
 				goto file_error;
 			col=255-col;
 
@@ -1102,7 +1102,7 @@ TGA_Info TGA_load_psx(const CBYTE *file,SLONG        max_width,SLONG        max_
 		return ans;
 	}
 
-	
+
 	if (tga_width  > max_width ||
 		tga_height > max_height)
 	{
@@ -1122,7 +1122,7 @@ TGA_Info TGA_load_psx(const CBYTE *file,SLONG        max_width,SLONG        max_
 	//
 	// Skip past the image identification field.
 	//
-	
+
 	for (i = 0; i < tga_id_length; i++)
 	{
 		if (fread(&junk, sizeof(UBYTE), 1, handle) != 1) goto file_error;
@@ -1138,14 +1138,14 @@ TGA_Info TGA_load_psx(const CBYTE *file,SLONG        max_width,SLONG        max_
 		SLONG entries      = header[5] + header[6] * 256;
 		SLONG bitsperentry = header[7];
 		SLONG length;
-		
+
 		length = entries * bitsperentry + 7 >> 3;
 		ASSERT(length<=256*3);
-		
-		if (fread(&pal[i], sizeof(UBYTE), length, handle) != length) 
+
+		if (fread(&pal[i], sizeof(UBYTE), length, handle) != length)
 			goto file_error;
 
-		if (fread(data, sizeof(UBYTE),tga_width * tga_height, handle) != tga_width * tga_height) 
+		if (fread(data, sizeof(UBYTE),tga_width * tga_height, handle) != tga_width * tga_height)
 			goto file_error;
 
 		//
@@ -1208,7 +1208,7 @@ TGA_Info TGA_load_psx(const CBYTE *file,SLONG        max_width,SLONG        max_
 		//
 		// read the pal indexes straight in, no conversion to RGB
 		//
-		
+
 	}
 	else
 	{
@@ -1223,7 +1223,7 @@ TGA_Info TGA_load_psx(const CBYTE *file,SLONG        max_width,SLONG        max_
 		UBYTE	remap[256];
 		SLONG	next_pal=0;
 		memset(remap,0,255);
-		if (fread(data, sizeof(UBYTE),tga_width * tga_height, handle) != tga_width * tga_height) 
+		if (fread(data, sizeof(UBYTE),tga_width * tga_height, handle) != tga_width * tga_height)
 			goto file_error;
 
 		for(c0=0;c0<tga_width * tga_height;c0++)
@@ -1291,8 +1291,8 @@ TGA_Info TGA_load_psx(const CBYTE *file,SLONG        max_width,SLONG        max_
 UBYTE TGA_header[18] =
 {
 	0, 0, 2, 0,
-	0, 0, 0, 0, 
-	0, 0, 0, 0, 
+	0, 0, 0, 0,
+	0, 0, 0, 0,
 	0, 1,	// Width  LSB:MSB
 	0, 1, 	// Height LSB:MSB
 	24,		// Pixel depth

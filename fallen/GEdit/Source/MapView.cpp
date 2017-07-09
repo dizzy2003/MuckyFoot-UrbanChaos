@@ -27,7 +27,7 @@
 #include	"TrapSetup.h"
 #include	"WayWind.h"
 #include	"WSpace.h"
-#include	"C:\fallen\DDEngine\Headers\poly.h"
+#include	"fallen/DDEngine/Headers/poly.h"
 #include	"inputbox.h"
 #include	"pap.h"
 #include	"mav.h"
@@ -37,7 +37,7 @@
 
 #include	"game.h"
 #include	"inside2.h"
-#include	"c:\fallen\headers\memory.h"
+#include	"fallen/headers/memory.h"
 
 #include	"cutscene.h"
 
@@ -325,7 +325,7 @@ SLONG OpenProperties(EventPoint *ep) {
 		case WPT_CREATE_CREATURE:
 			do_creature_setup(ep);
 			break;
-		
+
 		case WPT_CREATE_CAMERA:
 		case WPT_CAMERA_WAYPOINT:
 			// essentially same properties...
@@ -736,7 +736,7 @@ LRESULT	CALLBACK	map_view_proc	(
 //					flag=(!prim_height) ? OB_FLAG_ON_FLOOR : 0;
 
 					INDOORS_INDEX=calc_inside_for_xyz(mouse_world_x, (mouse_world_y + prim_height), mouse_world_z,&INDOORS_ROOM);
-					if (INDOORS_INDEX) 
+					if (INDOORS_INDEX)
 						INDOORS_DBUILDING=inside_storeys[INDOORS_INDEX].Building;
 					else INDOORS_DBUILDING=0;
 
@@ -756,7 +756,7 @@ LRESULT	CALLBACK	map_view_proc	(
 					prim_height=OB_ob[prim_index].y-mouse_world_y;
 					prim_num=OB_ob[prim_index].prim;
 					INDOORS_INDEX=calc_inside_for_xyz(mouse_world_x, (mouse_world_y + prim_height), mouse_world_z,&INDOORS_ROOM);
-					if (INDOORS_INDEX) 
+					if (INDOORS_INDEX)
 						INDOORS_DBUILDING=inside_storeys[INDOORS_INDEX].Building;
 					else INDOORS_DBUILDING=0;
 				}
@@ -770,7 +770,7 @@ LRESULT	CALLBACK	map_view_proc	(
 				SetZone(mouse_world_x>>8,mouse_world_z>>8,mask);
 				zone_state=mask & zone_mask;
 				return 0;
-			} 
+			}
 			if ((link_mode>0)&&(link_mode<3)) {
 				if (map_valid && mouse_valid && hilited_ep) {
 					if (selected_ep) {
@@ -890,7 +890,7 @@ LRESULT	CALLBACK	map_view_proc	(
 			if(hilited_ep)
 			{
 				OpenProperties(hilited_ep);
-				ep_to_controls2(selected_ep); 
+				ep_to_controls2(selected_ep);
 				return 0;
 			}
 			break;
@@ -956,10 +956,10 @@ LRESULT	CALLBACK	map_view_proc	(
 				SLONG check;
 				//	Bring up the context menu.
 				mv_menu	=	GetSubMenu(LoadMenu(GEDIT_hinstance,MAKEINTRESOURCE(IDR_GEDIT_POPUPS)),3);
-				
+
 				// let's just be extra windowsy about it... heh. :P
 				if (HasProperties(hilited_ep))
-					SetMenuDefaultItem( mv_menu, ID_EVENTPOINTROOT_PROPERTIES, 0); 
+					SetMenuDefaultItem( mv_menu, ID_EVENTPOINTROOT_PROPERTIES, 0);
 				else
 					EnableMenuItem( mv_menu, ID_EVENTPOINTROOT_PROPERTIES, MF_BYCOMMAND|MF_DISABLED|MF_GRAYED );
 
@@ -989,7 +989,7 @@ LRESULT	CALLBACK	map_view_proc	(
 									0,GEDIT_view_wnd,NULL
 								);
 				DestroyMenu(mv_menu);
-				
+
 				workspace_changed	=	TRUE;
 
 				return	0;
@@ -1034,7 +1034,7 @@ LRESULT	CALLBACK	map_view_proc	(
 //					if (ControlFlag) mouse_world_y=dry;
 
 					INDOORS_INDEX=calc_inside_for_xyz(mouse_world_x, (mouse_world_y + prim_height), mouse_world_z,&INDOORS_ROOM);
-					if (INDOORS_INDEX) 
+					if (INDOORS_INDEX)
 						INDOORS_DBUILDING=inside_storeys[INDOORS_INDEX].Building;
 					else INDOORS_DBUILDING=0;
 
@@ -1125,7 +1125,7 @@ LRESULT	CALLBACK	map_view_proc	(
 						mouse_world_y = PAP_calc_map_height_at(mouse_world_x, mouse_world_z);
 						height=0;
 					}
-				} else 
+				} else
 					INDOORS_INDEX=0;
 
 				//	Set new position.
@@ -1359,13 +1359,13 @@ void AENG_world_text(
 		UBYTE  shadowed_or_not,
 		CBYTE *fmt, ...);
 void AENG_world_line(
-		SLONG x1, SLONG y1, SLONG z1, SLONG width1, ULONG colour1, 
+		SLONG x1, SLONG y1, SLONG z1, SLONG width1, ULONG colour1,
 		SLONG x2, SLONG y2, SLONG z2, SLONG width2, ULONG colour2,
 		SLONG sort_to_front);
 
 
 void AENG_world_line_alpha(
-		SLONG x1, SLONG y1, SLONG z1, SLONG width1, ULONG colour1, 
+		SLONG x1, SLONG y1, SLONG z1, SLONG width1, ULONG colour1,
 		SLONG x2, SLONG y2, SLONG z2, SLONG width2, ULONG colour2,
 		SLONG sort_to_front)
 {
@@ -1589,7 +1589,7 @@ void	process_view_wind(void)
 				NULL,0);
 
 			INDOORS_INDEX=calc_inside_for_xyz(mouse_world_x, (mouse_world_y + prim_height), mouse_world_z,&INDOORS_ROOM);
-			if (INDOORS_INDEX) 
+			if (INDOORS_INDEX)
 				INDOORS_DBUILDING=inside_storeys[INDOORS_INDEX].Building;
 			else INDOORS_DBUILDING=0;
 
@@ -1686,7 +1686,7 @@ void	process_view_wind(void)
 					}
 
 //					if(ep_ptr->TriggeredBy==TT_RADIUS)
-					if (WaypointUses[ep_ptr->TriggeredBy] & WPU_RADIUS) 
+					if (WaypointUses[ep_ptr->TriggeredBy] & WPU_RADIUS)
 					{
 						GI_rad_trigger_draw	(
 												mouse.x,
@@ -1732,7 +1732,7 @@ void	process_view_wind(void)
 							}
 						}
 					}
-					
+
 					// and the boolean lines where appropriate
 //					if ((ep_ptr->TriggeredBy==TT_BOOLEANAND)||(ep_ptr->TriggeredBy==TT_BOOLEANOR)||(ep_ptr->TriggeredBy==TT_KILLED)||(ep_ptr->TriggeredBy==TT_COUNTDOWN)) {
 					if (WaypointUses[ep_ptr->TriggeredBy] & WPU_BOOLEAN) {
@@ -1923,7 +1923,7 @@ void	process_view_wind(void)
 								);
 			}
 		}
-		
+
 		//	Draw the text.
 		FONT_buffer_draw();
 		CONSOLE_draw();

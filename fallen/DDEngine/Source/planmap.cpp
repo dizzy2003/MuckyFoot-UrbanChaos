@@ -3,8 +3,8 @@
 #include <math.h>
 #include "aeng.h"
 #include "game.h"
-#include "c:\fallen\headers\pap.h"
-#include "c:\fallen\headers\road.h"
+#include "fallen/headers/pap.h"
+#include "fallen/headers/road.h"
 #include "planmap.h"
 
 
@@ -109,7 +109,7 @@ void	draw_shadow_rect(SLONG csx,SLONG csy,SLONG pixelw,SLONG red,SLONG green,SLO
 
 			px=csx+dx;
 			py=csy+dy;
-			
+
 			if(clipped)
 			{
 				if(px<clip_left||px>=clip_right||py<clip_top||py>=clip_bot)
@@ -214,7 +214,7 @@ void	draw_shadow_rect(SLONG csx,SLONG csy,SLONG pixelw,SLONG red,SLONG green,SLO
 					//	 ...
 					//	 ...
 					if(dx+dy>pixelw && dy>(pixelw>>1))
-					{					
+					{
 						r>>=1;
 						g>>=1;
 						b>>=1;
@@ -248,7 +248,7 @@ void	get_screen_xy(SLONG *x,SLONG *z)
 	rx>>=8;
 
 	rx+=screen_x+(screen_width>>1);
-	
+
 	rz-=screen_mz;
 	rz*=block_size; //screen_pitch;
 	rz>>=8;
@@ -280,7 +280,7 @@ void	map_beacon_draw(SLONG x,SLONG z,ULONG col,ULONG flag,UWORD dir)
 		{
 			//
 			// Always draw beacons.
-			// 
+			//
 		}
 		else
 		{
@@ -297,7 +297,7 @@ void	map_beacon_draw(SLONG x,SLONG z,ULONG col,ULONG flag,UWORD dir)
 		else
 			size=3;
 	}
-		
+
 	draw_shadow_rect(x-size,z-size,size<<1,0,0,0 ,0,0);
 	draw_shadow_rect(x-size+1,z-size+1,(size-1)<<1,col>>16,(col&0xff00)>>8,(col&0xff) ,0,0);
 
@@ -353,7 +353,7 @@ extern UBYTE* image_mem;
 	block_size=pixelw;
 
 	m=mem;
-	
+
 
 /*	for(c0=0;c0<640*480;c0++)
 	{
@@ -386,7 +386,7 @@ extern UBYTE* image_mem;
 	{
 		for(x=minx;x<maxx;x++)
 		{
-			
+
 			if(x>1&&x<127&&z>1&&z<127)
 			{
 				if(player_visited[x>>3][z]&(1<<(x&7)))
@@ -411,7 +411,7 @@ extern UBYTE* image_mem;
 					{
 						edge|=EDGE_BOTTOM;
 					}
-					
+
 
 					if((PAP_2HI(x,z).Flags&PAP_FLAG_HIDDEN)==0)
 					{

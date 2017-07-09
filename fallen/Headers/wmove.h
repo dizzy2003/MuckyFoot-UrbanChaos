@@ -5,14 +5,14 @@
 #ifndef _WMOVE_
 #define _WMOVE_
 
-//#include	"c:\fallen\headers\memory.h"
+//#include	"fallen/headers/memory.h"
 
 typedef struct
 {
 	UWORD x;
 	SWORD y;
 	UWORD z;
-	
+
 } WMOVE_Point;
 
 
@@ -20,7 +20,7 @@ typedef struct
 typedef struct
 {
 	UWORD face4;	// Index into the prim_faces4[] array for the walkable face.
-	
+
 	//
 	// The position of the walkable face last frame. All WMOVE faces are rectangles.
 	// Only three points are given. The last point is implicit.
@@ -89,7 +89,7 @@ void WMOVE_relative_pos(
 
 //
 // Draws the walkable faces using AENG_world_line()
-// 
+//
 
 void WMOVE_draw(void);
 

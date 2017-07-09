@@ -22,7 +22,7 @@
 #include "memory.h"
 #include "collide.h"
 #include	"tracks.h"
-#include	"c:\fallen\headers\fc.h"
+#include	"fallen/headers/fc.h"
 #include	"barrel.h"
 #include	"eway.h"
 #include "mfx.h"
@@ -37,7 +37,7 @@
  *
  */
 
-void CHOPPER_draw_chopper(Thing *p_chopper) 
+void CHOPPER_draw_chopper(Thing *p_chopper)
 {
 
 	Chopper *chopper = CHOPPER_get_chopper(p_chopper);
@@ -178,7 +178,7 @@ void CHOPPER_draw_chopper(Thing *p_chopper)
 
 
 
-void TRACKS_DrawTrack(Thing *p_thing) 
+void TRACKS_DrawTrack(Thing *p_thing)
 {
 	Track *walk=p_thing->Genus.Track;
 	SLONG x,y,z,id,diff;
@@ -279,7 +279,7 @@ extern Particle		particles[PSYSTEM_MAX_PARTICLES];
 extern SLONG		next_free, next_used;
 
 
-void PARTICLE_Draw() 
+void PARTICLE_Draw()
 {
 	SLONG ctr;
 	UBYTE ndx;
@@ -289,7 +289,7 @@ void PARTICLE_Draw()
 //	p=particles;
 //	for (ctr=0;ctr<PSYSTEM_MAX_PARTICLES;ctr++,p++)
 	for (p=particles+next_used;p!=particles;p=particles+p->prev)
-//		if (p->priority) 
+//		if (p->priority)
 		{
 			if (!p->sprite) {
 				u=0; v=0; w=1; h=1;
@@ -321,7 +321,7 @@ void PARTICLE_Draw()
 				0xff000000,
 				p->page,
 				u, v, w, h,
-				SPRITE_SORT_NORMAL);		
+				SPRITE_SORT_NORMAL);
 		}
 }
 
@@ -512,7 +512,7 @@ void SPRITE_draw_tex2(
 		{
 			//
 			// Off screen.
-			// 
+			//
 		}
 		else
 		{
@@ -567,7 +567,7 @@ void SPRITE_draw_tex2(
 					pp[3].z = 0.01F;
 					pp[3].Z = 1.00F;
 					break;
-				
+
 				default:
 					ASSERT(0);
 			}
@@ -659,7 +659,7 @@ void	draw_flame_element2(SLONG x,SLONG y,SLONG z,SLONG c0)
 				break;
 			}
 		}
-	
+
 }
 
 
@@ -828,7 +828,7 @@ void PYRO_draw_pyro(Thing *p_pyro) {
 		break;
 
 	case PYRO_BONFIRE:
-		if (pyro->thing->Flags&FLAGS_IN_VIEW) 
+		if (pyro->thing->Flags&FLAGS_IN_VIEW)
 		{
 
 extern	int AENG_detail_skyline;
@@ -867,7 +867,7 @@ extern UBYTE sw_hack;
 		break;
 
 	case PYRO_WHOOMPH:
-		if (pyro->thing->Flags&FLAGS_IN_VIEW) 
+		if (pyro->thing->Flags&FLAGS_IN_VIEW)
 		{
 
 
@@ -1002,7 +1002,7 @@ extern UBYTE sw_hack;
 							py = bob.Y + (Random()&0x3fff)-0x13ff;
 							pz = bob.Z + (Random()&0x3fff)-0x1fff;
 							RIBBON_extend(pyro->radii[0],px>>8,py>>8,pz>>8);
-						}					
+						}
 						break;
 					}
 					break;
@@ -1027,7 +1027,7 @@ extern UBYTE sw_hack;
 							FMATRIX_MUL(matrix,pp->x,pp->y,pp->z);
 
 							pos.X = (pp->x)+(pyro->victim->WorldPos.X>>8);
-							pos.Y = (pp->y)+(pyro->victim->WorldPos.Y>>8); 
+							pos.Y = (pp->y)+(pyro->victim->WorldPos.Y>>8);
 							pos.Z = (pp->z)+(pyro->victim->WorldPos.Z>>8);
 
 							RIBBON_extend(pyro->radii[0],pos.X,pos.Y,pos.Z);
@@ -1048,14 +1048,14 @@ extern UBYTE sw_hack;
 								FMATRIX_MUL(matrix,pp->x,pp->y,pp->z);
 
 								pos.X = (pp->x)+(pyro->victim->WorldPos.X>>8);
-								pos.Y = (pp->y)+(pyro->victim->WorldPos.Y>>8); 
+								pos.Y = (pp->y)+(pyro->victim->WorldPos.Y>>8);
 								pos.Z = (pp->z)+(pyro->victim->WorldPos.Z>>8);
 
 								for (j=0;j<8;j++) {
 									draw_flame_element2(pos.X,pos.Y,pos.Z,i+(j*128));
 									draw_flame_element2(pos.X,pos.Y,pos.Z,i+(j*128)+1);
 								}
-							  
+
 							  }
 						}
 
@@ -1083,7 +1083,7 @@ extern UBYTE sw_hack;
 								p,
 								&px,
 								&py,
-								&pz);				
+								&pz);
 							px += pyro->victim->WorldPos.X >> 8;
 							py += pyro->victim->WorldPos.Y >> 8;
 							pz += pyro->victim->WorldPos.Z >> 8;
@@ -1103,7 +1103,7 @@ extern UBYTE sw_hack;
 									PFLAG_SPRITEANI|PFLAG_SPRITELOOP|PFLAG_FADE2|PFLAG_RESIZE,
 									300,50,1,1,1);
 							}*/
-						}					
+						}
 					}
 					return;
 				}
@@ -1136,7 +1136,7 @@ extern UBYTE sw_hack;
 						FMATRIX_MUL(matrix,pp->x,pp->y,pp->z);
 
 						pos.X = (pp->x)+(pyro->victim->WorldPos.X>>8);
-						pos.Y = (pp->y)+(pyro->victim->WorldPos.Y>>8); 
+						pos.Y = (pp->y)+(pyro->victim->WorldPos.Y>>8);
 						pos.Z = (pp->z)+(pyro->victim->WorldPos.Z>>8);
 
 						RIBBON_extend(pyro->radii[0],pos.X,pos.Y,pos.Z);
@@ -1164,12 +1164,12 @@ extern UBYTE sw_hack;
 							p,
 							&px,
 							&py,
-							&pz);				
+							&pz);
 						px += pyro->victim->WorldPos.X >> 8;
 						py += pyro->victim->WorldPos.Y >> 8;
 						pz += pyro->victim->WorldPos.Z >> 8;
 						RIBBON_extend(pyro->radii[i],px,py,pz);
-					}					
+					}
 					}
 					return;
 				default:
@@ -1177,7 +1177,7 @@ extern UBYTE sw_hack;
 					pos.X>>=8; pos.Y>>=8; pos.Z>>=8;
 					for (i=0;i<40;i++)
 						draw_flame_element(pos.X,pos.Y,pos.Z,i,0);
-					return;					
+					return;
 				}
 
 
@@ -1194,7 +1194,7 @@ extern UBYTE sw_hack;
 					FMATRIX_MUL(matrix,pp->x,pp->y,pp->z);
 
 					pos.X = (pp->x)+(pyro->victim->WorldPos.X>>8);
-					pos.Y = (pp->y)+(pyro->victim->WorldPos.Y>>8); 
+					pos.Y = (pp->y)+(pyro->victim->WorldPos.Y>>8);
 					pos.Z = (pp->z)+(pyro->victim->WorldPos.Z>>8);
 
 					for (j=0;j<8;j++) {
@@ -1263,7 +1263,7 @@ extern UBYTE sw_hack;
 		//col|=0x007f7f7f;
 		//SPRITE_draw_tex(pyro->thing->WorldPos.X>>8,pyro->thing->WorldPos.Y>>8,pyro->thing->WorldPos.Z>>8,50,col,0xff000000,POLY_PAGE_FLAMES, 0.0,0.0,1.0,1.0, SPRITE_SORT_NORMAL);
 		//PYRO_draw_blob(pyro);
-		
+
 			SLONG x,y,z,d,h,i;
 
 			if (pyro->counter<10)
@@ -1308,7 +1308,7 @@ extern UBYTE sw_hack;
 					x>>=8; z>>=8;
 					h=(127+(Random()&0x7f))<<24;
 					h|=0xFFFFFF;
-					
+
 					PARTICLE_Add(pyro->thing->WorldPos.X,pyro->thing->WorldPos.Y,pyro->thing->WorldPos.Z,
 						x,y,z,
 						POLY_PAGE_FLAMES2,2+((Random()&3)<<2),h,
@@ -1355,7 +1355,7 @@ extern UBYTE sw_hack;
 					70+(Random()&0x3f),100,1,2,4+(Random()&3));
 				}
 			}
-		
+
 		}
 		break;
 
@@ -1420,7 +1420,7 @@ extern UBYTE sw_hack;
 			pt2.u=1.0; pt2.v=1.0;
 			break;
 		  }
-		  if (POLY_valid_line(&pt1,&pt2)) 
+		  if (POLY_valid_line(&pt1,&pt2))
 		  {
 			if (pyro->counter>1)
 				POLY_add_line_tex_uv(&pt1,&pt2,42,42,POLY_PAGE_HITSPANG,0);
@@ -1683,7 +1683,7 @@ void PYRO_draw_dustwave(Pyro *pyro) {
 		shock_sector++;
 		if (shock_sector==DUSTWAVE_SECTORS) shock_sector=0;
 	}
-	
+
 
 }
 */
@@ -1849,7 +1849,7 @@ void PYRO_draw_dustwave(Pyro *pyro) {
 		shock_sector++;
 		if (shock_sector==iNumSectors) shock_sector=0;
 	}
-	
+
 
 }
 
@@ -1891,7 +1891,7 @@ void PYRO_draw_explosion2(Pyro *pyro) {
 			radius=COS(i*128)>>8;
 
 			// generate ring x,y
-	
+
 			for (j=0;j<8;j++) {
 				pt->x=(radius*((SLONG)SIN(j*256)))/256;
 				pt->z=(radius*((SLONG)COS(j*256)))/256;
@@ -2102,7 +2102,7 @@ void PYRO_draw_newdome(Pyro *pyro) {
 //			radius+=Random()&0x7f;
 
 			// generate ring x,y
-	
+
 			for (j=0;j<8;j++) {
 				pt->x=(radius*((SLONG)SIN(j*256)))/256;
 				pt->z=(radius*((SLONG)COS(j*256)))/256;
@@ -2280,7 +2280,7 @@ void PYRO_draw_newdome(Pyro *pyro) {
 
 
 void PYRO_alpha_line(
-		SLONG x1, SLONG y1, SLONG z1, SLONG width1, ULONG colour1, 
+		SLONG x1, SLONG y1, SLONG z1, SLONG width1, ULONG colour1,
 		SLONG x2, SLONG y2, SLONG z2, SLONG width2, ULONG colour2,
 		SLONG sort_to_front)
 {
@@ -2393,7 +2393,7 @@ void PYRO_draw_streamer(Pyro *pyro) {
 
 }
 
-void PYRO_draw_blob(Pyro *p_thing) 
+void PYRO_draw_blob(Pyro *p_thing)
 {
 
 }
@@ -2509,7 +2509,7 @@ void PYRO_draw_armageddon(Pyro *pyro)
 extern	void ANIM_obj_draw(Thing *p_thing,DrawTween *dt);
 extern	void ANIM_obj_draw_warped(Thing *p_thing,DrawTween *dt);
 
-void ANIMAL_draw(Thing *p_thing) 
+void ANIMAL_draw(Thing *p_thing)
 {
 	UBYTE i;
 	Animal *animal=ANIMAL_get_animal(p_thing);
@@ -2535,7 +2535,7 @@ void ANIMAL_draw(Thing *p_thing)
 /*
 	for (i=0;i<ANIMAL_body_size(animal);i++)
 		ANIM_obj_draw_warped(p_thing,dt++);*/
-	
+
 }
 
 #endif
@@ -2594,7 +2594,7 @@ void RIBBON_draw_ribbon(Ribbon *ribbon) {
 		ASSERT(ctr<MAX_RIBBON_SIZE);
 	} while (i!=ribbon->Head); // egad!
 
-	
+
 }
 
 /*************************************************************
@@ -2688,7 +2688,7 @@ void SPRITE_draw_rotated(
 		{
 			//
 			// Off screen.
-			// 
+			//
 		}
 		else
 		{
@@ -2771,7 +2771,7 @@ void SPRITE_draw_rotated(
 					pp[3].z = 0.01F;
 					pp[3].Z = 1.00F;
 					break;
-				
+
 				default:
 					ASSERT(0);
 			}
@@ -2858,7 +2858,7 @@ void BLOOM_flare_draw(SLONG x, SLONG y, SLONG z, SLONG str) {
 		SLONG dz = abs(z - (fc_z >> 8));
 
 		SLONG dist = QDIST3(dx,dy,dz);
-		
+
 		// scale = 256 - (dist * 256 / (16 * 256)); // surely that's nonsense mark?
 		scale = 256 - (dist / 16);
 
@@ -2872,14 +2872,14 @@ void BLOOM_flare_draw(SLONG x, SLONG y, SLONG z, SLONG str) {
 		scale  *= str;
 		scale >>= 8;
 	}
-	
+
 
 //	scale=str;
 
 	//TRACE("final flare scale: %d\n",scale);
 	if (!scale) return;
 
-	for (i=-12;i<15;i++) 
+	for (i=-12;i<15;i++)
 	  if (i) {
 		j=abs(i>>2);
 		j*=i;
@@ -2922,7 +2922,7 @@ void BLOOM_flare_draw(SLONG x, SLONG y, SLONG z, SLONG str) {
 			POLY_add_quad(quad, POLY_PAGE_LENSFLARE, FALSE, true);
 	  }
 
-	
+
 }
 
 void BLOOM_draw(SLONG x, SLONG y, SLONG z, SLONG dx, SLONG dy, SLONG dz, SLONG col, UBYTE opts) {
@@ -2950,7 +2950,7 @@ void BLOOM_draw(SLONG x, SLONG y, SLONG z, SLONG dx, SLONG dy, SLONG dz, SLONG c
 						fc_x>>8,fc_y>>8,fc_z>>8,
 						LOS_FLAG_IGNORE_PRIMS)) return;
 
-	if ((!dx)&&(!dy)&&(!dz)) 
+	if ((!dx)&&(!dy)&&(!dz))
 		dot=-255;
 	else {
 		// first order of the day: calculate the dot product of the light and view normal
@@ -2996,7 +2996,7 @@ void BLOOM_draw(SLONG x, SLONG y, SLONG z, SLONG dx, SLONG dy, SLONG dz, SLONG c
 		pt1.specular=pt2.specular=0xFF000000;
 
 		sz*=3;
-		
+
 		if (POLY_valid_line(&pt1, &pt2))
 			POLY_add_line_tex(&pt1, &pt2, sz>>2, sz, POLY_PAGE_BLOOM2, 0);
 	}
@@ -3024,7 +3024,7 @@ void DRAWXTRA_Special(Thing *p_thing) {
 		  BLOOM_draw(p_thing->WorldPos.X>>8,(p_thing->WorldPos.Y>>8)+25,p_thing->WorldPos.Z>>8,
 			dx,0,dz,0x7F0000,BLOOM_BEAM);
 		}
-		else 
+		else
 		{
 		  c0=3+(THING_NUMBER(p_thing)&7);
 		  c0=(((GAME_TURN*c0)+(THING_NUMBER(p_thing)*9))<<4)&2047;
@@ -3076,7 +3076,7 @@ void DRAW2D_Box(SLONG x, SLONG y, SLONG ox, SLONG oy, SLONG rgb, UBYTE flag, UBY
 	pp[1].X=ox;	pp[1].Y=y;
 	pp[2].X=x;	pp[2].Y=oy;
 	pp[3].X=ox;	pp[3].Y=oy;
-	
+
 	POLY_add_quad(quad,page,FALSE,TRUE);
 
 }
@@ -3095,7 +3095,7 @@ void DRAW2D_Box_Page(SLONG x, SLONG y, SLONG ox, SLONG oy, SLONG rgb, SLONG page
 	pp[1].X=ox;	pp[1].Y=y;
 	pp[2].X=x;	pp[2].Y=oy;
 	pp[3].X=ox;	pp[3].Y=oy;
-	
+
 	POLY_add_quad(quad,page,FALSE,TRUE);
 
 }
@@ -3113,7 +3113,7 @@ void DRAW2D_Tri(SLONG x, SLONG y, SLONG ox, SLONG oy, SLONG tx, SLONG ty, SLONG 
 	pp[0].X=x;	pp[0].Y=y;
 	pp[1].X=ox;	pp[1].Y=oy;
 	pp[2].X=tx;	pp[2].Y=ty;
-	
+
 	POLY_add_triangle(tri,page,FALSE,TRUE);
 }
 
@@ -3130,7 +3130,7 @@ void DRAW2D_Sprite(SLONG x, SLONG y, SLONG ox, SLONG oy, float u, float v, float
 	pp[1].X=ox;	pp[1].Y=y;	pp[1].u=ou;	pp[1].v=v;
 	pp[2].X=x;	pp[2].Y=oy;	pp[2].u=u;	pp[2].v=ov;
 	pp[3].X=ox;	pp[3].Y=oy;	pp[3].u=ou;	pp[3].v=ov;
-	
+
 	POLY_add_quad(quad,page,FALSE,TRUE);
 }
 
@@ -3177,7 +3177,7 @@ void DRAWXTRA_MIB_destruct(Thing *p_thing)
 		pt1.specular=pt2.specular=0xFF000000;
 		pt1.u=0; pt1.v=0;
 		pt2.u=1.0; pt2.v=0.25;
-	    if (POLY_valid_line(&pt1,&pt2)) 
+	    if (POLY_valid_line(&pt1,&pt2))
 		  POLY_add_line_tex_uv(&pt1,&pt2,142,142,POLY_PAGE_LITE_BOLT,0);
 	}
 
@@ -3198,7 +3198,7 @@ void DRAWXTRA_MIB_destruct(Thing *p_thing)
 					5,
 					25,
 					30);
-		
+
 		if (dlight)
 		{
 			NIGHT_dlight[dlight].flag |= NIGHT_DLIGHT_FLAG_REMOVE;
@@ -3232,7 +3232,7 @@ void DRAWXTRA_MIB_destruct(Thing *p_thing)
 		SPARK_Pinfo p2;
 
 		UBYTE limbs[] = { SUB_OBJECT_LEFT_HAND, SUB_OBJECT_RIGHT_HAND, SUB_OBJECT_LEFT_FOOT, SUB_OBJECT_RIGHT_FOOT };
-		
+
 		p1.type   = SPARK_TYPE_GROUND;
 		p1.flag   = 0;
 		p1.person = THING_NUMBER(p_thing);
@@ -3395,7 +3395,7 @@ void DRAWXTRA_final_glow(SLONG x, SLONG y, SLONG z, UBYTE fade)
 
 		dx = float(SIN(angle)) * mid.Z * (1.0F / 32.0F);
 		dy = float(COS(angle)) * mid.Z * (1.0F / 32.0F);
-	
+
 		for (j = 0; j < 4; j++)
 		{
 			if (j & 1)

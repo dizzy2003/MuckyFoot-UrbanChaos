@@ -7,12 +7,12 @@
 #include "sound.h"
 #include "ob.h"
 #include "supermap.h"
-#include "c:\fallen\editor\headers\thing.h"
+#include "fallen/editor/headers/thing.h"
 #include	"io.h"
 #include	"eway.h"
-#include "c:\fallen\headers\inside2.h"
+#include "fallen/headers/inside2.h"
 #include	"memory.h"
-#include "c:\fallen\headers\noserver.h"
+#include "fallen/headers/noserver.h"
 #ifdef FS_ISO9660
 #include <libcd.h>
 #include <ctype.h>
@@ -172,7 +172,7 @@ SLONG	SpecialRead(SLONG handle,UBYTE *ptr,SLONG s1)
 	fs=&file_system[handle];
 
 	if(fs->fileindex>=fs->filelen) return FILE_OPEN_ERROR;
-	
+
 
 	for(c0=0;c0<s1;c0++)
 	{
@@ -231,20 +231,20 @@ UWORD	local_next_prim_multi_object;
 void	record_prim_status(void)
 {
 
-	local_next_prim_point = next_prim_point;       
-	local_next_prim_face4 = next_prim_face4;       
-	local_next_prim_face3 = next_prim_face3;       
-	local_next_prim_object = next_prim_object;      
+	local_next_prim_point = next_prim_point;
+	local_next_prim_face4 = next_prim_face4;
+	local_next_prim_face3 = next_prim_face3;
+	local_next_prim_object = next_prim_object;
 	local_next_prim_multi_object=next_prim_multi_object;
 }
 
 void	revert_to_prim_status(void)
 {
 
-	next_prim_point =      local_next_prim_point;       
-	next_prim_face4 =      local_next_prim_face4;       
-	next_prim_face3 =      local_next_prim_face3;       
-	next_prim_object =     local_next_prim_object;      
+	next_prim_point =      local_next_prim_point;
+	next_prim_face4 =      local_next_prim_face4;
+	next_prim_face3 =      local_next_prim_face3;
+	next_prim_object =     local_next_prim_object;
 	next_prim_multi_object=local_next_prim_multi_object;
 }
 
@@ -592,7 +592,7 @@ void load_level_anim_prims(void)
 			anim=0;
 			switch(ew->ed.subtype)
 			{
-				
+
 				case EWAY_SUBTYPE_ANIMAL_BAT:
 					if(save_psx)
 						continue;
@@ -696,7 +696,7 @@ extern	UWORD WARE_roof_tex[PAP_SIZE_HI][PAP_SIZE_HI];
 
 				switch(t_mthing->Type)
 				{
-					case	MAP_THING_TYPE_ANIM_PRIM:		
+					case	MAP_THING_TYPE_ANIM_PRIM:
 						//
 						// Now add an animating prim to the universe
 						//
@@ -719,7 +719,7 @@ extern	UWORD WARE_roof_tex[PAP_SIZE_HI][PAP_SIZE_HI];
 
 				switch(map_thing.Type)
 				{
-					case	MAP_THING_TYPE_ANIM_PRIM:		
+					case	MAP_THING_TYPE_ANIM_PRIM:
 						//
 						// Now add an animating prim to the universe
 						//
@@ -764,7 +764,7 @@ extern	UWORD WARE_roof_tex[PAP_SIZE_HI][PAP_SIZE_HI];
 		load_super_map(handle,save_type);
 
 		//
-		// Load all the prim objects 
+		// Load all the prim objects
 		//
 
 		OB_load_needed_prims();
@@ -849,7 +849,7 @@ SLONG	load_all_prims(CBYTE	*name)
 	UWORD	dummy[100];
 	UWORD	check_it;
 
-/* fucked because primpoint size changed	
+/* fucked because primpoint size changed
 	sprintf(file_name,"data\\%s",name);
 	handle	=	FileOpen(file_name);
 	if(handle!=FILE_OPEN_ERROR)
@@ -875,7 +875,7 @@ extern	void	record_prim_status(void);
 	}
 */
 	return(0);
-	
+
 }
 
 
@@ -941,7 +941,7 @@ SLONG load_prim_object(SLONG prim)
 		{
 			//
 			// Oh dear!
-			// 
+			//
 			po->StartPoint=0;
 			po->EndPoint=0;
 			po->StartFace3=0;
@@ -994,7 +994,7 @@ SLONG load_prim_object(SLONG prim)
 
 	//
 	// Enough memory?
-	// 
+	//
 
 	if (next_prim_point + num_points > MAX_PRIM_POINTS ||
 		next_prim_face3 + num_faces3 > MAX_PRIM_FACES3 ||
@@ -1016,7 +1016,7 @@ SLONG load_prim_object(SLONG prim)
 
 	if(save_type-PRIM_START_SAVE_TYPE==1)
 	{
-		if (FileRead(handle,&prim_points[next_prim_point], sizeof(PrimPoint)*num_points) != sizeof(PrimPoint)*num_points) 
+		if (FileRead(handle,&prim_points[next_prim_point], sizeof(PrimPoint)*num_points) != sizeof(PrimPoint)*num_points)
 			goto file_error;
 	}
 	else
@@ -1025,13 +1025,13 @@ SLONG load_prim_object(SLONG prim)
 		struct	OldPrimPoint pp;
 		for(c0=0;c0<num_points;c0++)
 		{
-			if (FileRead(handle,&pp, sizeof(OldPrimPoint)) != sizeof(OldPrimPoint)) 
+			if (FileRead(handle,&pp, sizeof(OldPrimPoint)) != sizeof(OldPrimPoint))
 				goto file_error;
 
 			prim_points[c0+next_prim_point].X=(SWORD)pp.X;
 			prim_points[c0+next_prim_point].Y=(SWORD)pp.Y;
 			prim_points[c0+next_prim_point].Z=(SWORD)pp.Z;
-			
+
 
 		}
 	}
@@ -1056,7 +1056,7 @@ SLONG load_prim_object(SLONG prim)
 
 	//
 	// Fix the point indices inside the prim faces
-	// 
+	//
 
 	for (i = 0; i < num_faces3; i++)
 	{
@@ -1096,7 +1096,7 @@ SLONG load_prim_object(SLONG prim)
 
 	//
 	// Hard code the items!
-	// 
+	//
 
 	switch(prim)
 	{
@@ -1170,7 +1170,7 @@ void	read_object_name(FILE *file_handle,CBYTE *dest_string)
 	while(the_char!='\"' && count++<100)
 	{
 		fscanf(file_handle,"%c",&the_char);
-		
+
 		//if(the_char)
 		//	TRACE("%c",&the_char);
 	}
@@ -1232,7 +1232,7 @@ void	load_frame_numbers(CBYTE *vue_name,UWORD *frames,SLONG max_frames)
 						{
 							if(frames[val]==0)
 							{
-								frames[val]=index+1;  
+								frames[val]=index+1;
 								index++;
 							}
 //							else
@@ -1304,8 +1304,8 @@ void	invert_mult(struct Matrix33 *mat,struct PrimPoint *pp)
 
 //	LogText(" len before %d \n",SDIST3(pp->X,pp->Y,pp->Z));
 
-	x = (pp->X * temp_mat.M[0][0])+(pp->Y * temp_mat.M[0][1])+(pp->Z * temp_mat.M[0][2])>>15; 
-	y = (pp->X * temp_mat.M[1][0])+(pp->Y * temp_mat.M[1][1])+(pp->Z * temp_mat.M[1][2])>>15; 
+	x = (pp->X * temp_mat.M[0][0])+(pp->Y * temp_mat.M[0][1])+(pp->Z * temp_mat.M[0][2])>>15;
+	y = (pp->X * temp_mat.M[1][0])+(pp->Y * temp_mat.M[1][1])+(pp->Z * temp_mat.M[1][2])>>15;
 	z = (pp->X * temp_mat.M[2][0])+(pp->Y * temp_mat.M[2][1])+(pp->Z * temp_mat.M[2][2])>>15;
 //	LogText(" len after %d \n",SDIST3(x,y,z));
 
@@ -1859,7 +1859,7 @@ struct PrimObject	*p_obj;
 
 			LogText("SIZE edutils   center %d %d %d \n",x_centre,y_centre,z_centre);
 
-			
+
 			for(multi=the_chunk->MultiObjectStart;multi<=the_chunk->MultiObjectEnd;multi++)
 			for(c0=prim_multi_objects[multi].StartObject;c0<prim_multi_objects[multi].EndObject;c0++)
 			{
@@ -1874,7 +1874,7 @@ struct PrimObject	*p_obj;
 					prim_points[c1].Z	-=	z_centre;
 				}
 			}
-		}				
+		}
 
 		load_multi_vue(the_chunk,scale);
 #ifdef	EDITOR
@@ -1888,77 +1888,77 @@ extern	void	load_chunk_texture_info(KeyFrameChunk *the_chunk);
 
 /*
 fucked one
-LCTI obj 122 has f4 6 f3 31 
-LCTI obj 123 has f4 0 f3 16 
-LCTI obj 124 has f4 2 f3 8 
-LCTI obj 125 has f4 3 f3 6 
-LCTI obj 126 has f4 17 f3 77 
-LCTI obj 127 has f4 1 f3 11 
-LCTI obj 128 has f4 1 f3 14 
-LCTI obj 129 has f4 4 f3 6 
-LCTI obj 130 has f4 2 f3 9 
-LCTI obj 131 has f4 2 f3 12 
-LCTI obj 132 has f4 3 f3 8 
-LCTI obj 133 has f4 7 f3 20 
-LCTI obj 134 has f4 1 f3 14 
-LCTI obj 135 has f4 2 f3 8 
-LCTI obj 136 has f4 3 f3 6 
-LCTI obj 137 has f4 0 f3 0 
+LCTI obj 122 has f4 6 f3 31
+LCTI obj 123 has f4 0 f3 16
+LCTI obj 124 has f4 2 f3 8
+LCTI obj 125 has f4 3 f3 6
+LCTI obj 126 has f4 17 f3 77
+LCTI obj 127 has f4 1 f3 11
+LCTI obj 128 has f4 1 f3 14
+LCTI obj 129 has f4 4 f3 6
+LCTI obj 130 has f4 2 f3 9
+LCTI obj 131 has f4 2 f3 12
+LCTI obj 132 has f4 3 f3 8
+LCTI obj 133 has f4 7 f3 20
+LCTI obj 134 has f4 1 f3 14
+LCTI obj 135 has f4 2 f3 8
+LCTI obj 136 has f4 3 f3 6
+LCTI obj 137 has f4 0 f3 0
 
 
 fucked one
-LCTI obj 122 has f4 6 f3 31 
-LCTI obj 123 has f4 0 f3 16 
-LCTI obj 124 has f4 2 f3 8 
-LCTI obj 125 has f4 3 f3 6 
-LCTI obj 126 has f4 17 f3 77 
-LCTI obj 127 has f4 1 f3 11 
-LCTI obj 128 has f4 1 f3 14 
-LCTI obj 129 has f4 4 f3 6 
-LCTI obj 130 has f4 2 f3 9 
-LCTI obj 131 has f4 2 f3 12 
-LCTI obj 132 has f4 3 f3 8 
-LCTI obj 133 has f4 7 f3 20 
-LCTI obj 134 has f4 1 f3 14 
-LCTI obj 135 has f4 2 f3 8 
-LCTI obj 136 has f4 3 f3 6 
-LCTI obj 137 has f4 0 f3 0 
+LCTI obj 122 has f4 6 f3 31
+LCTI obj 123 has f4 0 f3 16
+LCTI obj 124 has f4 2 f3 8
+LCTI obj 125 has f4 3 f3 6
+LCTI obj 126 has f4 17 f3 77
+LCTI obj 127 has f4 1 f3 11
+LCTI obj 128 has f4 1 f3 14
+LCTI obj 129 has f4 4 f3 6
+LCTI obj 130 has f4 2 f3 9
+LCTI obj 131 has f4 2 f3 12
+LCTI obj 132 has f4 3 f3 8
+LCTI obj 133 has f4 7 f3 20
+LCTI obj 134 has f4 1 f3 14
+LCTI obj 135 has f4 2 f3 8
+LCTI obj 136 has f4 3 f3 6
+LCTI obj 137 has f4 0 f3 0
 
-fucked but right sex 
-LCTI obj 122 has f4 6 f3 31 
-LCTI obj 123 has f4 0 f3 16 
-LCTI obj 124 has f4 2 f3 8 
-LCTI obj 125 has f4 3 f3 6 
-LCTI obj 126 has f4 17 f3 77 
-LCTI obj 127 has f4 1 f3 11 
-LCTI obj 128 has f4 1 f3 14 
-LCTI obj 129 has f4 4 f3 6 
-LCTI obj 130 has f4 2 f3 9 
-LCTI obj 131 has f4 2 f3 12 
-LCTI obj 132 has f4 3 f3 8 
-LCTI obj 133 has f4 7 f3 20 
-LCTI obj 134 has f4 1 f3 14 
-LCTI obj 135 has f4 2 f3 8 
-LCTI obj 136 has f4 3 f3 6 
-LCTI obj 137 has f4 0 f3 0 
+fucked but right sex
+LCTI obj 122 has f4 6 f3 31
+LCTI obj 123 has f4 0 f3 16
+LCTI obj 124 has f4 2 f3 8
+LCTI obj 125 has f4 3 f3 6
+LCTI obj 126 has f4 17 f3 77
+LCTI obj 127 has f4 1 f3 11
+LCTI obj 128 has f4 1 f3 14
+LCTI obj 129 has f4 4 f3 6
+LCTI obj 130 has f4 2 f3 9
+LCTI obj 131 has f4 2 f3 12
+LCTI obj 132 has f4 3 f3 8
+LCTI obj 133 has f4 7 f3 20
+LCTI obj 134 has f4 1 f3 14
+LCTI obj 135 has f4 2 f3 8
+LCTI obj 136 has f4 3 f3 6
+LCTI obj 137 has f4 0 f3 0
 
 right but wrong sex
-LCTI obj 122 has f4 6 f3 31 
-LCTI obj 123 has f4 0 f3 16 
-LCTI obj 124 has f4 1 f3 10 
-LCTI obj 125 has f4 3 f3 6 
-LCTI obj 126 has f4 18 f3 75 
-LCTI obj 127 has f4 0 f3 13 
-LCTI obj 128 has f4 0 f3 16 
-LCTI obj 129 has f4 4 f3 6 
-LCTI obj 130 has f4 2 f3 9 
-LCTI obj 131 has f4 2 f3 12 
-LCTI obj 132 has f4 3 f3 8 
-LCTI obj 133 has f4 5 f3 24 
-LCTI obj 134 has f4 1 f3 14 
-LCTI obj 135 has f4 2 f3 8 
-LCTI obj 136 has f4 3 f3 6 
-LCTI obj 137 has f4 0 f3 0 
+LCTI obj 122 has f4 6 f3 31
+LCTI obj 123 has f4 0 f3 16
+LCTI obj 124 has f4 1 f3 10
+LCTI obj 125 has f4 3 f3 6
+LCTI obj 126 has f4 18 f3 75
+LCTI obj 127 has f4 0 f3 13
+LCTI obj 128 has f4 0 f3 16
+LCTI obj 129 has f4 4 f3 6
+LCTI obj 130 has f4 2 f3 9
+LCTI obj 131 has f4 2 f3 12
+LCTI obj 132 has f4 3 f3 8
+LCTI obj 133 has f4 5 f3 24
+LCTI obj 134 has f4 1 f3 14
+LCTI obj 135 has f4 2 f3 8
+LCTI obj 136 has f4 3 f3 6
+LCTI obj 137 has f4 0 f3 0
 
 */
 #endif
@@ -2001,7 +2001,7 @@ void	read_a_prim(SLONG prim,MFFileHandle	handle,SLONG	save_type)
 
 			}
 		}
-		
+
 
 		dp=next_prim_point-sp;// was 10 but is now 50 so need to add 40 to all point indexs
 
@@ -2039,7 +2039,7 @@ void	read_a_prim(SLONG prim,MFFileHandle	handle,SLONG	save_type)
 
 		prim_objects[next_prim_object].StartFace4=next_prim_face4;
 		prim_objects[next_prim_object].EndFace4=next_prim_face4+ef4-sf4;
-	
+
 		next_prim_point+=ep-sp;
 		next_prim_face3+=ef3-sf3;
 		next_prim_face4+=ef4-sf4;
@@ -2068,7 +2068,7 @@ SLONG	load_a_multi_prim(CBYTE *name)
 	handle	=	FileOpen(ext_name);
 	if(handle!=FILE_OPEN_ERROR)
 	{
-		
+
 		FileRead(handle,(UBYTE*)&save_type,sizeof(save_type));
 
 		FileRead(handle,(UBYTE*)&so,sizeof(so));
@@ -2172,7 +2172,7 @@ void	create_kline_bottle(void)
 			p_f4->Col=((c0+c1)&1)*50+50;
 		}
 	}
-	
+
 	build_prim_object(stp,sf3,sf4);
 	save_prim_asc(next_prim_object-1,0);
 	*/
@@ -2233,7 +2233,7 @@ extern	UBYTE	*pals[];
 
 // mesh
 
-// 
+//
 
 extern	void	write_a_prim(SLONG prim,MFFileHandle	handle);
 
@@ -2247,7 +2247,7 @@ SLONG	save_insert_a_multi_prim(MFFileHandle	handle,SLONG multi)
 #ifdef	EDITOR
 	if(handle!=FILE_OPEN_ERROR)
 	{
-		
+
 		FileWrite(handle,(UBYTE*)&save_type,sizeof(save_type));
 
 		so=prim_multi_objects[multi].StartObject;
@@ -2263,7 +2263,7 @@ SLONG	save_insert_a_multi_prim(MFFileHandle	handle,SLONG multi)
 	}
 #endif
 	return(0);
-	
+
 }
 
 SLONG	save_insert_game_chunk(MFFileHandle	handle,struct GameKeyFrameChunk *p_chunk)
@@ -2352,7 +2352,7 @@ SLONG	save_anim_system(struct GameKeyFrameChunk *p_chunk,CBYTE	*name)
 	handle	=	FileCreate(ext_name,1);
 	if(handle!=FILE_OPEN_ERROR)
 	{
-		
+
 		FileWrite(handle,(UBYTE*)&save_type,sizeof(save_type));
 
 		count=0;
@@ -2376,7 +2376,7 @@ SLONG	save_anim_system(struct GameKeyFrameChunk *p_chunk,CBYTE	*name)
 	}
 #endif
 	return(0);
-	
+
 }
 #endif
 #endif
@@ -2392,12 +2392,12 @@ SLONG	load_insert_game_chunk(MFFileHandle	handle,struct GameKeyFrameChunk *p_chu
 
 	struct GameKeyFrameElementBig *temp_mem;
 
-	
+
 
 	FileRead(handle,(UBYTE*)&save_type,sizeof(save_type));
 
 	ASSERT(save_type>1);
-	
+
 
 	FileRead(handle,(UBYTE*)&p_chunk->ElementCount,sizeof(p_chunk->ElementCount));
 
@@ -2478,7 +2478,7 @@ SLONG	load_insert_game_chunk(MFFileHandle	handle,struct GameKeyFrameChunk *p_chu
 		p_chunk->TheElements[c0].OffsetY=(temp_mem[c0].OffsetY)&0xff;
 		p_chunk->TheElements[c0].OffsetZ=(temp_mem[c0].OffsetZ)&0xff;
 
-	}	
+	}
 	FileRead(handle,&check,2);
 	ASSERT(check==666);
 
@@ -2609,7 +2609,7 @@ extern	void	convert_fightcol_to_pointer(GameFightCol *p,GameFightCol *p_fight,SL
 			}
 		}
 
-		
+
 		a_off=((ULONG)&p_chunk->AnimKeyFrames[0])-addr1;
 		for(c0=0;c0<p_chunk->MaxAnimFrames;c0++)
 		{
@@ -2637,7 +2637,7 @@ SLONG	load_insert_a_multi_prim(MFFileHandle	handle)
 
 	if(handle!=FILE_OPEN_ERROR)
 	{
-		
+
 		FileRead(handle,(UBYTE*)&save_type,sizeof(save_type));
 
 		FileRead(handle,(UBYTE*)&so,sizeof(so));
@@ -2680,7 +2680,7 @@ extern	void	free_game_chunk(GameKeyFrameChunk *the_chunk);
 	handle	=	FileOpen(ext_name);
 	if(handle!=FILE_OPEN_ERROR)
 	{
-		
+
 		FileRead(handle,(UBYTE*)&save_type,sizeof(save_type));
 
 		if(save_type>2)
@@ -2696,7 +2696,7 @@ extern	void	free_game_chunk(GameKeyFrameChunk *the_chunk);
 						p_chunk->MultiObject[c0]=load_insert_a_multi_prim(handle);
 						break;
 					case	1:
-						// darci 
+						// darci
 						switch(c0)
 						{
 							case	0: //darci
@@ -2725,7 +2725,7 @@ extern	void	free_game_chunk(GameKeyFrameChunk *the_chunk);
 						break;
 					case	2:
 						//thug   // 0 rasta 1 grey 2 red 3 miller 4 cop 5 mib 6 tramp 7 civ variety
-						
+
 						switch(c0)
 						{
 							case	0: //rasta
@@ -2778,7 +2778,7 @@ extern	void	free_game_chunk(GameKeyFrameChunk *the_chunk);
 		DebugText("\n ERROR failed to open \n");
 	}
 	return(0);
-	
+
 }
 SLONG	load_append_game_chunk(MFFileHandle	handle,struct GameKeyFrameChunk *p_chunk,SLONG start_frame)
 {
@@ -2798,12 +2798,12 @@ SLONG	load_append_game_chunk(MFFileHandle	handle,struct GameKeyFrameChunk *p_chu
 	SLONG	MaxElements;
 
 	ULONG	error;
-	
+
 
 	FileRead(handle,(UBYTE*)&save_type,sizeof(save_type));
 
 	ASSERT(save_type>1);
-	
+
 
 	//
 	//
@@ -2920,7 +2920,7 @@ void	skip_a_prim(SLONG prim,MFFileHandle	handle,SLONG	save_type)
 //			FileRead(handle,(UBYTE*)&prim_points[next_prim_point+c0-sp],sizeof(struct PrimPoint));
 			FileSeek(handle,SEEK_MODE_CURRENT,sizeof(struct PrimPoint));
 		}
-		
+
 
 
 		FileRead(handle,(UBYTE*)&sf3,sizeof(sf3));
@@ -2954,7 +2954,7 @@ void	skip_load_a_multi_prim(MFFileHandle	handle)
 
 	if(handle!=FILE_OPEN_ERROR)
 	{
-		
+
 		FileRead(handle,(UBYTE*)&save_type,sizeof(save_type));
 
 		FileRead(handle,(UBYTE*)&so,sizeof(so));
@@ -2994,7 +2994,7 @@ extern	void	free_game_chunk(GameKeyFrameChunk *the_chunk);
 			start_ob++;
 		}
 
-		
+
 
 		FileRead(handle,(UBYTE*)&save_type,sizeof(save_type));
 
@@ -3023,7 +3023,7 @@ extern	void	free_game_chunk(GameKeyFrameChunk *the_chunk);
 		DebugText("\n ERROR failed to open \n");
 	}
 	return(0);
-	
+
 }
 
 #endif

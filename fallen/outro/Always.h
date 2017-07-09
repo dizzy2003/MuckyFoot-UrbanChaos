@@ -78,7 +78,7 @@ typedef					char			CBYTE;
 
 //
 // Error checking macros
-// 
+//
 
 #ifndef NDEBUG
 
@@ -89,7 +89,7 @@ void OS_string(CBYTE *fmt, ...);
 #define VERIFY(x) ASSERT(x)
 #else
 #define ASSERT(x) {__assume(x);}
-#define TRACE	  
+#define TRACE
 #define VERIFY(x) x
 
 //
@@ -121,7 +121,7 @@ static inline SLONG DIV16(SLONG a, SLONG b)
 	return v;
 }
 
-#pragma warning( disable : 4035 )	
+#pragma warning( disable : 4035 )
 // stop warning of no return value : eax is valid
 static inline SLONG MUL16(SLONG a, SLONG b)
 // MSVC++ version, params:ecx,edx, return:eax
@@ -202,23 +202,23 @@ static inline SBYTE CROSS_PROD_SIGN(SLONG x1, SLONG y1, SLONG x2, SLONG y2)
 		mov		ecx, x2
 		mov		edx, y2
 
-		imul	edx		
+		imul	edx
 		xchg	eax,ebx
 		xchg	edx,ecx
-		imul	edx		
+		imul	edx
 		sub		ebx,eax
-		setnz	al		
+		setnz	al
 		sbb		ecx,edx
-		jz		done	
-		setl	ah		
-		setg	al		
-		sub		al,ah	
+		jz		done
+		setl	ah
+		setg	al
+		sub		al,ah
 	  done:
 
 		mov		ans, al
 	}
 
-	return ans;	
+	return ans;
 }
 
 
@@ -227,7 +227,7 @@ static inline SBYTE CROSS_PROD_SIGN(SLONG x1, SLONG y1, SLONG x2, SLONG y2)
 // -1 if there is no bit set.
 //
 
-static inline first_bit(SLONG search)
+static inline SLONG first_bit(SLONG search)
 {
 	SLONG ans;
 
@@ -248,7 +248,7 @@ static inline first_bit(SLONG search)
 // -1 if there is no bit set.
 //
 
-static inline last_bit(SLONG search)
+static inline SLONG last_bit(SLONG search)
 {
 	SLONG ans;
 
@@ -293,7 +293,7 @@ typedef struct
 	UBYTE r;
 	UBYTE g;
 	UBYTE b;
-	
+
 } Colour;
 
 //
@@ -372,7 +372,7 @@ static inline float qdist3(float x, float y, float z)
 
 //
 // A floating point number between 0 and 1.0F
-// 
+//
 
 static inline float frand(void)
 {

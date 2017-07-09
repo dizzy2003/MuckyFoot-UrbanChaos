@@ -1,7 +1,7 @@
 #ifndef	BUILDING_H
 #define	BUILDING_H			1
 
-//#include	"c:\fallen\headers\memory.h"
+//#include	"fallen/headers/memory.h"
 
 //DEFINES
 
@@ -200,7 +200,7 @@ struct	BuildingObject
 {
 	SWORD	FacetHead;
 	UWORD	StartFace4;
-	UWORD	EndFace4;	 
+	UWORD	EndFace4;
 	SWORD	StartFace3;
 	SWORD	EndFace3;
 	UWORD	StartPoint;
@@ -318,7 +318,7 @@ struct	FWall
 	UBYTE	*Textures;
 	UWORD	Tcount;
 	UBYTE	*Textures2;
-	
+
 	UWORD	Dummy[1];
 };
 
@@ -462,7 +462,7 @@ void get_wall_start_and_end(
 		// These are 16-bit map coordinates...
 		//
 
-		SLONG *x1, SLONG *z1,	
+		SLONG *x1, SLONG *z1,
 		SLONG *x2, SLONG *z2);
 
 

@@ -20,10 +20,10 @@
 #include "matrix.h"
 #include "tga.h"
 
-#include "c:\fallen\ddlibrary\headers\ddlib.h"
-#include "c:\fallen\ddlibrary\headers\mfx.h"
-#include "c:\fallen\headers\music.h"
-#include "c:\fallen\headers\sound_id.h"
+#include "fallen/ddlibrary/headers/ddlib.h"
+#include "fallen/ddlibrary/headers/mfx.h"
+#include "fallen/headers/music.h"
+#include "fallen/headers/sound_id.h"
 
 //#include "midasdll.h"
 
@@ -117,183 +117,19 @@ SLONG                 OS_midas_ok;
 //
 // ========================================================
 
-IDirectInput        *OS_joy_direct_input;
-IDirectInputDevice  *OS_joy_input_device;
-IDirectInputDevice2 *OS_joy_input_device2;	// We need this newer interface to poll the joystick.
+extern IDirectInput        *OS_joy_direct_input;
+extern IDirectInputDevice  *OS_joy_input_device;
+extern IDirectInputDevice2 *OS_joy_input_device2;	// We need this newer interface to poll the joystick.
 
 float OS_joy_x;
 float OS_joy_y;
-SLONG OS_joy_x_range_min;
-SLONG OS_joy_x_range_max;
-SLONG OS_joy_y_range_min;
-SLONG OS_joy_y_range_max;
+extern SLONG OS_joy_x_range_min;
+extern SLONG OS_joy_x_range_max;
+extern SLONG OS_joy_y_range_min;
+extern SLONG OS_joy_y_range_max;
 ULONG OS_joy_button;		// The buttons that are currently down
 ULONG OS_joy_button_down;	// The buttons that have just been pressed
 ULONG OS_joy_button_up;		// The buttons that have just been released
-
-
-//
-// The callback function for enumerating joysticks.
-//
-
-BOOL CALLBACK OS_joy_enum(
-		LPCDIDEVICEINSTANCE instance, 
-        LPVOID              context )
-{
-    HRESULT             hr;
-    LPDIRECTINPUTDEVICE pDevice;
-
-	//
-    // Get an interface to the joystick.
-	//
-
-    hr = OS_joy_direct_input->CreateDevice(
-								instance->guidInstance,
-							   &OS_joy_input_device,
-							    NULL);
-
-    if (FAILED(hr))
-	{
-		//
-		// Cant use this joystick for some reason!
-		//
-
-		OS_joy_input_device  = NULL;
-		OS_joy_input_device2 = NULL;
-
-        return DIENUM_CONTINUE;
-	}
-
-	//
-    // Query for the IDirectInputDevice2 interface.
-	// We need this to poll the joystick.
-	//
-
-    OS_joy_input_device->QueryInterface(
-							IID_IDirectInputDevice2, 
-							(LPVOID *) &OS_joy_input_device2);
-
-	//
-	// No need to find another joystick!
-	//
-
-    return DIENUM_STOP;
-}
-
-//
-// Initialises the joystick.
-//
-
-void OS_joy_init(void)
-{
-	HRESULT hr;
-
-	//
-	// Initialise everything.
-	//
-
-	OS_joy_direct_input  = NULL;
-	OS_joy_input_device  = NULL;
-	OS_joy_input_device2 = NULL;
-
-	//
-	// Create the direct input object.
-	//
-
-    hr = DirectInputCreate(
-			OS_this_instance,
-			DIRECTINPUT_VERSION,
-		   &OS_joy_direct_input,
-			NULL);
-
-    if (FAILED(hr)) 
-	{
-		//
-		// No direct input!
-		//
-
-        return;
-	}
-
-	//
-	// Find a joystick.
-	//
-	
-    hr = OS_joy_direct_input->EnumDevices(
-								DIDEVTYPE_JOYSTICK,
-								OS_joy_enum,
-								NULL,
-								DIEDFL_ATTACHEDONLY);
-
-	if (OS_joy_input_device  == NULL ||
-		OS_joy_input_device2 == NULL)
-	{
-		//
-		// The joystick wasn't properly found.
-		// 
-
-		OS_joy_input_device  = NULL;
-		OS_joy_input_device2 = NULL;
-
-		return;
-	}
-
-	//
-	// So we can get the nice 'n' simple joystick data format.
-	//
-
-    OS_joy_input_device->SetDataFormat(&c_dfDIJoystick);
-
-	//
-	// Grab the joystick exclusively when our window in the foreground.
-	//
-
-    OS_joy_input_device->SetCooperativeLevel(
-							OS_window_handle,
-							DISCL_EXCLUSIVE | DISCL_FOREGROUND);
-
-	//
-	// What is the range of the joystick?
-	//
-
-	DIPROPRANGE diprg; 
-
-	//
-	// In x...
-	// 
-
-    diprg.diph.dwSize       = sizeof(DIPROPRANGE); 
-    diprg.diph.dwHeaderSize = sizeof(DIPROPHEADER); 
-    diprg.diph.dwHow        = DIPH_BYOFFSET;
-	diprg.diph.dwObj        = DIJOFS_X;
-    diprg.lMin              = 0;
-    diprg.lMax              = 0;
-
-	OS_joy_input_device->GetProperty(
-								DIPROP_RANGE,
-							   &diprg.diph);
-
-	OS_joy_x_range_min = diprg.lMin;
-	OS_joy_x_range_max = diprg.lMax;
-
-	//
-	// In y...
-	// 
-
-    diprg.diph.dwSize       = sizeof(DIPROPRANGE); 
-    diprg.diph.dwHeaderSize = sizeof(DIPROPHEADER); 
-    diprg.diph.dwHow        = DIPH_BYOFFSET;
-	diprg.diph.dwObj        = DIJOFS_Y;
-    diprg.lMin              = 0;
-    diprg.lMax              = 0;
-
-	OS_joy_input_device->GetProperty(
-								DIPROP_RANGE,
-							   &diprg.diph);
-
-	OS_joy_y_range_min = diprg.lMin;
-	OS_joy_y_range_max = diprg.lMax;
-}
 
 //
 // Polls the joystick.
@@ -322,7 +158,7 @@ void OS_joy_poll(void)
 
 	//
 	// Acquire the joystick.
-	// 
+	//
 
 	hr = OS_joy_input_device->Acquire();
 
@@ -387,7 +223,7 @@ void OS_joy_poll(void)
 
 // ========================================================
 //
-// TEXTURE STUFF 
+// TEXTURE STUFF
 //
 // ========================================================
 
@@ -399,7 +235,7 @@ void OS_joy_poll(void)
 
 //
 // The pixel formats for each of our OS_TEXTURE_FORMATs
-// 
+//
 
 typedef struct
 {
@@ -443,7 +279,7 @@ typedef struct os_texture
 
 //
 // They are stored in a linked list and dynamically allocated.
-// 
+//
 
 OS_Texture *OS_texture_head;
 
@@ -576,7 +412,7 @@ HRESULT CALLBACK OS_texture_enumerate_pixel_formats(
 // The formula is...
 //
 //	PIXEL(r,g,b) = ((r >> mask) << shift) | ((g >> mask) << shift) | ((b >> mask) << shift);
-// 
+//
 // THIS ASSUMES that r,g,b are 8-bit values.
 //
 
@@ -666,7 +502,7 @@ OS_Texture *OS_texture_create(CBYTE *fname, SLONG invert)
 
 		return NULL;
 	}
-	
+
 	//
 	// The full pathname.
 	//
@@ -763,7 +599,7 @@ OS_Texture *OS_texture_create(CBYTE *fname, SLONG invert)
 	//
 
 	ot = (OS_Texture *) malloc(sizeof(OS_Texture));
-	
+
 	if (ot == NULL)
 	{
 		//
@@ -773,7 +609,7 @@ OS_Texture *OS_texture_create(CBYTE *fname, SLONG invert)
 		free(data);
 
 		return NULL;
-	}	
+	}
 
 	strncpy(ot->name, fname, _MAX_PATH);
 
@@ -909,7 +745,7 @@ OS_Texture *OS_texture_create(CBYTE *fname, SLONG invert)
 			{
 				pixel_tga = data[i + j * ti.width];
 				pixel_our = 0;
-				
+
 				pixel_our |= (pixel_tga.red   >> best_otf->mask_r) << best_otf->shift_r;
 				pixel_our |= (pixel_tga.green >> best_otf->mask_g) << best_otf->shift_g;
 				pixel_our |= (pixel_tga.blue  >> best_otf->mask_b) << best_otf->shift_b;
@@ -941,7 +777,7 @@ OS_Texture *OS_texture_create(CBYTE *fname, SLONG invert)
 			}
 		}
 	}
-	
+
 	//
 	// Unlock the surface.
 	//
@@ -978,7 +814,7 @@ OS_Texture *OS_texture_create(SLONG size, SLONG format)
 
 	//
 	// Make sure this texture is not too big.
-	// 
+	//
 
 	{
 		D3DDEVICEDESC dh;
@@ -1043,7 +879,7 @@ OS_Texture *OS_texture_create(SLONG size, SLONG format)
 	//
 
 	ot = (OS_Texture *) malloc(sizeof(OS_Texture));
-	
+
 	if (ot == NULL)
 	{
 		//
@@ -1051,7 +887,7 @@ OS_Texture *OS_texture_create(SLONG size, SLONG format)
 		//
 
 		return NULL;
-	}	
+	}
 
 	sprintf(ot->name, "Generated");
 
@@ -1102,7 +938,7 @@ OS_Texture *OS_texture_create(SLONG size, SLONG format)
 		return NULL;
 	}
 
-	
+
 	//
 	// The surface probably contains junk...
 	//
@@ -1275,7 +1111,7 @@ void OS_init_renderstates()
 
 	//
 	// Setup renderstates.
-	// 
+	//
 
 	d3d->SetRenderState(D3DRENDERSTATE_SHADEMODE,          D3DSHADE_GOURAUD);
 	d3d->SetRenderState(D3DRENDERSTATE_TEXTUREPERSPECTIVE, TRUE);
@@ -1337,7 +1173,7 @@ void OS_init_renderstates()
 //
 // Works out how to setup the pipeline for additive and multiplicitive
 // multi-texturing.
-// 
+//
 
 #define OS_METHOD_NUMBER_MUL 2
 
@@ -1372,7 +1208,7 @@ void OS_pipeline_calculate()
 				d3d->SetTextureStageState(1, D3DTSS_COLOROP,   D3DTOP_MODULATE);
 				d3d->SetTextureStageState(1, D3DTSS_COLORARG1, D3DTA_TEXTURE);
 				d3d->SetTextureStageState(1, D3DTSS_COLORARG2, D3DTA_CURRENT);
-				
+
 				break;
 
 			case 0:
@@ -1390,7 +1226,7 @@ void OS_pipeline_calculate()
 				d3d->SetTextureStageState(2, D3DTSS_COLORARG2, D3DTA_CURRENT);
 
 				break;
-			
+
 			default:
 
 				//
@@ -1559,7 +1395,7 @@ void OS_change_renderstate_for_type(ULONG draw)
 				d3d->SetTextureStageState(1, D3DTSS_COLOROP,   D3DTOP_MODULATE);
 				d3d->SetTextureStageState(1, D3DTSS_COLORARG1, D3DTA_TEXTURE);
 				d3d->SetTextureStageState(1, D3DTSS_COLORARG2, D3DTA_CURRENT);
-				
+
 				break;
 
 			case 0:
@@ -1586,7 +1422,7 @@ void OS_change_renderstate_for_type(ULONG draw)
 				}
 
 				break;
-			
+
 			default:
 				break;
 		}
@@ -1673,7 +1509,7 @@ SLONG OS_mhz;
 
 //
 // Returns TRUE if the processor has support for the RDTSC instruction.
-// 
+//
 
 SLONG OS_has_rdtsc(void)
 {
@@ -1830,8 +1666,8 @@ LRESULT CALLBACK OS_message_handler(
 
 			return 0;
 
-		case WM_KEYDOWN: 
-		case WM_KEYUP:	 
+		case WM_KEYDOWN:
+		case WM_KEYUP:
 
 			//
 			// Keyboard stuff.
@@ -1849,7 +1685,7 @@ LRESULT CALLBACK OS_message_handler(
 			{
 				KEY_on[scancode] = 0;
 			}
-			
+
 			//
 			// Alt keys don't work.
 			//
@@ -1876,7 +1712,7 @@ LRESULT CALLBACK OS_message_handler(
 			//
 
 			OS_frame.Move(LOWORD(param_l),HIWORD(param_l));
-			
+
 			//
 			// Fall through to the default handling.
 			//
@@ -2243,7 +2079,7 @@ BOOL CALLBACK OS_mydemo_proc(
 					switch(HIWORD(param_w))
 					{
 						case CBN_SELCHANGE:
-							
+
 							//
 							// Change the list of modes.
 							//
@@ -2258,7 +2094,7 @@ BOOL CALLBACK OS_mydemo_proc(
 
 							break;
 					}
-					
+
 					break;
 
 				case IDC_COMBO_MODE:
@@ -2266,7 +2102,7 @@ BOOL CALLBACK OS_mydemo_proc(
 					switch(HIWORD(param_w))
 					{
 						case CBN_SELCHANGE:
-							
+
 							//
 							// Update the current mode.
 							//
@@ -2279,7 +2115,7 @@ BOOL CALLBACK OS_mydemo_proc(
 
 							break;
 					}
-					
+
 					break;
 			}
 
@@ -2314,7 +2150,7 @@ int WINAPI WinMain(
 	//
 	// Remember the arguments passed to this function.
 	//
-	
+
 	OS_this_instance	= this_instance;
 	OS_last_instance	= last_instance;
 	OS_command_line		= command_line;
@@ -2336,7 +2172,7 @@ int WINAPI WinMain(
 	//
 	// Register the window class.
 	//
-	
+
 	if (RegisterClassEx(&OS_wcl) == 0)
 	{
 		//
@@ -2495,7 +2331,7 @@ int WINAPI WinMain(
 
 			//
 			// Close gracefully...
-			// 
+			//
 
 			D3DEnum_FreeResources();
 
@@ -2516,7 +2352,7 @@ int WINAPI WinMain(
 		BOOL            is_windowed;
 		BOOL            is_hardware;
 
-		#if WE_USE_THE_DEFAULT_DIALOG_BOX		
+		#if WE_USE_THE_DEFAULT_DIALOG_BOX
 
 		//
 		// Prompt the user for a device and a driver.
@@ -2578,14 +2414,14 @@ int WINAPI WinMain(
 						device,
 						display_mode,
 						flags);
-		
+
 		if (res == S_OK)
 		{
 			if (OS_frame_is_fullscreen)
 			{
 				//
 				// Hide the mouse.
-				// 
+				//
 
 				ShowCursor(FALSE);
 
@@ -2610,7 +2446,7 @@ int WINAPI WinMain(
 
 			{
 				int i;
-				
+
 				OS_Tformat *otf;
 
 				//
@@ -2645,7 +2481,7 @@ int WINAPI WinMain(
 						OS_calculate_mask_and_shift(otf->ddpf.dwRBitMask, &otf->mask_r, &otf->shift_r);
 						OS_calculate_mask_and_shift(otf->ddpf.dwGBitMask, &otf->mask_g, &otf->shift_g);
 						OS_calculate_mask_and_shift(otf->ddpf.dwBBitMask, &otf->mask_b, &otf->shift_b);
-									 
+
 						if (otf->ddpf.dwFlags & DDPF_ALPHAPIXELS)
 						{
 							OS_calculate_mask_and_shift(otf->ddpf.dwRGBAlphaBitMask, &otf->mask_a, &otf->shift_a);
@@ -2923,7 +2759,7 @@ void OS_clear_screen(UBYTE r, UBYTE g, UBYTE b, float z)
 	/*
 
 	ULONG colour = (r << 16) | (g << 8) | (b << 0);
-	
+
 	HRESULT ret = OS_frame.GetViewport()->Clear2(
 								1,
 								(D3DRECT *) OS_frame.GetViewportRect(),
@@ -3228,14 +3064,14 @@ void OS_buffer_add_triangle(
 			OS_trans[ov1->trans].clip &
 			OS_trans[ov2->trans].clip &
 			OS_trans[ov3->trans].clip;
-	
+
 	if (clip_and & OS_CLIP_TRANSFORMED)
 	{
 		if (clip_and & OS_CLIP_OFFSCREEN)
 		{
 			//
 			// The triangle is completely off-screen.
-			// 
+			//
 
 			return;
 		}
@@ -3322,7 +3158,7 @@ void OS_buffer_add_sprite(
 	//
 	// Add four vertices.
 	//
-	
+
 	for (i = 0; i < 4; i++)
 	{
 		of = &ob->flert[ob->num_flerts + i];
@@ -3407,7 +3243,7 @@ void OS_buffer_add_sprite_rot(
 
 	float x;
 	float y;
-	
+
 	x_mid *= OS_screen_width;
 	y_mid *= OS_screen_height;
 
@@ -3421,11 +3257,11 @@ void OS_buffer_add_sprite_rot(
 	//
 	// Add four vertices.
 	//
-	
+
 	for (i = 0; i < 4; i++)
 	{
 		of = &ob->flert[ob->num_flerts + i];
-		
+
 		x = 0.0F;
 		y = 0.0F;
 
@@ -3524,7 +3360,7 @@ void OS_buffer_add_sprite_arbitrary(
 	//
 	// Add four vertices.
 	//
-	
+
 	for (i = 0; i < 4; i++)
 	{
 		of = &ob->flert[ob->num_flerts + i];
@@ -3558,11 +3394,11 @@ void OS_buffer_add_sprite_arbitrary(
 				u = u4;
 				v = v4;
 				break;
-			
+
 			default:
 				ASSERT(0);
 				break;
-		}		
+		}
 
 		x *= OS_screen_width;
 		y *= OS_screen_height;
@@ -3621,7 +3457,7 @@ void OS_buffer_add_line_3d(
 
 	float x;
 	float y;
-	
+
 	//
 	// Enough room in our buffer?
 	//
@@ -3632,7 +3468,7 @@ void OS_buffer_add_line_3d(
 	//
 	// The width of the line.
 	//
-	
+
 	dx = X2 - X1;
 	dy = Y2 - Y1;
 
@@ -3645,11 +3481,11 @@ void OS_buffer_add_line_3d(
 	//
 	// Add four vertices.
 	//
-	
+
 	for (i = 0; i < 4; i++)
 	{
 		of = &ob->flert[ob->num_flerts + i];
-		
+
 		x = 0.0F;
 		y = 0.0F;
 
@@ -3730,7 +3566,7 @@ void OS_buffer_add_line_2d(
 
 	float x;
 	float y;
-	
+
 	//
 	// Enough room in our buffer?
 	//
@@ -3741,7 +3577,7 @@ void OS_buffer_add_line_2d(
 	//
 	// The width of the line.
 	//
-	
+
 	x1 *= OS_screen_width;
 	y1 *= OS_screen_height;
 
@@ -3760,11 +3596,11 @@ void OS_buffer_add_line_2d(
 	//
 	// Add four vertices.
 	//
-	
+
 	for (i = 0; i < 4; i++)
 	{
 		of = &ob->flert[ob->num_flerts + i];
-		
+
 		x = 0.0F;
 		y = 0.0F;
 
@@ -3852,7 +3688,7 @@ void OS_buffer_draw(
 		//
 		// Make this texture the input into the pipeline.
 		//
-		
+
 		d3d->SetTexture(0, ot1->ddtx);
 	}
 
@@ -3878,7 +3714,7 @@ void OS_buffer_draw(
 		//
 		// Check that this will be okay.
 		//
-	
+
 		ULONG num_passes;
 
 		if (d3d->ValidateDevice(&num_passes) != D3D_OK)
@@ -3983,7 +3819,7 @@ void OS_hack(void)
 
 	{
 		int i;
-		
+
 		OS_Tformat *otf;
 
 		//
@@ -4018,7 +3854,7 @@ void OS_hack(void)
 				OS_calculate_mask_and_shift(otf->ddpf.dwRBitMask, &otf->mask_r, &otf->shift_r);
 				OS_calculate_mask_and_shift(otf->ddpf.dwGBitMask, &otf->mask_g, &otf->shift_g);
 				OS_calculate_mask_and_shift(otf->ddpf.dwBBitMask, &otf->mask_b, &otf->shift_b);
-							 
+
 				if (otf->ddpf.dwFlags & DDPF_ALPHAPIXELS)
 				{
 					OS_calculate_mask_and_shift(otf->ddpf.dwRGBAlphaBitMask, &otf->mask_a, &otf->shift_a);

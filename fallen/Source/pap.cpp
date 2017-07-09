@@ -7,9 +7,9 @@
 #include "game.h"
 #include "mav.h"
 #ifndef		PSX
-#include "c:\fallen\ddengine\headers\aeng.h"
+#include "fallen/ddengine/headers/aeng.h"
 #else
-#include "c:\fallen\psxeng\headers\engine.h"
+#include "fallen/psxeng/headers/engine.h"
 
 #endif
 #include "inside2.h"
@@ -20,7 +20,7 @@
 
 //
 // The maps.
-// 
+//
 
 MEM_PAP_Lo *PAP_lo; //[PAP_SIZE_LO][PAP_SIZE_LO];
 MEM_PAP_Hi *PAP_hi; //[PAP_SIZE_HI][PAP_SIZE_HI];
@@ -446,7 +446,7 @@ SLONG PAP_calc_map_height_near(SLONG x, SLONG z)
 		height = PAP_calc_map_height_at(x + dx, z + dz);
 
 		if (height > max)
-		{	
+		{
 			max = height;
 		}
 	}
@@ -512,7 +512,7 @@ SLONG	PAP_on_slope(SLONG x,SLONG z,SLONG *angle)
 		//
 		//	h1   h3
 
-		
+
 		h0 <<= PAP_ALT_SHIFT;
 		h1 <<= PAP_ALT_SHIFT;
 		h2 <<= PAP_ALT_SHIFT;

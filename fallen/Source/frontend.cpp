@@ -40,7 +40,6 @@
 #include "font2d.h"
 #include "env.h"
 #include "drive.h"
-#include "snd_type.h"
 #include "sound.h"
 #include "MFX.h"
 #include "MFX_Miles.h"
@@ -48,12 +47,12 @@
 #include "poly.h"
 #include "drawxtra.h"
 #include "fmatrix.h"
-#include    "C:\fallen\DDLibrary\headers\D3DTexture.h"
-#include    "C:\fallen\DDLibrary\headers\GDisplay.h"
-#include	"C:\fallen\DDEngine\headers\polypage.h"
+#include    "fallen/DDLibrary/headers/D3DTexture.h"
+#include    "fallen/DDLibrary/headers/GDisplay.h"
+#include	"fallen/DDEngine/headers/polypage.h"
 #include "io.h"
 #include "truetype.h"
-#include "c:\fallen\ddlibrary\headers\dclowlevel.h"
+#include "fallen/ddlibrary/headers/dclowlevel.h"
 #include "panel.h"
 
 #ifdef TARGET_DC
@@ -67,7 +66,7 @@ extern	BOOL	allow_debug_keys;
 
 
 #ifndef TARGET_DC
-UBYTE build_dc = TRUE;		// Set to TRUE to save out all the dreamcast DAD files.
+UBYTE build_dc = FALSE;		// Set to TRUE to save out all the dreamcast DAD files.
 UBYTE build_dc_mission;
 #endif
 
@@ -119,8 +118,8 @@ void	FRONTEND_display ( void );
 #if 0
 #define	STARTS_START	1
 #define	STARTS_EDITOR	2
-#define	STARTS_LOAD		3	
-#define	STARTS_EXIT		4	
+#define	STARTS_LOAD		3
+#define	STARTS_EXIT		4
 #define STARTS_LANGUAGE_CHANGE 10
 #else
 #include "startscr.h"
@@ -307,7 +306,7 @@ CBYTE *suggest_order[] =
 
 //
 // The script... biggest one at the moment is 17k
-// 
+//
 
 #define SCRIPT_MEMORY (20 * 1024)
 
@@ -588,26 +587,26 @@ CBYTE menu_choice_language[50];
 
 #if TARGET_DC
 // Underlines, not spaces.
-CBYTE* menu_back_names[] = { "title_leaves1.tga", "title_rain1.tga", 
+CBYTE* menu_back_names[] = { "title_leaves1.tga", "title_rain1.tga",
 	   					     "title_snow1.tga", "title_blood1.tga" };
-CBYTE* menu_map_names[]  = { "map_leaves_darci.tga", "map_rain_darci.tga", 
+CBYTE* menu_map_names[]  = { "map_leaves_darci.tga", "map_rain_darci.tga",
 						     "map_snow_darci.tga", "map_blood_darci.tga" };
-CBYTE* menu_brief_names[]= { "briefing_leaves_darci.tga", "briefing_rain_darci.tga", 
+CBYTE* menu_brief_names[]= { "briefing_leaves_darci.tga", "briefing_rain_darci.tga",
 						     "briefing_snow_darci.tga", "briefing_blood_darci.tga" };
-CBYTE* menu_config_names[]= { "config_leaves.tga", "config_rain.tga", 
+CBYTE* menu_config_names[]= { "config_leaves.tga", "config_rain.tga",
 						     "config_snow.tga", "config_blood.tga" };
 #else
-CBYTE* menu_back_names[] = { "title leaves1.tga", "title rain1.tga", 
+CBYTE* menu_back_names[] = { "title leaves1.tga", "title rain1.tga",
 	   					     "title snow1.tga", "title blood1.tga" };
-CBYTE* menu_map_names[]  = { "map leaves darci.tga", "map rain darci.tga", 
+CBYTE* menu_map_names[]  = { "map leaves darci.tga", "map rain darci.tga",
 						     "map snow darci.tga", "map blood darci.tga" };
-CBYTE* menu_brief_names[]= { "briefing leaves darci.tga", "briefing rain darci.tga", 
+CBYTE* menu_brief_names[]= { "briefing leaves darci.tga", "briefing rain darci.tga",
 						     "briefing snow darci.tga", "briefing blood darci.tga" };
-CBYTE* menu_config_names[]= { "config leaves.tga", "config rain.tga", 
+CBYTE* menu_config_names[]= { "config leaves.tga", "config rain.tga",
 						     "config snow.tga", "config blood.tga" };
 #endif
 
-CBYTE frontend_fonttable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!\":;'#$*-()[]\\/?ÈÀÜÖÄÙÚÓÁÉ";
+CBYTE frontend_fonttable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!\":;'#$*-()[]\\/?ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
 
 /*ULONG FRONTEND_leaf_colours[4] =
 	{
@@ -658,7 +657,7 @@ SWORD	  mission_count=0;
 SWORD	  mission_selected=0;
 UBYTE	  mission_hierarchy[60];
 MissionCache mission_cache[60];
-#ifdef	NDEBUG	
+#ifdef	NDEBUG
 UBYTE	  complete_point=0;
 #else
 UBYTE	  complete_point=0;
@@ -813,7 +812,7 @@ void ChangeDoorResetStatus ( bool bAllowReset )
 
 #ifndef TARGET_DC
 // define this to save backgrounds out again in DC file format.
-#define SAVE_MY_BACKGROUNDS_PLEASE_BOB defined
+// #define SAVE_MY_BACKGROUNDS_PLEASE_BOB defined
 #endif
 
 
@@ -978,7 +977,7 @@ void	FRONTEND_scr_img_load_into_screenfull(CBYTE *name, CompressedBackground *sc
 			TRACE ( "Out of memory for screen %s\n", fname );
 			return;
 		}
-	
+
 		SLONG res = FileRead ( handle, *screen, slSize );
 		ASSERT ( res == slSize );
 
@@ -1031,7 +1030,7 @@ void	FRONTEND_scr_img_load_into_screenfull(CBYTE *name, LPDIRECTDRAWSURFACE4 *sc
 
 
 #ifndef TARGET_DC
-#ifdef SAVE_MY_BACKGROUNDS_PLEASE_BOB 
+#ifdef SAVE_MY_BACKGROUNDS_PLEASE_BOB
 		// Save the screen out - should already be in 565.
 
 
@@ -1206,7 +1205,7 @@ void FRONTEND_scr_new_theme(
 
 
 
-	
+
 	if (the_display.lp_DD_Background_use_instead == screenfull_back  ) {last = 1;}
 	if (the_display.lp_DD_Background_use_instead == screenfull_map   ) {last = 2;}
 	if (the_display.lp_DD_Background_use_instead == screenfull_brief ) {last = 3;}
@@ -1387,25 +1386,25 @@ void	FRONTEND_ParseMissionData(CBYTE *text, CBYTE version, MissionData *mdata) {
 	switch(version) {
 	case 2:
 		sscanf(text,"%d : %d : %d : %d : %d : %s : *%d : %*d : %[^:] : %*s",
-			&mdata->ObjID, &mdata->GroupID, &mdata->ParentID, &mdata->ParentIsGroup, 
+			&mdata->ObjID, &mdata->GroupID, &mdata->ParentID, &mdata->ParentIsGroup,
 			&mdata->Type, mdata->fn, mdata->ttl);
 		mdata->Flags=0; mdata->District=-1; n=9;
 		break;
 	case 3:
 		sscanf(text,"%d : %d : %d : %d : %d : %d : %s : %[^:] : %*s",
-			&mdata->ObjID, &mdata->GroupID, &mdata->ParentID, &mdata->ParentIsGroup, 
+			&mdata->ObjID, &mdata->GroupID, &mdata->ParentID, &mdata->ParentIsGroup,
 			&mdata->Type, &mdata->District, mdata->fn, mdata->ttl);
 		mdata->Flags=0; n=8;
 		break;
 	case 4:
 		sscanf(text,"%d : %d : %d : %d : %d : %d : %d : %s : %[^:] : %*s",
-			&mdata->ObjID, &mdata->GroupID, &mdata->ParentID, &mdata->ParentIsGroup, 
+			&mdata->ObjID, &mdata->GroupID, &mdata->ParentID, &mdata->ParentIsGroup,
 			&mdata->Type, &mdata->Flags, &mdata->District, mdata->fn, mdata->ttl);
 		n=9;
 		break;
 	default:
-		sscanf(text,"%d : %d : %d : %d : %d : %s : %[^:] : %*s", 
-			&mdata->ObjID, &mdata->GroupID, &mdata->ParentID, &mdata->ParentIsGroup, 
+		sscanf(text,"%d : %d : %d : %d : %d : %s : %[^:] : %*s",
+			&mdata->ObjID, &mdata->GroupID, &mdata->ParentID, &mdata->ParentIsGroup,
 			&mdata->Type, mdata->fn, mdata->ttl);
 		mdata->Flags=0; mdata->District=-1; n=7;
 	}
@@ -1610,7 +1609,7 @@ void	FRONTEND_init_xition ( void ) {
 #endif
 	case FE_LOADSCREEN:
 	case FE_SAVESCREEN:
-	case FE_CONFIG: 
+	case FE_CONFIG:
 #ifdef TARGET_DC
 	case FE_VMU_SELECT:
 #endif
@@ -1674,7 +1673,7 @@ void	FRONTEND_show_xition() {
 		//case FE_MAINMENU:
 		//default:
 			rc.top=0; rc.bottom=RealDisplayHeight;
-			rc.left=0; 
+			rc.left=0;
 			if (RealDisplayWidth==640)
 			{
 				rc.right=fade_state*10;
@@ -1786,7 +1785,7 @@ void	FRONTEND_stop_xition()
 		case FE_MAINMENU:
 			UseBackSurface(screenfull_back);
 			break;
-#ifdef WANT_A_TITLE_SCREEN 
+#ifdef WANT_A_TITLE_SCREEN
 		case FE_TITLESCREEN:
 		case FE_LANGUAGESCREEN:
 			UseBackSurface(screenfull_title);
@@ -1828,7 +1827,7 @@ void	FRONTEND_stop_xition()
 			}
 			break;
 	}
-	
+
 	/*
 
 	if (screenfull) {
@@ -1852,11 +1851,11 @@ void	FRONTEND_draw_button(SLONG x, SLONG y, UBYTE which, UBYTE flash = FALSE) {
 	float u,v,w,h;
 	UBYTE size=(which<4)?64:32;
 	UBYTE grow;
-	
+
 	if (flash)
 	{
 		grow = 8;
-		
+
 		if (GetTickCount() & 0x200)
 		{
 			which = 7;
@@ -1877,16 +1876,16 @@ void	FRONTEND_draw_button(SLONG x, SLONG y, UBYTE which, UBYTE flash = FALSE) {
 	pp[0].colour=(which<4)?0xffFFFFFF:(fade_rgb<<1)|0xffffff; pp[0].specular=0; pp[0].Z=0.5;
 	pp[1]=pp[2]=pp[3]=pp[0];
 
-	pp[0].X=x-(grow>>1); pp[0].Y=y-grow; 
+	pp[0].X=x-(grow>>1); pp[0].Y=y-grow;
 	pp[0].u=u; pp[0].v=v;
 
-	pp[1].X=x+(grow>>1)+size; pp[1].Y=y-grow; 
+	pp[1].X=x+(grow>>1)+size; pp[1].Y=y-grow;
 	pp[1].u=w; pp[1].v=v;
 
-	pp[2].X=x; pp[2].Y=y+size; 
+	pp[2].X=x; pp[2].Y=y+size;
 	pp[2].u=u; pp[2].v=h;
 
-	pp[3].X=x+size; pp[3].Y=y+size; 
+	pp[3].X=x+size; pp[3].Y=y+size;
 	pp[3].u=w; pp[3].v=h;
 
 	POLY_add_quad(quad,(which<4)?POLY_PAGE_BIG_BUTTONS:POLY_PAGE_TINY_BUTTONS,FALSE,TRUE);
@@ -1903,36 +1902,36 @@ void	FRONTEND_kibble_draw() {
 
 	ASSERT ( kibble != NULL );
 
-	for (c0=0,k=kibble;c0<512;c0++,k++) 
+	for (c0=0,k=kibble;c0<512;c0++,k++)
 	  if (k->type>0) {
 
 		pp[0].colour=(k->rgb) | 0xff000000; pp[0].specular=0;
 		pp[1]=pp[2]=pp[3]=pp[0];
 
 		FMATRIX_calc(matrix, k->r, k->t, k->p);
-	
-		x=- k->size; 
+
+		x=- k->size;
 		y=- k->size;
 		z=0;
 		FMATRIX_MUL(matrix,x,y,z);
 		pp[0].X=(k->x>>8)+x; pp[0].Y=(k->y>>8)+y; pp[0].Z=KIBBLE_Z;
 		pp[0].u=0; pp[0].v=0;
 
-		x=+ k->size; 
+		x=+ k->size;
 		y=- k->size;
 		z=0;
 		FMATRIX_MUL(matrix,x,y,z);
 		pp[1].X=(k->x>>8)+x; pp[1].Y=(k->y>>8)+y; pp[1].Z=KIBBLE_Z;
 		pp[1].u=1; pp[1].v=0;
 
-		x=- k->size; 
+		x=- k->size;
 		y=+ k->size;
 		z=0;
 		FMATRIX_MUL(matrix,x,y,z);
 		pp[2].X=(k->x>>8)+x; pp[2].Y=(k->y>>8)+y; pp[2].Z=KIBBLE_Z;
 		pp[2].u=0; pp[2].v=1;
 
-		x=+ k->size; 
+		x=+ k->size;
 		y=+ k->size;
 		z=0;
 		FMATRIX_MUL(matrix,x,y,z);
@@ -1954,7 +1953,7 @@ void	FRONTEND_DrawSlider(MenuData *md) {
 	DRAW2D_Box(337,y-4,341,y+4,rgb,0,192);
 	DRAW2D_Box(337+255,y-4,341+255,y+4,rgb,0,192);
 	DRAW2D_Box(337+(md->Data),y-8,341+(md->Data),y+8,rgb,0,192);
-} 
+}
 
 void	FRONTEND_DrawMulti(MenuData *md, ULONG rgb) {
 	SLONG x,y,dy,c0;
@@ -2025,15 +2024,15 @@ void	FRONTEND_DrawKey(MenuData *md) {
 		strcpy(str,"Enter");		break;
 	case KB_SPACE:
 		strcpy(str,"Space");		break;
-	case KB_LSHIFT: 
+	case KB_LSHIFT:
 		strcpy(str,"Left Shift");	break;
-	case KB_RSHIFT: 
+	case KB_RSHIFT:
 		strcpy(str,"Right Shift");	break;
-	case KB_LALT: 
+	case KB_LALT:
 		strcpy(str,"Left Alt");		break;
-	case KB_RALT: 
+	case KB_RALT:
 		strcpy(str,"Right Alt");	break;
-	case KB_LCONTROL: 
+	case KB_LCONTROL:
 		strcpy(str,"Left Ctrl");	break;
 	case KB_RCONTROL:
 		strcpy(str,"Right Ctrl");break;
@@ -2069,7 +2068,7 @@ void	FRONTEND_DrawKey(MenuData *md) {
 	} else {
 		c0<<=16;
 	}
-	
+
 #ifdef TARGET_DC
 	strcpy ( str, "FixMePlease" );
 #else
@@ -2080,7 +2079,7 @@ void	FRONTEND_DrawKey(MenuData *md) {
 	{
 		MENUFONT_Dimensions(str,x,y,-1,BIG_FONT_SCALE);
 		MENUFONT_Draw(620-x,dy,BIG_FONT_SCALE,str,rgb,0);
-	} 
+	}
 	else
 	{
 		FONT2D_DrawStringRightJustify(str,620,dy,rgb,SMALL_FONT_SCALE,POLY_PAGE_FONT2D);
@@ -2152,16 +2151,16 @@ void	FRONTEND_DrawPad(MenuData *md) {
 			pp[0].Z=0.7f;
 			pp[1]=pp[2]=pp[3]=pp[0];
 
-			pp[0].X=620 - fSize * 2.0f; pp[0].Y=dy - fSize; 
+			pp[0].X=620 - fSize * 2.0f; pp[0].Y=dy - fSize;
 			pp[0].u=0.0f; pp[0].v=0.0f;
 
-			pp[1].X=620 - fSize * 2.0f; pp[1].Y=dy + fSize; 
+			pp[1].X=620 - fSize * 2.0f; pp[1].Y=dy + fSize;
 			pp[1].u=0.0f; pp[1].v=1.0f;
 
-			pp[2].X=620; pp[2].Y=dy - fSize; 
+			pp[2].X=620; pp[2].Y=dy - fSize;
 			pp[2].u=1.0f; pp[2].v=0.0f;
 
-			pp[3].X=620; pp[3].Y=dy + fSize; 
+			pp[3].X=620; pp[3].Y=dy + fSize;
 			pp[3].u=1.0f; pp[3].v=1.0f;
 
 			POLY_add_quad(quad,dwPage,FALSE,TRUE);
@@ -2187,7 +2186,7 @@ void	FRONTEND_DrawPad(MenuData *md) {
 //--- kibbly stuff ---
 
 void	FRONTEND_kibble_init_one(Kibble*k, UBYTE type) {
-	
+
 	SLONG kibble_index = k - kibble;
 
 	ASSERT ( kibble != NULL );
@@ -2206,11 +2205,11 @@ void	FRONTEND_kibble_init_one(Kibble*k, UBYTE type) {
 	}
 	switch(type&0x7f) {
 	case 1:
-		k->dx=(20+(Random()&15))<<5; 
+		k->dx=(20+(Random()&15))<<5;
 		k->dy=0;
 		k->page=POLY_PAGE_BIG_LEAF;
 		k->rgb=FRONTEND_leaf_colours[Random()&3];
-		k->x=(-10-(Random()&0x1ff))<<8; 
+		k->x=(-10-(Random()&0x1ff))<<8;
 		k->y=((Random()%520)-20)<<8;
 		k->size=35+(Random()&0x1f);
 		k->r=Random()&2047; k->t=Random()&2047; k->p=0;
@@ -2218,14 +2217,14 @@ void	FRONTEND_kibble_init_one(Kibble*k, UBYTE type) {
 		k->type=type;
 		break;
 	case 2:
-		k->dx=k->dy=(20+(Random()&15))<<5; 
+		k->dx=k->dy=(20+(Random()&15))<<5;
 		k->page=POLY_PAGE_BIG_RAIN;
 		k->rgb=0x3f7f7fff;
 		if (Random()&1) {
-			k->x=(-10-(Random()&0x1ff))<<8; 
+			k->x=(-10-(Random()&0x1ff))<<8;
 			k->y=((Random()%520)-20)<<8;
 		} else {
-			k->x=((Random()%680)-20)<<8; 
+			k->x=((Random()%680)-20)<<8;
 			k->y=(-10-(Random()&0x1ff)-20)<<8;
 		}
 		k->size=25+(Random()&0x1f);
@@ -2235,14 +2234,14 @@ void	FRONTEND_kibble_init_one(Kibble*k, UBYTE type) {
 		break;
 	case 3:
 		k->dx=(15+(Random()&15))<<5;
-		k->dy=(5+(Random()&15))<<5; 
+		k->dy=(5+(Random()&15))<<5;
 		k->page=POLY_PAGE_SNOWFLAKE;
 		k->rgb=0xffafafff;
 		if (Random()&1) {
-			k->x=(-10-(Random()&0x1ff))<<8; 
+			k->x=(-10-(Random()&0x1ff))<<8;
 			k->y=((Random()%520)-20)<<8;
 		} else {
-			k->x=((Random()%680)-20)<<8; 
+			k->x=((Random()%680)-20)<<8;
 			k->y=(-10-(Random()&0x1ff)-20)<<8;
 		}
 		k->size=25+(Random()&0x1f);
@@ -2328,13 +2327,13 @@ void	FRONTEND_kibble_flurry() {
 
 	n=densities[menu_theme];
 
-	for (c0=0,k=kibble;c0<n;c0++,k++) 
+	for (c0=0,k=kibble;c0<n;c0++,k++)
 	  if (!k->type) {
 		  switch(menu_theme) {
 		  case 0:
 			  FRONTEND_kibble_init_one(k,1|128);
-			  k->dx=(25+(Random()&15))<<5; 
-			  k->x=(-60-(Random()&0xff))<<8; 
+			  k->dx=(25+(Random()&15))<<5;
+			  k->x=(-60-(Random()&0xff))<<8;
 			  k->y=(Random()%480)<<8;
 			  k->size=5+(Random()&0x1f);
 			  k->r=Random()&2047; k->t=Random()&2047;
@@ -2416,7 +2415,7 @@ void	FRONTEND_kibble_process() {
 
 		last += 1000 / 40;
 
-		for (c0=0,k=kibble;c0<512;c0++,k++) 
+		for (c0=0,k=kibble;c0<512;c0++,k++)
 		  if (k->type>0) {
 			  k->x+=k->dx; k->y+=k->dy;
 			  k->r+=k->rd; k->t+=k->td;
@@ -2442,8 +2441,8 @@ void	FRONTEND_kibble_process() {
 				}
 			  case 2:
 			  case 130:
-				  if ((((k->x>>8)-k->size)>640)||(((k->y>>8)-k->size)>480)) 
-					  if (k->type<128) 
+				  if ((((k->x>>8)-k->size)>640)||(((k->y>>8)-k->size)>480))
+					  if (k->type<128)
 						  FRONTEND_kibble_init_one(k,k->type&127);
 					  else
 						  k->type=0;
@@ -2462,7 +2461,7 @@ void FRONTEND_fetch_title_from_id(CBYTE *script, CBYTE *ttl, UBYTE id) {
 
 	*ttl=0;
 
-	text = (CBYTE*)MemAlloc(4096); 
+	text = (CBYTE*)MemAlloc(4096);
 	memset(text,0,4096);
 
 	// Default value = no valid mission.
@@ -2486,7 +2485,7 @@ void FRONTEND_fetch_title_from_id(CBYTE *script, CBYTE *ttl, UBYTE id) {
 			if (mdata->ObjID==id) {
 				strcpy(ttl,mdata->ttl);
 				break;
-			}			
+			}
 		}
 	}
 	FileCloseScript();
@@ -2564,14 +2563,14 @@ bool FRONTEND_load_savegame(UBYTE slot) {
 		FileRead(file,&the_game.RoperStrength,1);
 		FileRead(file,&the_game.RoperConstitution,1);
 		FileRead(file,&the_game.RoperSkill,1);
-		FileRead(file,&the_game.RoperStamina,1);		
-		FileRead(file,&the_game.DarciDeadCivWarnings,1); 
+		FileRead(file,&the_game.RoperStamina,1);
+		FileRead(file,&the_game.DarciDeadCivWarnings,1);
 	}
-	if (version>1) 
+	if (version>1)
 	{
 		FileRead(file,mission_hierarchy,60);
 	}
-	if (version>2) 
+	if (version>2)
 	{
 		FileRead(file,&best_found[0][0],50*4);
 	}
@@ -2908,8 +2907,8 @@ bool FRONTEND_load_savegame(UBYTE slot)
 		DC_FILE_READ(&the_game.RoperStrength,1);
 		DC_FILE_READ(&the_game.RoperConstitution,1);
 		DC_FILE_READ(&the_game.RoperSkill,1);
-		DC_FILE_READ(&the_game.RoperStamina,1);		
-		DC_FILE_READ(&the_game.DarciDeadCivWarnings,1); 
+		DC_FILE_READ(&the_game.RoperStamina,1);
+		DC_FILE_READ(&the_game.DarciDeadCivWarnings,1);
 	}
 	if ( version >= 2 )
 	{
@@ -3277,7 +3276,7 @@ CBYTE*	FRONTEND_MissionFilename(CBYTE *script, UBYTE i) {
 
 	*str=0;
 
-	text = (CBYTE*)MemAlloc(4096); 
+	text = (CBYTE*)MemAlloc(4096);
 	memset(text,0,4096);
 
 	i++;
@@ -3311,7 +3310,7 @@ CBYTE*	FRONTEND_MissionFilename(CBYTE *script, UBYTE i) {
 				mission_launch=mdata->ObjID;
 				break;
 			}
-			
+
 		}
 	}
 	FileCloseScript();
@@ -3343,7 +3342,7 @@ void	FRONTEND_MissionHierarchy(CBYTE *script) {
 	if (newtheme!=menu_theme) {
 
 		menu_theme = newtheme;
- 
+
 		FRONTEND_scr_new_theme(
 			menu_back_names  [menu_theme],
 			menu_map_names   [menu_theme],
@@ -3387,10 +3386,10 @@ void	FRONTEND_MissionHierarchy(CBYTE *script) {
 		}
 		FRONTEND_kibble_init();
 	}
-	
-	
 
-	text = (CBYTE*)MemAlloc(4096); 
+
+
+	text = (CBYTE*)MemAlloc(4096);
 	memset(text,0,4096);
 
 //	ZeroMemory(mission_hierarchy,sizeof(mission_hierarchy));
@@ -3400,7 +3399,7 @@ void	FRONTEND_MissionHierarchy(CBYTE *script) {
 #ifdef ANNOYING_HACK_FOR_SIMON
 
 	// this hack does an end run around the hierarchy system
-	// it forces fight1, assault1, & testdrive1a (the bronze fighting, driving test and 
+	// it forces fight1, assault1, & testdrive1a (the bronze fighting, driving test and
 	// assault course) to be complete before allowing police1 to open up
 
 	SLONG fightID = -1, assaultID = -1, testdriveID = -1, policeID = -1, fight2ID = -1, testdrive3ID = -1;
@@ -3411,7 +3410,7 @@ void	FRONTEND_MissionHierarchy(CBYTE *script) {
 	while (1) {
 		LoadStringScript(text);
 		if (*text==0) break;
-		if (text[0]=='[') break; 
+		if (text[0]=='[') break;
 		if ((text[0]=='/')&&(text[1]=='/')) {
 			if (strstr(text,"Version")) sscanf(text,"%*s Version %d",&ver);
 		} else
@@ -3522,10 +3521,10 @@ void	FRONTEND_MissionHierarchy(CBYTE *script) {
 
 			flag=mission_hierarchy[mdata->ObjID]|1; // exists
 
-//			this dodgy method is no longer used, cos it sucks.		
+//			this dodgy method is no longer used, cos it sucks.
 //			if (mdata->ObjID<=complete_point) flag|=2; // complete
 //			instead, the entire hierarchy is preserved in savegames and
-//			completing a mission sets the appropriate flag. ie, the proper way.			
+//			completing a mission sets the appropriate flag. ie, the proper way.
 
 
 #ifdef TARGET_DC
@@ -3547,7 +3546,7 @@ void	FRONTEND_MissionHierarchy(CBYTE *script) {
 
 
 #ifndef VERSION_DEMO
-			if (mission_hierarchy[mdata->ParentID]&2) 
+			if (mission_hierarchy[mdata->ParentID]&2)
 #endif
 			{
 #ifndef VERSION_DEMO
@@ -3705,7 +3704,7 @@ void	FRONTEND_MissionHierarchy(CBYTE *script) {
 	FileCloseScript();
 
 
-#if 0
+#if !defined(TARGET_DC)
 	if ( !IsEnglish )
 	{
 		// Never show breakout in French.
@@ -3785,7 +3784,7 @@ void	FRONTEND_MissionBrief(CBYTE *script, UBYTE i) {
 	*str=0;
 	i++;
 
-	text = (CBYTE*)MemAlloc(4096); 
+	text = (CBYTE*)MemAlloc(4096);
 	memset(text,0,4096);
 
 	MUSIC_mode(0);
@@ -3822,7 +3821,7 @@ void	FRONTEND_MissionBrief(CBYTE *script, UBYTE i) {
 				menu_state.title=str;
 				break;
 			}
-			
+
 		}
 	}
 	FileCloseScript();
@@ -3924,7 +3923,7 @@ void	FRONTEND_MissionList(CBYTE *script, UBYTE district) {
 
 	//district--;
 
-	text = (CBYTE*)MemAlloc(4096); 
+	text = (CBYTE*)MemAlloc(4096);
 	memset(text,0,4096);
 	mission_count=mission_selected=0;
 	file = FileOpen(script);
@@ -3944,7 +3943,7 @@ void	FRONTEND_MissionList(CBYTE *script, UBYTE district) {
 				str+=strlen(mdata->ttl)+1;
 				mission_count++;
 			}
-			
+
 		}
 	}
 	FileClose(file);
@@ -3957,7 +3956,7 @@ void	FRONTEND_MissionList(CBYTE *script, UBYTE district) {
 
 	mission_count=mission_selected=0;
 
-	while (*mission_cache[i].name) 
+	while (*mission_cache[i].name)
 	{
 		if (mission_cache[i].district == district)
 		{
@@ -4015,7 +4014,7 @@ void	FRONTEND_CacheMissionList(CBYTE *script) {
 
 	//district--;
 
-	text = (CBYTE*)MemAlloc(4096); 
+	text = (CBYTE*)MemAlloc(4096);
 	memset(text,0,4096);
 	FileOpenScript();
 	while (1) {
@@ -4054,7 +4053,7 @@ void	FRONTEND_districts(CBYTE *script) {
 	SWORD temp_dist[40][3];
 	UBYTE crap_remap[640][10];
 
-	text = (CBYTE*)MemAlloc(4096); 
+	text = (CBYTE*)MemAlloc(4096);
 	memset(text,0,4096);
 
 	district_count=0;
@@ -4084,9 +4083,9 @@ void	FRONTEND_districts(CBYTE *script) {
 			} else
 				if ((text[0]=='/')&&(text[1]=='/')) {
 					if (strstr(text,"Version")) sscanf(text,"%*s Version %d",&ver);
-				} 
+				}
 
-		} 
+		}
 	}
 	FileCloseScript();
 
@@ -4102,7 +4101,7 @@ void	FRONTEND_districts(CBYTE *script) {
 			}
 		FRONTEND_MissionList(script,districts[district_selected][2]);
 	}
-		  
+
 
 	MemFree(text);
 
@@ -4272,7 +4271,7 @@ void FRONTEND_restore_video_data()
 
 void FRONTEND_store_video_data()
 {
-	int data[20], i, mode, bit_depth; 
+	int data[20], i, mode, bit_depth;
 
 	// Get the current ones.
 #ifdef TARGET_DC
@@ -4390,7 +4389,7 @@ void	FRONTEND_do_drivers() {
 
 	switch (RealDisplayWidth)
 	{
-	case 640:		
+	case 640:
 		CurrentVidMode=0;
 		break;
 	case 800:
@@ -4399,10 +4398,10 @@ void	FRONTEND_do_drivers() {
 	case 1024:
 		CurrentVidMode=2;
 		break;
-	case 320:		
+	case 320:
 		CurrentVidMode=3;
 		break;
-	case 512:		
+	case 512:
 		CurrentVidMode=4;
 		break;
 
@@ -4600,7 +4599,7 @@ extern bool g_bDreamcastABXYStartShouldGoToBootRomImmediately;
 				menu_state.stack[menu_state.stackpos].title=0;
 				menu_state.stackpos++;
 				menu_thrash=0;
-		} else 
+		} else
 			if (menu_state.mode!=-1) {
 				menu_state.stack[menu_state.stackpos].mode=menu_state.mode;
 				menu_state.stack[menu_state.stackpos].scroll=menu_state.scroll;
@@ -4715,7 +4714,7 @@ extern bool g_bDreamcastABXYStartShouldGoToBootRomImmediately;
 #endif
 	case FE_SAVESCREEN:
 		AllowSave=1;
-		if (!menu_state.stackpos) 
+		if (!menu_state.stackpos)
 		{
 			//InitBackImage(menu_config_names[menu_theme]);
 #ifdef ONLY_USE_THREE_BACKGROUNDS_PLEASE_BOB
@@ -4936,7 +4935,7 @@ void	FRONTEND_draw_districts() {
 			bonus_this_turn++;
 			MFX_play_stereo(0,S_TUNE_BONUS,0);
 		}
-		fade = (64 - fade_state) << 2;	
+		fade = (64 - fade_state) << 2;
 		if (IsEnglish)
 		{
 			str="Bonus mission unlocked!"; // XLAT_str(X_BONUS_MISSION_UNLOCKED)
@@ -5499,16 +5498,16 @@ extern void PANEL_draw_quad( float left,float top,float right,float bottom,SLONG
 			char *pcString[3];
 			if ( !IsEnglish )
 			{
-				pcString[0] = "Une manette vient d'etre"; 		// NOTE! The E in etre should be ê, but the font doesn't have it, and it's all in caps anyway.
+				pcString[0] = "Une manette vient d'etre"; 		// NOTE! The E in etre should be ï¿½, but the font doesn't have it, and it's all in caps anyway.
 				if ( bWriteVMInsteadOfVMU )
 				{
-					pcString[1] = "retirée ou une VM est";
+					pcString[1] = "retirï¿½e ou une VM est";
 				}
 				else
 				{
-					pcString[1] = "retirée ou une VMU est";
+					pcString[1] = "retirï¿½e ou une VMU est";
 				}
-				pcString[2] = "en cours de détection";
+				pcString[2] = "en cours de dï¿½tection";
 			}
 			else
 			{
@@ -6098,7 +6097,7 @@ extern BOOL AreAnyDevicesConnected ( void );
 			last_input=input;
 #endif
 #ifndef TARGET_DC
-			for (scan=0;scan<8;scan++) 
+			for (scan=0;scan<8;scan++)
 				any_button |= the_state.rgbButtons[scan];
 			// Supress very first movement - PC joysticks have a
 			// strange habit of doing one movement on boot-up for some reason.
@@ -6172,7 +6171,7 @@ extern BOOL AreAnyDevicesConnected ( void );
 		case KB_LEFT: case KB_RIGHT: case KB_UP: case KB_DOWN: case KB_ENTER: case KB_SPACE:
 		case KB_LSHIFT: case KB_RSHIFT: case KB_LALT: case KB_RALT: case KB_LCONTROL: case KB_RCONTROL:
 		case KB_TAB: case KB_END: case KB_HOME: case KB_DEL: case KB_INS: case KB_PGUP: case KB_PGDN:
-			item->Data=LastKey; 
+			item->Data=LastKey;
 			Keys[LastKey]=0;
 			break;
 		case KB_ESC: break;
@@ -6196,7 +6195,7 @@ extern BOOL AreAnyDevicesConnected ( void );
 	}
 	if(allow_debug_keys)
 	{
-		if (Keys[KB_1]||Keys[KB_2]||Keys[KB_3]||Keys[KB_4]) 
+		if (Keys[KB_1]||Keys[KB_2]||Keys[KB_3]||Keys[KB_4])
 		{
 			if (Keys[KB_1]) { Keys[KB_1]=0; menu_theme=0; }
 			if (Keys[KB_2]) { Keys[KB_2]=0; menu_theme=1; }
@@ -6216,7 +6215,7 @@ extern BOOL AreAnyDevicesConnected ( void );
 		MFX_play_stereo(1,S_MENU_CLICK_START,MFX_REPLACE);
 		menu_state.selected=menu_state.items-1;
 		if (menu_state.mode==FE_MAPSCREEN) mission_selected=mission_count-1;
-		while (((menu_data+menu_state.selected)->Type==OT_LABEL)||(((menu_data+menu_state.selected)->Type==OT_BUTTON)&&((menu_data+menu_state.selected)->Choices==(CBYTE*)1))) 
+		while (((menu_data+menu_state.selected)->Type==OT_LABEL)||(((menu_data+menu_state.selected)->Type==OT_BUTTON)&&((menu_data+menu_state.selected)->Choices==(CBYTE*)1)))
 			menu_state.selected--;
 	}
 	if (Keys[KB_HOME])
@@ -6225,7 +6224,7 @@ extern BOOL AreAnyDevicesConnected ( void );
 		MFX_play_stereo(1,S_MENU_CLICK_START,MFX_REPLACE);
 		menu_state.selected=0;
 		if (menu_state.mode==FE_MAPSCREEN) mission_selected=0;
-		while (((menu_data+menu_state.selected)->Type==OT_LABEL)||(((menu_data+menu_state.selected)->Type==OT_BUTTON)&&((menu_data+menu_state.selected)->Choices==(CBYTE*)1))) 
+		while (((menu_data+menu_state.selected)->Type==OT_LABEL)||(((menu_data+menu_state.selected)->Type==OT_BUTTON)&&((menu_data+menu_state.selected)->Choices==(CBYTE*)1)))
 			menu_state.selected++;
 	}
 #endif
@@ -6328,7 +6327,7 @@ extern BOOL AreAnyDevicesConnected ( void );
 		if ( ( (menu_state.mode==FE_SAVESCREEN)&&(item->Data==FE_MAPSCREEN) )
 		   ||( (menu_state.mode==FE_SAVE_CONFIRM)&&(item->Data==FE_MAPSCREEN) ) )
 #else
-		if ((menu_state.mode==FE_SAVE_CONFIRM)&&(item->Data==FE_MAPSCREEN)) 
+		if ((menu_state.mode==FE_SAVE_CONFIRM)&&(item->Data==FE_MAPSCREEN))
 #endif
 		{
 			if ( item->LabelID == X_CANCEL )
@@ -6455,7 +6454,7 @@ extern BOOL AreAnyDevicesConnected ( void );
 		case OT_BUTTON:
 		case OT_BUTTON_L:
 			if (menu_state.mode==FE_START) return FE_LOADSCREEN;
-#ifdef WANT_A_TITLE_SCREEN 
+#ifdef WANT_A_TITLE_SCREEN
 
 #if 0
 			if (menu_state.mode==FE_TITLESCREEN)
@@ -6510,7 +6509,7 @@ extern BOOL AreAnyDevicesConnected ( void );
 				return 0;
 			}
 #endif
-			
+
 			FRONTEND_kibble_flurry();
 
 			//FRONTEND_mode(item->Data);
@@ -6953,7 +6952,7 @@ extern TGA_Info TGA_load_from_file(const CBYTE *file, SLONG max_width, SLONG max
 
 	#endif
 
-	
+
 #ifdef TARGET_DC
 	// Need to reinit the frontend stuff.
 	FRONTEND_scr_new_theme(
@@ -7021,15 +7020,18 @@ extern TGA_Info TGA_load_from_file(const CBYTE *file, SLONG max_width, SLONG max
 #endif
 
 
-	CBYTE *str, *lang=ENV_get_value_string("language");
-
+	CBYTE *str, *lang=ENV_get_value_string("language", "Game");
+	if (lang == NULL) {
 #ifdef VERSION_FRENCH
-	// Kludge for the DC converter
-	if (!lang) lang="text\\lang_french.txt";
+		// Kludge for the DC converter
+		XLAT_load("text/lang_french.txt");
 #else
-	if (!lang) lang="text\\lang_english.txt";
+		XLAT_load("text/lang_english.txt");
 #endif
-	XLAT_load(lang);
+	} else {
+		XLAT_load(lang);
+		ENV_free_string(lang);
+	}
 	XLAT_init();
 
 	IsEnglish=!stricmp(XLAT_str(X_THIS_LANGUAGE_IS),"English");
@@ -7060,11 +7062,11 @@ extern TGA_Info TGA_load_from_file(const CBYTE *file, SLONG max_width, SLONG max
 	MENUFONT_Load("olyfont2.tga",POLY_PAGE_NEWFONT_INVERSE,frontend_fonttable);
 #endif
 
-void MENUFONT_MergeLower(void);	
+void MENUFONT_MergeLower(void);
 	MENUFONT_MergeLower();
 
 	menu_theme = 0;
-	
+
 	//InitBackImage(menu_back_names[menu_theme]);
 	UseBackSurface(screenfull_back);
 
@@ -7186,7 +7188,7 @@ void MENUFONT_MergeLower(void);
 		// Load in the front-end specific sound
 		//
 
-		#ifdef TARGET_DC	
+		#ifdef TARGET_DC
 		sprintf(fname, "Data\\Sfx\\1622DC\\%s", sound_list[S_FRONT_END_LOOP_EDIT]);
 		#else
 		sprintf(fname, "Data\\Sfx\\1622\\%s", sound_list[S_FRONT_END_LOOP_EDIT]);
@@ -7201,14 +7203,14 @@ void MENUFONT_MergeLower(void);
 		#ifdef TARGET_DC
 		MFX_QUICK_play("data\\sfx\\1622DC\\GeneralMusic\\FrontLoopMONO.wav",TRUE,0,0,0);
 		#else
-		MFX_QUICK_play("data\\sfx\\1622\\GeneralMusic\\FrontLoopMONO.wav",TRUE,0,0,0);
+		MFX_QUICK_play("data\\sfx\\1622\\GeneralMusic\\FrontLoop.wav",TRUE,0,0,0);
 		#endif
 	}
 
 	bFirstTime = FALSE;
 }
 
-void	FRONTEND_level_lost() 
+void	FRONTEND_level_lost()
 {
 	mission_launch=previous_mission_launch;
 	// Start up the kibble again.
@@ -7219,7 +7221,7 @@ void	FRONTEND_level_lost()
 	FRONTEND_mode(FE_MAINMENU);
 }
 
-void	FRONTEND_level_won() 
+void	FRONTEND_level_won()
 {
 
 	ASSERT(mission_launch<50);
@@ -7234,7 +7236,7 @@ extern bool g_bPunishMePleaseICheatedOnThisLevel;
 	if ( !g_bPunishMePleaseICheatedOnThisLevel )
 	{
 		// time to update roper/darci doohickeys
-		if (1)//NET_PERSON(0)->Genus.Person->PersonType==PERSON_DARCI) 
+		if (1)//NET_PERSON(0)->Genus.Person->PersonType==PERSON_DARCI)
 		{
 			SLONG	found;
 			found=NET_PLAYER(0)->Genus.Player->Constitution - the_game.DarciConstitution;
@@ -7278,8 +7280,8 @@ extern bool g_bPunishMePleaseICheatedOnThisLevel;
 			the_game.DarciStamina=NET_PLAYER(0)->Genus.Player->Stamina;
 			the_game.DarciSkill=NET_PLAYER(0)->Genus.Player->Skill;
 	*/
-		} 
-		else 
+		}
+		else
 		{
 	#ifdef TARGET_DC
 			// Not used.
@@ -7298,7 +7300,7 @@ extern bool g_bPunishMePleaseICheatedOnThisLevel;
 	FRONTEND_kibble_init();
 	ZeroMemory(&menu_state,sizeof(menu_state));
 	menu_state.mode=-1;
-	if (complete_point<mission_launch) complete_point=mission_launch; 
+	if (complete_point<mission_launch) complete_point=mission_launch;
 	//mission_launch++;
 	FRONTEND_MissionHierarchy(MISSION_SCRIPT);
 /*  hierarchy does both of these now
@@ -7380,10 +7382,10 @@ void	FRONTEND_diddle_music()
 	if (strstr(STARTSCR_mission,"levels\\fight")||strstr(STARTSCR_mission,"levels\\FTutor"))
 		MUSIC_bodge_code=1;
 	else
-		if (strstr(STARTSCR_mission,"levels\\Assault")) 
+		if (strstr(STARTSCR_mission,"levels\\Assault"))
 			MUSIC_bodge_code=2;
 		else
-			if (strstr(STARTSCR_mission,"levels\\testdrive")) 
+			if (strstr(STARTSCR_mission,"levels\\testdrive"))
 				MUSIC_bodge_code=3;
 			else
 				if (strstr(STARTSCR_mission,"levels\\Finale1"))
@@ -7403,7 +7405,7 @@ SBYTE	FRONTEND_loop() {
 	static SLONG now = 0;
 
 	SLONG millisecs;
-	
+
 	now       = GetTickCount();
 
 	if (last < now - 250)
@@ -7503,7 +7505,7 @@ SBYTE	FRONTEND_loop() {
 
 			// "Reset" the controller so that "Press Start Button" is displayed.
 			ClearPrimaryDevice();
-			
+
 			// Two minutes wait on the title screen.
 			dwAutoPlayFMVTimeout = timeGetTime() + AUTOPLAY_FMV_DELAY;
 		}
@@ -7609,7 +7611,7 @@ extern int g_iCheatNumber;
 #endif
 	if (res==FE_EDITOR)			return STARTS_EDITOR;
 	if (res==FE_LOADSCREEN)		return STARTS_START;
-#ifdef WANT_A_TITLE_SCREEN 
+#ifdef WANT_A_TITLE_SCREEN
 	if (res==FE_CHANGE_LANGUAGE) return STARTS_LANGUAGE_CHANGE;
 #endif
 #ifndef TARGET_DC
@@ -7669,7 +7671,7 @@ extern int g_iCheatNumber;
 
 			{"!"}
 		};
-		
+
 		//
 		// What level are we loading?
 		//
@@ -7728,7 +7730,7 @@ extern int g_iCheatNumber;
 		//
 		// What should we or shouldn't we load?
 		//
-		
+
 		ASSERT(WITHIN(index_into_the_whattoload_array, 0, 35));
 
 #ifndef TARGET_DC
@@ -7747,7 +7749,7 @@ extern int g_iCheatNumber;
 
 		// If doing all levels, don't use DONT_load. The two don't mix.
 		ASSERT ( !DONT_load || !build_dc );
-		
+
 		//
 		// Does this level have violence?
 		//

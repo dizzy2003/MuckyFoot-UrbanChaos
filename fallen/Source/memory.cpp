@@ -35,7 +35,7 @@
 #include <libsn.h>
 #include <libcd.h>
 #include <ctype.h>
-#include "c:\fallen\psxlib\headers\myheap.h"
+#include "fallen/psxlib/headers/myheap.h"
 #endif
 
 #ifdef PSX
@@ -69,16 +69,16 @@ extern	ULONG	level_index;
 
   //
   // e3.ucm 16 aug 99
-  //	 
+  //
 
- MOSTspecialS 49 
- MOSTmeshS 138 
- MOSTtweenS 66 
- MOSTCARS 29 
- MOSTPEOPLE 66 
+ MOSTspecialS 49
+ MOSTmeshS 138
+ MOSTtweenS 66
+ MOSTCARS 29
+ MOSTPEOPLE 66
 
- SAVE INGAME 
- store data 4 
+ SAVE INGAME
+ store data 4
  Pap_Hi -> 98304   tot 98304 (16384)
  Pap_Lo -> 8192   tot 106496 (1024)
  net_peep -> 40   tot 106536 (10)
@@ -309,7 +309,7 @@ extern	SLONG EWAY_tick;			// The amount of time since the last process waypoints
 //
 // The cut-scene camera.
 //
-			   
+
 extern	SLONG  EWAY_cam_active;
 extern	SLONG  EWAY_cam_x;		// Big coordinates...
 extern	SLONG  EWAY_cam_y;
@@ -402,8 +402,8 @@ struct MemTable save_table[]=
 	{M_("prim normal")	,(void**)&prim_normal			,MEM_DYNAMIC,0							,&next_prim_point			,MAX_PRIM_POINTS			,sizeof(PrimNormal)				},
 #endif
 */
-																																										
-	{M_("ob_ob")		,(void**)&OB_ob					,MEM_DYNAMIC,&OB_ob_upto				,0							,OB_MAX_OBS					,sizeof(OB_Ob)					,0}, //20				
+
+	{M_("ob_ob")		,(void**)&OB_ob					,MEM_DYNAMIC,&OB_ob_upto				,0							,OB_MAX_OBS					,sizeof(OB_Ob)					,0}, //20
 	{M_("ob_ mapwho")	,(void**)&OB_mapwho				,MEM_STATIC, 0							,0							,OB_SIZE*OB_SIZE			,sizeof(OB_Mapwho)				,0}, //21
 	{M_("EWAY_mess")	,(void**)&EWAY_mess				,MEM_DYNAMIC,&EWAY_mess_upto			,0							,EWAY_MAX_MESSES			,sizeof(CBYTE*)					,0}, //22
 	{M_("EWAY_mess buf"),(void**)&EWAY_mess_buffer		,MEM_DYNAMIC,&EWAY_mess_buffer_upto		,0							,EWAY_MESS_BUFFER_SIZE		,sizeof(CBYTE)					,0}, //23
@@ -416,7 +416,7 @@ struct MemTable save_table[]=
 	{M_("EWAY_way")		,(void**)&EWAY_way				,MEM_DYNAMIC,&EWAY_way_upto				,0							,EWAY_MAX_WAYS				,sizeof(EWAY_Way)				,0}, //26
 	{M_("EWAY_edef")	,(void**)&EWAY_edef				,MEM_DYNAMIC,&EWAY_edef_upto			,0							,EWAY_MAX_EDEFS				,sizeof(EWAY_Edef)				,0}, //27
 	{M_("EWAY_counter") ,(void**)&EWAY_counter			,MEM_STATIC	,0							,0							,EWAY_MAX_COUNTERS			,sizeof(UBYTE)					,0}, //28
-																																										
+
 	{M_("vehicles")		,(void**)&VEHICLES				,MEM_STATIC, 0							,0							,RMAX_VEHICLES				,sizeof(Vehicle)				,32}, //29
 	{M_("people")		,(void**)&PEOPLE				,MEM_STATIC, 0							,0							,RMAX_PEOPLE				,sizeof(Person)					,128}, //30
 	{M_("animals")		,(void**)&ANIMALS				,MEM_STATIC, 0							,0							,MAX_ANIMALS				,sizeof(Animal)					,0}, //31
@@ -434,18 +434,18 @@ struct MemTable save_table[]=
 	{M_("bike")			,(void**)&BIKE_bike				,MEM_STATIC, 0							,0							,BIKE_MAX_BIKES				,sizeof(BIKE_Bike)				,0}, //42
 	#endif
 	{M_("barrelsphere")	,(void**)&BARREL_sphere			,MEM_STATIC, 0							,0							,BARREL_MAX_SPHERES			,sizeof(BARREL_Sphere)			,0}, //43
-	{M_("barrels")		,(void**)&BARREL_barrel			,MEM_DYNAMIC,&BARREL_barrel_upto		,0							,BARREL_MAX_BARRELS			,sizeof(Barrel)					,0}, //44			
-	{M_("plat")			,(void**)&PLAT_plat				,MEM_DYNAMIC,&PLAT_plat_upto			,0							,RPLAT_MAX_PLATS			,sizeof(Plat)					,2}, //45			
-	{M_("wmove")		,(void**)&WMOVE_face			,MEM_DYNAMIC,&WMOVE_face_upto			,0							,RWMOVE_MAX_FACES			,sizeof(WMOVE_Face)				,64}, //46			
-	{M_("mav_opt")		,(void**)&MAV_opt				,MEM_DYNAMIC,&MAV_opt_upto				,0							,MAV_MAX_OPTS				,sizeof(MAV_Opt)				,0}, //47			
+	{M_("barrels")		,(void**)&BARREL_barrel			,MEM_DYNAMIC,&BARREL_barrel_upto		,0							,BARREL_MAX_BARRELS			,sizeof(Barrel)					,0}, //44
+	{M_("plat")			,(void**)&PLAT_plat				,MEM_DYNAMIC,&PLAT_plat_upto			,0							,RPLAT_MAX_PLATS			,sizeof(Plat)					,2}, //45
+	{M_("wmove")		,(void**)&WMOVE_face			,MEM_DYNAMIC,&WMOVE_face_upto			,0							,RWMOVE_MAX_FACES			,sizeof(WMOVE_Face)				,64}, //46
+	{M_("mav_opt")		,(void**)&MAV_opt				,MEM_DYNAMIC,&MAV_opt_upto				,0							,MAV_MAX_OPTS				,sizeof(MAV_Opt)				,0}, //47
 
-	//{M_("mav height")	,(void**)&MAV_height			,MEM_STATIC, 0							,0							,PAP_SIZE_HI*PAP_SIZE_HI	,sizeof(SBYTE)					},			
+	//{M_("mav height")	,(void**)&MAV_height			,MEM_STATIC, 0							,0							,PAP_SIZE_HI*PAP_SIZE_HI	,sizeof(SBYTE)					},
 
-	{M_("mav_nav")		,(void**)&MAV_nav				,MEM_STATIC, 0							,0							,PAP_SIZE_HI*PAP_SIZE_HI	,sizeof(UWORD)					,0}, //48			
-	{M_("road_noads")	,(void**)&ROAD_node				,MEM_DYNAMIC,&ROAD_node_upto			,0							,ROAD_MAX_NODES				,sizeof(ROAD_Node)				,0}, //49			
-	{M_("balloons")		,(void**)&BALLOON_balloon		,MEM_DYNAMIC,&BALLOON_balloon_upto		,0							,BALLOON_MAX_BALLOONS		,sizeof(BALLOON_Balloon)		,0}, //50			
-	{M_("tracks")		,(void**)&tracks				,MEM_STATIC, 0							,0							,TRACK_BUFFER_LENGTH		,sizeof(Track)					,0}, //51			
-	{M_("roofface4")	,(void**)&roof_faces4			,MEM_DYNAMIC,0							,&next_roof_face4			,MAX_ROOF_FACE4				,sizeof(struct RoofFace4)		,0}, //52			
+	{M_("mav_nav")		,(void**)&MAV_nav				,MEM_STATIC, 0							,0							,PAP_SIZE_HI*PAP_SIZE_HI	,sizeof(UWORD)					,0}, //48
+	{M_("road_noads")	,(void**)&ROAD_node				,MEM_DYNAMIC,&ROAD_node_upto			,0							,ROAD_MAX_NODES				,sizeof(ROAD_Node)				,0}, //49
+	{M_("balloons")		,(void**)&BALLOON_balloon		,MEM_DYNAMIC,&BALLOON_balloon_upto		,0							,BALLOON_MAX_BALLOONS		,sizeof(BALLOON_Balloon)		,0}, //50
+	{M_("tracks")		,(void**)&tracks				,MEM_STATIC, 0							,0							,TRACK_BUFFER_LENGTH		,sizeof(Track)					,0}, //51
+	{M_("roofface4")	,(void**)&roof_faces4			,MEM_DYNAMIC,0							,&next_roof_face4			,MAX_ROOF_FACE4				,sizeof(struct RoofFace4)		,0}, //52
 	{M_("fastnav")		,(void**)&COLLIDE_fastnav		,MEM_STATIC, 0							,0							,PAP_SIZE_HI*PAP_SIZE_HI>>3 ,sizeof(UBYTE)					,0}, //53
 	{M_("night_slight")	,(void**)&NIGHT_slight			,MEM_DYNAMIC,&NIGHT_slight_upto			,0							,NIGHT_MAX_SLIGHTS			,sizeof(NIGHT_Slight)			,0}, //54
 	{M_("night_smap")	,(void**)&NIGHT_smap			,MEM_STATIC	,0							,0							,PAP_SIZE_LO*PAP_SIZE_LO	,sizeof(NIGHT_Smap)				,0}, //55
@@ -476,8 +476,8 @@ struct MemTable save_table[]=
 //
 // new ones added by MikeD for footstep surfaces
 //
-	{M_("soundfxmap")		,(void**)&SOUND_FXMapping	,MEM_STATIC, 0							,0							,1024						,sizeof(UBYTE)					,0}, //48			
-	{M_("soundfxgroup")		,(void**)&SOUND_FXGroups	,MEM_STATIC, 0							,0							,128*2						,sizeof(UWORD)					,0}, //48			
+	{M_("soundfxmap")		,(void**)&SOUND_FXMapping	,MEM_STATIC, 0							,0							,1024						,sizeof(UBYTE)					,0}, //48
+	{M_("soundfxgroup")		,(void**)&SOUND_FXGroups	,MEM_STATIC, 0							,0							,128*2						,sizeof(UWORD)					,0}, //48
 
 
 	{0,0,0,0,0,0,0}
@@ -785,7 +785,7 @@ void	convert_thing_to_index(Thing *p_thing)
 			break;
 		case	CLASS_PERSON:
 			p_thing->Genus.Person=(Person *)PERSON_NUMBER(p_thing->Genus.Person);
-			
+
 			break;
 		case	CLASS_ANIMAL:
 			p_thing->Genus.Animal=(Animal*)ANIMAL_NUMBERb(p_thing->Genus.Animal);
@@ -844,7 +844,7 @@ void	convert_thing_to_index(Thing *p_thing)
 void	convert_pointers_to_index(void)
 {
 	SLONG	c0,i;
-	static	max_people=0,max_car=0,max_mesh=0,max_tween=0,max_anim=0,max_special=0,max_bat=0;
+	static	SLONG max_people=0,max_car=0,max_mesh=0,max_tween=0,max_anim=0,max_special=0,max_bat=0;
 	SLONG	count_people=0,count_car=0,count_mesh=0,count_tween=0,count_anim=0,count_special=0,count_bat=0;
 	SLONG	gap=0;
 
@@ -892,7 +892,7 @@ void	convert_pointers_to_index(void)
 			{
 				count_mesh=i;
 			}
-		} 
+		}
 	}
 
 	for(c0=0;c0<RMAX_DRAW_TWEENS;c0++)
@@ -924,7 +924,7 @@ void	convert_pointers_to_index(void)
 	for(c0=1;c0<RMAX_SPECIALS;c0++)
 	{
 		if(SPECIALS[c0].SpecialType!=SPECIAL_NONE)
-		{	
+		{
 			if(c0>count_special)
 				count_special=c0;
 		}
@@ -939,7 +939,7 @@ void	convert_pointers_to_index(void)
 		}
 	}
 
-	
+
 
 	save_table[SAVE_TABLE_PEOPLE].Maximum  =MIN(save_table[SAVE_TABLE_PEOPLE].Extra+count_people,RMAX_PEOPLE);
 	save_table[SAVE_TABLE_VEHICLE].Maximum =MIN(save_table[SAVE_TABLE_VEHICLE].Extra+count_car,RMAX_VEHICLES);
@@ -1166,7 +1166,7 @@ void	save_whole_anims(MFFileHandle handle)
 			//
 			// Convert the pointers to indexes
 			//
-				
+
 			convert_keyframe_to_index(gc->AnimKeyFrames,gc->TheElements,gc->FightCols,gc->MaxKeyFrames);
 			convert_animlist_to_index(gc->AnimList,gc->AnimKeyFrames,gc->MaxAnimFrames);
 			convert_fightcol_to_index(gc->FightCols,gc->FightCols,gc->MaxFightCols);
@@ -1213,18 +1213,18 @@ void	save_whole_anims(MFFileHandle handle)
 		{
 			struct	 GameKeyFrameChunk	*gc;
 			gc=&anim_chunk[c0];
-			STORE_DATA(c0);							//4 
-			STORE_DATA(gc->MaxPeopleTypes);	        //2 
-			STORE_DATA(gc->MaxKeyFrames);			//2 
-			STORE_DATA(gc->MaxAnimFrames);			//2 
-			STORE_DATA(gc->MaxFightCols);			//2 
-			STORE_DATA(gc->MaxElements);			//4 
-			STORE_DATA(gc->ElementCount);			//4 
+			STORE_DATA(c0);							//4
+			STORE_DATA(gc->MaxPeopleTypes);	        //2
+			STORE_DATA(gc->MaxKeyFrames);			//2
+			STORE_DATA(gc->MaxAnimFrames);			//2
+			STORE_DATA(gc->MaxFightCols);			//2
+			STORE_DATA(gc->MaxElements);			//4
+			STORE_DATA(gc->ElementCount);			//4
 
 			//
 			// Convert the pointers to indexes
 			//
-				
+
 			convert_keyframe_to_index(gc->AnimKeyFrames,gc->TheElements,gc->FightCols,gc->MaxKeyFrames);
 			convert_animlist_to_index(gc->AnimList,gc->AnimKeyFrames,gc->MaxAnimFrames);
 			convert_fightcol_to_index(gc->FightCols,gc->FightCols,gc->MaxFightCols);
@@ -1463,7 +1463,7 @@ void	save_whole_anims_psx(MFFileHandle handle)
 						SLONG	bdist=0;
 						for(ele=0;(signed)ele<gc->ElementCount;ele++)
 						{
-							
+
 							//if(gc->AnimKeyFrames[c1].FirstElement[ele].OffsetX<bx)
 								bx+=(gc->AnimKeyFrames[c1].FirstElement[ele].OffsetX);
 
@@ -1490,7 +1490,7 @@ void	save_whole_anims_psx(MFFileHandle handle)
 						{
 							SLONG	dx,dy,dz,dist;
 
-							
+
 							gc->AnimKeyFrames[c1].FirstElement[ele].OffsetX-=bx;
 							gc->AnimKeyFrames[c1].FirstElement[ele].OffsetY-=by;
 							gc->AnimKeyFrames[c1].FirstElement[ele].OffsetZ-=bz;
@@ -1514,7 +1514,7 @@ void	save_whole_anims_psx(MFFileHandle handle)
 								big_z=(gc->AnimKeyFrames[c1].FirstElement[ele].OffsetZ);
 
 
-							
+
 
 //							ASSERT(gc->AnimKeyFrames[c1].FirstElement[ele].OffsetX>=-128 && gc->AnimKeyFrames[c1].FirstElement[ele].OffsetX<128);
 //							ASSERT(gc->AnimKeyFrames[c1].FirstElement[ele].OffsetY>=-128 && gc->AnimKeyFrames[c1].FirstElement[ele].OffsetY<128);
@@ -1588,7 +1588,7 @@ void	save_whole_anims_psx(MFFileHandle handle)
 			//
 			// Convert the pointers to indexes
 			//
-				
+
 			convert_keyframe_to_index(gc->AnimKeyFrames,gc->TheElements,gc->FightCols,gc->MaxKeyFrames);
 			convert_animlist_to_index(gc->AnimList,gc->AnimKeyFrames,gc->MaxAnimFrames);
 			convert_fightcol_to_index(gc->FightCols,gc->FightCols,gc->MaxFightCols);
@@ -1674,7 +1674,7 @@ void	save_whole_anims_psx(MFFileHandle handle)
 					{
 						for(ele=0;ele<gc->ElementCount;ele++)
 						{
-							
+
 							//if(gc->AnimKeyFrames[c1].FirstElement[ele].OffsetX<bx)
 								bx+=(gc->AnimKeyFrames[c1].FirstElement[ele].OffsetX);
 
@@ -1698,7 +1698,7 @@ void	save_whole_anims_psx(MFFileHandle handle)
 
 						for(ele=0;ele<gc->ElementCount;ele++)
 						{
-							
+
 							gc->AnimKeyFrames[c1].FirstElement[ele].OffsetX-=bx;
 							gc->AnimKeyFrames[c1].FirstElement[ele].OffsetY-=by;
 							gc->AnimKeyFrames[c1].FirstElement[ele].OffsetZ-=bz;
@@ -1739,18 +1739,18 @@ void	save_whole_anims_psx(MFFileHandle handle)
 			}
 
 
-			STORE_DATA(c0);							//4 
-			STORE_DATA(gc->MaxPeopleTypes);	        //2 
-			STORE_DATA(gc->MaxKeyFrames);			//2 
-			STORE_DATA(gc->MaxAnimFrames);			//2 
-			STORE_DATA(gc->MaxFightCols);			//2 
-			STORE_DATA(gc->MaxElements);			//4 
-			STORE_DATA(gc->ElementCount);			//4 
+			STORE_DATA(c0);							//4
+			STORE_DATA(gc->MaxPeopleTypes);	        //2
+			STORE_DATA(gc->MaxKeyFrames);			//2
+			STORE_DATA(gc->MaxAnimFrames);			//2
+			STORE_DATA(gc->MaxFightCols);			//2
+			STORE_DATA(gc->MaxElements);			//4
+			STORE_DATA(gc->ElementCount);			//4
 
 			//
 			// Convert the pointers to indexes
 			//
-				
+
 			convert_keyframe_to_index(gc->AnimKeyFrames,gc->TheElements,gc->FightCols,gc->MaxKeyFrames);
 			convert_animlist_to_index(gc->AnimList,gc->AnimKeyFrames,gc->MaxAnimFrames);
 			convert_fightcol_to_index(gc->FightCols,gc->FightCols,gc->MaxFightCols);
@@ -1886,7 +1886,7 @@ void	save_whole_wad(CBYTE	*gamename,UBYTE type)
 
 
 	handle=FileCreate(gamename,1);
-	if(handle!=FILE_CREATION_ERROR) 
+	if(handle!=FILE_CREATION_ERROR)
 	{
 // get rid of the nasty pointers
 // by converting to indexes
@@ -1990,7 +1990,7 @@ void	save_whole_wad(CBYTE	*gamename,UBYTE type)
 
 				FileWrite(handle,(UBYTE*)block,mem_size);
 				MemFree(block);
-				
+
 
 
 			}
@@ -2054,7 +2054,7 @@ void	save_whole_wad(CBYTE	*gamename,UBYTE type)
 			else
 			{
 				p_mem=(UBYTE*)*ptab->Point;
-				
+
 				// chunk id
 				FileWrite(handle,(UBYTE*)&c0,4);
 				FileWrite(handle,(UBYTE*)&count,4);
@@ -2082,74 +2082,74 @@ void	save_whole_wad(CBYTE	*gamename,UBYTE type)
 		DebugText("\n");
 
 
-		STORE_DATA(PRIMARY_USED);								   
-		STORE_DATA(PRIMARY_UNUSED);								   
-		STORE_DATA(SECONDARY_USED);								   
-		STORE_DATA(SECONDARY_UNUSED);							   
-		STORE_DATA(PERSON_COUNT);								   
-		STORE_DATA(PERSON_COUNT);								   
-		STORE_DATA(ANIMAL_COUNT);								   
-		STORE_DATA(CHOPPER_COUNT);								   
-		STORE_DATA(PYRO_COUNT);									   
-		STORE_DATA(PLAYER_COUNT);								   
-		STORE_DATA(PROJECTILE_COUNT);							   
-		STORE_DATA(SPECIAL_COUNT);								   
-		STORE_DATA(SWITCH_COUNT);								   
-		STORE_DATA(PRIMARY_COUNT);								   
-		STORE_DATA(SECONDARY_COUNT);							   
-		STORE_DATA(GAME_STATE);									   
-		STORE_DATA(GAME_TURN);									   
-		STORE_DATA(GAME_FLAGS);									   
-		STORE_DATA(TEXTURE_set);								   
-		STORE_DATA(WMOVE_face_upto);							   
-		STORE_DATA(first_walkable_prim_point);					   
-		STORE_DATA(number_of_walkable_prim_points);				   
-		STORE_DATA(first_walkable_prim_face4);					   
-		STORE_DATA(number_of_walkable_prim_faces4);				   
-		STORE_DATA(BARREL_sphere_last);							   
-		STORE_DATA(track_head);									   
-		STORE_DATA(track_tail);									   
-		STORE_DATA(track_eob);									   
-		STORE_DATA( NIGHT_dlight_free);							   
-		STORE_DATA( NIGHT_dlight_used);							   
+		STORE_DATA(PRIMARY_USED);
+		STORE_DATA(PRIMARY_UNUSED);
+		STORE_DATA(SECONDARY_USED);
+		STORE_DATA(SECONDARY_UNUSED);
+		STORE_DATA(PERSON_COUNT);
+		STORE_DATA(PERSON_COUNT);
+		STORE_DATA(ANIMAL_COUNT);
+		STORE_DATA(CHOPPER_COUNT);
+		STORE_DATA(PYRO_COUNT);
+		STORE_DATA(PLAYER_COUNT);
+		STORE_DATA(PROJECTILE_COUNT);
+		STORE_DATA(SPECIAL_COUNT);
+		STORE_DATA(SWITCH_COUNT);
+		STORE_DATA(PRIMARY_COUNT);
+		STORE_DATA(SECONDARY_COUNT);
+		STORE_DATA(GAME_STATE);
+		STORE_DATA(GAME_TURN);
+		STORE_DATA(GAME_FLAGS);
+		STORE_DATA(TEXTURE_set);
+		STORE_DATA(WMOVE_face_upto);
+		STORE_DATA(first_walkable_prim_point);
+		STORE_DATA(number_of_walkable_prim_points);
+		STORE_DATA(first_walkable_prim_face4);
+		STORE_DATA(number_of_walkable_prim_faces4);
+		STORE_DATA(BARREL_sphere_last);
+		STORE_DATA(track_head);
+		STORE_DATA(track_tail);
+		STORE_DATA(track_eob);
+		STORE_DATA( NIGHT_dlight_free);
+		STORE_DATA( NIGHT_dlight_used);
 
 
-		STORE_DATA(EWAY_time_accurate);							   
-		STORE_DATA(EWAY_time);									   
-		STORE_DATA(EWAY_tick);									   
-		STORE_DATA(EWAY_cam_active);							   
-		STORE_DATA(EWAY_cam_x);									   
-		STORE_DATA(EWAY_cam_y);									   
-		STORE_DATA(EWAY_cam_z);									   
-		STORE_DATA(EWAY_cam_dx);								   
-		STORE_DATA(EWAY_cam_dy);								   
-		STORE_DATA(EWAY_cam_dz);								   
-		STORE_DATA(EWAY_cam_yaw);								   
-		STORE_DATA(EWAY_cam_pitch);								   
-		STORE_DATA(EWAY_cam_waypoint);							   
-		STORE_DATA(EWAY_cam_target);							   
-		STORE_DATA(EWAY_cam_delay);								   
-		STORE_DATA(EWAY_cam_speed);								   
-		STORE_DATA(EWAY_cam_freeze);							   
+		STORE_DATA(EWAY_time_accurate);
+		STORE_DATA(EWAY_time);
+		STORE_DATA(EWAY_tick);
+		STORE_DATA(EWAY_cam_active);
+		STORE_DATA(EWAY_cam_x);
+		STORE_DATA(EWAY_cam_y);
+		STORE_DATA(EWAY_cam_z);
+		STORE_DATA(EWAY_cam_dx);
+		STORE_DATA(EWAY_cam_dy);
+		STORE_DATA(EWAY_cam_dz);
+		STORE_DATA(EWAY_cam_yaw);
+		STORE_DATA(EWAY_cam_pitch);
+		STORE_DATA(EWAY_cam_waypoint);
+		STORE_DATA(EWAY_cam_target);
+		STORE_DATA(EWAY_cam_delay);
+		STORE_DATA(EWAY_cam_speed);
+		STORE_DATA(EWAY_cam_freeze);
 		STORE_DATA(EWAY_cam_cant_interrupt);
-		STORE_DATA( NIGHT_amb_d3d_colour);						   
-		STORE_DATA( NIGHT_amb_d3d_specular);					   
-		STORE_DATA( NIGHT_amb_red);								   
-		STORE_DATA( NIGHT_amb_green);							   
-		STORE_DATA( NIGHT_amb_blue);							   
-		STORE_DATA( NIGHT_amb_norm_x);							   
-		STORE_DATA( NIGHT_amb_norm_y);							   
-		STORE_DATA( NIGHT_amb_norm_z);							   
-		STORE_DATA( NIGHT_flag);								   
-		STORE_DATA( NIGHT_lampost_radius);						   
-		STORE_DATA( NIGHT_lampost_red);							   
-		STORE_DATA( NIGHT_lampost_green);						   
-		STORE_DATA( NIGHT_lampost_blue);						   
-		STORE_DATA( NIGHT_sky_colour);						
+		STORE_DATA( NIGHT_amb_d3d_colour);
+		STORE_DATA( NIGHT_amb_d3d_specular);
+		STORE_DATA( NIGHT_amb_red);
+		STORE_DATA( NIGHT_amb_green);
+		STORE_DATA( NIGHT_amb_blue);
+		STORE_DATA( NIGHT_amb_norm_x);
+		STORE_DATA( NIGHT_amb_norm_y);
+		STORE_DATA( NIGHT_amb_norm_z);
+		STORE_DATA( NIGHT_flag);
+		STORE_DATA( NIGHT_lampost_radius);
+		STORE_DATA( NIGHT_lampost_red);
+		STORE_DATA( NIGHT_lampost_green);
+		STORE_DATA( NIGHT_lampost_blue);
+		STORE_DATA( NIGHT_sky_colour);
 		STORE_DATA(padding_byte);
-		STORE_DATA(check);					
-		STORE_DATA(CRIME_RATE);					
-		STORE_DATA(CRIME_RATE_SCORE_MUL);					
+		STORE_DATA(check);
+		STORE_DATA(CRIME_RATE);
+		STORE_DATA(CRIME_RATE_SCORE_MUL);
 		STORE_DATA(MUSIC_WORLD);
 		STORE_DATA(BOREDOM_RATE);
 		STORE_DATA(world_type);
@@ -2160,40 +2160,40 @@ void	save_whole_wad(CBYTE	*gamename,UBYTE type)
 		STORE_DATA(EWAY_fake_wander_text_guilty_number );
 		STORE_DATA(EWAY_fake_wander_text_annoyed_index );
 		STORE_DATA(EWAY_fake_wander_text_annoyed_number);
-		
+
 		STORE_DATA(GAME_FLAGS);
-		
+
 		STORE_DATA(semtex);
 		STORE_DATA(estate);
 		STORE_DATA(padding_word);
 
 
-#ifdef	OLD_CAM													  
-																  
-		CAM_focus=(Thing*)THING_NUMBER(CAM_focus);				  
-		STORE_DATA(CAM_focus);									  
-		CAM_focus=TO_THING((SLONG)CAM_focus);					  
-#endif															  
+#ifdef	OLD_CAM
+
+		CAM_focus=(Thing*)THING_NUMBER(CAM_focus);
+		STORE_DATA(CAM_focus);
+		CAM_focus=TO_THING((SLONG)CAM_focus);
+#endif
 
 		switch(type)
 		{
 			case	0:
-				save_whole_anims(handle);								  
+				save_whole_anims(handle);
 				break;
 
 			case	1:
 #ifndef	ULTRA_COMPRESSED_ANIMATIONS
-				save_whole_anims_psx(handle);								  
+				save_whole_anims_psx(handle);
 #endif
 				break;
 
 
 		}
 
-			
-																  
-																  
-//		STORE_DATA(GAME_TIME,sizeof								  
+
+
+
+//		STORE_DATA(GAME_TIME,sizeof
 //		STORE_DATA(GAME_SEASON,size
 
 		FileClose(handle);
@@ -2293,7 +2293,7 @@ void	convert_drawtype_to_pointer(Thing *p_thing,SLONG meshtype)
 						ASSERT(0);
 						break;
 				}
-				
+
 				switch(p_thing->Class)
 				{
 					case	CLASS_PERSON:
@@ -2378,7 +2378,7 @@ void	convert_drawtype_to_pointer(Thing *p_thing,SLONG meshtype)
 
 //
 // what's left is function pointers
-// and 
+// and
 
 
 extern	void	process_hardware_level_input_for_player(Thing *p_thing);
@@ -2444,7 +2444,7 @@ void special_normal(Thing *s_thing);
 void CHOPPER_fn_normal(Thing *);
 			p_thing->Genus.Chopper=(Chopper*)TO_CHOPPER((SLONG)p_thing->Genus.Chopper);
 			p_thing->StateFn    = CHOPPER_fn_normal;
-	
+
 			break;
 		case	CLASS_PYRO:
 			p_thing->Genus.Pyro=(Pyro*)TO_PYRO((SLONG)p_thing->Genus.Pyro);
@@ -2689,7 +2689,7 @@ extern SLONG EWAY_count_up;		 // The visible count-up timer...
 
 //
 // The penalties incurred for the count-up timer.
-// 
+//
 
 extern UBYTE EWAY_count_up_add_penalties;
 extern SWORD EWAY_count_up_num_penalties;
@@ -2883,7 +2883,7 @@ extern char cd_file_buffer[];
 #endif
 #endif
 
-#endif	
+#endif
 #endif
 
 	mem_all=p_all;
@@ -2929,7 +2929,7 @@ extern char cd_file_buffer[];
 			case	2:
 				if(ptab->Extra)
 					ptab->Maximum=count;
-				
+
 				break;
 
 			case	1:
@@ -2960,79 +2960,79 @@ extern char cd_file_buffer[];
 	AENG_loading_bar(60);
 #endif
 
-		GET_DATA(PRIMARY_USED);								   
-		GET_DATA(PRIMARY_UNUSED);								   
-		GET_DATA(SECONDARY_USED);								   
-		GET_DATA(SECONDARY_UNUSED);							   
-		GET_DATA(PERSON_COUNT);								   
-		GET_DATA(PERSON_COUNT);								   
-		GET_DATA(ANIMAL_COUNT);								   
-		GET_DATA(CHOPPER_COUNT);								   
-		GET_DATA(PYRO_COUNT);									   
-		GET_DATA(PLAYER_COUNT);								   
-		GET_DATA(PROJECTILE_COUNT);							   
-		GET_DATA(SPECIAL_COUNT);								   
-		GET_DATA(SWITCH_COUNT);								   
-		GET_DATA(PRIMARY_COUNT);								   
-		GET_DATA(SECONDARY_COUNT);							   
-		GET_DATA(GAME_STATE);									   
+		GET_DATA(PRIMARY_USED);
+		GET_DATA(PRIMARY_UNUSED);
+		GET_DATA(SECONDARY_USED);
+		GET_DATA(SECONDARY_UNUSED);
+		GET_DATA(PERSON_COUNT);
+		GET_DATA(PERSON_COUNT);
+		GET_DATA(ANIMAL_COUNT);
+		GET_DATA(CHOPPER_COUNT);
+		GET_DATA(PYRO_COUNT);
+		GET_DATA(PLAYER_COUNT);
+		GET_DATA(PROJECTILE_COUNT);
+		GET_DATA(SPECIAL_COUNT);
+		GET_DATA(SWITCH_COUNT);
+		GET_DATA(PRIMARY_COUNT);
+		GET_DATA(SECONDARY_COUNT);
+		GET_DATA(GAME_STATE);
 
 #ifdef TARGET_DC
 		GAME_STATE &= ~(GS_RECORD|GS_PLAYBACK|GS_EDITOR);
 #endif
 
-		GET_DATA(GAME_TURN);									   
-		GET_DATA(GAME_FLAGS);									   
-		GET_DATA(texture_set_local);								   
-		GET_DATA(WMOVE_face_upto);							   
-		GET_DATA(first_walkable_prim_point);					   
-		GET_DATA(number_of_walkable_prim_points);				   
-		GET_DATA(first_walkable_prim_face4);					   
-		GET_DATA(number_of_walkable_prim_faces4);				   
-		GET_DATA(BARREL_sphere_last);							   
-		GET_DATA(track_head);									   
-		GET_DATA(track_tail);									   
-		GET_DATA(track_eob);									   
-		GET_DATA( NIGHT_dlight_free);							   
-		GET_DATA( NIGHT_dlight_used);							   
+		GET_DATA(GAME_TURN);
+		GET_DATA(GAME_FLAGS);
+		GET_DATA(texture_set_local);
+		GET_DATA(WMOVE_face_upto);
+		GET_DATA(first_walkable_prim_point);
+		GET_DATA(number_of_walkable_prim_points);
+		GET_DATA(first_walkable_prim_face4);
+		GET_DATA(number_of_walkable_prim_faces4);
+		GET_DATA(BARREL_sphere_last);
+		GET_DATA(track_head);
+		GET_DATA(track_tail);
+		GET_DATA(track_eob);
+		GET_DATA( NIGHT_dlight_free);
+		GET_DATA( NIGHT_dlight_used);
 
 
-		GET_DATA(EWAY_time_accurate);							   
-		GET_DATA(EWAY_time);									   
-		GET_DATA(EWAY_tick);									   
-		GET_DATA(EWAY_cam_active);							   
-		GET_DATA(EWAY_cam_x);									   
-		GET_DATA(EWAY_cam_y);									   
-		GET_DATA(EWAY_cam_z);									   
-		GET_DATA(EWAY_cam_dx);								   
-		GET_DATA(EWAY_cam_dy);								   
-		GET_DATA(EWAY_cam_dz);								   
-		GET_DATA(EWAY_cam_yaw);								   
-		GET_DATA(EWAY_cam_pitch);								   
-		GET_DATA(EWAY_cam_waypoint);							   
-		GET_DATA(EWAY_cam_target);							   
-		GET_DATA(EWAY_cam_delay);								   
-		GET_DATA(EWAY_cam_speed);								   
-		GET_DATA(EWAY_cam_freeze);							   
+		GET_DATA(EWAY_time_accurate);
+		GET_DATA(EWAY_time);
+		GET_DATA(EWAY_tick);
+		GET_DATA(EWAY_cam_active);
+		GET_DATA(EWAY_cam_x);
+		GET_DATA(EWAY_cam_y);
+		GET_DATA(EWAY_cam_z);
+		GET_DATA(EWAY_cam_dx);
+		GET_DATA(EWAY_cam_dy);
+		GET_DATA(EWAY_cam_dz);
+		GET_DATA(EWAY_cam_yaw);
+		GET_DATA(EWAY_cam_pitch);
+		GET_DATA(EWAY_cam_waypoint);
+		GET_DATA(EWAY_cam_target);
+		GET_DATA(EWAY_cam_delay);
+		GET_DATA(EWAY_cam_speed);
+		GET_DATA(EWAY_cam_freeze);
 		GET_DATA(EWAY_cam_cant_interrupt);
 		GET_DATA(NIGHT_amb_d3d_colour);
 		GET_DATA(NIGHT_amb_d3d_specular);
 		GET_DATA(NIGHT_amb_red);
 		GET_DATA(NIGHT_amb_green);
 		GET_DATA(NIGHT_amb_blue);
-		GET_DATA(NIGHT_amb_norm_x);							   
-		GET_DATA(NIGHT_amb_norm_y);							   
-		GET_DATA(NIGHT_amb_norm_z);							   
-		GET_DATA(NIGHT_flag);								   
-		GET_DATA(NIGHT_lampost_radius);						   
-		GET_DATA(NIGHT_lampost_red);							   
-		GET_DATA(NIGHT_lampost_green);						   
-		GET_DATA(NIGHT_lampost_blue);						   
-		GET_DATA(NIGHT_sky_colour);						
+		GET_DATA(NIGHT_amb_norm_x);
+		GET_DATA(NIGHT_amb_norm_y);
+		GET_DATA(NIGHT_amb_norm_z);
+		GET_DATA(NIGHT_flag);
+		GET_DATA(NIGHT_lampost_radius);
+		GET_DATA(NIGHT_lampost_red);
+		GET_DATA(NIGHT_lampost_green);
+		GET_DATA(NIGHT_lampost_blue);
+		GET_DATA(NIGHT_sky_colour);
 		GET_DATA(padding_byte);
-		GET_DATA(check);										  
-		GET_DATA(CRIME_RATE);					
-		GET_DATA(CRIME_RATE_SCORE_MUL);					
+		GET_DATA(check);
+		GET_DATA(CRIME_RATE);
+		GET_DATA(CRIME_RATE_SCORE_MUL);
 		GET_DATA(MUSIC_WORLD);
 		GET_DATA(BOREDOM_RATE);
 		GET_DATA(world_type);
@@ -3083,7 +3083,7 @@ extern char cd_file_buffer[];
 
 	SATURATE(NIGHT_amb_blue,25,127);
 
-	
+
 #ifdef VERSION_USA
 	{
 		SLONG	bright;
@@ -3299,24 +3299,24 @@ void MEMORY_quick_save()
 
 	#define QSTORE_DATA(x) if (fwrite(&(x), sizeof(x), 1, handle) != 1) goto file_error;
 
-	QSTORE_DATA(PRIMARY_USED);								   
-	QSTORE_DATA(PRIMARY_UNUSED);								   
-	QSTORE_DATA(SECONDARY_USED);								   
-	QSTORE_DATA(SECONDARY_UNUSED);							   
-	QSTORE_DATA(PERSON_COUNT);								   
-	QSTORE_DATA(PERSON_COUNT);								   
-	QSTORE_DATA(ANIMAL_COUNT);								   
-	QSTORE_DATA(CHOPPER_COUNT);								   
-	QSTORE_DATA(PYRO_COUNT);									   
-	QSTORE_DATA(PLAYER_COUNT);								   
-	QSTORE_DATA(PROJECTILE_COUNT);							   
-	QSTORE_DATA(SPECIAL_COUNT);								   
-	QSTORE_DATA(SWITCH_COUNT);								   
-	QSTORE_DATA(PRIMARY_COUNT);								   
-	QSTORE_DATA(SECONDARY_COUNT);							   
-	QSTORE_DATA(GAME_STATE);	   
-	QSTORE_DATA(GAME_TURN);	
-	QSTORE_DATA(GAME_FLAGS);	   
+	QSTORE_DATA(PRIMARY_USED);
+	QSTORE_DATA(PRIMARY_UNUSED);
+	QSTORE_DATA(SECONDARY_USED);
+	QSTORE_DATA(SECONDARY_UNUSED);
+	QSTORE_DATA(PERSON_COUNT);
+	QSTORE_DATA(PERSON_COUNT);
+	QSTORE_DATA(ANIMAL_COUNT);
+	QSTORE_DATA(CHOPPER_COUNT);
+	QSTORE_DATA(PYRO_COUNT);
+	QSTORE_DATA(PLAYER_COUNT);
+	QSTORE_DATA(PROJECTILE_COUNT);
+	QSTORE_DATA(SPECIAL_COUNT);
+	QSTORE_DATA(SWITCH_COUNT);
+	QSTORE_DATA(PRIMARY_COUNT);
+	QSTORE_DATA(SECONDARY_COUNT);
+	QSTORE_DATA(GAME_STATE);
+	QSTORE_DATA(GAME_TURN);
+	QSTORE_DATA(GAME_FLAGS);
 	QSTORE_DATA(TEXTURE_set);
 	QSTORE_DATA(WMOVE_face_upto)
 	QSTORE_DATA(first_walkable_prim_point);
@@ -3330,43 +3330,43 @@ void MEMORY_quick_save()
 	QSTORE_DATA( NIGHT_dlight_free);
 	QSTORE_DATA( NIGHT_dlight_used);
 
-	QSTORE_DATA(EWAY_time_accurate);							   
-	QSTORE_DATA(EWAY_time);									   
-	QSTORE_DATA(EWAY_tick);									   
-	QSTORE_DATA(EWAY_cam_active);							   
-	QSTORE_DATA(EWAY_cam_x);									   
-	QSTORE_DATA(EWAY_cam_y);									   
-	QSTORE_DATA(EWAY_cam_z);									   
-	QSTORE_DATA(EWAY_cam_dx);								   
-	QSTORE_DATA(EWAY_cam_dy);								   
-	QSTORE_DATA(EWAY_cam_dz);								   
-	QSTORE_DATA(EWAY_cam_yaw);								   
-	QSTORE_DATA(EWAY_cam_pitch);								   
-	QSTORE_DATA(EWAY_cam_waypoint);							   
-	QSTORE_DATA(EWAY_cam_target);							   
-	QSTORE_DATA(EWAY_cam_delay);								   
-	QSTORE_DATA(EWAY_cam_speed);								   
-	QSTORE_DATA(EWAY_cam_freeze);							   
+	QSTORE_DATA(EWAY_time_accurate);
+	QSTORE_DATA(EWAY_time);
+	QSTORE_DATA(EWAY_tick);
+	QSTORE_DATA(EWAY_cam_active);
+	QSTORE_DATA(EWAY_cam_x);
+	QSTORE_DATA(EWAY_cam_y);
+	QSTORE_DATA(EWAY_cam_z);
+	QSTORE_DATA(EWAY_cam_dx);
+	QSTORE_DATA(EWAY_cam_dy);
+	QSTORE_DATA(EWAY_cam_dz);
+	QSTORE_DATA(EWAY_cam_yaw);
+	QSTORE_DATA(EWAY_cam_pitch);
+	QSTORE_DATA(EWAY_cam_waypoint);
+	QSTORE_DATA(EWAY_cam_target);
+	QSTORE_DATA(EWAY_cam_delay);
+	QSTORE_DATA(EWAY_cam_speed);
+	QSTORE_DATA(EWAY_cam_freeze);
 	QSTORE_DATA(EWAY_cam_cant_interrupt);
 
-	QSTORE_DATA( NIGHT_amb_d3d_colour);						   
-	QSTORE_DATA( NIGHT_amb_d3d_specular);					   
-	QSTORE_DATA( NIGHT_amb_red);								   
-	QSTORE_DATA( NIGHT_amb_green);							   
-	QSTORE_DATA( NIGHT_amb_blue);							   
-	QSTORE_DATA( NIGHT_amb_norm_x);							   
-	QSTORE_DATA( NIGHT_amb_norm_y);							   
-	QSTORE_DATA( NIGHT_amb_norm_z);							   
-	QSTORE_DATA( NIGHT_flag);								   
-	QSTORE_DATA( NIGHT_lampost_radius);						   
-	QSTORE_DATA( NIGHT_lampost_red);							   
-	QSTORE_DATA( NIGHT_lampost_green);						   
-	QSTORE_DATA( NIGHT_lampost_blue);						   
-	QSTORE_DATA( NIGHT_sky_colour);						
+	QSTORE_DATA( NIGHT_amb_d3d_colour);
+	QSTORE_DATA( NIGHT_amb_d3d_specular);
+	QSTORE_DATA( NIGHT_amb_red);
+	QSTORE_DATA( NIGHT_amb_green);
+	QSTORE_DATA( NIGHT_amb_blue);
+	QSTORE_DATA( NIGHT_amb_norm_x);
+	QSTORE_DATA( NIGHT_amb_norm_y);
+	QSTORE_DATA( NIGHT_amb_norm_z);
+	QSTORE_DATA( NIGHT_flag);
+	QSTORE_DATA( NIGHT_lampost_radius);
+	QSTORE_DATA( NIGHT_lampost_red);
+	QSTORE_DATA( NIGHT_lampost_green);
+	QSTORE_DATA( NIGHT_lampost_blue);
+	QSTORE_DATA( NIGHT_sky_colour);
 	QSTORE_DATA(padding_byte);
-	QSTORE_DATA(check);					
-	QSTORE_DATA(CRIME_RATE);					
-	QSTORE_DATA(CRIME_RATE_SCORE_MUL);					
+	QSTORE_DATA(check);
+	QSTORE_DATA(CRIME_RATE);
+	QSTORE_DATA(CRIME_RATE_SCORE_MUL);
 	QSTORE_DATA(MUSIC_WORLD);
 	QSTORE_DATA(BOREDOM_RATE);
 	QSTORE_DATA(world_type);
@@ -3377,9 +3377,9 @@ void MEMORY_quick_save()
 	QSTORE_DATA(EWAY_fake_wander_text_guilty_number );
 	QSTORE_DATA(EWAY_fake_wander_text_annoyed_index );
 	QSTORE_DATA(EWAY_fake_wander_text_annoyed_number);
-	
+
 	QSTORE_DATA(GAME_FLAGS);
-	
+
 	//
 	// Lighting stuff that isn't saved on the PSX, so it isn't in the save table.
 	//
@@ -3466,29 +3466,29 @@ SLONG MEMORY_quick_load()
 
 	#define QREAD_DATA(x) if (fread(&(x), sizeof(x), 1, handle) != 1) goto file_error;
 
-	QREAD_DATA(PRIMARY_USED);								   
-	QREAD_DATA(PRIMARY_UNUSED);								   
-	QREAD_DATA(SECONDARY_USED);								   
-	QREAD_DATA(SECONDARY_UNUSED);							   
-	QREAD_DATA(PERSON_COUNT);								   
-	QREAD_DATA(PERSON_COUNT);								   
-	QREAD_DATA(ANIMAL_COUNT);								   
-	QREAD_DATA(CHOPPER_COUNT);								   
-	QREAD_DATA(PYRO_COUNT);									   
-	QREAD_DATA(PLAYER_COUNT);								   
-	QREAD_DATA(PROJECTILE_COUNT);							   
-	QREAD_DATA(SPECIAL_COUNT);								   
-	QREAD_DATA(SWITCH_COUNT);								   
-	QREAD_DATA(PRIMARY_COUNT);								   
-	QREAD_DATA(SECONDARY_COUNT);							   
-	QREAD_DATA(GAME_STATE);	   
+	QREAD_DATA(PRIMARY_USED);
+	QREAD_DATA(PRIMARY_UNUSED);
+	QREAD_DATA(SECONDARY_USED);
+	QREAD_DATA(SECONDARY_UNUSED);
+	QREAD_DATA(PERSON_COUNT);
+	QREAD_DATA(PERSON_COUNT);
+	QREAD_DATA(ANIMAL_COUNT);
+	QREAD_DATA(CHOPPER_COUNT);
+	QREAD_DATA(PYRO_COUNT);
+	QREAD_DATA(PLAYER_COUNT);
+	QREAD_DATA(PROJECTILE_COUNT);
+	QREAD_DATA(SPECIAL_COUNT);
+	QREAD_DATA(SWITCH_COUNT);
+	QREAD_DATA(PRIMARY_COUNT);
+	QREAD_DATA(SECONDARY_COUNT);
+	QREAD_DATA(GAME_STATE);
 
 #ifdef TARGET_DC
 		GAME_STATE &= ~(GS_RECORD|GS_PLAYBACK|GS_EDITOR);
 #endif
 
-	QREAD_DATA(GAME_TURN);	
-	QREAD_DATA(GAME_FLAGS);	   
+	QREAD_DATA(GAME_TURN);
+	QREAD_DATA(GAME_FLAGS);
 	QREAD_DATA(TEXTURE_set);
 	QREAD_DATA(WMOVE_face_upto)
 	QREAD_DATA(first_walkable_prim_point);
@@ -3502,42 +3502,42 @@ SLONG MEMORY_quick_load()
 	QREAD_DATA( NIGHT_dlight_free);
 	QREAD_DATA( NIGHT_dlight_used);
 
-	QREAD_DATA(EWAY_time_accurate);							   
-	QREAD_DATA(EWAY_time);									   
-	QREAD_DATA(EWAY_tick);									   
-	QREAD_DATA(EWAY_cam_active);							   
-	QREAD_DATA(EWAY_cam_x);									   
-	QREAD_DATA(EWAY_cam_y);									   
-	QREAD_DATA(EWAY_cam_z);									   
-	QREAD_DATA(EWAY_cam_dx);								   
-	QREAD_DATA(EWAY_cam_dy);								   
-	QREAD_DATA(EWAY_cam_dz);								   
-	QREAD_DATA(EWAY_cam_yaw);								   
-	QREAD_DATA(EWAY_cam_pitch);								   
-	QREAD_DATA(EWAY_cam_waypoint);							   
-	QREAD_DATA(EWAY_cam_target);							   
-	QREAD_DATA(EWAY_cam_delay);								   
-	QREAD_DATA(EWAY_cam_speed);								   
-	QREAD_DATA(EWAY_cam_freeze);							   
+	QREAD_DATA(EWAY_time_accurate);
+	QREAD_DATA(EWAY_time);
+	QREAD_DATA(EWAY_tick);
+	QREAD_DATA(EWAY_cam_active);
+	QREAD_DATA(EWAY_cam_x);
+	QREAD_DATA(EWAY_cam_y);
+	QREAD_DATA(EWAY_cam_z);
+	QREAD_DATA(EWAY_cam_dx);
+	QREAD_DATA(EWAY_cam_dy);
+	QREAD_DATA(EWAY_cam_dz);
+	QREAD_DATA(EWAY_cam_yaw);
+	QREAD_DATA(EWAY_cam_pitch);
+	QREAD_DATA(EWAY_cam_waypoint);
+	QREAD_DATA(EWAY_cam_target);
+	QREAD_DATA(EWAY_cam_delay);
+	QREAD_DATA(EWAY_cam_speed);
+	QREAD_DATA(EWAY_cam_freeze);
 	QREAD_DATA(EWAY_cam_cant_interrupt);
-	QREAD_DATA( NIGHT_amb_d3d_colour);						   
-	QREAD_DATA( NIGHT_amb_d3d_specular);					   
-	QREAD_DATA( NIGHT_amb_red);								   
-	QREAD_DATA( NIGHT_amb_green);							   
-	QREAD_DATA( NIGHT_amb_blue);							   
-	QREAD_DATA( NIGHT_amb_norm_x);							   
-	QREAD_DATA( NIGHT_amb_norm_y);							   
-	QREAD_DATA( NIGHT_amb_norm_z);							   
-	QREAD_DATA( NIGHT_flag);								   
-	QREAD_DATA( NIGHT_lampost_radius);						   
-	QREAD_DATA( NIGHT_lampost_red);							   
-	QREAD_DATA( NIGHT_lampost_green);						   
-	QREAD_DATA( NIGHT_lampost_blue);						   
-	QREAD_DATA( NIGHT_sky_colour);						
+	QREAD_DATA( NIGHT_amb_d3d_colour);
+	QREAD_DATA( NIGHT_amb_d3d_specular);
+	QREAD_DATA( NIGHT_amb_red);
+	QREAD_DATA( NIGHT_amb_green);
+	QREAD_DATA( NIGHT_amb_blue);
+	QREAD_DATA( NIGHT_amb_norm_x);
+	QREAD_DATA( NIGHT_amb_norm_y);
+	QREAD_DATA( NIGHT_amb_norm_z);
+	QREAD_DATA( NIGHT_flag);
+	QREAD_DATA( NIGHT_lampost_radius);
+	QREAD_DATA( NIGHT_lampost_red);
+	QREAD_DATA( NIGHT_lampost_green);
+	QREAD_DATA( NIGHT_lampost_blue);
+	QREAD_DATA( NIGHT_sky_colour);
 	QREAD_DATA(padding_byte);
-	QREAD_DATA(check);					
-	QREAD_DATA(CRIME_RATE);					
-	QREAD_DATA(CRIME_RATE_SCORE_MUL);					
+	QREAD_DATA(check);
+	QREAD_DATA(CRIME_RATE);
+	QREAD_DATA(CRIME_RATE_SCORE_MUL);
 	QREAD_DATA(MUSIC_WORLD);
 	QREAD_DATA(BOREDOM_RATE);
 	QREAD_DATA(world_type);
@@ -3548,7 +3548,7 @@ SLONG MEMORY_quick_load()
 	QREAD_DATA(EWAY_fake_wander_text_guilty_number );
 	QREAD_DATA(EWAY_fake_wander_text_annoyed_index );
 	QREAD_DATA(EWAY_fake_wander_text_annoyed_number);
-	
+
 	QREAD_DATA(GAME_FLAGS);
 
 	//
@@ -3654,7 +3654,7 @@ extern SLONG get_level_no ( CBYTE *name );
 
 	handle = FileCreate(cFullName, 1);
 
-	if(handle!=FILE_CREATION_ERROR) 
+	if(handle!=FILE_CREATION_ERROR)
 	{
 		// get rid of the nasty pointers
 		// by converting to indexes
@@ -3686,7 +3686,7 @@ extern SLONG get_level_no ( CBYTE *name );
 					else
 					{
 						if(ptab->CountW)
-				
+
 							count=*ptab->CountW;
 					}
 					if(ptab->Extra)				// redundant but more readable!
@@ -3704,7 +3704,7 @@ extern SLONG get_level_no ( CBYTE *name );
 
 
 			p_mem=(UBYTE*)*ptab->Point;
-			
+
 			// chunk id
 			FileWrite(handle,(UBYTE*)&c0,4);
 			FileWrite(handle,(UBYTE*)&count,4);
@@ -3730,41 +3730,41 @@ extern SLONG get_level_no ( CBYTE *name );
 		}
 		DebugText("\n");
 
-		STORE_DATA(PRIMARY_USED);								   
-		STORE_DATA(PRIMARY_UNUSED);								   
-		STORE_DATA(SECONDARY_USED);								   
-		STORE_DATA(SECONDARY_UNUSED);							   
-		STORE_DATA(PERSON_COUNT);								   
-		STORE_DATA(PERSON_COUNT);								   
-		STORE_DATA(ANIMAL_COUNT);								   
-		STORE_DATA(CHOPPER_COUNT);								   
-		STORE_DATA(PYRO_COUNT);									   
-		STORE_DATA(PLAYER_COUNT);								   
-		STORE_DATA(PROJECTILE_COUNT);							   
-		STORE_DATA(SPECIAL_COUNT);								   
-		STORE_DATA(SWITCH_COUNT);								   
-		STORE_DATA(PRIMARY_COUNT);								   
-		STORE_DATA(SECONDARY_COUNT);							   
-		STORE_DATA(GAME_STATE);									   
-		STORE_DATA(GAME_TURN);									   
-		STORE_DATA(GAME_FLAGS);									   
-		STORE_DATA(TEXTURE_set);								   
-		STORE_DATA(WMOVE_face_upto);							   
-		STORE_DATA(first_walkable_prim_point);					   
-		STORE_DATA(number_of_walkable_prim_points);				   
-		STORE_DATA(first_walkable_prim_face4);					   
-		STORE_DATA(number_of_walkable_prim_faces4);				   
-		STORE_DATA(BARREL_sphere_last);							   
-		STORE_DATA(track_head);									   
-		STORE_DATA(track_tail);									   
-		STORE_DATA(track_eob);									   
-		STORE_DATA( NIGHT_dlight_free);							   
-		STORE_DATA( NIGHT_dlight_used);							   
+		STORE_DATA(PRIMARY_USED);
+		STORE_DATA(PRIMARY_UNUSED);
+		STORE_DATA(SECONDARY_USED);
+		STORE_DATA(SECONDARY_UNUSED);
+		STORE_DATA(PERSON_COUNT);
+		STORE_DATA(PERSON_COUNT);
+		STORE_DATA(ANIMAL_COUNT);
+		STORE_DATA(CHOPPER_COUNT);
+		STORE_DATA(PYRO_COUNT);
+		STORE_DATA(PLAYER_COUNT);
+		STORE_DATA(PROJECTILE_COUNT);
+		STORE_DATA(SPECIAL_COUNT);
+		STORE_DATA(SWITCH_COUNT);
+		STORE_DATA(PRIMARY_COUNT);
+		STORE_DATA(SECONDARY_COUNT);
+		STORE_DATA(GAME_STATE);
+		STORE_DATA(GAME_TURN);
+		STORE_DATA(GAME_FLAGS);
+		STORE_DATA(TEXTURE_set);
+		STORE_DATA(WMOVE_face_upto);
+		STORE_DATA(first_walkable_prim_point);
+		STORE_DATA(number_of_walkable_prim_points);
+		STORE_DATA(first_walkable_prim_face4);
+		STORE_DATA(number_of_walkable_prim_faces4);
+		STORE_DATA(BARREL_sphere_last);
+		STORE_DATA(track_head);
+		STORE_DATA(track_tail);
+		STORE_DATA(track_eob);
+		STORE_DATA( NIGHT_dlight_free);
+		STORE_DATA( NIGHT_dlight_used);
 
 
-		STORE_DATA(EWAY_time_accurate);							   
-		STORE_DATA(EWAY_time);									   
-		STORE_DATA(EWAY_tick);									   
+		STORE_DATA(EWAY_time_accurate);
+		STORE_DATA(EWAY_time);
+		STORE_DATA(EWAY_tick);
 
 
 
@@ -3803,24 +3803,24 @@ extern SLONG get_level_no ( CBYTE *name );
 
 
 
-		STORE_DATA( NIGHT_amb_d3d_colour);						   
-		STORE_DATA( NIGHT_amb_d3d_specular);					   
-		STORE_DATA( NIGHT_amb_red);								   
-		STORE_DATA( NIGHT_amb_green);							   
-		STORE_DATA( NIGHT_amb_blue);							   
-		STORE_DATA( NIGHT_amb_norm_x);							   
-		STORE_DATA( NIGHT_amb_norm_y);							   
-		STORE_DATA( NIGHT_amb_norm_z);							   
-		STORE_DATA( NIGHT_flag);								   
-		STORE_DATA( NIGHT_lampost_radius);						   
-		STORE_DATA( NIGHT_lampost_red);							   
-		STORE_DATA( NIGHT_lampost_green);						   
-		STORE_DATA( NIGHT_lampost_blue);						   
-		STORE_DATA( NIGHT_sky_colour);						
+		STORE_DATA( NIGHT_amb_d3d_colour);
+		STORE_DATA( NIGHT_amb_d3d_specular);
+		STORE_DATA( NIGHT_amb_red);
+		STORE_DATA( NIGHT_amb_green);
+		STORE_DATA( NIGHT_amb_blue);
+		STORE_DATA( NIGHT_amb_norm_x);
+		STORE_DATA( NIGHT_amb_norm_y);
+		STORE_DATA( NIGHT_amb_norm_z);
+		STORE_DATA( NIGHT_flag);
+		STORE_DATA( NIGHT_lampost_radius);
+		STORE_DATA( NIGHT_lampost_red);
+		STORE_DATA( NIGHT_lampost_green);
+		STORE_DATA( NIGHT_lampost_blue);
+		STORE_DATA( NIGHT_sky_colour);
 		STORE_DATA(padding_byte);
-		STORE_DATA(check);					
-		STORE_DATA(CRIME_RATE);					
-		STORE_DATA(CRIME_RATE_SCORE_MUL);					
+		STORE_DATA(check);
+		STORE_DATA(CRIME_RATE);
+		STORE_DATA(CRIME_RATE_SCORE_MUL);
 		STORE_DATA(MUSIC_WORLD);
 		STORE_DATA(BOREDOM_RATE);
 		STORE_DATA(world_type);
@@ -3833,22 +3833,22 @@ extern SLONG get_level_no ( CBYTE *name );
 		STORE_DATA(EWAY_fake_wander_text_guilty_number );
 		STORE_DATA(EWAY_fake_wander_text_annoyed_index );
 		STORE_DATA(EWAY_fake_wander_text_annoyed_number);
-		
+
 		STORE_DATA(GAME_FLAGS);
-		
+
 		STORE_DATA(semtex);
 		STORE_DATA(estate);
 		STORE_DATA(padding_word);
 
 
-#ifdef	OLD_CAM													  
-																  
-		CAM_focus=(Thing*)THING_NUMBER(CAM_focus);				  
-		STORE_DATA(CAM_focus);									  
-		CAM_focus=TO_THING((SLONG)CAM_focus);					  
-#endif															  
+#ifdef	OLD_CAM
 
-		save_whole_anims(handle);								  
+		CAM_focus=(Thing*)THING_NUMBER(CAM_focus);
+		STORE_DATA(CAM_focus);
+		CAM_focus=TO_THING((SLONG)CAM_focus);
+#endif
+
+		save_whole_anims(handle);
 
 		FileClose(handle);
 
@@ -4012,7 +4012,7 @@ extern UBYTE loading_screen_active;
 			case	2:
 				if(ptab->Extra)
 					ptab->Maximum=count;
-				
+
 				break;
 
 			case	1:
@@ -4048,48 +4048,48 @@ extern UBYTE loading_screen_active;
 		}
 	}
 
-	GET_DATA(PRIMARY_USED);								   
-	GET_DATA(PRIMARY_UNUSED);								   
-	GET_DATA(SECONDARY_USED);								   
-	GET_DATA(SECONDARY_UNUSED);							   
-	GET_DATA(PERSON_COUNT);								   
-	GET_DATA(PERSON_COUNT);								   
-	GET_DATA(ANIMAL_COUNT);								   
-	GET_DATA(CHOPPER_COUNT);								   
-	GET_DATA(PYRO_COUNT);									   
-	GET_DATA(PLAYER_COUNT);								   
-	GET_DATA(PROJECTILE_COUNT);							   
-	GET_DATA(SPECIAL_COUNT);								   
-	GET_DATA(SWITCH_COUNT);								   
-	GET_DATA(PRIMARY_COUNT);								   
-	GET_DATA(SECONDARY_COUNT);							   
+	GET_DATA(PRIMARY_USED);
+	GET_DATA(PRIMARY_UNUSED);
+	GET_DATA(SECONDARY_USED);
+	GET_DATA(SECONDARY_UNUSED);
+	GET_DATA(PERSON_COUNT);
+	GET_DATA(PERSON_COUNT);
+	GET_DATA(ANIMAL_COUNT);
+	GET_DATA(CHOPPER_COUNT);
+	GET_DATA(PYRO_COUNT);
+	GET_DATA(PLAYER_COUNT);
+	GET_DATA(PROJECTILE_COUNT);
+	GET_DATA(SPECIAL_COUNT);
+	GET_DATA(SWITCH_COUNT);
+	GET_DATA(PRIMARY_COUNT);
+	GET_DATA(SECONDARY_COUNT);
 	// Don't load this from the WAD!
-	//GET_DATA(GAME_STATE);									   
+	//GET_DATA(GAME_STATE);
 	p_all+=sizeof(GAME_STATE);
 
 #ifdef TARGET_DC
 		GAME_STATE &= ~(GS_RECORD|GS_PLAYBACK|GS_EDITOR);
 #endif
 
-	GET_DATA(GAME_TURN);									   
-	GET_DATA(GAME_FLAGS);									   
-	GET_DATA(texture_set_local);								   
-	GET_DATA(WMOVE_face_upto);							   
-	GET_DATA(first_walkable_prim_point);					   
-	GET_DATA(number_of_walkable_prim_points);				   
-	GET_DATA(first_walkable_prim_face4);					   
-	GET_DATA(number_of_walkable_prim_faces4);				   
-	GET_DATA(BARREL_sphere_last);							   
-	GET_DATA(track_head);									   
-	GET_DATA(track_tail);									   
-	GET_DATA(track_eob);									   
-	GET_DATA( NIGHT_dlight_free);							   
-	GET_DATA( NIGHT_dlight_used);							   
+	GET_DATA(GAME_TURN);
+	GET_DATA(GAME_FLAGS);
+	GET_DATA(texture_set_local);
+	GET_DATA(WMOVE_face_upto);
+	GET_DATA(first_walkable_prim_point);
+	GET_DATA(number_of_walkable_prim_points);
+	GET_DATA(first_walkable_prim_face4);
+	GET_DATA(number_of_walkable_prim_faces4);
+	GET_DATA(BARREL_sphere_last);
+	GET_DATA(track_head);
+	GET_DATA(track_tail);
+	GET_DATA(track_eob);
+	GET_DATA( NIGHT_dlight_free);
+	GET_DATA( NIGHT_dlight_used);
 
 
-	GET_DATA(EWAY_time_accurate);							   
-	GET_DATA(EWAY_time);									   
-	GET_DATA(EWAY_tick);									   
+	GET_DATA(EWAY_time_accurate);
+	GET_DATA(EWAY_time);
+	GET_DATA(EWAY_tick);
 
 	GET_DATA(EWAY_cam_active);
 	GET_DATA(EWAY_cam_goinactive);
@@ -4130,19 +4130,19 @@ extern UBYTE loading_screen_active;
 	GET_DATA(NIGHT_amb_red);
 	GET_DATA(NIGHT_amb_green);
 	GET_DATA(NIGHT_amb_blue);
-	GET_DATA(NIGHT_amb_norm_x);							   
-	GET_DATA(NIGHT_amb_norm_y);							   
-	GET_DATA(NIGHT_amb_norm_z);							   
-	GET_DATA(NIGHT_flag);								   
-	GET_DATA(NIGHT_lampost_radius);						   
-	GET_DATA(NIGHT_lampost_red);							   
-	GET_DATA(NIGHT_lampost_green);						   
-	GET_DATA(NIGHT_lampost_blue);						   
-	GET_DATA(NIGHT_sky_colour);						
+	GET_DATA(NIGHT_amb_norm_x);
+	GET_DATA(NIGHT_amb_norm_y);
+	GET_DATA(NIGHT_amb_norm_z);
+	GET_DATA(NIGHT_flag);
+	GET_DATA(NIGHT_lampost_radius);
+	GET_DATA(NIGHT_lampost_red);
+	GET_DATA(NIGHT_lampost_green);
+	GET_DATA(NIGHT_lampost_blue);
+	GET_DATA(NIGHT_sky_colour);
 	GET_DATA(padding_byte);
-	GET_DATA(check);										  
-	GET_DATA(CRIME_RATE);					
-	GET_DATA(CRIME_RATE_SCORE_MUL);					
+	GET_DATA(check);
+	GET_DATA(CRIME_RATE);
+	GET_DATA(CRIME_RATE_SCORE_MUL);
 	GET_DATA(MUSIC_WORLD);
 	GET_DATA(BOREDOM_RATE);
 	GET_DATA(world_type);
@@ -4286,7 +4286,7 @@ extern UBYTE EWAY_conv_active;
 extern void EWAY_reactivate_waypoints_that_arent_in_the_dad_file ( void );
 	EWAY_reactivate_waypoints_that_arent_in_the_dad_file ();
 #endif
-	
+
 	loading_screen_active = FALSE;
 
 }

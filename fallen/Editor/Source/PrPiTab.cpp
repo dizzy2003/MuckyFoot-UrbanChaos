@@ -4,8 +4,8 @@
 #include	"engine.h"
 #include	"math.h"
 #include	"FileReq.hpp"
-#include	"c:\fallen\headers\io.h"
-#include	"c:\fallen\headers\memory.h"
+#include	"fallen/headers/io.h"
+#include	"fallen/headers/memory.h"
 
 //#include	"collide.hpp"  //needed for ele_shift
 
@@ -24,7 +24,7 @@ void	cross_work_window(void)
 {
 	DrawLineC(0,0,WorkWindowWidth-1,WorkWindowHeight-1,WHITE_COL);
 	DrawLineC(0,WorkWindowHeight-1,WorkWindowWidth-1,0,WHITE_COL);
-	
+
 }
 extern	void	scan_apply_ambient(SLONG face,SLONG x,SLONG y,SLONG z,SLONG extra);
 
@@ -78,7 +78,7 @@ MenuDef2		prim_mode_menu[]	=
 };
 
 
-ControlDef	prim_pick_tab_def[]	=	
+ControlDef	prim_pick_tab_def[]	=
 {
 	{	BUTTON,			0,	"Load A BackGround",		10,		473,	0,	0	},
 	{	BUTTON,			0,	"Save selected prim",		10,		485,	0,	0	},
@@ -161,7 +161,7 @@ void	apply_user_rotates(struct PrimPoint *point)
 SLONG	angle_prim_y=0;
 void	rotate_prim_thing(UWORD thing)
 {
-	
+
 //	anglex=map_things[thing].AngleY;
 	if(LastKey==KB_H)
 	{
@@ -207,7 +207,7 @@ void	rotate_prim_thing(UWORD thing)
 		angle_x-=64;
 		angle_x=((angle_x+2048)&2047);
 	}
-	
+
 	for(c0=sp;c0<ep;c0++)
 	{
 		p=prim_points[c0-offset_p];
@@ -263,7 +263,7 @@ void	PrimPickTab::UpdatePrimInfo(void)
 {
 	//
 	// Checks/unchecks the collide buttons.
-	// 
+	//
 
 	SetControlState(CTRL_PRIM_COLLIDE_NONE,     CTRL_DESELECTED);
 	SetControlState(CTRL_PRIM_COLLIDE_BOX,      CTRL_DESELECTED);
@@ -283,7 +283,7 @@ void	PrimPickTab::UpdatePrimInfo(void)
 
 	//
 	// Checks/unchecks the shadow buttons.
-	// 
+	//
 
 	SetControlState(CTRL_PRIM_SHADOW_NONE,	   CTRL_DESELECTED);
 	SetControlState(CTRL_PRIM_SHADOW_BOXEDGE,  CTRL_DESELECTED);
@@ -305,7 +305,7 @@ void	PrimPickTab::UpdatePrimInfo(void)
 
 	//
 	// The prim flags.
-	// 
+	//
 
 	SetControlState(CTRL_PRIM_FLAG_LAMPOST,  CTRL_DESELECTED);
 	SetControlState(CTRL_PRIM_FLAG_GLARE, CTRL_DESELECTED);
@@ -333,7 +333,7 @@ void	PrimPickTab::UpdatePrimInfo(void)
 
 	//
 	// Checks/unchecks the damageable flags.
-	// 
+	//
 
 	SetControlState(CTRL_PRIM_DAMAGABLE, CTRL_DESELECTED);
 	SetControlState(CTRL_PRIM_LEANS,     CTRL_DESELECTED);
@@ -343,7 +343,7 @@ void	PrimPickTab::UpdatePrimInfo(void)
 	if (prim_objects[CurrentPrim].damage & PRIM_DAMAGE_DAMAGABLE)
 	{
 		SetControlState(CTRL_PRIM_DAMAGABLE, CTRL_SELECTED);
-		
+
 		if (prim_objects[CurrentPrim].damage & PRIM_DAMAGE_LEAN)     {SetControlState(CTRL_PRIM_LEANS,    CTRL_SELECTED);}
 		if (prim_objects[CurrentPrim].damage & PRIM_DAMAGE_CRUMPLE)  {SetControlState(CTRL_PRIM_CRUMPLES, CTRL_SELECTED);}
 		if (prim_objects[CurrentPrim].damage & PRIM_DAMAGE_EXPLODES) {SetControlState(CTRL_PRIM_EXPLODES, CTRL_SELECTED);}
@@ -351,7 +351,7 @@ void	PrimPickTab::UpdatePrimInfo(void)
 
 	//
 	// This crashes?!...
-	// 
+	//
 
 //	((CStaticText*)GetControlPtr(CTRL_PRIM_MODE_TEXT))->SetString1(prim_mode_menu[PrimTabMode].ItemText);
 }
@@ -367,7 +367,7 @@ void	PrimPickTab::DrawTabContent(void)
 	else
 		((CVSlider*)GetControlPtr(CTRL_PRIM_V_SLIDE_PRIM))->SetValueRange(0,next_prim_multi_object+9);
 
-	content_rect	=	ContentRect;	
+	content_rect	=	ContentRect;
 	content_rect.ShrinkRect(1,1);
 	content_rect.FillRect(CONTENT_COL);
 
@@ -399,14 +399,14 @@ void	PrimPickTab::DrawAPrimInRect(ULONG prim,SLONG x,SLONG y,SLONG w,SLONG h)
 	flags=(SLONG*)MemAlloc(sizeof(SLONG)*13000);
 	if(flags==0)
 		return;
-		
+
 	res=(struct SVector*)MemAlloc(sizeof(struct SVector)*13000);
 	if(res==0)
 	{
 		MemFree(flags);
 		return;
 	}
-	
+
 
 	os=engine.Scale;
 	engine.Scale=1000;
@@ -446,7 +446,7 @@ void	PrimPickTab::DrawAPrimInRect(ULONG prim,SLONG x,SLONG y,SLONG w,SLONG h)
 
 	sp=p_obj->StartPoint;
 	ep=p_obj->EndPoint;
-		
+
 	for(c0=sp;c0<ep;c0++)
 	{
 		struct SVector	pp;
@@ -521,14 +521,14 @@ void	PrimPickTab::DrawABuildingInRect(ULONG prim,SLONG x,SLONG y,SLONG w,SLONG h
 	flags=(SLONG*)MemAlloc(sizeof(SLONG)*3000);
 	if(flags==0)
 		return;
-		
+
 	res=(struct SVector*)MemAlloc(sizeof(struct SVector)*3000);
 	if(res==0)
 	{
 		MemFree(flags);
 		return;
 	}
-	
+
 
 	os=engine.Scale;
 	engine.Scale=1000;
@@ -552,7 +552,7 @@ void	PrimPickTab::DrawABuildingInRect(ULONG prim,SLONG x,SLONG y,SLONG w,SLONG h
 	ep=p_obj->EndPoint;
 
 	LogText(" build in rect  prim %d sp %d ep %d \n",prim,sp,ep);
-		
+
 	for(c0=sp;c0<ep;c0++)
 	{
 		struct	SVector	pp;
@@ -767,7 +767,7 @@ SLONG	PrimPickTab::HiLightObjects(SLONG x,SLONG y,SLONG w,SLONG h)
 	wwy=WorkWindowRect.Top;
 	www=WorkWindowRect.Width;
 	wwh=WorkWindowRect.Height;
-	
+
 	mx=(engine.X>>8)>>ELE_SHIFT;
 	my=(engine.Y>>8)>>ELE_SHIFT;
 	mz=(engine.Z>>8)>>ELE_SHIFT;
@@ -823,20 +823,20 @@ void	PrimPickTab::DrawModuleContent(SLONG x,SLONG y,SLONG w,SLONG h)
 							View1.GetWidth(),
 							View1.GetHeight()
 						);
-	
+
 	View1.FillRect(CONTENT_COL);
 	View1.OutlineRect(0);
-	
+
 	SetWorkWindowBounds	(
 							View2.GetLeft(),
 							View2.GetTop(),
 							View2.GetWidth(),
 							View2.GetHeight()
 						);
-	
+
 	View2.FillRect(CONTENT_COL);
 	View2.OutlineRect(0);
-*/	
+*/
 
 	View1.SetRect(x,y,w-1,h/2-3);
 	View2.SetRect(x,y+h/2+4,w-1,h/2-4);
@@ -950,7 +950,7 @@ void	PrimPickTab::DrawPrims(void)
 
 			switch(t_mthing->Type)
 			{
-				case	MAP_THING_TYPE_PRIM:		
+				case	MAP_THING_TYPE_PRIM:
 					if(t_mthing->IndexOther<256)
 					{
 						prim_count[t_mthing->IndexOther]++;
@@ -1046,7 +1046,7 @@ extern	void	drawkeyframeboxgamechunk(UWORD multi_object,EdRect *bounds_rect,stru
 	engine.X=ox;
 	engine.Y=oy;
 	engine.Z=oz;
-/*	
+/*
 	{
 	SetWorkWindowBounds(ContentLeft(),ContentTop(),300,300);
 		CBYTE	str[100];
@@ -1082,7 +1082,7 @@ void	redraw_all_prims(void)
 void	PrimPickTab::HandleTab(MFPoint *current_point)
 {
 	SLONG		   update	=	0;
-	
+
 
 	ModeTab::HandleTab(current_point);
 /*
@@ -1349,10 +1349,10 @@ SLONG	PrimPickTab::DragAPrim(UBYTE flags,MFPoint *clicked_point,SLONG button)
 
 	SLONG	px=0,py=0,pz=0;
 
-	
 
 
-	// Stop compiler moaning.	
+
+	// Stop compiler moaning.
 	flags	=	flags;
 
 	wwx=WorkWindowRect.Left;
@@ -1366,7 +1366,7 @@ SLONG	PrimPickTab::DragAPrim(UBYTE flags,MFPoint *clicked_point,SLONG button)
 	h=Parent->ContentHeight();
 
 	col++;
-	
+
 	SetWorkWindowBounds(x,y,w-1,h/2-3);
 	set_camera_plan();
 
@@ -1410,7 +1410,7 @@ extern	void	find_map_clip(SLONG *minx,SLONG *maxx,SLONG *minz,SLONG *maxz);
 	drag=select_map_things(clicked_point,MAP_THING_TYPE_PRIM);
 	if(drag==0)
 		drag=select_map_things(clicked_point,MAP_THING_TYPE_ANIM_PRIM);
-	
+
 
 	if(!drag)
 	{
@@ -1482,7 +1482,7 @@ extern	void	find_map_clip(SLONG *minx,SLONG *maxx,SLONG *minz,SLONG *maxz);
 	oy=map_things[drag].Y;
 	oz=map_things[drag].Z;
 
-	
+
 
 	if(drag)  //drag in plan view
 	{
@@ -1510,7 +1510,7 @@ extern	void	find_map_clip(SLONG *minx,SLONG *maxx,SLONG *minz,SLONG *maxz);
 //		set_user_rotate(map_things[drag].AngleX,0,0);
 
 		angle_prim_y=map_things[drag].AngleY;
-		
+
 
 		while(SHELL_ACTIVE && ( (button==0) ? LeftButton : RightButton))
 		{
@@ -1566,7 +1566,7 @@ extern	void	find_map_clip(SLONG *minx,SLONG *maxx,SLONG *minz,SLONG *maxz);
 			ShowWorkWindow(0);
 			screen_change=1;
 
-			SetWorkWindowBounds(this->ContentLeft()+1,this->ContentTop()+1,this->ContentWidth(),this->ContentHeight()); 
+			SetWorkWindowBounds(this->ContentLeft()+1,this->ContentTop()+1,this->ContentWidth(),this->ContentHeight());
 //			ContentRect.FillRect(CONTENT_COL);
 
 			DrawBox(0,0,this->ContentWidth(),this->ContentHeight(),CONTENT_COL);
@@ -1587,7 +1587,7 @@ extern	void	find_map_clip(SLONG *minx,SLONG *maxx,SLONG *minz,SLONG *maxz);
 		MyUndo.MoveObject(0,drag,ox,oy,oz);
 
 	}
-	SetWorkWindowBounds(this->ContentLeft()+1,this->ContentTop()+1,this->ContentWidth(),this->ContentHeight()); 
+	SetWorkWindowBounds(this->ContentLeft()+1,this->ContentTop()+1,this->ContentWidth(),this->ContentHeight());
 	DrawBox(0,0,this->ContentWidth(),this->ContentHeight(),CONTENT_COL);
 //	ContentRect.FillRect(CONTENT_COL);
 	UpdatePrimPickWindow();
@@ -1641,7 +1641,7 @@ SLONG	PrimPickTab::DragEngine(UBYTE flags,MFPoint *clicked_point)
 				engine.Z = (old_z+(-nz+start_z));
 
 //				engine.Z=nz<<8;
-				
+
 				DrawModuleContent(Parent->ContentLeft()+1,Parent->ContentTop()+1,Parent->ContentWidth(),Parent->ContentHeight());
 				SetWorkWindowBounds(Parent->ContentLeft()+1,Parent->ContentTop()+1,Parent->ContentWidth(),Parent->ContentHeight());
 				ShowWorkWindow(0);
@@ -1650,7 +1650,7 @@ SLONG	PrimPickTab::DragEngine(UBYTE flags,MFPoint *clicked_point)
 				engine.X=old_x;
 				engine.Y=old_y;
 				engine.Z=old_z;
-				
+
 			}
 		}
 		if(flag)
@@ -1671,7 +1671,7 @@ SLONG	PrimPickTab::HandleModuleContentClick(MFPoint	*clicked_point,UBYTE flags,S
 	SWORD	thing;
 
 
-	// Stop compiler moaning.	
+	// Stop compiler moaning.
 	x	=	x;
 	y	=	y;
 	w	=	w;
@@ -1770,7 +1770,7 @@ extern	SLONG	find_alt_for_this_pos(SLONG x,SLONG z);
 			break;
 	}
 	return(0);
-	
+
 }
 
 UWORD	PrimPickTab::HandleTabClick(UBYTE flags,MFPoint *clicked_point)
@@ -1964,7 +1964,7 @@ void	add_a_background_thing(UWORD prim,SLONG x,SLONG y,SLONG z)
 	p_mthing->X=x;
 	p_mthing->Y=y;
 	p_mthing->Z=z;
-	
+
 	p_mthing->IndexOther=prim;
 	p_mthing->IndexNext=background_prim;
 	background_prim=map_thing;
@@ -1972,7 +1972,7 @@ void	add_a_background_thing(UWORD prim,SLONG x,SLONG y,SLONG z)
 	p_mthing->Type=MAP_THING_TYPE_PRIM;
 	scan_function=scan_apply_ambient;
 	scan_map_thing(map_thing);
-	
+
 }
 
 extern		void	clear_map2(void);
@@ -1994,7 +1994,7 @@ void	PrimPickTab::HandleControl(UWORD control_id)
 				fr=new FileRequester("objects\\","*.*","Load A Prim","hello");
 				if(fr->Draw())
 				{
-					
+
 					strcpy(fname,fr->Path);
 					strcat(fname,fr->FileName);
 					read_asc(fname,100,1);
@@ -2022,7 +2022,7 @@ void	PrimPickTab::HandleControl(UWORD control_id)
 				if(fr->Draw())
 				{
 					SLONG	temp;
-					
+
 					strcpy(fname,fr->Path);
 					strcat(fname,fr->FileName);
 					temp=next_prim_object;
@@ -2111,7 +2111,7 @@ void	PrimPickTab::HandleControl(UWORD control_id)
 				edit_info.amb_offset=0;
 //				edit_info.amb_flag=1;
 
-//				scan_map();	
+//				scan_map();
 
 			}
 */
@@ -2128,7 +2128,7 @@ void	PrimPickTab::HandleControl(UWORD control_id)
 
 					switch(t_mthing->Type)
 					{
-						case	MAP_THING_TYPE_PRIM:		
+						case	MAP_THING_TYPE_PRIM:
 							if(t_mthing->IndexOther==CurrentPrim)
 							{
 								delete_thing(c0);
@@ -2226,7 +2226,7 @@ void	PrimPickTab::HandleControl(UWORD control_id)
 		case CTRL_PRIM_FLAG_ON_FLOOR:
 			if (CurrentPrim && PrimTabMode == PRIM_MODE_SINGLE)
 			{
-				
+
 				prim_objects[CurrentPrim].flag ^= PRIM_FLAG_ON_FLOOR;
 				if(prim_objects[CurrentPrim].flag & PRIM_FLAG_ON_FLOOR)
 				{
@@ -2238,7 +2238,7 @@ void	PrimPickTab::HandleControl(UWORD control_id)
 		case CTRL_PRIM_FLAG_JUST_FLOOR:
 			if (CurrentPrim && PrimTabMode == PRIM_MODE_SINGLE)
 			{
-				
+
 				prim_objects[CurrentPrim].flag ^= PRIM_FLAG_JUST_FLOOR;
 				if(prim_objects[CurrentPrim].flag & PRIM_FLAG_JUST_FLOOR)
 				{
@@ -2249,7 +2249,7 @@ void	PrimPickTab::HandleControl(UWORD control_id)
 			break;
 		case CTRL_PRIM_FLAG_INSIDE:
 			{
-				
+
 				edit_info.Inside^=1;
 				UpdatePrimInfo();
 			}
@@ -2378,7 +2378,7 @@ void	PrimPickTab::HandleControl(UWORD control_id)
 
 				UpdatePrimInfo();
 			}
-			
+
 			break;
 
 		case CTRL_PRIM_CENTRE_PIVOT:

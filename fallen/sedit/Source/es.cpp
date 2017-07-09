@@ -8,15 +8,15 @@
 #include "supermap.h"
 #include "es.h"
 #include "ns.h"
-#include "c:\fallen\ddengine\headers\aeng.h"
+#include "fallen/ddengine/headers/aeng.h"
 #include "ob.h"
-#include	"c:\fallen\headers\memory.h"
+#include	"fallen/headers/memory.h"
 
 
 
 //
 // The map.
-// 
+//
 
 ES_Hi ES_hi[PAP_SIZE_HI][PAP_SIZE_HI];
 ES_Lo ES_lo[PAP_SIZE_LO][PAP_SIZE_LO];
@@ -106,7 +106,7 @@ void ES_init()
 
 	//
 	// No water in the city.
-	// 
+	//
 
 	for (x = 0; x < PAP_SIZE_HI; x++)
 	for (z = 0; z < PAP_SIZE_HI; z++)
@@ -163,7 +163,7 @@ void ES_change_height(
 	{
 		UBYTE x;
 		UBYTE z;
-		
+
 	} Queue;
 
 	#define QUEUE_SIZE 512
@@ -181,7 +181,7 @@ void ES_change_height(
 
 	queue_start = 0;
 	queue_end   = 1;
-	
+
 	count = 0;
 
 	while(queue_start < queue_end)
@@ -203,7 +203,7 @@ void ES_change_height(
 		ASSERT(WITHIN(qs->z, 0, PAP_SIZE_HI - 1));
 
 		eh = &ES_hi[qs->x][qs->z];
-		
+
 		eh->height = height;
 
 		if (eh->type == ES_TYPE_SEWER || ShiftFlag)
@@ -255,7 +255,7 @@ void ES_change_height(
 
 //
 // Sets the water-related flags on the PAP map from the ES_city_water maps
-// 
+//
 
 void ES_city_water_build(void)
 {
@@ -281,13 +281,13 @@ void ES_city_water_build(void)
 	{
 		if (PAP_2HI(x,z).Flags & PAP_FLAG_WATER)
 		{
-			PAP_2HI(x,z).Flags &= ~(PAP_FLAG_WATER); 
+			PAP_2HI(x,z).Flags &= ~(PAP_FLAG_WATER);
 		}
 	}
 
 	//
 	// Get the water level from the bottom of a prim 13 Ob.
-	// 
+	//
 
 	SLONG water_level = 0;
 
@@ -679,7 +679,7 @@ void ES_build_sewers()
 				break;
 
 			case ES_THING_TYPE_PRIM:
-				
+
 				NS_add_prim(
 					et->prim,
 					et->yaw,
@@ -736,7 +736,7 @@ void ES_build_sewers()
 
 	//
 	// Put the the water above the city.
-	// 
+	//
 
 	ES_city_water_build();
 }
@@ -1065,7 +1065,7 @@ void ES_light_dheight(SLONG x, SLONG z, SLONG dheight)
 		//
 
 		SLONG lheight;
-		
+
 		lheight  = ES_lo[lo_map_x][lo_map_z].light_y;
 		lheight += dheight;
 
@@ -1276,7 +1276,7 @@ void ES_ladder_dheight(
 			dist = abs(dx) + abs(dz);
 
 			if (dist < best_dist)
-			{	
+			{
 				best_thing = i;
 				best_dist  = dist;
 			}
@@ -1294,7 +1294,7 @@ void ES_ladder_dheight(
 		//
 
 		SLONG height;
-		
+
 		height  = et->height;
 		height += dheight;
 
@@ -1336,7 +1336,7 @@ void ES_ladder_delete(
 			dist = abs(dx) + abs(dz);
 
 			if (dist < best_dist)
-			{	
+			{
 				best_thing = i;
 				best_dist  = dist;
 			}
@@ -1402,7 +1402,7 @@ void ES_sewer_water_dheight(SLONG x, SLONG z, SLONG dheight)
 		match   = eh->water;
 		height  = eh->water;
 		height += dheight;
-		
+
 		SATURATE(height, 9, 255);
 	}
 
@@ -1410,7 +1410,7 @@ void ES_sewer_water_dheight(SLONG x, SLONG z, SLONG dheight)
 	{
 		UBYTE x;
 		UBYTE z;
-		
+
 	} Queue;
 
 	#define QUEUE_SIZE 512
@@ -1448,7 +1448,7 @@ void ES_sewer_water_dheight(SLONG x, SLONG z, SLONG dheight)
 
 		ASSERT(WITHIN(qs->x, 0, PAP_SIZE_HI - 1));
 		ASSERT(WITHIN(qs->z, 0, PAP_SIZE_HI - 1));
-		
+
 		eh = &ES_hi[qs->x][qs->z];
 
 		eh->water = height;
@@ -1560,7 +1560,7 @@ void  ES_city_water_set(SLONG x, SLONG z, SLONG on_or_not)
 
 			//
 			// Put the the water above the city.
-			// 
+			//
 
 			ES_city_water_build();
 
@@ -1574,7 +1574,7 @@ void  ES_city_water_set(SLONG x, SLONG z, SLONG on_or_not)
 
 			//
 			// Put the the water above the city.
-			// 
+			//
 
 			ES_city_water_build();
 		}
@@ -1654,7 +1654,7 @@ void ES_city_water_dlevel(SLONG x, SLONG z, SLONG dlevel)
 	{
 		level = maxg + (1 << PAP_ALT_SHIFT);
 	}
-	
+
 	//
 	// Set the new water level FOR THE WHOLE CITY FOR NOW!
 	//
@@ -1667,7 +1667,7 @@ void ES_city_water_dlevel(SLONG x, SLONG z, SLONG dlevel)
 
 	//
 	// Put the the water above the city.
-	// 
+	//
 
 	ES_city_water_build();
 }
@@ -1760,7 +1760,7 @@ void ES_prim_delete(
 			dist = abs(dx) + abs(dz);
 
 			if (dist < best_dist)
-			{	
+			{
 				best_thing = i;
 				best_dist  = dist;
 			}
@@ -1816,7 +1816,7 @@ void ES_prim_dheight(
 			dist = abs(dx) + abs(dz);
 
 			if (dist < best_dist)
-			{	
+			{
 				best_thing = i;
 				best_dist  = dist;
 			}

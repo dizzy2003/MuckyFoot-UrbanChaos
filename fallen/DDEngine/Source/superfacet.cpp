@@ -188,7 +188,7 @@ void SUPERFACET_free_end_of_queue(void)
 {
 	SLONG i;
 	SLONG facet;
-	
+
 	SUPERFACET_Facet *sf;
 	SUPERFACET_Call  *sc;
 
@@ -201,7 +201,7 @@ void SUPERFACET_free_end_of_queue(void)
 	facet = SUPERFACET_queue[SUPERFACET_queue_end & (SUPERFACET_QUEUE_SIZE - 1)];
 
 	ASSERT(WITHIN(facet, 0, SUPERFACET_MAX_FACETS - 1));
-	
+
 	sf = &SUPERFACET_facet[facet];
 
 	//
@@ -213,12 +213,12 @@ void SUPERFACET_free_end_of_queue(void)
 		ASSERT(WITHIN(sf->call + i, 0, SUPERFACET_MAX_CALLS - 1));
 
 		sc = &SUPERFACET_call[sf->call + i];
-		
+
 		ASSERT(sc->flag & SUPERFACET_CALL_FLAG_USED);
 
 		sc->flag = 0;
 	}
-	
+
 	//
 	// Upto the end of the last call structure is now free.
 	//
@@ -254,7 +254,7 @@ void SUPERFACET_free_end_of_queue(void)
 	#ifdef SUPERFACET_PERFORMANCE
 	fprintf(SUPERFACET_handle, "Game turn %5d  freed up facet %4d\n", GAME_TURN, facet);
 	fflush(SUPERFACET_handle);
-	#endif									  
+	#endif
 
 	//
 	// Mark as unused.
@@ -327,13 +327,13 @@ void SUPERFACET_make_facet_points(
 		float sz,
 		float dx,
 		float dz,
-		float block_height, 
+		float block_height,
 		SLONG height,
 		NIGHT_Colour *col,
 		SLONG foundation,
 		SLONG count,
 		SLONG hug)
-{	
+{
 	SLONG hf = 0;
 
 	POLY_buffer_upto = 0;	// or else FacetDiffY is accessed wrongly
@@ -489,7 +489,7 @@ void SUPERFACET_create_points(SLONG facet)
 		foundation = 2;
 	}
 	else
-	{	
+	{
 		foundation = 0;
 	}
 
@@ -749,7 +749,7 @@ void SUPERFACET_fill_facet_points(
 					// so we can see the efficiency.
 
 					// It also shows up things that won't repeat properly. There aren't many, and we can ignore them.
-					// (e.g. wall of the 
+					// (e.g. wall of the
 					DWORD dwColour = (DWORD)sc;
 					dwColour = ( dwColour >> 2 ) ^ ( dwColour >> 6 ) ^ ( dwColour ) ^ ( dwColour << 3 );
 					dwColour = ( dwColour << 9 ) ^ ( dwColour << 19 ) ^ ( dwColour ) ^ ( dwColour << 29 ) ^ ( dwColour >> 3 );
@@ -917,6 +917,9 @@ void SUPERFACET_build_call(SLONG facet, SLONG call)
 	if (df->FHeight)
 	{
 		foundation = 2;
+	}
+	else {
+		foundation = 0;
 	}
 
 	block_height = float(df->BlockHeight << 4);
@@ -1253,13 +1256,13 @@ void SUPERFACET_convert_facet(SLONG facet)
 	//
 	// How much lvert/index memory do we need?
 	//
-	
+
 	memory = 0;
 
 	for (i = 0; i < sf->num; i++)
 	{
 		ASSERT(WITHIN(sf->call + i, 0, SUPERFACET_MAX_CALLS - 1));
-		
+
 		sc = &SUPERFACET_call[sf->call + i];
 
 		memory += sc->quads * 4;	// 4 verts per quad.
@@ -1339,7 +1342,7 @@ void SUPERFACET_convert_facet(SLONG facet)
 	fflush(SUPERFACET_handle);
 	#endif
 }
- 
+
 
 void SUPERFACET_init()
 {
@@ -1832,7 +1835,7 @@ SLONG SUPERFACET_draw(SLONG facet)
 						{
 							a = rand() & 3;
 							b = rand() & 3;
-							
+
 							SWAP(order[a],order[b]);
 						}
 					}
@@ -1855,7 +1858,7 @@ SLONG SUPERFACET_draw(SLONG facet)
 					world_y = SUPERFACET_lvert[index[3]].y;
 					world_z = SUPERFACET_lvert[index[3]].z;
 
-					ASSERT(WITHIN(sc->dir, 0, 3));			
+					ASSERT(WITHIN(sc->dir, 0, 3));
 
 					POLY_set_local_rotation(
 						world_x,
@@ -1864,7 +1867,7 @@ SLONG SUPERFACET_draw(SLONG facet)
 						SUPERFACET_direction_matrix[sc->dir]);
 
 					static UBYTE order[4] = {0,2,1,3};
-					
+
 					/*
 
 					if ((GAME_TURN & 0x1f) == 0)
@@ -1878,7 +1881,7 @@ SLONG SUPERFACET_draw(SLONG facet)
 						{
 							a = rand() & 3;
 							b = rand() & 3;
-							
+
 							SWAP(order[a],order[b]);
 						}
 					}
@@ -2118,7 +2121,7 @@ SLONG SUPERFACET_draw(SLONG facet)
 						{
 							a = rand() & 3;
 							b = rand() & 3;
-							
+
 							SWAP(order[a],order[b]);
 						}
 					}
@@ -2141,7 +2144,7 @@ SLONG SUPERFACET_draw(SLONG facet)
 					world_y = SUPERFACET_lvert[index[3]].y;
 					world_z = SUPERFACET_lvert[index[3]].z;
 
-					ASSERT(WITHIN(sc->dir, 0, 3));			
+					ASSERT(WITHIN(sc->dir, 0, 3));
 
 					POLY_set_local_rotation(
 						world_x,
@@ -2150,7 +2153,7 @@ SLONG SUPERFACET_draw(SLONG facet)
 						SUPERFACET_direction_matrix[sc->dir]);
 
 					static UBYTE order[4] = {0,2,1,3};
-					
+
 					/*
 
 					if ((GAME_TURN & 0x1f) == 0)
@@ -2164,7 +2167,7 @@ SLONG SUPERFACET_draw(SLONG facet)
 						{
 							a = rand() & 3;
 							b = rand() & 3;
-							
+
 							SWAP(order[a],order[b]);
 						}
 					}
@@ -2286,7 +2289,7 @@ SLONG SUPERFACET_draw(SLONG facet)
 				sc->lvertcount,
 				SUPERFACET_index + sc->index,
 				sc->indexcount);
-			
+
 			*/
 
 			the_display.lp_D3D_Device->DrawIndexedPrimitive(
@@ -2335,7 +2338,7 @@ void SUPERFACET_fini()
 	fprintf(SUPERFACET_handle, "Percentage cached      = %5f%%\n", float(SUPERFACET_total_already_cached) * 100.0F / float(SUPERFACET_total_drawn));
 
 	fflush(SUPERFACET_handle);
-	
+
 	#endif
 }
 

@@ -10,7 +10,7 @@
 #include "qedit.h"
 #include "qmap.h"
 #include "fmatrix.h"
-#include "c:\fallen\ddengine\headers\qeng.h"
+#include "fallen/ddengine/headers/qeng.h"
 
 
 
@@ -33,7 +33,7 @@ SLONG QEDIT_cam_matrix[9];
 
 //
 // Draws the QMAP around the given location in wire-frame.
-// 
+//
 
 void QEDIT_draw_wireframe(
 		SLONG world_x,
@@ -122,22 +122,22 @@ void QEDIT_draw_wireframe(
 			#define QEDIT_CUBE_RADIUS 0x40
 			#define QEDIT_CUBE_COLOUR 0x00880022
 
-			QENG_world_line(   
+			QENG_world_line(
 				x1, y1, z1, QEDIT_CUBE_RADIUS, QEDIT_CUBE_COLOUR,
 				x2, y1, z1, QEDIT_CUBE_RADIUS, QEDIT_CUBE_COLOUR,
-				FALSE);		   
-							   
-			QENG_world_line(   
+				FALSE);
+
+			QENG_world_line(
 				x2, y1, z1, QEDIT_CUBE_RADIUS, QEDIT_CUBE_COLOUR,
 				x2, y1, z2, QEDIT_CUBE_RADIUS, QEDIT_CUBE_COLOUR,
-				FALSE);		   
-							   
-			QENG_world_line(   
+				FALSE);
+
+			QENG_world_line(
 				x2, y1, z2, QEDIT_CUBE_RADIUS, QEDIT_CUBE_COLOUR,
 				x1, y1, z2, QEDIT_CUBE_RADIUS, QEDIT_CUBE_COLOUR,
-				FALSE);		   
-							   
-			QENG_world_line(   
+				FALSE);
+
+			QENG_world_line(
 				x1, y1, z2, QEDIT_CUBE_RADIUS, QEDIT_CUBE_COLOUR,
 				x1, y1, z1, QEDIT_CUBE_RADIUS, QEDIT_CUBE_COLOUR,
 				FALSE);
@@ -146,40 +146,40 @@ void QEDIT_draw_wireframe(
 			QENG_world_line(
 				x1, y1, z1, QEDIT_CUBE_RADIUS, QEDIT_CUBE_COLOUR,
 				x1, y2, z1, QEDIT_CUBE_RADIUS, QEDIT_CUBE_COLOUR,
-				FALSE);		   
-							   
-			QENG_world_line(   
+				FALSE);
+
+			QENG_world_line(
 				x2, y1, z1, QEDIT_CUBE_RADIUS, QEDIT_CUBE_COLOUR,
 				x2, y2, z1, QEDIT_CUBE_RADIUS, QEDIT_CUBE_COLOUR,
-				FALSE);		   
-							   
-			QENG_world_line(   
+				FALSE);
+
+			QENG_world_line(
 				x1, y1, z2, QEDIT_CUBE_RADIUS, QEDIT_CUBE_COLOUR,
 				x1, y2, z2, QEDIT_CUBE_RADIUS, QEDIT_CUBE_COLOUR,
-				FALSE);		   
-							   
-			QENG_world_line(   
+				FALSE);
+
+			QENG_world_line(
 				x2, y1, z2, QEDIT_CUBE_RADIUS, QEDIT_CUBE_COLOUR,
 				x2, y2, z2, QEDIT_CUBE_RADIUS, QEDIT_CUBE_COLOUR,
-				FALSE);		   
-							   
-							   
-			QENG_world_line(   
+				FALSE);
+
+
+			QENG_world_line(
 				x1, y2, z1, QEDIT_CUBE_RADIUS, QEDIT_CUBE_COLOUR,
 				x2, y2, z1, QEDIT_CUBE_RADIUS, QEDIT_CUBE_COLOUR,
-				FALSE);		   
-							   
-			QENG_world_line(   
+				FALSE);
+
+			QENG_world_line(
 				x2, y2, z1, QEDIT_CUBE_RADIUS, QEDIT_CUBE_COLOUR,
 				x2, y2, z2, QEDIT_CUBE_RADIUS, QEDIT_CUBE_COLOUR,
-				FALSE);		   
-							   
-			QENG_world_line(   
+				FALSE);
+
+			QENG_world_line(
 				x2, y2, z2, QEDIT_CUBE_RADIUS, QEDIT_CUBE_COLOUR,
 				x1, y2, z2, QEDIT_CUBE_RADIUS, QEDIT_CUBE_COLOUR,
-				FALSE);		   
-							   
-			QENG_world_line(   
+				FALSE);
+
+			QENG_world_line(
 				x1, y2, z2, QEDIT_CUBE_RADIUS, QEDIT_CUBE_COLOUR,
 				x1, y2, z1, QEDIT_CUBE_RADIUS, QEDIT_CUBE_COLOUR,
 				FALSE);
@@ -308,11 +308,11 @@ void QEDIT_control(void)
 	if (Keys[KB_PGUP]) {QEDIT_cam_pitch += QEDIT_SPEED_ROTATE;}
 
 	if (Keys[KB_HOME]) {QEDIT_cam_zoom -= QEDIT_SPEED_ZOOM;}
-	if (Keys[KB_END] ) {QEDIT_cam_zoom += QEDIT_SPEED_ZOOM;} 
+	if (Keys[KB_END] ) {QEDIT_cam_zoom += QEDIT_SPEED_ZOOM;}
 
 	SATURATE(QEDIT_focus_x, 0, (QMAP_SIZE << 8) - 1);
 	SATURATE(QEDIT_focus_z, 0, (QMAP_SIZE << 8) - 1);
-	
+
 	SATURATE(QEDIT_cam_zoom, 0x100, 0x7800);
 
 	QEDIT_cam_yaw   &= 2047;

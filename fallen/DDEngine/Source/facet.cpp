@@ -4,13 +4,13 @@
 #include	"mesh.h"
 #include	"math.h"
 #include	"poly.h"
-#include	"c:\fallen\headers\supermap.h"
-#include	"c:\fallen\headers\inside2.h"
+#include	"fallen/headers/supermap.h"
+#include	"fallen/headers/inside2.h"
 #include	"night.h"
-#include	"c:\fallen\headers\pap.h"
+#include	"fallen/headers/pap.h"
 #include	"math.h"
 #include	"ns.h"
-#include	"c:\fallen\sedit\headers\es.h"
+#include	"fallen/sedit/headers/es.h"
 #include	"memory.h"
 #include "texture.h"
 #include	"polypage.h"
@@ -60,7 +60,7 @@ typedef struct
 {
 	UWORD page;
 	UWORD quads;
-	
+
 } FACET_Pageinfo;
 
 #define FACET_MAX_PAGEINFO_PER_FACET 32
@@ -85,7 +85,7 @@ SLONG FACET_facetinfo_current;
 
 
 #endif
- 
+
 
 
 
@@ -142,7 +142,7 @@ void FACET_facetinfo_trace(void)
 		{
 			num_facets += 1;
 			num_pages  += ff->num_pages;
-			
+
 			for (j = 0; j < ff->num_pages; j++)
 			{
 				num_quads += ff->page[j].quads;
@@ -169,7 +169,7 @@ void FACET_facetinfo_trace(void)
 	FACET_output("Average number of quads per page  = %f\n", ave_quads_per_page );
 	FACET_output("Max pages per facet               = %d\n", max_pages_per_facet);
 	FACET_output("\n");
-	
+
 	for (i = 0; i < MAX_QUADS_PER_PAGE; i++)
 	{
 		FACET_output("%4d Quads per page : %5d\n", i, quads_per_page[i]);
@@ -325,13 +325,13 @@ void	draw_fence_gap(POLY_Point *quad[4],SLONG page,SLONG along,float sx,float sy
 //		 b
 //	 3  a c   2
 
-	
+
 	g_quad[0]=quad[0];
 	g_quad[1]=&ppb[1];
 	g_quad[2]=quad[2];
 	g_quad[3]=&ppb[2];
 
-	
+
 	if (POLY_valid_quad(g_quad))
 		POLY_add_quad(g_quad, page, 0); // 1 means perform a backface cull
 
@@ -397,17 +397,17 @@ SLONG texture_quad(POLY_Point *quad[4],SLONG texture_style,SLONG pos,SLONG count
 
 		index=p_storey->Index;
 		ASSERT(p_storey->Count);
-		
+
 		if(pos<p_storey->Count)
 		{
 			page=paint_mem[index+pos];
 //	ASSERT(page!=156);
 
-//			MSG_add(" pos %d page %x count %d index %d \n",pos,page,p_storey->Count,p_storey->Index); 
+//			MSG_add(" pos %d page %x count %d index %d \n",pos,page,p_storey->Count,p_storey->Index);
 
 			if(page&0x80)
 			{
-				
+
 				flip=1;
 				page&=0x7f;
 				if(ControlFlag&&allow_debug_keys)
@@ -459,7 +459,7 @@ SLONG texture_quad(POLY_Point *quad[4],SLONG texture_style,SLONG pos,SLONG count
 //	ASSERT(page!=156);
 				}
 
-				
+
 			}
 		}
 		else
@@ -547,7 +547,7 @@ SLONG texture_quad(POLY_Point *quad[4],SLONG texture_style,SLONG pos,SLONG count
 			break;
 	}
 
-		  
+
 
 //	LogText("quad text page %d \n",page);
 
@@ -598,11 +598,11 @@ SLONG	get_texture_page(SLONG texture_style,SLONG pos,SLONG count,UBYTE *rflip)
 
 		index=p_storey->Index;
 		ASSERT(p_storey->Count);
-		
+
 		if(pos<p_storey->Count)
 		{
 			page=paint_mem[index+pos];
-//			MSG_add(" pos %d page %x count %d index %d \n",pos,page,p_storey->Count,p_storey->Index); 
+//			MSG_add(" pos %d page %x count %d index %d \n",pos,page,p_storey->Count,p_storey->Index);
 
 			if(page&0x80)
 			{
@@ -613,7 +613,7 @@ SLONG	get_texture_page(SLONG texture_style,SLONG pos,SLONG count,UBYTE *rflip)
 			{
 				texture_style = p_storey->Style;
 
-				
+
 			}
 		}
 		else
@@ -691,7 +691,7 @@ SLONG	texture_quad2(POLY_Point *quad[4],SLONG texture_style,SLONG texture_piece)
 			break;
 	}
 
-		  
+
 
 //	LogText("quad text page %d \n",page);
 
@@ -745,7 +745,7 @@ SLONG	texture_tri2(POLY_Point *quad[3],SLONG texture_style,SLONG texture_piece)
 			break;
 	}
 
-		  
+
 
 //	LogText("quad text page %d \n",page);
 
@@ -818,7 +818,7 @@ void	build_fence_poles(float sx,float sy,float sz,float fdx,float fdz,SLONG coun
 	while(count-->0)
 	{
 		SLONG	c0;
-		
+
 		POLY_buffer_upto = 0;
 		pp = &POLY_buffer[0];
 
@@ -890,7 +890,7 @@ void	build_fence_poles(float sx,float sy,float sz,float fdx,float fdz,SLONG coun
 
 			for(q=0;q<3;q++)
 			{
-				
+
 				quad[0] = &POLY_buffer[3+q];
 				quad[1] = &POLY_buffer[3+q_lookup[q]];
 				quad[2] = &POLY_buffer[0+q];
@@ -899,10 +899,10 @@ void	build_fence_poles(float sx,float sy,float sz,float fdx,float fdz,SLONG coun
 				if (POLY_valid_quad(quad))
 				{
 					SLONG	page;
-					
+
 					//
 					// Texture the quad.
-					// 
+					//
 
 					page=texture_quad2(quad,dstyles[style],TEXTURE_PIECE_MIDDLE2);
 
@@ -916,17 +916,17 @@ void	build_fence_poles(float sx,float sy,float sz,float fdx,float fdz,SLONG coun
 			tri[2] = &POLY_buffer[6];
 			for(t=0;t<3;t++)
 			{
-				
+
 				tri[1] = &POLY_buffer[3+t];
 				tri[0] = &POLY_buffer[3+q_lookup[t]];
 
 				if (POLY_valid_triangle(tri))
 				{
 					SLONG	page=0;
-					
+
 					//
 					// Texture the quad.
-					// 
+					//
 
 					page=texture_tri2(tri,dstyles[style],TEXTURE_PIECE_MIDDLE2); //TOP_LEFT);
 
@@ -934,7 +934,7 @@ void	build_fence_poles(float sx,float sy,float sz,float fdx,float fdz,SLONG coun
 				}
 
 			}
-			
+
 
 		}
 
@@ -1474,9 +1474,9 @@ extern UBYTE AENG_transparent_warehouses;
 SWORD FacetRows[100];
 float FacetDiffY[128];
 
-static void MakeFacetPoints(float sx, float sy, float sz, float dx, float dz, float block_height, 
+static void MakeFacetPoints(float sx, float sy, float sz, float dx, float dz, float block_height,
 							SLONG height, SLONG max_height, NIGHT_Colour* col, SLONG foundation, SLONG count, SLONG invisible,SLONG hug)
-{	
+{
 	SLONG	hf = 0;
 
 	ASSERT(POLY_buffer_upto == 0);	// or else FacetDiffY is accessed wrongly
@@ -1499,7 +1499,7 @@ static void MakeFacetPoints(float sx, float sy, float sz, float dx, float dz, fl
 
 			if(hug)
 			{
-				
+
 				ty = float(PAP_2HI(SLONG(x) >> 8, SLONG(z) >> 8).Alt << 3);
 				ty+=y;
 
@@ -1568,9 +1568,9 @@ static void MakeFacetPoints(float sx, float sy, float sz, float dx, float dz, fl
 }
 
 
-static void MakeFacetPointsFence(float sx, float sy, float sz, float dx, float dz, float block_height, 
+static void MakeFacetPointsFence(float sx, float sy, float sz, float dx, float dz, float block_height,
 							SLONG height, SLONG max_height, NIGHT_Colour* col, SLONG foundation, SLONG count, SLONG invisible,float *diff_y)
-{	
+{
 	SLONG	hf = 0;
 	float	*p_diffy;
 
@@ -1644,7 +1644,9 @@ static void FillFacetPoints(SLONG count, ULONG base_row, SLONG foundation, SLONG
 	SLONG	row1 = FacetRows[base_row];
 	SLONG	row2 = FacetRows[base_row+1];
 
-	for (SLONG c0 = 0; c0 < row2 - row1 - 1; c0++)
+	SLONG c0;
+
+	for (c0 = 0; c0 < row2 - row1 - 1; c0++)
 	{
 		if (facet_backwards)
 		{
@@ -1692,7 +1694,7 @@ static void FillFacetPoints(SLONG count, ULONG base_row, SLONG foundation, SLONG
 			{
 				quad[3]->v = FacetDiffY[c0];
 				quad[2]->v = FacetDiffY[c0+1];
-				
+
 				// This doesn't work with texture paging.
 				//POLY_Page[page].RS.WrapJustOnce();
 
@@ -1809,9 +1811,9 @@ extern int AENG_detail_crinkles;
 
 
 // Like MakeFacetPoints, but used in the most common cases.
-inline void MakeFacetPointsCommon(float sx, float sy, float sz, float dx, float dz, float block_height, 
+inline void MakeFacetPointsCommon(float sx, float sy, float sz, float dx, float dz, float block_height,
 							SLONG height, NIGHT_Colour* col, SLONG foundation, SLONG count, SLONG hug)
-{	
+{
 	SLONG	hf = 0;
 
 
@@ -1839,7 +1841,7 @@ inline void MakeFacetPointsCommon(float sx, float sy, float sz, float dx, float 
 
 			if(hug)
 			{
-				
+
 				ty = float(PAP_2HI(SLONG(x) >> 8, SLONG(z) >> 8).Alt << 3);
 				ty+=y;
 
@@ -1907,7 +1909,9 @@ inline void FillFacetPointsCommon(SLONG count, ULONG base_row, SLONG foundation,
 	FACET_Facetinfo *ff;
 	#endif
 
-	for (SLONG c0 = 0; c0 < row2 - row1 - 1; c0++)
+	SLONG c0;
+
+	for (c0 = 0; c0 < row2 - row1 - 1; c0++)
 	{
 		{
 			quad[0] = &POLY_buffer[row2+c0+1];
@@ -2252,7 +2256,7 @@ void FACET_draw_quick(SLONG facet,UBYTE alpha)
 	{
 		col = 0xFF200000;
 	}
-	
+
 	switch(p_facet->FacetType)
 	{
 		case	STOREY_TYPE_FENCE:
@@ -2485,7 +2489,7 @@ void FACET_draw_rare(SLONG facet,UBYTE alpha)
 		 p_facet->FacetType == STOREY_TYPE_LADDER)
 		&& !(p_facet->FacetFlags&FACET_FLAG_2SIDED)) // actually brick is barbed wire...
 	{
-		// 2sided flag means textured for both sides, if its textued on both sideds then you need to 
+		// 2sided flag means textured for both sides, if its textued on both sideds then you need to
 		// do a backface cull to decide which side you are drawing
 
 
@@ -2498,7 +2502,7 @@ void FACET_draw_rare(SLONG facet,UBYTE alpha)
 	{
 		//
 		// Don't draw these.
-		// 
+		//
 
 //#define WE_WANT_TO_DRAW_THESE_FACET_LINES 1
 		#if WE_WANT_TO_DRAW_THESE_FACET_LINES
@@ -2555,7 +2559,7 @@ void FACET_draw_rare(SLONG facet,UBYTE alpha)
 		{
 			//
 			// We've got rid of a whole facet :o)
-			// 
+			//
 
 			if((p_facet->FacetFlags&FACET_FLAG_2SIDED) || p_facet->FacetType == STOREY_TYPE_OINSIDE)
 			{
@@ -2607,7 +2611,7 @@ void FACET_draw_rare(SLONG facet,UBYTE alpha)
 		//
 #ifdef EDITOR
 		extern BOOL is_in_mission_editor;
-		
+
 		if (is_in_mission_editor)
 		{
 			p_facet->Open += 1;
@@ -2696,7 +2700,7 @@ void FACET_draw_rare(SLONG facet,UBYTE alpha)
 
 	//
 	// Draw the facet.
-	// 
+	//
 
 	dfacets_drawn_this_gameturn += 1;
 
@@ -2744,7 +2748,7 @@ void FACET_draw_rare(SLONG facet,UBYTE alpha)
 
 	if (p_facet->Dfcache == 0)
 	{
-		// I've just seen how this work's and I'm scared 
+		// I've just seen how this work's and I'm scared
 		// looks like NIGHT_dfcache_create has to completely understand how to build any facet
 		// like the fence struts I've just crafted...
 
@@ -2755,7 +2759,7 @@ void FACET_draw_rare(SLONG facet,UBYTE alpha)
 			return;
 		}
 	}
-	
+
 	ASSERT(WITHIN(p_facet->Dfcache, 1, NIGHT_MAX_DFCACHES - 1));
 
 	col = NIGHT_dfcache[p_facet->Dfcache].colour;
@@ -2803,7 +2807,7 @@ void FACET_draw_rare(SLONG facet,UBYTE alpha)
 			fdz=(float)dz/(float)count;
 
 			diag=0;
-			
+
 		}
 
 //		return;
@@ -2845,7 +2849,7 @@ void FACET_draw_rare(SLONG facet,UBYTE alpha)
 
 			fdx = rdx;
 			fdz = rdz;
-		}	
+		}
 	}
 
 	count++;
@@ -2929,7 +2933,7 @@ extern	FONT2D_DrawString_3d(CBYTE*str, ULONG world_x, ULONG world_y,ULONG world_
 				style_index++;
 			if(facet_backwards)
 			{
-				
+
 				DRAW_door(sx,sy,sz,fdx,256.0,fdz,block_height,count,fade_alpha,dstyles[style_index],1);
 			}
 			else
@@ -3008,10 +3012,10 @@ extern	FONT2D_DrawString_3d(CBYTE*str, ULONG world_x, ULONG world_y,ULONG world_
 							if (POLY_valid_quad(quad))
 							{
 								SLONG page;
-								
+
 								//
 								// Texture the quad.
-								// 
+								//
 
 								page=texture_quad(quad,dstyles[style_index],c0,count,flipx);
 
@@ -3344,10 +3348,10 @@ extern	FONT2D_DrawString_3d(CBYTE*str, ULONG world_x, ULONG world_y,ULONG world_
 							if (POLY_valid_quad(quad))
 							{
 								SLONG	page;
-								
+
 								//
 								// Texture the quad.
-								// 
+								//
 
 								page=texture_quad(quad,dstyles[style_index],c0,count);
 
@@ -3379,7 +3383,7 @@ extern	FONT2D_DrawString_3d(CBYTE*str, ULONG world_x, ULONG world_y,ULONG world_
 
 					height=3; //fence is 3/4 height
 
-					
+
 				}
 
 				//
@@ -3396,7 +3400,7 @@ extern	FONT2D_DrawString_3d(CBYTE*str, ULONG world_x, ULONG world_y,ULONG world_
 				{
 					//
 					// triple high
-					// 
+					//
 
 
 					MakeFacetPointsFence(sx, sy, sz, fdx, fdz, block_height, height, max_height, col, foundation, count, p_facet->FacetFlags&(FACET_FLAG_INVISIBLE|FACET_FLAG_IN_SEWERS),diff_y);
@@ -3558,10 +3562,10 @@ extern	FONT2D_DrawString_3d(CBYTE*str, ULONG world_x, ULONG world_y,ULONG world_
 							if (POLY_valid_quad(quad))
 							{
 								SLONG	page;
-								
+
 								//
 								// Texture the quad.
-								// 
+								//
 
 								page=texture_quad(quad,dstyles[style_index],c0,count);
 
@@ -3582,7 +3586,7 @@ extern	FONT2D_DrawString_3d(CBYTE*str, ULONG world_x, ULONG world_y,ULONG world_
 										//
 										// This is the mesh texture so the fence should be
 										// climable.
-										// 
+										//
 
 										if (p_facet->FacetFlags & FACET_FLAG_UNCLIMBABLE)
 										{
@@ -3752,7 +3756,7 @@ void FACET_draw(SLONG facet,UBYTE alpha)
 		{
 			//
 			// We've got rid of a whole facet :o)
-			// 
+			//
 			LOG_EXIT ( Facet_draw_start )
 			return;
 		}
@@ -3922,7 +3926,7 @@ draw_the_facet_common:;
 
 	//
 	// Draw the facet.
-	// 
+	//
 
 	p_facet->FacetFlags &= ~FACET_FLAG_DLIT;
 
@@ -3947,7 +3951,7 @@ draw_the_facet_common:;
 
 	if (p_facet->Dfcache == 0)
 	{
-		// I've just seen how this work's and I'm scared 
+		// I've just seen how this work's and I'm scared
 		// looks like NIGHT_dfcache_create has to completely understand how to build any facet
 		// like the fence struts I've just crafted...
 
@@ -3959,7 +3963,7 @@ draw_the_facet_common:;
 			return;
 		}
 	}
-	
+
 	ASSERT(WITHIN(p_facet->Dfcache, 1, NIGHT_MAX_DFCACHES - 1));
 
 	col = NIGHT_dfcache[p_facet->Dfcache].colour;
@@ -4021,7 +4025,7 @@ draw_the_facet_common:;
 
 			fdx = rdx;
 			fdz = rdz;
-		}	
+		}
 	}
 
 	count++;
@@ -4045,7 +4049,7 @@ draw_the_facet_common:;
 	block_height=p_facet->BlockHeight<<4;
 
 	ASSERT ( inside_clip == 0 );
-	
+
 	if(p_facet->FHeight)
 	{
 		foundation=2;
@@ -4125,7 +4129,7 @@ void FACET_draw_walkable(SLONG build)
 	SLONG blue;
 
 	SLONG page;
-	SLONG warehouse; 
+	SLONG warehouse;
 
 	SLONG walkable;
 
@@ -4299,7 +4303,7 @@ void FACET_draw_walkable(SLONG build)
 						// Draw the slide-edges
 						//
 
-						
+
 						if (p_f4->DrawFlags & (RFACE_FLAG_SLIDE_EDGE_0))
 						{
 								AENG_world_line(x,y,z,4,0xffffff,x+256,y,z,4,0xffffff,1);
@@ -4401,7 +4405,7 @@ void FACET_draw_walkable(SLONG build)
 
 							//
 							// Create four darkened points.
-							// 
+							//
 
 							pshad[0] = *(quad[0]);
 							pshad[1] = *(quad[1]);
@@ -4452,7 +4456,7 @@ void FACET_draw_walkable(SLONG build)
 									POLY_add_triangle(tri, page, !warehouse);
 
 									break;
-									
+
 								case 2:
 
 									tri[0] = &pshad [0];
@@ -4468,7 +4472,7 @@ void FACET_draw_walkable(SLONG build)
 									POLY_add_triangle(tri, page, !warehouse);
 
 									break;
-									
+
 								case 3:
 
 									//pshad[2].colour += 0x00101010;
@@ -4486,7 +4490,7 @@ void FACET_draw_walkable(SLONG build)
 									POLY_add_triangle(tri, page, !warehouse);
 
 									break;
-									
+
 								case 4:
 
 									tri[0] = quad[0];
@@ -4502,7 +4506,7 @@ void FACET_draw_walkable(SLONG build)
 									POLY_add_triangle(tri, page, !warehouse);
 
 									break;
-									
+
 								case 5:
 
 									tri[0] = &pshad [0];
@@ -4518,7 +4522,7 @@ void FACET_draw_walkable(SLONG build)
 									POLY_add_triangle(tri, page, !warehouse);
 
 									break;
-									
+
 								case 6:
 
 									tri[0] = &pshad [0];
@@ -4534,7 +4538,7 @@ void FACET_draw_walkable(SLONG build)
 									POLY_add_triangle(tri, page, !warehouse);
 
 									break;
-									
+
 								case 7:
 
 									tri[0] = quad[0];
@@ -4684,7 +4688,7 @@ void FACET_draw_walkable_old(SLONG build)
 				p1 = p_f4->Points[1] - sp;
 				p2 = p_f4->Points[2] - sp;
 				p3 = p_f4->Points[3] - sp;
-				
+
 				ASSERT(WITHIN(p0, 0, POLY_buffer_upto - 1));
 				ASSERT(WITHIN(p1, 0, POLY_buffer_upto - 1));
 				ASSERT(WITHIN(p2, 0, POLY_buffer_upto - 1));
@@ -4705,9 +4709,9 @@ void FACET_draw_walkable_old(SLONG build)
 						//
 
 						SLONG ei;
-						
+
 						UBYTE point_order[4] = {0, 1, 3, 2};
-						
+
 						for (ei = 0; ei < 4; ei++)
 						{
 							if (p_f4->FaceFlags & (FACE_FLAG_SLIDE_EDGE << ei))
@@ -4717,7 +4721,7 @@ void FACET_draw_walkable_old(SLONG build)
 									prim_points[p_f4->Points[point_order[(ei + 0) & 0x3]]].Y,
 									prim_points[p_f4->Points[point_order[(ei + 0) & 0x3]]].Z,
 									32,
-									0xffffff,										   
+									0xffffff,
 									prim_points[p_f4->Points[point_order[(ei + 1) & 0x3]]].X,
 									prim_points[p_f4->Points[point_order[(ei + 1) & 0x3]]].Y,
 									prim_points[p_f4->Points[point_order[(ei + 1) & 0x3]]].Z,
@@ -4765,7 +4769,7 @@ void FACET_draw_walkable_old(SLONG build)
 
 							//
 							// Create four darkened points.
-							// 
+							//
 
 							ps[0] = *(quad[0]);
 							ps[1] = *(quad[1]);
@@ -4816,7 +4820,7 @@ void FACET_draw_walkable_old(SLONG build)
 									POLY_add_triangle(tri, page, TRUE);
 
 									break;
-									
+
 								case 2:
 
 									tri[0] = &ps [0];
@@ -4832,7 +4836,7 @@ void FACET_draw_walkable_old(SLONG build)
 									POLY_add_triangle(tri, page, TRUE);
 
 									break;
-									
+
 								case 3:
 
 
@@ -4851,7 +4855,7 @@ void FACET_draw_walkable_old(SLONG build)
 									POLY_add_triangle(tri, page, TRUE);
 
 									break;
-									
+
 								case 4:
 
 									tri[0] = quad[0];
@@ -4867,7 +4871,7 @@ void FACET_draw_walkable_old(SLONG build)
 									POLY_add_triangle(tri, page, TRUE);
 
 									break;
-									
+
 								case 5:
 
 									tri[0] = &ps [0];
@@ -4883,7 +4887,7 @@ void FACET_draw_walkable_old(SLONG build)
 									POLY_add_triangle(tri, page, TRUE);
 
 									break;
-									
+
 								case 6:
 
 									tri[0] = &ps [0];
@@ -4899,7 +4903,7 @@ void FACET_draw_walkable_old(SLONG build)
 									POLY_add_triangle(tri, page, TRUE);
 
 									break;
-									
+
 								case 7:
 
 									tri[0] = quad[0];
@@ -5010,10 +5014,10 @@ void	DRAW_ladder_rungs(float x1,float z1,float x2,float z2,struct DFacet	*p_face
 		if (POLY_valid_quad(quad))
 		{
 			SLONG	page;
-			
+
 			//
 			// Texture the quad.
-			// 
+			//
 
 			page = POLY_PAGE_LADDER;
 
@@ -5070,7 +5074,7 @@ void	DRAW_ladder_sides(float x1,float z1,float x2,float z2,struct DFacet	*p_face
 		{
 			//
 			// The 'v' coordinate for this height.
-			// 
+			//
 
 			v = y * (1.0F / 64.0F);
 
@@ -5140,7 +5144,7 @@ void	DRAW_ladder_sides(float x1,float z1,float x2,float z2,struct DFacet	*p_face
 				if (POLY_valid_quad(quad))
 				{
 					SLONG	page;
-					
+
 					page = POLY_PAGE_LADDER;
 
 					POLY_add_quad(quad, page, 0); // 1 means perform a backface cull
@@ -5168,7 +5172,7 @@ void	DRAW_ladder_sides(float x1,float z1,float x2,float z2,struct DFacet	*p_face
 				if (POLY_valid_quad(quad))
 				{
 					SLONG	page;
-					
+
 					//page = texture_quad(quad,dstyles[0],0,0);
 					//page=texture_quad(quad,dstyles[p_facet->StyleIndex],1,5);
 					page = POLY_PAGE_LADDER;
@@ -5184,7 +5188,7 @@ void	DRAW_ladder_sides(float x1,float z1,float x2,float z2,struct DFacet	*p_face
 				if (POLY_valid_quad(quad))
 				{
 					SLONG	page;
-					
+
 					//page = texture_quad(quad,dstyles[0],0,0);
 					//page=texture_quad(quad,dstyles[p_facet->StyleIndex],1,5);
 					page = POLY_PAGE_LADDER;
@@ -5197,7 +5201,7 @@ void	DRAW_ladder_sides(float x1,float z1,float x2,float z2,struct DFacet	*p_face
 		}
 	}
 }
-	
+
 void	DRAW_ladder(struct DFacet *p_facet)
 {
 	SLONG	dx,dz;
@@ -5330,7 +5334,7 @@ void	DRAW_ladder(struct DFacet *p_facet)
 
 		POLY_transform(
 			(p_facet->x[1] << 8) + dz,
-			(p_facet->Y[0]),	         
+			(p_facet->Y[0]),
 			(p_facet->z[1] << 8) - dx,
 		   &pp[1]);
 
@@ -5396,7 +5400,7 @@ void FACET_draw_ns_ladder(
 	ASSERT(WITHIN(mz, 0, PAP_SIZE_HI - 1));
 
 	y  = ES_hi[mx][mz].height << 5;
-	y += -32 * 0x100; 
+	y += -32 * 0x100;
 
 	//
 	// Create a pretend facet for the ladder facet function to use.
@@ -5439,7 +5443,7 @@ void FACET_project_crinkled_shadow(SLONG facet)
 	DFacet *p_facet;
 
 	ASSERT(WITHIN(facet, 1, next_dfacet - 1));
-	
+
 	p_facet = &dfacets[facet];
 
 	//
@@ -5470,7 +5474,7 @@ void FACET_project_crinkled_shadow(SLONG facet)
 	SLONG max_height   = INFINITY;
 
 	NIGHT_Colour *col = NULL;	// No cached lighting needed!
-	
+
 	SLONG foundation = (p_facet->FHeight) ? 2 : 0;
 
 	SLONG count = abs(dx) + abs(dz);

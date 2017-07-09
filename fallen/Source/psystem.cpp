@@ -9,7 +9,7 @@
 #include "psystem.h"
 #include "mav.h"
 #include "FMatrix.h"
-#include "C:\fallen\DDEngine\Headers\poly.h"
+#include "fallen/DDEngine/Headers/poly.h"
 #include "animate.h"
 #include "interact.h"
 #include "sound.h"
@@ -59,7 +59,7 @@ void PARTICLE_Run() {
 	SLONG   palndx;
 	UBYTE isWare;
 
-	
+
 	isWare=(FC_cam->focus->Class == CLASS_PERSON && FC_cam->focus->Genus.Person->Ware);
 
 
@@ -98,7 +98,7 @@ void PARTICLE_Run() {
 //	p=particles;
 //	for (ctr=0;ctr<PSYSTEM_MAX_PARTICLES;ctr++,p++)
 	for (p=particles+next_used;p!=particles;)
-//		if (p->priority) 
+//		if (p->priority)
 		{
 			// these are nice n smooth always (not local_ratio'd)
 			tx=p->x+((p->dx*TICK_RATIO)>>TICK_SHIFT);
@@ -113,7 +113,7 @@ void PARTICLE_Run() {
 				  p->sprite+=4;
 				}
 
-			if (local_ratio>255) 
+			if (local_ratio>255)
 			{
 /*				if (p->flags & PFLAG_SPRITEANI) {
 				  p->sprite+=(TICK_RATIO>>TICK_SHIFT)<<2;
@@ -187,7 +187,7 @@ void PARTICLE_Run() {
 
 				if (p->flags & PFLAG_BOUNCE) {
 					SLONG tmpy=PAP_calc_map_height_at(tx>>8,tz>>8)<<8;
-					if (ty<tmpy) { 
+					if (ty<tmpy) {
 						ty-=tmpy;
 						ty=tmpy-ty;
 					  p->dy=-(p->dy*180)>>8; //dy*=-0.9;
@@ -196,7 +196,7 @@ void PARTICLE_Run() {
 						p->dz=(p->dz*180)>>8;
 					  }
 					}
-				} 
+				}
 				else
 //				if (MAV_inside(tx>>8,ty>>8,tz>>8))
 				if ((ty>>8)<PAP_calc_map_height_at(tx>>8,tz>>8))
@@ -204,7 +204,7 @@ void PARTICLE_Run() {
 					if (p->flags & PFLAG_COLLIDE) {
 						// twiddle...
 					} else {
-						if (!isWare)			
+						if (!isWare)
 
 						p->life=1; // the -- at end will remove
 	//					TRACE("psystem: collide-removed\n");
@@ -272,10 +272,10 @@ void PARTICLE_Run() {
 						1,
 						1);*/
 				}
-				
+
 				if (p->flags & PFLAG_RESIZE) {
 					SLONG temp=p->size;
-					
+
 					temp+=(p->resize*local_ratio)>>local_shift;
 					if (temp<1) { temp=1; p->life=1; } // clear 0-size or less particles
 					if (temp>255) temp=255;
@@ -283,9 +283,9 @@ void PARTICLE_Run() {
 				}
 				if (p->flags & PFLAG_RESIZE2) {
 					SLONG temp=p->size;
-					
+
 					temp+=(p->resize*local_ratio)>>local_shift;
-					if (temp<1) p->life=1; 
+					if (temp<1) p->life=1;
 					SATURATE(temp,1,65535);
 					p->size=temp;
 				}
@@ -293,14 +293,14 @@ void PARTICLE_Run() {
 				if (p->flags & PFLAG_HURTPEOPLE)
 				{
 					if (GAME_TURN & 0x1)
-					{	
+					{
 						SLONG i;
 
 						UWORD hurt[8];
 						SLONG num;
 
 						THING_INDEX i_hurt;
-						
+
 						num = THING_find_sphere(
 								p->x >> 8,
 								p->y >> 8,
@@ -482,7 +482,7 @@ extern SLONG GAMEMENU_menu_type;
 	new_particle = next_free;
 	next_free=particles[next_free].next;
 	particles[next_free].prev=0;
-	
+
 	// set its contents
 	particles[new_particle]=p;
 	particles[new_particle].next=0; // part of pulling off the list, but JIC...
@@ -525,7 +525,7 @@ UWORD PARTICLE_Exhaust(SLONG x, SLONG y, SLONG z,UBYTE density,UBYTE disperse) {
 	p.page=POLY_PAGE_STEAM; p.sprite=1+((rand()&3)<<2);
 	p.colour=0x7FFFFFFF; p.flags=PFLAGS_SMOKE|PFLAG_WANDER;
 	p.life=50; p.priority=1;
-	p.size=4; p.resize=6; 
+	p.size=4; p.resize=6;
 	p.fade=disperse;
 	p.dx=0; p.dy=0; p.dz=0;
 	for (i=density;i&&res;i--) {
@@ -537,7 +537,7 @@ UWORD PARTICLE_Exhaust(SLONG x, SLONG y, SLONG z,UBYTE density,UBYTE disperse) {
 	return res;
 }
 
-UWORD PARTICLE_Exhaust2(Thing *object, UBYTE density, UBYTE disperse) 
+UWORD PARTICLE_Exhaust2(Thing *object, UBYTE density, UBYTE disperse)
 {
 	UBYTE i;
 	UWORD res;
@@ -551,7 +551,7 @@ UWORD PARTICLE_Exhaust2(Thing *object, UBYTE density, UBYTE disperse)
 	*/
 //	SLONG matrix[9], vector[3], yaw, pitch, roll;
 	SLONG vel;
-	
+
 	vel=1024-(object->Velocity*128);
 	switch (object->DrawType) {
 	case DT_MESH:
@@ -568,7 +568,7 @@ UWORD PARTICLE_Exhaust2(Thing *object, UBYTE density, UBYTE disperse)
 		}
 		FMATRIX_calc(matrix, object->Draw.Mesh->Angle, object->Draw.Mesh->Tilt, object->Draw.Mesh->Roll);
 		FMATRIX_TRANSPOSE(matrix);
-		vector[2]=vel; vector[1]=0; vector[0]=0; 
+		vector[2]=vel; vector[1]=0; vector[0]=0;
 		FMATRIX_MUL(matrix,vector[0],vector[1],vector[2]);
 		dx=vector[0]; dy=vector[1]; dz=vector[2];
 /*		if (object->Class==CLASS_BIKE) {
@@ -584,7 +584,7 @@ UWORD PARTICLE_Exhaust2(Thing *object, UBYTE density, UBYTE disperse)
 		roll  = -float(object->Draw.Tweened->Roll)  * (2.0F * PI / 2048.0F);*/
 //		MATRIX_calc(matrix, yaw, pitch, roll);
 		FMATRIX_calc(matrix, object->Draw.Mesh->Angle, object->Draw.Mesh->Tilt, object->Draw.Mesh->Roll);
-		vector[2]=vel; vector[1]=0; vector[0]=0; 
+		vector[2]=vel; vector[1]=0; vector[0]=0;
 		FMATRIX_MUL(matrix,vector[0],vector[1],vector[2]);
 		dx=vector[0]; dy=vector[1]; dz=vector[2];
 		ox=dx; oy=dy; oz=dz;
@@ -602,7 +602,7 @@ UWORD PARTICLE_Exhaust2(Thing *object, UBYTE density, UBYTE disperse)
 	p.page=POLY_PAGE_STEAM; p.sprite=1+((rand()&3)<<2);
 	p.colour=0x3FFFFFFF; p.flags=PFLAGS_SMOKE|PFLAG_WANDER;
 	p.life=50; p.priority=1;
-	p.size=4; p.resize=6; 
+	p.size=4; p.resize=6;
 	p.fade=disperse;
 //	p.dx=0; p.dy=0; p.dz=0;
 	p.dx=dx/2; p.dy=dy/2; p.dz=dz/2;
@@ -621,7 +621,7 @@ UWORD PARTICLE_Exhaust2(Thing *object, UBYTE density, UBYTE disperse)
 		  FMATRIX_MUL(matrix,vector[0],vector[1],vector[2]);
 		  ox=vector[0]; oy=vector[1]; oz=vector[2];
 		}
-		
+
 		p.x=ox+x+(rand()&0xff)-0x7f;
 		p.y=oy+y+(rand()&0xff)-0x7f;
 		p.z=oz+z+(rand()&0xff)-0x7f;
@@ -677,15 +677,15 @@ UWORD PARTICLE_SGrenade(Thing *object, UBYTE time) {
 	p.page=POLY_PAGE_SMOKECLOUD2; p.sprite=2+((rand()&3)<<2);
 	p.colour=0x7FFFFFFF; p.flags=PFLAGS_SMOKE|PFLAG_DRIFT|PFLAG_SPRITEANI|PFLAG_SPRITELOOP;
 	p.life=80; p.priority=1;
-	p.size=6; p.resize=6; 
+	p.size=6; p.resize=6;
 	p.fade=3;
 	for (i=3;i&&res;i--) {
 		p.x=object->WorldPos.X			+ (rand()&0x3FFF)-0x1FFF;
 		p.y=object->WorldPos.Y+0x600;
 		p.z=object->WorldPos.Z			+ (rand()&0x3FFF)-0x1FFF;
-		p.dx=(rand()&0x7FF)-0x3FF; 
-		p.dy=(rand()&0x3FF)+0x100; 
-		p.dz=(rand()&0x7FF)-0x3FF; 
+		p.dx=(rand()&0x7FF)-0x3FF;
+		p.dy=(rand()&0x3FF)+0x100;
+		p.dz=(rand()&0x7FF)-0x3FF;
 		res=PARTICLE_AddParticle(p);
 	}
 	return res;

@@ -1,6 +1,0 @@
-Direct Input mouse driver.
-Direct Input keyboard driver.
-Palette bug.
-Square root.
-Draw clipped one colour sprite.
-

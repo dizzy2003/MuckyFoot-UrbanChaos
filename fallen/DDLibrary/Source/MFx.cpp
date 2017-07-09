@@ -15,7 +15,7 @@
 
 #include "MFx.h"
 #include "A3DManager.h"
-#include "c:\fallen\headers\fc.h"
+#include "fallen/headers/fc.h"
 
 #ifdef	TARGET_DC
 #include "target.h"
@@ -184,7 +184,7 @@ inline void MFX_queue_wave(MFX_Channel* chan, UWORD wave, ULONG flags, SLONG x, 
 	SLONG ndx;
 	MFX_Queue* q;
 
-	if ((flags&&MFX_SHORT_QUEUE)&&chan->queuectr) { 
+	if ((flags&&MFX_SHORT_QUEUE)&&chan->queuectr) {
 		// short queue -- queued wave will always be the next wave played
 		q=&MFX_queue[chan->queue];
 		q->flags=flags;
@@ -242,7 +242,7 @@ void	MFX_play_xyz(UWORD channel_id, ULONG wave, ULONG flags, SLONG x, SLONG y, S
 		MFX_kill(chan);
 	}
 
-	MFX_std_chan_setup(chan,channel_id,wave,flags); 
+	MFX_std_chan_setup(chan,channel_id,wave,flags);
 	chan->source->SetPositionl(x,y,z);
 	if (!(flags&MFX_PAIRED_TRK2)) chan->source->Play(flags&MFX_LOOPED);
 	if (flags&MFX_PAIRED_TRK1) MFX_trigger_paired_channel(channel_id+1);
@@ -373,7 +373,7 @@ void	MFX_stop(SLONG channel_id, ULONG wave) {
 
 	if (channel_id==MFX_CHANNEL_ALL) {
 
-		UWORD i;	
+		UWORD i;
 		for (i=0,chan=MFX_channels;i<MFX_MAX_CHANS;i++,chan++) {
 			MFX_kill(chan);
 		}
@@ -453,7 +453,7 @@ void	MFX_set_queue_gain(UWORD channel_id, ULONG wave, UBYTE gain) {
 	if(!chan) return;
 
 	fgain=(float)(gain)/256.0f;
-	if (chan->queue>=0) 
+	if (chan->queue>=0)
 		q=&MFX_queue[chan->queue];
 	else { // assume we really want to set the current one?
 //		TRACE("queuef (short circuit) gain set: %f\n",fgain);
@@ -461,7 +461,7 @@ void	MFX_set_queue_gain(UWORD channel_id, ULONG wave, UBYTE gain) {
 		return;
 	}
 //	TRACE("queuef gain set: %f\n",fgain);
-	while (q) { 
+	while (q) {
 		q->gain=fgain;
 		q=(q->next)?&MFX_queue[q->next]:0;
 	}
@@ -474,7 +474,7 @@ void	MFX_set_channel_gain(UWORD channel_id, UBYTE gain) {
 	return;
 #endif
 	MFX_Channel* chan = MFX_get_channel(channel_id,0);
-	
+
 	if (!chan) return;
 	chan->gain=(float)(gain)/256.0;
 	if (chan->source) chan->source->SetGainf(chan->gain);
@@ -712,7 +712,7 @@ void	MFX_render ( void ) {
 					item->SetGainf(gain);
 					item->Play(q->flags&MFX_LOOPED);
 					the_a3d_manager.Render();
-				
+
 				}
 			} else {
 //				TRACE("[MFX] deleted (no User)\n");

@@ -6,25 +6,6 @@
 
 #include	<MFStdLib.h>
 
-// Link in the MF standard library.
-#ifdef	_DEBUG
-#pragma comment(lib, "MFStdLib_D.lib")
-#else
-#pragma comment(lib, "MFStdLib_R.lib")
-#endif
-
-// Link in the DX libraries.
-#pragma comment(lib, "ddraw.lib")
-#pragma comment(lib, "dinput.lib")
-#ifdef TARGET_DC
-#pragma comment(lib, "dplayx.lib")
-#else
-#pragma comment(lib, "dplay.lib")
-// What kind of pervert needs to link with RM????
-#pragma comment(lib, "d3drm.lib")
-#endif
-#pragma comment(lib, "dsound.lib")
-
 #include	"D3DTexture.h"
 #include	"DDManager.h"
 #include	"Debug.h"

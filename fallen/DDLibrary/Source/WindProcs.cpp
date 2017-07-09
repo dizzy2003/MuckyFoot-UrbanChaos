@@ -4,8 +4,8 @@
 #include	"DDLib.h"
 //#include	"finaleng.h"
 #include	"BinkClient.h"
-#include	"c:\fallen\headers\music.h"
-#include	"c:\fallen\headers\game.h"
+#include	"fallen/headers/music.h"
+#include	"fallen/headers/game.h"
 
 extern void MFX_QUICK_stop(void);
 
@@ -115,7 +115,7 @@ BOOL	DlgDevicesInit(HWND hDlg)
 	current_device	=	ValidateDevice(current_driver, D3D_guid, NULL);
 	if(!current_device)
 		return FALSE;
-	
+
 	// Dump Device list to Combo Box
 	device_list	=	current_driver->DeviceList;
 	while(device_list)
@@ -141,7 +141,7 @@ BOOL	DlgDevicesInit(HWND hDlg)
 	// Success
 	return TRUE;
 }
-    
+
 
 int _cdecl CompareModes(const void *element1, const void *element2)
 {
@@ -226,7 +226,7 @@ BOOL DlgModesInit (HWND hDlg)
 	mode_count	=	current_driver->CountModes();
 	if(!mode_count)
 		return FALSE;
-	
+
 	if(!current_mode)
 	{
 		current_mode	=	ValidateMode(
@@ -267,7 +267,7 @@ BOOL DlgModesInit (HWND hDlg)
 		if((mode_buffer[index]) && (mode_buffer[index]->ModeSupported(current_device)))
 		{
 			mode_buffer[index]->GetMode(&w,&h,&bpp,&refresh);
-			
+
 			// Set up Mode String
 			if(refresh)
 				wsprintf(szBuff, TEXT("%4d x %4d x %4d (%4d Hz)"), w, h, bpp, refresh);
@@ -280,14 +280,14 @@ BOOL DlgModesInit (HWND hDlg)
 			// Set up pointer to Mode Info for this item
 			SendDlgItemMessage(hDlg, IDC_MODES, CB_SETITEMDATA, (WPARAM)result, (LPARAM)(void *)mode_buffer[index]);
 
-			// Is it the current Mode 
+			// Is it the current Mode
 			if(current_mode==mode_buffer[index])
 			{
 				// Set as our current selection
 				SendDlgItemMessage (hDlg, IDC_MODES, CB_SETCURSEL, (WPARAM)result, 0L);
 			}
 		}
-	}	
+	}
 
 	// Cleanup Memory
 	MemFree(mode_buffer);
@@ -308,7 +308,7 @@ DDDriverInfo	*DlgGetDriver(HWND hDlg)
 	{
 		// Return pointer to driver
 		return	(DDDriverInfo*)SendDlgItemMessage(hDlg, IDC_DRIVERS, CB_GETITEMDATA, (WPARAM)index, (LPARAM)0);
-	}			
+	}
 
 	// Failure
 	return NULL;
@@ -319,14 +319,14 @@ DDDriverInfo	*DlgGetDriver(HWND hDlg)
 D3DDeviceInfo	*DlgGetDevice(HWND hDlg)
 {
 	SLONG	index;
-	
-	
+
+
 	index	=	SendDlgItemMessage(hDlg, IDC_DEVICES, CB_GETCURSEL, 0, 0);
 	if(index!=CB_ERR)
 	{
 		// Get pointer to device
 		return	(D3DDeviceInfo*)SendDlgItemMessage(hDlg, IDC_DEVICES, CB_GETITEMDATA, (WPARAM)index, (LPARAM)0);
-	}			
+	}
 
 	// Failure
 	return NULL;
@@ -344,7 +344,7 @@ DDModeInfo	*DlgGetMode(HWND hDlg)
 	{
 		// Get pointer to device
 		return	(DDModeInfo*)SendDlgItemMessage(hDlg, IDC_MODES, CB_GETITEMDATA, (WPARAM)index, (LPARAM)0);
-	}			
+	}
 
 	// Failure
 	return NULL;
@@ -392,7 +392,7 @@ BOOL CALLBACK ChangeDriverProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lP
 					}
 					else
 						change_info->DeviceNew	=	change_info->DeviceCurrent;
-					
+
 					// Get new mode.
 					the_mode	=	DlgGetMode(hDlg);
 					if ((the_mode) && (the_mode!=change_info->ModeCurrent))
@@ -422,7 +422,7 @@ BOOL CALLBACK ChangeDriverProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lP
 							change_info->DriverNew	=	the_driver;
 							change_info->DeviceNew	=	NULL;	// Pick a new device
 							change_info->ModeNew	=	NULL;	// Pick a new mode
-							
+
 							// Update the Device list
 							SendDlgItemMessage(hDlg, IDC_DEVICES, CB_RESETCONTENT, 0, 0);
 							DlgDevicesInit(hDlg);
@@ -438,13 +438,13 @@ BOOL CALLBACK ChangeDriverProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lP
 					{
 						// User has changed the current device
 						change_info	=	(ChangeDDInfo*)GetWindowLong(hDlg,DWL_USER);
-						
+
 						// Check if user has changed the device
 						the_device	=	DlgGetDevice(hDlg);
 						if((the_device) && (the_device!=change_info->DeviceNew))
 						{
 							change_info->DeviceNew	=	the_device;
-							
+
 							// Update the Mode list
 							SendDlgItemMessage(hDlg,IDC_MODES,CB_RESETCONTENT,0,0);
 							DlgModesInit(hDlg);
@@ -456,7 +456,7 @@ BOOL CALLBACK ChangeDriverProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lP
 					{
 						// User has changed the current mode
 						change_info	=	(ChangeDDInfo*)GetWindowLong(hDlg, DWL_USER);
-						
+
 						// Check if user has changed the Mode
 						the_mode	=	DlgGetMode(hDlg);
 						if((the_mode) && (the_mode!=change_info->ModeNew))
@@ -515,7 +515,7 @@ LRESULT	CALLBACK	DDLibShellProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM l
 #ifndef TARGET_DC
 	BinkMessage(hWnd, message, wParam, lParam);
 #endif
-	
+
 	switch(message)
 	{
 #ifndef TARGET_DC
@@ -627,7 +627,7 @@ LRESULT	CALLBACK	DDLibShellProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM l
 
 						result	=	DialogBoxParam(
 													hInstance,
-													MAKEINTRESOURCE(IDD_DRIVERS), 
+													MAKEINTRESOURCE(IDD_DRIVERS),
 													hWnd,
 													(DLGPROC)ChangeDriverProc,
 													(LPARAM)(void *)&change_info

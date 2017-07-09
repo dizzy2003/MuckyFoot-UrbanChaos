@@ -2,8 +2,8 @@
 #include	"edit.h"
 #include	"engine.h"
 #include	"prim.h"
-#include	"c:\fallen\headers\game.h"
-#include	"c:\fallen\headers\memory.h"
+#include	"fallen/headers/game.h"
+#include	"fallen/headers/memory.h"
 //#include	"trig.h"
 
 
@@ -61,15 +61,15 @@ void	draw_explode_faces(void);
 #define	DEBUG_FPS	(1<<1)
 #define	DEBUG_VECTS	(1<<2)
 
-inline void	rotate_point_old(struct EnginePoint* eptr)								
-{																			
+inline void	rotate_point_old(struct EnginePoint* eptr)
+{
 	SLONG	x,y,z;
 
 	eptr->X3d-=engine.X>>8;
 	eptr->Y3d-=engine.Y>>8;
 	eptr->Z3d-=engine.Z>>8;
 
-	x = (eptr->X3d*engine.CosY-eptr->Z3d*engine.SinY)>>16;	// rotate about y 				
+	x = (eptr->X3d*engine.CosY-eptr->Z3d*engine.SinY)>>16;	// rotate about y
 	z = (eptr->X3d*engine.SinY+eptr->Z3d*engine.CosY)>>16;
 
 	y = (eptr->Y3d*engine.CosX-z*engine.SinX)>>16;			// rotate about x
@@ -140,7 +140,7 @@ ULONG	rotate_point_gte_perspective(struct	SVector *v,struct SVector *r)
 */
 
 
-	x = ((vx*engine.CosY-vz*engine.SinY));	// rotate about y 				
+	x = ((vx*engine.CosY-vz*engine.SinY));	// rotate about y
 	z = (vx*engine.SinY+vz*engine.CosY)>>16;
 
 	y = ((vy*engine.CosX-z*engine.SinX));			// rotate about x
@@ -218,7 +218,7 @@ ULONG	rotate_point_gte_normal(struct	SVector *v,struct SVector *r)
 	{
 		SLONG	dy;
 		dy=(engine.TrueY-engine.Y)>>8;
-		
+
 		if( v->Y+dy > engine.ClipMaxY||v->Y+dy < engine.ClipMinY)
 		{
 			flags |=EF_BEHIND_YOU;
@@ -233,7 +233,7 @@ ULONG	rotate_point_gte_normal(struct	SVector *v,struct SVector *r)
 		vx=v->X;
 		vz=v->Z;
 
-		x = ((vx*engine.CosDY-vz*engine.SinDY)>>16);	// rotate about LOCAL y 				
+		x = ((vx*engine.CosDY-vz*engine.SinDY)>>16);	// rotate about LOCAL y
 		z = (vx*engine.SinDY+vz*engine.CosDY)>>16;
 
 		vx=x-(engine.X>>8);
@@ -249,7 +249,7 @@ ULONG	rotate_point_gte_normal(struct	SVector *v,struct SVector *r)
 
 #ifndef	NO_TRANSFORM
 
-	x = ((vx*engine.CosY-vz*engine.SinY));	// rotate about y 				
+	x = ((vx*engine.CosY-vz*engine.SinY));	// rotate about y
 	z = (vx*engine.SinY+vz*engine.CosY)>>16;
 
 	y = ((vy*engine.CosX-z*engine.SinX));			// rotate about x
@@ -301,7 +301,7 @@ ULONG	rotate_point_gte_normal(struct	SVector *v,struct SVector *r)
 
 
 void	init_engine(void)
-{	
+{
 	init_camera();
 	rotate_point_gte=rotate_point_gte_perspective;
 	rotate_point_gte=rotate_point_gte_normal;
@@ -371,7 +371,7 @@ void	draw_block(UWORD	prev_block,UWORD	c_block)
 	SLONG	c0;
 	struct	Block			*p_b;
 	struct	Bucket			*p_bucket;
-		
+
 	p_b=&blocks[prev_block];
 	p_bucket=&buckets[next_bucket_pool];
 
@@ -407,7 +407,7 @@ void	draw_quad(struct	MfEnginePoint *p1,struct	MfEnginePoint *p2,struct	MfEngine
 {
 //	vec_mode=VM_GT;
 
-	
+
 		my_trig(p1,p2,p3);
 		my_trig(p3,p4,p1);
 }
@@ -421,7 +421,7 @@ void	draw_quad_anti(struct	MfEnginePoint *p1,struct	MfEnginePoint *p2,struct	MfE
 //		my_trig(p3,p2,p1);
 //		my_trig(p1,p4,p3);
 
-		
+
 
 		my_trig(p1,p2,p3);
 		my_trig(p4,p3,p2);
@@ -492,11 +492,11 @@ void	draw_quad_bucket(struct BucketQuad *p_b,SLONG z)
 		{
 			if(p_b->DrawFlags&POLY_FLAG_DOUBLESIDED)
 			{
-				if(view_mode&1)		
+				if(view_mode&1)
 					my_quad(&p_b->P[2],&p_b->P[3],&p_b->P[1],&p_b->P[0]);
 				else
 					my_quad_noz(&p_b->P[2],&p_b->P[3],&p_b->P[1],&p_b->P[0]);
-				
+
 			}
 			if(view_mode&1)
 				my_quad(&p_b->P[0],&p_b->P[1],&p_b->P[3],&p_b->P[2]);
@@ -539,7 +539,7 @@ void	draw_quad_bucket(struct BucketQuad *p_b,SLONG z)
 
 	if(p_b->DebugFlags&FACE_FLAG_OUTLINE)
 	{
-wire:;		 
+wire:;
 		DrawLineC(p_b->P[0].X,p_b->P[0].Y,p_b->P[1].X,p_b->P[1].Y,255);
 		DrawLineC(p_b->P[1].X,p_b->P[1].Y,p_b->P[3].X,p_b->P[3].Y,255);
 		DrawLineC(p_b->P[3].X,p_b->P[3].Y,p_b->P[2].X,p_b->P[2].Y,255);
@@ -560,7 +560,7 @@ wire:;
 		sprintf(str3,"S%d",wall_list[-prim_faces4[p_b->DebugInfo].ThingIndex].StoreyHead);
 		x=(p_b->P[0].X+p_b->P[1].X+p_b->P[2].X+p_b->P[3].X)>>2;
 		y=(p_b->P[0].Y+p_b->P[1].Y+p_b->P[2].Y+p_b->P[3].Y)>>2;
-		
+
 		if(prim_faces4[p_b->DebugInfo].ThingIndex<0)
 		if(y>0&&y<WorkWindowHeight-16)
 		{
@@ -636,7 +636,7 @@ void	draw_tri_bucket(struct BucketTri *p_b)
 
 	p1.TMapX=p_b->TX[0];
 	p2.TMapX=p_b->TX[1];
-	p3.TMapX=p_b->TX[2];		
+	p3.TMapX=p_b->TX[2];
 
 
 	p1.TMapY=p_b->TY[0];
@@ -658,7 +658,7 @@ void	draw_tri_bucket(struct BucketTri *p_b)
 	}
 	if(p_b->DebugFlags&FACE_FLAG_OUTLINE)
 	{
-wire:;		 
+wire:;
 		DrawLineC(p_b->P[0].X,p_b->P[0].Y,p_b->P[1].X,p_b->P[1].Y,255);
 		DrawLineC(p_b->P[1].X,p_b->P[1].Y,p_b->P[2].X,p_b->P[2].Y,255);
 		DrawLineC(p_b->P[2].X,p_b->P[2].Y,p_b->P[0].X,p_b->P[0].Y,255);
@@ -741,7 +741,7 @@ void	hilite_a_floor_face(SWORD face,UBYTE info_flag)
 	DrawLineC(res[1].X,res[1].Y,res[2].X,res[2].Y,select_colour);
 	DrawLineC(res[2].X,res[2].Y,res[3].X,res[3].Y,select_colour);
 	DrawLineC(res[3].X,res[3].Y,res[0].X,res[0].Y,select_colour);
-	
+
 }
 
 void	hilite_a_face(SWORD face,UBYTE info_flag)
@@ -807,20 +807,20 @@ void	hilite_a_face(SWORD face,UBYTE info_flag)
 
 
 
-		flag_and = flags[0]&flags[1];	
-		flag_or = flags[0]|flags[1];	
+		flag_and = flags[0]&flags[1];
+		flag_or = flags[0]|flags[1];
 		if((flag_or&EF_BEHIND_YOU)==0)
 			if(!(flag_and & EF_CLIPFLAGS))
 				DrawLineC(res[0].X,res[0].Y,res[1].X,res[1].Y,select_colour);
 
-		flag_and = flags[1]&flags[2];	
-		flag_or = flags[1]|flags[2];	
+		flag_and = flags[1]&flags[2];
+		flag_or = flags[1]|flags[2];
 		if((flag_or&EF_BEHIND_YOU)==0)
 			if(!(flag_and & EF_CLIPFLAGS))
 				DrawLineC(res[1].X,res[1].Y,res[2].X,res[2].Y,select_colour);
 
-		flag_and = flags[0]&flags[2];	
-		flag_or = flags[0]|flags[2];	
+		flag_and = flags[0]&flags[2];
+		flag_or = flags[0]|flags[2];
 		if((flag_or&EF_BEHIND_YOU)==0)
 			if(!(flag_and & EF_CLIPFLAGS))
 				DrawLineC(res[2].X,res[2].Y,res[0].X,res[0].Y,select_colour);
@@ -832,7 +832,7 @@ void	hilite_a_face(SWORD face,UBYTE info_flag)
 			QuickTextC(30,31,str,0);
 			QuickTextC(31,30,str,0);
 			QuickTextC(30,30,str,255);
-			
+
 		}
 /*
 		calc_normal(face,&norm);
@@ -886,27 +886,27 @@ void	hilite_a_face(SWORD face,UBYTE info_flag)
 
 
 
-		flag_and = flags[0]&flags[1];	
-		flag_or = flags[0]|flags[1];	
+		flag_and = flags[0]&flags[1];
+		flag_or = flags[0]|flags[1];
 		if((flag_or&EF_BEHIND_YOU)==0)
 			if(!(flag_and & EF_CLIPFLAGS))
 				DrawLineC(res[0].X,res[0].Y,res[1].X,res[1].Y,select_colour);
 
-		flag_and = flags[1]&flags[3];	
-		flag_or = flags[1]|flags[3];	
+		flag_and = flags[1]&flags[3];
+		flag_or = flags[1]|flags[3];
 		if((flag_or&EF_BEHIND_YOU)==0)
 			if(!(flag_and & EF_CLIPFLAGS))
 				DrawLineC(res[1].X,res[1].Y,res[3].X,res[3].Y,select_colour);
 
-		flag_and = flags[3]&flags[2];	
-		flag_or = flags[3]|flags[2];	
+		flag_and = flags[3]&flags[2];
+		flag_or = flags[3]|flags[2];
 		if((flag_or&EF_BEHIND_YOU)==0)
 			if(!(flag_and & EF_CLIPFLAGS))
 				DrawLineC(res[2].X,res[2].Y,res[3].X,res[3].Y,select_colour);
 		DrawLineC(res[2].X,res[2].Y,res[0].X,res[0].Y,select_colour);
 
-		flag_and = flags[0]&flags[2];	
-		flag_or = flags[0]|flags[2];	
+		flag_and = flags[0]&flags[2];
+		flag_or = flags[0]|flags[2];
 		if((flag_or&EF_BEHIND_YOU)==0)
 			if(!(flag_and & EF_CLIPFLAGS))
 				DrawLineC(res[2].X,res[2].Y,res[0].X,res[0].Y,select_colour);
@@ -918,7 +918,7 @@ void	hilite_a_face(SWORD face,UBYTE info_flag)
 			QuickTextC(30,31,str,0);
 			QuickTextC(31,30,str,0);
 			QuickTextC(30,30,str,255);
-			
+
 		}
 
 //			calc_normal(face,&norm);
@@ -969,7 +969,7 @@ void	render_buckets(UBYTE highlight)
 							draw_rect_bucket((struct BucketRect*)bucket);
 						break;
 
-				}			
+				}
 				bucket=((struct BucketGeneric*)bucket)->BucketPtr;
 			}
 		}
@@ -982,7 +982,7 @@ void	render_buckets(UBYTE highlight)
 
 	if(highlight)
 	{
-/*		
+/*
 		if(next_face_selected>1)
 		{
 			SLONG	c0;
@@ -1016,7 +1016,7 @@ void	render_buckets(UBYTE highlight)
 	QuickTextC(11,11,str,255);
 
 		{
-			
+
 			if((engine.ClipFlag&ENGINE_CLIPZ_FLAG))
 				sprintf(str," CLIP %d sc %d pc=%d  ex %d ey %d ez %d ax %d ay %d az %d\n",engine.ClipZ,engine.Scale,poly_count,engine.X>>8,engine.Y>>8,engine.Z>>8,engine.AngleX,engine.AngleY,engine.AngleZ);
 			else
@@ -1030,7 +1030,7 @@ void	render_buckets(UBYTE highlight)
 	{
 		Keys[KB_D]=0;
 		debug_info++;
-		
+
 	}
 //	LogText(" 0 it \n");
 	poly_count=0;
@@ -1057,7 +1057,7 @@ void	render_view(UBYTE highlight)
 		case 4:
 			render_span=render_span32;
 			break;
-		
+
 	}
 //	draw_blocks(1);
 
@@ -1123,7 +1123,7 @@ void	render_buckets_3dfx(UBYTE highlight);
 		time=(time<<8)/10; //time for an averaged frame
 		if(time==0)
 			time=1;
-		time=(1000<<8)/time; 
+		time=(1000<<8)/time;
 		if(debug_info&DEBUG_FPS)
 		{
 			sprintf(str," FPS %d sz %d bz %d BS %d ax %d ay %d",time,small_z,big_z,engine.BucketSize,engine.AngleX>>8,engine.AngleY>>8);
@@ -1135,11 +1135,11 @@ void	render_buckets_3dfx(UBYTE highlight);
 
 
 		prev_time=time;
-		
+
 		if(!(view_mode&2))
-			QuickTextC(10,75,"PERSPECTIVE CORRECT",255); 
+			QuickTextC(10,75,"PERSPECTIVE CORRECT",255);
 		if((view_mode&4))
-			QuickTextC(10,90,"PERSPECTIVE VIEW",255); 
+			QuickTextC(10,90,"PERSPECTIVE VIEW",255);
 */
 	}
 	prev_time=the_time.Ticks;
@@ -1288,7 +1288,7 @@ void	reverse_transform(SLONG x,SLONG y,SLONG z,SLONG *out_x,SLONG *out_y,SLONG *
 
 	z=-((z<<16)/sint); // I dont know how this formulae works, its crazy
 
-	*out_x = (x*cosa-z*sina)>>16;	// rotate about y 				
+	*out_x = (x*cosa-z*sina)>>16;	// rotate about y
 	*out_z = (x*sina+z*cosa)>>16;
 
 	*out_y=-y;
@@ -1330,7 +1330,7 @@ void	dump_face_info(SWORD face)
 	SLONG	x,y,z;
 	SLONG	c0;
 	SWORD	index[]={0,1,3,2,0};
-	
+
 	if(face>0)
 	{
 		struct	PrimFace4 *p_face;
@@ -1364,7 +1364,7 @@ void	dump_face_info(SWORD face)
 			LogText(" (%d)=",p_face->Points[c0]);
 			LogText(" (%d,%d,%d) ",prim_points[p_face->Points[c0]].X,prim_points[p_face->Points[c0]].Y,prim_points[p_face->Points[c0]].Z);
 		}
-		
+
 	}
 
 	LogText("\n");
@@ -1405,7 +1405,7 @@ void	rotate_point_by_xyz(struct SVector *p,SLONG ax,SLONG ay,SLONG az)
 	p->X=rx;
 	p->Y=ry;
 	p->Z=rz;
-	
+
 }
 
 void	rotate_ex_face(SWORD index)
@@ -1414,7 +1414,7 @@ void	rotate_ex_face(SWORD index)
 	rotate_point_by_xyz((SVector*)&ex_faces[index].P[0],ex_faces[index].AX,ex_faces[index].AY,0);
 	rotate_point_by_xyz((SVector*)&ex_faces[index].P[1],ex_faces[index].AX,ex_faces[index].AY,0);
 	rotate_point_by_xyz((SVector*)&ex_faces[index].P[2],ex_faces[index].AX,ex_faces[index].AY,0);
-	
+
 }
 
 void	remove_ex_face(SWORD	index)
@@ -1422,7 +1422,7 @@ void	remove_ex_face(SWORD	index)
 	ex_faces[index].X=0;
 	if(index==next_ex_face-1)
 		next_ex_face--;
-	
+
 }
 
 SLONG	find_an_empty_explode_face(void)
@@ -1432,7 +1432,7 @@ SLONG	find_an_empty_explode_face(void)
 	{
 		if(ex_faces[c0].X==0)
 		{
-			
+
 			if(c0>=next_ex_face)
 				next_ex_face=c0+1;
 			return(c0);
@@ -1454,7 +1454,7 @@ void	split_explode_face(SWORD index)
 	SLONG	c0,c1;
 	for(c0=0;c0<3;c0++)
 	{
-		
+
 		dx=ex_faces[index].P[aindex[c0+1]].X-ex_faces[index].P[aindex[c0]].X;
 		dy=ex_faces[index].P[aindex[c0+1]].Y-ex_faces[index].P[aindex[c0]].Y;
 		dz=ex_faces[index].P[aindex[c0+1]].Z-ex_faces[index].P[aindex[c0]].Z;
@@ -1477,7 +1477,7 @@ void	split_explode_face(SWORD index)
 
 	if(face1)
 	{
-		
+
 		switch(b_index)
 		{
 			case	0:
@@ -1514,10 +1514,10 @@ void	split_explode_face(SWORD index)
 		tri=tri1;
 		for(c1=0;c1<2;c1++)
 		{
-			
+
 			if(face1)
 			{
-				
+
 				ex_faces[face1].Face3.TexturePage=ex_faces[index].Face3.TexturePage;
 				ex_faces[face1].Face3.DrawFlags=ex_faces[index].Face3.DrawFlags;
 				ex_faces[face1].AX=ex_faces[index].AX+(rand()&7);
@@ -1778,7 +1778,7 @@ UWORD	make_poly_into_glass_shatter_prim(SWORD face,SWORD mid_x,SWORD mid_y,SWORD
 
 		for(side=0;side<4;side++)
 		{
-			
+
 			x1=prim_points[prim_faces4[face].Points[index[side]]].X;
 			y1=prim_points[prim_faces4[face].Points[index[side]]].Y;
 			z1=prim_points[prim_faces4[face].Points[index[side]]].Z;
@@ -1809,7 +1809,7 @@ UWORD	make_poly_into_glass_shatter_prim(SWORD face,SWORD mid_x,SWORD mid_y,SWORD
 				points[cp].X=x1+(((x2-x1)*c0)/count);
 				points[cp].Y=y1+(((y2-y1)*c0)/count);
 				points[cp++].Z=z1+(((z2-z1)*c0)/count);
-			
+
 
 			}
 		}

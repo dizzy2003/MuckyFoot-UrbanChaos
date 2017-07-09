@@ -2,12 +2,12 @@
 #include <DDLib.h>
 #include <math.h>
 #include "aeng.h"
-#include "c:\fallen\headers\balloon.h"
+#include "fallen/headers/balloon.h"
 #include "poly.h"
 #include "shape.h"
 #include "night.h"
 #include "matrix.h"
-#include "c:\fallen\editor\headers\prim.h"
+#include "fallen/editor/headers/prim.h"
 #include "mesh.h"
 #include "game.h"
 
@@ -186,7 +186,7 @@ void SHAPE_semisphere(
 
 		//
 		// The colour of the points along this circle.
-		// 
+		//
 
 		c_red   = red   * height >> 8;
 		c_green = green * height >> 8;
@@ -233,7 +233,7 @@ void SHAPE_semisphere(
 
 				return;
 			}
-			
+
 			pp->colour   = c_colour;
 			pp->specular = 0;
 			pp->u        = 0.0F;
@@ -265,7 +265,7 @@ void SHAPE_semisphere(
 
 		return;
 	}
-	
+
 	pp->colour   = (red << 16) | (green << 8) | (blue << 0);
 	pp->specular = 0;
 	pp->u        = 0.0F;
@@ -470,7 +470,7 @@ void SHAPE_semisphere_textured(
 
 		//
 		// The colour of the points along this circle.
-		// 
+		//
 
 		c_red   = red   * height >> 8;
 		c_green = green * height >> 8;
@@ -518,7 +518,7 @@ void SHAPE_semisphere_textured(
 
 				return;
 			}
-			
+
 			pp->colour   = c_colour;
 			pp->specular = 0;
 			pp->u        = (u_mid + sin(f_angle) * uv_width);
@@ -550,7 +550,7 @@ void SHAPE_semisphere_textured(
 
 		return;
 	}
-	
+
 	pp->colour   = (red << 16) | (green << 8) | (blue << 0);
 	pp->specular = 0;
 	pp->u        = u_mid;
@@ -658,7 +658,7 @@ void SHAPE_sphere(
 
 	//
 	// The top and bottom points.
-	// 
+	//
 
 	POLY_transform(sx, sy + sradius, sz, &pp_top);
 	POLY_transform(sx, sy - sradius, sz, &pp_bot);
@@ -696,7 +696,7 @@ void SHAPE_sphere(
 	{
 		pitch -= PI / float(SHAPE_SPHERE_NUM_UPDOWN);
 		yaw    = 0.0F;
- 
+
 		for (j = 0; j < SHAPE_SPHERE_NUM_AROUND; j++)
 		{
 			MATRIX_vector(
@@ -746,7 +746,7 @@ void SHAPE_sphere(
 		p2 = i + 1;
 
 		if (p2 == SHAPE_SPHERE_NUM_AROUND) {p2 = 0;}
-		
+
 		//
 		// Top...
 		//
@@ -795,7 +795,7 @@ void SHAPE_sphere(
 			p2 = j + 1;
 
 			if (p2 == SHAPE_SPHERE_NUM_AROUND) {p2 = 0;}
-			
+
 			quad[0] = &POLY_buffer[line1 + p1];
 			quad[1] = &POLY_buffer[line1 + p2];
 			quad[2] = &POLY_buffer[line2 + p1];
@@ -837,7 +837,7 @@ void SHAPE_sparky_line(
 	SLONG n2_valid;
 
 	POLY_Point pp1;
-	POLY_Point pp2;	
+	POLY_Point pp2;
 
 	float nx[SHAPE_MAX_SPARKY_POINTS];
 	float ny[SHAPE_MAX_SPARKY_POINTS];
@@ -873,7 +873,7 @@ void SHAPE_sparky_line(
 		if (pp[i].IsValid())
 		{
 			if (i == 0 && width == 20.0F)
-			{ 
+			{
 				size = POLY_world_length_to_screen(width * 2.0F) * pp[i].Z;
 			}
 			else
@@ -903,7 +903,7 @@ void SHAPE_sparky_line(
 
 				len     = (fabsf(dx) > fabs(dy)) ? fabs(dx) + 0.414F * fabsf(dy) : fabsf(dy) + 0.414F * fabsf(dx);
 				overlen = size / len;
-				
+
 				dx *= overlen;
 				dy *= overlen;
 
@@ -924,7 +924,7 @@ void SHAPE_sparky_line(
 
 				len     = (fabsf(dx) > fabsf(dy)) ? fabsf(dx) + 0.414F * fabsf(dy) : fabsf(dy) + 0.414F * fabsf(dx);
 				overlen = size / len;
-				
+
 				dx *= overlen;
 				dy *= overlen;
 
@@ -939,7 +939,7 @@ void SHAPE_sparky_line(
 
 					len     = (fabsf(pnx) > fabsf(pny)) ? fabsf(pnx) + 0.414F * fabsf(pny) : fabsf(pny) + 0.414F * fabsf(pnx);
 					overlen = size / len;
-					
+
 					pnx *= overlen;
 					pny *= overlen;
 				}
@@ -1024,7 +1024,7 @@ void SHAPE_sparky_line(
 
 /*			pp1.X = pp[i + 0].X - nx[i + 0];
 			pp1.Y = pp[i + 0].Y - ny[i + 0];
-							   
+
 			pp2.X = pp[i + 1].X - nx[i + 1];
 			pp2.Y = pp[i + 1].Y - ny[i + 1];
 
@@ -1037,7 +1037,7 @@ void SHAPE_sparky_line(
 
 			pp1.X = pp[i + 0].X - (nx[i + 0] * 0.25F);
 			pp1.Y = pp[i + 0].Y - (ny[i + 0] * 0.25F);
-							   
+
 			pp2.X = pp[i + 1].X - (nx[i + 1] * 0.25F);
 			pp2.Y = pp[i + 1].Y - (ny[i + 1] * 0.25F);
 
@@ -1118,7 +1118,7 @@ void SHAPE_glitter(
 	else
 	{
 		len = adpy + (adpx * 0.5F);
-	}	
+	}
 
 	size = POLY_world_length_to_screen(30.0F) * pp1.Z;
 	mul  = size / len;
@@ -1271,7 +1271,7 @@ void SHAPE_tripwire(
 		y1,
 		z1 - dx,
 	   &pp[0]);
-	
+
 	if (!pp[0].MaybeValid())
 	{
 		return;
@@ -1282,7 +1282,7 @@ void SHAPE_tripwire(
 		y1,
 		z1 + dx,
 	   &pp[1]);
-	
+
 	if (!pp[1].MaybeValid())
 	{
 		return;
@@ -1293,7 +1293,7 @@ void SHAPE_tripwire(
 		y2,
 		z2 - dx,
 	   &pp[2]);
-	
+
 	if (!pp[2].MaybeValid())
 	{
 		return;
@@ -1304,7 +1304,7 @@ void SHAPE_tripwire(
 		y2,
 		z2 + dx,
 	   &pp[3]);
-	
+
 	if (!pp[3].MaybeValid())
 	{
 		return;
@@ -1376,7 +1376,7 @@ void SHAPE_waterfall(
 	for (i = 0; i < 3; i++)
 	{
 		switch(i)
-		{	
+		{
 			case 0: y = top;        colour = 0xaa4488aa; break;
 			case 1: y = top - 0x10; colour = 0x884488aa; break;
 			case 2: y = top - 0x40;	colour = 0x004488aa; break;
@@ -1503,7 +1503,7 @@ void SHAPE_droplet(
 	else
 	{
 		len = adpy + (adpx * 0.5F);
-	}	
+	}
 
 	size = POLY_world_length_to_screen(10.0F) * pp1.Z;
 	mul  = size / len;
@@ -1750,7 +1750,7 @@ void SHAPE_prim_shadow(OB_Info *oi)
 			quad[1] = &pp[1];
 			quad[2] = &pp[2];
 			quad[3] = &pp[3];
-			
+
 			if (POLY_valid_quad(quad))
 			{
 				POLY_add_quad(quad, POLY_PAGE_ALPHA, FALSE);
@@ -1813,7 +1813,7 @@ void SHAPE_prim_shadow(OB_Info *oi)
 			}
 
 			pp_upto = &pp[0];
-		
+
 			for (i = 0; i < 3; i++)
 			{
 				POLY_transform(
@@ -1976,7 +1976,7 @@ void SHAPE_alpha_sphere(
 
 	//
 	// The top and bottom points.
-	// 
+	//
 
 	POLY_transform(sx, sy + sradius, sz, &pp_top);
 	POLY_transform(sx, sy - sradius, sz, &pp_bot);
@@ -2017,7 +2017,7 @@ void SHAPE_alpha_sphere(
 	{
 		pitch -= PI / float(SHAPE_SPHERE_NUM_UPDOWN);
 		yaw    = 0.0F;
- 
+
 		for (j = 0; j < SHAPE_SPHERE_NUM_AROUND; j++)
 		{
 			MATRIX_vector(
@@ -2068,7 +2068,7 @@ void SHAPE_alpha_sphere(
 		p2 = i + 1;
 
 		if (p2 == SHAPE_SPHERE_NUM_AROUND) {p2 = 0;}
-		
+
 		//
 		// Top...
 		//
@@ -2117,7 +2117,7 @@ void SHAPE_alpha_sphere(
 			p2 = j + 1;
 
 			if (p2 == SHAPE_SPHERE_NUM_AROUND) {p2 = 0;}
-			
+
 			quad[0] = &POLY_buffer[line1 + p1];
 			quad[1] = &POLY_buffer[line1 + p2];
 			quad[2] = &POLY_buffer[line2 + p1];
@@ -2145,7 +2145,7 @@ void SHAPE_draw_balloon(SLONG balloon)
 	ASSERT(WITHIN(balloon, 1, BALLOON_balloon_upto - 1));
 
 	BALLOON_Balloon *bb;
-	
+
 	bb = &BALLOON_balloon[balloon];
 
 	for (i = 0; i < BALLOON_POINTS_PER_BALLOON - 1; i++)

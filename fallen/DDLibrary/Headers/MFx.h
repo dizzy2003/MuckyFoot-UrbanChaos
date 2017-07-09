@@ -10,8 +10,8 @@
 
 
 #include "MFStdLib.h"
-#include "c:\fallen\headers\structs.h"
-#include "c:\fallen\headers\thing.h"
+#include "fallen/headers/structs.h"
+#include "fallen/headers/thing.h"
 
 // set this to enable forcing the PC to only play FX available on the PSX
 #define DODGYPSXIFY 1

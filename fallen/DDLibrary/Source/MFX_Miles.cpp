@@ -15,16 +15,16 @@
 #define TALK_3D			0
 
 #include "snd_type.h"
-#include	"c:\fallen\headers\demo.h"
+#include	"fallen/headers/demo.h"
 
 #include "MFX.h"
 #include "MFX_Miles.h"
 
-#include "c:\fallen\headers\fc.h"
-#include "c:\fallen\headers\env.h"
-#include "c:\fallen\headers\xlat_str.h"
-#include "c:\fallen\headers\demo.h"
-#include "c:\fallen\ddengine\headers\poly.h"
+#include "fallen/headers/fc.h"
+#include "fallen/headers/env.h"
+#include "fallen/headers/xlat_str.h"
+#include "fallen/headers/demo.h"
+#include "fallen/ddengine/headers/poly.h"
 #include "resource.h"
 #ifndef TARGET_DC
 #include <cmath>
@@ -361,7 +361,7 @@ void MilesInit(HINSTANCE hInst, HWND hWnd)
 
 	//
 	// WAIT FOR THE GRAPHICS DIALOG BOX TO FINISH OFF INITIALISING US!
-	// 
+	//
 	//  It calls init_my_dialog() and my_dialog_over()...
 	//
 	//
@@ -933,7 +933,7 @@ static void FinishLoading(MFX_Voice* vptr)
 		{
 			sptr->usecount++;
 			AIL_set_3D_sample_file(vptr->h3D, sptr->dptr);
-			AIL_set_3D_sample_distances(vptr->h3D,	MaxDist * COORDINATE_UNITS * sptr->linscale, MinDist * COORDINATE_UNITS * sptr->linscale, 
+			AIL_set_3D_sample_distances(vptr->h3D,	MaxDist * COORDINATE_UNITS * sptr->linscale, MinDist * COORDINATE_UNITS * sptr->linscale,
 													MaxDist * COORDINATE_UNITS * sptr->linscale, MinDist * COORDINATE_UNITS * sptr->linscale);
 			AIL_set_3D_sample_volume(vptr->h3D, S32(Volumes[sptr->type] * 127));
 			if (IsEAX)
@@ -1013,7 +1013,7 @@ static void MoveVoice(MFX_Voice* vptr)
 #ifndef	FINAL
 void	AENG_draw_rectr(SLONG x,SLONG y,SLONG w,SLONG h,SLONG col,SLONG layer,SLONG page);
 		AENG_draw_rectr(vptr->x>>6,vptr->z>>7,2,2,0xffff,1,POLY_PAGE_COLOUR);
-#endif				   
+#endif
 */
 
 
@@ -1556,7 +1556,7 @@ static void LoadWaveFileFinished(MFX_Sample* sptr)
 
 		if (sptr->is3D)
 		{
-			if (info.channels > 1)				
+			if (info.channels > 1)
 			{
 				sptr->is3D = false;
 			}
@@ -1719,7 +1719,7 @@ void MFX_render()
 		{
 			if (Voices[ii].smp == sptr)
 			{
-				FinishLoading(&Voices[ii]);				
+				FinishLoading(&Voices[ii]);
 			}
 		}
 	}
@@ -1736,7 +1736,7 @@ void MFX_render()
 		{
 			if (!vptr->queue)
 			{
-				FreeVoice(vptr);				
+				FreeVoice(vptr);
 			}
 			else
 			{
@@ -1835,7 +1835,7 @@ static BOOL CALLBACK dlgproc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 
 			// localise this bastard
 			CBYTE *lang=ENV_get_value_string("language");
-			
+
 			if (!lang) lang="text\\lang_english.txt";
 			XLAT_load(lang);
 			XLAT_init();
@@ -2039,7 +2039,7 @@ void init_my_dialog (HWND hWnd)
 
 		// localise this bastard
 		CBYTE *lang=ENV_get_value_string("language");
-		
+
 		if (!lang) lang="text\\lang_english.txt";
 		XLAT_load(lang);
 		XLAT_init();

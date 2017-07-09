@@ -2,11 +2,11 @@
 
 #include	"Editor.hpp"
 #include	"engine.h"
-#include	"c:\fallen\headers\game.h"
-#include	"c:\fallen\headers\animtmap.h"
-#include	"c:\fallen\headers\inside2.h"
-#include	"c:\fallen\headers\memory.h"
-#include	"c:\fallen\headers\io.h"
+#include	"fallen/headers/game.h"
+#include	"fallen/headers/animtmap.h"
+#include	"fallen/headers/inside2.h"
+#include	"fallen/headers/memory.h"
+#include	"fallen/headers/io.h"
 //#include	"collide.hpp"  //needed for ele_shift
 //#define		ShowWorkWindow(x)	{DrawLineC(0,0,WorkWindowWidth-1,WorkWindowHeight-1,255);DrawLineC(0,WorkWindowHeight-1,WorkWindowWidth-1,0,255); ShowWorkWindow(x);}
 
@@ -91,7 +91,7 @@ CBYTE	inside_names[64][20]=
 
 struct	AWindowIcon	win_bar_icons[]=
 {
-	{handle_icon_click,0,18,18},  //Load 
+	{handle_icon_click,0,18,18},  //Load
 	{handle_icon_click,0,19,19},  //Save
 	{handle_icon_click,1,20,20},  //Test Lores
 	{0,0,0,-1},
@@ -116,7 +116,7 @@ extern			void	reset_game(void);
 UBYTE	back_dat[256*256];
 
 SLONG	draw_background(void)
-{				 
+{
 	SLONG	x,y,mod_x;
 	SLONG	c0,c1,width,size,height;
 	UBYTE *ptr,*ptr_dat;
@@ -205,7 +205,7 @@ SLONG	draw_background(void)
 		ptr_dat+=256;
 	}
 	return(type);
-}	
+}
 
 extern	void	init_hair(SLONG x,SLONG y,SLONG z);
 extern	void	draw_hair(void);
@@ -232,7 +232,7 @@ void	do_clip_keys(void)
 //		engine.ClipFlag=300;
 	}
 
-	
+
 }
 extern		void	mini_game_test(void);
 extern	void	interface_thing2(struct MapThing *p_thing);
@@ -282,7 +282,7 @@ void	screen_shot(void)
 		header[17]=0x21;  //flags
 		header[18]=0x01;
 		header[19]=0;
-	
+
 		FileWrite(handle,&header[0],(ULONG)20);
 
 		p_w=(UWORD*)&header[20];
@@ -314,7 +314,7 @@ void	handle_icon_click(UWORD id)
 	{
 		case ICON_LOAD_MAP:
 			{
-				
+
 				FileRequester	*fr;
 				CBYTE	fname[100];
 				fr=new FileRequester("data\\","*.map","Load A MAP","temp.map");
@@ -346,7 +346,7 @@ void	handle_icon_click(UWORD id)
 					strcpy(edit_info.MapName,fr->FileName);
 					save_map(fname,0);
 				}
-				
+
 				delete fr;
 			//	RequestUpdate();
 			}
@@ -399,21 +399,21 @@ extern	void	draw_test_bloke(SLONG x,SLONG y,SLONG z,UBYTE anim,SLONG angle);
 				FileLoadAt("data\\back.dat",back_dat);
 				SetWorkWindowBounds(0,0,320,199);
 
-				
+
 extern	SLONG	calc_height_at(SLONG x,SLONG z);
 
 				darci->X=engine.X>>8;
 				darci->Y=calc_height_at(darci->X,darci->Z);
 				darci->Z=engine.Z>>8;
 
-				engine.Scale=296;	 
+				engine.Scale=296;
 				if(Keys[KB_SPACE])
 				{
 //					mini_game_test();
 				}
 				else
 				{
-					
+
 
 //FLI				anim_record();
 					init_hair(MouseX,MouseY,0);
@@ -599,7 +599,7 @@ void	LevelEditor::SetupModule(void)
 	// Mikes editor stuff.
 	init_engine();
 
-	
+
 	next_prim_point		=	1;
 	next_prim_face4		=	1;
 	next_prim_face3		=	1;
@@ -611,7 +611,7 @@ void	LevelEditor::SetupModule(void)
 	memset(prim_faces3,0,sizeof(PrimFace3)*MAX_PRIM_FACES4);
 	memset(prim_objects,0,sizeof(PrimObject)*MAX_PRIM_OBJECTS);
 	memset(prim_multi_objects,0,sizeof(PrimMultiObject)*MAX_PRIM_MOBJECTS);
-	
+
 	init_editor();
 
 	background_prim		=	0;
@@ -746,20 +746,20 @@ void	LevelEditor::CreateLevelTabs(void)
 void	LevelEditor::DestroyLevelTabs(void)
 {
 	/*
-	if(ColMode)		 
+	if(ColMode)
 		delete	ColMode;
 	*/
 
-	if(LightMode)		 
+	if(LightMode)
 		delete	LightMode;
 
-	if(PrimMode)		 
+	if(PrimMode)
 		delete	PrimMode;
 
 	if(PaintMode)
 		delete	PaintMode;
 
-	if(TestMode)		 
+	if(TestMode)
 		delete	TestMode;
 
 
@@ -784,11 +784,11 @@ void	LevelEditor::DestroyLevelTabs(void)
 }
 
 //---------------------------------------------------------------
-//CONTENT WINDOW HAS DIFFERENT VIEWS DEPENDING ON TAB SELECTED 
+//CONTENT WINDOW HAS DIFFERENT VIEWS DEPENDING ON TAB SELECTED
 
 void	build_texture(SLONG x,SLONG y,SLONG w,SLONG h,UBYTE page,UBYTE u0,UBYTE v0,UBYTE u1,UBYTE v1,UBYTE u2,UBYTE v2,UBYTE u3,UBYTE v3)
 {
-	
+
 	setPolyType4(current_bucket_pool,POLY_T);
 
 	setXY4((struct BucketQuad*)current_bucket_pool,
@@ -914,7 +914,7 @@ void 	LevelEditor::HandleAnimTmapClick(UBYTE flags,MFPoint *clicked_point)
 						SLONG	page;
 						if(PaintMode->GetTexturePage()>=0)
 						{
-							
+
 							for(c0=0;c0<4;c0++)
 							{
 								anim_tmaps[current_anim_tmap].UV[count][c0][0]=current_texture->U[c0];
@@ -941,7 +941,7 @@ void 	LevelEditor::HandleAnimTmapClick(UBYTE flags,MFPoint *clicked_point)
 				}
 
 				RequestUpdate();
-				return;	
+				return;
 			}
 			tex_rect.SetRect(w+40,h+10,16,12);
 			if(tex_rect.PointInRect(&local_point)&&count<MAX_TMAP_FRAMES)
@@ -961,7 +961,7 @@ void 	LevelEditor::HandleAnimTmapClick(UBYTE flags,MFPoint *clicked_point)
 				}
 				RequestUpdate();
 				return;
-				
+
 			}
 			count++;
 
@@ -1079,7 +1079,7 @@ void	LevelEditor::DrawTexStyleContent(void)
 	SLONG	scroll_pos=PaintMode->CurrentStylePos;
 	SLONG	c0,pos;
 	EdRect	tex_rect;
-	
+
 	QuickTextC(10,10,"    Name                  MidL MidM  MidR  Mid2  Mid3 ",0);
 
 	for(c0=0;c0<15;c0++)
@@ -1174,7 +1174,7 @@ SLONG	LevelEditor::HandleTexStyleClick(UBYTE flags,MFPoint *clicked_point)
 			((CEditText*)StyleControls.GetControlPtr(CTRL_STYLE_NAME_EDIT))->SetFlags((UBYTE)(((CEditText*)StyleControls.GetControlPtr(CTRL_STYLE_NAME_EDIT))->GetFlags()&~CONTROL_INACTIVE));
 
 			return(1);
-			
+
 		}
 		for(pos=0;pos<5;pos++)
 		{
@@ -1259,7 +1259,7 @@ SLONG	LevelEditor::HandlePSXTexClick(UBYTE flags,MFPoint *clicked_point)
 
 						u>>=(2+5);
 						v>>=(2+5);
-						
+
 						page=u+v*8+PaintMode->GetTexturePage()*64;
 						if(page<8*64)
 						{
@@ -1304,7 +1304,7 @@ extern	void	fix_style_names(void);
 extern	void	save_texture_styles(UBYTE world);
 			save_texture_styles(editor_texture_set);
 
-			//SaveAllAnims(&test_chunk);			
+			//SaveAllAnims(&test_chunk);
 			break;
 		case	CTRL_STYLE_POS_SLIDER:
 			PaintMode->CurrentStylePos	=	((CVSlider*)StyleControls.GetControlPtr(CTRL_STYLE_POS_SLIDER))->GetCurrentValue();
@@ -1323,7 +1323,7 @@ void	LevelEditor::HandlePSXControl(ULONG  control_id)
 extern	void	save_texture_styles(UBYTE world);
 //			save_texture_styles(editor_texture_set);
 
-			//SaveAllAnims(&test_chunk);			
+			//SaveAllAnims(&test_chunk);
 			break;
 */
 		case	CTRL_PSX_PAGE1:
@@ -1348,7 +1348,7 @@ extern	void	save_texture_styles(UBYTE world);
 
 				u>>=(2+5);
 				v>>=(2+5);
-				
+
 				page=u+v*8+PaintMode->GetTexturePage()*64;
 				if(page<8*64)
 				{
@@ -1376,7 +1376,7 @@ void	LevelEditor::DrawTexInStyleContent(void)
 	SLONG	scroll_pos=PaintMode->CurrentStylePos;
 	SLONG	c0,pos;
 	EdRect	tex_rect;
-	
+
 //	QuickTextC(10,10,"    Name                  MidL MidM  MidR  Mid2  Mid3 ",0);
 
 	for(c0=0;c0<15;c0++)
@@ -1443,7 +1443,7 @@ SLONG	LevelEditor::HandleTexInStyleClick(UBYTE flags,MFPoint *clicked_point)
 			((CEditText*)InStyleControls.GetControlPtr(CTRL_STYLE_NAME_EDIT))->SetFlags((UBYTE)(((CEditText*)InStyleControls.GetControlPtr(CTRL_STYLE_NAME_EDIT))->GetFlags()&~CONTROL_INACTIVE));
 
 			return(1);
-			
+
 		}
 		for(pos=0;pos<16;pos++)
 		{
@@ -1528,7 +1528,7 @@ extern	void	fix_style_names(void);
 		case	CTRL_STYLE_SAVE:
 			save_texture_instyles(editor_texture_set);
 
-			//SaveAllAnims(&test_chunk);			
+			//SaveAllAnims(&test_chunk);
 			break;
 		case	CTRL_STYLE_POS_SLIDER:
 			PaintMode->CurrentStylePos	=	((CVSlider*)InStyleControls.GetControlPtr(CTRL_STYLE_POS_SLIDER))->GetCurrentValue();
@@ -1560,22 +1560,22 @@ void	LevelEditor::DrawContent(void)
 			hilited_face.Face	=	0;
 			if(PaintMode->GetPaintMode()==ANIM_TMAP_PAINT)
 			{
-				DrawAnimTmapContent(PaintMode->GetAnimTmap());	
+				DrawAnimTmapContent(PaintMode->GetAnimTmap());
 			}
 			else
 			if(PaintMode->GetPaintMode()==PSX_TEX_DEFINE)
 			{
-				DrawPSXTexContent();	
+				DrawPSXTexContent();
 			}
 			else
 			if(PaintMode->GetPaintMode()==STYLE_DEFINE)
 			{
-				DrawTexStyleContent();	
+				DrawTexStyleContent();
 			}
 			else
 			if(PaintMode->GetPaintMode()==INSTYLE_DEFINE)
 			{
-				DrawTexInStyleContent();	
+				DrawTexInStyleContent();
 			}
 			else
 			if(PaintMode->GetPaintMode()==FLOOR_PAINT)
@@ -1793,7 +1793,7 @@ void	LevelEditor::DragEngine(UBYTE flags,MFPoint *clicked_point)
 	}
 }
 //---------------------------------------------------------------
-//content clicks do different things depending on the tab selected 
+//content clicks do different things depending on the tab selected
 
 void	LevelEditor::HandleContentClick(UBYTE flags,MFPoint *clicked_point)
 {
@@ -2033,7 +2033,7 @@ void	LevelEditor::HandleContentClick(UBYTE flags,MFPoint *clicked_point)
 									if(ApplyTexture(&hilited_face))
 									{
 										update	=	1;
-											
+
 									}
 								}
 								if(LockWorkScreen())
@@ -2045,7 +2045,7 @@ void	LevelEditor::HandleContentClick(UBYTE flags,MFPoint *clicked_point)
 								ShowWorkWindow(0);
 								editor_turn++;
 
-							}	
+							}
 							break;
 						case	RIGHT_CLICK:
 							if(LockWorkScreen())
@@ -2085,7 +2085,7 @@ void	LevelEditor::HandleContentClick(UBYTE flags,MFPoint *clicked_point)
 							}
 							else
 							{
-								
+
 								current_texture	=	PaintMode->GetTexture();
 								if(hilited_face.PEle)
 								{
@@ -2098,7 +2098,7 @@ void	LevelEditor::HandleContentClick(UBYTE flags,MFPoint *clicked_point)
 									else
 									if(hilited_face.PEle==(struct EditMapElement*)-2)
 									{
-										
+
 										struct	MiniTextureBits	*tex;
 										LogText(" get floor tex co-ords for on screen edit \n");
 										if(edit_info.RoofTex)
@@ -2129,7 +2129,7 @@ void	LevelEditor::HandleContentClick(UBYTE flags,MFPoint *clicked_point)
 				//								prim_faces3[-edit_face.Face].TexturePage	=	(UWORD)TextureMode->GetTexturePage();
 												current_texture->U[c0]	=	prim_faces3[-hilited_face.Face].UV[c0][0];
 												current_texture->V[c0]	=	prim_faces3[-hilited_face.Face].UV[c0][1];
-											}		
+											}
 											PaintMode->SetTexturePage(prim_faces3[-hilited_face.Face].TexturePage);
 											PaintMode->SetTextureFlags(PaintMode->GetTextureFlags()&~FLAGS_QUADS);
 
@@ -2189,7 +2189,7 @@ void	LevelEditor::HandleContentClick(UBYTE flags,MFPoint *clicked_point)
 
 
 												}
-											
+
 
 
 												PaintMode->SetTexturePage(prim_faces4[hilited_face.Face].TexturePage);
@@ -2239,7 +2239,7 @@ void	LevelEditor::HandleContentClick(UBYTE flags,MFPoint *clicked_point)
 		//in here we may be pasteing a 3ds prim
 		//we may be dragging it somewhere
 		{
-			
+
 			MFPoint	local_point;
 			local_point=*clicked_point;
 			GlobalToLocal(&local_point);
@@ -2256,11 +2256,11 @@ void	LevelEditor::HandleContentClick(UBYTE flags,MFPoint *clicked_point)
 				ShowWorkWindow(0);
 			}
 		}
-			
+
 			break;
 		case	TAB_LIGHT:
 		{
-			
+
 
 			MFPoint	local_point;
 			local_point=*clicked_point;
@@ -2278,7 +2278,7 @@ void	LevelEditor::HandleContentClick(UBYTE flags,MFPoint *clicked_point)
 				ShowWorkWindow(0);
 			}
 		}
-			
+
 			break;
 		/*
 		case	TAB_COL:
@@ -2299,7 +2299,7 @@ void	LevelEditor::HandleContentClick(UBYTE flags,MFPoint *clicked_point)
 				ShowWorkWindow(0);
 			}
 		}
-			
+
 			break;
 		*/
 		case	TAB_MAP:
@@ -2319,7 +2319,7 @@ void	LevelEditor::HandleContentClick(UBYTE flags,MFPoint *clicked_point)
 				ShowWorkWindow(0);
 			}
 		}
-			
+
 			break;
 		case	TAB_MAPED:
 		{
@@ -2414,7 +2414,7 @@ void	LevelEditor::HandleContentClick(UBYTE flags,MFPoint *clicked_point)
 			}
 		}
 
-			
+
 	}
 	if(update)
 	{
@@ -2448,7 +2448,7 @@ extern	void	zoom_map_onto_screen(void);
 void	ApplyShadow(struct EditFace *edit_face,SLONG shadow)
 {
 	SLONG			c0;
-	
+
 	if(edit_face->PEle==(struct EditMapElement*)-2)
 	{
 		{
@@ -2517,7 +2517,7 @@ void	swap_maps();
 
 					if(LastKey==KB_S&&(!ShiftFlag))
 					{
-						
+
 						SelectFlag=3;
 						update			=	1;
 					}
@@ -2627,11 +2627,11 @@ void	swap_maps();
 						PaintMode->CurrentTextureRot&=3;
 						tex->Rot=PaintMode->CurrentTextureRot;
 						PaintMode->ConvertMiniTex(tex);
-						
+
 					}
 					else
 					{
-						
+
 						PaintMode->CurrentTextureRot++;
 						PaintMode->CurrentTextureRot&=3;
 
@@ -2721,7 +2721,7 @@ void	swap_maps();
 
 			SewerMode->SetView(storey_list[BuildMode->EditStorey].DX,storey_list[BuildMode->EditStorey].DZ);
 
-						
+
 					}
 				break;
 			case	TAB_SEWER:
@@ -2735,7 +2735,7 @@ void	swap_maps();
 						{
 							SewerMode->MouseInContent();
 						}
-						
+
 					}
 				break;
 			case	TAB_MAPED:
@@ -2749,7 +2749,7 @@ void	swap_maps();
 						{
 							MapEdMode->MouseInContent();
 						}
-						
+
 					}
 				break;
 
@@ -2801,7 +2801,7 @@ extern	ULONG	engine_keys_scroll_plan(void);
 			case	TAB_PAINT:
 				if(PaintMode->GetPaintMode()==FLOOR_PAINT)
 				{
-					
+
 					update  +=  BuildMode->DoZoom();
 					update	+=	(editor_user_interface(2)<<1);
 				}
@@ -2810,7 +2810,7 @@ extern	ULONG	engine_keys_scroll_plan(void);
 				break;
 
 			case	TAB_HM:
-				
+
 				//
 				// The HM tab does it own keys thankyou very much!!!
 				//
@@ -2820,7 +2820,7 @@ extern	ULONG	engine_keys_scroll_plan(void);
 			default:
 				update	+=	(editor_user_interface(0)<<1);
 				break;
-			
+
 		}
 	}
 
@@ -2914,7 +2914,7 @@ SLONG	find_texture_point_for_face(SWORD face)
 		}
 	}
 	return(tp);
-	
+
 }
 
 void	fix_all_selected_faces_for_tile_mode(void)
@@ -3058,7 +3058,7 @@ void	LevelEditor::DoFacePopup(MFPoint *clicked_point)
 	local_point	=	*clicked_point;
 	GlobalToLocal(&local_point);
 	popup_def.ControlLeft	=	local_point.X+4;
-	popup_def.ControlTop	=	local_point.Y-4;	 
+	popup_def.ControlTop	=	local_point.Y-4;
 
 //	if(local_point.Y+POPUP_HEIGHT>ContentHeight())
 //		local_point.Y=ContentHeight()-POPUP_HEIGHT;
@@ -3073,7 +3073,7 @@ void	LevelEditor::DoFacePopup(MFPoint *clicked_point)
 				if(hilited_face.PEle==(struct EditMapElement*)-2)
 				{
 					return;
-					
+
 				}
 				else
 				if(hilited_face.PEle==(struct EditMapElement*)-1)
@@ -3161,7 +3161,7 @@ void	LevelEditor::DoFacePopup(MFPoint *clicked_point)
 
 					//
 					// Set the envinronment map and tint flags.
-					// 
+					//
 
 					prim_faces4[hilited_face.Face].FaceFlags &= ~FACE_FLAG_ENVMAP;
 					prim_faces4[hilited_face.Face].FaceFlags &= ~FACE_FLAG_TINT;
@@ -3174,7 +3174,7 @@ void	LevelEditor::DoFacePopup(MFPoint *clicked_point)
 				{
 					//
 					// Set the envinronment map and tint flags.
-					// 
+					//
 
 					prim_faces3[-hilited_face.Face].FaceFlags &= ~FACE_FLAG_ENVMAP;
 					prim_faces3[-hilited_face.Face].FaceFlags &= ~FACE_FLAG_TINT;
@@ -3185,7 +3185,7 @@ void	LevelEditor::DoFacePopup(MFPoint *clicked_point)
 
 				if(hilited_face.PEle==(struct EditMapElement*)-2)
 				{
-					
+
 				}
 				else
 				if(hilited_face.PEle==(struct EditMapElement*)-1)
@@ -3207,7 +3207,7 @@ void	LevelEditor::DoFacePopup(MFPoint *clicked_point)
 
 								//
 								// Set the envinronment map and tint flags.
-								// 
+								//
 
 								prim_faces3[-face_selected_list[c0]].FaceFlags &= ~FACE_FLAG_ENVMAP;
 								prim_faces3[-face_selected_list[c0]].FaceFlags &= ~FACE_FLAG_TINT;
@@ -3221,7 +3221,7 @@ void	LevelEditor::DoFacePopup(MFPoint *clicked_point)
 
 								//
 								// Set the envinronment map and tint flags.
-								// 
+								//
 
 								prim_faces4[face_selected_list[c0]].FaceFlags &= ~FACE_FLAG_ENVMAP;
 								prim_faces4[face_selected_list[c0]].FaceFlags &= ~FACE_FLAG_TINT;
@@ -3230,7 +3230,7 @@ void	LevelEditor::DoFacePopup(MFPoint *clicked_point)
 								if (face_popup[11].ItemFlags & MENU_CHECK_MASK) {prim_faces4[face_selected_list[c0]].FaceFlags |= FACE_FLAG_TINT;}
 							}
 						}
-						
+
 					}
 					else
 					{
@@ -3271,7 +3271,7 @@ UBYTE	LevelEditor::DoStylePopup(MFPoint *clicked_point,UBYTE flags)
 	local_point	=	*clicked_point;
 	GlobalToLocal(&local_point);
 	popup_def.ControlLeft	=	local_point.X+4;
-	popup_def.ControlTop	=	local_point.Y-4;	 
+	popup_def.ControlTop	=	local_point.Y-4;
 
 
 	if(CurrentModeTab())
@@ -3333,7 +3333,7 @@ void	set_wall_texture_info(SLONG	wall,UBYTE page,EdTexture	*current_texture,UBYT
 		index=page*64+x+y*8;
 
 		type=texture_info[index].Type;
-		
+
 		sub_type=texture_info[index].SubType;
 	}
 	*/
@@ -3374,7 +3374,7 @@ void	LevelEditor::TextureFace(SWORD face,PaintTab *texture_mode)
 	if(texture_mode->GetPaintMode()==PALETTE_PAINT)
 	{
 		if(face<0)
-		{	
+		{
 			if	(
 					!(prim_faces3[-face].DrawFlags&POLY_FLAG_TEXTURED) &&
 					prim_faces3[-face].Col2==texture_mode->GetCurrentColour()
@@ -3435,7 +3435,7 @@ void	LevelEditor::TextureFace(SWORD face,PaintTab *texture_mode)
 	{
 		texture_mode->MyUndo.ApplyPrim4(0,face,&prim_faces4[face]);
 	}
-	
+
 	if(texture_mode->GetPaintMode()==PALETTE_PAINT)
 	{
 		if(face<0)
@@ -3615,28 +3615,28 @@ SLONG	flood_fill_texture(SLONG x,SLONG y,SLONG z,ULONG tex_bits)
 			case	CUBE_INDEX_BACK:
 				if(index=edit_map[(x+1)][(y)].Depth[(z)])
 				{
-					
+
 					PEle=&edit_map_eles[index];
 					if(*(ULONG*)&PEle->Textures[static_face_no]!=tex_bits)
 						flood_fill_texture(x+1,y,z,tex_bits);
 				}
 				if(index=edit_map[(x-1)][(y)].Depth[(z)])
 				{
-					
+
 					PEle=&edit_map_eles[index];
 					if(*(ULONG*)&PEle->Textures[static_face_no]!=tex_bits)
 						flood_fill_texture(x-1,y,z,tex_bits);
 				}
 				if(index=edit_map[(x)][(y-1)].Depth[(z)])
 				{
-					
+
 					PEle=&edit_map_eles[index];
 					if(*(ULONG*)&PEle->Textures[static_face_no]!=tex_bits)
 						flood_fill_texture(x,y-1,z,tex_bits);
 				}
 				if(index=edit_map[(x)][(y+1)].Depth[(z)])
 				{
-					
+
 					PEle=&edit_map_eles[index];
 					if(*(ULONG*)&PEle->Textures[static_face_no]!=tex_bits)
 						flood_fill_texture(x,y+1,z,tex_bits);
@@ -3647,28 +3647,28 @@ SLONG	flood_fill_texture(SLONG x,SLONG y,SLONG z,ULONG tex_bits)
 			case	CUBE_INDEX_BOTTOM:
 				if(index=edit_map[(x+1)][(y)].Depth[(z)])
 				{
-					
+
 					PEle=&edit_map_eles[index];
 					if(*(ULONG*)&PEle->Textures[static_face_no]!=tex_bits)
 						flood_fill_texture(x+1,y,z,tex_bits);
 				}
 				if(index=edit_map[(x-1)][(y)].Depth[(z)])
 				{
-					
+
 					PEle=&edit_map_eles[index];
 					if(*(ULONG*)&PEle->Textures[static_face_no]!=tex_bits)
 						flood_fill_texture(x-1,y,z,tex_bits);
 				}
 				if(index=edit_map[(x)][(y)].Depth[(z-1)])
 				{
-					
+
 					PEle=&edit_map_eles[index];
 					if(*(ULONG*)&PEle->Textures[static_face_no]!=tex_bits)
 						flood_fill_texture(x,y,z-1,tex_bits);
 				}
 				if(index=edit_map[(x)][(y)].Depth[(z+1)])
 				{
-					
+
 					PEle=&edit_map_eles[index];
 					if(*(ULONG*)&PEle->Textures[static_face_no]!=tex_bits)
 						flood_fill_texture(x,y,z+1,tex_bits);
@@ -3676,31 +3676,31 @@ SLONG	flood_fill_texture(SLONG x,SLONG y,SLONG z,ULONG tex_bits)
 				break;
 
 			case	CUBE_INDEX_LEFT:
-			case	CUBE_INDEX_RIGHT:	
+			case	CUBE_INDEX_RIGHT:
 				if(index=edit_map[(x)][(y)].Depth[(z-1)])
 				{
-					
+
 					PEle=&edit_map_eles[index];
 					if(*(ULONG*)&PEle->Textures[static_face_no]!=tex_bits)
 						flood_fill_texture(x,y,z-1,tex_bits);
 				}
 				if(index=edit_map[(x)][(y)].Depth[(z+1)])
 				{
-					
+
 					PEle=&edit_map_eles[index];
 					if(*(ULONG*)&PEle->Textures[static_face_no]!=tex_bits)
 						flood_fill_texture(x,y,z+1,tex_bits);
 				}
 				if(index=edit_map[(x)][(y-1)].Depth[(z)])
 				{
-					
+
 					PEle=&edit_map_eles[index];
 					if(*(ULONG*)&PEle->Textures[static_face_no]!=tex_bits)
 						flood_fill_texture(x,y-1,z,tex_bits);
 				}
 				if(index=edit_map[(x)][(y+1)].Depth[(z)])
 				{
-					
+
 					PEle=&edit_map_eles[index];
 					if(*(ULONG*)&PEle->Textures[static_face_no]!=tex_bits)
 						flood_fill_texture(x,y+1,z,tex_bits);
@@ -3718,12 +3718,12 @@ BOOL	LevelEditor::ApplyTexture(struct EditFace *edit_face)
 {
 	SLONG			c0;
 
-	
+
 	if(edit_face->PEle==(struct EditMapElement*)-2)
 	{
 		if(PaintMode==PALETTE_PAINT)
 		{
-			
+
 		}
 		else
 		{
@@ -3751,7 +3751,7 @@ BOOL	LevelEditor::ApplyTexture(struct EditFace *edit_face)
 			}
 		}
 
-		
+
 	}
 	else
 	if(edit_face->PEle==(struct EditMapElement*)-1)
@@ -3783,7 +3783,7 @@ BOOL	LevelEditor::ApplyTexture(struct EditFace *edit_face)
 		PaintMode->ConvertFreeToFixedEle(&edit_face->PEle->Textures[edit_face->Face],&x,&y,&width,&height,&page);
 		if(ShiftFlag)
 		{
-			
+
 			texbits=(*(ULONG*)&edit_face->PEle->Textures[edit_face->Face]);
 
 			find_map_coord(&mx,&my,&mz,edit_face->PEle);

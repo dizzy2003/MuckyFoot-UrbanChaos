@@ -215,10 +215,10 @@ static inline int ftol(float f)
 
 static int numdevices = 0;
 
-static HRESULT CALLBACK D3DEnumDevicesCallback(GUID FAR* lpGuid, 
-											   LPTSTR lpDeviceDescription, 
-											   LPTSTR lpDeviceName, 
-											   LPD3DDEVICEDESC lpD3DHWDeviceDesc, 
+static HRESULT CALLBACK D3DEnumDevicesCallback(GUID FAR* lpGuid,
+											   LPTSTR lpDeviceDescription,
+											   LPTSTR lpDeviceName,
+											   LPD3DDEVICEDESC lpD3DHWDeviceDesc,
 											   LPD3DDEVICEDESC lpD3DHELDeviceDesc,
 											   LPVOID lpContext)
 {
@@ -305,7 +305,7 @@ SLONG main(UWORD argc, TCHAR *argv[])
 extern void ENV_init ( void );
 	ENV_init();
 #else
-	ENV_load("config.ini");
+	ENV_load("config.toml");
 #endif
 
 	LocateCDROM();
@@ -379,6 +379,8 @@ extern void ENV_init ( void );
 		game();
 	}
 	ResetHost();
+
+	ENV_save("config.toml");
 
 	return	EXIT_SUCCESS;
 }

@@ -9,7 +9,7 @@
 #include <string>
 #endif
 #include "font2d.h"
-#include "c:\fallen\ddlibrary\headers\tga.h"
+#include "fallen/ddlibrary/headers/tga.h"
 #include "noserver.h"
 #include <DDLib.h>
 #include "truetype.h"
@@ -76,7 +76,7 @@ FONT2D_Letter FONT2D_letter[FONT2D_NUM_LETTERS];
 
 CBYTE FONT2D_punct[] =
 {
-	"!\"£$%^&*(){}[]<>\\/:;'@#_?-=+.,"
+	"!\"ï¿½$%^&*(){}[]<>\\/:;'@#_?-=+.,"
 
 	//
 	// German characters in decimal and octal!
@@ -85,13 +85,13 @@ CBYTE FONT2D_punct[] =
 	// (a) We can type them in directly and this can be physically matched against the bitmap
 	// (b) We can type them *all* in, instead of missing a few
 
-	"ÄËÏÖØÜßïöø"
+	"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"
 
 	//
 	// French characters
 	//
 
-	"ÆÇÔàâçèéêîïôøû"
+	"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"
 
 	//
 	// Spanish
@@ -99,7 +99,7 @@ CBYTE FONT2D_punct[] =
 	// 161,191,216,225,228,233,237,241,243,248,250
 	//
 
-	"¡¿Øáäéíñóøú"
+	"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"
 
 	//
 	// Italian
@@ -108,7 +108,7 @@ CBYTE FONT2D_punct[] =
 	//
 	//
 
-	"ÀÈÌÒÙàìòùü©®"
+	"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"
 };
 
 
@@ -121,7 +121,7 @@ MyArrayType *FONT2D_data;
 
 //
 // Returns TRUE if it finds pixel data at (x,y)
-// 
+//
 
 SLONG FONT2D_found_data(SLONG x, SLONG y)
 {
@@ -175,7 +175,7 @@ void FONT2D_init(SLONG font_id)
 	sprintf(fname, "%s%s", TEXTURE_EXTRA_DIR, "multifontPC.tga");
 #else
 	if (SOFTWARE)
-	{	
+	{
 		sprintf(fname, "%s%s", TEXTURE_EXTRA_DIR, "multifontPC640.tga");
 	}
 	else
@@ -273,7 +273,7 @@ void FONT2D_init(SLONG font_id)
 
 //
 // Returns the index of the given character
-// 
+//
 
 SLONG FONT2D_GetIndex(CBYTE chr)
 {
@@ -283,7 +283,7 @@ SLONG FONT2D_GetIndex(CBYTE chr)
 	// Remap certain characters first
 	//
 
-	if (chr=='É') chr='E';
+	if (chr=='ï¿½') chr='E';
 
 	//
 	// Find our letter index.
@@ -328,9 +328,9 @@ SLONG FONT2D_GetLetterWidth(CBYTE chr)
 {
 	SLONG letter;
 
-	if ( ( chr == ' ' ) || ( chr == '¬' ) )
+	if ( ( chr == ' ' ) || ( chr == 'ï¿½' ) )
 	{
-		// ¬ is a non-wrapping space.
+		// ï¿½ is a non-wrapping space.
 		return 8;
 	}
 
@@ -364,10 +364,10 @@ SLONG FONT2D_DrawLetter(CBYTE chr, SLONG x, SLONG y, ULONG rgb, SLONG scale, SLO
 
 	//
 	// Space is a special case!
-	// 
+	//
 
 	if (chr == -110)
-	{	
+	{
 		//
 		// Meant to be a single quote!
 		//
@@ -375,8 +375,8 @@ SLONG FONT2D_DrawLetter(CBYTE chr, SLONG x, SLONG y, ULONG rgb, SLONG scale, SLO
 		chr = 39;
 	}
 
-	// ¬ is a non-wrapping space.
-	if (chr == ' ' || chr == '\n' || chr == '\r' || chr == '\t' || chr=='¬' )
+	// ï¿½ is a non-wrapping space.
+	if (chr == ' ' || chr == '\n' || chr == '\r' || chr == '\t' || chr=='ï¿½' )
 	{
 		return 8 * scale >> 8;
 	}
@@ -583,7 +583,7 @@ SLONG FONT2D_DrawStringWrap(CBYTE*str, SLONG x, SLONG y, ULONG rgb, SLONG scale,
 			xlook = x;
 
 			while(*ch && *ch != ' ')
-			{	
+			{
 				xlook += FONT2D_GetLetterWidth(*ch);
 				ch    += 1;
 			}
@@ -653,7 +653,7 @@ SLONG FONT2D_DrawStringWrapTo(CBYTE*str, SLONG x, SLONG y, ULONG rgb, SLONG scal
 			xlook = x;
 
 			while(*ch && *ch != ' ')
-			{	
+			{
 				xlook += FONT2D_GetLetterWidth(*ch);
 				ch    += 1;
 			}
@@ -729,7 +729,7 @@ SLONG FONT2D_DrawStringRightJustify(CBYTE*str, SLONG x, SLONG y, ULONG rgb, SLON
 			{
 				//
 				// Draw the last line.
-				// 
+				//
 
 				xlook = -INFINITY;
 			}
@@ -743,7 +743,7 @@ SLONG FONT2D_DrawStringRightJustify(CBYTE*str, SLONG x, SLONG y, ULONG rgb, SLON
 				xlook = x;
 
 				while(*ch && *ch != ' ')
-				{	
+				{
 					xlook -= FONT2D_GetLetterWidth(*ch);
 					ch    += 1;
 				}
@@ -812,7 +812,7 @@ SLONG FONT2D_DrawStringRightJustifyNoWrap(CBYTE*str, SLONG x, SLONG y, ULONG rgb
 
 
 //POLY_PAGE_FONT2D
-void FONT2D_DrawString_3d(CBYTE*str, ULONG world_x, ULONG world_y, ULONG world_z, ULONG rgb, SLONG text_size, SWORD fade) 
+void FONT2D_DrawString_3d(CBYTE*str, ULONG world_x, ULONG world_y, ULONG world_z, ULONG rgb, SLONG text_size, SWORD fade)
 {
 	if (str == NULL)
 	{
@@ -842,13 +842,13 @@ void FONT2D_DrawString_3d(CBYTE*str, ULONG world_x, ULONG world_y, ULONG world_z
 
 		float width;
 		SLONG scale = SLONG(mid.Z * 6 * 256);
-		
+
 		SLONG letter;
 
 		//
 		// Work out the length of the string.
 		//
-	
+
 		len = 0;
 
 		for (ch = str; *ch; ch++)
@@ -929,7 +929,7 @@ void FONT2D_DrawString_3d(CBYTE*str, ULONG world_x, ULONG world_y, ULONG world_z
 		{
 			//
 			// Off screen.
-			// 
+			//
 		}
 		else
 		{

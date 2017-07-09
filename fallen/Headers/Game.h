@@ -83,7 +83,7 @@ extern	struct MemTable save_table[];
 #define	SAVE_TABLE_WMOVE	46
 #define	SAVE_TABLE_POINTS	15
 #define	SAVE_TABLE_FACE4	16
-#define	SAVE_TABLE_PLATS	45	
+#define	SAVE_TABLE_PLATS	45
 
 #include	"Structs.h"
 #include	"State.h"
@@ -115,13 +115,13 @@ extern	struct MemTable save_table[];
 #include	"interact.h"
 
 #ifdef VERSION_D3D
-#include	"c:\fallen\ddengine\headers\aeng.h"
+#include	"fallen/ddengine/headers/aeng.h"
 #endif
 
 #ifdef	PSX
-#include	"c:\fallen\psxeng\headers\psxeng.h"
+#include	"fallen/psxeng/headers/psxeng.h"
 #define _MAX_PATH 260
-#include	"c:\fallen\headers\memory.h"
+#include	"fallen/headers/memory.h"
 #endif
 
 #ifdef	EDITOR

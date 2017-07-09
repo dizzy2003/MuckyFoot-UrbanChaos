@@ -8,7 +8,7 @@
 #include "MenuFont.h"
 #include "tga.h"
 #include "poly.h"
-#include "c:\fallen\headers\noserver.h"
+#include "fallen/headers/noserver.h"
 
 #ifdef TARGET_DC
 #include "target.h"
@@ -77,7 +77,7 @@ void MENUFONT_Page(SLONG page) {
   ZeroMemory(FontInfo,sizeof(FontInfo));
 
   for (y=0;y<255;y++)
-	for (x=0;x<255;x++) 
+	for (x=0;x<255;x++)
 	  if (Mata(ofs=x|(y<<8),temp)) {
 		FontInfo[*pt].x=ox=x+1;
 		FontInfo[*pt].y=oy=y+1;
@@ -145,7 +145,7 @@ void MENUFONT_Load(CBYTE *fn, SLONG page, CBYTE *fontlist) {
   ZeroMemory(FontInfo,sizeof(FontInfo));
 
   for (y=0;y<255;y++)
-	for (x=0;x<255;x++) 
+	for (x=0;x<255;x++)
 	  if (Mata(ofs=x|(y<<8),temp)) {
 		FontInfo[*pt].x=ox=x+1;
 		FontInfo[*pt].y=oy=y+1;
@@ -185,7 +185,7 @@ void MENUFONT_Load(CBYTE *fn, SLONG page, CBYTE *fontlist) {
 #define SC(a) (SIN(a&2047)>>15)
 #define CC(a) (COS(a&2047)>>15)
 
-void MENUFONT_DrawFlanged(SWORD x, SWORD y, UWORD scale, CBYTE *msg, SLONG alpha, SLONG rgb, UBYTE flags) 
+void MENUFONT_DrawFlanged(SWORD x, SWORD y, UWORD scale, CBYTE *msg, SLONG alpha, SLONG rgb, UBYTE flags)
 {
 	SLONG width=0,height,c0,len=strlen(msg), i;
 	UBYTE *pt;
@@ -212,7 +212,7 @@ void MENUFONT_DrawFlanged(SWORD x, SWORD y, UWORD scale, CBYTE *msg, SLONG alpha
 			pp[2].u=FontInfo[*pt].x;	pp[2].v=FontInfo[*pt].oy;
 			pp[3].u=FontInfo[*pt].ox;	pp[3].v=FontInfo[*pt].oy;
 
-			if (flags & MENUFONT_SINED)	
+			if (flags & MENUFONT_SINED)
 				for (i=0;i<4;i++) {
 					pp[0].X=x;			pp[0].Y=y+(SIN(((x+FONT_TICK)<<i)&2047)>>13);
 					pp[1].X=x+width;	pp[1].Y=y+(SIN(((x+width+FONT_TICK)<<i)&2047)>>13);
@@ -279,10 +279,10 @@ void MENUFONT_DrawFutzed(SWORD x, SWORD y, UWORD scale, CBYTE *msg, SLONG alpha,
 //			j=(!(rand()&0xff));
 
 
-			for (i=0;i<8;i++) 
+			for (i=0;i<8;i++)
 			{
 
-//				if (abs(i-j)<8) 
+//				if (abs(i-j)<8)
 //				if (!(rand()%0xff))
 				if (j)
 				{
@@ -347,7 +347,7 @@ void MENUFONT_Draw_Selection_Box_Sized(SWORD x, SWORD y, SWORD x2, SWORD y2, SLO
 	pp[3].X=x+width;	pp[3].Y=y+height;
 
 	POLY_add_quad(quad,POLY_PAGE_ALPHA,FALSE,TRUE);
-	
+
 	// Then draw a pure white frame.
 	rgb = 0xffffffff;
 	pp[0].colour=pp[1].colour=pp[2].colour=pp[3].colour=rgb;
@@ -768,7 +768,7 @@ void MENUFONT_MergeLower() {
 	for (c='a';c<='z';c++) {
 	  FontInfo[c]=FontInfo[c-32];
 	}
-/*	for (c='à';c<='ý';c++) {
+/*	for (c='ï¿½';c<='ï¿½';c++) {
 	  FontInfo[c]=FontInfo[c-32];
 	}*/
 	for (c=224;c<=252;c++) {
@@ -875,7 +875,7 @@ float MENUFONT_fadein_char(float x, float y, UBYTE ch, UBYTE fade)
 		#define MENUFONT_FADEIN_SEGMENTS 16
 
 		SLONG i;
-		
+
 		float x1;
 		float y1;
 		float x2;
@@ -975,7 +975,7 @@ void MENUFONT_fadein_draw(SLONG x, SLONG y, UBYTE fade, CBYTE *msg)
 	CBYTE *ch;
 
 	float tx;
-	
+
 	//
 	// Centre the text.
 	//

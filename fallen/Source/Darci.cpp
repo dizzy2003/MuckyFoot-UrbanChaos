@@ -6,8 +6,8 @@
 #include	"animate.h"
 #include	"combat.h"
 #include	"id.h"
-//#include	"c:\fallen\editor\headers\collide.hpp"
-//#include	"c:\fallen\editor\headers\map.h"
+//#include	"fallen/editor/headers/collide.hpp"
+//#include	"fallen/editor/headers/map.h"
 #include	"statedef.h"
 #include	"enter.h"
 #include	"pap.h"
@@ -30,13 +30,13 @@
 //#include	"..\Editor\Headers\Thing.h"
 //#include	"..\Editor\Headers\engine.h"
 
-//#include	"c:\fallen\editor\headers\prim_draw.h"
+//#include	"fallen/editor/headers/prim_draw.h"
 /*
 struct	SVector
 {
 	SLONG	X,Y,Z;
 };
-*/				   
+*/
 
 SLONG	calc_height_at(SLONG x,SLONG z);
 
@@ -73,7 +73,7 @@ extern	void	locked_anim_change(Thing *p_person,UWORD locked_object,UWORD anim,SL
 
 
   1. a table to find the anim number for a particular person
-     i.e ANIM_HIT1 is an index into anim_array but each 
+     i.e ANIM_HIT1 is an index into anim_array but each
 
 
 */
@@ -236,7 +236,7 @@ SLONG	predict_collision_with_floor(Thing *p_thing,SWORD pelvis,SLONG *new_y,SLON
 	}
 
 
-//	if(MAV_HEIGHT(temp_pos.WorldPos.X>>16,temp_pos.WorldPos.Z>>16	
+//	if(MAV_HEIGHT(temp_pos.WorldPos.X>>16,temp_pos.WorldPos.Z>>16
 	ret=do_floor_collide(p_thing,pelvis,new_y,foot_y,128);
 
 	p_thing->Velocity=temp_velocity;
@@ -274,7 +274,7 @@ SLONG	predict_collision_with_face(Thing *p_thing,SLONG wx,SLONG wy,SLONG wz,SWOR
 		ignore_building = NULL;
 	}
 
-	
+
 	calc_sub_objects_position(
 		p_thing,
 		255, //p_thing->Draw.Tweened->AnimTween,
@@ -358,14 +358,14 @@ SLONG	col_is_fence(SLONG	col)
 			return(1);
 	}
 	*/
-	
+
 //	if(col_vects[col].PrimType==STOREY_TYPE_FENCE || col_vects[col].PrimType==STOREY_TYPE_FENCE_FLAT)
 //	if(dfacets[col].FacetType==STOREY_TYPE_FENCE || dfacets[col].FacetType==STOREY_TYPE_FENCE_FLAT)
 	if(dfacets[col].FacetType==STOREY_TYPE_FENCE || dfacets[col].FacetType==STOREY_TYPE_FENCE_FLAT || dfacets[col].FacetType==STOREY_TYPE_FENCE_BRICK)
 	{
 //		MSG_add(" col vect %d is fence \n",col);
 		return(1);
-		
+
 	}
 	else
 		return(0);
@@ -457,7 +457,7 @@ SLONG	damage_person_on_land(Thing *p_thing)
 
 		//
 		// Actually do the sound...
-		//	
+		//
 
 		// <GRUNT GRUNT GRUNT> :)
 	}
@@ -586,7 +586,7 @@ SLONG	projectile_move_thing(Thing *p_thing,SLONG flag)
 			dy-=((py)+80 - wy)<<8;
 
 	}
-	
+
 	ASSERT(p_thing->Class == CLASS_PERSON);
 
 	p_thing->Genus.Person->SlideOdd = 0;
@@ -699,7 +699,7 @@ SLONG	projectile_move_thing(Thing *p_thing,SLONG flag)
 						if (flag & 8)
 						{
 							just_started_falling_off_backwards = TRUE;
-							
+
 						}
 
 						slide_along(
@@ -715,7 +715,7 @@ SLONG	projectile_move_thing(Thing *p_thing,SLONG flag)
 //
 						extern SLONG slide_into_warehouse;
 						extern SLONG slide_outof_warehouse;
-						
+
 						if (slide_into_warehouse)
 						{
 							p_thing->Genus.Person->Flags |= FLAG_PERSON_WAREHOUSE;
@@ -807,7 +807,7 @@ SLONG	projectile_move_thing(Thing *p_thing,SLONG flag)
 			}
 		}
 	}
-	
+
 
 	new_position.X	-=	dx;
 	new_position.Z	-=	dz;
@@ -878,7 +878,7 @@ SLONG	projectile_move_thing(Thing *p_thing,SLONG flag)
 
 			p_thing->Flags&=~FLAGS_PROJECTILE_MOVEMENT;
 
-			if((flag&4)==0)	 
+			if((flag&4)==0)
 			{
 				//
 				// foot collsion with face
@@ -895,7 +895,7 @@ SLONG	projectile_move_thing(Thing *p_thing,SLONG flag)
 				}
 
 	//
-	// I've put this back in, because we were exiting and not finding ourselves on the face 
+	// I've put this back in, because we were exiting and not finding ourselves on the face
 	//
 				move_thing_on_map(p_thing,&new_position);
 			}
@@ -923,7 +923,7 @@ SLONG	projectile_move_thing(Thing *p_thing,SLONG flag)
 			else
 #endif
 			{
-				if((flag&4)==0)	 
+				if((flag&4)==0)
 				{
 					//
 					// foot collsion with face
@@ -940,10 +940,10 @@ SLONG	projectile_move_thing(Thing *p_thing,SLONG flag)
 					}
 
 					//
-					// I've put this back in, because we were exiting and not finding ourselves on the face 
+					// I've put this back in, because we were exiting and not finding ourselves on the face
 					//
 
-						
+
 				}
 				else
 				{
@@ -960,7 +960,7 @@ SLONG	projectile_move_thing(Thing *p_thing,SLONG flag)
 */
 
 				//
-				// foot can collide roof top 
+				// foot can collide roof top
 				//
 
 				move_thing_on_map(p_thing,&new_position);
@@ -975,7 +975,7 @@ SLONG	projectile_move_thing(Thing *p_thing,SLONG flag)
 		}
 
 	}
-	
+
 	//
 	// Actually move the person.
 	//
@@ -1029,7 +1029,7 @@ SLONG	projectile_move_thing(Thing *p_thing,SLONG flag)
 				//
 				// Already falling to your death...
 				//
-				if (MagicFrameCheck(p_thing,2)) 
+				if (MagicFrameCheck(p_thing,2))
 				{
 					ScreamFallSound(p_thing);	// scream yer lungs out!
 				}
@@ -1110,7 +1110,7 @@ SLONG	projectile_move_thing(Thing *p_thing,SLONG flag)
 
 				locked_anim_change(p_thing, SUB_OBJECT_PELVIS, ANIM_PLUNGE_START);
 
-/*				if (MagicFrameCheck(p_thing,0)) 
+/*				if (MagicFrameCheck(p_thing,0))
 				{
 					ScreamFallSound(p_thing);	// scream yer lungs out!
 				}*/
@@ -1203,7 +1203,7 @@ void	set_thing_velocity(Thing *t_thing,SLONG vel)
 
 extern	SLONG dist_to_line(	SLONG x1, SLONG z1,	SLONG x2, SLONG z2,	SLONG a,  SLONG b);
 extern	void nearest_point_on_line(	SLONG x1, SLONG z1,	SLONG x2, SLONG z2,	SLONG a,  SLONG b,SLONG *ret_x,SLONG *ret_z);
-extern	calc_things_height(struct MapThing *p_thing); //editor\collide.c
+extern	void calc_things_height(struct MapThing *p_thing); //editor\collide.c
 //extern	struct	CollisionVect		col_vects[];
 #ifdef	DOG_POO
 SLONG	setup_person_for_jump_grab(Thing *p_thing)
@@ -1315,7 +1315,7 @@ void	show_walkable(SLONG mx,SLONG mz)
 
 
 
-	
+
 
 Code For pull up onto Storey
 
@@ -1367,7 +1367,7 @@ Alternate Method for Pull Up Onto Storey
 
 //to do
 
-  create a collision poly system that allows players to walk/jump/vault/pull up 
+  create a collision poly system that allows players to walk/jump/vault/pull up
   onto faces
 
 	Fire escapes can be walked up onto
@@ -1379,7 +1379,7 @@ Alternate Method for Pull Up Onto Storey
   Code for detecting the existence of interactible scenery when interaction is requested
 
   Code for performing the interaction
-	
+
 
   Kerbs/ Kerbs as roof tops
   Floor Slopes/Floor Slopes as roof tops
@@ -1387,7 +1387,7 @@ Alternate Method for Pull Up Onto Storey
 
   Do we link existing poly's or do we build special collision polys
 
-  Point 
+  Point
   {
 	UWORD x;
 	UWORD Y;
@@ -1420,5 +1420,5 @@ Alternate Method for Pull Up Onto Storey
 
 
 
-  
+
 */

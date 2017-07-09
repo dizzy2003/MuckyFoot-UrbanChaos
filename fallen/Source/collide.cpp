@@ -1,6 +1,6 @@
 #include	"Game.h"
-//#include	"c:\fallen\editor\headers\collide.hpp"
-#include	"c:\fallen\editor\headers\map.h"
+//#include	"fallen/editor/headers/collide.hpp"
+#include	"fallen/editor/headers/map.h"
 #include	"animate.h"
 #include	"dirt.h"
 #include	"fog.h"
@@ -16,12 +16,12 @@
 #include	"mav.h"
 #include	"build2.h"
 #ifndef		PSX
-#include	"C:\fallen\DDEngine\Headers\console.h"
+#include	"fallen/DDEngine/Headers/console.h"
 #endif
 #include	"person.h"
 #include	"sound.h"
 #include	"interact.h"
-#include	"C:\fallen\headers\inside2.h"
+#include	"fallen/headers/inside2.h"
 #include	"barrel.h"
 #include	"walkable.h"
 #include	"fc.h"
@@ -128,9 +128,9 @@ extern	void	e_draw_3d_mapwho_y(SLONG x1,SLONG my_y1,SLONG z1);
 #ifdef	UNUSED
 SLONG lines_intersect(SLONG x1,SLONG  my_y1,SLONG x2,SLONG  y2,SLONG x3,SLONG  y3,SLONG x4,SLONG  y4,SLONG *x,SLONG  *y)
 {
-    long a1, a2, b1, b2, c1, c2; 
-    long r1, r2, r3, r4;         
-    long denom, offset, num;     
+    long a1, a2, b1, b2, c1, c2;
+    long r1, r2, r3, r4;
+    long denom, offset, num;
 
     a1 = y2 - my_y1;
     b1 = x1 - x2;
@@ -192,7 +192,7 @@ UBYTE	two4_line_intersection(SLONG x1,SLONG my_y1,SLONG x2,SLONG y2,SLONG x3,SLO
 		x1hi=(SWORD)x2;
 		x1lo=(SWORD)x1;
 	}
- 
+
 	if(bx>0)
 	{
 		if(x1hi < (SWORD)x4 || (SWORD)x3 < x1lo)
@@ -246,7 +246,7 @@ UBYTE	two4_line_intersection(SLONG x1,SLONG my_y1,SLONG x2,SLONG y2,SLONG x3,SLO
 	}
 
 	e=ax*cy-ay*cx;
-	
+
 	if(f>0)
 	{
 		if(e<0||e>f)
@@ -268,7 +268,7 @@ void	clear_all_col_info(void)
 {
 #ifdef	DOG_POO
 #ifdef	EDITOR
-	SLONG	dx,dy,dz;	
+	SLONG	dx,dy,dz;
 	for(dx=0;dx<EDIT_MAP_WIDTH;dx++)
 	for(dy=0;dy<EDIT_MAP_HEIGHT;dy++)
 		edit_map[dx][dy].ColVectHead=0;
@@ -321,7 +321,7 @@ SLONG get_height_along_vect(SLONG ax,SLONG az,struct CollisionVect *p_vect)
 	ax -= x1;
 	az -= z1;
 
-	
+
 
 
 	if (abs(dx) > abs(dz))
@@ -449,7 +449,7 @@ ULONG remove_collision_from_single_cell(UWORD index, SLONG x, SLONG z)
 	{
 		return(0);
 	}
-	
+
 	prev = &MAP2(x,z).ColVectHead;
 	next =  MAP2(x,z).ColVectHead;
 
@@ -462,7 +462,7 @@ ULONG remove_collision_from_single_cell(UWORD index, SLONG x, SLONG z)
 			//
 
 		   *prev = col_vects_links[next].Next;
-		    
+
 			return(1);
 		}
 
@@ -553,7 +553,7 @@ SLONG	insert_collision_vect(SLONG x1,SLONG my_y1,SLONG z1,SLONG x2,SLONG y2,SLON
 		temp_x+=step_x;
 		temp_z+=step_z;
 	}
-	next_col_vect++;	
+	next_col_vect++;
 	return(next_col_vect-1);
 }
 
@@ -640,7 +640,7 @@ UBYTE	check_big_point_triangle_col(SLONG x,SLONG y,SLONG ux,SLONG uy,SLONG vx,SL
 	top=(y-uy)*(wx-ux)+(ux-x)*(wy-uy);
 	bot=(vy-uy)*(wx-ux)-(vx-ux)*(wy-uy);
 
-	
+
 //	if(next_col_column<5)
 //		printf(" top %d bot %d \n",top,bot);
 
@@ -697,7 +697,7 @@ SLONG	point_in_quad_old(SLONG px,SLONG pz,SLONG x,SLONG y,SLONG z,SWORD face)
 
 
 
-	
+
 
 
 	ret=check_big_point_triangle_col(px-x1,pz-z1,x1-x1,z1-z1,x2-x1,z2-z1,x3-x1,z3-z1);
@@ -708,14 +708,14 @@ SLONG	point_in_quad_old(SLONG px,SLONG pz,SLONG x,SLONG y,SLONG z,SWORD face)
 
 //	SLONG x,SLONG y,SLONG ux,SLONG uy,SLONG vx,SLONG vy,SLONG wx,SLONG wy)
 
-	
+
 }
 #endif
 #endif
 
 //
 // Given a segment of a line (x1,z1)-(x2,z2) and a point (a,b) returns
-// *dist and *along.  *along is how far along the line the perpendicular line 
+// *dist and *along.  *along is how far along the line the perpendicular line
 // from the point would intersect the given line and *dist is how far the point is from the line
 //
 // dest and along are returned in fixed point 8.
@@ -741,7 +741,7 @@ SLONG dist_to_line(	SLONG x1, SLONG z1,	SLONG x2, SLONG z2,	SLONG a,  SLONG b)
 
 	// First we see if the perpendicular intersection of (a,b) to the line
 	// (x1,z1) - (x2,z2) lies inside the line segment.
-	
+
 	// If it does, then dist is the perpendicular distance and along is how
 	// far along the line the perpendicular intersection is.
 
@@ -759,7 +759,7 @@ SLONG dist_to_line(	SLONG x1, SLONG z1,	SLONG x2, SLONG z2,	SLONG a,  SLONG b)
 
 	LogText(" DTL1 dx %d dz %d da %d db %d \n",dx,dz,da,db);
 
-	
+
 	dprod = da*dx + db*dz;
 
 	if (dprod <= 0)
@@ -783,7 +783,7 @@ SLONG dist_to_line(	SLONG x1, SLONG z1,	SLONG x2, SLONG z2,	SLONG a,  SLONG b)
 
 	// if the dot product of these two vectors is less than zero then
 	// (a,b) lies 'behind' point (x2,z2)
-	
+
 	dprod = da*dx + db*dz;
 
 	if (dprod <= 0)
@@ -850,12 +850,12 @@ SLONG which_side(
 
 	da = a  - x1;
 	db = b  - z1;
-	
+
 	cprod = da*dz - db*dx;
 
-	return cprod;	
+	return cprod;
 }
-	
+
 
 SLONG calc_along_vect(SLONG ax,SLONG az,struct DFacet *p_vect)
 {
@@ -971,7 +971,7 @@ void signed_dist_to_line_with_normal(
 		//
 		// Make the distance signed.
 		//
-		
+
 		if (cprod < 0) {*dist = -*dist;}
 
 		return;
@@ -1080,7 +1080,7 @@ void signed_dist_to_line_with_normal_mark(
 		//
 		// Make the distance signed.
 		//
-		
+
 		if (cprod < 0) {*dist = -*dist;}
 
 		return;
@@ -1163,7 +1163,7 @@ void nearest_point_on_line(	SLONG x1, SLONG z1,	SLONG x2, SLONG z2,	SLONG a,  SL
 
 	// First we see if the perpendicular intersection of (a,b) to the line
 	// (x1,z1) - (x2,z2) lies inside the line segment.
-	
+
 	// If it does, then dist is the perpendicular distance and along is how
 	// far along the line the perpendicular intersection is.
 
@@ -1178,7 +1178,7 @@ void nearest_point_on_line(	SLONG x1, SLONG z1,	SLONG x2, SLONG z2,	SLONG a,  SL
 
 	// if the dot product of these two vectors is less than zero then
 	// (x,z) lies 'behind' point (x1,z1)
-	
+
 	dprod = da*dx + db*dz;
 
 	if (dprod <= 0)
@@ -1199,7 +1199,7 @@ void nearest_point_on_line(	SLONG x1, SLONG z1,	SLONG x2, SLONG z2,	SLONG a,  SL
 
 	// if the dot product of these two vectors is less than zero then
 	// (a,b) lies 'behind' point (x2,z2)
-	
+
 	dprod = da*dx + db*dz;
 
 	if (dprod <= 0)
@@ -1256,7 +1256,7 @@ SLONG nearest_point_on_line_and_dist(	SLONG x1, SLONG z1,	SLONG x2, SLONG z2,	SL
 
 	// First we see if the perpendicular intersection of (a,b) to the line
 	// (x1,z1) - (x2,z2) lies inside the line segment.
-	
+
 	// If it does, then dist is the perpendicular distance and along is how
 	// far along the line the perpendicular intersection is.
 
@@ -1271,7 +1271,7 @@ SLONG nearest_point_on_line_and_dist(	SLONG x1, SLONG z1,	SLONG x2, SLONG z2,	SL
 
 	// if the dot product of these two vectors is less than zero then
 	// (x,z) lies 'behind' point (x1,z1)
-	
+
 	dprod = da*dx + db*dz;
 
 	if (dprod <= 0)
@@ -1296,7 +1296,7 @@ SLONG nearest_point_on_line_and_dist(	SLONG x1, SLONG z1,	SLONG x2, SLONG z2,	SL
 
 	// if the dot product of these two vectors is less than zero then
 	// (a,b) lies 'behind' point (x2,z2)
-	
+
 	dprod = da*dx + db*dz;
 
 	if (dprod <= 0)
@@ -1362,7 +1362,7 @@ SLONG nearest_point_on_line_and_dist_calc_y(	SLONG x1, SLONG my_y1,SLONG z1,	SLO
 
 	// First we see if the perpendicular intersection of (a,b) to the line
 	// (x1,z1) - (x2,z2) lies inside the line segment.
-	
+
 	// If it does, then dist is the perpendicular distance and along is how
 	// far along the line the perpendicular intersection is.
 
@@ -1377,7 +1377,7 @@ SLONG nearest_point_on_line_and_dist_calc_y(	SLONG x1, SLONG my_y1,SLONG z1,	SLO
 
 	// if the dot product of these two vectors is less than zero then
 	// (x,z) lies 'behind' point (x1,z1)
-	
+
 	dprod = da*dx + db*dz;
 
 	if (dprod <= 0)
@@ -1402,7 +1402,7 @@ SLONG nearest_point_on_line_and_dist_calc_y(	SLONG x1, SLONG my_y1,SLONG z1,	SLO
 
 	// if the dot product of these two vectors is less than zero then
 	// (a,b) lies 'behind' point (x2,z2)
-	
+
 	dprod = da*dx + db*dz;
 
 	if (dprod <= 0)
@@ -1488,7 +1488,7 @@ SLONG nearest_point_on_line_and_dist_and_along(	SLONG x1, SLONG z1,	SLONG x2, SL
 
 	// First we see if the perpendicular intersection of (a,b) to the line
 	// (x1,z1) - (x2,z2) lies inside the line segment.
-	
+
 	// If it does, then dist is the perpendicular distance and along is how
 	// far along the line the perpendicular intersection is.
 
@@ -1503,7 +1503,7 @@ SLONG nearest_point_on_line_and_dist_and_along(	SLONG x1, SLONG z1,	SLONG x2, SL
 
 	// if the dot product of these two vectors is less than zero then
 	// (x,z) lies 'behind' point (x1,z1)
-	
+
 	dprod = da*dx + db*dz;
 
 	if (dprod <= 0)
@@ -1528,7 +1528,7 @@ SLONG nearest_point_on_line_and_dist_and_along(	SLONG x1, SLONG z1,	SLONG x2, SL
 
 	// if the dot product of these two vectors is less than zero then
 	// (a,b) lies 'behind' point (x2,z2)
-	
+
 	dprod = da*dx + db*dz;
 
 	if (dprod <= 0)
@@ -1591,8 +1591,8 @@ SLONG	get_height_on_plane_quad_f(SLONG x,SLONG z,UWORD face)
 
 	this_face4=&prim_faces4[face];
 
-	obj_x=map_things[this_face4->ThingIndex].X;	
-	obj_z=map_things[this_face4->ThingIndex].Z;	
+	obj_x=map_things[this_face4->ThingIndex].X;
+	obj_z=map_things[this_face4->ThingIndex].Z;
 	obj_y=map_things[this_face4->ThingIndex].Y;
 
 	ux=	obj_x+prim_points[this_face4->Points[0]].X;
@@ -1602,11 +1602,11 @@ SLONG	get_height_on_plane_quad_f(SLONG x,SLONG z,UWORD face)
 	vx=	obj_x+prim_points[this_face4->Points[1]].X;
 	vy=	obj_y+prim_points[this_face4->Points[1]].Y;
 	vz=	obj_z+prim_points[this_face4->Points[1]].Z;
- 
+
 	wx=	obj_x+prim_points[this_face4->Points[2]].X;
 	wy=	obj_y+prim_points[this_face4->Points[2]].Y;
 	wz=	obj_z+prim_points[this_face4->Points[2]].Z;
-	
+
 	return(get_height_on_plane_tri(x,z,ux,uy,uz,vx,vy,vz,wx,wy,wz));
 }
 
@@ -1618,8 +1618,8 @@ SLONG	get_height_on_plane_tri_f(SLONG x,SLONG z,UWORD face)
 
 	this_face3=&prim_faces3[face];
 
-	obj_x=map_things[this_face3->ThingIndex].X;	
-	obj_z=map_things[this_face3->ThingIndex].Z;	
+	obj_x=map_things[this_face3->ThingIndex].X;
+	obj_z=map_things[this_face3->ThingIndex].Z;
 	obj_y=map_things[this_face3->ThingIndex].Y;
 
 	ux=	obj_x+prim_points[this_face3->Points[0]].X;
@@ -1629,11 +1629,11 @@ SLONG	get_height_on_plane_tri_f(SLONG x,SLONG z,UWORD face)
 	vx=	obj_x+prim_points[this_face3->Points[1]].X;
 	vy=	obj_y+prim_points[this_face3->Points[1]].Y;
 	vz=	obj_z+prim_points[this_face3->Points[1]].Z;
- 
+
 	wx=	obj_x+prim_points[this_face3->Points[2]].X;
 	wy=	obj_y+prim_points[this_face3->Points[2]].Y;
 	wz=	obj_z+prim_points[this_face3->Points[2]].Z;
-	
+
 	return(get_height_on_plane_tri(x,z,ux,uy,uz,vx,vy,vz,wx,wy,wz));
 }
 */
@@ -1652,8 +1652,8 @@ SLONG	get_height_on_face_quad64(SLONG x, SLONG z, UWORD face)
 
 	this_face4=&prim_faces4[face];
 
-	obj_x=map_things[this_face4->ThingIndex].X;	
-	obj_z=map_things[this_face4->ThingIndex].Z;	
+	obj_x=map_things[this_face4->ThingIndex].X;
+	obj_z=map_things[this_face4->ThingIndex].Z;
 	obj_y=map_things[this_face4->ThingIndex].Y;
 
 	ux=	obj_x+prim_points[this_face4->Points[0]].X;
@@ -1663,16 +1663,16 @@ SLONG	get_height_on_face_quad64(SLONG x, SLONG z, UWORD face)
 	vx=	obj_x+prim_points[this_face4->Points[1]].X;
 	vy=	obj_y+prim_points[this_face4->Points[1]].Y;
 	vz=	obj_z+prim_points[this_face4->Points[1]].Z;
- 
+
 	wx=	obj_x+prim_points[this_face4->Points[2]].X;
 	wy=	obj_y+prim_points[this_face4->Points[2]].Y;
 	wz=	obj_z+prim_points[this_face4->Points[2]].Z;
 
-	
+
 	ax = (vx - ux) << 8;
 	ay = (vy - uy) << 8;
 	az = (vz - uz) << 8;
-				  
+
 	bx = (wx - ux) << 8;
 	by = (wy - uy) << 8;
 	bz = (wz - uz) << 8;
@@ -1683,7 +1683,7 @@ SLONG	get_height_on_face_quad64(SLONG x, SLONG z, UWORD face)
 	//printf("face =%d a=(%d,%d,%d) b =(%d,%d,%d) xz=(%d,%d)\n",face,ax,ay,az,bx,by,bz,x,z);
 
 	// Work out alpha and beta such that x = alpha*ax + beta*bx and y = alhpa*ay + beta*by
-	
+
 	// First alpha...
 
 	top   = MUL64(x,  bz) - MUL64(z,  bx);
@@ -1702,7 +1702,7 @@ SLONG	get_height_on_face_quad64(SLONG x, SLONG z, UWORD face)
 	y    += MUL64(alpha, ay);
 	y    += MUL64(beta,  by);
 
-	if (alpha < 0 || alpha > 0x10000 || beta < 0 || beta > 0x10000) 
+	if (alpha < 0 || alpha > 0x10000 || beta < 0 || beta > 0x10000)
 	{
 //		LogText(" get height on QUAD NOT %d alpha %x beta %x \n",face,alpha,beta);
 		return 0;
@@ -1761,8 +1761,8 @@ SLONG	calc_height_at(SLONG x,SLONG z)
 //	SWAP(h0,h2);
 //	SWAP(h1,h3);
 	//LogText("CALC HEIGHT x %d.%d z %d.%d  h1 %d h0 %d h2 %d h3 %d \n",x>>ELE_SHIFT,x&(~ELE_AND),z>>ELE_SHIFT,z&(~ELE_AND),h1,h0,h2,h3);
-	x=x&(~ELE_AND);	
-	z=z&(~ELE_AND);	
+	x=x&(~ELE_AND);
+	z=z&(~ELE_AND);
 //	if(x+z<ELE_SIZE)
 //		new_y=(h1+(((h0-h1)*(x))>>ELE_SHIFT)+(((h2-h1)*(z))>>ELE_SHIFT));
 //	else
@@ -1772,7 +1772,7 @@ SLONG	calc_height_at(SLONG x,SLONG z)
 		new_y=(h1+(((h0-h1)*(x))>>ELE_SHIFT)+(((h2-h1)*(z))>>ELE_SHIFT));
 	else
 		new_y=(h3+(((h2-h3)*(ELE_SIZE-x))>>ELE_SHIFT)+(((h0-h3)*(ELE_SIZE-z))>>ELE_SHIFT));
-	
+
 	if (me->Flags & FLOOR_SINK_SQUARE)
 	{
 		new_y-=32;
@@ -1885,7 +1885,7 @@ SLONG	do_move_collide_circle(SLONG x,SLONG y,SLONG z,SLONG len,SLONG cell_dx,SLO
 			actual_vect=col_vects_links[vect].VectIndex;
 			p_vect=&col_vects[actual_vect];
 			//e_draw_3d_line(p_vect->X[0],0,p_vect->Z[0],p_vect->X[1],0,p_vect->Z[1]);
-			
+
 			if(dist_to_line(p_vect->X[0],p_vect->Z[0],p_vect->X[1],p_vect->Z[1],x,z)<len)
 			{
 				return(actual_vect);
@@ -1900,7 +1900,7 @@ SLONG	do_move_collide_circle(SLONG x,SLONG y,SLONG z,SLONG len,SLONG cell_dx,SLO
 
 //
 // given a col vect index and a world co-ord, returns a new co-ord
-// new_dist away from col vect, 
+// new_dist away from col vect,
 //
 
 SLONG	get_point_dist_from_col_vect(SLONG vect,SLONG x,SLONG z,SLONG *ret_x,SLONG *ret_z,SLONG new_dist)
@@ -1922,9 +1922,9 @@ SLONG	get_point_dist_from_col_vect(SLONG vect,SLONG x,SLONG z,SLONG *ret_x,SLONG
 	// find co_ord on line that we are near
 	//
 	nearest_point_on_line(p_vect->X[0],p_vect->Z[0],p_vect->X[1],p_vect->Z[1],x,z,&near_x,&near_z);
-	
+
 	//
-	// near_xz and xz form a vector of length dist which we must position ourselves 
+	// near_xz and xz form a vector of length dist which we must position ourselves
 	// REQUIRED_DIST_JUMP_GRAB along
 	//
 
@@ -2002,19 +2002,19 @@ SLONG	check_vect_vect(MAPCO16 m_dx,MAPCO16 m_dy,MAPCO16 m_dz,Thing *p_thing,SLON
 
 	//LogText(" cell dx %d %d scale %d\n",cell_dx,cell_dz,scale);
 
-	col=do_move_collide(wx,wy,wz,m_dx,m_dy,m_dz,0,0,scale);		
+	col=do_move_collide(wx,wy,wz,m_dx,m_dy,m_dz,0,0,scale);
 
 	if(cell_dx&&!col)
 	{
-		col=do_move_collide(wx,wy,wz,m_dx,m_dy,m_dz,cell_dx,0,scale);		
-	}	
+		col=do_move_collide(wx,wy,wz,m_dx,m_dy,m_dz,cell_dx,0,scale);
+	}
 	if(cell_dz&&!col)
 	{
-		col=do_move_collide(wx,wy,wz,m_dx,m_dy,m_dz,0,cell_dz,scale);		
-	}	
+		col=do_move_collide(wx,wy,wz,m_dx,m_dy,m_dz,0,cell_dz,scale);
+	}
 	if(cell_dx && cell_dz && !col)
 	{
-		col=do_move_collide(wx,wy,wz,m_dx,m_dy,m_dz,cell_dx,cell_dz,scale);		
+		col=do_move_collide(wx,wy,wz,m_dx,m_dy,m_dz,cell_dx,cell_dz,scale);
 	}
 	return(col);
 }
@@ -2214,19 +2214,19 @@ SLONG	check_vect(SLONG m_dx,SLONG m_dy,SLONG m_dz,Thing *p_thing,SLONG scale)
 	cell_dx=-((p_thing->X)>>ELE_SHIFT)+((p_thing->X+m_dx*scale)>>ELE_SHIFT);
 	cell_dz=-((p_thing->Z)>>ELE_SHIFT)+((p_thing->Z+m_dz*scale)>>ELE_SHIFT);
 
-	col=do_move_collide(p_thing->X,p_thing->Alt,p_thing->Z,m_dx,m_dy,m_dz,0,0,scale);		
+	col=do_move_collide(p_thing->X,p_thing->Alt,p_thing->Z,m_dx,m_dy,m_dz,0,0,scale);
 
 	if(cell_dx&&!col)
 	{
-		col=do_move_collide(p_thing->X,p_thing->Alt,p_thing->Z,m_dx,m_dy,m_dz,cell_dx,0,scale);		
-	}	
+		col=do_move_collide(p_thing->X,p_thing->Alt,p_thing->Z,m_dx,m_dy,m_dz,cell_dx,0,scale);
+	}
 	if(cell_dz&&!col)
 	{
-		col=do_move_collide(p_thing->X,p_thing->Alt,p_thing->Z,m_dx,m_dy,m_dz,0,cell_dz,scale);		
-	}	
+		col=do_move_collide(p_thing->X,p_thing->Alt,p_thing->Z,m_dx,m_dy,m_dz,0,cell_dz,scale);
+	}
 	if(cell_dx && cell_dz && !col)
 	{
-		col=do_move_collide(p_thing->X,p_thing->Alt,p_thing->Z,m_dx,m_dy,m_dz,cell_dx,cell_dz,scale);		
+		col=do_move_collide(p_thing->X,p_thing->Alt,p_thing->Z,m_dx,m_dy,m_dz,cell_dx,cell_dz,scale);
 	}
 	return(col);
 }
@@ -2429,7 +2429,7 @@ SLONG find_alt_for_this_pos(SLONG  x,SLONG  z)
 	{
 		index = PAP_2LO(mx,mz).Walkable;
 		count=0;
-		
+
 		 while(index&&count++<1000)
 		 {
 			ASSERT(index >= 0);
@@ -2540,7 +2540,7 @@ SLONG	mount_ladder(Thing *p_thing,SLONG facet)
 {
 //	SWORD	storey,wall;
 
-	
+
 	if(ok_to_mount_ladder(p_thing,&dfacets[facet]))
 	{
 
@@ -2740,7 +2740,7 @@ SLONG	height_above_anything(Thing *p_person,SLONG body_part,SWORD *onface)
 	SLONG	fx,fy,fz,new_y;
 
 //	SLONG ignore_building;
-	
+
 	*onface = 0;
 
 	if(p_person->Genus.Person->InsideIndex)
@@ -2789,7 +2789,7 @@ SLONG	height_above_anything(Thing *p_person,SLONG body_part,SWORD *onface)
 
 
 //
-// For a person in 3d space, find either a face to stand on, or the floor to stand on, and setup height/onface ... 
+// For a person in 3d space, find either a face to stand on, or the floor to stand on, and setup height/onface ...
 //
 SLONG	plant_feet(Thing *p_person)
 {
@@ -2797,7 +2797,7 @@ SLONG	plant_feet(Thing *p_person)
 	SLONG	fx,fy,fz,new_y;
 
 //	SLONG ignore_building;
-	
+
 	//
 	// Make a splash...
 
@@ -3007,7 +3007,7 @@ SLONG	bump_someone(Thing *p_thing,MAPCO24 mdx,MAPCO24 mdy,MAPCO24 mdz)
 						dist2=QDIST2(ddx,ddz);
 
 						if(dist<dist2)
-						{		
+						{
 							//
 							// distance with move vect is smaller than without movement therefore collision is valid
 							//
@@ -3300,7 +3300,7 @@ SLONG slide_along_old(
 
 				//
 				// Done this one already?
-				// 
+				//
 
 				for (i = already_upto - 1; i >= 0; i--)
 				{
@@ -3335,7 +3335,7 @@ SLONG slide_along_old(
 				//
 				// Is the 'y' component in range?
 				//
-				
+
 				{
 					SLONG vect_y;
 
@@ -3399,7 +3399,7 @@ SLONG slide_along_old(
 //					MSG_add(" slide along  dist %d nx %d nz %d on %d\n",dist,norm_x,norm_z,on);
 
 
-	
+
 					//
 					// This piece of code would probably be quite readable if it wasnt for all the comments getting in the way
 					//
@@ -3432,7 +3432,7 @@ SLONG slide_along_old(
 										// you ended on the wrong side of the wall
 										// and you started out on the wrong side of the wall
 
-//										MSG_add("!ON1 dist %d side %d nx %d nz %d\n",dist,side,norm_x,norm_z); 
+//										MSG_add("!ON1 dist %d side %d nx %d nz %d\n",dist,side,norm_x,norm_z);
 
 										dist=-dist;
 										slide=1;
@@ -3442,7 +3442,7 @@ SLONG slide_along_old(
 
 										// you ended on the wrong side of the wall
 										// and you started out on the right side of the wall
-//										MSG_add("!ON2 dist %d side %d nx %d nz %d\n",dist,side,norm_x,norm_z); 
+//										MSG_add("!ON2 dist %d side %d nx %d nz %d\n",dist,side,norm_x,norm_z);
 
 										step_back_along_vect(
 											x1, z1,
@@ -3507,7 +3507,7 @@ SLONG slide_along_old(
 											x2,z2,
 											p_vect->x[start_index] << 8, p_vect->z[start_index] << 8,
 											p_vect->x[end_index  ] << 8, p_vect->z[end_index  ] << 8,
-											0);	// 
+											0);	//
 
 										signed_dist_to_line_with_normal_mark(
 											p_vect->x[start_index] << 8, p_vect->z[start_index] << 8,
@@ -3575,7 +3575,7 @@ SLONG slide_along_old(
 										x1, z1);
 
 
-//							MSG_add("ON dist %d side %d nx %d nz %d\n",dist,side,norm_x,norm_z); 
+//							MSG_add("ON dist %d side %d nx %d nz %d\n",dist,side,norm_x,norm_z);
 							if(dist<0)
 							{
 								//
@@ -3613,7 +3613,7 @@ SLONG slide_along_old(
 										// unhindered
 										//
 									}
-										
+
 								}
 								else
 								{
@@ -3659,7 +3659,7 @@ SLONG slide_along_old(
 							else
 							{
 								//
-								// you ended on the correct side 
+								// you ended on the correct side
 								//
 
 								if(side<0)
@@ -4058,7 +4058,7 @@ SLONG slide_along(
 					{
 						continue;
 					}
-					
+
 					tx = x1 + dx;
 					tz = z1 + dz;
 
@@ -4304,13 +4304,13 @@ SLONG slide_along(
 
 			//
 			// Done this one already?
-			// 
+			//
 
 			if (df->Counter[0] == SUPERMAP_counter[0])
 			{
 				//
 				// We've done this facet already.
-				// 
+				//
 
 				continue;
 			}
@@ -4342,7 +4342,7 @@ SLONG slide_along(
 			//
 			// Is the 'y' component in range?
 			//
-			
+
 			if (df->FacetType == STOREY_TYPE_FENCE_FLAT  ||
 				df->FacetType == STOREY_TYPE_FENCE       ||
 				df->FacetType == STOREY_TYPE_FENCE_BRICK ||
@@ -4358,7 +4358,7 @@ SLONG slide_along(
 				fence=0;
 				y_bot = df->Y[0] - 64;
 				y_top = df->Y[0] + (df->Height * df->BlockHeight << 2);
-				
+
 				if (df->FHeight||df->FacetFlags&FACET_FLAG_HUG_FLOOR)
 				{
 					//
@@ -4553,7 +4553,7 @@ SLONG slide_along(
 						//
 
 						/*
-						
+
 						if (x1 < fx1 && *x2 >= fx1)
 						{
 						   *x2 = fx1 - (*x2 - fx1);
@@ -4887,7 +4887,7 @@ SLONG cross_door(SLONG  x1, SLONG  my_y1, SLONG  z1,
 
 				//
 				// Done this one already?
-				// 
+				//
 
 				if (p_vect->FacetType == STOREY_TYPE_DOOR)
 				{
@@ -4917,7 +4917,7 @@ SLONG cross_door(SLONG  x1, SLONG  my_y1, SLONG  z1,
 					//
 					// Is the 'y' component in range?
 					//
-					
+
 					{
 						SLONG vect_y;
 
@@ -4981,7 +4981,7 @@ SLONG cross_door(SLONG  x1, SLONG  my_y1, SLONG  z1,
 
 							if(!on)
 							{
-							
+
 							}
 							else
 							{
@@ -5061,7 +5061,7 @@ SLONG	bump_person(Thing *p_person,THING_INDEX index,SLONG x1,SLONG my_y1,SLONG z
 	x1>>=8;
 	my_y1>>=8;
 	z1>>=8;
-	
+
 	*x2>>=8;
 	*y2>>=8;
 	*z2>>=8;
@@ -5086,7 +5086,7 @@ SLONG	bump_person(Thing *p_person,THING_INDEX index,SLONG x1,SLONG my_y1,SLONG z
 		dist2=QDIST2(odx,odz);
 
 		if(dist<dist2)
-		{	
+		{
 //			SLONG	tdx,tdz;
 			SLONG	angle;
 //			SLONG	radius=bump_radius+my_radius;
@@ -5095,7 +5095,7 @@ SLONG	bump_person(Thing *p_person,THING_INDEX index,SLONG x1,SLONG my_y1,SLONG z
 			angle=Arctan(-ddx,ddz)+1024;  //oh no mystery arctan function
 
 			//
-			// Angle round the circle we bump at 
+			// Angle round the circle we bump at
 			//
 
 			*x2=x1;//+(COS(angle)*radius>>16);
@@ -5104,7 +5104,7 @@ SLONG	bump_person(Thing *p_person,THING_INDEX index,SLONG x1,SLONG my_y1,SLONG z
 			//
 			// should use the tangent as a movement vector to make up for lost distance
 			//
-			
+
 
 
 
@@ -5202,16 +5202,16 @@ void slide_along_edges(
 
 			dex = ex2 - ex1;
 			dez = ez2 - ez1;
-				
+
 			//
 			// Are we moving to the wrong side of this edge?
 			//
 
 			vecx = (*x2>>8) - ex1;
 			vecz = (*z2>>8) - ez1;
-			
+
 			cprod = dex*vecz - dez*vecx;
-						
+
 			if (cprod < 0)
 			{
 				//
@@ -5247,10 +5247,10 @@ void slide_along_redges(
 
 	SLONG mx;
 	SLONG mz;
-	
+
 	SLONG height1;
 	SLONG height2;
-	
+
 	SLONG hard_edge;
 
 	RoofFace4 *f4;
@@ -5320,7 +5320,7 @@ void slide_along_redges(
 			switch(i)
 			{
 				case 0:	// ZS
-					
+
 					if ((*z2 & 0xffff) < EDGE_WIDTH)
 					{
 						*z2 &= ~0xffff;
@@ -5350,7 +5350,7 @@ void slide_along_redges(
 					break;
 
 				case 3: // XS
-					
+
 					if ((*x2 & 0xffff) < EDGE_WIDTH)
 					{
 						*x2 &= ~0xffff;
@@ -5456,7 +5456,7 @@ void slide_along_redges(
 		else
 		{
 			height2=MAVHEIGHT((ox>>8)+roof_dx[i],(oz>>8)+roof_dz[i]);
-			
+
 			if(abs(height1-height2)>1)
 				hard_edge=1;
 			else
@@ -5473,16 +5473,16 @@ void slide_along_redges(
 
 			dex = ex2 - ex1;
 			dez = ez2 - ez1;
-				
+
 			//
 			// Are we moving to the wrong side of this edge?
 			//
 
 			vecx = (*x2>>8) - ex1;
 			vecz = (*z2>>8) - ez1;
-			
+
 			cprod = dex*vecz - dez*vecx;
-						
+
 			if (cprod < 0)
 			{
 				//
@@ -5648,7 +5648,7 @@ SLONG collide_against_objects(
 									{
 										//
 										// Is it a prim we can sit on?
-										// 
+										//
 
 										if (oi->prim == 105 ||
 											oi->prim == 101 ||
@@ -5766,7 +5766,7 @@ SLONG collide_against_objects(
 										{
 											//
 											// Is it a prim we can sit on?
-											// 
+											//
 
 											if (oi->prim == 70  ||
 												oi->prim == 30  ||
@@ -5853,7 +5853,7 @@ SLONG should_i_collide_against_this_anim_prim(Thing *p_aprim)
 			//
 
 			collide_or_not = !!(p_aprim->Flags & FLAGS_SWITCHED_ON);
-				
+
 			break;
 
 		case ANIM_PRIM_TYPE_SWITCH:
@@ -5861,7 +5861,7 @@ SLONG should_i_collide_against_this_anim_prim(Thing *p_aprim)
 			//
 			// Ignore these: never collide.
 			//
-			
+
 			break;
 	}
 
@@ -5939,7 +5939,7 @@ SLONG collide_against_things(
 	{
 		col_thing = TO_THING(col_with_things[i]);
 
-		if (col_thing->State == STATE_DEAD || 
+		if (col_thing->State == STATE_DEAD ||
 		    col_thing->State == STATE_DYING)
 		{
 			//
@@ -5950,7 +5950,7 @@ SLONG collide_against_things(
 			{
 				//
 				// Still collide against dead cars...
-				// 
+				//
 			}
 			else
 			{
@@ -6308,14 +6308,14 @@ SLONG collide_against_things(
 					}
 				}
 				break;
-			
+
 			#if BIKE
 
 			case CLASS_BIKE:
-				
+
 				{
 					SLONG dy = col_thing->WorldPos.Y - my_y1 >> 8;
-					
+
 					if (abs(dy) < 0x100)
 					{
 						slide_around_circle(
@@ -6403,7 +6403,7 @@ void drop_on_heads(Thing *p_thing)
 					    fx,
 						fy,
 						fz,
-						200,	
+						200,
 						col_with_things,
 						MAX_COL_WITH,
 						collide_types|(1<<31));
@@ -6417,7 +6417,7 @@ void drop_on_heads(Thing *p_thing)
 
 		ASSERT(col_thing->Class==CLASS_PERSON);
 
-		if (col_thing->State == STATE_DEAD || 
+		if (col_thing->State == STATE_DEAD ||
 		    col_thing->State == STATE_DYING)
 		{
 			//
@@ -6553,7 +6553,7 @@ ULONG move_thing(
 	{
 		MSG_add("ERROR: move_slidey_thing(NULL!)");
 
-		return 0;						 
+		return 0;
 	}
 
 	ASSERT(WITHIN(p_thing, TO_THING(1), TO_THING(MAX_THINGS - 1)));
@@ -6561,7 +6561,7 @@ ULONG move_thing(
 
 	//
 	// The size of the thing and the max size of any furniture..
-	// 
+	//
 
 	#define THING_RADIUS 128
 
@@ -6690,7 +6690,7 @@ extern	void	set_player_visited(UBYTE x,UBYTE z);
 #endif
 			if (p_thing->Genus.Person->Flags2 & FLAG2_PERSON_CARRYING) {saflag |= SLIDE_ALONG_FLAG_CARRYING;}
 
-												
+
 			slide_along(
 				x1,  my_y1,  z1,
 			   &x2, &y2, &z2,
@@ -6781,7 +6781,7 @@ void slide_along_edgesr(SLONG face4,SLONG  x1, SLONG  z1,SLONG *x2, SLONG *z2);
 				//
 				// Walked off a face.
 				//
-				
+
 				fall_off_flag |= FALL_OFF_FLAG_TRUE;
 
 				if (p_thing->OnFace > 0 && (prim_faces4[p_thing->OnFace].FaceFlags & (FACE_FLAG_WMOVE|FACE_FLAG_PRIM)))
@@ -7068,7 +7068,7 @@ void slide_along_edgesr(SLONG face4,SLONG  x1, SLONG  z1,SLONG *x2, SLONG *z2);
 
 
 	//
-	//	 code removed that 
+	//	 code removed that
 	//
 
 	new_position.X = x2;
@@ -7108,7 +7108,7 @@ void slide_along_edgesr(SLONG face4,SLONG  x1, SLONG  z1,SLONG *x2, SLONG *z2);
 
 	//
 	// Actually move the person.
-	// 
+	//
 /*
 	if(p_thing->SubState==SUB_STATE_WALKING &&(fall_off_flag&FALL_OFF_FLAG_TRUE))
 		return(1);
@@ -7133,7 +7133,7 @@ void slide_along_edgesr(SLONG face4,SLONG  x1, SLONG  z1,SLONG *x2, SLONG *z2);
 	if(slide_door)
 	{
 		//
-		// pass through door 
+		// pass through door
 		//
 		if(slide_door<0)
 		{
@@ -7285,7 +7285,7 @@ void slide_along_edgesr(SLONG face4,SLONG  x1, SLONG  z1,SLONG *x2, SLONG *z2);
 
 //
 // Set when check_vector_against_mapsquare() returns TRUE.
-// 
+//
 
 SLONG los_failure_x;
 SLONG los_failure_y;
@@ -7354,7 +7354,7 @@ SLONG check_vector_against_mapsquare(
 	/*
 
 	if (ControlFlag)
-	{	
+	{
 		SLONG mx1 = map_x + 0 << PAP_SHIFT_LO;
 		SLONG mz1 = map_z + 0 << PAP_SHIFT_LO;
 		SLONG mx2 = map_x + 1 << PAP_SHIFT_LO;
@@ -7385,12 +7385,12 @@ SLONG check_vector_against_mapsquare(
 
 	ASSERT(WITHIN(map_x, 0, PAP_SIZE_LO - 1));
 	ASSERT(WITHIN(map_z, 0, PAP_SIZE_LO - 1));
-	
+
 	pl = &PAP_2LO(map_x,map_z);
-	
+
 	//
 	// For each of the dfacets on this mapsquare.
-	//	
+	//
 
 	f_list = pl->ColVectHead;
 
@@ -7588,7 +7588,7 @@ SLONG check_vector_against_mapsquare(
 					// Found a strange facet type!
 					//
 
-					iy = iy;
+					// iy = iy;
 				}
 			}
 		}
@@ -7666,7 +7666,7 @@ SLONG check_vector_against_mapsquare_objects(
 			}
 		}
 	}
-	
+
 	//
 	// Include large cars in the line of sight check.
 	//
@@ -7816,7 +7816,7 @@ SLONG there_is_a_los(
 		SLONG cdx   = los_v_dx / steps;
 		SLONG cdy   = los_v_dy / steps;
 		SLONG cdz   = los_v_dz / steps;
-		
+
 		los_v_x = x1 + cdx;
 		los_v_y = my_y1 + cdy;
 		los_v_z = z1 + cdz;
@@ -7880,7 +7880,7 @@ SLONG there_is_a_los(
 				if (check_vector_against_mapsquare(
 						los_v_mx, los_v_mz,
 						los_flags))
-				{	
+				{
 					return FALSE;
 				}
 
@@ -7928,7 +7928,7 @@ SLONG there_is_a_los(
 					if (check_vector_against_mapsquare(
 							los_v_mx, los_v_mz,
 							los_flags))
-					{	
+					{
 						return FALSE;
 					}
 
@@ -7995,7 +7995,7 @@ SLONG there_is_a_los(
 				if (check_vector_against_mapsquare(
 						los_v_mx, los_v_mz,
 						los_flags))
-				{	
+				{
 					return FALSE;
 				}
 
@@ -8043,7 +8043,7 @@ SLONG there_is_a_los(
 					if (check_vector_against_mapsquare(
 							los_v_mx, los_v_mz,
 							los_flags))
-					{	
+					{
 						return FALSE;
 					}
 
@@ -8230,7 +8230,7 @@ SLONG there_is_a_los_mav(
 				// Was there a wall in the way?
 				//
 
-				if(!(mo->opt[direction] & MAV_CAPS_GOTO)) 
+				if(!(mo->opt[direction] & MAV_CAPS_GOTO))
 				{
 					SLONG	x1,z1,x2,z2;
 //					SLONG	y;
@@ -8246,7 +8246,7 @@ SLONG there_is_a_los_mav(
 						z1=mz; //>>PAP_SHIFT_HI;
 						z2=z1;
 					}
-					
+
 //					for(y=0;y<256;y+=16)
 //						AENG_e_draw_3d_line_col_sorted(x1<<PAP_SHIFT_HI,y,z1<<PAP_SHIFT_HI,x2<<PAP_SHIFT_HI,y,z2<<PAP_SHIFT_HI,128,128,128);
 
@@ -8268,7 +8268,7 @@ SLONG there_is_a_los_mav(
 				{
 					return 0;
 				}
-				if(!(mo->opt[MAV_DIR_XL] & MAV_CAPS_GOTO)) 
+				if(!(mo->opt[MAV_DIR_XL] & MAV_CAPS_GOTO))
 				{
 					SLONG	x1,z1,x2,z2;
 //					SLONG	y;
@@ -8276,7 +8276,7 @@ SLONG there_is_a_los_mav(
 					x2=mx+1;
 					z1=mz; //>>PAP_SHIFT_HI;
 					z2=z1+1;
-					
+
 //					for(y=0;y<256;y+=16)
 //						AENG_e_draw_3d_line_col_sorted(x1<<PAP_SHIFT_HI,y,z1<<PAP_SHIFT_HI,x2<<PAP_SHIFT_HI,y,z2<<PAP_SHIFT_HI,128,128,128);
 					return(1);
@@ -8291,7 +8291,7 @@ SLONG there_is_a_los_mav(
 				{
 					return 0;
 				}
-				if(!(mo->opt[MAV_DIR_XS] & MAV_CAPS_GOTO)) 
+				if(!(mo->opt[MAV_DIR_XS] & MAV_CAPS_GOTO))
 				{
 					SLONG	x1,z1,x2,z2;
 //					SLONG	y;
@@ -8299,7 +8299,7 @@ SLONG there_is_a_los_mav(
 					x2=mx;
 					z1=mz;//>>PAP_SHIFT_HI;
 					z2=z1+1;
-					
+
 //					for(y=0;y<256;y+=16)
 //						AENG_e_draw_3d_line_col_sorted(x1<<PAP_SHIFT_HI,y,z1<<PAP_SHIFT_HI,x2<<PAP_SHIFT_HI,y,z2<<PAP_SHIFT_HI,128,128,128);
 					return(1);
@@ -8390,7 +8390,7 @@ SLONG there_is_a_los_mav(
 
 				mo = &MAV_opt[MAV_NAV(mx,mz)];
 
-				if(!(mo->opt[direction] & MAV_CAPS_GOTO)) 
+				if(!(mo->opt[direction] & MAV_CAPS_GOTO))
 				{
 					SLONG	x1,z1,x2,z2;
 //					SLONG	y;
@@ -8406,7 +8406,7 @@ SLONG there_is_a_los_mav(
 					}
 					z1=mz; //>>PAP_SHIFT_HI;
 					z2=z1+1;
-					
+
 //					for(y=0;y<256;y+=16)
 //						AENG_e_draw_3d_line_col_sorted(x1<<PAP_SHIFT_HI,y,z1<<PAP_SHIFT_HI,x2<<PAP_SHIFT_HI,y,z2<<PAP_SHIFT_HI,128,128,128);
 					return(1);
@@ -8432,7 +8432,7 @@ SLONG there_is_a_los_mav(
 				{
 					return 0;
 				}
-				if(!(mo->opt[MAV_DIR_ZL] & MAV_CAPS_GOTO)) 
+				if(!(mo->opt[MAV_DIR_ZL] & MAV_CAPS_GOTO))
 				{
 					SLONG	x1,z1,x2,z2;
 //					SLONG y;
@@ -8441,7 +8441,7 @@ SLONG there_is_a_los_mav(
 					x2=mx+1;
 					z1=(mz+1);//>>PAP_SHIFT_HI;
 					z2=z1+1;
-					
+
 //					for(y=0;y<256;y+=16)
 //						AENG_e_draw_3d_line_col_sorted(x1<<PAP_SHIFT_HI,y,z1<<PAP_SHIFT_HI,x2<<PAP_SHIFT_HI,y,z2<<PAP_SHIFT_HI,128,128,128);
 					return(2);
@@ -8456,7 +8456,7 @@ SLONG there_is_a_los_mav(
 				{
 					return 0;
 				}
-				if(!(mo->opt[MAV_DIR_ZS] & MAV_CAPS_GOTO)) 
+				if(!(mo->opt[MAV_DIR_ZS] & MAV_CAPS_GOTO))
 				{
 					SLONG	x1,z1,x2,z2;
 //					SLONG	y;
@@ -8465,7 +8465,7 @@ SLONG there_is_a_los_mav(
 					x2=mx+1;
 					z1=(mz);//>>PAP_SHIFT_HI;
 					z2=z1;
-					
+
 //					for(y=0;y<256;y+=16)
 //						AENG_e_draw_3d_line_col_sorted(x1<<PAP_SHIFT_HI,y,z1<<PAP_SHIFT_HI,x2<<PAP_SHIFT_HI,y,z2<<PAP_SHIFT_HI,128,128,128);
 					return(2);
@@ -8870,7 +8870,7 @@ SLONG there_is_a_los(
 
 	if (abs(dlx) > abs(dlz))
 	{
-		
+
 	}
 	else
 	{
@@ -9122,7 +9122,7 @@ SLONG collide_box(
 //	UBYTE flag_or;
 
 	//
-	// The rotation matrix 
+	// The rotation matrix
 	//
 
 	useangle  = -yaw;
@@ -9139,7 +9139,7 @@ SLONG collide_box(
 	//
 	// The bounding box to search for colvects.
 	//
-	
+
 	#define PUSH_OUT_A_BIT 64
 
 	x1 = midx + (minx * 362 >> 8) - PUSH_OUT_A_BIT >> ELE_SHIFT;
@@ -9167,7 +9167,7 @@ SLONG collide_box(
 				//
 				// Is the 'y' compenent in range?
 				//
-				
+
 				y_bot = p_vect->Y[0];
 				y_top = p_vect->Y[0] + BLOCK_SIZE * p_vect->PrimExtra;
 
@@ -9224,7 +9224,7 @@ SLONG collide_box(
 						{
 							//
 							// Definitely collided.
-							// 
+							//
 
 							return TRUE;
 						}
@@ -9479,7 +9479,7 @@ THING_INDEX find_nearby_person(
 
 	//
 	// Check each person.
-	// 
+	//
 
 	best_dist  = INFINITY;
 	best_thing = NULL;
@@ -9557,7 +9557,7 @@ SLONG find_intersected_colvect(
 
 	SLONG y_bot;
 	SLONG y_top;
-	
+
 	SLONG index;
 	SLONG score;
 	SLONG best_ans;
@@ -9567,7 +9567,7 @@ SLONG find_intersected_colvect(
 	SLONG i_vect;
 
 	CollisionVect *p_vect;
-	
+
 	SLONG mx1 = MIN(x1, x2) - PUSH_OUT_A_BIT >> 8;
 	SLONG mz1 = MIN(z2, z2) - PUSH_OUT_A_BIT >> 8;
 
@@ -9595,7 +9595,7 @@ SLONG find_intersected_colvect(
 
 			//
 			// Check the y-range of this colvect.
-			// 
+			//
 
 			y_bot  = p_vect->Y[0] - 128;	// Underneath a bit too...
 			y_top  = p_vect->Y[0] + BLOCK_SIZE *  p_vect->PrimExtra;
@@ -9605,7 +9605,7 @@ SLONG find_intersected_colvect(
 			{
 				//
 				// Do we intersect this colvect?
-				// 
+				//
 
 				if (two4_line_intersection(
 						x1, z1,
@@ -9639,7 +9639,7 @@ SLONG find_intersected_colvect(
 						best_ans   = i_vect;
 					}
 				}
-			}					
+			}
 
 			v_list = col_vects_links[v_list].Next;
 		}
@@ -9716,7 +9716,7 @@ SLONG collide_against_sausage(
 			{
 				//
 				// A rectangle along the middle of the sausage.
-				// 
+				//
 
 				if (vx1 > sx1)
 				{
@@ -9755,7 +9755,7 @@ SLONG collide_against_sausage(
 			{
 				//
 				// A rectangle along the middle of the sausage.
-				// 
+				//
 
 				if (vz1 > sz1)
 				{
@@ -9884,7 +9884,7 @@ SLONG slide_around_sausage(
 	   &vec_x,
 	   &vec_z,
 	   &on);
-	
+
 	dist = abs(dist);
 
 	if (dist > sradius)
@@ -9908,7 +9908,7 @@ SLONG slide_around_sausage(
 	//
 	// Make sure (*x2,*z2) is 'radius' distance from the colvect.
 	//
-	
+
 	dx = MUL64(sradius - dist, vec_x);
 	dz = MUL64(sradius - dist, vec_z);
 
@@ -10017,7 +10017,7 @@ void create_just_collision_facet(
 
 	SLONG hx1 = x1 + SIGN(dx) + SIGN(dz);
 	SLONG hz1 = z1 + SIGN(dz) - SIGN(dx);
-	      
+
 	SLONG hx2 = x2 - SIGN(dx) + SIGN(dz);
 	SLONG hz2 = z2 - SIGN(dz) - SIGN(dx);
 
@@ -10036,7 +10036,7 @@ void create_just_collision_facet(
 	SLONG dfacet = next_dfacet++;
 
 	DFacet *df = &dfacets[dfacet];
-	
+
 	df->FacetType   = STOREY_TYPE_JUST_COLLISION;
 	df->Height      = 4;
 	df->BlockHeight = 16;
@@ -10062,7 +10062,7 @@ void create_just_collision_facet(
 
 	//
 	// Put the facet on the mapwho.
-	// 
+	//
 
 	add_facet_to_map(dfacet);
 }
@@ -10084,7 +10084,7 @@ void insert_collision_facets()
 
 	//
 	// Lines of constant x.
-	// 
+	//
 
 	for (x = 1; x < PAP_SIZE_HI - 1; x++)
 	{
@@ -10186,7 +10186,7 @@ void insert_collision_facets()
 
 	//
 	// Lines of constant z.
-	// 
+	//
 
 	for (z = 1; z < PAP_SIZE_HI - 1; z++)
 	{
@@ -10327,7 +10327,7 @@ SLONG slide_around_box(
 
 	SLONG minx;
 	SLONG minz;
-          
+
 	SLONG maxx;
 	SLONG maxz;
 
@@ -10360,7 +10360,7 @@ SLONG slide_around_box(
 	//
 	// Rotate the positions.
 	//
-	
+
 	tx1 =  x1 - box_mid_x;
 	tz1 =  z1 - box_mid_z;
 
@@ -10443,7 +10443,7 @@ SLONG slide_around_box(
 			best_z = rz2;
 			used_this_go=1;
 		}
-		
+
 		if(!(tried&4))
 		if (dmaxx < best)
 		{
@@ -10540,7 +10540,7 @@ inline	SLONG slide_around_box_lowstack(
 
 	SLONG minx;
 	SLONG minz;
-          
+
 	SLONG maxx;
 	SLONG maxz;
 
@@ -10569,7 +10569,7 @@ inline	SLONG slide_around_box_lowstack(
 	//
 	// Rotate the positions.
 	//
-	
+
 	tx1 =  x1 - box_mid_x;
 	tz1 =  z1 - box_mid_z;
 
@@ -10638,7 +10638,7 @@ inline	SLONG slide_around_box_lowstack(
 	best   = dminx;
 	best_x = minx - 1;
 	best_z = rz2;
-	
+
 	if (dmaxx < best)
 	{
 		best   = dmaxx;
@@ -10725,7 +10725,7 @@ SLONG collide_box_with_line(
 	//
 	// Rotate the positions.
 	//
-	
+
 	tx1 = lx1 - midx;
 	tz1 = lz1 - midz;
 
@@ -10737,7 +10737,7 @@ SLONG collide_box_with_line(
 
 	rx2 = MUL64(tx2, matrix[0]) + MUL64(tz2, matrix[1]);
 	rz2 = MUL64(tx2, matrix[2]) + MUL64(tz2, matrix[3]);
-	
+
 	#define COL_CLIP_XS (1 << 0)
 	#define COL_CLIP_XL (1 << 1)
 	#define COL_CLIP_ZS (1 << 2)
@@ -10780,7 +10780,7 @@ SLONG collide_box_with_line(
 	{
 		//
 		// The line does not intersect the box.
-		// 
+		//
 
 		return FALSE;
 	}
@@ -10794,9 +10794,9 @@ SLONG collide_box_with_line(
 	if (clip_xor & COL_CLIP_XS)
 	{
 		iz = rz1 + (rz2 - rz1) * (minx - rx1) / (rx2 - rx1);
-		
+
 		if (WITHIN(iz, minz, maxz))
-		{	
+		{
 			return TRUE;
 		}
 	}
@@ -10806,7 +10806,7 @@ SLONG collide_box_with_line(
 		iz = rz1 + (rz2 - rz1) * (maxx - rx1) / (rx2 - rx1);
 
 		if (WITHIN(iz, minz, maxz))
-		{	
+		{
 			return TRUE;
 		}
 	}
@@ -10816,7 +10816,7 @@ SLONG collide_box_with_line(
 		ix = rx1 + (rx2 - rx1) * (minz - rz1) / (rz2 - rz1);
 
 		if (WITHIN(ix, minx, maxx))
-		{	
+		{
 			return TRUE;
 		}
 	}
@@ -10826,7 +10826,7 @@ SLONG collide_box_with_line(
 		ix = rx1 + (rx2 - rx1) * (maxz - rz1) / (rz2 - rz1);
 
 		if (WITHIN(iz, minx, maxx))
-		{	
+		{
 			return TRUE;
 		}
 	}
@@ -11018,7 +11018,7 @@ void create_shockwave(
 					else
 					{
 						hitpoints = maxdamage * (radius - dist + 0x80) / radius;
-						
+
 						if (p_found->Genus.Bat->type == BAT_TYPE_BALROG)
 						{
 							//
@@ -11152,7 +11152,7 @@ void COLLIDE_find_seethrough_fences()
 
 //
 // The fastnav bits array.
-// 
+//
 
 COLLIDE_Fastnavrow *COLLIDE_fastnav;
 
@@ -11366,7 +11366,7 @@ void box_circle_early_out(
 		SLONG cradius);
 
 //
-// returns if a fence has a hole and also its along position from 1 to 255  
+// returns if a fence has a hole and also its along position from 1 to 255
 //
 
 #ifdef	UNUSED_WIRECUTTERS
@@ -11425,7 +11425,7 @@ void	set_fence_hole(struct DFacet *p_facet,SLONG pos)
 {
 	if(next_cut_hole<8)
 	{
-		
+
 		p_facet->CutHole|=1<<(next_cut_hole);
 		hole_pos[next_cut_hole]=pos;
 		next_cut_hole++;
