@@ -4,12 +4,12 @@
 #include	"game.h"
 //#include	"trig.h"
 #include	"prim_draw.h"
-#include	"c:\fallen\headers\animate.h"
-#include	"c:\fallen\headers\io.h"
+#include	"animate.h"
+#include	"io.h"
 #include	"primtex.h"
 #include	"perstex.h"
-#include	"c:\fallen\headers\memory.h"
-#include	"c:\fallen\headers\noserver.h"
+#include	"memory.h"
+#include	"noserver.h"
 
 CBYTE	*body_part_names[]=
 {

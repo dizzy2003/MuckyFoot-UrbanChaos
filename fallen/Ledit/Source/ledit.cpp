@@ -1272,7 +1272,7 @@ void LEDIT_process()
 	SLONG dz;
 	SLONG dist;
 
-	static turn = 0;
+	static SLONG turn = 0;
 
 	turn += 1;
 

@@ -18,10 +18,10 @@
 
 #include "game.h"
 #ifndef	PSX
-#include "c:\fallen\ddengine\headers\matrix.h"
-#include "c:\fallen\ddengine\headers\poly.h"
-#include "c:\fallen\ddengine\headers\oval.h"
-#include "c:\fallen\ddlibrary\headers\ddlib.h"
+#include "matrix.h"
+#include "poly.h"
+#include "oval.h"
+#include "ddlib.h"
 #else
 #include "c:\fallen\psxeng\headers\poly.h"
 #endif
@@ -31,8 +31,8 @@
 #include "pcom.h"
 
 #ifndef	PSX
-#include "c:\fallen\ddengine\headers\aeng.h"
-#include "c:\fallen\ddengine\headers\mesh.h"
+#include "aeng.h"
+#include "mesh.h"
 #else
 #include "c:\fallen\psxeng\headers\mesh.h"
 #endif
@@ -42,14 +42,14 @@
 #include "interfac.h"
 #include "dirt.h"
 #include "mist.h"
-#include "c:\fallen\editor\headers\prim.h"
+#include "Editor/Headers/Prim.h"
 #include "animate.h"
 #include "sound.h"
 #include "barrel.h"
 #include "interact.h"
 #include "ob.h"
 #include "night.h"
-#include "c:\fallen\ddengine\headers\drawxtra.h"
+#include "drawxtra.h"
 #include "psystem.h"
 
 #include "mfx.h"
@@ -1051,7 +1051,7 @@ void reinit_vehicle(Thing* p_thing)
 
 	SLONG	height;
 	
-	for (ii = 0; ii < 4; ii++)
+	for (int ii = 0; ii < 4; ii++)
 	{
 		vp->DY[ii] = 0;
 		vp->Spring[ii].Compression = 4300;

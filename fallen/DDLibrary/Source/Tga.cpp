@@ -489,8 +489,9 @@ static void WriteSquished(UWORD* buffer, size_t nwords, ULONG id)
 	memset(used, 0, 65536*2);
 
 	UWORD	total = 0;
+	size_t	ii;
 
-	for (size_t ii = 3; ii < nwords; ii++)
+	for (ii = 3; ii < nwords; ii++)
 	{
 		if (!used[buffer[ii]])
 		{
@@ -598,8 +599,9 @@ static UBYTE* ReadSquished(ULONG id)
 	// read mapping
 	UWORD	total = *bptr++;
 	UWORD	mapping[65536];
+	size_t	ii;
 
-	for (size_t ii = 0; ii < total; ii++)
+	for (ii = 0; ii < total; ii++)
 	{
 		mapping[ii] = *bptr++;
 	}

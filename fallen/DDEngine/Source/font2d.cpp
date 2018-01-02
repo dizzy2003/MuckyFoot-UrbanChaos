@@ -9,7 +9,7 @@
 #include <string>
 #endif
 #include "font2d.h"
-#include "c:\fallen\ddlibrary\headers\tga.h"
+#include "tga.h"
 #include "noserver.h"
 #include <DDLib.h>
 #include "truetype.h"

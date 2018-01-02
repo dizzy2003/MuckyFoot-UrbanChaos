@@ -1,0 +1,46 @@
+set_target_properties(
+    outro
+    PROPERTIES
+        EXCLUDE_FROM_ALL ON
+        EXCLUDE_FROM_DEFAULT_BUILD OFF
+)
+target_compile_definitions(
+    outro
+    PRIVATE
+        $<$<CONFIG:Debug>:EDITOR>
+        $<$<OR:$<CONFIG:MinSizeRel>,$<CONFIG:Release>,$<CONFIG:RelWithDebInfo>>:FINAL>
+)
+target_include_directories(
+    outro
+    PRIVATE
+        ${CMAKE_CURRENT_LIST_DIR}/../../MFStdLib/Headers
+        ${CMAKE_CURRENT_LIST_DIR}/../DDEngine/Headers
+        ${CMAKE_CURRENT_LIST_DIR}/../DDLibrary/Headers
+        ${CMAKE_CURRENT_LIST_DIR}/../Headers
+)
+target_sources(
+    outro
+    PRIVATE
+        ${CMAKE_CURRENT_LIST_DIR}/Always.h
+        ${CMAKE_CURRENT_LIST_DIR}/Matrix.h
+        ${CMAKE_CURRENT_LIST_DIR}/Tga.h
+        ${CMAKE_CURRENT_LIST_DIR}/back.h
+        ${CMAKE_CURRENT_LIST_DIR}/cam.h
+        ${CMAKE_CURRENT_LIST_DIR}/credits.h
+        ${CMAKE_CURRENT_LIST_DIR}/font.h
+        ${CMAKE_CURRENT_LIST_DIR}/imp.h
+        ${CMAKE_CURRENT_LIST_DIR}/mf.h
+        ${CMAKE_CURRENT_LIST_DIR}/os.h
+        ${CMAKE_CURRENT_LIST_DIR}/wire.h
+        ${CMAKE_CURRENT_LIST_DIR}/Matrix.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Tga.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/back.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/cam.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/credits.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/font.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/imp.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/main.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/mf.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/os.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/wire.cpp
+)

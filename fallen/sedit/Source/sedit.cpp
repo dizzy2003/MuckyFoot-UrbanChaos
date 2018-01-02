@@ -9,9 +9,9 @@
 #include "fmatrix.h"
 #include "es.h"
 #include "ns.h"
-#include "c:\fallen\editor\headers\prim.h"
-#include "c:\fallen\headers\building.h"
-#include	"c:\fallen\headers\memory.h"
+#include "Editor/Headers/Prim.h"
+#include "building.h"
+#include	"memory.h"
 
 
 HINSTANCE SEDIT_hinstance;

@@ -16,12 +16,12 @@ CBYTE STARTSCR_mission[_MAX_PATH] = {0};
 #include	"startscr.h"
 
 #ifndef		PSX
-#include	"c:\fallen\ddengine\headers\poly.h"
-#include	"c:\fallen\ddengine\headers\text.h"
-#include    "c:\fallen\ddengine\headers\flamengine.h"
-#include    "c:\fallen\ddengine\headers\font3d.h"
-#include    "C:\fallen\DDLibrary\headers\D3DTexture.h"
-#include    "C:\fallen\DDLibrary\headers\GDisplay.h"
+#include	"poly.h"
+#include	"text.h"
+#include    "flamengine.h"
+#include    "font3d.h"
+#include    "D3DTexture.h"
+#include    "GDisplay.h"
 #include	"sound.h"
 #include	"menufont.h"
 #include	"texture.h"
@@ -29,10 +29,10 @@ CBYTE STARTSCR_mission[_MAX_PATH] = {0};
 #include	"night.h"
 #include	"io.h"
 #include	"ob.h"
-#include	"C:\fallen\DDEngine\headers\vertexbuffer.h"
-#include	"C:\fallen\DDEngine\headers\polypoint.h"
-#include	"C:\fallen\DDEngine\headers\renderstate.h"
-#include	"C:\fallen\DDEngine\headers\polypage.h"
+#include	"vertexbuffer.h"
+#include	"polypoint.h"
+#include	"renderstate.h"
+#include	"polypage.h"
 #include	"password.h"
 #include	"interfac.h"
 #include	"env.h"
@@ -463,7 +463,7 @@ SLONG	MainE3BodgeLoop() {
 	}
 	ticker--;
 	if (ticker==-movie_delay) { // approx every 2 mins or so
-extern int _CRTAPI1 do_only_game_intro(void);
+extern int do_only_game_intro(void);
 		if (dont_play_movie!=1) do_only_game_intro();
 		ticker=0;
 	}
@@ -479,7 +479,7 @@ SLONG	do_start_menu(void)
 #ifdef	PSX
 	return(STARTS_START);
 #else
-	static	menu=1;
+	static	SLONG menu=1;
 	static  Flamengine fire("data\\testfire3.phy");
 //	static  Font3D font("data\\font3d\\");
 //	static  Font3D font("data\\font3d\\urban\\");

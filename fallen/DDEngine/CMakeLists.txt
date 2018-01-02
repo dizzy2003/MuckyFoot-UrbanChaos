@@ -1,0 +1,102 @@
+set_target_properties(
+    ddengine
+    PROPERTIES
+        EXCLUDE_FROM_ALL ON
+        EXCLUDE_FROM_DEFAULT_BUILD OFF
+)
+target_compile_definitions(
+    ddengine
+    PRIVATE
+        $<$<CONFIG:Debug>:EDITOR>
+        $<$<OR:$<CONFIG:MinSizeRel>,$<CONFIG:Release>,$<CONFIG:RelWithDebInfo>>:FINAL>
+)
+target_include_directories(
+    ddengine
+    PRIVATE
+        ${CMAKE_CURRENT_LIST_DIR}/..
+        ${CMAKE_CURRENT_LIST_DIR}/../../MFStdLib/Headers
+        ${CMAKE_CURRENT_LIST_DIR}/../Headers
+        ${CMAKE_CURRENT_LIST_DIR}/Headers
+        ${CMAKE_CURRENT_LIST_DIR}/../DDLibrary/Headers
+        ${CMAKE_CURRENT_LIST_DIR}/../sedit/Headers
+)
+target_sources(
+    ddengine
+    PRIVATE
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/BreakTimer.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/Crinkle.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/DrawXtra.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/Font.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/Matrix.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/NGamut.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/Quaternion.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/Text.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/aa.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/aeng.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/cone.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/console.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/farfacet.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/fastprim.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/font2d.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/map.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/menufont.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/mesh.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/oval.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/panel.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/planmap.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/poly.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/polypage.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/sky.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/smap.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/sprite.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/superfacet.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/sw.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/texture.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/truetype.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/vertexbuffer.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/wibble.h
+        ${CMAKE_CURRENT_LIST_DIR}/Source/BreakTimer.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/Crinkle.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/Font.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/Matrix.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/Message.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/NGamut.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/Quaternion.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/Text.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/aa.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/aeng.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/cone.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/console.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/drawxtra.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/facet.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/farfacet.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/fastprim.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/figure.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/font2d.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/map.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/menufont.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/mesh.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/oval.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/panel.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/planmap.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/poly.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/polypage.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/polyrenderstate.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/renderstate.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/shape.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/sky.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/smap.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/sprite.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/superfacet.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/sw.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/texture.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/truetype.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/vertexbuffer.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/wibble.cpp
+        $<$<CONFIG:Debug>:${CMAKE_CURRENT_LIST_DIR}/Headers/comp.h>
+        $<$<CONFIG:Debug>:${CMAKE_CURRENT_LIST_DIR}/Headers/flamengine.h>
+        $<$<CONFIG:Debug>:${CMAKE_CURRENT_LIST_DIR}/Headers/ic.h>
+        $<$<CONFIG:Debug>:${CMAKE_CURRENT_LIST_DIR}/Source/comp.cpp>
+        $<$<CONFIG:Debug>:${CMAKE_CURRENT_LIST_DIR}/Source/flamengine.cpp>
+        $<$<CONFIG:Debug>:${CMAKE_CURRENT_LIST_DIR}/Source/ic.cpp>
+)

@@ -26,12 +26,12 @@
 #include	"Sound.h"
 #include	"gamemenu.h"
 #ifndef	PSX
-#include	"c:\fallen\ddengine\headers\menufont.h"
-#include	"c:\fallen\ddlibrary\headers\net.h"
+#include	"menufont.h"
+#include	"net.h"
 #endif
 #include	"bang.h"
 #include	"mav.h"
-#include	"c:\fallen\editor\headers\extra.h"
+#include	"extra.h"
 #include	"spark.h"
 #include	"statedef.h"
 #include	"glitter.h"
@@ -45,7 +45,7 @@
 #include	"cloth.h"
 #include	"ns.h"
 #include	"supermap.h"
-#include	"c:\fallen\sedit\headers\es.h"
+#include	"es.h"
 #include	"build2.h"
 #include	"eway.h"
 #include	"elev.h"
@@ -68,9 +68,9 @@
 #include	"balloon.h"
 #include	"memory.h"
 #ifndef	PSX
-#include	"C:\fallen\DDEngine\Headers\console.h"
-#include	"C:\fallen\DDEngine\Headers\poly.h"
-#include	"c:\fallen\DDEngine\Headers\map.h"
+#include	"console.h"
+#include	"poly.h"
+#include	"map.h"
 #endif
 #include	"psystem.h"
 #include	"ribbon.h"
@@ -79,12 +79,12 @@
 #include	"grenade.h"
 #ifndef	PSX
 #include	"drawxtra.h"
-#include	"c:\fallen\ddlibrary\headers\ddlib.h"
-#include	"c:\fallen\ddengine\headers\planmap.h"
+#include	"ddlib.h"
+#include	"planmap.h"
 #include	<math.h>
-#include	"c:\fallen\ddengine\headers\BreakTimer.h"
+#include	"BreakTimer.h"
 #include	"frontend.h"
-#include	"c:\fallen\ddengine\headers\truetype.h"
+#include	"truetype.h"
 #include "panel.h"
 
 #else
@@ -101,10 +101,10 @@ extern ControllerPacket	PAD_Input1,PAD_Input2;
 #define	VERIFY_PLAYBACK	0	// !$$! set to 1 to verify demo playback
 
 #include "mfx.h"
-#include "c:\fallen\ddengine\headers\superfacet.h"
-#include "c:\fallen\ddengine\headers\farfacet.h"
-#include "c:\fallen\ddengine\headers\fastprim.h"
-#include "c:\fallen\ddengine\headers\supercrinkle.h"
+#include "superfacet.h"
+#include "farfacet.h"
+#include "fastprim.h"
+#include "supercrinkle.h"
 
 
 SLONG CAM_cur_x, CAM_cur_y, CAM_cur_z, 

@@ -612,7 +612,7 @@ BOOL TimeLine::Process(HWND parent, WPARAM wParam, LPARAM lParam) {
 }
 
 
-TimeLine::Measure(LPARAM lParam) {
+void TimeLine::Measure(LPARAM lParam) {
 	LPMEASUREITEMSTRUCT mis = (LPMEASUREITEMSTRUCT)lParam;
 
 	mis->itemHeight=16; mis->itemWidth=GetWidth();
@@ -725,7 +725,7 @@ void TimeLine::Draw(LPARAM lParam) {
 
 }
 
-TimeLine::GetWidth() {
+LONG TimeLine::GetWidth() {
 	RECT rc;
 	GetClientRect(hWnd, &rc);
 	return rc.right-rc.left;
@@ -738,14 +738,14 @@ char* TimeLine::GetText(int chan, char *buf) {
 	return buf;
 }
 
-TimeLine::Add(CBYTE *str) {
+void TimeLine::Add(CBYTE *str) {
 	TLEntry* entry = new TLEntry;
 	ZeroMemory(entry,sizeof(TLEntry));
 	strncpy(entry->title,str,50);
 	SendMessage(hWnd,LB_ADDSTRING,0,(LPARAM)entry);
 }
 
-TimeLine::Del(UWORD index) {
+void TimeLine::Del(UWORD index) {
 	TLEntry *entry;
 
 	SendMessage(hWnd,LB_GETTEXT,index,(LPARAM)&entry);
@@ -754,7 +754,7 @@ TimeLine::Del(UWORD index) {
 
 }
 
-TimeLine::MarkEntry(UWORD index, UWORD start, UWORD length, UBYTE which) {
+void TimeLine::MarkEntry(UWORD index, UWORD start, UWORD length, UBYTE which) {
 	TLEntry *entry;
 	SLONG c0;
 	UBYTE v;
@@ -811,7 +811,7 @@ TimeLineRuler::TimeLineRuler(HWND nhWnd) {
 	owner=0;
 }
 
-TimeLineRuler::Draw(LPARAM lParam) {
+void TimeLineRuler::Draw(LPARAM lParam) {
 	LPDRAWITEMSTRUCT dis = (LPDRAWITEMSTRUCT)lParam;
 	SLONG rgb;
 	HBRUSH brs;

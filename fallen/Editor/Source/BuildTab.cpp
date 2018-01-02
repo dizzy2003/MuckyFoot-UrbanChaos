@@ -2,10 +2,10 @@
 
 #include	"BuildTab.hpp"
 #include	"engine.h"
-#include	"c:\fallen\headers\enter.h"
-#include	"c:\fallen\headers\id.h"
+#include	"enter.h"
+#include	"id.h"
 #include	"extra.h"
-#include	"c:\fallen\headers\supermap.h"
+#include	"supermap.h"
 #include	"outline.h"
 
 

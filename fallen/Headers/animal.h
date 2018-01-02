@@ -89,7 +89,7 @@ Animal   *ANIMAL_get_animal  (Thing *animal_thing);
 //
 
 GameCoord GetChunkCentre(GameKeyFrameChunk *chunk);
-SetChunkCentre(GameKeyFrameChunk *chunk, GameCoord centre);
+void SetChunkCentre(GameKeyFrameChunk *chunk, GameCoord centre);
 
 
 #endif

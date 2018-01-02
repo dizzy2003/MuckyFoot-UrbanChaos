@@ -9,7 +9,6 @@
 
 // Standard 'C' includes.
 #if !defined(TARGET_DC)
-#include	<iostream.h>
 #include	<time.h>
 #endif
 #include	<stdio.h>
@@ -41,7 +40,6 @@
 #endif
 #endif
 #include	<dinput.h>
-#include	<dplay.h>
 #include	<dsound.h>
 #include	<d3d.h>
 
@@ -285,6 +283,7 @@ void	SetListenerPosition(SLONG x,SLONG y,SLONG z,SLONG scale);
 // Stuff put in by Mark...
 //
 
+#undef INFINITY // FIXME: this is a standard macro!
 #define INFINITY		0x7fffffff
 #define PI				(3.14159265F)
 #define WITHIN(x,a,b)	((x) >= (a) && (x) <= (b))

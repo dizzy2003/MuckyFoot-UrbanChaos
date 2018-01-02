@@ -2,11 +2,11 @@
 // Guy Simmons, 13th November 1997.
 
 #include	"DDLib.h"
-#include	"c:\fallen\headers\demo.h"
-#include	"c:\fallen\headers\interfac.h"
+#include	"demo.h"
+#include	"interfac.h"
 #include	"BinkClient.h"
-#include	"c:\fallen\headers\env.h"
-#include	"c:\fallen\headers\xlat_str.h"
+#include	"env.h"
+#include	"xlat_str.h"
 
 #include "poly.h"
 #include "vertexbuffer.h"
@@ -15,7 +15,7 @@
 #include "polypage.h"
 #include "gdisplay.h"
 #include "panel.h"
-#include	"c:\fallen\headers\game.h"
+#include	"game.h"
 
 #ifdef TARGET_DC
 #include "target.h"
@@ -591,7 +591,7 @@ int _CRTAPI1 do_intro(void)
 
 #else
 
-int _CRTAPI1 do_intro(void)
+int do_intro(void)
 {
 #if 0
 	DDSURFACEDESC       ddsd;
@@ -660,7 +660,7 @@ int _CRTAPI1 do_intro(void)
 
 #ifndef TARGET_DC
 // Use PlayQuickMovie instead please.
-int _CRTAPI1 do_only_game_intro(void)
+int do_only_game_intro(void)
 {
 #if 0
 	DDSURFACEDESC       ddsd;
@@ -5339,7 +5339,8 @@ int PackBackground ( UBYTE* image_data, WORD *surface )
 
 			// Now try both to see if they will work.
 			BYTE bData;
-			for ( int iNeighbour = 0; iNeighbour < 2; iNeighbour++ )
+			int iNeighbour;
+			for ( iNeighbour = 0; iNeighbour < 2; iNeighbour++ )
 			{
 				bData = iNeighbour << 6;
 

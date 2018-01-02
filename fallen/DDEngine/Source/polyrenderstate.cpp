@@ -11,9 +11,6 @@
 #include "texture.h"
 #include "message.h"
 #include "night.h"
-#ifndef TARGET_DC
-#include "clip.h"
-#endif
 #include "vertexbuffer.h"
 #include "polypoint.h"
 #include "renderstate.h"
@@ -209,8 +206,10 @@ void POLY_init_render_states()
 
 	//TRACE("Phase %i\n", iPhase);
 
+	int ii;
+
 	// set each page to the default
-	for (int ii = 0; ii < POLY_NUM_PAGES; ii++)
+	for (ii = 0; ii < POLY_NUM_PAGES; ii++)
 	{
 		POLY_Page[ii].RS = DefRenderState;
 	}

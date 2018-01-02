@@ -2,11 +2,11 @@
 
 #include	"Editor.hpp"
 #include	"engine.h"
-#include	"c:\fallen\headers\game.h"
-#include	"c:\fallen\headers\animtmap.h"
-#include	"c:\fallen\headers\inside2.h"
-#include	"c:\fallen\headers\memory.h"
-#include	"c:\fallen\headers\io.h"
+#include	"game.h"
+#include	"animtmap.h"
+#include	"inside2.h"
+#include	"memory.h"
+#include	"io.h"
 //#include	"collide.hpp"  //needed for ele_shift
 //#define		ShowWorkWindow(x)	{DrawLineC(0,0,WorkWindowWidth-1,WorkWindowHeight-1,255);DrawLineC(0,WorkWindowHeight-1,WorkWindowWidth-1,0,255); ShowWorkWindow(x);}
 
@@ -256,7 +256,7 @@ void	screen_shot(void)
 	UWORD	x,y;
 	UWORD	line[2048];
 	UWORD	red,green,blue,col;
-	static	count=0;
+	static	SLONG count=0;
 	CBYTE	fname[50];
 	count++;
 

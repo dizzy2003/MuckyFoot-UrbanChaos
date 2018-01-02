@@ -5,6 +5,7 @@
 #include "DDLib.h"
 #include "net.h"
 
+#if 0
 
 //
 // Our private cunning messages...
@@ -1168,12 +1169,23 @@ void NET_message_get(NET_Message *ans)
 	}
 }
 
+#else
 
+void NET_init(void) {}
+void NET_kill(void) {}
+SLONG NET_get_connection_number(void) { return 0; }
+CBYTE* NET_get_connection_name(SLONG connection) { return nullptr; }
+SLONG NET_connection_make(SLONG connection) { return 0; }
+SLONG NET_create_session(CBYTE* name, SLONG max_players, CBYTE* my_player_name) { return 0; }
+SLONG NET_get_session_number(void) { return 0; }
+NET_Sinfo NET_get_session_info(SLONG session) { return {0}; }
+SLONG NET_join_session(SLONG session, CBYTE* my_player_name) { return 0; }
+void NET_leave_session(void) {}
+UBYTE NET_start_game(void) { return NET_PLAYER_NONE; }
+SLONG NET_get_num_players(void) { return 0; }
+CBYTE* NET_get_player_name(SLONG player) { return nullptr; }
+void NET_message_send(UBYTE player_id, void* data, UWORD num_bytes) {}
+SLONG NET_message_waiting(void) { return 0; }
+void NET_message_get(NET_Message* answer) {}
 
-
-
-
-
-
-
-
+#endif

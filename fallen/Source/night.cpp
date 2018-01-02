@@ -10,7 +10,7 @@
 #include "fmatrix.h"
 #include "heap.h"
 #include "supermap.h"
-#include "c:\fallen\ledit\headers\ed.h"
+#include "ed.h"
 #include "memory.h"
 #include "ware.h"
 #include "mav.h"

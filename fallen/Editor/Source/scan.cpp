@@ -1,6 +1,6 @@
 
 #include	"Editor.hpp"
-#include	"c:\fallen\headers\memory.h"
+#include	"memory.h"
 
 
 void	(*scan_function)(SLONG face,SLONG x,SLONG y,SLONG z,SLONG extra);

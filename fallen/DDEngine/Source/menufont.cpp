@@ -8,7 +8,7 @@
 #include "MenuFont.h"
 #include "tga.h"
 #include "poly.h"
-#include "c:\fallen\headers\noserver.h"
+#include "noserver.h"
 
 #ifdef TARGET_DC
 #include "target.h"

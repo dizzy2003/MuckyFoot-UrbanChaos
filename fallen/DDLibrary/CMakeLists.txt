@@ -1,0 +1,59 @@
+set_target_properties(
+    ddlibrary
+    PROPERTIES
+        EXCLUDE_FROM_ALL ON
+        EXCLUDE_FROM_DEFAULT_BUILD OFF
+)
+target_compile_definitions(
+    ddlibrary
+    PRIVATE
+        $<$<CONFIG:Debug>:EDITOR>
+        $<$<OR:$<CONFIG:MinSizeRel>,$<CONFIG:Release>,$<CONFIG:RelWithDebInfo>>:FINAL>
+)
+target_include_directories(
+    ddlibrary
+    PRIVATE
+        ${CMAKE_CURRENT_LIST_DIR}/../../MFStdLib/Headers
+        ${CMAKE_CURRENT_LIST_DIR}/../Headers
+        ${CMAKE_CURRENT_LIST_DIR}/../DDEngine/Headers
+        ${CMAKE_CURRENT_LIST_DIR}/Headers
+)
+target_sources(
+    ddlibrary
+    INTERFACE
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/resource.h
+        ${CMAKE_CURRENT_LIST_DIR}/DDlib.rc
+    PRIVATE
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/BinkClient.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/D3DTexture.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/DCLowLevel.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/DDManager.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/DDlib.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/DIManager.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/Debug.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/Drive.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/FileClump.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/GDisplay.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/GWorkScreen.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/MFx.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/Tga.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/WindProcs.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/net.h
+        ${CMAKE_CURRENT_LIST_DIR}/Source/BinkClient.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/D3DTexture.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/DCLowLevel.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/DDManager.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/DIManager.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/Drive.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/FileClump.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/GDebug.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/GDisplay.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/GHost.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/GKeyboard.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/GMouse.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/GWorkScreen.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/MFX_DC.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/Tga.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/WindProcs.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/net.cpp
+)

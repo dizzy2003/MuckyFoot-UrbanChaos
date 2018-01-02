@@ -1,0 +1,120 @@
+set_target_properties(
+    editor
+    PROPERTIES
+        EXCLUDE_FROM_ALL ON
+        EXCLUDE_FROM_DEFAULT_BUILD ON
+        EXCLUDE_FROM_DEFAULT_BUILD_DEBUG OFF
+)
+target_compile_definitions(
+    editor
+    PRIVATE
+        $<$<CONFIG:Debug>:EDITOR>
+        $<$<OR:$<CONFIG:MinSizeRel>,$<CONFIG:Release>,$<CONFIG:RelWithDebInfo>>:FINAL>
+)
+target_include_directories(
+    editor
+    PRIVATE
+        ${CMAKE_CURRENT_LIST_DIR}/..
+        ${CMAKE_CURRENT_LIST_DIR}/../../MFStdLib/Headers
+        ${CMAKE_CURRENT_LIST_DIR}/../Headers
+        ${CMAKE_CURRENT_LIST_DIR}/Headers
+        ${CMAKE_CURRENT_LIST_DIR}/../DDEngine/Headers
+        ${CMAKE_CURRENT_LIST_DIR}/../DDLibrary/Headers
+)
+target_sources(
+    editor
+    PRIVATE
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/Alert.hpp
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/ColTab.hpp
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/ComTab.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/CondTab.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/Controls.hpp
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/CtrlSet.hpp
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/EdCom.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/EdUtils.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/EdWay.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/Edit.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/EditMod.hpp
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/Editor.hpp
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/EditorLib.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/GameEd.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/HmTab.hpp
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/Icon.hpp
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/Intrface.hpp
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/KFrameEd.hpp
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/LightTab.hpp
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/MapEdTab.hpp
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/MapTab.hpp
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/ModeTab.hpp
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/Poly.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/PrPiTab.hpp
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/Primativ.hpp
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/SaveTab.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/Thing.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/ThingTab.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/Window.hpp
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/engine.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/extra.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/map.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/outline.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/perstex.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/prim_draw.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/prim_edit.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/primtex.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/scan.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/undo.hpp
+        ${CMAKE_CURRENT_LIST_DIR}/Library/Draw2d.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Library/DrawBox.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Library/DrawCirc.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Library/DrawLine.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Library/DrawPnt.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Library/DrawPxl.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Library/QuickTxt.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Library/Sprites.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Library/TextDef.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/Alert.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/BuildTab.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/ColTab.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/ComTab.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/CondTab.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/Controls.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/CtrlSet.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/EdCom.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/EdText.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/EdUtils.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/EdWay.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/Edit.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/EditMod.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/Editor.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/Engine.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/FileReq.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/GameEd.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/HmTab.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/Icon.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/Intrface.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/LevelEd.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/LightTab.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/KFrameEd.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/Main.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/MapEdTab.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/MapTab.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/ModeTab.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/PaintTab.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/Poly.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/PrPiTab.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/Primativ.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/SaveTab.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/Thing.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/ThingTab.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/Window.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/extra.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/map.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/outline.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/perstex.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/prim_draw.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/prim_edit.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/primtex.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/scan.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/sewertab.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/undo.cpp
+)

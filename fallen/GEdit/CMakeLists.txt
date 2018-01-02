@@ -1,0 +1,100 @@
+set_target_properties(
+    gedit
+    PROPERTIES
+        EXCLUDE_FROM_ALL ON
+        EXCLUDE_FROM_DEFAULT_BUILD ON
+        EXCLUDE_FROM_DEFAULT_BUILD_DEBUG OFF
+)
+target_compile_definitions(
+    gedit
+    PRIVATE
+        $<$<CONFIG:Debug>:EDITOR>
+        $<$<OR:$<CONFIG:MinSizeRel>,$<CONFIG:Release>,$<CONFIG:RelWithDebInfo>>:FINAL>
+)
+target_include_directories(
+    gedit
+    PRIVATE
+        ${CMAKE_CURRENT_LIST_DIR}/..
+        ${CMAKE_CURRENT_LIST_DIR}/../../MFStdLib/Headers
+        ${CMAKE_CURRENT_LIST_DIR}/../DDEngine/Headers
+        ${CMAKE_CURRENT_LIST_DIR}/../DDLibrary/Headers
+        ${CMAKE_CURRENT_LIST_DIR}/../Headers
+        ${CMAKE_CURRENT_LIST_DIR}/../Editor/Headers
+        ${CMAKE_CURRENT_LIST_DIR}/Headers
+        ${CMAKE_CURRENT_LIST_DIR}/../Ledit/Headers
+)
+target_sources(
+    gedit
+    PRIVATE
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/CamTargetSetup.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/CameraSetup.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/EdStrings.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/EnemySetup.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/ItemSetup.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/MapExitSetup.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/Mission.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/PlayerSetup.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/SubClass.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/TabCtl.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/WSpace.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/WayWind.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/activatesetup.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/cutscene.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/inputbox.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/platformSetup.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/propedit.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/ticklist.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/trapsetup.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/waypointSetup.h
+        ${CMAKE_CURRENT_LIST_DIR}/Source/BonusSetup.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/CamTargetSetup.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/CameraSetup.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/CreatureSetup.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/EdStrings.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/EnemySetup.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/EngWind.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/ExtendSetup.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/GEdit.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/ItemSetup.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/MapExitSetup.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/MapView.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/MessageSetup.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/Mission.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/MoveSetup.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/NavSetup.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/PeeSetup.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/PlayerSetup.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/ResetSetup.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/SfxSetup.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/SubClass.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/TabCtl.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/TransferSetup.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/TrapSetup.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/VehicleSetup.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/VfxSetup.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/WSpace.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/WayWind.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/activatesetup.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/animSetup.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/barrelSetup.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/bombSetup.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/burnSetup.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/converse.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/countersetup.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/cutscene.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/dlightSetup.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/enemyflagsetup.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/inputbox.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/locksetup.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/platformSetup.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/propedit.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/setskills.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/signsetup.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/spotfxSetup.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/stallsetup.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/ticklist.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/treasuresetup.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/warefxsetup.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/waypointSetup.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/wptSetup.cpp
+)

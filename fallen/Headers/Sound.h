@@ -7,8 +7,6 @@
 #include "Structs.h"
 #include "MFX.h"
 
-#define USE_A3D
-
 // because the versions in MFStdLib.h are misspelt...
 #define	WAVE_PLAY_INTERRUPT		0
 #define	WAVE_PLAY_NO_INTERRUPT	1

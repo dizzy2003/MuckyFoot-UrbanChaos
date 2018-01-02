@@ -1,7 +1,7 @@
 #include "game.h"
-#include "c:\fallen\headers\cam.h"
-#include "c:\fallen\headers\statedef.h"
-#include "c:\fallen\ddengine\headers\panel.h"
+#include "cam.h"
+#include "statedef.h"
+#include "panel.h"
 #include "fc.h"
 #include "animate.h"
 #include "memory.h"
@@ -10,8 +10,8 @@
 #include "eway.h"
 #ifndef PSX
 #include "ddlib.h"
-#include "c:\fallen\ddengine\headers\planmap.h"
-#include "c:\fallen\ddengine\headers\poly.h"
+#include "planmap.h"
+#include "poly.h"
 #include "font2d.h"
 #else
 #include "c:\fallen\psxeng\headers\psxeng.h"

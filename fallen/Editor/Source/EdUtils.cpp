@@ -2,8 +2,8 @@
 // Guy Simmons, 5th April 1997
 
 #include	"Editor.hpp"
-#include	"c:\fallen\headers\animtmap.h"
-#include	"c:\fallen\headers\memory.h"
+#include	"animtmap.h"
+#include	"memory.h"
 
 
 extern	SLONG			key_frame_count,current_element;

@@ -1,5 +1,5 @@
 #include <MFStdLib.h>
-#include "c:\fallen\ddengine\headers\matrix.h"
+#include "matrix.h"
 
 #include <math.h>
 

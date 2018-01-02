@@ -1,7 +1,7 @@
 // EdUtils.h
 // Guy Simmons, 5th April 1997.
 
-#include "c:\fallen\headers\structs.h"
+#include "Headers/Structs.h"
 //#define	GAME_SCALE			2560.0
 
 extern SLONG					current_element;

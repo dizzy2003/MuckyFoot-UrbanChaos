@@ -6,10 +6,10 @@
 #include "game.h"
 #include "pyro.h"
 #include "statedef.h"
-#include "C:\fallen\DDEngine\Headers\Matrix.h"
-#include "C:\fallen\DDEngine\Headers\Sprite.h"
+#include "Matrix.h"
+#include "Sprite.h"
 #ifndef PSX
-#include "C:\fallen\DDEngine\Headers\poly.h"
+#include "poly.h"
 #else
 #include "c:\fallen\psxeng\headers\poly.h"
 #endif

@@ -24,7 +24,7 @@
 #include	"ob.h"
 #include	"game.h"
 #include	"inside2.h"
-#include	"c:\fallen\headers\memory.h"
+#include	"memory.h"
 
 //---------------------------------------------------------------
 // from supermap.cpp

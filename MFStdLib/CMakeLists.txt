@@ -1,0 +1,30 @@
+set_target_properties(
+    mfstdlib
+    PROPERTIES
+        EXCLUDE_FROM_ALL ON
+        EXCLUDE_FROM_DEFAULT_BUILD OFF
+)
+target_compile_definitions(
+    mfstdlib
+    PRIVATE
+        $<$<CONFIG:Debug>:EDITOR>
+        $<$<OR:$<CONFIG:MinSizeRel>,$<CONFIG:Release>,$<CONFIG:RelWithDebInfo>>:FINAL>
+)
+target_include_directories(
+    mfstdlib
+    PRIVATE
+        ${CMAKE_CURRENT_LIST_DIR}/Headers
+)
+target_sources(
+    mfstdlib
+    PRIVATE
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/MFStdLib.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/StdFile.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/StdKeybd.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/StdMaths.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/StdMem.h
+        ${CMAKE_CURRENT_LIST_DIR}/Headers/StdMouse.h
+        ${CMAKE_CURRENT_LIST_DIR}/Source/StdLib/StdFile.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/StdLib/StdMaths.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/Source/StdLib/StdMem.cpp
+)

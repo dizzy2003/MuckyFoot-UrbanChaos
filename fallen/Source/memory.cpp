@@ -844,7 +844,7 @@ void	convert_thing_to_index(Thing *p_thing)
 void	convert_pointers_to_index(void)
 {
 	SLONG	c0,i;
-	static	max_people=0,max_car=0,max_mesh=0,max_tween=0,max_anim=0,max_special=0,max_bat=0;
+	static	SLONG max_people=0,max_car=0,max_mesh=0,max_tween=0,max_anim=0,max_special=0,max_bat=0;
 	SLONG	count_people=0,count_car=0,count_mesh=0,count_tween=0,count_anim=0,count_special=0,count_bat=0;
 	SLONG	gap=0;
 

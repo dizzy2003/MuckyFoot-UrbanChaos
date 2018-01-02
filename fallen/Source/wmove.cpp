@@ -5,7 +5,7 @@
 #include "game.h"
 #include "wmove.h"
 #include "build2.h"
-#include "c:\fallen\headers\memory.h"
+#include "memory.h"
 #include "fmatrix.h"
 #include "statedef.h"
 

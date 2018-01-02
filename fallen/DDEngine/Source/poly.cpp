@@ -11,9 +11,6 @@
 #include "texture.h"
 #include "message.h"
 #include "night.h"
-#ifndef TARGET_DC
-#include "clip.h"
-#endif
 #include "vertexbuffer.h"
 #include "polypoint.h"
 #include "renderstate.h"
@@ -1727,7 +1724,8 @@ SLONG POLY_clip_against_nearplane(POLY_Point** rptr, float* dptr, SLONG count, P
 	POLY_Point*		p1;
 	POLY_Point*		p2;
 
-	for (SLONG ii = 0; ii < count - 1; ii++)
+	SLONG ii;
+	for (ii = 0; ii < count - 1; ii++)
 	{
 		p1 = rptr[ii];
 		p2 = rptr[ii+1];
@@ -1791,7 +1789,8 @@ SLONG POLY_clip_against_side_X(POLY_Point** rptr, float* dptr, SLONG count, POLY
 	POLY_Point*		p1;
 	POLY_Point*		p2;
 
-	for (SLONG ii = 0; ii < count - 1; ii++)
+	SLONG ii;
+	for (ii = 0; ii < count - 1; ii++)
 	{
 		p1 = rptr[ii];
 		p2 = rptr[ii+1];
@@ -1851,7 +1850,8 @@ SLONG POLY_clip_against_side_Y(POLY_Point** rptr, float* dptr, SLONG count, POLY
 	POLY_Point*		p1;
 	POLY_Point*		p2;
 
-	for (SLONG ii = 0; ii < count - 1; ii++)
+	SLONG ii;
+	for (ii = 0; ii < count - 1; ii++)
 	{
 		p1 = rptr[ii];
 		p2 = rptr[ii+1];

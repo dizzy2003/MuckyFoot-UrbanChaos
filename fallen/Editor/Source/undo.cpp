@@ -4,7 +4,7 @@
 #include	"undo.hpp"
 #include	"edit.h"
 #include	"prim.h"
-#include	"c:\fallen\headers\memory.h"
+#include	"memory.h"
 
 Undo::Undo(void)
 {

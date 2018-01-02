@@ -3,12 +3,12 @@
 
 #include	"SewerTab.hpp"
 #include	"engine.h"
-#include	"c:\fallen\headers\enter.h"
-#include	"c:\fallen\headers\id.h"
+#include	"enter.h"
+#include	"id.h"
 #include	"extra.h"
-#include	"c:\fallen\headers\supermap.h"
-#include	"c:\fallen\headers\inside2.h"
-#include	"c:\fallen\headers\memory.h"
+#include	"supermap.h"
+#include	"inside2.h"
+#include	"memory.h"
 
 extern	void	draw_quad_now(SLONG x,SLONG y,SLONG w,SLONG h,UBYTE tx,UBYTE ty,UBYTE page,UBYTE flip,UBYTE flags);
 

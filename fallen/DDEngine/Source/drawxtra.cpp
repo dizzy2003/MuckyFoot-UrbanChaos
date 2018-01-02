@@ -22,7 +22,7 @@
 #include "memory.h"
 #include "collide.h"
 #include	"tracks.h"
-#include	"c:\fallen\headers\fc.h"
+#include	"fc.h"
 #include	"barrel.h"
 #include	"eway.h"
 #include "mfx.h"
@@ -430,14 +430,14 @@ void Pyros_EndOfFrameMarker ( void )
 
 // Not using the limiting stuff - these do nothing exciting.
 
-inline int IWouldLikeSomePyroSpritesHowManyCanIHave ( int iIWantThisMany )
+int IWouldLikeSomePyroSpritesHowManyCanIHave ( int iIWantThisMany )
 {
 	// Sure.
 	return ( iIWantThisMany );
 }
 
 // If the rout can't change how many it uses, at leats call this to warn the phyro system that they will be used.
-inline void IHaveToHaveSomePyroSprites( int iINeedThisMany )
+void IHaveToHaveSomePyroSprites( int iINeedThisMany )
 {
 	// Does nothing in this case.
 }

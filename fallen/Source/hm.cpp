@@ -10,8 +10,8 @@
 #include <stdlib.h>
 #include <hm.h>
 #include <math.h>
-#include "c:\fallen\ddengine\headers\message.h"
-#include "c:\fallen\ddengine\headers\matrix.h"
+#include "message.h"
+#include "matrix.h"
 #include "maths.h"
 #include "pap.h"
 #include	"memory.h"

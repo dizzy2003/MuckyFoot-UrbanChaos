@@ -114,11 +114,11 @@ private:
 public:
 	TimeLine(HWND nhWnd, TimeLineRuler *nrule, TimeLineScroll *nscroll);
 	~TimeLine();
-	GetWidth();
-	Measure(LPARAM lParam);
-	Add(CBYTE *str);
-	Del(UWORD index);
-	MarkEntry(UWORD index, UWORD start, UWORD length, UBYTE which);
+	LONG GetWidth();
+	void Measure(LPARAM lParam);
+	void Add(CBYTE *str);
+	void Del(UWORD index);
+	void MarkEntry(UWORD index, UWORD start, UWORD length, UBYTE which);
 	void  Draw(LPARAM lParam);
 	BOOL  Process(HWND parent, WPARAM wParam, LPARAM lParam);
 	void  SetImageList(HINSTANCE inst, SLONG idx);
@@ -139,7 +139,7 @@ private:
 	TimeLine	*owner;
 public:
 	TimeLineRuler(HWND nhWnd);
-	Draw(LPARAM lParam);
+	void Draw(LPARAM lParam);
 	BOOL Process(HWND parent, WPARAM wParam, LPARAM lParam);
 	void SetOwner(TimeLine *nown);
 };

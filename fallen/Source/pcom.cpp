@@ -4,7 +4,7 @@
 
 #include "game.h"
 #include "collide.h"
-#include "c:\fallen\headers\pcom.h"
+#include "pcom.h"
 #include "eway.h"
 #include "mav.h"
 #include "statedef.h"

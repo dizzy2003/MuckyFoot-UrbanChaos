@@ -37,7 +37,7 @@
 #include	"sound.h"
 #include	"grenade.h"
 #ifndef		PSX
-#include	"c:\fallen\ddengine\headers\panel.h"
+#include	"panel.h"
 #else
 #include	"c:\fallen\psxeng\headers\panel.h"
 #endif

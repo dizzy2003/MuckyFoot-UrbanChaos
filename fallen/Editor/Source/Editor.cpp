@@ -2,7 +2,7 @@
 // Guy Simmons, 19th February 1997.
 
 #include	"Editor.hpp"
-#include	"c:\fallen\headers\sound.h"
+#include	"sound.h"
 #include	"mfx.h"
 
 //#include	"DXEngine.h"

@@ -7,12 +7,12 @@
 #include "sound.h"
 #include "ob.h"
 #include "supermap.h"
-#include "c:\fallen\editor\headers\thing.h"
+#include "Editor/Headers/Thing.h"
 #include	"io.h"
 #include	"eway.h"
-#include "c:\fallen\headers\inside2.h"
+#include "inside2.h"
 #include	"memory.h"
-#include "c:\fallen\headers\noserver.h"
+#include "noserver.h"
 #ifdef FS_ISO9660
 #include <libcd.h>
 #include <ctype.h>

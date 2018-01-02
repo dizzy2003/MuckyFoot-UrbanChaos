@@ -30,7 +30,7 @@
 #include	"hook.h"
 #include	"pcom.h"
 #include	"tracks.h"
-#include	"C:\fallen\DDEngine\Headers\Matrix.h"
+#include	"Matrix.h"
 #include	"ob.h"
 #include	"wmove.h"
 #include	"balloon.h"

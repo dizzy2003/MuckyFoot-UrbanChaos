@@ -5650,7 +5650,7 @@ void	draw_all_spans(void)
 void	test_poly(void)
 {
 	static	struct	MfEnginePoint p1,p2,p3,p4,p5,p6;
-	static	init=0;
+	static	SLONG init=0;
 
 	if(init==0)
 	{

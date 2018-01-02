@@ -4,16 +4,16 @@
 
 #include	"Editor.hpp"
 #include	"FileReq.hpp"
-#include	"c:\fallen\editor\headers\Prim.h"
-#include	"c:\fallen\headers\FMatrix.h"
-#include	"c:\fallen\headers\animtmap.h"
-#include	"c:\fallen\headers\animate.h"
-#include	"c:\fallen\headers\memory.h"
-#include	"c:\fallen\headers\io.h"
+#include	"Editor/Headers/Prim.h"
+#include	"FMatrix.h"
+#include	"animtmap.h"
+#include	"animate.h"
+#include	"memory.h"
+#include	"io.h"
 
 // JCL
-#include	"c:\fallen\ddengine\headers\Quaternion.h"
-#include	"c:\fallen\headers\Hierarchy.h"
+#include	"Quaternion.h"
+#include	"Hierarchy.h"
 
 #define	CONTROLS_HEIGHT			400
 #define	CONTROLS_WIDTH			300
@@ -5904,6 +5904,7 @@ void	KeyFrameEditor::SaveAllAnims(KeyFrameChunk *the_chunk,SLONG save_all)
 	{
 		void convert_anim(Anim *key_list,GameKeyFrameChunk *game_chunk,KeyFrameChunk *the_chunk);
 		extern	void	free_game_chunk(GameKeyFrameChunk *the_chunk);
+		extern GameKeyFrameChunk game_chunk[];
 		free_game_chunk(&game_chunk[0]);
 
 		convert_anim(AnimList[Bank],&game_chunk[0],the_chunk);

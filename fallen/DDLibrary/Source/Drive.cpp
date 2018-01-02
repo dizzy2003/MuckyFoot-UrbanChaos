@@ -4,7 +4,7 @@
 
 #include "ddlib.h"
 #include "drive.h"
-#include "c:\fallen\headers\env.h"
+#include "env.h"
 
 static char Path[MAX_PATH];			// CD-ROM path
 static bool	TexturesCD;				// textures on CD?

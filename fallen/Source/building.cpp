@@ -1,7 +1,7 @@
 
 #include	"game.h"
 #include	"shadow.h"
-#include "c:\fallen\headers\animtmap.h"
+#include "animtmap.h"
 #include	"pap.h"
 #include	"supermap.h"
 #include	"io.h"
@@ -9,7 +9,7 @@
 
 #ifndef PSX
 #ifdef	EDITOR
-#include	"c:\fallen\editor\headers\Editor.hpp"
+#include	"Editor.hpp"
 #else
 #define PSX
 

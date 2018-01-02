@@ -21,7 +21,7 @@
 
 #include	"cutscene.h"
 
-#include	"c:\fallen\editor\headers\anim.h"
+#include	"anim.h"
 #include	"poly.h"
 #include	"polypage.h"
 #include	"animate.h"

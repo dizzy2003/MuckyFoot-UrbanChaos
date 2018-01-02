@@ -16,8 +16,8 @@
 #include "mav.h"
 
 #ifndef PSX
-#include "c:\fallen\ddengine\headers\poly.h"
-#include "c:\fallen\ddengine\headers\texture.h"
+#include "poly.h"
+#include "texture.h"
 #endif
 
 

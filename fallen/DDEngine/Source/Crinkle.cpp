@@ -438,7 +438,7 @@ void CRINKLE_write_bin(FileClump* tclump, CRINKLE_Handle hnd, int id)
 		bptr += sizeof(*cp);
 	}
 
-	for (ii = 0; ii < cc->num_faces; ii++)
+	for (int ii = 0; ii < cc->num_faces; ii++)
 	{
 		memcpy(bptr, cf, sizeof(*cf));
 		cf++;

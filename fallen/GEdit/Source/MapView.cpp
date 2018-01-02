@@ -27,7 +27,7 @@
 #include	"TrapSetup.h"
 #include	"WayWind.h"
 #include	"WSpace.h"
-#include	"C:\fallen\DDEngine\Headers\poly.h"
+#include	"poly.h"
 #include	"inputbox.h"
 #include	"pap.h"
 #include	"mav.h"
@@ -37,7 +37,7 @@
 
 #include	"game.h"
 #include	"inside2.h"
-#include	"c:\fallen\headers\memory.h"
+#include	"memory.h"
 
 #include	"cutscene.h"
 

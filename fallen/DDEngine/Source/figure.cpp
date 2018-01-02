@@ -7,9 +7,9 @@
 #include "poly.h"
 #include "figure.h"
 #include "sprite.h"
-#include "c:\fallen\headers\fmatrix.h"
-#include "c:\fallen\headers\mav.h"
-#include "c:\fallen\headers\interact.h"
+#include "fmatrix.h"
+#include "mav.h"
+#include "interact.h"
 #include "night.h"
 #include "shadow.h"
 #include "matrix.h"
@@ -27,10 +27,10 @@
 #include "Quaternion.h"
 #include "memory.h"
 
-#include "c:\fallen\headers\person.h"
-#include "c:\fallen\headers\pcom.h"
-#include "c:\fallen\headers\eway.h"
-#include "c:\fallen\headers\dirt.h"
+#include "person.h"
+#include "pcom.h"
+#include "eway.h"
+#include "dirt.h"
 #include	"ddlib.h"
 #include	"panel.h"
 
@@ -197,7 +197,8 @@ void BuildMMLightingTable ( Pyro *p, DWORD colour_and=0xffffffff )
 	vTotal.y = fBright * NIGHT_amb_norm_y;
 	vTotal.z = fBright * NIGHT_amb_norm_z;
 	NIGHT_Found *nf;
-	for (int j = 0; j < NIGHT_found_upto; j++)
+	int j;
+	for (j = 0; j < NIGHT_found_upto; j++)
 	{
 		nf = &NIGHT_found[j];
 
@@ -367,7 +368,8 @@ void BuildMMLightingTable ( Pyro *p, DWORD colour_and=0xffffffff )
 	}
 
 	DWORD dwColour = ( (DWORD)cR << 16 ) | ( (DWORD)cG << 8 ) | ( (DWORD)cB );
-	for ( int i = 64; i < 128; i++ )
+	int i;
+	for ( i = 64; i < 128; i++ )
 	{
 		MM_pcFadeTable[i] = dwColour;
 		MM_pcFadeTableTint[i] = dwColour & colour_and;
@@ -2805,7 +2807,7 @@ void FIGURE_TPO_finish_3d_object ( TomsPrimObject *pPrimObj, int iThrashIndex = 
 					WORD wIndex1 = -1;
 					bool bOdd = FALSE;
 					bool bFirst = TRUE;
-					for ( i = pMaterial->wNumListIndices / 3; i > 0; i-- )
+					for ( int i = pMaterial->wNumListIndices / 3; i > 0; i-- )
 					{
 						// Can we continue the list?
 						WORD wNextIndex = -1;
@@ -3304,7 +3306,7 @@ void FIGURE_draw_prim_tween(
 
 	if (prim == 267)
 	{
-		static count = 0;
+		static SLONG count = 0;
 
 		count += 1;
 

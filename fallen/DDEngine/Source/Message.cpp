@@ -126,7 +126,7 @@ void MSG_draw()
 	UBYTE blue;
 
 	SLONG	pos;
-	static	draw_flag=0;
+	static	SLONG draw_flag=0;
 	SLONG	size=1;
 	//
 	// Go through the messages and draw them.

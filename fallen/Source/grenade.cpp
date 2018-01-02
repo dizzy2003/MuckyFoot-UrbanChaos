@@ -66,7 +66,8 @@ Grenade	*global_g;
 
 bool CreateGrenade(Thing* owner, SLONG x, SLONG y, SLONG z, SLONG dx, SLONG dy, SLONG dz, SLONG timer)
 {
-	for (int ix = 0; ix < MAX_GRENADES; ix++)
+	int ix;
+	for (ix = 0; ix < MAX_GRENADES; ix++)
 	{
 		if (!GrenadeArray[ix].owner)	break;
 	}

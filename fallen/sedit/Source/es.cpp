@@ -8,9 +8,9 @@
 #include "supermap.h"
 #include "es.h"
 #include "ns.h"
-#include "c:\fallen\ddengine\headers\aeng.h"
+#include "aeng.h"
 #include "ob.h"
-#include	"c:\fallen\headers\memory.h"
+#include	"memory.h"
 
 
 

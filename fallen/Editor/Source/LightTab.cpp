@@ -2,9 +2,9 @@
 
 #include	"LightTab.hpp"
 #include	"engine.h"
-#include	"c:\fallen\headers\memory.h"
+#include	"memory.h"
 
-static		counter;
+static		SLONG counter;
 #define	SHADOW_LIGHT_SHIFT		(5)
 //#define		ShowWorkWindow(x)	{DrawLineC(0+(counter-1)&255,0,WorkWindowWidth-1,WorkWindowHeight-1,0);DrawLineC(0+(counter++)&255,0,WorkWindowWidth-1,WorkWindowHeight-1,255);DrawLineC(0,WorkWindowHeight-1,WorkWindowWidth-1,0,255); ShowWorkWindow(x);}
 
@@ -81,7 +81,7 @@ ControlDef	light_tab_def[]	=
 
 
 LightTab	*the_lighttab;
-static	light_x,light_y,light_z,light_bright;
+static	SLONG light_x,light_y,light_z,light_bright;
 
 void	redraw_tab(void);
 void	scan_apply_ambient(SLONG face,SLONG x,SLONG y,SLONG z,SLONG extra);
@@ -658,7 +658,7 @@ void	scan_apply_light(SLONG face,SLONG x,SLONG y,SLONG z,SLONG extra)
 	}
 }
 
-static	light_head=0;
+static	SLONG light_head=0;
 
 void	link_all_lights(void)
 {

@@ -4,7 +4,7 @@
 #include "Game.h"
 #include "cam.h"
 #ifndef	PSX
-#include "c:\fallen\ddlibrary\headers\ddlib.h"
+#include "ddlib.h"
 #include "font2d.h"
 #include "poly.h"
 #include "panel.h"
@@ -187,7 +187,7 @@ reinit_because_of_language_change:
 		FRONTEND_init ( bReinitBecauseOfLanguageChange );
 	}
 #else
-	FRONTEND_init ( bReinitBecauseOfLanguageChange )
+	FRONTEND_init ( bReinitBecauseOfLanguageChange );
 #endif
 
 

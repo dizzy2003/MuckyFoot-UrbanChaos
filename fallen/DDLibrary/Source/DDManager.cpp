@@ -6,8 +6,8 @@
 #endif
 
 #include	"DDLib.h"
-#include	"c:\fallen\headers\env.h"
-#include	"c:\fallen\headers\game.h"
+#include	"env.h"
+#include	"game.h"
 #include	<tchar.h>
 #ifdef	TARGET_DC
 #include "target.h"

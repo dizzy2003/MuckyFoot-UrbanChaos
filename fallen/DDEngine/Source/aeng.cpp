@@ -45,7 +45,7 @@
 #include "text.h"
 #include "pap.h"
 #include "night.h"
-#include "c:\fallen\headers\supermap.h"
+#include "supermap.h"
 #include "hook.h"
 #include "sm.h"
 #include "ns.h"
@@ -55,12 +55,12 @@
 #include "ic.h"
 #include "comp.h"
 #include "cam.h"
-#include "c:\fallen\headers\tracks.h"
+#include "tracks.h"
 #include "pcom.h"
 #include "drawxtra.h"
 #include "balloon.h"
 #include "snipe.h"
-#include "c:\fallen\headers\inside2.h"
+#include "inside2.h"
 #include "psystem.h"
 #include "fc.h"
 #include "memory.h"
@@ -69,12 +69,12 @@
 #include "pow.h"
 #include "FMatrix.h"
 #include "eway.h"
-#include "c:\fallen\headers\env.h"
+#include "env.h"
 #include "animate.h"
 #include "oval.h"
 #include "crinkle.h"
 #include "sw.h"
-#include "c:\fallen\headers\sound.h"
+#include "sound.h"
 
 #include "vertexbuffer.h"
 
@@ -6417,7 +6417,7 @@ void	draw_quick_floor(SLONG warehouse)
 
 	D3DMULTIMATRIX	mm_draw_floor;
 
-	static	init_stats=1;
+	static	SLONG	init_stats=1;
 
 	static	SLONG	biggest=0;
 
@@ -7372,8 +7372,8 @@ void AENG_draw_city()
 	OB_Info *oi;
 
 	LIGHT_Colour pcol;
-	static	outside=1;
-	static	sea_offset=0;
+	static	SLONG outside=1;
+	static	SLONG sea_offset=0;
 
 	AENG_total_polys_drawn = 0;
 void	draw_all_boxes(void);
@@ -10294,9 +10294,9 @@ extern HWND GEDIT_edit_wnd;
 										{
 											SLONG	dx,dy,dz,dist;
 
-											dx=abs((p_thing->WorldPos.X >> 8)-AENG_cam_x);
-											dy=abs((p_thing->WorldPos.Y >> 8)-AENG_cam_y);
-											dz=abs((p_thing->WorldPos.Z >> 8)-AENG_cam_z);
+											dx=fabs((p_thing->WorldPos.X >> 8)-AENG_cam_x);
+											dy=fabs((p_thing->WorldPos.Y >> 8)-AENG_cam_y);
+											dz=fabs((p_thing->WorldPos.Z >> 8)-AENG_cam_z);
 
 											dist=QDIST3(dx,dy,dz);
 
@@ -12502,9 +12502,9 @@ void AENG_draw_warehouse()
 							{
 								SLONG	dx,dy,dz,dist;
 
-								dx=abs((p_thing->WorldPos.X >> 8)-AENG_cam_x);
-								dy=abs((p_thing->WorldPos.Y >> 8)-AENG_cam_y);
-								dz=abs((p_thing->WorldPos.Z >> 8)-AENG_cam_z);
+								dx=fabs((p_thing->WorldPos.X >> 8)-AENG_cam_x);
+								dy=fabs((p_thing->WorldPos.Y >> 8)-AENG_cam_y);
+								dz=fabs((p_thing->WorldPos.Z >> 8)-AENG_cam_z);
 
 								dist=QDIST3(dx,dy,dz);
 
@@ -12734,7 +12734,7 @@ void AENG_draw_ns()
 	THING_INDEX t_index;
 	Thing      *p_thing;
 
-	static bright = FALSE;
+	static SLONG bright = FALSE;
 
 	if (Keys[KB_COLON])
 	{

@@ -5,9 +5,9 @@
 #include "Editor.hpp"
 #include "EditMod.hpp"
 #include "ModeTab.hpp"
-#include	"c:\fallen\headers\memory.h"
+#include	"memory.h"
 
-#include "c:\fallen\headers\hm.h"
+#include "hm.h"
 
 
 //

@@ -4,10 +4,9 @@
 #include	"DDLib.h"
 //#include	"finaleng.h"
 #include	"BinkClient.h"
-#include	"c:\fallen\headers\music.h"
-#include	"c:\fallen\headers\game.h"
-
-extern void MFX_QUICK_stop(void);
+#include	"music.h"
+#include	"game.h"
+#include	"MFx.h"
 
 #ifndef TARGET_DC
 

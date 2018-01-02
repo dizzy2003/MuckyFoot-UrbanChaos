@@ -5,8 +5,8 @@
 #include "game.h"
 #include "smap.h"
 #include "aa.h"
-#include "c:\fallen\headers\person.h"
-#include "c:\fallen\headers\fmatrix.h"
+#include "person.h"
+#include "fmatrix.h"
 #include "matrix.h"
 #include "memory.h"
 #include <math.h>

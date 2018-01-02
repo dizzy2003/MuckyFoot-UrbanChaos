@@ -8,8 +8,8 @@
 
 #include	"Stealth.h"
 #include	"poly.h"
-#include	"c:\fallen\headers\io.h"
-#include	"c:\fallen\headers\noserver.h"
+#include	"io.h"
+#include	"noserver.h"
 
 
 extern void	game(void);

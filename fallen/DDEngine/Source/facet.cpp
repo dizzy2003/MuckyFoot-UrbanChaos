@@ -4,13 +4,13 @@
 #include	"mesh.h"
 #include	"math.h"
 #include	"poly.h"
-#include	"c:\fallen\headers\supermap.h"
-#include	"c:\fallen\headers\inside2.h"
+#include	"supermap.h"
+#include	"inside2.h"
 #include	"night.h"
-#include	"c:\fallen\headers\pap.h"
+#include	"pap.h"
 #include	"math.h"
 #include	"ns.h"
-#include	"c:\fallen\sedit\headers\es.h"
+#include	"es.h"
 #include	"memory.h"
 #include "texture.h"
 #include	"polypage.h"
@@ -1643,8 +1643,9 @@ static void FillFacetPoints(SLONG count, ULONG base_row, SLONG foundation, SLONG
 
 	SLONG	row1 = FacetRows[base_row];
 	SLONG	row2 = FacetRows[base_row+1];
+	SLONG	c0;
 
-	for (SLONG c0 = 0; c0 < row2 - row1 - 1; c0++)
+	for (c0 = 0; c0 < row2 - row1 - 1; c0++)
 	{
 		if (facet_backwards)
 		{
@@ -1902,12 +1903,13 @@ inline void FillFacetPointsCommon(SLONG count, ULONG base_row, SLONG foundation,
 
 	SLONG	row1 = FacetRows[base_row];
 	SLONG	row2 = FacetRows[base_row+1];
+	SLONG	c0;
 
 	#ifdef FACETINFO
 	FACET_Facetinfo *ff;
 	#endif
 
-	for (SLONG c0 = 0; c0 < row2 - row1 - 1; c0++)
+	for (c0 = 0; c0 < row2 - row1 - 1; c0++)
 	{
 		{
 			quad[0] = &POLY_buffer[row2+c0+1];

@@ -33,6 +33,7 @@ typedef					char			CBYTE;
 // Constants.
 //
 
+#undef INFINITY // FIXME: this is a standard macro!
 #define PI         (3.14159265F)
 #define INFINITY   (0x7fffffff)
 
@@ -227,7 +228,7 @@ static inline SBYTE CROSS_PROD_SIGN(SLONG x1, SLONG y1, SLONG x2, SLONG y2)
 // -1 if there is no bit set.
 //
 
-static inline first_bit(SLONG search)
+static inline SLONG first_bit(SLONG search)
 {
 	SLONG ans;
 
@@ -248,7 +249,7 @@ static inline first_bit(SLONG search)
 // -1 if there is no bit set.
 //
 
-static inline last_bit(SLONG search)
+static inline SLONG last_bit(SLONG search)
 {
 	SLONG ans;
 

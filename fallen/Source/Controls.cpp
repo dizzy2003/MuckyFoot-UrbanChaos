@@ -44,11 +44,11 @@
 #include	"combat.h"
 #include	"door.h"
 #ifndef	PSX
-#include    "C:\fallen\DDEngine\Headers\console.h"
+#include    "console.h"
 #endif
 #include	"psystem.h"
 #include	"ribbon.h"
-#include	"C:\fallen\DDEngine\Headers\poly.h"
+#include	"poly.h"
 #include	"wmove.h"
 #include	"balloon.h"
 #include	"wand.h"
@@ -78,8 +78,8 @@
 #ifndef TARGET_DC
 #include	"FFManager.h"
 #endif
-#include	"c:\fallen\ddlibrary\headers\ddlib.h"
-#include	"c:\fallen\ddengine\headers\texture.h"
+#include	"ddlib.h"
+#include	"texture.h"
 #else
 #include	"LIBETC.h"
 
@@ -3468,7 +3468,7 @@ extern void PYRO_fn_init(Thing *thing);
 		}*/
 	}
 	if (ribbon_id!=-1) {
-		static ribbon_tick=0;
+		static SLONG ribbon_tick=0;
 		ribbon_tick++;
 		if (ribbon_tick&1) {
 			SLONG dx,dz,ang;
@@ -3615,7 +3615,7 @@ extern void PYRO_fn_init(Thing *thing);
 	*/
 
 	{
-		static dlight = NULL;
+		static UBYTE dlight = NULL;
 
 		if (Keys[KB_L])
 		{
@@ -3832,7 +3832,7 @@ extern void PYRO_fn_init(Thing *thing);
 
 	if (ShiftFlag)
 	{
-		static	skill=0;
+		static	SLONG skill=0;
 		if(Keys[KB_A])
 		{
 			UWORD	index;

@@ -5,10 +5,10 @@
 
 
 #include	"Editor.hpp"
-#include	"c:\fallen\headers\game.h"
-#include	"c:\fallen\headers\animtmap.h"
-#include	"c:\fallen\ddlibrary\headers\tga.h"
-#include	"c:\fallen\headers\memory.h"
+#include	"game.h"
+#include	"animtmap.h"
+#include	"tga.h"
+#include	"memory.h"
 #define	SET_TEXTURE_COORDS			texture_x=TextureX;if(texture_x>(256-(1<<TextureZoom)))texture_x=(256-(1<<TextureZoom));	\
 									texture_y=TextureY;if(texture_y>(256-(1<<TextureZoom)))texture_y=(256-(1<<TextureZoom));
 
